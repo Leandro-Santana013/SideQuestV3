@@ -1,4 +1,5 @@
 // import Swiper core and required modules
+import React, {useState} from 'react'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -13,6 +14,79 @@ import 'swiper/css/scrollbar';
 // Import images
 import imgPintor from "../assets/pintor.png";
 
+
+
+export default function Carrossel() {
+  const [activeCarrossel, setActiveCarrossel] = useState(1);
+
+  function showCarrossel(carrosselNumber) {
+    setActiveCarrossel(carrosselNumber);
+  }
+
+  return (
+    <section className='swippers'>
+      <div className="header-siwpper">
+        <h2>Principais <strong>serviços</strong></h2>
+        <div className="btns-swipper">
+          <div className="swiper-button-prev btn-swipper"></div>
+          <div className="swiper-button-next btn-swipper"></div>
+        </div>
+      </div>
+      <div className="carrossel">
+        <div className="left-carrossel">
+          <div className="tipos-serviço">
+            {[1, 2, 3, 4, 5].map((num) => (
+              <div className="carrossel-btn" id={`carrossel-btn${num}`} key={num}>
+                <p
+                  id={`carrossel-palavra${num}`}
+                  onClick={() => showCarrossel(num)}
+                  style={{ color: activeCarrossel === num ? 'var(--verde)' : 'black' }}
+                >
+                  {num === 1 ? 'Eletrica' : num === 2 ? 'Pintura' : num === 3 ? 'Encanamento' : num === 4 ? 'Carpintaria' : 'Outros'}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+        {[1, 2, 3, 4, 5].map((num) => (
+          <Swiper
+            key={num}
+            modules={[Navigation]}
+            spaceBetween={50}
+            slidesPerView={3.5}
+            navigation={{
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            }}
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log('slide change')}
+            style={{ display: activeCarrossel === num ? 'block' : 'none' }}
+          >
+            {[1, 2, 3, 4, 5].map((slideNum) => (
+              <SwiperSlide key={slideNum} className='SwipperSlide'>
+                <div className="swiper mySwiper" id={`carrossel${num}`}>
+                  <div className="swiper-wrapper">
+                    <div className="swiper-slide">
+                      <div className="card-carrossel">
+                        <img src={imgPintor} alt="Pintor" />
+                        <p>Eletricista</p>
+                        <div className="btn-buscar">
+                          <a href="">Buscar</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ))}
+      </div>
+    </section>
+  );
+} 
+
+/*
 export default function Carrossel(){
   
   return(
@@ -224,7 +298,8 @@ export default function Carrossel(){
     </Swiper>
     </div>
     </section>
-)};
+)};*/
+
 
 /*
 const carrosselSwiper = () => {
