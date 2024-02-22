@@ -1,0 +1,166 @@
+.tbodylogin{
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var();
+}   
+.tbodycad{
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var();
+}
+
+.forms {
+    display: flex;
+    width: 75vw;
+    height: 70vh;
+    background-color: var(--verde-claro);
+    border-radius: 20px;
+    box-shadow: 0 5px 5px -5px black, 5px 0 5px -5px black, -5px 0 5px -5px black;
+}
+
+.l-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    background-color: var(--azul);
+    border-radius: 20px;
+}
+
+.r-side {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-logo {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+
+    img {
+        margin: 15px;
+    }
+}
+
+.forms .formProfi{
+    display: none;
+}
+
+.campos {
+    display: flex;
+   justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 0.2vw;
+    }
+
+    h2 {
+        color: var(--azul);
+    }
+
+    .btn-slide {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        border-radius: 50%;
+    }
+
+    .btn-slide input[type="checkbox"] {
+        display: none;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 20px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked+.slider {
+        background-color: var(--verde);
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px var(--verde);
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+
+    input {
+        margin: 10px;
+        width: 300px;
+        height: 30px;
+        border-radius: 10px;
+        padding: 5px;
+        border: solid 2px gray;
+        font-size: 18px;
+    }
+
+    input:focus {
+        background-color: #c8e3ff;
+    }
+}
+
+.btn-criar {
+    width: 310px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 15px;
+    background-color: var(--verde);
+    transition: .25s ease-in-out;
+}
+
+.btn-criar:hover {
+    background-color: var(--azul);
+}
+
+.entre-google {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.linha {
+    width: 50px;
+    height: 1px;
+    background-color: black;
+}

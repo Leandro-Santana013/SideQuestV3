@@ -3,6 +3,10 @@
   --azul: #144474;
   --verde-claro: #E8FFF7;
 }
+.hidden {
+  display: none;
+}
+
 
 body {
   font-family: 'Inter', sans-serif;
@@ -385,6 +389,7 @@ ul.t2 a {
   height: 100%;
   flex: 1;
 }
+  
 
 .swiper-slide {
   text-align: center;
@@ -473,6 +478,8 @@ ul.t2 a {
   position: relative;
 
 }
+
+
 
 section.swippers .header-siwpper {
   display: flex;

@@ -14,22 +14,55 @@ import 'swiper/css/scrollbar';
 import imgPintor from "../assets/pintor.png";
 
 export default function Carrossel(){
-  return( <div className='swippers '>
-     
+  
+  return(
+     <section className='swippers'>
+     <div class="header-siwpper">
+  <h2>Principais <strong>serviços</strong></h2>
+  <div class="btns-swipper">
+
+        <div class="swiper-button-prev btn-swipper"></div>
+        <div class="swiper-button-next btn-swipper"></div>
+      
+  </div>
+</div>
+<div class="carrossel">
+  <div class="left-carrossel">
+    <div class="tipos-serviço">
+      <div class="carrossel-btn" id="carrossel-btn1">
+        <p id="carrossel-palavra1" onclick="showCarrossel(1)">Eletrica</p>
+      </div>
+      <div class="carrossel-btn" id="carrossel-btn2">
+        <p id="carrossel-palavra2" onclick="showCarrossel(2)">Pintura</p>
+      </div>
+      <div class="carrossel-btn" id="carrossel-btn3">
+        <p id="carrossel-palavra3" onclick="showCarrossel(3)">Encanamento</p>
+      </div>
+      <div class="carrossel-btn" id="carrossel-btn4">
+        <p id="carrossel-palavra4" onclick="showCarrossel(4)">Carpintaria</p>
+      </div>
+      <div class="carrossel-btn" id="carrossel-btn5">
+        <p id="carrossel-palavra5" onclick="showCarrossel(5)">Outros</p>
+      </div>
+    </div>
+  </div>
+
     
     <Swiper
       // install Swiper modules
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      modules={[Navigation, A11y]}
       spaceBetween={50}
-      slidesPerView={3}
-      navigation
-      pagination={{ clickable: true }}
-      scrollbar={{ draggable: true }}
+      slidesPerView={3.5}
+      navigation={{
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      }}
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log('slide change')}
     >
-         <SwiperSlide>
-        <div className="swiper mySwiper" id="carrossel4" style={{ display: 'flex' }}>
+
+         <SwiperSlide className='SwipperSlide'>
+        <div className="swiper mySwiper" id="carrossel1">
           <div className="swiper-wrapper">
             <div className="swiper-slide">
               <div className="card-carrossel">
@@ -43,8 +76,8 @@ export default function Carrossel(){
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide>
-        <div className="swiper mySwiper" id="carrossel4" style={{ display: 'flex' }}>
+      <SwiperSlide className='SwipperSlide'>
+        <div className="swiper mySwiper" id="carrossel1">
           <div className="swiper-wrapper">
             <div className="swiper-slide">
               <div className="card-carrossel">
@@ -58,8 +91,8 @@ export default function Carrossel(){
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide>
-        <div className="swiper mySwiper" id="carrossel4" style={{ display: 'flex' }}>
+      <SwiperSlide className='SwipperSlide'>
+        <div className="swiper mySwiper" id="carrossel1">
           <div className="swiper-wrapper">
             <div className="swiper-slide">
               <div className="card-carrossel">
@@ -72,8 +105,8 @@ export default function Carrossel(){
             </div>
           </div>
         </div>
-      </SwiperSlide> <SwiperSlide>
-        <div className="swiper mySwiper" id="carrossel4" style={{ display: 'flex' }}>
+      </SwiperSlide> <SwiperSlide className='SwipperSlide'>
+        <div className="swiper mySwiper" id="carrossel1">
           <div className="swiper-wrapper">
             <div className="swiper-slide">
               <div className="card-carrossel">
@@ -86,8 +119,8 @@ export default function Carrossel(){
             </div>
           </div>
         </div>
-      </SwiperSlide> <SwiperSlide>
-        <div className="swiper mySwiper" id="carrossel4" style={{ display: 'flex' }}>
+      </SwiperSlide> <SwiperSlide className='SwipperSlide'>
+        <div className="swiper mySwiper" id="carrossel1">
           <div className="swiper-wrapper">
             <div className="swiper-slide">
               <div className="card-carrossel">
@@ -101,9 +134,96 @@ export default function Carrossel(){
           </div>
         </div>
       </SwiperSlide>
-      ...
+    </Swiper>
+    <Swiper
+      // install Swiper modules
+      modules={[Navigation, A11y]}
+      spaceBetween={50}
+      slidesPerView={3.5}
+      navigation={{
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      }}
+      onSwiper={(swiper) => console.log(swiper)}
+      onSlideChange={() => console.log('slide change')}
+    >
+
+         <SwiperSlide className='SwipperSlide'>
+        <div className="swiper mySwiper" id="carrossel2" style={{display: 'none'}}>
+          <div className="swiper-wrapper">
+            <div className="swiper-slide">
+              <div className="card-carrossel">
+                <img src={imgPintor}alt="Pintor" />
+                <p>Eletricista</p>
+                <div className="btn-buscar">
+                  <a href="">Buscar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </SwiperSlide>
+      <SwiperSlide className='SwipperSlide'>
+        <div className="swiper mySwiper" id="carrossel2" style={{display: 'none'}}>
+          <div className="swiper-wrapper">
+            <div className="swiper-slide">
+              <div className="card-carrossel">
+                <img src={imgPintor}alt="Pintor" />
+                <p>Eletricista</p>
+                <div className="btn-buscar">
+                  <a href="">Buscar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </SwiperSlide>
+      <SwiperSlide className='SwipperSlide'>
+        <div className="swiper mySwiper" id="carrossel2" style={{display: 'none'}}>
+          <div className="swiper-wrapper">
+            <div className="swiper-slide">
+              <div className="card-carrossel">
+                <img src={imgPintor}alt="Pintor" />
+                <p>Eletricista</p>
+                <div className="btn-buscar">
+                  <a href="">Buscar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </SwiperSlide> <SwiperSlide className='SwipperSlide'>
+        <div className="swiper mySwiper" id="carrossel2" style={{display: 'none'}}>
+          <div className="swiper-wrapper">
+            <div className="swiper-slide">
+              <div className="card-carrossel">
+                <img src={imgPintor}alt="Pintor" />
+                <p>Eletricista</p>
+                <div className="btn-buscar">
+                  <a href="">Buscar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </SwiperSlide> <SwiperSlide className='SwipperSlide'>
+        <div className="swiper mySwiper" id="carrossel2" style={{display: 'none'}}>
+          <div className="swiper-wrapper">
+            <div className="swiper-slide">
+              <div className="card-carrossel">
+                <img src={imgPintor}alt="Pintor" />
+                <p>Eletricista</p>
+                <div className="btn-buscar">
+                  <a href="">Buscar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </SwiperSlide>
     </Swiper>
     </div>
+    </section>
 )};
 
 /*
