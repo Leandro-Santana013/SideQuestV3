@@ -571,3 +571,31 @@ footer img {
   color: #000000;
   text-decoration: none;
 }
+
+.styleNone {
+  display: none;
+}
+
+.borderLeftGray {
+  border-left: solid 3px #757575';
+}
+
+.styleColorBlack {
+  background-color: black;
+}
+
+.styleFLex{
+  display: flex;
+}
+
+.styleBlock {
+  display: block;
+}
+
+.borderLeftGreen {
+  border-left: solid 3px var(--verde);
+}
+
+.styleColorGreen {
+  background-color: var(--verde);
+}

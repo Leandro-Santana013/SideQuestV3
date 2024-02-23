@@ -1,20 +1,25 @@
-// import Swiper core and required modules
-import React, {useState} from 'react'
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-
-// Import Swiper styles
+import React, { useState } from 'react';
+import { Swiper, SwiperSlide,  } from 'swiper/react';
+import SwiperCore from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import  { Navigation } from 'swiper/modules';
+import img1 from "../assets/pintor.png";
+import img2 from "../assets/substitutir.png";
+import img3 from "../assets/Vector.png"
 
-// Import images
-import imgPintor from "../assets/pintor.png";
 
+SwiperCore.use([Navigation]);
 
+const slidesData = [
+  { id: 1, text: 'Texto do slide 1', image: img1 },
+  { id: 2, text: 'Texto do slide 2', image: img2 },
+  { id: 3, text: 'Texto do slide 3', image: img3 },
+  { id: 4, text: 'Texto do slide 3', image: img3 },
+  { id: 5, text: 'Texto do slide 3', image: img3 },
+];
 
 export default function Carrossel() {
   const [activeCarrossel, setActiveCarrossel] = useState(1);
@@ -53,7 +58,7 @@ export default function Carrossel() {
             key={num}
             modules={[Navigation]}
             spaceBetween={50}
-            slidesPerView={3.5}
+            slidesPerView={3.3}
             navigation={{
               nextEl: ".swiper-button-next",
               prevEl: ".swiper-button-prev",
@@ -62,14 +67,14 @@ export default function Carrossel() {
             onSlideChange={() => console.log('slide change')}
             style={{ display: activeCarrossel === num ? 'block' : 'none' }}
           >
-            {[1, 2, 3, 4, 5].map((slideNum) => (
-              <SwiperSlide key={slideNum} className='SwipperSlide'>
+            {slidesData.map((slide) => (
+              <SwiperSlide key={slide.id} className='SwipperSlide'>
                 <div className="swiper mySwiper" id={`carrossel${num}`}>
                   <div className="swiper-wrapper">
                     <div className="swiper-slide">
                       <div className="card-carrossel">
-                        <img src={imgPintor} alt="Pintor" />
-                        <p>Eletricista</p>
+                        <img src={slide.image} alt={slide.text} />
+                        <p>{slide.text}</p>
                         <div className="btn-buscar">
                           <a href="">Buscar</a>
                         </div>
@@ -84,7 +89,8 @@ export default function Carrossel() {
       </div>
     </section>
   );
-} 
+}
+
 
 /*
 export default function Carrossel(){
