@@ -8,7 +8,7 @@ import 'swiper/css/scrollbar';
 import { Navigation } from 'swiper/modules';
 import img1 from "../assets/pintor.png";
 import img2 from "../assets/substitutir.png";
-import img3 from "../assets/Vector.png"
+
 
 
 SwiperCore.use([Navigation]);

@@ -4,6 +4,20 @@ const tokenConfirmacao = require('../tools/createToken')
 const smtpconfig = require('../config/smtp')
 
 
+function queryAsync(sql, values) {
+  return new Promise((resolve, reject) => {
+    connection.query(sql, values, (error, results) => {
+      if (error) {
+        reject(error);
+       
+      } else {
+        resolve(results);
+        
+      }
+    });
+  });
+}
+
 exports.registerPro = async (req, res) => {
 
     try {
@@ -11,28 +25,22 @@ exports.registerPro = async (req, res) => {
       const { name, email, cpf, senha, senhaConfirm } = req.body;
       const cpfNumerico = cpf.replace(/\D/g, '');
      
-      const emailResults = await queryAsync("SELECT cd_emailTrabalhador FROM tb_Trabalhador WHERE cd_emailTrabalhador = ?", [email]);
+      const emailResults = await queryAsync("SELECT cd_emailTrabalhador FROM tb_profissional WHERE cd_emailTrabalhador = ?", [email]);
   
         globalemail = email
   
       if (emailResults.length > 0) {
-        return res.render('cadastro', {
-          message: 'Este Email é inválido ou já está em uso'
-        });
+        return res.status(200).json({ message: 'Email inválido ou já está em uso'})
       } else if (senha !== senhaConfirm) {
-        return res.render('cadastro', {
-          message: 'As senhas não estão corretas'
-        });
+        return res.status(200).json({ message: 'As senhas estão incorretas' });
       }
   
-      const cpfResults = await queryAsync("SELECT cd_cpfTrabalhador FROM tb_Trabalhador WHERE cd_cpfTrabalhador = ?", [cpfNumerico]);
+      const cpfResults = await queryAsync("SELECT cd_cpfTrabalhador FROM tb_profissional WHERE cd_cpfTrabalhador = ?", [cpfNumerico]);
   
       if (cpfResults.length > 0) {
-        return res.render('cadastro', {
-          message: 'Alguns desses dados estão incorretos ou estão sendo utilizados'
-        });
+        return res.status(200).json({ message: 'Alguns desses dados estão incorretos ou estão sendo utilizados'});
       }
-  
+      
       // Hash da senha
       let hash = await bcrypt.hash(senha, 8);
   
@@ -40,7 +48,7 @@ exports.registerPro = async (req, res) => {
       const token = tokenConfirmacao.generateEmailConfirmationToken();
       globaltoken = token
       // Inserir novo cliente
-      await queryAsync('INSERT INTO tb_Trabalhador SET ?', { nm_Trabalhador: name, cd_emailTrabalhador: email, cd_cpfTrabalhador: cpfNumerico, cd_senha: hash });
+      await queryAsync('INSERT INTO tb_profissional SET ?', { nm_Trabalhador: name, cd_emailTrabalhador: email, cd_cpfTrabalhador: cpfNumerico, cd_senha: hash });
       
       const htmlContent = `
       <html>
@@ -66,8 +74,8 @@ exports.registerPro = async (req, res) => {
         </head>
         <body>
           <h1>Confirme seu Email</h1>
-          <p>Clique no botão abaixo para confirmar seu email. Você será redirecionado para outra página</p>
-          <a href="http://localhost:5000/confirmarEmail?token=${token}&email=${email}">Confirmar E-mail</a>
+          <p>Clique no botão abaixo para confirmar seu email profissional. Você será redirecionado para outra página</p>
+          <a href="http://localhost:5000/confirmarEmail?token=${token}">Confirmar E-mail</a>
         </body>
       </html>
     `;
@@ -88,11 +96,8 @@ exports.registerPro = async (req, res) => {
         }
       }
       sendmail();
-  
-      return res.render('cadastro', {
-        message: 'Verifique sua caixa de email para confirma-lo'
-      });
-  
+      return res.status(200).json({ message: 'Verifique sua caixa de email para confirma-lo' });
+     
     } catch (error) {
       console.error(error);
       return res.render('error404');

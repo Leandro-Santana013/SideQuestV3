@@ -36,8 +36,7 @@ exports.register = async (req, res) => {
       return res.status(200).json({ message: 'Email inválido ou já está em uso' 
     });
     } else if (senha !== senhaConfirm) {
-      return res.status(200).json({ message: 'As senhas estão incorretas' 
-    });
+      return res.status(200).json({ message: 'As senhas estão incorretas' });
     }
 
     const cpfResults = await queryAsync("SELECT cd_cpfCliente FROM tb_cliente WHERE cd_cpfCliente = ?", [cpfNumerico]);

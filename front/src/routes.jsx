@@ -5,6 +5,7 @@ import Login from "./pages/Login"
 import Cadastro from "./pages/cad"
 import ValidaEmail from "./pages/validaEmail"
 import HomeCliente from './pages/homeCliente'
+
 const router = createBrowserRouter([
   {
     path: "/",

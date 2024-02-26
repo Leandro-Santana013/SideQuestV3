@@ -2,9 +2,10 @@ import React from 'react'
 import logo from '../assets/logo_SideQuest.png'
 import { Link } from 'react-router-dom'
 
+
 const navhome = () => {
   
-  return <header>
+  return <header className='headerHome'>
   <img class="img-logo" src={logo} alt="Logo do SideQuest"/>
   <nav>
     <ul class="t1">

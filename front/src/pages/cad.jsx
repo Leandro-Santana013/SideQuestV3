@@ -7,7 +7,16 @@
 
     const Cad = () => {
       const [isProfessional, setIsProfessional] = useState(true);
+
       const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        cpf: '',
+        senha: '',
+        senhaConfirm: '',
+      });
+
+      const [formDatapro, setFormDatapro] = useState({
         name: '',
         email: '',
         cpf: '',
@@ -35,10 +44,28 @@
         }
         
       };
+      const handleSubmit1 = async (e) => {
+        e.preventDefault();
+
+        try {
+          const response = await axios.post('http://localhost:5000/auth/registerPro', formDatapro);
+
+          setMessage(response.data.message);
+         
+        }  catch (error) {
+          console.error('Erro ao cadastrar:', error);
+          setMessage(error.response?.data?.message || 'Erro ao cadastrar. Tente novamente.');
+        }
+        
+      };
 
       const handleChange = (e) => {
         setFormData({
           ...formData,
+          [e.target.name]: e.target.value,
+        });
+        setFormDatapro({
+          ...formDatapro,
           [e.target.name]: e.target.value,
         });
       };
@@ -70,6 +97,14 @@
                         <input placeholder="Digite seu CPF" type="text" id="cpfInput" name="cpf" value={formData.cpf}  onChange={handleChange}/>
                         <input placeholder="Digite uma senha" type="password" name="senha" value={formData.senha} onChange={handleChange}/>
                         <input placeholder="Confirme sua senha" type="password" name="senhaConfirm" value={formData.senhaConfirm} onChange={handleChange}/>
+                        <button type="submit" class="btn-criar">Criar</button>
+                </form>
+                <form onSubmit={handleSubmit1} className={isProfessional ? 'formProfi' : 'formCliente'}>
+                <input placeholder="Digite s" type="name" name="name"   value={formData.name} onChange={handleChange}/>
+                        <input placeholder="Digite seu email" type="email" name="email" value={formDatapro.email} onChange={handleChange}/>
+                        <input placeholder="Digite seu CPF" type="text" id="cpfInput" name="cpf" value={formDatapro.cpf}  onChange={handleChange}/>
+                        <input placeholder="Digite uma senha" type="password" name="senha" value={formDatapro.senha} onChange={handleChange}/>
+                        <input placeholder="Confirme sua senha" type="password" name="senhaConfirm" value={formDatapro.senhaConfirm} onChange={handleChange}/>
                         <button type="submit" class="btn-criar">Criar</button>
                 </form>
                 <div className="entre-google">

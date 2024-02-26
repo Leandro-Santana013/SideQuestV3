@@ -1,0 +1,26 @@
+header {
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    flex-grow: 1;
+    height: 5vw;
+}
+
+header .img-logo {
+    width: 8vw;
+    height: auto;
+    margin-left: 3vw;
+}
+
+.notificacao i {
+    font-size: 2vW;
+    color: #3cbc8c;
+    transition: 0.25s ease-in-out;
+    margin-right: 3vw;
+}
+
+.notificacao i:hover {
+    color: #144474;
+}
