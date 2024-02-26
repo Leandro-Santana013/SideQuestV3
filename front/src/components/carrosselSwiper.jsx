@@ -16,10 +16,12 @@ SwiperCore.use([Navigation]);
 const allSlidesData = [
   [
     { id: 1, text: 'Texto do slide 1', image: img1 },
+    { id: 1, text: 'Texto do slide 1', image: img1 },
+    { id: 1, text: 'Texto do slide 1', image: img1 },
   ],
   [
     { id: 1, text: 'Texto do slide 1', image: img1 },
-    { id: 2, text: 'Texto do slide 2', image: img2 },
+    { id: 2, text: 'Texto do slide 2', image: img2},
   ],
   [
     { id: 1, text: 'Texto do slide 1', image: img1 },
@@ -87,7 +89,7 @@ export default function Carrossel() {
             key={num}
             modules={[Navigation]}
             spaceBetween={50}
-            slidesPerView={3.3}
+            slidesPerView={3}
             navigation={{
               nextEl: ".swiper-button-next",
               prevEl: ".swiper-button-prev",
@@ -105,7 +107,7 @@ export default function Carrossel() {
                         <img src={slide.image} alt={slide.text} />
                         <p>{slide.text}</p>
                         <div className="btn-buscar">
-                          <a href="">Buscar</a>
+                          <a href={slide.htref}>Buscar</a>
                         </div>
                       </div>
                     </div>
