@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer')
 const tokenConfirmacao = require('../tools/createToken')
 const smtpconfig = require('../config/smtp')
-const {useHistory} = require('react-router-dom')
+
 
 function queryAsync(sql, values) {
   return new Promise((resolve, reject) => {
@@ -82,7 +82,7 @@ exports.register = async (req, res) => {
       <body>
         <h1>Confirme seu Email</h1>
         <p>Clique no botão abaixo para confirmar seu email. Você será redirecionado para outra página</p>
-        <a href="http://localhost:5000/confirmarEmail?token=${token}&email=${email}">Confirmar E-mail</a>
+        <a href="http://localhost:5173/validaemail?token=${token}">Confirmar E-mail</a>
       </body>
     </html>
   `;
@@ -104,7 +104,7 @@ exports.register = async (req, res) => {
     }
     sendmail();
    
-    return res.status(200).json({ message: 'Verifique sua caixa de email',  });
+    return res.status(200).json({ message: 'Verifique sua caixa de email', });
 
 
   } catch (error) {
@@ -124,24 +124,18 @@ exports.login = async (req, res) => {
 
 
     if (user.length === 0) {
-      return res.render('login', {
-        message: 'Email ou senha incorretos'
-      });
+      return res.status(200).json({ message: 'Email ou senha incorretos', });
     }
 
     const match = await bcrypt.compare(senha, user[0].cd_senha);
 
     if (!match) {
-      return res.render('login', {
-        message: 'Email ou senha incorretos'
-      });
+      return res.status(200).json({ message: 'Email ou senha incorretos', });
     }
 
     const tokenconfirmed = await queryAsync("SELECT * FROM tb_cliente where cd_token = ? ", [user[0].cd_token])
     if (tokenconfirmed.length === 0) {
-      return res.render('login', {
-        message: 'Confirme seu email, verifique na sua caixa de entrada'
-      });
+      return res.status(200).json({ message: 'Confirme seu email, verifique na sua caixa de entrada', });
     }
 
     return res.redirect('/homeCliente');
@@ -154,14 +148,13 @@ exports.login = async (req, res) => {
 
 exports.validaEmail = async (req, res) => {
   try {
-    console.log(globalemail)
+    const {token} = req.params; 
+    console.log(token)
       if (globalemail) {
         
         await queryAsync('UPDATE tb_cliente SET cd_token = ? WHERE cd_emailCliente = ?', [globaltoken, globalemail]);
         
-      return res.render('confirmarEmail', {
-        message: 'E-mail confirmado com sucesso!'
-      });
+   return res.status(200).json({ message: 'E-mail confirmado com sucesso!', });
     } else {      
       console.error('Token inválido');
       return res.render('confirmarEmail', {

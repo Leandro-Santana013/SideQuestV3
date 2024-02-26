@@ -6,19 +6,28 @@ import img_logo from "../assets/sidequest_3.png"
 
 
 const Login = () => {
+    const [message, setMessage] = useState(null);  
     
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [formData, setFormData] = useState({
+        email: '',
+        senha: '',
+      });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/auth/login', { email, senha });
-            console.log(response.data);
+            const response = await axios.post('http://localhost:5000/auth/login',  formData);
+            setMessage(response.data.message);
         } catch (error) {
             console.error(error.response.data.message);
         }
     };
+    const handleChange = (e) => {
+        setFormData({
+          ...formData,
+          [e.target.name]: e.target.value,
+        });
+      };
 
   return (
     <div className="formlogin" class="tbodylogin">
@@ -33,8 +42,8 @@ const Login = () => {
         <div class="campos">
             <h2>Entre em sua conta</h2>
             <form onSubmit={handleSubmit}>
-            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <input type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input placeholder="Digite seu email" type="email" name="email" value={formData.email} onChange={handleChange}/>
+            <input placeholder="Digite uma senha" type="password" name="senha" value={formData.senha} onChange={handleChange}/>
             <button  type="submit" class="btn-criar">Entrar</button>
         </form>
             <div class="entre-google">
@@ -44,6 +53,7 @@ const Login = () => {
             </div>
         </div>
     </div>
+    {message && <div className="message">{message}</div>}  
 </div>
 </div>
   )

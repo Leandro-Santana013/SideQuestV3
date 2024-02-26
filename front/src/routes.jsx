@@ -3,7 +3,7 @@ import { createBrowserRouter} from 'react-router-dom'
 import Home from "./pages/home"
 import Login from "./pages/Login"
 import Cadastro from "./pages/cad"
-
+import ValidaEmail from "./pages/validaEmail"
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,7 +16,11 @@ const router = createBrowserRouter([
   {
     path: "/cadastro",
     element: <Cadastro />
-  }
+  },
+  {
+    path: "/validaemail",
+    element: <ValidaEmail />
+  },
 ])
 
 export default router
