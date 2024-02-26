@@ -2,16 +2,17 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer')
 const tokenConfirmacao = require('../tools/createToken')
 const smtpconfig = require('../config/smtp')
+const {useHistory} = require('react-router-dom')
 
 function queryAsync(sql, values) {
   return new Promise((resolve, reject) => {
     connection.query(sql, values, (error, results) => {
       if (error) {
         reject(error);
-        console.error(error)
+       
       } else {
         resolve(results);
-        console.log(results)
+        
       }
     });
   });
@@ -32,17 +33,17 @@ exports.register = async (req, res) => {
       globalemail = email
 
     if (emailResults.length > 0) {
-      return res.status(401).json({ message: 'Email inválido ou já está em uso' 
+      return res.status(200).json({ message: 'Email inválido ou já está em uso' 
     });
     } else if (senha !== senhaConfirm) {
-      return res.status(401).json({ message: 'As senhas estão incorretas' 
+      return res.status(200).json({ message: 'As senhas estão incorretas' 
     });
     }
 
     const cpfResults = await queryAsync("SELECT cd_cpfCliente FROM tb_cliente WHERE cd_cpfCliente = ?", [cpfNumerico]);
 
     if (cpfResults.length > 0) {
-      return res.status(401).json({ message: 'Alguns dos dados já estão sendo utilizado'
+      return res.status(200).json({ message: 'Alguns dos dados já estão sendo utilizado'
      });
 
     }
@@ -50,7 +51,7 @@ exports.register = async (req, res) => {
     // Hash da senha
     let hash = await bcrypt.hash(senha, 8);
 
-    console.log(cpfNumerico)
+    
     const token = tokenConfirmacao.generateEmailConfirmationToken();
     globaltoken = token
     // Inserir novo cliente
@@ -102,8 +103,9 @@ exports.register = async (req, res) => {
       }
     }
     sendmail();
+   
+    return res.status(200).json({ message: 'Verifique sua caixa de email',  });
 
-    return res.status(200).json({ message: 'Verifique sua caixa de email'});
 
   } catch (error) {
     console.error(error);

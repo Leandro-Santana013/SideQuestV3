@@ -3,9 +3,10 @@
     import img_logo from '../assets/sidequest_3.png';
     import axios from 'axios';
     
+    
 
     const Cad = () => {
-      const [isProfessional, setIsProfessional] = useState(false);
+      const [isProfessional, setIsProfessional] = useState(true);
       const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -18,20 +19,21 @@
         setIsProfessional((prevIsProfessional) => !prevIsProfessional);
       };
       const [message, setMessage] = useState(null);  
-
+   
+        
       const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
           const response = await axios.post('http://localhost:5000/auth/register', formData);
 
-
-          // Atualize o estado da mensagem com a mensagem recebida do back-end
           setMessage(response.data.message);
-        } catch (error) {
+         
+        }  catch (error) {
           console.error('Erro ao cadastrar:', error);
-          // Exiba uma mensagem de erro ou faça algo apropriado
+          setMessage(error.response?.data?.message || 'Erro ao cadastrar. Tente novamente.');
         }
+        
       };
 
       const handleChange = (e) => {
@@ -40,8 +42,7 @@
           [e.target.name]: e.target.value,
         });
       };
-
-
+      
       return (
         <div className="formlogin" class="tbodycad">
           <div className="forms">
@@ -79,7 +80,8 @@
               </div>
             </div>
           </div>
-          {message && <div className="message">{message}</div>}
+          {message && <div className="message">{message}</div>}  
+          
         </div>
       );
     };
