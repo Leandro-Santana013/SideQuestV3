@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from 'axios';2
 import '../styles/login.css'
 import img_login1 from '../assets/cad-img.png'
 import img_logo from "../assets/sidequest_3.png"
+import { useNavigate } from 'react-router-dom'
 
 
 const Login = () => {
@@ -12,12 +13,17 @@ const Login = () => {
         email: '',
         senha: '',
       });
+      const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:5000/auth/login',  formData);
-            setMessage(response.data.message);
+            if (response.status === 200) {
+                setMessage(response.data.message);
+            } else if (response.status === 201) {
+                navigate("/homecliente");
+            }
         } catch (error) {
             console.error(error.response.data.message);
         }

@@ -4,6 +4,7 @@ import Home from "./pages/home"
 import Login from "./pages/Login"
 import Cadastro from "./pages/cad"
 import ValidaEmail from "./pages/validaEmail"
+import HomeCliente from './pages/homeCliente'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/validaemail",
     element: <ValidaEmail />
+  },
+  {
+    path: "/homecliente",
+    element: <HomeCliente />
   },
 ])
 

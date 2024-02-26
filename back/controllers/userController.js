@@ -138,7 +138,7 @@ exports.login = async (req, res) => {
       return res.status(200).json({ message: 'Confirme seu email, verifique na sua caixa de entrada', });
     }
 
-    return res.redirect('/homeCliente');
+    return res.status(201).json(); 
 
   } catch (error) {
     console.error(error);
