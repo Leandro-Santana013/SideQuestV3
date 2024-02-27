@@ -9,19 +9,19 @@
       const [isProfessional, setIsProfessional] = useState(true);
 
       const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        cpf: '',
-        senha: '',
-        senhaConfirm: '',
+        name: null,
+        email: null,
+        cpf: null,
+        senha: null,
+        senhaConfirm: null,
       });
 
       const [formDatapro, setFormDatapro] = useState({
-        name: '',
-        email: '',
-        cpf: '',
-        senha: '',
-        senhaConfirm: '',
+        name: null,
+        email: null,
+        cpf: null,
+        senha: null,
+        senhaConfirm: null,
       });
 
       const toggleForm = () => {

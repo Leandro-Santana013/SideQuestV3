@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ani1 from '../assets/triangulo-animation2.png';
 import ani2 from '../assets/substitutir.png';
 
-const Animation = () => {
+export const Animation = () => {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -39,5 +39,3 @@ const Animation = () => {
     </section>
   );
 };
-
-export default Animation;

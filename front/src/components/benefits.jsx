@@ -3,7 +3,7 @@ import img_Benefits_Review from "../assets/Review.png";
 import img_Benefits_Calendario from "../assets/calendario.png";
 import img_Benefits_high_five from "../assets/high_five.png";
 
-const Benefits = () => {
+export const Benefits = () => {
   const [visibleCards, setVisibleCards] = useState([]);
 
   useEffect(() => {
@@ -48,5 +48,3 @@ const Benefits = () => {
     </section>
   );
 };
-
-export default Benefits;

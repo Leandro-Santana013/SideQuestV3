@@ -55,7 +55,7 @@
     width: 82vw;
 }
 
-h1 {
+.homeClienteH1{
     font-size: 1.3vw;
     width: 22vw;
     color: var(--verde);

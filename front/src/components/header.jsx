@@ -5,7 +5,7 @@ import "../styles/header.css"
 const header = () => {
   return (
     <div>
-     <header>
+     <header className='headerHomeCLiente'>
         <img class="img-logo" src={imgLogo} alt="Logo do SideQuest"/>
         <div class="notificacao">
             <i class="fa-solid fa-bell"></i>

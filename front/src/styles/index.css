@@ -21,7 +21,7 @@ body {
   width: 100vw;
   display: flex;
   align-items: center;
-  margin-bottom: 4.166666666666667vw;
+  margin-bottom: 7vw;
 }
 
 .img-banner {
@@ -38,7 +38,6 @@ body {
   margin-left: 3vw;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
 }
 
 .banner .content-input i {
@@ -103,7 +102,7 @@ body {
   color: black;
 }
 
-.left-banner h1 {
+.left-banner .landingH1 {
   color: black;
   width: 40vw;
   font-size: 3vw;
@@ -113,6 +112,7 @@ body {
   color: var(--verde);
   text-decoration: underline;
 }
+
 
 /*Animação */
 .animation1 {
@@ -371,6 +371,7 @@ body {
   position: relative !important;
   width: 2vw !important;
   height: 2vw !important;
+  margin-bottom: 2vw;
 }
 
 .btn-swipper {

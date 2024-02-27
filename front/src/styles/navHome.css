@@ -1,5 +1,5 @@
 
-header  {
+.headerHome {
     margin-top: 1vw;
     display: flex;
     align-items: center;
@@ -8,13 +8,13 @@ header  {
     height: 3vw;
   }
   
-  nav {
+  .navLanding {
     display: flex;
     font-size: 1.5vw;
   }
   
-  nav a,
-  nav ul {
+  .navLanding a,
+  .navLanding ul {
     text-decoration: none;
     list-style: none;
   }
@@ -42,7 +42,7 @@ header  {
   
   ul.t2 a {
     text-decoration: none;
-    font-weight: 800;
+    font-weight: 700;
     color: #ffffff;
     font-size: 1.3vw;
   }
@@ -59,7 +59,7 @@ header  {
   }
   
   .t2 .btn-insc a {
-    font-size: 1vw;
+    font-size: 0.9vw;
     color: var(--verde);
   }
   

@@ -47,7 +47,7 @@ const homeCliente = () => {
                 </div>
             </div>
 
-            <h1>Encontre os melhores profissionais para seu problema</h1>
+            <h1 className='homeClienteH1'>Encontre os melhores profissionais para seu problema</h1>
 
 
             <div className="input-filtros">
