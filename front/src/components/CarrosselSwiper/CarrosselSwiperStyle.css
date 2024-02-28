@@ -1,0 +1,151 @@
+.swippers {
+  margin-left: 20px;
+  margin-bottom: 70px;
+}
+.header-siwpper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.5vw;
+}
+.header-siwpper h2 {
+  font-size: 2vw;
+  font-weight: 700;
+}
+.header-siwpper h2 strong {
+  color: var(--verde);
+}
+
+.btns-swipper {
+  display: flex;
+  gap: 3vw;
+  transition: 0.35s ease-in-out;
+}
+.btn-swipper {
+  width: 50px;
+  height: 50px;
+}
+.btn-swipper:hover {
+  background-color: #144474;
+  outline: none;
+  color: white;
+}
+
+.btn-swipper::after {
+  font-size: 2vw !important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  border-radius: 50%;
+  position: relative !important;
+  width: 2vw !important;
+  height: 2vw !important;
+  padding: 10px;
+}
+.swiper-button-next {
+  color: #fff;
+  background-color: var(--verde);
+  position: relative;
+}
+
+.swiper-button-prev {
+  color: #000;
+  background-color: transparent;
+  outline: 1px solid var(--verde);
+  outline-offset: -1px;
+  position: relative;
+}
+.carrossel {
+  display: flex;
+  justify-content: space-between;
+  gap: 17vw;
+  margin-bottom: 35px;
+}
+.left-carrossel {
+  width: 18vw;
+  padding-left: 9px;
+  height: 24vw;
+  display: flex;
+  gap: 2vw;
+}
+
+.left-carrossel p {
+  font-size: 1.5vw;
+  margin: 0;
+}
+.carrossel-btn {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  border-left: solid 3px #757575;
+  height: 5vw;
+  transition: border-left 0.3s ease;
+}
+
+#carrossel-btn1 {
+  border-left: solid 3px var(--verde);
+}
+#carrossel-palavra1 {
+  color: var(--verde);
+}
+
+.card-carrossel {
+  width: 17vw;
+  height: 24vw;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.swiper-wrapper {
+  height: 120% !important;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide .card-carrossel img {
+  display: block;
+  border-radius: 10px 10px 0 0px;
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+  border-bottom: solid 3px var(--verde);
+}
+
+.swiper-slide .card-carrossel p {
+  font-size: 1.3vw;
+}
+
+.swiper-slide .card-carrossel .btn-buscar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6vw;
+  height: 3vw;
+  border-radius: 6px;
+  background-color: var(--verde);
+  font-size: 1.3vw;
+  transition: 0.25s ease-in-out;
+}
+
+.swiper-slide .card-carrossel .btn-buscar:hover {
+  background-color: var(--azul);
+}
+
+.swiper-slide .card-carrossel .btn-buscar a {
+  color: #fff;
+  text-decoration: none;
+}

@@ -1,7 +1,8 @@
     import React, { useState } from 'react';
-    import img_cad from '../assets/cad-img.png';
-    import img_logo from '../assets/sidequest_3.png';
+    import img_cad from '../../assets/cad-img.png';
+    import img_logo from '../../assets/sidequest_3.png';
     import axios from 'axios';
+    import './cad.css'
     
     
 

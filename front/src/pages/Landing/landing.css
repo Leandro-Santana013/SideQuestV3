@@ -1,0 +1,99 @@
+.homeContainer{
+  width: 100%;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4.166666666666667vw;
+}
+
+.img-banner {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+  width: 38vw;
+  height: 43vw;
+}
+
+.left-banner {
+  padding-top: 10vw;
+  padding-left: 3vw;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.banner .content-input i {
+  color: var(--verde);
+  font-size: 1.4vw;
+  margin-left: 5px;
+}
+
+.banner .content-input {
+  padding-left: 0.3vw;
+  margin-top: 8vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32vw;
+  height: 3vw;
+  border: solid 1px #144474;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
+  -webkit-box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
+  -moz-box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
+}
+
+.content-input img {
+  width: 2.3vw;
+  height: 2.3vw;
+  margin-right: 7px;
+}
+
+.left-banner input {
+  margin-left: 0.5vw;
+  font-size: 0.99vw;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  width: 28vw;
+  height: auto;
+  border: none;
+}
+
+.left-banner button:hover {
+  background-color: var(--azul);
+}
+
+.left-banner button {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--verde);
+  color: #ffffff;
+  border: none;
+  width: 7vw;
+  height: 100%;
+  border-radius: 0 10px 10px 0;
+  font-size: 1vw;
+  transition: all 0.5s ease;
+}
+
+.left-banner input:focus {
+  outline: none;
+  color: black;
+}
+
+.left-banner .h1Banner {
+  color: black;
+  width: 40vw;
+  font-size: 3vw;
+}
+
+.left-banner strong {
+  color: var(--verde);
+  text-decoration: underline;
+}

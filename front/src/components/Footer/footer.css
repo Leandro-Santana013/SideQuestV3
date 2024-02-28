@@ -1,0 +1,27 @@
+footer {
+    display: flex;
+    border-top: solid 1px var(--verde);
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 2vw;
+  }
+  
+  .termos,
+  .sobre {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 1.2vw;
+  }
+  
+  footer img {
+    width: 8vw;
+    height: 3vw;
+  }
+  
+  .termos a,
+  .sobre a {
+    color: #000000;
+    text-decoration: none;
+  }
+  

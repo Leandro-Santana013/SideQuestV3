@@ -1,32 +1,37 @@
-import React from 'react'
-import { createBrowserRouter} from 'react-router-dom'
-import Home from "./pages/home"
-import Login from "./pages/Login"
-import Cadastro from "./pages/cad"
-import ValidaEmail from "./pages/validaEmail"
-import HomeCliente from './pages/homeCliente'
+import React from "react";
+import { createBrowserRouter } from "react-router-dom";
+import Landing from "./pages/Landing/landing";
+import Login from "./pages/Login/Login";
+import Cadastro from "./pages/Cadastro/Cadastro";
+import ValidaEmail from "./pages/ValidaEmail/validaEmail";
+import HomeCliente from "./pages/HomeCliente/HomeCliente";
+import PerfilCliente from "./pages/PerfilCliente/PerfilCliente";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />
+    element: <Landing />,
   },
   {
     path: "/login",
-    element: <Login />
+    element: <Login />,
   },
   {
     path: "/cadastro",
-    element: <Cadastro />
+    element: <Cadastro />,
   },
   {
     path: "/validaemail",
-    element: <ValidaEmail />
+    element: <ValidaEmail />,
   },
   {
     path: "/homecliente",
-    element: <HomeCliente />
+    element: <HomeCliente />,
   },
-])
+  {
+    path: "/perfil",
+    element: <PerfilCliente />,
+  },
+]);
 
-export default router
+export default router;
