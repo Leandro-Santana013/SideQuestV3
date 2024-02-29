@@ -2,11 +2,10 @@
     import img_cad from '../../assets/cad-img.png';
     import img_logo from '../../assets/sidequest_3.png';
     import axios from 'axios';
-    import './cad.css'
     
-    
+    import './cadastro.css'
 
-    const Cad = () => {
+    export const Cadastro = () => {
       const [isProfessional, setIsProfessional] = useState(true);
 
       const [formData, setFormData] = useState({
@@ -122,4 +121,3 @@
       );
     };
 
-    export default Cad;

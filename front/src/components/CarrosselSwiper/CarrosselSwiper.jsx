@@ -17,7 +17,6 @@ const allSlidesData = [
     { id: 1, text: "Texto do slide 1", image: img1 },
     { id: 1, text: "Texto do slide 1", image: img1 },
     { id: 1, text: "Texto do slide 1", image: img1 },
-    
   ],
   [
     { id: 1, text: "Texto do slide 1", image: img1 },
@@ -140,3 +139,134 @@ export const CarrosselSwiper = () => {
     </section>
   );
 };
+
+/*
+SwiperCore.use([Navigation]);
+
+const slidesData1 = [
+  { id: 1, text: 'Texto do slide 1', image: img1 },
+
+];
+const slidesData2 = [
+  { id: 1, text: 'Texto do slide 1', image: img1 },
+  { id: 2, text: 'Texto do slide 2', image: img2 },
+  // Add more data for the second carousel if needed
+];
+const slidesData3 = [
+  { id: 1, text: 'Texto do slide 1', image: img1 },
+  { id: 2, text: 'Texto do slide 2', image: img2 },
+  { id: 3, text: 'Texto do slide 3', image: img3 },
+  // Add more data for the second carousel if needed
+];
+
+const slidesData4 = [
+  { id: 1, text: 'Texto do slide 1', image: img1 },
+  { id: 2, text: 'Texto do slide 2', image: img2 },
+  { id: 3, text: 'Texto do slide 3', image: img3 },
+  { id: 4, text: 'Texto do slide 3', image: img3 },
+  // Add more data for the second carousel if needed
+];
+
+const slidesData5 = [
+  { id: 1, text: 'Texto do slide 1', image: img1 },
+  { id: 2, text: 'Texto do slide 2', image: img2 },
+  { id: 3, text: 'Texto do slide 3', image: img3 },
+  { id: 4, text: 'Texto do slide 3', image: img3 },
+  { id: 5, text: 'Texto do slide 3', image: img3 },
+  // Add more data for the second carousel if needed
+];
+
+{num === 1
+              ? slidesData1.map((slide) => (
+                <SwiperSlide key={slide.id} className='SwipperSlide'>
+                  <div className="swiper mySwiper" id={`carrossel${num}`}>
+                    <div className="swiper-wrapper">
+                      <div className="swiper-slide">
+                        <div className="card-carrossel">
+                          <img src={slide.image} alt={slide.text} />
+                          <p>{slide.text}</p>
+                          <div className="btn-buscar">
+                            <a href="">Buscar</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))
+              : num === 2
+                ? slidesData2.map((slide) => (
+                  <SwiperSlide key={slide.id} className='SwipperSlide'>
+                    <div className="swiper mySwiper" id={`carrossel${num}`}>
+                      <div className="swiper-wrapper">
+                        <div className="swiper-slide">
+                          <div className="card-carrossel">
+                            <img src={slide.image} alt={slide.text} />
+                            <p>{slide.text}</p>
+                            <div className="btn-buscar">
+                              <a href="">Buscar</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))
+                : num === 3
+                  ? slidesData3.map((slide) => (
+                    <SwiperSlide key={slide.id} className='SwipperSlide'>
+                      <div className="swiper mySwiper" id={`carrossel${num}`}>
+                        <div className="swiper-wrapper">
+                          <div className="swiper-slide">
+                            <div className="card-carrossel">
+                              <img src={slide.image} alt={slide.text} />
+                              <p>{slide.text}</p>
+                              <div className="btn-buscar">
+                                <a href="">Buscar</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  ))
+
+                  : num === 4
+                    ? slidesData4.map((slide) => (
+                      <SwiperSlide key={slide.id} className='SwipperSlide'>
+                        <div className="swiper mySwiper" id={`carrossel${num}`}>
+                          <div className="swiper-wrapper">
+                            <div className="swiper-slide">
+                              <div className="card-carrossel">
+                                <img src={slide.image} alt={slide.text} />
+                                <p>{slide.text}</p>
+                                <div className="btn-buscar">
+                                  <a href="">Buscar</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                    ))
+
+                    : num === 5
+                      ? slidesData5.map((slide) => (
+                        <SwiperSlide key={slide.id} className='SwipperSlide'>
+                          <div className="swiper mySwiper" id={`carrossel${num}`}>
+                            <div className="swiper-wrapper">
+                              <div className="swiper-slide">
+                                <div className="card-carrossel">
+                                  <img src={slide.image} alt={slide.text} />
+                                  <p>{slide.text}</p>
+                                  <div className="btn-buscar">
+                                    <a href="">Buscar</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </SwiperSlide>
+                      ))
+                      : null}
+*/

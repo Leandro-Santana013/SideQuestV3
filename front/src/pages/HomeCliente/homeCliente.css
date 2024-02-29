@@ -6,12 +6,6 @@
   margin-bottom: 3vw;
 }
 
-.content-midia {
-  display: flex;
-  justify-content: flex-end;
-}
-
-
 .actions {
   display: flex;
 }
@@ -52,10 +46,10 @@
   display: flex;
   align-items: center;
   width: 82vw;
-  margin-top: 5.5vw;
+  margin-top: 5vw;
 }
 
-.h1HomeCliente{
+.h1Home {
   font-size: 1.3vw;
   width: 22vw;
   color: var(--verde);
@@ -70,7 +64,7 @@
   margin-bottom: 4vw;
 }
 
-.input-filtros .inputHome {
+.input-filtros input {
   margin-left: 0.5vw;
   font-size: 0.99vw;
   flex-grow: 1;
@@ -81,11 +75,11 @@
   border: none;
 }
 
-.input-filtros .inputHome:focus {
+.input-filtros input:focus {
   outline: none;
 }
 
-.content-inputs {
+.content-input {
   padding-left: 0.3vw;
   display: flex;
   align-items: center;

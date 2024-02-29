@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import {  
+import {
   CarrosselSwiper,
   Benefits,
   Animation,
-  Navhome,
+  HeaderLanding,
   Footer,
 } from "../../components";
 import "./landing.css";
@@ -20,13 +20,13 @@ const Home = () => {
     setText(newValue);
   };
   return (
-    <div className="homeContainer">
-      <Navhome />
+    <>
+      <HeaderLanding/>
 
-      <div class="banner">
-        <div class="left-banner">
-          <div class="text-input">
-            <h1 className="h1Banner">
+      <div className="banner">
+        <div className="left-banner">
+          <div className="text-input">
+            <h1 className="h1Landing">
               Encontre os melhores <strong>profissionais</strong> para <br />
               sua <strong>residência</strong> aqui!
             </h1>
@@ -36,14 +36,14 @@ const Home = () => {
               value={text}
             />
           </div>
-          <img class="img-banner" src={ftbanner} alt="furadeira" />
+          <img className="img-banner" src={ftbanner} alt="furadeira" />
         </div>
       </div>
       <CarrosselSwiper />
       <Benefits />
       <Animation />
       <Footer />
-    </div>
+    </>
   );
 };
 

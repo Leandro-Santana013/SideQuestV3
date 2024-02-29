@@ -1,3 +1,7 @@
+.content-midia {
+    display: flex;
+    justify-content: flex-end;
+}
 
 .connected-bar {
     display: none;

@@ -5,12 +5,12 @@ import "./header.css";
 export const Header = () => {
   return (
     <div>
-    <header className='headerHomeCLiente'>
-       <img class="img-logo" src={imgLogo} alt="Logo do SideQuest"/>
-       <div class="notificacao">
-           <i class="fa-solid fa-bell"></i>
-       </div>
-   </header>
-   </div>
+      <header className="containerHeader">
+        <img class="img-logo" src={imgLogo} alt="Logo do SideQuest" />
+        <div class="notificacao">
+          <i class="fa-solid fa-bell"></i>
+        </div>
+      </header>
+    </div>
   );
 };

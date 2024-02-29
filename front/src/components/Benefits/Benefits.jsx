@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import img_Benefits_Review from "../../assets/Review.png";
 import img_Benefits_Calendario from "../../assets/calendario.png";
 import img_Benefits_high_five from "../../assets/high_five.png";
+
 import "./benefits.css"
 
 export const Benefits = () => {
@@ -29,7 +30,7 @@ export const Benefits = () => {
 
   return (
     <section className="beneficios">
-      <h3 className="h3Benefits">Principais benefícios</h3>
+      <h3>Principais benefícios</h3>
       <div className="animation1">
         <div
           id="card1"

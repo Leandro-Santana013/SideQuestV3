@@ -1,7 +1,6 @@
 import React from "react";
 import img_logo from "../../assets/logo_SideQuest.png";
-import './footer.css'
-
+import "./footer.css"
 export const Footer = () => {
   return (
     <footer>
@@ -18,5 +17,5 @@ export const Footer = () => {
         <a>Equipe SideQuest</a>
       </div>
     </footer>
-  );
+  );  
 };

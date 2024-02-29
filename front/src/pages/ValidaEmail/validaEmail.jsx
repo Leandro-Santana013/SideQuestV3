@@ -3,7 +3,7 @@
   import axios from 'axios';
   import { useParams } from 'react-router-dom';
 
-  const ValidaEmail = () => {
+  const validaEmail = () => {
 
     
     const { token } = useParams();
@@ -44,4 +44,4 @@
     );
   };
 
-  export default ValidaEmail
+  export default validaEmail

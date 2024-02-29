@@ -1,16 +1,21 @@
-import React from "react";
+import React,{useState} from "react";
 import "./homeCliente.css";
-import { SidebarCliente, CardProfissional, Header } from "../../components";
+import { SidebarCliente, CardProfissional, Header, CustomTextInput } from "../../components";
 import imgAproved from "../../assets/aproved.png";
 import imgReload from "../../assets/reload.png";
 import imgCalendario from "../../assets/calendario1.png";
 
+
 const HomeCliente = () => {
+  const [text, setText] = useState("");
+  const handleChange = (newValue) => {
+    console.log("Novo valor:", newValue);
+    setText(newValue);
+  };
   return (
     <>
       <Header />
       <SidebarCliente />
-
       <div className="content-midia">
         <div className="menu-profissionais">
           <div className="menu-topo">
@@ -45,20 +50,17 @@ const HomeCliente = () => {
             </div>
           </div>
 
-          <h1 className="h1HomeCliente">Encontre os melhores profissionais para seu problema</h1>
+          <h1 className="h1Home">Encontre os melhores profissionais para seu problema</h1>
 
-          <div className="input-filtros">
-            <div className="content-inputs">
-              <i className="fa-solid fa-magnifying-glass"></i>
-              <input type="text" placeholder="busque por serviços" className="inputHome" />
-            </div>
-            <div className="filtros">
-              <p>Filtros</p>
-              <i className="fa-solid fa-sliders"></i>
-            </div>
-          </div>
+              <CustomTextInput 
+              className="contetn-input"
+              onChange={handleChange}
+              placeholder={"Encontre profissionais"}
+              value={text}
+            />
+            
 
-          <CardProfissional />
+          <CardProfissional />  
         </div>
       </div>
     </>

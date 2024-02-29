@@ -1,9 +1,21 @@
+
 footer {
     display: flex;
     border-top: solid 1px var(--verde);
     align-items: center;
     justify-content: space-around;
     margin-bottom: 2vw;
+  }
+  
+  .beneficios {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .beneficios h3 {
+    font-size: 2vw;
+    margin-bottom: 20px;
   }
   
   .termos,
@@ -24,4 +36,5 @@ footer {
     color: #000000;
     text-decoration: none;
   }
+  
   

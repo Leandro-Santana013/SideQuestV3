@@ -1,5 +1,7 @@
 import { Header, SidebarCliente } from "../../components";
 
+import "./perfilCliente.css"
+
 const PerfilCliente = () => {
   return (
     <div>

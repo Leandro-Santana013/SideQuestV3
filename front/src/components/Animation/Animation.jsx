@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import ani1 from "../../assets/triangulo-animation2.png";
 import ani2 from "../../assets/substitutir.png";
-import "./animation.css"
 
+import "./animation.css"
 export const Animation = () => {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {

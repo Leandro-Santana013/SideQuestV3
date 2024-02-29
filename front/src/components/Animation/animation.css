@@ -34,7 +34,7 @@
     gap: 4vw;
     width: 40vw;
     height: 30vw;
-  padding-right: 10vw; 
+  /*   padding-right: 10vw; */
   }
   
   .conteudo-animation2 p {
@@ -123,3 +123,5 @@
     transform: translateY(0%);
     transition-delay: 1100ms;
   }
+  
+  

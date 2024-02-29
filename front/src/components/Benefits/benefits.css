@@ -1,4 +1,4 @@
-/*Animação */
+
 .animation1 {
     display: flex;
     gap: 13vw;
@@ -55,14 +55,4 @@
     width: 21vw;
     height: 15vw;
   }
-
-.beneficios{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.h3Benefits {
-    font-size: 1.7vw;
-    margin-bottom: 50px;
-}
+  

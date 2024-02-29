@@ -5,13 +5,12 @@ export const SidebarCliente = () => {
   const [currentPage, setCurrentPage] = useState(window.location.pathname);
 
   const pages = [
-    {id: 1, text: "home", href: "homeCliente"},
-    {id: 2 , text: "perfil", href: "perfil"},
-    {id: 3, text: "chats", href: "chats"},
-    {id: 4, text: "favoritos", href: "favoritos"},
-    {id: 5, text: "histórico", href: "historico"},
-    {id: 6, text: "pagamentos", href: "pagamentos"},
-
+    {id: 1, name:"home", href: "homeCliente"},
+    {id: 2, name:"perfil", href: "perfil"},
+    {id: 3, name:"chats", href: "chats"},,
+    {id: 4, name:"favoritos", href: "favoritos"},
+    {id: 5, name:"histórico", href: "historico"},
+    {id: 6, name:"pagamemntos", href: "pagamentos"},
   ];
 
   useEffect(() => {
@@ -35,21 +34,21 @@ export const SidebarCliente = () => {
           <a
             key={index}
             href={`/${page.href}`}
-            className={`option ${currentPage.includes(page) ? "active" : ""}`}
+            className={`option ${currentPage.includes(page.name) ? "active" : ""}`}
           >
             <div
               className={`connected-bar  ${
-                currentPage.includes(page) ? "active" : ""
+                currentPage.includes(page.name) ? "active" : ""
               }`}
-              style={{ display: currentPage.includes(page) ? "flex" : "none" }}
+              style={{ display: currentPage.includes(page.name) ? "flex" : "none" }}
             ></div>
             <i
               className={`${getIcon(page)} ${
                 currentPage.includes(page) ? "active" : ""
               }`}
-              style={{ color: currentPage.includes(page) ? "#3cbc8c" : "" }}
+              style={{ color: currentPage.includes(page.name) ? "#3cbc8c" : "" }}
             ></i>
-            <p style={{ color: currentPage.includes(page) ? "#3cbc8c" : "" }}>
+            <p style={{ color: currentPage.includes(page.name) ? "#3cbc8c" : "" }}>
               {getPageLabel(page)}
             </p>
           </a>
@@ -113,5 +112,5 @@ const getPageLabel = (page) => {
   // Lógica para obter o rótulo da página com base no nome da página
   // Substitua ou adicione a lógica conforme necessário
   // Exemplo: se o nome da página for 'perfil', retorna 'Perfil'
-  return page.text.charAt(0).toUpperCase() + page.text.slice(1);
+  return page.name.charAt(0).toUpperCase() + page.name.slice(1);
 };
