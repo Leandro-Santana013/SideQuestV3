@@ -1,5 +1,5 @@
 import { g as getDocument } from '../shared/ssr-window.esm.mjs';
-import { m as makeElementsArray, h as classesToTokens, c as createElement, n as nextTick, b as elementOffset } from '../shared/utils.mjs';
+import { m as makeElementsArray, i as classesToTokens, c as createElement, n as nextTick, b as elementOffset } from '../shared/utils.mjs';
 import { c as createElementIfNotDefined } from '../shared/create-element-if-not-defined.mjs';
 import { c as classesToSelector } from '../shared/classes-to-selector.mjs';
 

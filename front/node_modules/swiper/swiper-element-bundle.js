@@ -1,5 +1,5 @@
 /**
- * Swiper Custom Element 11.0.6
+ * Swiper Custom Element 11.0.7
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * https://swiperjs.com
  *
@@ -7,7 +7,7 @@
  *
  * Released under the MIT License
  *
- * Released on: February 5, 2024
+ * Released on: February 27, 2024
  */
 
 (function () {
@@ -2445,7 +2445,7 @@
           if (byMousewheel) {
             swiper.setTranslate(swiper.translate - diff);
           } else {
-            swiper.slideTo(activeIndex + slidesPrepended, 0, false, true);
+            swiper.slideTo(activeIndex + Math.ceil(slidesPrepended), 0, false, true);
             if (setTranslate) {
               swiper.touchEventsData.startTranslate = swiper.touchEventsData.startTranslate - diff;
               swiper.touchEventsData.currentTranslate = swiper.touchEventsData.currentTranslate - diff;
@@ -6318,6 +6318,7 @@
     extendParams({
       zoom: {
         enabled: false,
+        limitToOriginalSize: false,
         maxRatio: 3,
         minRatio: 1,
         toggle: true,
@@ -6389,6 +6390,15 @@
       const distance = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
       return distance;
     }
+    function getMaxRatio() {
+      const params = swiper.params.zoom;
+      const maxRatio = gesture.imageWrapEl.getAttribute('data-swiper-zoom') || params.maxRatio;
+      if (params.limitToOriginalSize && gesture.imageEl && gesture.imageEl.naturalWidth) {
+        const imageMaxRatio = gesture.imageEl.naturalWidth / gesture.imageEl.offsetWidth;
+        return Math.min(imageMaxRatio, maxRatio);
+      }
+      return maxRatio;
+    }
     function getScaleOrigin() {
       if (evCache.length < 2) return {
         x: null,
@@ -6445,7 +6455,7 @@
           gesture.imageEl = undefined;
           return;
         }
-        gesture.maxRatio = gesture.imageWrapEl.getAttribute('data-swiper-zoom') || params.maxRatio;
+        gesture.maxRatio = getMaxRatio();
       }
       if (gesture.imageEl) {
         const [originX, originY] = getScaleOrigin();
@@ -6708,8 +6718,9 @@
         touchX = undefined;
         touchY = undefined;
       }
-      zoom.scale = forceZoomRatio || gesture.imageWrapEl.getAttribute('data-swiper-zoom') || params.maxRatio;
-      currentScale = forceZoomRatio || gesture.imageWrapEl.getAttribute('data-swiper-zoom') || params.maxRatio;
+      const maxRatio = getMaxRatio();
+      zoom.scale = forceZoomRatio || maxRatio;
+      currentScale = forceZoomRatio || maxRatio;
       if (e && !(currentScale === 1 && forceZoomRatio)) {
         slideWidth = gesture.slideEl.offsetWidth;
         slideHeight = gesture.slideEl.offsetHeight;
@@ -7462,7 +7473,7 @@
       } else {
         location = window.location;
       }
-      const slide = swiper.slides[index];
+      const slide = swiper.virtual && swiper.params.virtual.enabled ? swiper.slidesEl.querySelector(`[data-swiper-slide-index="${index}"]`) : swiper.slides[index];
       let value = slugify(slide.getAttribute('data-history'));
       if (swiper.params.history.root.length > 0) {
         let root = swiper.params.history.root;
@@ -9539,7 +9550,7 @@
   }
 
   /**
-   * Swiper 11.0.6
+   * Swiper 11.0.7
    * Most modern mobile touch slider and framework with hardware accelerated transitions
    * https://swiperjs.com
    *
@@ -9547,7 +9558,7 @@
    *
    * Released under the MIT License
    *
-   * Released on: February 5, 2024
+   * Released on: February 27, 2024
    */
 
 
@@ -9874,7 +9885,7 @@
   }
 
   /**
-   * Swiper Custom Element 11.0.6
+   * Swiper Custom Element 11.0.7
    * Most modern mobile touch slider and framework with hardware accelerated transitions
    * https://swiperjs.com
    *
@@ -9882,7 +9893,7 @@
    *
    * Released under the MIT License
    *
-   * Released on: February 5, 2024
+   * Released on: February 27, 2024
    */
 
 

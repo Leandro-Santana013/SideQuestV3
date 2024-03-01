@@ -289,4 +289,4 @@ function makeElementsArray(el) {
   return (Array.isArray(el) ? el : [el]).filter(e => !!e);
 }
 
-export { elementParents as a, elementOffset as b, createElement as c, now as d, elementChildren as e, elementOuterSize as f, elementIndex as g, classesToTokens as h, getTranslate as i, elementTransitionEnd as j, isObject as k, getSlideTransformEl as l, makeElementsArray as m, nextTick as n, elementStyle as o, elementNextAll as p, elementPrevAll as q, animateCSSModeScroll as r, setCSSProperty as s, showWarning as t, extend as u, deleteProps as v };
+export { elementParents as a, elementOffset as b, createElement as c, now as d, elementChildren as e, elementOuterSize as f, getSlideTransformEl as g, elementIndex as h, classesToTokens as i, getTranslate as j, elementTransitionEnd as k, isObject as l, makeElementsArray as m, nextTick as n, elementStyle as o, elementNextAll as p, elementPrevAll as q, animateCSSModeScroll as r, setCSSProperty as s, showWarning as t, extend as u, deleteProps as v };

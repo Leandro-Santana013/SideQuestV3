@@ -1,7 +1,7 @@
 import React from "react";
 import "./TextInputStyle.css";
 
-export const CustomTextInput = ({ placeholder, value, onChange, ...rest }) => {
+export const TextInput = ({ placeholder, value, onChange, ...rest }) => {
   const handleChange = (event) => {
     onChange(event.target.value);
   };

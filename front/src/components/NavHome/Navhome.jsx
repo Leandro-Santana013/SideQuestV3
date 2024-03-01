@@ -3,7 +3,7 @@ import logo from "../..//assets/logo_SideQuest.png";
 import { Link } from "react-router-dom";
 import "./navHomeStyle.css";
 
-export const Navhome = () => {
+export const NavHome = () => {
   return (
         <nav className="navHomenav">
         <ul className="navHomeUl">

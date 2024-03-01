@@ -1,5 +1,5 @@
 import { c as classesToSelector } from '../shared/classes-to-selector.mjs';
-import { c as createElement, g as elementIndex, m as makeElementsArray } from '../shared/utils.mjs';
+import { c as createElement, h as elementIndex, m as makeElementsArray } from '../shared/utils.mjs';
 
 function A11y(_ref) {
   let {

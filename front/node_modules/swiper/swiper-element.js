@@ -1,5 +1,5 @@
 /**
- * Swiper Custom Element 11.0.6
+ * Swiper Custom Element 11.0.7
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * https://swiperjs.com
  *
@@ -7,7 +7,7 @@
  *
  * Released under the MIT License
  *
- * Released on: February 5, 2024
+ * Released on: February 27, 2024
  */
 
 (function () {
@@ -2415,7 +2415,7 @@
           if (byMousewheel) {
             swiper.setTranslate(swiper.translate - diff);
           } else {
-            swiper.slideTo(activeIndex + slidesPrepended, 0, false, true);
+            swiper.slideTo(activeIndex + Math.ceil(slidesPrepended), 0, false, true);
             if (setTranslate) {
               swiper.touchEventsData.startTranslate = swiper.touchEventsData.startTranslate - diff;
               swiper.touchEventsData.currentTranslate = swiper.touchEventsData.currentTranslate - diff;
@@ -4621,7 +4621,7 @@
   }
 
   /**
-   * Swiper Custom Element 11.0.6
+   * Swiper Custom Element 11.0.7
    * Most modern mobile touch slider and framework with hardware accelerated transitions
    * https://swiperjs.com
    *
@@ -4629,7 +4629,7 @@
    *
    * Released under the MIT License
    *
-   * Released on: February 5, 2024
+   * Released on: February 27, 2024
    */
 
 

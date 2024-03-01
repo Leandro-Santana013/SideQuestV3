@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import "./homeCliente.css";
-import { SidebarCliente, CardProfissional, Header, CustomTextInput } from "../../components";
+import { SidebarCliente, CardProfissional, Header, TextInput } from "../../components";
 import imgAproved from "../../assets/aproved.png";
 import imgReload from "../../assets/reload.png";
 import imgCalendario from "../../assets/calendario1.png";
@@ -52,7 +52,7 @@ const HomeCliente = () => {
 
           <h1 className="h1Home">Encontre os melhores profissionais para seu problema</h1>
 
-              <CustomTextInput 
+              <TextInput 
               className="contetn-input"
               onChange={handleChange}
               placeholder={"Encontre profissionais"}

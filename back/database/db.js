@@ -13,7 +13,7 @@ async function connect() {
         user: "root",
         password: "root",
         database: "db_sidequest",
-        port: 3307
+        port: 3306
     });
 
     connection.connect((err) => {

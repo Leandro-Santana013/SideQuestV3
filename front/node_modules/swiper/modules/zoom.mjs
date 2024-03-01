@@ -1,5 +1,5 @@
 import { a as getWindow } from '../shared/ssr-window.esm.mjs';
-import { e as elementChildren, a as elementParents, b as elementOffset, i as getTranslate } from '../shared/utils.mjs';
+import { e as elementChildren, a as elementParents, b as elementOffset, j as getTranslate } from '../shared/utils.mjs';
 
 function Zoom(_ref) {
   let {
@@ -12,6 +12,7 @@ function Zoom(_ref) {
   extendParams({
     zoom: {
       enabled: false,
+      limitToOriginalSize: false,
       maxRatio: 3,
       minRatio: 1,
       toggle: true,
@@ -83,6 +84,15 @@ function Zoom(_ref) {
     const distance = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
     return distance;
   }
+  function getMaxRatio() {
+    const params = swiper.params.zoom;
+    const maxRatio = gesture.imageWrapEl.getAttribute('data-swiper-zoom') || params.maxRatio;
+    if (params.limitToOriginalSize && gesture.imageEl && gesture.imageEl.naturalWidth) {
+      const imageMaxRatio = gesture.imageEl.naturalWidth / gesture.imageEl.offsetWidth;
+      return Math.min(imageMaxRatio, maxRatio);
+    }
+    return maxRatio;
+  }
   function getScaleOrigin() {
     if (evCache.length < 2) return {
       x: null,
@@ -139,7 +149,7 @@ function Zoom(_ref) {
         gesture.imageEl = undefined;
         return;
       }
-      gesture.maxRatio = gesture.imageWrapEl.getAttribute('data-swiper-zoom') || params.maxRatio;
+      gesture.maxRatio = getMaxRatio();
     }
     if (gesture.imageEl) {
       const [originX, originY] = getScaleOrigin();
@@ -402,8 +412,9 @@ function Zoom(_ref) {
       touchX = undefined;
       touchY = undefined;
     }
-    zoom.scale = forceZoomRatio || gesture.imageWrapEl.getAttribute('data-swiper-zoom') || params.maxRatio;
-    currentScale = forceZoomRatio || gesture.imageWrapEl.getAttribute('data-swiper-zoom') || params.maxRatio;
+    const maxRatio = getMaxRatio();
+    zoom.scale = forceZoomRatio || maxRatio;
+    currentScale = forceZoomRatio || maxRatio;
     if (e && !(currentScale === 1 && forceZoomRatio)) {
       slideWidth = gesture.slideEl.offsetWidth;
       slideHeight = gesture.slideEl.offsetHeight;

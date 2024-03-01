@@ -1,5 +1,5 @@
 import { a as getWindow, g as getDocument } from './ssr-window.esm.mjs';
-import { a as elementParents, o as elementStyle, e as elementChildren, s as setCSSProperty, f as elementOuterSize, p as elementNextAll, q as elementPrevAll, i as getTranslate, r as animateCSSModeScroll, n as nextTick, t as showWarning, c as createElement, d as now, u as extend, g as elementIndex, v as deleteProps } from './utils.mjs';
+import { a as elementParents, o as elementStyle, e as elementChildren, s as setCSSProperty, f as elementOuterSize, p as elementNextAll, q as elementPrevAll, j as getTranslate, r as animateCSSModeScroll, n as nextTick, t as showWarning, c as createElement, d as now, u as extend, h as elementIndex, v as deleteProps } from './utils.mjs';
 
 let support;
 function calcSupport() {
@@ -2000,7 +2000,7 @@ function loopFix(_temp) {
         if (byMousewheel) {
           swiper.setTranslate(swiper.translate - diff);
         } else {
-          swiper.slideTo(activeIndex + slidesPrepended, 0, false, true);
+          swiper.slideTo(activeIndex + Math.ceil(slidesPrepended), 0, false, true);
           if (setTranslate) {
             swiper.touchEventsData.startTranslate = swiper.touchEventsData.startTranslate - diff;
             swiper.touchEventsData.currentTranslate = swiper.touchEventsData.currentTranslate - diff;
