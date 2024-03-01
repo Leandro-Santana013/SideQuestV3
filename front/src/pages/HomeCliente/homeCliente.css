@@ -79,16 +79,6 @@
   outline: none;
 }
 
-.content-input {
-  padding-left: 0.3vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32vw;
-  height: 3vw;
-  border: solid 1px #000000;
-  border-radius: 16px;
-}
 
 .filtros {
   border-radius: 16px;
@@ -104,10 +94,8 @@
   font-size: 1vw;
 }
 
-.content-input i {
+.filtros .iconFilter {
+  font-size: 1.5vw;
   color: var(--verde);
-  font-size: 1.4vw;
-  margin-left: 5px;
 }
-
 /*area dos cards de serviços*/

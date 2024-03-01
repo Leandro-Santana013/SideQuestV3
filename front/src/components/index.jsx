@@ -9,7 +9,6 @@ import { NavHome } from "./NavHome/Navhome";
 import { SidebarCliente } from "./SidebarCliente/SidebarCliente";
 import { TextInput } from "./TextInput/TextInput";
 import { Typography } from "./Typography/Typography";
-
 export {
     Animation,
     Benefits,

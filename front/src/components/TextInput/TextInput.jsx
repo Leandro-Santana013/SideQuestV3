@@ -1,6 +1,6 @@
 import React from "react";
 import "./TextInputStyle.css";
-
+import { RiSearch2Line } from "react-icons/ri";
 export const TextInput = ({ placeholder, value, onChange, ...rest }) => {
   const handleChange = (event) => {
     onChange(event.target.value);
@@ -9,6 +9,7 @@ export const TextInput = ({ placeholder, value, onChange, ...rest }) => {
   return (
     <div className="container">
       <div className="content-input">
+      <RiSearch2Line className="iconSearch" />
         <input
           type="text"
           placeholder={placeholder}

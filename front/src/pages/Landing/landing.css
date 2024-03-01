@@ -23,32 +23,6 @@
   justify-content: flex-start;
 }
 
-.banner .content-input i {
-  color: var(--verde);
-  font-size: 1.4vw;
-  margin-left: 5px;
-}
-
-.banner .content-input {
-  padding-left: 0.3vw;
-  margin-top: 8vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32vw;
-  height: 3vw;
-  border: solid 1px #144474;
-  border-radius: 10px 10px 10px 10px;
-  box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
-  -webkit-box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
-  -moz-box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
-}
-
-.content-input img {
-  width: 2.3vw;
-  height: 2.3vw;
-  margin-right: 7px;
-}
 
 .left-banner input {
   margin-left: 0.5vw;

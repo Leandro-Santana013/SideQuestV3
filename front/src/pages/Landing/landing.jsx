@@ -10,7 +10,7 @@ import {
 import "./landing.css";
 import ftbanner from "../../assets/ftbanner.png";
 
-import { TextInput } from "../../components/";
+import { TextInput } from "../../components";
 import { Typography } from "../../components/Typography/Typography";
 
 const Home = () => {

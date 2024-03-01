@@ -157,3 +157,10 @@
     height: 1px;
     background-color: black;
 }
+
+.message{
+    background-color: #bb2c2c;
+    width: 20vw;
+    height: 14vw;
+    font-size: 1vw;
+}

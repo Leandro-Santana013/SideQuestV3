@@ -5,6 +5,7 @@ import imgAproved from "../../assets/aproved.png";
 import imgReload from "../../assets/reload.png";
 import imgCalendario from "../../assets/calendario1.png";
 
+import { RiFilter2Fill } from "react-icons/ri";
 
 const HomeCliente = () => {
   const [text, setText] = useState("");
@@ -51,14 +52,17 @@ const HomeCliente = () => {
           </div>
 
           <h1 className="h1Home">Encontre os melhores profissionais para seu problema</h1>
-
+              <div className="input-filtros">
               <TextInput 
-              className="contetn-input"
               onChange={handleChange}
               placeholder={"Encontre profissionais"}
               value={text}
             />
-            
+            <div className="filtros">
+              <p>Filtros</p>
+              <RiFilter2Fill className="iconFilter"/>
+            </div>
+            </div>
 
           <CardProfissional />  
         </div>

@@ -12,7 +12,6 @@
 
 .content-input {
   padding-left: 0.3vw;
-  margin-top: 8vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,4 +40,11 @@
   border-radius: 0 10px 10px 0;
   font-size: 1vw;
   transition: all 0.5s ease;
+}
+
+
+.content-input .iconSearch {
+  color: var(--verde);
+  font-size: 2vw;
+  margin-left: 5px;
 }
