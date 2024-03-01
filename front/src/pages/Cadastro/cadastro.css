@@ -158,9 +158,26 @@
     background-color: black;
 }
 
+.cadBody{
+    display: flex; 
+    justify-content: center;
+    flex-direction: column;
+}
+
+.divMessage{
+    display: flex;
+    justify-content: flex-end;
+}
+
 .message{
-    background-color: #bb2c2c;
-    width: 20vw;
-    height: 14vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #acacac;
+    width: 18vw;
+    height: 5vw;
     font-size: 1vw;
+    border-radius: 10px;
+    color: #bb2c2c;
+    position: absolute;
 }

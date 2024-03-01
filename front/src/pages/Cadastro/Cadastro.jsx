@@ -51,11 +51,13 @@ export const Cadastro = () => {
       const response = await axios.post('http://localhost:5000/auth/registerPro', formDatapro);
 
       setMessage(response.data.message);
+     
 
     } catch (error) {
       console.error('Erro ao cadastrar:', error);
       setMessage(error.response?.data?.message || 'Erro ao cadastrar. Tente novamente.');
     }
+
 
   };
 
@@ -70,8 +72,16 @@ export const Cadastro = () => {
     });
   };
 
+const closeMessage = () =>{
+  setMessage(null);
+};
+
   return (
-    <div className="formlogin" class="tbodycad">
+  <div className='cadBody'>
+    <div className='divMessage' onClick={closeMessage}>
+  {message && <div className="message">{message}</div>}
+  </div>
+       <div className="formlogin" class="tbodycad">
       <div className="forms">
         <div className="l-side">
           <img src={img_cad} alt="cad-img" />
@@ -115,8 +125,8 @@ export const Cadastro = () => {
           </div>
         </div>
       </div>
-      {message && <div className="message">{message}</div>}
 
+    </div>
     </div>
   );
 };
