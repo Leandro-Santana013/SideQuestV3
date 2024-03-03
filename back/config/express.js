@@ -5,7 +5,9 @@ const app = express();
 const ejs = require('ejs');
 const session = require('express-session');
 const randomSession = require('../tools/autoToken');
+const cors = require('cors');
 
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
