@@ -1,6 +1,7 @@
 import React,{useState} from "react";
+import { Link } from "react-router-dom";
 import "./homeCliente.css";
-import { SidebarCliente, CardProfissional, Header, TextInput } from "../../components";
+import { SidebarCliente, CardProfissional, Header, TextInputBusca } from "../../components";
 import imgAproved from "../../assets/aproved.png";
 import imgReload from "../../assets/reload.png";
 import imgCalendario from "../../assets/calendario1.png";
@@ -18,15 +19,19 @@ const HomeCliente = () => {
       <Header />
       <SidebarCliente />
       <div className="content-midia">
-        <div className="menu-profissionais">
+        <div className="main-content">
           <div className="menu-topo">
             <div className="actions">
               <div className="info-action">
                 <p>Adicionar serviço</p>
+                <a href="/postarServico">
+                <Link to={"/postarServico"}>
                 <div className="action">
                   <p>Publique um serviço e receba orçamentos</p>
                   <img src={imgAproved} alt="" />
                 </div>
+                </Link>
+                </a>
               </div>
             </div>
 
@@ -53,7 +58,7 @@ const HomeCliente = () => {
 
           <h1 className="h1Home">Encontre os melhores profissionais para seu problema</h1>
               <div className="input-filtros">
-              <TextInput 
+              <TextInputBusca
               onChange={handleChange}
               placeholder={"Encontre profissionais"}
               value={text}

@@ -78,8 +78,11 @@ const closeMessage = () =>{
 
   return (
   <div className='cadBody'>
-    <div className='divMessage' onClick={closeMessage}>
-  {message && <div className="message">{message}</div>}
+    <div className='divMessage'>
+  {message && <div className="message">
+  <div className='closeMessage' onClick={closeMessage}>x</div>
+    <div className='msgErroCad'>{message}</div>
+    </div>}
   </div>
        <div className="formlogin" class="tbodycad">
       <div className="forms">

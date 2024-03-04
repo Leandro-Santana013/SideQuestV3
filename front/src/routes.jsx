@@ -6,7 +6,7 @@ import {Cadastro} from "./pages/Cadastro/Cadastro";
 import ValidaEmail from "./pages/ValidaEmail/validaEmail";
 import HomeCliente from "./pages/HomeCliente/HomeCliente";
 import PerfilCliente from "./pages/PerfilCliente/PerfilCliente";
-
+import PostarServico from "./pages/PostarServico/PostarServico";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/perfil",
     element: <PerfilCliente />,
+  },
+  {
+    path: "/postarServico",
+    element: <PostarServico />,
   },
 ]);
 

@@ -10,7 +10,7 @@ import {
 import "./landing.css";
 import ftbanner from "../../assets/ftbanner.png";
 
-import { TextInput } from "../../components";
+import { TextInputBusca } from "../../components";
 import { Typography } from "../../components/Typography/Typography";
 
 const Home = () => {
@@ -30,7 +30,7 @@ const Home = () => {
               Encontre os melhores <strong>profissionais</strong> para <br />
               sua <strong>residência</strong> aqui!
             </h1>
-            <TextInput
+            <TextInputBusca
               onChange={handleChange}
               placeholder={"Busque por serviços"}
               value={text}

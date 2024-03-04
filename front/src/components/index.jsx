@@ -7,7 +7,8 @@ import { Header } from "./Header/Header";
 import { HeaderLanding } from "./HeaderLanding/HeaderLanding";
 import { NavHome } from "./NavHome/Navhome";
 import { SidebarCliente } from "./SidebarCliente/SidebarCliente";
-import { TextInput } from "./TextInput/TextInput";
+import { TextInput } from './TextInput/TextInput';
+import { TextInputBusca } from "./TextInputBusca/TextInputBusca";
 import { Typography } from "./Typography/Typography";
 export {
     Animation,
@@ -20,5 +21,6 @@ export {
     NavHome,
     SidebarCliente,
     TextInput,
+    TextInputBusca,
     Typography,
 }

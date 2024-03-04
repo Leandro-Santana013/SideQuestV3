@@ -41,13 +41,6 @@
   height: 5vw;
 }
 
-.menu-profissionais {
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-  width: 82vw;
-  margin-top: 5vw;
-}
 
 .h1Home {
   font-size: 1.3vw;

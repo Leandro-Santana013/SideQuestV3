@@ -8,9 +8,10 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  
 }
 
-.content-input {
+.content-input-busca {
   padding-left: 0.3vw;
   display: flex;
   align-items: center;
@@ -25,6 +26,8 @@
   color: var(--verde);
   font-size: 1.4vw;
   margin-left: 5px;
+  
+  
 }
 
 .btn {
@@ -43,7 +46,7 @@
 }
 
 
-.content-input .iconSearch {
+.content-input-busca .iconSearch {
   color: var(--verde);
   font-size: 2vw;
   margin-left: 5px;

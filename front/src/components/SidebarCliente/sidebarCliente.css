@@ -1,7 +1,16 @@
 .content-midia {
     display: flex;
     justify-content: flex-end;
+    
 }
+
+.main-content {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    width: 82vw;
+    margin-top: 5vw;
+  }
 
 .connected-bar {
     display: none;

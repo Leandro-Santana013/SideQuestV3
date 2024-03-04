@@ -167,17 +167,43 @@
 .divMessage{
     display: flex;
     justify-content: flex-end;
+    width: inherit;
+
 }
 
 .message{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #acacac;
-    width: 18vw;
+    background-color: #fff;
+    border: #bb2c2c solid 1px;
+    width: 17vw;
     height: 5vw;
     font-size: 1vw;
-    border-radius: 10px;
+    border-radius: 8px;
+    font-weight: 550;
     color: #bb2c2c;
+    position: absolute;
+    flex-direction: column;
+    margin-right: 0.4vw;
+    margin-top: 0.4vw;
+    
+}
+
+.closeMessage{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-bottom: 3vw;
+    width: inherit;
+    margin-right: 20px;
+    font-size: 1vw;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.msgErroCad{   
+    width: 17vw;
+    text-align: center;
     position: absolute;
 }
