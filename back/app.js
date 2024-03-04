@@ -1,9 +1,8 @@
 // app.js
 const app = require('./config/express');
-const db = require('./database/db');
+const {connectionDataBase} = require("./database/db.js")
 const authController = require ('./routes/auth');
-const cors = require('cors');
-app.use(cors());
+
 
 
 
@@ -11,7 +10,13 @@ app.use('/auth', authController);  // Em seguida, use o roteador de pages.js par
 
 
 (async () => {
-    await db.connect();
+    await connectionDataBase.sync()
+    
+    connectionDataBase.authenticate().then(() => {
+      console.log("Conexão bem sucedida")
+  }).catch(erroConn => {
+      console.error("Incapaz de fazer conexão", erroConn)
+  })
    
 
 app.listen(5000, () => {

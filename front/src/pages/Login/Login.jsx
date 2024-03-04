@@ -10,8 +10,8 @@ const Login = () => {
     const [message, setMessage] = useState(null);
 
     const [formData, setFormData] = useState({
-        email: '',
-        senha: '',
+        email: null,
+        senha: null,
     });
     const navigate = useNavigate();
 

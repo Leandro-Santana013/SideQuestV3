@@ -6,6 +6,6 @@
     router.post('/register', userControllers.register);
     router.post('/registerPro', proControllers.registerPro)
     router.post('/login', userControllers.login);
-    router.get('/confirmarEmail/', userControllers.validaEmail)
+    router.post('/validaemail', userControllers.validaEmail)
 
     module.exports = router; 

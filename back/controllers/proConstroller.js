@@ -9,10 +9,8 @@ function queryAsync(sql, values) {
     connection.query(sql, values, (error, results) => {
       if (error) {
         reject(error);
-       
       } else {
         resolve(results);
-        
       }
     });
   });
