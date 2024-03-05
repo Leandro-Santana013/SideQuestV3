@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto+Mono:wght@600&display=swap');
+
+:root {
+    --verde: #3cbc8c;
+    --azul: #144474;
+    --verde-claro: #E8FFF7;
+}
+
+.conteudo-favoritos {
+    margin-right: 5vw;
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    margin-top: 15vh;
+}
+
+.prof-fav-pesq {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input-procurar {
+    display: flex;
+    width: 15vw;
+    border: solid 2px black;
+    padding: 5px;
+    justify-content: space-between;
+    border-radius: 20px;
+}
+
+.input-procurar input {
+    border: none;
+    width: 100%;
+}
+
+.input-procurar input:focus {
+    outline: none;
+}
+
+.area-profs {
+    box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
+    border-radius: 20px;
+}
+
+.prof-favoritos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70vw;
+    gap: 1vh;
+    padding: 5px;
+    
+}
+
+.card-prof-fav {
+    display: flex;
+    align-items: center;
+    width: 60vw;
+    padding: 5px;
+    justify-content: space-between;
+    border: solid 1px black;
+    border-radius: 50px;
+}
+
+.info-prof-fav {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+.info-prof-fav img {
+    width: 3.5vw;
+}
+
+.actions-prof-fav {
+    margin-right: 10px;
+    display: flex;
+    gap: 1.5vw;
+}
+
+.actions-prof-fav i {
+    font-size: 2vw;
+    color: var(--verde);
+    transition: .25s ease-in-out;
+}
+
+.actions-prof-fav i:hover {
+    font-size: 2vw;
+    color: var(--azul);
+}
