@@ -40,6 +40,10 @@
     color: #bebebe;
 }
 
+.publicar.form {
+    color: var(--verde);
+}
+
 .headerVoltar {
     width: inherit;
     height: auto;
