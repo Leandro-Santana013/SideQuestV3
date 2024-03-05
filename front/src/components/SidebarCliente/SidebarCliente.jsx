@@ -5,12 +5,12 @@ export const SidebarCliente = () => {
   const [currentPage, setCurrentPage] = useState(window.location.pathname);
 
   const pages = [
-    {id: 1, name:"home", href: "homeCliente"},
-    {id: 2, name:"perfil", href: "perfil"},
-    {id: 3, name:"chats", href: "chats"},,
-    {id: 4, name:"favoritos", href: "favoritos"},
-    {id: 5, name:"histórico", href: "historico"},
-    {id: 6, name:"pagamemntos", href: "pagamentos"},
+    { id: 1, name: "home", href: "homeCliente" },
+    { id: 2, name: "perfil", href: "perfilCliente" },
+    { id: 3, name: "chats", href: "chats" }, ,
+    { id: 4, name: "favoritos", href: "favoritosCliente" },
+    { id: 5, name: "histórico", href: "historicoCliente" },
+    { id: 6, name: "pagamentos", href: "pagamentosCliente" },
   ];
 
   useEffect(() => {
@@ -37,15 +37,13 @@ export const SidebarCliente = () => {
             className={`option ${currentPage.includes(page.name) ? "active" : ""}`}
           >
             <div
-              className={`connected-bar  ${
-                currentPage.includes(page.name) ? "active" : ""
-              }`}
+              className={`connected-bar  ${currentPage.includes(page.name) ? "active" : ""
+                }`}
               style={{ display: currentPage.includes(page.name) ? "flex" : "none" }}
             ></div>
             <i
-              className={`${getIcon(page)} ${
-                currentPage.includes(page) ? "active" : ""
-              }`}
+              className={`${getIcon(page)} ${currentPage.includes(page) ? "active" : ""
+                }`}
               style={{ color: currentPage.includes(page.name) ? "#3cbc8c" : "" }}
             ></i>
             <p style={{ color: currentPage.includes(page.name) ? "#3cbc8c" : "" }}>
@@ -63,15 +61,13 @@ export const SidebarCliente = () => {
           className={`option ${currentPage.includes("config") ? "active" : ""}`}
         >
           <div
-            className={`connected-bar ${
-              currentPage.includes("config") ? "active" : ""
-            }`}
+            className={`connected-bar ${currentPage.includes("config") ? "active" : ""
+              }`}
             style={{ display: currentPage.includes("config") ? "flex" : "" }}
           ></div>
           <i
-            className={`fa-solid fa-gear ${
-              currentPage.includes("config") ? "active" : ""
-            }`}
+            className={`fa-solid fa-gear ${currentPage.includes("config") ? "active" : ""
+              }`}
             style={{ color: currentPage.includes("config") ? "#3cbc8c" : "" }}
           ></i>
           <p style={{ color: currentPage.includes("config") ? "#3cbc8c" : "" }}>
@@ -91,15 +87,15 @@ const getIcon = (page) => {
   switch (page.href) {
     case "homeCliente":
       return "fa-solid fa-house";
-    case "perfil":
+    case "perfilCliente":
       return "fa-regular fa-user";
     case "chats":
       return "fa-regular fa-comments";
-    case "favoritos":
+    case "favoritosCliente":
       return "fa-regular fa-star";
-    case "historico":
+    case "historicoCliente":
       return "fa-solid fa-clock-rotate-left";
-    case "pagamentos":
+    case "pagamentosCliente":
       return "fa-solid fa-hand-holding-dollar";
     case "config":
       return "fa-solid fa-gear";

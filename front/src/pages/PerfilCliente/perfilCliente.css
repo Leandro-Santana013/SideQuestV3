@@ -1,0 +1,118 @@
+:root {
+    --verde: #3cbc8c;
+    --azul: #144474;
+    --verde-claro: #E8FFF7;
+}
+
+.content-midia {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.perfilbox {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 75vw;
+    margin-top: 6vw;
+    margin-right: 3vw;
+    height: 42vw;
+    border-radius: 25px;
+    box-shadow: 0 5px 5px -5px black, 5px 0 5px -5px black, -5px 0 5px -5px black;
+}
+
+.header-perfil {
+    display: flex;
+    align-items: center;
+    width: 70vw;
+    justify-content: space-between;
+    margin: 2vw 2vw 0.5vw 2vw;
+}
+
+.perfil-client {
+    color: black;
+    gap: 1.1vw;
+    display: flex;
+    align-items: center;
+}
+
+.header-perfil button {
+    display: flex;
+    align-items: center;
+    border: none;
+    width: 6.5vw;
+    height: 2.5vw;
+    justify-content: center;
+    color: white;
+    background-color: var(--verde);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.img-perfil {
+    width: 5.2vw;
+    border: 1.5px groove var(--verde);
+    border-radius: 50%;
+}
+
+hr {
+    border: 1px solid var(--verde);
+    width: 100%;
+}
+
+.details {
+    display: flex;
+    height: 75%;
+    width: 90%;
+    flex-direction: column;
+    gap: 2vw;
+    align-items: center;
+}
+
+.details h3 {
+    display: flex;
+    font-size: 1.4vw;
+    width: 54vw;
+    margin-top: 2vw;
+    height: 0;
+}
+
+.name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.name-content {
+    display: flex;
+    border-radius: 12px;
+    width: 25vw;
+    height: 3vw;
+    border: 1px solid black;
+    align-items: center;
+    font-size: 1.1vw;
+}
+.name-content p{
+    margin-left: 0.8vw;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2vw;
+}
+.contact-content{
+    display: flex;
+    border-radius: 12px;
+    width: 54vw;
+    height: 3vw;
+    border: 1px solid black;
+    align-items: center;
+    font-size: 1.1vw;
+}
+.char {
+    display: flex;
+    flex-direction: column;
+}
