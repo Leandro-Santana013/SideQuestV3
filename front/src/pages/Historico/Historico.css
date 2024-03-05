@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto+Mono:wght@600&display=swap');
+
+:root {
+    --verde: #3cbc8c;
+    --azul: #144474;
+    --verde-claro: #E8FFF7;
+}
+
+.conteudo-historico {
+    margin-right: 5vw;
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    margin-top: 15vh;
+}
+
+.hist-pesq {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input-procurar {
+    display: flex;
+    width: 15vw;
+    border: solid 2px black;
+    padding: 5px;
+    justify-content: space-between;
+    border-radius: 20px;
+}
+
+.input-procurar input {
+    border: none;
+    width: 100%;
+}
+
+.input-procurar input:focus {
+    outline: none;
+}
+
+.area-historico {
+    box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
+    border-radius: 20px;
+    padding-bottom: 20px;
+    width: 70vw;
+}
+
+.historicos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70vw;
+    gap: 1vh;
+    padding: 5px;
+}
+
+.hist-cabecalho {
+    display: flex;
+    justify-content: space-around;
+}
+
+.hist-cabecalho p {
+    font-size: 1vw;
+}
+
+.card-historico {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border: solid 1px black;
+    border-radius: 50px;
+}
+
+.alinhador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+}
+
+.info-prof p{
+    margin: 0;
+}
+
+.desc-tipo-servico {
+    font-weight: 800;
+    font-size: 1vw;
+}
+
+.info-prof img{
+    width: 3.5vw;
+}
+
+.categoria {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+    background-color: var(--verde);
+    border-radius: 10px;
+}
+
+.categoria p {
+    color: white;
+    font-size: 1vw;
+}

@@ -8,6 +8,9 @@ import HomeCliente from "./pages/HomeCliente/HomeCliente";
 import PerfilCliente from "./pages/PerfilCliente/PerfilCliente";
 import PostarServico from "./pages/PostarServico/PostarServico";
 import PagamentosCliente from "./pages/PagamentosCliente/PagamentosCliente";
+import Favoritos from "./pages/Favoritos/Favoritos";
+import Historico from "./pages/Historico/Historico";
+import HomeProfissionais from "./pages/HomeProfissional/HomeProfissional";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +44,19 @@ const router = createBrowserRouter([
   {
     path: "/pagamentosCliente",
     element: <PagamentosCliente />,
-  }
+  },
+  {
+    path: "/favoritos",
+    element: <Favoritos />,
+  },
+  {
+    path: "/historico",
+    element: <Historico />,
+  },
+  {
+    path: "/homeProfissionais",
+    element: <HomeProfissionais />,
+  },
 ]);
 
 export default router;
