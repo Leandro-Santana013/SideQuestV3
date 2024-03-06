@@ -10,6 +10,7 @@
     justify-content: space-around;
     width: 75vw;
     margin-bottom: 3vw;
+    margin-top: 5vh;
 }
 
 .actions {
@@ -115,3 +116,180 @@ h1 {
     font-size: 1.4vw;
     margin-left: 5px;
 }
+
+/*Fazendo Cards Servicos*/
+
+.card-servicoProfissa h2 {
+    font-size: 1.4rem;
+    margin-bottom: 3.5vh;
+}
+
+.card-servicoProfissa p {
+font-size: 12px;
+}
+
+.card-servicoProfissa {
+margin: 20px;
+border: 1px solid black;
+padding: 10px;
+border-radius: 10px;
+width: 52vw;
+padding-left: 0px;
+padding-top: 0px;
+padding-right: 0px;
+display: flex;
+justify-content: flex-start;
+}
+
+ .area-servicos a {
+    text-decoration: none;
+    color: black;
+    }
+
+.card-servicoProfissa .icon-sucesso {
+background-color: #3cbc8c;
+height: 8vh;
+border-top-left-radius: 10px;
+border-bottom-right-radius: 40px;
+padding: 9px;
+display: flex;
+align-items: center;
+}
+
+.card-servicoProfissa .icon-sucesso img {
+width: 4vw;
+height: 7vh;
+margin: 8px;
+}
+
+.card-servicoProfissa .desc-servico-usuario {
+    width: 25vw;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    }
+
+
+.card-servicoProfissa .info-usuario {
+display: flex;
+flex-direction: column;
+}
+
+.card-servicoProfissa .info-usuario .avaliacao {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    }
+
+.card-servicoProfissa .info-usuario .avaliacao #perfil {
+    width: 4vw;
+    height: 7vh;
+}
+
+.card-servicoProfissa .info-usuario .avaliacao #estrela {
+width: 2vw;
+height: 3vh;
+}
+
+.card-servicoProfissa .btn-distancia {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: 10vw;
+}
+
+.card-servicoProfissa .btn-distancia button {
+align-self: flex-end;
+width: 7vw;
+height: 7vh;
+border-radius: 20px;
+border: none ;
+background-color: #3cbc8c;
+color: white;
+font-weight: bolder;
+font-size: 1.2rem;
+}
+
+.card-servicoProfissa .btn-distancia .distancia {
+display: flex;
+gap: 7px;
+font-weight: bolder;
+align-items: center;
+}
+
+.card-servicoProfissa .btn-distancia .distancia p {
+    font-size: 1.3rem;
+}
+
+
+.card-servicoProfissa .chat-cancelar {
+display: flex;
+justify-content: space-between;
+width: 35vw;
+align-items: flex-end;
+height: 7vh;
+}
+
+.card-servicoProfissa .chat-cancelar #finalizar {
+    background-color: var(--verde);
+    color: white;
+    width: 7vw;
+    height: 5vh;
+    font-size: 1.1rem;
+    border: none;
+    }
+
+.card-servicoProfissa .chat-cancelar #chat {
+background-color: var(--verde);
+color: white;
+width: 7vw;
+height: 5vh;
+font-size: 1.1rem;
+border: none;
+}
+
+.card-servicoProfissa .double-button {
+width: 25vw;
+height: 20vh;
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+}
+
+.card-servicoProfissa .double-button #ver-mais {
+    width: 7vw;
+    height: 7vh;
+    border-radius: 20px;
+    border: none ;
+    background-color: #3cbc8c;
+    color: white;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    align-self: center;
+}
+
+.card-servicoProfissa .double-button a{
+    align-self: center;
+}
+
+.card-servicoProfissa .double-button #valor {
+    width: 7vw;
+    height: 7vh;
+    border-bottom-left-radius: 40px;
+    border: none ;
+    background-color: #3cbc8c;
+    color: white;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    border-top-right-radius: 10px;
+}
+
+.card-servicoProfissa .chat-cancelar #cancelar {
+    background-color: white;
+    color: red;
+    width: 7vw;
+    height: 5vh;
+    font-size: 1.1rem;
+    border: 2px solid red;
+    }

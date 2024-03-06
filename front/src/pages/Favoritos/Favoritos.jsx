@@ -4,7 +4,7 @@ import imgPerfil from "../../assets/icone-perfil.png";
 import "./Favoritos.css";
 import "../../assets/remixicons/remixicon.css";
 
-function ProfissionaisFavoritos() {
+const ProfissionaisFavoritos = () => {
     return (
         <>
             <Header />
