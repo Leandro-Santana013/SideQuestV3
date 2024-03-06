@@ -40,8 +40,9 @@
     color: #bebebe;
 }
 
-.publicar.form {
+.publicar123.form {
     color: var(--verde);
+    border: solid 2px var(--verde);
 }
 
 .headerVoltar {
