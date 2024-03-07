@@ -11,7 +11,7 @@ import PagamentosCliente from "./pages/PagamentosCliente/PagamentosCliente";
 import Favoritos from "./pages/Favoritos/Favoritos";
 import Historico from "./pages/Historico/Historico";
 import HomeProfissionais from "./pages/HomeProfissional/HomeProfissional";
-
+import ServicosPendentesCliente from "./pages/ServicosPendentesCliente/ServicosPendentesCliente";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -56,6 +56,10 @@ const router = createBrowserRouter([
   {
     path: "/homeProfissionais",
     element: <HomeProfissionais />,
+  },
+  {
+    path: "/servicosPendentesCliente",
+    element: <ServicosPendentesCliente />,
   },
 ]);
 
