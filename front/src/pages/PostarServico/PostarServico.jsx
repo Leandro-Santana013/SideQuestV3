@@ -21,6 +21,9 @@ const PostarServico = () => {
   const handleChange = (event) => {
     setCep(event.target.value);
   };
+  const pinto = (event) => {
+    (event.target.value);
+  };
   const handleBairroChange = (event) => {
     // Lógica para lidar com as mudanças no campo Bairro
   };
@@ -160,7 +163,7 @@ const PostarServico = () => {
                       <h4 className="postarH4">Nome da rua</h4>
                       <TextInput
                         size={{ width: "17vw", height: "3vw" }}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e.target.value)}
                         placeholder={""}
                         value={addressData.logradouro ? `${addressData.logradouro}`: ""}
                       />
@@ -169,8 +172,8 @@ const PostarServico = () => {
                       <h4 className="postarH4">Número</h4>
                       <TextInput
                         size={{ width: "8vw", height: "3vw" }}
-                        onChange={handleChange}
                         placeholder={""}
+                        
                       />
                     </div>
                   </div>

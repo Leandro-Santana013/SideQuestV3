@@ -2,19 +2,8 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer')
 const tokenConfirmacao = require('../tools/createToken')
 const smtpconfig = require('../config/smtp')
+const controller_Pro = require('./Querys/proQuerys')
 
-
-function queryAsync(sql, values) {
-  return new Promise((resolve, reject) => {
-    connection.query(sql, values, (error, results) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(results);
-      }
-    });
-  });
-}
 
 exports.registerPro = async (req, res) => {
 
@@ -23,9 +12,12 @@ exports.registerPro = async (req, res) => {
       const { name, email, cpf, senha, senhaConfirm } = req.body;
       const cpfNumerico = cpf.replace(/\D/g, '');
      
-      const emailResults = await queryAsync("SELECT cd_emailTrabalhador FROM tb_profissional WHERE cd_emailTrabalhador = ?", [email]);
+     
+      const emailResults = await controller_Pro.findEmailProfissional({
+        params: { cd_emailTrabalhador: email }
+      });
   
-        globalemail = email
+        globalemail = email 
   
       if (emailResults.length > 0) {
         return res.status(200).json({ message: 'Email inválido ou já está em uso'})
@@ -33,8 +25,10 @@ exports.registerPro = async (req, res) => {
         return res.status(200).json({ message: 'As senhas estão incorretas' });
       }
   
-      const cpfResults = await queryAsync("SELECT cd_cpfTrabalhador FROM tb_profissional WHERE cd_cpfTrabalhador = ?", [cpfNumerico]);
-  
+      const cpfResults = await controller_Pro.findcpfProfissional({
+        params: { cd_cpftrabalhador: cpfNumerico }
+      });
+
       if (cpfResults.length > 0) {
         return res.status(200).json({ message: 'Alguns desses dados estão incorretos ou estão sendo utilizados'});
       }
@@ -48,6 +42,10 @@ exports.registerPro = async (req, res) => {
       // Inserir novo cliente
       await queryAsync('INSERT INTO tb_profissional SET ?', { nm_Trabalhador: name, cd_emailTrabalhador: email, cd_cpfTrabalhador: cpfNumerico, cd_senha: hash });
       
+    await controller_Pro.insertProfissional({
+      params: {  nm_trabalhador: name, cd_emailtrabalhado: email, cd_cpftrabalhador: cpfNumerico, cd_senha: hash }
+    });
+
       const htmlContent = `
       <html>
         <head>

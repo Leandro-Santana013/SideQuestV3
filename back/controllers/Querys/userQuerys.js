@@ -1,4 +1,4 @@
-const { ModelCliente } = require('../models/cliente')
+const { ModelCliente } = require('../../models/cliente')
 const { Model, Op } = require('sequelize')
 const { raw } = require("mysql2")
 

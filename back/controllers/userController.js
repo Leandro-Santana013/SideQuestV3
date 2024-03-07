@@ -2,22 +2,8 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer')
 const tokenConfirmacao = require('../tools/createToken')
 const smtpconfig = require('../config/smtp')
-const controller_User = require('./userQuerys')
+const controller_User = require('./Querys/userQuerys')
 
-
-function queryAsync(sql, values) {
-  return new Promise((resolve, reject) => {
-    connection.query(sql, values, (error, results) => {
-      if (error) {
-        reject(error);
-
-      } else {
-        resolve(results);
-
-      }
-    });
-  });
-}
 
 let globalemail
 let globaltoken
