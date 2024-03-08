@@ -34,19 +34,19 @@ export const SidebarCliente = () => {
           <a
             key={index}
             href={`/${page.href}`}
-            className={`option ${currentPage.includes(page.name) ? "active" : ""}`}
+            className={`option ${currentPage.includes(page.href) ? "active" : ""}`}
           >
             <div
-              className={`connected-bar  ${currentPage.includes(page.name) ? "active" : ""
+              className={`connected-bar  ${currentPage.includes(page.href) ? "active" : ""
                 }`}
-              style={{ display: currentPage.includes(page.name) ? "flex" : "none" }}
+              style={{ display: currentPage.includes(page.href) ? "flex" : "none" }}
             ></div>
             <i
               className={`${getIcon(page)} ${currentPage.includes(page) ? "active" : ""
                 }`}
-              style={{ color: currentPage.includes(page.name) ? "#3cbc8c" : "" }}
+              style={{ color: currentPage.includes(page.href) ? "#3cbc8c" : "" }}
             ></i>
-            <p style={{ color: currentPage.includes(page.name) ? "#3cbc8c" : "" }}>
+            <p style={{ color: currentPage.includes(page.href) ? "#3cbc8c" : "" }}>
               {getPageLabel(page)}
             </p>
           </a>

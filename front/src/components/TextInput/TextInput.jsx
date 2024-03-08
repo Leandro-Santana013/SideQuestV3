@@ -1,6 +1,6 @@
 import React from "react";
 import "./textInput.css";
-export const TextInput = ({ placeholder, value, size, onChange, ...rest }) => {
+export const TextInput = ({ placeholder, type, name, value, size, onChange, ...rest }) => {
   const handleChange = (event) => {
     if (onChange) {
       onChange(event);
@@ -10,9 +10,10 @@ export const TextInput = ({ placeholder, value, size, onChange, ...rest }) => {
   return (
     <div className="container">
         <input className="content-input"
-          type="text"
+          type={type}
           placeholder={placeholder}
-          value={value}   
+          value={value}
+          name = {name}
           style={size}
           onChange={handleChange}
           {...rest}

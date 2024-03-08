@@ -17,16 +17,15 @@ const PostarServico = () => {
   const [form, setform] = useState(1);
   const [cep, setCep] = useState(""); // State variable for CEP input
   const [addressData, setAddressData] = useState({}); // State variable to store address data
-
-  const handleChange = (event) => {
-    setCep(event.target.value);
-  };
-  const pinto = (event) => {
-    (event.target.value);
-  };
-  const handleBairroChange = (event) => {
-    // Lógica para lidar com as mudanças no campo Bairro
-  };
+  const [formData, setformData] = useState({
+    titulo:null,
+    dsServico:null,
+    cep: null,
+    estadoCidade: null,
+    bairro: null,
+    nmRua: null,
+    nmrResidencia: null,
+  })
   const handleNext = () => {
     setform(form + 1);
   };
@@ -59,6 +58,13 @@ const PostarServico = () => {
     }
   }, [cep]);
 
+  const handleChange = (e) => {
+    setformData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <>
       <Header />
@@ -84,9 +90,12 @@ const PostarServico = () => {
                 <div className="leftPostar">
                   <h3 className="tituloServico">Titulo do serviço</h3>
                   <TextInput
+                    name="titulo"
+                    type="text"
                     size={{ width: "35vw", height: "3vw" }}
                     onChange={handleChange}
                     placeholder={"Busque por serviços"}
+                    value={formData.titulo}
                   />
 
                   <div className="emergente-categorias">
@@ -104,11 +113,14 @@ const PostarServico = () => {
                     Descreva o serviço detalhadamente
                   </h3>
                   <TextInput
+                    type="text"
+                    name="servico"
                     size={{ width: "35vw", height: "10vw" }}
                     onChange={handleChange}
                     placeholder={
                       "Exemplo: Eu preciso de um pintor para pintar uma parede externa de 4 metros de altura e 6 metros de largura. A parede é feita de tijolos e precisa ser limpa e preparada antes da pintura. Eu gostaria que a parede fosse pintada com tinta acrílica branca. Já comprei toda a tinta necessária, caso precise de mais tinta posso comprar."
                     }
+                    value={formData.dsServico}
                   />
                   <div className="anexo">
                     Anexo
@@ -136,44 +148,54 @@ const PostarServico = () => {
                   <h3 className="tituloServico">Endereço</h3>
                   <h4 className="postarH4">CEP</h4>
                   <TextInput
+                    type="number"
+                    name={formData.cep}
                     size={{ width: "8vw", height: "3vw" }}
-                    onChange={handleChangecpf}
+                    onChange={handleChangecpf && handleChange}
                     placeholder={""}
-                    value={cep}
+                    value={cep && formData.cep}
                   />
 
                   <h4 className="postarH4">Estado - Cidade</h4>
                   <TextInput
+                    type="text"
+                    name={formData.estadoCidade}
                     size={{ width: "30vw", height: "3vw" }}
-                 onChange={handleBairroChange}
+      
                     placeholder={""}
-                    value={addressData.uf ? `${addressData.uf} - ${addressData.localidade}`: "" }
+                    value={addressData.uf ? `${addressData.uf} - ${addressData.localidade}` : ""}
                   />
 
                   <h4 className="postarH4">Bairro</h4>
                   <TextInput
+                    type="text"
+                    name={formData.bairro}
                     size={{ width: "30vw", height: "3vw" }}
                     onChange={handleChange}
                     placeholder={""}
-                    value={addressData.bairro ? `${addressData.bairro}`: "" }
+                    value={addressData.bairro ? `${addressData.bairro}` : ""}
                   />
 
                   <div className="rua-numero">
                     <div>
                       <h4 className="postarH4">Nome da rua</h4>
                       <TextInput
+                        type="text"
+                        name={formData.nmRua}
                         size={{ width: "17vw", height: "3vw" }}
                         onChange={(e) => handleChange(e.target.value)}
                         placeholder={""}
-                        value={addressData.logradouro ? `${addressData.logradouro}`: ""}
+                        value={addressData.logradouro ? `${addressData.logradouro}` : ""}
                       />
                     </div>
                     <div>
-                      <h4 className="postarH4">Número</h4>
+                      <h4 className="postarH4">Número da residência</h4>
                       <TextInput
+                        type="number"
+                        name={formData.nmrResidencia}
                         size={{ width: "8vw", height: "3vw" }}
                         placeholder={""}
-                        
+
                       />
                     </div>
                   </div>
@@ -208,11 +230,21 @@ const PostarServico = () => {
                   <div className="inicio-fim">
                     <div className="inicio">
                       <h4 className="postarH4">Inicio</h4>
-                      <div className="anexo"></div>
+                      <TextInput
+                        type="date"
+                        name={formData.nmrResidencia}
+                        size={{ width: "8vw", height: "3vw" }}
+                        placeholder={""}
+                      />
                     </div>
                     <div className="fim">
                       <h4 className="postarH4">fim</h4>
-                      <div className="anexo"></div>
+                      <TextInput
+                        type="date"
+                        name={formData.nmrResidencia}
+                        size={{ width: "8vw", height: "3vw" }}
+                        placeholder={""}
+                      />
                     </div>
                   </div>
 
@@ -223,11 +255,21 @@ const PostarServico = () => {
                   <div className="inicio-fim">
                     <div className="inicio">
                       <h4 className="postarH4">Inicio</h4>
-                      <div className="anexo"></div>
+                      <TextInput
+                        type="date"
+                        name={formData.nmrResidencia}
+                        size={{ width: "8vw", height: "3vw" }}
+                        placeholder={""}
+                      />
                     </div>
                     <div className="fim">
                       <h4 className="postarH4">fim</h4>
-                      <div className="anexo"></div>
+                      <TextInput
+                        type="date"
+                        name={formData.nmrResidencia}
+                        size={{ width: "8vw", height: "3vw" }}
+                        placeholder={""}
+                      />
                     </div>
                   </div>
                 </div>

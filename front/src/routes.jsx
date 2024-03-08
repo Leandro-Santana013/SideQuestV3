@@ -46,11 +46,11 @@ const router = createBrowserRouter([
     element: <PagamentosCliente />,
   },
   {
-    path: "/favoritos",
+    path: "/favoritosCliente",
     element: <Favoritos />,
   },
   {
-    path: "/historico",
+    path: "/historicoCliente",
     element: <Historico />,
   },
   {
