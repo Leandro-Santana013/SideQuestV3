@@ -13,56 +13,70 @@ import {
 
 const PostarServico = () => {
   const navigate = useNavigate();
-  const [text, setText] = useState("");
-  const [form, setform] = useState(1);
-  const [cep, setCep] = useState(""); // State variable for CEP input
-  const [addressData, setAddressData] = useState({}); // State variable to store address data
-  const [formData, setformData] = useState({
-    titulo:null,
-    dsServico:null,
-    cep: null,
+  const [form, setForm] = useState(1);
+  const [cep, setCep] = useState("");
+  const [addressData, setAddressData] = useState({});
+  const [manualAddress, setManualAddress] = useState({
     estadoCidade: null,
     bairro: null,
+    estado_cidade: null,
     nmRua: null,
     nmrResidencia: null,
-  })
+  });
+  const [formData, setFormData] = useState({
+    titulo: null,
+    dsServico: null,
+    cep: null,
+  });
+
   const handleNext = () => {
-    setform(form + 1);
+    setForm(form + 1);
   };
+
   const handleBefore = () => {
     if (form === 1) {
-      // If form is 1, go back to homeCliente
       navigate("/homecliente");
     } else {
-      // If form is greater than 1, decrement the form value
-      setform(form - 1);
-      console.log(form);
+      setForm(form - 1);
     }
   };
-  const handleChangecpf = (event) => {
+
+  const handleCepChange = (event) => {
     setCep(event.target.value);
   };
 
-  const handleSearch = async () => {
-    try {
-      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`); // Replace with your desired CEP API URL
-      setAddressData(response.data);
-    } catch (error) {
-      console.error(error); // Handle errors appropriately
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+        setAddressData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    
     if (cep.length === 8) {
-      handleSearch();
+      fetchData();
     }
   }, [cep]);
 
-  const handleChange = (e) => {
-    setformData({
+  const handleManualAddressChange = (e) => {
+    setManualAddress({
+      ...manualAddress,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleFormDataChange = (e) => {
+    setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleFormSubmit = () => {
+    // Adicione aqui a lógica para enviar os dados do formulário
+    console.log(formData);
   };
 
   return (
@@ -93,7 +107,7 @@ const PostarServico = () => {
                     name="titulo"
                     type="text"
                     size={{ width: "35vw", height: "3vw" }}
-                    onChange={handleChange}
+                    onChange={handleFormDataChange}
                     placeholder={"Busque por serviços"}
                     value={formData.titulo}
                   />
@@ -116,7 +130,7 @@ const PostarServico = () => {
                     type="text"
                     name="servico"
                     size={{ width: "35vw", height: "10vw" }}
-                    onChange={handleChange}
+                    onChange={handleFormDataChange}
                     placeholder={
                       "Exemplo: Eu preciso de um pintor para pintar uma parede externa de 4 metros de altura e 6 metros de largura. A parede é feita de tijolos e precisa ser limpa e preparada antes da pintura. Eu gostaria que a parede fosse pintada com tinta acrílica branca. Já comprei toda a tinta necessária, caso precise de mais tinta posso comprar."
                     }
@@ -149,9 +163,9 @@ const PostarServico = () => {
                   <h4 className="postarH4">CEP</h4>
                   <TextInput
                     type="number"
-                    name={formData.cep}
+                    name="cep"
                     size={{ width: "8vw", height: "3vw" }}
-                    onChange={handleChangecpf && handleChange}
+                    onChange={handleCepChange}
                     placeholder={""}
                     value={cep && formData.cep}
                   />
@@ -159,21 +173,21 @@ const PostarServico = () => {
                   <h4 className="postarH4">Estado - Cidade</h4>
                   <TextInput
                     type="text"
-                    name={formData.estadoCidade}
+                    name="estado_cidade"
                     size={{ width: "30vw", height: "3vw" }}
-      
+                    onChange={handleManualAddressChange}
                     placeholder={""}
-                    value={addressData.uf ? `${addressData.uf} - ${addressData.localidade}` : ""}
+                    value={manualAddress.estado_cidade ? manualAddress.estado_cidade : manualAddress.estado_cidade || addressData.uf}
                   />
 
                   <h4 className="postarH4">Bairro</h4>
                   <TextInput
                     type="text"
-                    name={formData.bairro}
+                    name="bairro"
                     size={{ width: "30vw", height: "3vw" }}
-                    onChange={handleChange}
+                    onChange={handleManualAddressChange}
                     placeholder={""}
-                    value={addressData.bairro ? `${addressData.bairro}` : ""}
+                    value={manualAddress.bairro ? manualAddress.bairro : addressData.bairro}
                   />
 
                   <div className="rua-numero">
@@ -181,21 +195,22 @@ const PostarServico = () => {
                       <h4 className="postarH4">Nome da rua</h4>
                       <TextInput
                         type="text"
-                        name={formData.nmRua}
+                        name="nmRua"
                         size={{ width: "17vw", height: "3vw" }}
-                        onChange={(e) => handleChange(e.target.value)}
+                        onChange={handleManualAddressChange}
                         placeholder={""}
-                        value={addressData.logradouro ? `${addressData.logradouro}` : ""}
+                        value={manualAddress.nmRua ? manualAddress.nmRua : addressData.logradouro ? addressData.logradouro : ""}
                       />
                     </div>
                     <div>
                       <h4 className="postarH4">Número da residência</h4>
                       <TextInput
                         type="number"
-                        name={formData.nmrResidencia}
+                        name="nmrResidencia"
                         size={{ width: "8vw", height: "3vw" }}
+                        onChange={handleManualAddressChange}
                         placeholder={""}
-
+                        value={manualAddress.nmrResidencia || ""}
                       />
                     </div>
                   </div>
@@ -232,7 +247,7 @@ const PostarServico = () => {
                       <h4 className="postarH4">Inicio</h4>
                       <TextInput
                         type="date"
-                        name={formData.nmrResidencia}
+                        name="inicio"
                         size={{ width: "8vw", height: "3vw" }}
                         placeholder={""}
                       />
@@ -241,7 +256,7 @@ const PostarServico = () => {
                       <h4 className="postarH4">fim</h4>
                       <TextInput
                         type="date"
-                        name={formData.nmrResidencia}
+                        name="fim"
                         size={{ width: "8vw", height: "3vw" }}
                         placeholder={""}
                       />
@@ -257,7 +272,7 @@ const PostarServico = () => {
                       <h4 className="postarH4">Inicio</h4>
                       <TextInput
                         type="date"
-                        name={formData.nmrResidencia}
+                        name="pretensaoInicio"
                         size={{ width: "8vw", height: "3vw" }}
                         placeholder={""}
                       />
@@ -266,7 +281,7 @@ const PostarServico = () => {
                       <h4 className="postarH4">fim</h4>
                       <TextInput
                         type="date"
-                        name={formData.nmrResidencia}
+                        name="pretensaoFim"
                         size={{ width: "8vw", height: "3vw" }}
                         placeholder={""}
                       />
@@ -274,7 +289,9 @@ const PostarServico = () => {
                   </div>
                 </div>
                 <div className="rightPostar">
-                  <div className="btnProximo">Publicar</div>
+                  <div className="btnProximo" onClick={handleFormSubmit}>
+                    Publicar
+                  </div>
                 </div>
               </div>
             </form>

@@ -9,7 +9,7 @@ export const TextInputBusca = ({ placeholder, value, onChange, ...rest }) => {
   return (
     <div className="container">
       <div className="content-input-busca">
-      <RiSearch2Line className="iconSearch" />
+        <RiSearch2Line className="iconSearch" />
         <input
           type="text"
           placeholder={placeholder}
