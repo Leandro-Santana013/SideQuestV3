@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { SidebarCliente, Header, TextInput } from "../../components";
+import { SidebarCliente, Header, TextInput, MapApi } from "../../components";
 import axios from "axios";
 
 import "./postarServico.css";
@@ -204,7 +204,7 @@ const PostarServico = () => {
                   <h4 className="postarH4">
                     Leve o indicador até sua residência
                   </h4>
-                  <div className="mapa"></div>
+                  <div className="mapa"><MapApi/></div>
                   <div className="zoom">
                     <div className="mais-menos">+</div>
                     <div className="mais-menos">-</div>
