@@ -50,6 +50,7 @@ const ModelCliente = connectionDataBase.define('tb_cliente', {
     _padraoTableDBExistence('tb_cliente')
 )
 
+
 module.exports = {
     ModelCliente
 }

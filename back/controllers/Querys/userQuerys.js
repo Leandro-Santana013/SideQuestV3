@@ -1,11 +1,11 @@
 const { Model, Op } = require('sequelize')
 const { raw } = require("mysql2")
-const { Cliente, endereco, categoria, servico, cidade } = require('../../models/index')
+const { ModelCliente, endereco, ModelCategoria, ModelServico, cidade } = require('../../models/index')
 
 module.exports = {
     findEmailCliente: async (req, res) => {
         const { cd_emailCliente, } = req.params;
-        return Cliente.findAll({
+        return ModelCliente.findAll({
             attributes: ['cd_emailCliente', 'cd_senha'],
             where: {
                 cd_emailCliente: cd_emailCliente
@@ -15,7 +15,7 @@ module.exports = {
     },
     findcpfCliente: async (req, res) => {
         const { cd_cpfCliente } = req.params;
-        return Cliente.findAll({
+        return ModelCliente.findAll({
             attributes: ['cd_cpfCliente'],
             where: {
                 cd_cpfCliente: cd_cpfCliente
@@ -26,7 +26,7 @@ module.exports = {
 
     insertClient: async (req, res) => {
         const { nm_cliente, cd_cpfCliente, cd_emailCliente, cd_senha } = req.params; // Assumindo que o nome da marca está no corpo da requisição
-        return Cliente.create({
+        return ModelCliente.create({
             nm_cliente: nm_cliente,
             cd_emailCliente: cd_emailCliente,
             cd_cpfCliente: cd_cpfCliente,
@@ -36,7 +36,7 @@ module.exports = {
     findtokenCliente: async (req, res) => {
         try {
             const { cd_emailCliente } = req.params;
-            const cliente = await Cliente.findOne({
+            const cliente = await ModelCliente.findOne({
                 attributes: ['cd_token'],
                 where: {
                     cd_emailCliente: cd_emailCliente
@@ -54,21 +54,21 @@ module.exports = {
     },
     updateTokenByEmail: async (req, res) => {
         const { cd_emailCliente, cd_token } = req.params;
-        return Cliente.update(
+        return ModelCliente.update(
             { cd_token: cd_token },
             { where: { cd_emailCliente: cd_emailCliente } }
         );
     },
 
     selectCategorias: async (req, res) => {
-        return categoria.findAll({
+        return ModelCategoria.findAll({
             attributes: ['ds_categoria'],
             raw: true
         });
     },
 
     insertServico: async (req, res) => {
-        return servico.create({
+        return ModelServico.create({
             
         })
     }

@@ -1,26 +1,27 @@
-const Cliente = require('./cliente')
-const endereco = require('./endereco')
-const categoria = require('./categoria')
-const servico = require('./servico')
-const cidade = require('./cidade')
 
-Cliente.hasmany(servico, { foreignKey: 'cd_clinte' })
-servico.belongTo(Cliente, { foreignKey: 'cd_cliente' })
 
-categoria.hasmany(servico, { foreignKey: 'cd_categoria' })
-servico.belongsTo(categoria, { foreignKey: ' cd_categoria' })
+const { ModelCliente } = require('./cliente');
+const {ModelEndereco} = require('./endereco');
+const {ModelCategoria} = require('./categoria');
+const {ModelServico} = require('./servico');
+const {ModelCidade} = require('./cidade');
 
-endereco.hasmany(servico, { foreignKey: 'endereço' })
-servico.belongTo(endereco, { foreignKey: 'endereço' })
+ModelCliente.hasMany(ModelServico, { foreignKey: 'cd_cliente' });
+ModelServico.belongsTo(ModelCliente, { foreignKey: 'cd_cliente' });
 
-//cidade 
-cidade.hasmany(endereco, { foreignKey: 'cd_endereco' })
-endereco.belongTo(cidade, { foreignKey: 'cd_endereco' })
+ModelCategoria.hasMany(ModelServico, { foreignKey: 'cd_categoria' });
+ModelServico.belongsTo(ModelCategoria, { foreignKey: 'cd_categoria' });
+
+ModelEndereco.hasMany(ModelServico, { foreignKey: 'cd_endereco' });
+ModelServico.belongsTo(ModelEndereco, { foreignKey: 'cd_endereco' });
+
+ModelCidade.hasMany(ModelEndereco, { foreignKey: 'cd_cidade' });
+ModelEndereco.belongsTo(ModelCidade, { foreignKey: 'cd_cidade' });
 
 module.exports = {
-    Cliente,
-    endereco,
-    categoria,
-    servico,
-    cidade
-}
+    ModelCliente,
+    ModelEndereco,
+    ModelCategoria,
+    ModelServico,
+    ModelCidade
+};
