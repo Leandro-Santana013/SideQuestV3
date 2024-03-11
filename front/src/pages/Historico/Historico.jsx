@@ -20,103 +20,103 @@ function Historico() {
                     <div className="area-historico">
                         <div className="historicos">
                             <div className="hist-cabecalho">
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <p>Serviços</p>
                                 </div>
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <p>Início</p>
                                 </div>
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <p>Fim</p>
                                 </div>
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <p>Categoria</p>
                                 </div>
                             </div>
 
                             <div className="card-historico">
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <div className="info-prof">
                                         <p className="desc-tipo-servico">Pintura de parede</p>
                                         <p className="desc-nome-prof">Profissional: Vitor Roque</p>
                                     </div>
                                 </div>
 
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <p>10/02/2020 15:00h</p>
                                 </div>
 
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <p>13/02/2020 17:56h</p>
                                 </div>
 
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <div className="categoria">
                                         <p>Elétrica</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="card-historico">
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <div className="info-prof">
                                         <p className="desc-tipo-servico">Pintura de parede</p>
                                         <p className="desc-nome-prof">Profissional: Vitor Roque</p>
                                     </div>
                                 </div>
 
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <p>10/02/2020 15:00h</p>
                                 </div>
 
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <p>13/02/2020 17:56h</p>
                                 </div>
 
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <div className="categoria">
                                         <p>Elétrica</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="card-historico">
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <div className="info-prof">
                                         <p className="desc-tipo-servico">Pintura de parede</p>
                                         <p className="desc-nome-prof">Profissional: Vitor Roque</p>
                                     </div>
                                 </div>
 
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <p>10/02/2020 15:00h</p>
                                 </div>
 
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <p>13/02/2020 17:56h</p>
                                 </div>
 
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <div className="categoria">
                                         <p>Elétrica</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="card-historico">
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <div className="info-prof">
                                         <p className="desc-tipo-servico">Pintura de parede</p>
                                         <p className="desc-nome-prof">Profissional: Vitor Roque</p>
                                     </div>
                                 </div>
 
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <p>10/02/2020 15:00h</p>
                                 </div>
 
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <p>13/02/2020 17:56h</p>
                                 </div>
 
-                                <div className="alinhador">
+                                <div className="alinhadorHist">
                                     <div className="categoria">
                                         <p>Elétrica</p>
                                     </div>
