@@ -10,6 +10,7 @@ import { SidebarCliente } from "./SidebarCliente/SidebarCliente";
 import { TextInput } from './TextInput/TextInput';
 import { TextInputBusca } from "./TextInputBusca/TextInputBusca";
 import { Typography } from "./Typography/Typography";
+import {MapApi} from "./MapApi/MapApi"
 
 export {
     Animation,
@@ -24,4 +25,5 @@ export {
     TextInput,
     TextInputBusca,
     Typography,
+    MapApi,
 }
