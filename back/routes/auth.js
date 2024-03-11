@@ -7,5 +7,7 @@
     router.post('/registerPro', proControllers.registerPro)
     router.post('/login', userControllers.login);
     router.post('/validaemail', userControllers.validaEmail)
+    router.post('/postarServico', userControllers.postarServico)
+    router.post('/selectCategoria', userControllers.selectCategoria)
 
     module.exports = router; 

@@ -25,7 +25,7 @@ const publicDirectory = path.join(__dirname, '../../front/');
 app.use(express.static(publicDirectory));
 
 
-  app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../../front/'));
 
 module.exports = app;
