@@ -6,15 +6,21 @@
     --verde-claro: #E8FFF7;
 }
 
-.conteudo-historico {
+.content-midia {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.conteudo-pagamento {
+    margin-top: 15vh;
     margin-right: 5vw;
     display: flex;
     flex-direction: column;
     width: 70vw;
-    margin-top: 15vh;
 }
 
-.hist-pesq {
+.pag-pesq {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -38,14 +44,14 @@
     outline: none;
 }
 
-.area-historico {
+.area-pagamento {
     box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
     border-radius: 20px;
     padding-bottom: 20px;
     width: 70vw;
 }
 
-.historicos {
+.pagamentos {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -54,16 +60,16 @@
     padding: 5px;
 }
 
-.hist-cabecalho {
+.pag-cabecalho {
     display: flex;
     justify-content: space-around;
 }
 
-.hist-cabecalho p {
+.pag-cabecalho p {
     font-size: 1vw;
 }
 
-.card-historico {
+.card-pagamento {
     display: flex;
     align-items: center;
     padding: 5px;
@@ -71,37 +77,60 @@
     border-radius: 50px;
 }
 
-.alinhadorHist {
+.alinhadorPag {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 15vw;
+    width: 13vw;
 }
 
-.info-prof p{
-    margin: 0;
+.info-prof-pag {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
 }
 
-.desc-tipo-servico {
-    font-weight: 800;
-    font-size: 1vw;
-}
-
-.info-prof img{
+.info-prof-pag img{
     width: 3.5vw;
 }
 
-.categoria {
+.met-pag {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+.met-pag i {
+    font-size: 2vw;
+}
+
+.status {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
-    height: 50px;
+    width:5vw;
+    height: 3vw;
     background-color: var(--verde);
     border-radius: 10px;
 }
 
-.categoria p {
+.status p {
     color: white;
+    font-size: 1vw;
+}
+
+.stt2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5vw;
+    height: 3vw;
+    background-color: white;
+    border-radius: 10px;
+    border: solid 2px red;
+}
+
+.stt2 p {
+    color: red;
     font-size: 1vw;
 }
