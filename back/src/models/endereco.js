@@ -28,7 +28,15 @@ const ModelEndereco = connectionDataBase.define('tb_endereco', {
         type: DataTypes.CHAR(8),
         allowNull: false
     },
+    nm_bairro:{
+        type: DataTypes.STRING(100),
+        allowNull: false
+    },
 
+    nm_casa:{
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+    },
 
     cd_cidade: {
         type: DataTypes.INTEGER.UNSIGNED,

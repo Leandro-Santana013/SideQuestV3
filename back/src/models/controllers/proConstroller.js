@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer')
-const tokenConfirmacao = require('../tools/createToken')
-const smtpconfig = require('../config/smtp')
+const tokenConfirmacao = require('../../../tools/createToken')
+const smtpconfig = require('../../../config/smtp')
 const controller_Pro = require('./Querys/proQuerys')
 
 

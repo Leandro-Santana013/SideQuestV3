@@ -1,6 +1,6 @@
 const { Model, Op } = require('sequelize')
 const { raw } = require("mysql2")
-const { ModelCliente, endereco, ModelCategoria, ModelServico, cidade } = require('../../models/index')
+const { ModelCliente, ModelEndereco, ModelCategoria, ModelServico, ModelCidade } = require('../../models/index')
 
 module.exports = {
     findEmailCliente: async (req, res) => {
@@ -66,10 +66,27 @@ module.exports = {
             raw: true
         });
     },
+    selectCategoriaescolhida: async (req, res) => {
+        const { ds_categoria } = req.params
+        return ModelCategoria.findOne({
+            where: {
+                ds_categoria: ds_categoria
+            },
+            raw: true
+        });
+    },
+    insertCidadeService: async (req, res) => {
+        const { nm_cidade, sg_estado } = req.params
+        return ModelCidade.create({  
+            nm_cidade: nm_cidade,
+            sg_estado: sg_estado
+        })
+    },
+    CreateadressService: async (req, res) => {
+        const { nm_logradouro, cd_cep } = req.params
+        return ModelEndereco.create({
 
-    insertServico: async (req, res) => {
-        return ModelServico.create({
-            
+
         })
     }
 }

@@ -1,18 +1,19 @@
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
-const tokenConfirmacao = require("../tools/createToken");
-const smtpconfig = require("../config/smtp");
+const tokenConfirmacao = require("../../../tools/createToken");
+const smtpconfig = require("../../../config/smtp");
 const controller_User = require("./Querys/userQuerys");
 
 
 let globalemail;
 let globaltoken;
+let clienteInstance
 
 exports.register = async (req, res) => {
   try {
     const { name, email, cpf, senha, senhaConfirm } = req.body;
     const cpfNumerico = cpf.replace(/\D/g, "");
-
+    clienteInstance = name
     const emailResults = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
     });
@@ -182,6 +183,7 @@ exports.postarServico = async (req, res) => {
       fim,
       valorinicial,
       valorfinal,
+      categoriaSelecionada,
     } = req.body;
 
     var partes = uf_localidade.split(" - ");
@@ -211,6 +213,37 @@ exports.postarServico = async (req, res) => {
         .status(200)
         .json({ message: "O valor inicial deve ser menor que o final" });
     }
+
+    const categoriaInstance = await controller_User.selectCategoriaescolhida({
+      params: { ds_categoria: categoriaSelecionada}
+     });
+
+    const CidadeService = await controller_User.insertCidadeService({
+      params:{ nm_cidade: cidade, sg_estado: estado}
+    })
+
+    const enderecoInstance = await ModelEndereco.create({
+      cd_cliente: clienteInstance.cd_cliente,  // Associar o endereço ao cliente criado anteriormente
+      nm_logradouro: logradouro,
+      cd_cep: cep,
+      cd_cidade: CidadeService.cd_cidade, 
+      nm_bairro: bairro,
+      nm_casa:nmrResidencia
+    });
+   
+    
+const servicoInstance = await ModelServico.create({
+  dt_inicio: inicio,
+  dt_fim: fim,
+  ds_servico: dsServico,
+  vlr_servico: valorinicial,
+  cd_cliente: clienteInstance.cd_cliente,
+  cd_categoria: categoriaInstance.cd_categoria,
+  cd_endereco: enderecoInstance.cd_endereco,
+  // ... outros campos do serviço
+});
+
+    
 
   } catch (error) {
     console.error(error);
