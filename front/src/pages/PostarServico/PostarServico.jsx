@@ -43,7 +43,7 @@ const PostarServico = () => {
 
   const handleBefore = () => {
     if (form === 1) {
-      navigate("/homecliente");
+      navigate("/homeCliente");
     } else {
       setForm(form - 1);
     }
@@ -63,7 +63,7 @@ const PostarServico = () => {
         setAddressData(response.data);
         console.log(response.data);
 
-        if (response.data.erro === "true") {
+        if (response.data.erro === true) {
           setCepError(true);
         } else {
           setCepError(false);
