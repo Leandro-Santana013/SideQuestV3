@@ -33,7 +33,7 @@ const ModelEndereco = connectionDataBase.define('tb_endereco', {
         allowNull: false
     },
 
-    nm_casa:{
+    nr_casa:{
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
     },

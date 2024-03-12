@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
-const tokenConfirmacao = require("../../../tools/createToken");
-const smtpconfig = require("../../../config/smtp");
+const tokenConfirmacao = require("../../tools/createToken");
+const smtpconfig = require("../../config/smtp");
 const controller_User = require("./Querys/userQuerys");
 
 
@@ -13,7 +13,10 @@ exports.register = async (req, res) => {
   try {
     const { name, email, cpf, senha, senhaConfirm } = req.body;
     const cpfNumerico = cpf.replace(/\D/g, "");
+
+    
     clienteInstance = name
+
     const emailResults = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
     });
@@ -222,26 +225,26 @@ exports.postarServico = async (req, res) => {
       params:{ nm_cidade: cidade, sg_estado: estado}
     })
 
-    const enderecoInstance = await ModelEndereco.create({
-      cd_cliente: clienteInstance.cd_cliente,  // Associar o endereço ao cliente criado anteriormente
-      nm_logradouro: logradouro,
-      cd_cep: cep,
-      cd_cidade: CidadeService.cd_cidade, 
-      nm_bairro: bairro,
-      nm_casa:nmrResidencia
+    const enderecoInstance = await controller_User.CreateadressService({
+      params: {cd_cliente:clienteInstance.cd_cliente, nm_logradouro:logradouro, cd_cep:cep, cd_cidade:CidadeService.cd_cidade, nm_bairro: bairro, nm_casa:nmrResidencia, },
     });
+
+    console.log(clienteInstance.cd_cliente)
+    console.log(categoriaInstance.cd_categoria)
+    console.log(enderecoInstance.cd_endereco)
    
-    
-const servicoInstance = await ModelServico.create({
-  dt_inicio: inicio,
-  dt_fim: fim,
-  ds_servico: dsServico,
-  vlr_servico: valorinicial,
-  cd_cliente: clienteInstance.cd_cliente,
-  cd_categoria: categoriaInstance.cd_categoria,
-  cd_endereco: enderecoInstance.cd_endereco,
-  // ... outros campos do serviço
-});
+  try{
+const servicoInstance = await ontroller_User.create({
+  params: { dt_inicio: inicio,
+    dt_fim: fim,
+    ds_servico: dsServico,
+    vlr_servico: valorinicial,
+    cd_cliente: clienteInstance.cd_cliente,
+    cd_categoria: categoriaInstance.cd_categoria,
+    cd_endereco: enderecoInstance.cd_endereco,} 
+});}catch(error){
+  console.log(`Fudeu ${erro}`)
+}
 
     
 

@@ -1,10 +1,10 @@
 
 
 const { ModelCliente } = require('./cliente');
-const {ModelEndereco} = require('./endereco');
-const {ModelCategoria} = require('./categoria');
-const {ModelServico} = require('./servico');
-const {ModelCidade} = require('./cidade');
+const { ModelEndereco } = require('./endereco');
+const { ModelCategoria } = require('./categoria');
+const { ModelServico } = require('./servico');
+const { ModelCidade } = require('./cidade');
 
 ModelCliente.hasMany(ModelServico, { foreignKey: 'cd_cliente' });
 ModelServico.belongsTo(ModelCliente, { foreignKey: 'cd_cliente' });

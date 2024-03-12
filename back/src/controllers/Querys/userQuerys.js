@@ -79,14 +79,34 @@ module.exports = {
         const { nm_cidade, sg_estado } = req.params
         return ModelCidade.create({  
             nm_cidade: nm_cidade,
-            sg_estado: sg_estado
-        })
+            sg_estado: sg_estado,
+        }
+        )
     },
+
     CreateadressService: async (req, res) => {
-        const { nm_logradouro, cd_cep } = req.params
+        const { cd_cliente, nm_logradouro, cd_cep,  cd_cidade,  nm_bairro, nm_casa } = req.params
         return ModelEndereco.create({
-
-
+            cd_cliente: cd_cliente,
+            nm_logradouro: nm_logradouro,
+            cd_cep: cd_cep,
+            cd_cidade: cd_cidade,
+            nm_bairro: nm_bairro,
+            nm_casa: nm_casa,
+        })
+        
+    },
+    
+    CreateServico: async (req, res) => {
+        const {dt_inicio, dt_fim, ds_servico, vlr_servico, cd_cliente, cd_categoria, cd_endereco } = req.params
+        return ModelServico.create({
+            dt_inicio: dt_inicio,
+            dt_fim: dt_fim,
+            ds_servico: ds_servico,
+            ds_servico: ds_servico,
+            vlr_servico: vlr_servico,
+            cd_cliente: cd_cliente,
+            cd_endereco: cd_endereco,
         })
     }
 }
