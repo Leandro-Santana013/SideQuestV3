@@ -2,7 +2,7 @@
 .animation2 {
     display: flex;
     width: 100vw;
-    justify-content: space-between;
+    gap: 20vw;
     margin-bottom: 10vw;
   }
   

@@ -1,4 +1,7 @@
-
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
 
 .banner {
   display: flex;
@@ -63,6 +66,7 @@
   color: black;
   width: 40vw;
   font-size: 3vw;
+  text-align: left;
 }
 
 .left-banner strong {
