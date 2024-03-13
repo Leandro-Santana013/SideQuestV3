@@ -134,3 +134,34 @@
     color: red;
     font-size: 1vw;
 }
+
+@media screen and (max-width: 376px) {
+    .conteudo-pagamento h2 {
+        font-size: 0.8rem;
+    }
+
+    .pagamentos p {
+        font-size: 0.5rem;
+    }
+
+    .card-pagamento {
+        padding: 1px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .info-prof-pag img {
+        width: 5.0vw;
+    }
+
+    .stt2 {
+    width: 50px;
+    height: 30px;
+    }
+
+    .status {
+        width: 50px;
+        height: 30px;
+        margin: 0.5px;
+    }
+}

@@ -116,3 +116,24 @@ hr {
     display: flex;
     flex-direction: column;
 }
+
+
+@media screen and(max-width: 376px) {
+    .perfilbox h2 {
+        font-size: 0.8rem;
+    }
+
+    .perfilbox p {
+        font-size: 0.5rem;
+    }
+
+    .perfilbox .img-perfil {
+        width: 7vw;
+    }
+
+    .char p {
+        margin-top: 0;
+        margin-bottom: 0.5vh;
+    }
+    
+}
