@@ -22,7 +22,7 @@ const Login = () => {
             if (response.status === 200) {
                 setMessage(response.data.message);
             } else if (response.status === 201) {
-                navigate("/homecliente");
+                navigate("/homeCliente");
             }
         } catch (error) {
             console.error(error.response.data.message);
