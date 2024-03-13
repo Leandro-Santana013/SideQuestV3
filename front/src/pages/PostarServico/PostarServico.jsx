@@ -34,7 +34,7 @@ const PostarServico = () => {
     valorinicial: null,
     valorfinal: null,
     urgencia: null,
-    categoriaSelecionada: null
+    categoriaSelecionada: null,
   });
 
   const handleNext = () => {
@@ -90,39 +90,9 @@ const PostarServico = () => {
     e.preventDefault();
 
     try {
-      const {
-        titulo,
-        dsServico,
-        cep,
-        uf_localidade,
-        localidade,
-        logradouro,
-        bairro,
-        nmrResidencia,
-        inicio,
-        fim,
-        valorinicial,
-        valorfinal,
-        categoriaSelecionada,
-      } = formData;
-      const formDataBack = {
-        titulo,
-        dsServico,
-        cep,
-        uf_localidade,
-        localidade,
-        logradouro,
-        bairro,
-        nmrResidencia,
-        inicio,
-        fim,
-        valorinicial,
-        valorfinal,
-        categoriaSelecionada,
-      };
       const response = await axios.post(
         "http://localhost:5000/auth/postarServico",
-        formDataBack
+        formData
       );
 
       setMessage(response.data.message);
@@ -186,9 +156,16 @@ const PostarServico = () => {
     carregarCategorias();
   }, []);
   const handleCategoriaChange = (event) => {
-    setCategoriaSelecionada(event.target.value);
+    const selectedCategoria = event.target.value;
+    setCategoriaSelecionada(selectedCategoria);
+    
+    // Atualize o estado categoriaSelecionada no formData
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      categoriaSelecionada: selectedCategoria,
+    }));
   };
-
+  
 
   return (
     <>
@@ -235,9 +212,15 @@ const PostarServico = () => {
                         Serviço urgente
                         <RiQuestionLine className="emergenteDuvida" />
                       </div>
-                      <select id="categoriaSelect" value={categoriaSelecionada} onChange={handleCategoriaChange}className="categorias">
+                      <select
+                        id="categoriaSelect"
+                        value={categoriaSelecionada}
+                        onChange={handleCategoriaChange}
+                        className="categorias"
+                      >
                         {categorias.map((categoria) => (
                           <option
+                            name={categoria.ds_categoria}
                             key={categoria.cd_categoria}
                             value={categoria.cd_categoria}
                           >
@@ -250,8 +233,8 @@ const PostarServico = () => {
                       Descreva o serviço detalhadamente
                     </h3>
                     <TextInput
+                      name="dsServico"
                       type="text"
-                      name="servico"
                       size={{ width: "35vw", height: "10vw" }}
                       onChange={handleFormSubmit}
                       placeholder={
@@ -382,6 +365,7 @@ const PostarServico = () => {
                           name="inicio"
                           size={{ width: "8vw", height: "3vw" }}
                           placeholder={""}
+                          onChange={handleFormSubmit}
                           value={formData.inicio}
                         />
                       </div>
@@ -392,6 +376,7 @@ const PostarServico = () => {
                           name="fim"
                           size={{ width: "8vw", height: "3vw" }}
                           placeholder={""}
+                          onChange={handleFormSubmit}
                           value={formData.fim}
                         />
                       </div>
@@ -406,19 +391,21 @@ const PostarServico = () => {
                         <h4 className="postarH4">valor inicial</h4>
                         <TextInput
                           type="number"
-                          name="pretensaoInicio"
+                          name="valorinicial"
                           size={{ width: "8vw", height: "3vw" }}
                           placeholder={""}
+                          onChange={handleFormSubmit}
                           value={formData.valorinicial}
                         />
                       </div>
                       <div className="fim">
                         <h4 className="postarH4">fim</h4>
                         <TextInput
-                          type="date"
-                          name="pretensaoFim"
+                          type="number"
+                          name="valorfinal"
                           size={{ width: "8vw", height: "3vw" }}
                           placeholder={""}
+                          onChange={handleFormSubmit}
                           value={formData.valorfinal}
                         />
                       </div>

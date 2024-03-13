@@ -83,6 +83,27 @@ module.exports = {
         }
         )
     },
+    selectCidadeAdress: async (req, res) => {
+        const { nm_cidade, sg_estado } = req.params
+        return ModelCidade.findOne({
+            attributes:['cd_cidade'],
+            where: {
+                nm_cidade:nm_cidade,
+                 sg_estado:sg_estado
+            },
+            raw:true
+        })
+    },
+    findCdCliente: async (req, res) => {
+        const { cd_cpfCliente } = req.params;
+        return ModelCliente.findOne({
+            attributes: ['cd_cliente'],
+            where: {
+                cd_cpfCliente: cd_cpfCliente
+            },
+            raw: true
+        });
+    },
 
     CreateadressService: async (req, res) => {
         const { cd_cliente, nm_logradouro, cd_cep,  cd_cidade,  nm_bairro, nm_casa } = req.params

@@ -7,21 +7,22 @@ const controller_User = require("./Querys/userQuerys");
 
 let globalemail;
 let globaltoken;
-let clienteInstance
+let globalCpf
+
 
 exports.register = async (req, res) => {
   try {
     const { name, email, cpf, senha, senhaConfirm } = req.body;
     const cpfNumerico = cpf.replace(/\D/g, "");
 
-    
-    clienteInstance = name
+  
 
     const emailResults = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
     });
 
     globalemail = email;
+    globalCpf = cpf
 
     if (emailResults.length > 0) {
       return res.status(200).json({
@@ -188,10 +189,12 @@ exports.postarServico = async (req, res) => {
       valorfinal,
       categoriaSelecionada,
     } = req.body;
-
+    console.log(nmrResidencia)
+  
     var partes = uf_localidade.split(" - ");
     var estado = partes[0];
     var cidade = partes[1];
+    console.log(estado, cidade)
 
     if (titulo.length < 10 || titulo.length > 50) {
       return res
@@ -225,13 +228,18 @@ exports.postarServico = async (req, res) => {
       params:{ nm_cidade: cidade, sg_estado: estado}
     })
 
+    const cdCidade = await controller_User.selectCidadeAdress({
+      params:{ nm_cidade: cidade, sg_estado: estado}
+    })
+    const cdCliente = await controller_User.findCdCliente({
+      params:{cd_cpfCliente: globalCpf}
+    })
+
     const enderecoInstance = await controller_User.CreateadressService({
-      params: {cd_cliente:clienteInstance.cd_cliente, nm_logradouro:logradouro, cd_cep:cep, cd_cidade:CidadeService.cd_cidade, nm_bairro: bairro, nm_casa:nmrResidencia, },
+      params: {cd_cliente:cdCliente, nm_logradouro:logradouro, cd_cep:cep, cd_cidade:cdCidade, nm_bairro: bairro, nm_casa:nmrResidencia, },
     });
 
-    console.log(clienteInstance.cd_cliente)
-    console.log(categoriaInstance.cd_categoria)
-    console.log(enderecoInstance.cd_endereco)
+
    
   try{
 const servicoInstance = await ontroller_User.create({
@@ -239,11 +247,11 @@ const servicoInstance = await ontroller_User.create({
     dt_fim: fim,
     ds_servico: dsServico,
     vlr_servico: valorinicial,
-    cd_cliente: clienteInstance.cd_cliente,
+    cd_cliente: cdCliente,
     cd_categoria: categoriaInstance.cd_categoria,
     cd_endereco: enderecoInstance.cd_endereco,} 
 });}catch(error){
-  console.log(`Fudeu ${erro}`)
+  console.log(`Fudeu ${error}`)
 }
 
     

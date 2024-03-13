@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize')
-const { connectionDataBase } = require('../database/db')
-const { _padraoTableDBExistence } = require('../config/configTablesDB')
+const { connectionDataBase } = require('../../database/db')
+const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 
 const ModelCategoria = connectionDataBase.define('tb_categoria', {
     cd_categoria: {
