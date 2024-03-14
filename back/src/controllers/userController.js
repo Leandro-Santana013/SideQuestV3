@@ -15,14 +15,14 @@ exports.register = async (req, res) => {
     const { name, email, cpf, senha, senhaConfirm } = req.body;
     const cpfNumerico = cpf.replace(/\D/g, "");
 
-  
+
 
     const emailResults = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
     });
 
     globalemail = email;
-    globalCpf = cpf
+    globalCpf = cpfNumerico;
 
     if (emailResults.length > 0) {
       return res.status(200).json({
@@ -190,7 +190,7 @@ exports.postarServico = async (req, res) => {
       categoriaSelecionada,
     } = req.body;
     console.log(nmrResidencia)
-  
+
     var partes = uf_localidade.split(" - ");
     var estado = partes[0];
     var cidade = partes[1];
@@ -221,40 +221,50 @@ exports.postarServico = async (req, res) => {
     }
 
     const categoriaInstance = await controller_User.selectCategoriaescolhida({
-      params: { ds_categoria: categoriaSelecionada}
-     });
+      params: { ds_categoria: categoriaSelecionada }
+    });
 
-    const CidadeService = await controller_User.insertCidadeService({
-      params:{ nm_cidade: cidade, sg_estado: estado}
-    })
+    console.log(globalCpf)
+    console.log(categoriaInstance)
 
     const cdCidade = await controller_User.selectCidadeAdress({
-      params:{ nm_cidade: cidade, sg_estado: estado}
+      params: { nm_cidade: cidade, sg_estado: estado }
     })
     const cdCliente = await controller_User.findCdCliente({
-      params:{cd_cpfCliente: globalCpf}
+      params: { cd_cpfCliente: 23767673467 }
     })
+    console.log(cdCliente)
 
     const enderecoInstance = await controller_User.CreateadressService({
-      params: {cd_cliente:cdCliente, nm_logradouro:logradouro, cd_cep:cep, cd_cidade:cdCidade, nm_bairro: bairro, nm_casa:nmrResidencia, },
+      params: {
+        cd_cliente: cdCliente.cd_cliente,
+        nm_logradouro: logradouro,
+        cd_cep: cep,
+        cd_cidade: cdCidade.cd_cidade,
+        nm_bairro: bairro,
+        nr_casa: nmrResidencia,
+      },
     });
 
 
-   
-  try{
-const servicoInstance = await ontroller_User.create({
-  params: { dt_inicio: inicio,
-    dt_fim: fim,
-    ds_servico: dsServico,
-    vlr_servico: valorinicial,
-    cd_cliente: cdCliente,
-    cd_categoria: categoriaInstance.cd_categoria,
-    cd_endereco: enderecoInstance.cd_endereco,} 
-});}catch(error){
-  console.log(`Fudeu ${error}`)
-}
 
-    
+    try {
+      const servicoInstance = await controller_User.CreateServico({
+        params: {
+          dt_inicio: inicio,
+          dt_fim: fim,
+          ds_servico: dsServico,
+          vlr_servico: valorinicial,
+          cd_cliente: cdCliente.cd_cliente,
+          cd_categoria: categoriaInstance.cd_categoria,
+          cd_endereco: enderecoInstance.cd_endereco
+        }
+      });
+    } catch (error) {
+      console.log(`Fudeu ${error}`)
+    }
+
+
 
   } catch (error) {
     console.error(error);

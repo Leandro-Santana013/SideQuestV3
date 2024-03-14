@@ -75,14 +75,6 @@ module.exports = {
             raw: true
         });
     },
-    insertCidadeService: async (req, res) => {
-        const { nm_cidade, sg_estado } = req.params
-        return ModelCidade.create({  
-            nm_cidade: nm_cidade,
-            sg_estado: sg_estado,
-        }
-        )
-    },
     selectCidadeAdress: async (req, res) => {
         const { nm_cidade, sg_estado } = req.params
         return ModelCidade.findOne({
@@ -106,17 +98,25 @@ module.exports = {
     },
 
     CreateadressService: async (req, res) => {
-        const { cd_cliente, nm_logradouro, cd_cep,  cd_cidade,  nm_bairro, nm_casa } = req.params
-        return ModelEndereco.create({
-            cd_cliente: cd_cliente,
-            nm_logradouro: nm_logradouro,
-            cd_cep: cd_cep,
-            cd_cidade: cd_cidade,
-            nm_bairro: nm_bairro,
-            nm_casa: nm_casa,
-        })
-        
+        const { cd_cliente, nm_logradouro, cd_cep, cd_cidade, nm_bairro, nr_casa } = req.params;
+        try {
+            const [enderecoInstance, created] = await ModelEndereco.findOrCreate({
+                where: {
+                    cd_cliente: cd_cliente,
+                    nm_logradouro: nm_logradouro,
+                    cd_cep: cd_cep,
+                    cd_cidade: cd_cidade,
+                    nm_bairro: nm_bairro,
+                    nr_casa: nr_casa,
+                }
+            });
+            return enderecoInstance;
+        } catch (error) {
+            console.error('Erro ao criar ou encontrar endereço:', error);
+            throw error;
+        }
     },
+    
     
     CreateServico: async (req, res) => {
         const {dt_inicio, dt_fim, ds_servico, vlr_servico, cd_cliente, cd_categoria, cd_endereco } = req.params
@@ -124,7 +124,7 @@ module.exports = {
             dt_inicio: dt_inicio,
             dt_fim: dt_fim,
             ds_servico: ds_servico,
-            ds_servico: ds_servico,
+            cd_categoria: cd_categoria,
             vlr_servico: vlr_servico,
             cd_cliente: cd_cliente,
             cd_endereco: cd_endereco,
