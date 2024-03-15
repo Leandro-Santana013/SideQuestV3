@@ -13,7 +13,7 @@ app.use('/auth', authController);  // Em seguida, use o roteador de pages.js par
     await connectionDataBase.sync()
     
     connectionDataBase.authenticate().then(() => {
-      console.log("Conexão bem sucedida")
+      console.log("Conexão bem scedida")
   }).catch(erroConn => {
       console.error("Incapaz de fazer conexão", erroConn)
   })

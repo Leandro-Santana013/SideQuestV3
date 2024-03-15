@@ -23,8 +23,8 @@ const ModelConfirmacaoServico = connectionDataBase.define('tb_confirmacaoServico
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         references:{
-            model:'tb_id_profissional',
-            key:'id_id_profissional' 
+            model:'tb_profissional',
+            key:'id_profissional' 
         }
     },
 

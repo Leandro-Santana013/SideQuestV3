@@ -12,6 +12,7 @@ const ModelTerminoServico = connectionDataBase.define('tb_avaliacao',{
     id_confirmacaoServico: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
+        unique: true,
         references:{
             model:'tb_confirmacaoServico',
             key:'id_confirmacaoServico'

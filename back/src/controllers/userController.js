@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 const tokenConfirmacao = require("../../tools/createToken");
 const smtpconfig = require("../../config/smtp");
 const controller_User = require("./Querys/userQuerys");
+const cookieParser = require("cookie-parser");
 
 
 let globalemail;
@@ -21,6 +22,8 @@ exports.register = async (req, res) => {
 
     globalemail = email;
     globalCpf = cpfNumerico;
+
+
 
     if (emailResults.length > 0) {
       return res.status(200).json({

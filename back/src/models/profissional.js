@@ -19,7 +19,7 @@ const ModelProfissional = connectionDataBase.define('tb_profissional', {
         unique: true
     },
     sg_sexoProfissional: {
-        type: DataTypes.CHAR(1)
+        type: DataTypes.CHAR
     },
     qt_idadeProfissional: {
         type: DataTypes.INTEGER.UNSIGNED

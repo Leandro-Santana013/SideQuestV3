@@ -4,7 +4,7 @@ const { Sequelize, QueryTypes } = require("sequelize")
 
 
 const connectionDataBase = new Sequelize(
-    `mysql://${usu}:${password}@localhost:3306/${name}`
+    `mysql://${usu}:${password}@localhost:3307/${name}`
 )
 
 module.exports = { connectionDataBase }

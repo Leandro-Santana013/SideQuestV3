@@ -1,15 +1,18 @@
 const express = require('express');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const userControllers = require('../src/controllers/userController');
 const proControllers = require('../src/controllers/proConstroller')
 const router = express.Router();
+const randomSession = require('../tools/autoToken');
 
-const session = require('express-session');
-const cookieParser = require('cookie-parser');
+
+const secretSession = randomSession.jwtSecret;
 
 // Configure o uso desses middlewares
 router.use(cookieParser());
 router.use(session({
-    secret: 'suaChaveSecreta',
+    secret: secretSession,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false } // Defina como true se estiver usando HTTPS

@@ -9,9 +9,18 @@ const { ModelCliente,
     ModelConfirmacaoServico,
     ModelTerminoServico,
     ModelAvaliacao } = require('../../models/index');
-const { postarServico } = require('../userController');
 
 module.exports = {
+    bindCookieBypkCliente: async  (req, res) => {
+        const { cd_cpfCliente } = req.params;
+       return ModelCliente.findOne({
+        attributes: ['id_cliente'],
+        where:{
+            cd_cpfCliente:cd_cpfCliente
+        }
+     })
+    },
+
     findEmailCliente: async (req, res) => {
         const { cd_emailCliente, } = req.params;
         return ModelCliente.findAll({
