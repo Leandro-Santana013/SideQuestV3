@@ -7,15 +7,13 @@ const controller_User = require("./Querys/userQuerys");
 
 let globalemail;
 let globaltoken;
-let globalCpf
+let globalCpf;
 
 
 exports.register = async (req, res) => {
   try {
     const { name, email, cpf, senha, senhaConfirm } = req.body;
     const cpfNumerico = cpf.replace(/\D/g, "");
-
-
 
     const emailResults = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
@@ -54,7 +52,7 @@ exports.register = async (req, res) => {
         nm_cliente: name,
         cd_emailCliente: email,
         cd_cpfCliente: cpfNumerico,
-        cd_senha: hash,
+        cd_senhaCliente: hash,
       },
     });
 
@@ -158,7 +156,7 @@ exports.validaEmail = async (req, res) => {
     console.log(token);
     if (globalemail) {
       controller_User.updateTokenByEmail({
-        params: { cd_token: globaltoken, cd_emailCliente: globalemail },
+        params: { cd_tokenCliente: globaltoken, cd_emailCliente: globalemail },
       });
       return res
         .status(200)
@@ -183,10 +181,6 @@ exports.postarServico = async (req, res) => {
       logradouro,
       bairro,
       nmrResidencia,
-      inicio,
-      fim,
-      valorinicial,
-      valorfinal,
       categoriaSelecionada,
     } = req.body;
     console.log(nmrResidencia)
@@ -237,12 +231,12 @@ exports.postarServico = async (req, res) => {
 
     const enderecoInstance = await controller_User.CreateadressService({
       params: {
-        cd_cliente: cdCliente.cd_cliente,
+        id_cliente: cdCliente.id_cliente,
+        cd_cidade: cdCidade.cd_cidade,
         nm_logradouro: logradouro,
         cd_cep: cep,
-        cd_cidade: cdCidade.cd_cidade,
         nm_bairro: bairro,
-        nr_casa: nmrResidencia,
+        nmr_casa: nmrResidencia,
       },
     });
 
@@ -251,13 +245,11 @@ exports.postarServico = async (req, res) => {
     try {
       const servicoInstance = await controller_User.CreateServico({
         params: {
-          dt_inicio: inicio,
-          dt_fim: fim,
-          ds_servico: dsServico,
-          vlr_servico: valorinicial,
           cd_cliente: cdCliente.cd_cliente,
           cd_categoria: categoriaInstance.cd_categoria,
-          cd_endereco: enderecoInstance.cd_endereco
+          cd_endereco: enderecoInstance.cd_endereco,
+          ds_servico: dsServico,
+          ds_servico: titulo,
         }
       });
     } catch (error) {

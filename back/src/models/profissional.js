@@ -3,41 +3,42 @@ const { connectionDataBase } = require('../../database/db')
 const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 
 const ModelProfissional = connectionDataBase.define('tb_profissional', {
-    cd_profissional: {
+    id_profissional: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false
     },
-    nm_trabalhador: {
+    nm_profissional: {
         type: DataTypes.STRING(50),
         allowNull: false
     },
-    cd_cpftrabalhador: {
+    cd_cpfProfissional: {
         type: DataTypes.CHAR(11),
         allowNull: false,
         unique: true
     },
-    sg_sexotrabalhador: {
-        type: DataTypes.CHAR
+    sg_sexoProfissional: {
+        type: DataTypes.CHAR(1)
     },
-    qt_idadetrabalhador: {
+    qt_idadeProfissional: {
         type: DataTypes.INTEGER.UNSIGNED
     },
-    nmr_telefonetrabalhador: {
+    nmr_telefoneProfissional: {
         type: DataTypes.CHAR(11),
         allowNull: false,
         unique: true
     },
-    cd_emailtrabalhador: {
+    cd_emailProfissional: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+        unique: true
+    },
+    cd_senhaProfissional: {
         type: DataTypes.STRING(100),
         allowNull: false
     },
-    cd_senha: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    cd_token: {
+    cd_tokenProfissional: {
         type: DataTypes.STRING(255),
         allowNull: true
     }
@@ -45,7 +46,6 @@ const ModelProfissional = connectionDataBase.define('tb_profissional', {
 },
 _padraoTableDBExistence('tb_profissional')
 )
-
 
 module.exports = {
     ModelProfissional

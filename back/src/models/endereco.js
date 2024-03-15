@@ -3,27 +3,34 @@ const { connectionDataBase } = require('../../database/db')
 const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 
 const ModelEndereco = connectionDataBase.define('tb_endereco', {
-    cd_endereco: {
+    id_endereco: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false
     },
 
-    cd_cliente: {
+    id_cliente: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         references:{
             model:'tb_cliente',
-            key:'cd_cliente' 
+            key:'id_cliente' 
         }
     },
 
+    id_cidade: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        references:{
+            model:'tb_cidade',
+            key:'id_cidade' 
+        }
+    },
     nm_logradouro: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(100),
         allowNull: false
     },
-
     cd_cep: {
         type: DataTypes.CHAR(8),
         allowNull: false
@@ -33,19 +40,10 @@ const ModelEndereco = connectionDataBase.define('tb_endereco', {
         allowNull: false
     },
 
-    nr_casa:{
+    nmr_casa:{
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
-    },
-
-    cd_cidade: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
-        references:{
-            model:'tb_cidade',
-            key:'cd_cidade' 
-        }
-    },
+    }
 },
     _padraoTableDBExistence('tb_endereco')
 )

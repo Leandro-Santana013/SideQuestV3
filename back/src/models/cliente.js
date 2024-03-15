@@ -3,7 +3,7 @@ const { connectionDataBase } = require('../../database/db')
 const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 
 const ModelCliente = connectionDataBase.define('tb_cliente', {
-    cd_cliente: {
+    id_cliente: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
@@ -11,7 +11,7 @@ const ModelCliente = connectionDataBase.define('tb_cliente', {
     },
 
     nm_cliente: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: false
     },
 
@@ -21,28 +21,29 @@ const ModelCliente = connectionDataBase.define('tb_cliente', {
     },
 
     sg_sexoCliente: {
-        type: DataTypes.CHAR
+        type: DataTypes.CHAR(1)
     },
 
     qt_idadeCliente: {
         type: DataTypes.INTEGER.UNSIGNED
     },
 
-    nmr_telefonecliente: {
-        type: DataTypes.CHAR
+    nmr_telefoneCliente: {
+        type: DataTypes.CHAR(11),
+        unique: true
     },
 
     cd_emailCliente: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         allowNull: false
     },
 
-    cd_senha: {
-        type: DataTypes.STRING,
+    cd_senhaCliente: {
+        type: DataTypes.STRING(100),
         allowNull: false
     },
 
-    cd_token: {
+    cd_tokenCliente: {
         type: DataTypes.STRING(255),
         allowNull: true
     }

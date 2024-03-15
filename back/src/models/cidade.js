@@ -3,7 +3,7 @@ const { connectionDataBase } = require('../../database/db')
 const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 
 const ModelCidade = connectionDataBase.define('tb_cidade', {
-    cd_cidade: {
+    id_cidade: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,

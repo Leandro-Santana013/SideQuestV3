@@ -3,14 +3,14 @@ const { connectionDataBase } = require('../../database/db')
 const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 
 const ModelCategoria = connectionDataBase.define('tb_categoria', {
-    cd_categoria: {
+    id_categoria: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false
     },
     ds_categoria: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         allowNull: false
     },
 

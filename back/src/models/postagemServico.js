@@ -2,57 +2,50 @@ const { DataTypes } = require('sequelize')
 const { connectionDataBase } = require('../../database/db')
 const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 
-const ModelServico = connectionDataBase.define('tb_servico', {
-    cd_servico: {
+const ModelPostagemServico = connectionDataBase.define('tb_postagemServico', {
+    id_postagemServico: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false
     },
-
-    dt_inicio: {
-        type: DataTypes.DATE,
-        allowNull: false
+    
+    id_cliente: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        references:{
+            model:'tb_cliente',
+            key:'id_cliente'
+        }
     },
-    dt_fim: {
-        type: DataTypes.DATE,
+    id_categoria: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        references:{
+            model:'tb_categoria',
+            key:'id_categoria' 
+        }
+    },
+    id_endereco: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        references:{
+            model:'tb_endereco',
+            key:'id_endereco' 
+        }
     },
     ds_servico: {
         type: DataTypes.STRING(255),
         allowNull: false
     },
-    vlr_servico: {
-        type: DataTypes.DECIMAL(10, 2),
+    ds_titulo: {
+        type: DataTypes.STRING(50),
         allowNull: false
     },
-    cd_cliente: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
-        references:{
-            model:'tb_cliente',
-            key:'cd_cliente' 
-        }
-    },
-    cd_categoria: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
-        references:{
-            model:'tb_categoria',
-            key:'cd_categoria' 
-        }
-    },
-    cd_endereco: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
-        references:{
-            model:'tb_endereco',
-            key:'cd_endereco' 
-        }
-    },
 },
-    _padraoTableDBExistence('tb_servico')
+    _padraoTableDBExistence('tb_postagemServico')
 )
 
 module.exports = {
-    ModelServico
+    ModelPostagemServico
 }

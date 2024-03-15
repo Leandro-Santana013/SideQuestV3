@@ -4,32 +4,31 @@ const { raw } = require("mysql2")
 
 module.exports = {
     findEmailProfissional: async (req, res) => {
-        const {  cd_emailtrabalhador } = req.params;
+        const { cd_emailProfissional } = req.params;
         return ModelProfissional.findAll({
-            attributes: [' cd_emailtrabalhador', 'cd_senha'],
+            attributes: ['cd_emailProfissional', ' cd_senhaProfissional'],
             where: {
-                cd_emailtrabalhador:  cd_emailtrabalhador
+                cd_emailProfissional : cd_emailProfissional
             },
-            raw: true
         });
     },
     findcpfProfissional: async (req, res) => {
-        const { cd_cpftrabalhador } = req.params;
+        const { cd_cpfProfissional } = req.params;
         return ModelCliente.findAll({
-            attributes: ['cd_cpftrabalhador'],
+            attributes: ['cd_cpfProfissional'],
             where: {
-                cd_cpftrabalhador: cd_cpftrabalhador
+                cd_cpfProfissional: cd_cpfProfissional
             },
-            raw: true
+
         });
     },
     insertProfissional: async (req, res) => {
-        const { nm_trabalhador, cd_cpfCliente, cd_emailtrabalhador, cd_senha } = req.params; // Assumindo que o nome da marca está no corpo da requisição
+        const { nm_profissional, cd_cpfProfissional, cd_emailProfissional, cd_senhaProfissional } = req.params; // Assumindo que o nome da marca está no corpo da requisição
         return ModelCliente.create({
-            nm_trabalhador: nm_trabalhador,
-            cd_emailtrabalhador: cd_emailtrabalhador,
-            cd_cpfCliente: cd_cpfCliente,
-            cd_senha: cd_senha
+            nm_profissional: nm_profissional,
+            cd_emailProfissional : cd_emailProfissional,
+            cd_cpfProfissional: cd_cpfProfissional,
+            cd_senhaProfissional: cd_senhaProfissional
         });
     },
 }

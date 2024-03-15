@@ -8,13 +8,11 @@ const controller_Pro = require('./Querys/proQuerys')
 exports.registerPro = async (req, res) => {
 
     try {
-  
       const { name, email, cpf, senha, senhaConfirm } = req.body;
       const cpfNumerico = cpf.replace(/\D/g, '');
      
-     
       const emailResults = await controller_Pro.findEmailProfissional({
-        params: { cd_emailTrabalhador: email }
+        params: { cd_emailProfissional: email }
       });
   
         globalemail = email 
@@ -26,7 +24,7 @@ exports.registerPro = async (req, res) => {
       }
   
       const cpfResults = await controller_Pro.findcpfProfissional({
-        params: { cd_cpftrabalhador: cpfNumerico }
+        params: { cd_cpfProfissional: cpfNumerico }
       });
 
       if (cpfResults.length > 0) {
@@ -43,7 +41,7 @@ exports.registerPro = async (req, res) => {
       await queryAsync('INSERT INTO tb_profissional SET ?', { nm_Trabalhador: name, cd_emailTrabalhador: email, cd_cpfTrabalhador: cpfNumerico, cd_senha: hash });
       
     await controller_Pro.insertProfissional({
-      params: {  nm_trabalhador: name, cd_emailtrabalhado: email, cd_cpftrabalhador: cpfNumerico, cd_senha: hash }
+      params: { nm_profissional: name, cd_emailProfissional: email, cd_cpfProfissional: cpfNumerico, cd_senhaProfissional: hash }
     });
 
       const htmlContent = `

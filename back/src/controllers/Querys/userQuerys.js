@@ -1,16 +1,24 @@
 const { Model, Op } = require('sequelize')
 const { raw } = require("mysql2")
-const { ModelCliente, ModelEndereco, ModelCategoria, ModelServico, ModelCidade } = require('../../models/index')
+const { ModelCliente,
+    ModelProfissional,
+    ModelEndereco,
+    ModelCategoria,
+    ModelCidade,
+    ModelPostagemServico,
+    ModelConfirmacaoServico,
+    ModelTerminoServico,
+    ModelAvaliacao } = require('../../models/index');
+const { postarServico } = require('../userController');
 
 module.exports = {
     findEmailCliente: async (req, res) => {
         const { cd_emailCliente, } = req.params;
         return ModelCliente.findAll({
-            attributes: ['cd_emailCliente', 'cd_senha'],
+            attributes: ['cd_emailCliente', 'cd_senhaCliente'],
             where: {
                 cd_emailCliente: cd_emailCliente
             },
-            raw: true
         });
     },
     findcpfCliente: async (req, res) => {
@@ -20,28 +28,27 @@ module.exports = {
             where: {
                 cd_cpfCliente: cd_cpfCliente
             },
-            raw: true
         });
     },
 
     insertClient: async (req, res) => {
-        const { nm_cliente, cd_cpfCliente, cd_emailCliente, cd_senha } = req.params; // Assumindo que o nome da marca está no corpo da requisição
+        const { nm_cliente, cd_cpfCliente, cd_emailCliente, cd_senhaCliente } = req.params; // Assumindo que o nome da marca está no corpo da requisição
         return ModelCliente.create({
             nm_cliente: nm_cliente,
             cd_emailCliente: cd_emailCliente,
             cd_cpfCliente: cd_cpfCliente,
-            cd_senha: cd_senha
+            cd_senhaCliente: cd_senhaCliente
         });
     },
     findtokenCliente: async (req, res) => {
         try {
             const { cd_emailCliente } = req.params;
             const cliente = await ModelCliente.findOne({
-                attributes: ['cd_token'],
+                attributes: ['cd_tokenCliente'],
                 where: {
                     cd_emailCliente: cd_emailCliente
                 },
-                raw: true
+               
             });
 
             return cliente ? cliente.cd_token : null;
@@ -53,9 +60,9 @@ module.exports = {
         }
     },
     updateTokenByEmail: async (req, res) => {
-        const { cd_emailCliente, cd_token } = req.params;
+        const { cd_emailCliente, cd_tokenCliente } = req.params;
         return ModelCliente.update(
-            { cd_token: cd_token },
+            { cd_tokenCliente: cd_tokenCliente },
             { where: { cd_emailCliente: cd_emailCliente } }
         );
     },
@@ -63,7 +70,6 @@ module.exports = {
     selectCategorias: async (req, res) => {
         return ModelCategoria.findAll({
             attributes: ['ds_categoria'],
-            raw: true
         });
     },
     selectCategoriaescolhida: async (req, res) => {
@@ -78,18 +84,18 @@ module.exports = {
     selectCidadeAdress: async (req, res) => {
         const { nm_cidade, sg_estado } = req.params
         return ModelCidade.findOne({
-            attributes:['cd_cidade'],
+            attributes: ['id_cidade'],
             where: {
-                nm_cidade:nm_cidade,
-                 sg_estado:sg_estado
+                nm_cidade: nm_cidade,
+                sg_estado: sg_estado
             },
-            raw:true
+            raw: true
         })
     },
     findCdCliente: async (req, res) => {
         const { cd_cpfCliente } = req.params;
         return ModelCliente.findOne({
-            attributes: ['cd_cliente'],
+            attributes: ['id_cliente'],
             where: {
                 cd_cpfCliente: cd_cpfCliente
             },
@@ -98,16 +104,16 @@ module.exports = {
     },
 
     CreateadressService: async (req, res) => {
-        const { cd_cliente, nm_logradouro, cd_cep, cd_cidade, nm_bairro, nr_casa } = req.params;
+        const { id_cliente, nm_logradouro, cd_cep, id_cidade, nm_bairro, nmr_casa } = req.params;
         try {
             const [enderecoInstance, created] = await ModelEndereco.findOrCreate({
                 where: {
-                    cd_cliente: cd_cliente,
+                    id_cliente: id_cliente,
+                    id_cidade: id_cidade,
                     nm_logradouro: nm_logradouro,
                     cd_cep: cd_cep,
-                    cd_cidade: cd_cidade,
                     nm_bairro: nm_bairro,
-                    nr_casa: nr_casa,
+                    nmr_casa: nmr_casa,
                 }
             });
             return enderecoInstance;
@@ -116,18 +122,15 @@ module.exports = {
             throw error;
         }
     },
-    
-    
+
+
     CreateServico: async (req, res) => {
-        const {dt_inicio, dt_fim, ds_servico, vlr_servico, cd_cliente, cd_categoria, cd_endereco } = req.params
-        return ModelServico.create({
-            dt_inicio: dt_inicio,
-            dt_fim: dt_fim,
+        const { ds_servico, id_cliente, id_categoria, id_endereco } = req.params
+        return ModelPostagemServico.create({
+            id_cliente: id_cliente,
+            id_categoria: id_categoria,
+            id_endereco: id_endereco,
             ds_servico: ds_servico,
-            cd_categoria: cd_categoria,
-            vlr_servico: vlr_servico,
-            cd_cliente: cd_cliente,
-            cd_endereco: cd_endereco,
         })
     }
 }
