@@ -26,7 +26,7 @@ const ModelProfissional = connectionDataBase.define('tb_profissional', {
     },
     nmr_telefoneProfissional: {
         type: DataTypes.CHAR(11),
-        allowNull: false,
+        allowNull: true,
         unique: true
     },
     cd_emailProfissional: {

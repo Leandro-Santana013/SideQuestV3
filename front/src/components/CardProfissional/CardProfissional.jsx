@@ -5,8 +5,12 @@ import imgMedalha10K from "../../assets/medalha10k.png";
 import imgMedalhaOuro from "../../assets/medalhaouro.png";
 import imgMedalhaBronze from "../../assets/medelhabronze.png";
 import imgCertificado from "../../assets/certificado.png";
+import { TextInputBusca} from "../index";
+
+import { RiFilter2Fill } from "react-icons/ri";
 
 export const CardProfissional = () => {
+  const [modal, setModal] = useState(false)
   let paragrafo = document.querySelector(".desc");
   let botaoVerMais = document.querySelector(".vma-vme");
 
@@ -19,9 +23,40 @@ export const CardProfissional = () => {
       botaoVerMais.textContent = "ver menos";
     }
   }
+  const openModal = () => {
+    setModal(true);
+  };
+
+  // Função para fechar o modal
+  const closeModal = () => {
+    setModal(false);
+  };
 
   return (
+    
     <section className="area-servicos">
+      <div className="input-filtros">
+              <TextInputBusca
+              
+              placeholder={"Encontre profissionais"}
+          
+            />
+            <div className="ifopenf">
+            <div className="filtros" onClick={openModal}>
+              <p>Filtros</p>
+              <RiFilter2Fill className="iconFilter"/>
+              
+            </div>
+            {modal && (
+        <div className="modal">
+          <div className="modal-content">
+            {/* Opções de filtro */}
+            <button onClick={closeModal}>Fechar</button>
+          </div>
+        </div>
+      )} 
+            </div>
+          </div>
       <div className="card-servico">
         <div className="tamplate-img">
           <img src={imgPerfil} alt="Imagem de perfil" />

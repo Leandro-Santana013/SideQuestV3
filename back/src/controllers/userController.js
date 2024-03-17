@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 const tokenConfirmacao = require("../../tools/createToken");
 const smtpconfig = require("../../config/smtp");
 const controller_User = require("./Querys/userQuerys");
-const cookieParser = require("cookie-parser");
+
 
 
 let globalemail;
@@ -120,13 +120,13 @@ exports.login = async (req, res) => {
     const user = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
     });
-    console.log(user);
+    
 
     if (user.length == 0) {
       return res.status(200).json({ message: "Email ou senha incorretos" });
     }
 
-    const match = await bcrypt.compare(senha, user[0].cd_senha);
+    const match = await bcrypt.compare(senha, user[0].cd_senhaCliente);
 
     if (!match) {
       return res.status(200).json({ message: "Email ou senha incorretos" });

@@ -57,10 +57,9 @@ module.exports = {
                 where: {
                     cd_emailCliente: cd_emailCliente
                 },
-               
             });
-
-            return cliente ? cliente.cd_token : null;
+            console.log("Cliente encontrado:", cliente);
+            return cliente ? cliente.cd_tokenCliente : null;
 
         } catch (error) {
             console.error('Erro ao buscar token por email:', error);

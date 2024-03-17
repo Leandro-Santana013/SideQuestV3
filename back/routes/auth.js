@@ -16,7 +16,7 @@ router.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false } // Defina como true se estiver usando HTTPS
-}));
+}));// Backend
 
 router.post('/register', userControllers.register);
 router.post('/registerPro', proControllers.registerPro)

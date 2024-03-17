@@ -4,12 +4,12 @@ const tokenConfirmacao = require('../../tools/createToken')
 const smtpconfig = require('../../config/smtp')
 const controller_Pro = require('./Querys/proQuerys')
 
-
 exports.registerPro = async (req, res) => {
 
     try {
       const { name, email, cpf, senha, senhaConfirm } = req.body;
       const cpfNumerico = cpf.replace(/\D/g, '');
+      console.log(name, email, cpf, senha, senhaConfirm)
      
       const emailResults = await controller_Pro.findEmailProfissional({
         params: { cd_emailProfissional: email }
@@ -31,14 +31,13 @@ exports.registerPro = async (req, res) => {
         return res.status(200).json({ message: 'Alguns desses dados estão incorretos ou estão sendo utilizados'});
       }
       
-      // Hash da senha
+      // Hash da senha 
       let hash = await bcrypt.hash(senha, 8);
   
       console.log(cpfNumerico)
       const token = tokenConfirmacao.generateEmailConfirmationToken();
       globaltoken = token
       // Inserir novo cliente
-      await queryAsync('INSERT INTO tb_profissional SET ?', { nm_Trabalhador: name, cd_emailTrabalhador: email, cd_cpfTrabalhador: cpfNumerico, cd_senha: hash });
       
     await controller_Pro.insertProfissional({
       params: { nm_profissional: name, cd_emailProfissional: email, cd_cpfProfissional: cpfNumerico, cd_senhaProfissional: hash }
