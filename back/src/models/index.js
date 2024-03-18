@@ -34,17 +34,21 @@ ModelEndereco.belongsTo(ModelCidade, { foreignKey: 'id_cidade' });
 ModelPostagemServico.hasOne(ModelConfirmacaoServico, { foreignKey: 'id_confirmacaoServico' });
 ModelConfirmacaoServico.belongsTo(ModelPostagemServico, { foreignKey: 'id_confirmacaoServico' });
 
-//uma avaliação de serviço tem um serviço terminado e um serviço terminado tem uma avaliação
-ModelAvaliacao.hasOne(ModelTerminoServico, { foreignKey: 'id_avaliacao' });
-ModelTerminoServico.belongsTo(ModelAvaliacao, { foreignKey: 'id_avaliacao' });
+
 
 //as informaçôes de profissionais tem um profissional e um profissional tem uma informação de profissional
 ModelProfissional.hasOne(ModelInfoProfissional, { foreignKey: 'id_infoProfissional' });
 ModelInfoProfissional.belongsTo(ModelProfissional, { foreignKey: 'id_infoProfissional' });
 
+ModelProfissional.hasMany(ModelConfirmacaoServico, { foreignKey: 'id_profissional' });
+ModelConfirmacaoServico.belongsTo(ModelProfissional, { foreignKey: 'id_profissional' });
+
 //uma confirmação tem um termino de serviço tem uma confirmação e uma confirmação tem um termino
 ModelConfirmacaoServico.hasOne(ModelTerminoServico, { foreignKey: 'id_confirmacaoServico' });
 ModelTerminoServico.belongsTo(ModelConfirmacaoServico, { foreignKey: 'id_confirmacaoServico' });
+
+ModelTerminoServico.hasOne(ModelAvaliacao, {foreignKey: 'id_terminoServico'})
+ModelAvaliacao.belongsTo(ModelTerminoServico, {foreignKey: 'id_terminoServico'})
 
 module.exports = {
    ModelCliente,

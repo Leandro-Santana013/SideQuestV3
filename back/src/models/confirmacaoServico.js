@@ -34,6 +34,7 @@ const ModelConfirmacaoServico = connectionDataBase.define('tb_confirmacaoServico
       },
 },
 _padraoTableDBExistence('tb_confirmacaoServico')
+
 )
 
 module.exports = {

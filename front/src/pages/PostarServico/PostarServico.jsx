@@ -143,7 +143,7 @@ const PostarServico = () => {
     // Função para buscar as categorias ao montar o componente
     const carregarCategorias = async () => {
       try {
-        const response = await axios.post(
+        const response = await axios.get(
           "http://localhost:5000/auth/selectCategoria"
         );
         setCategorias(response.data);

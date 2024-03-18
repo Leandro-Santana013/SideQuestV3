@@ -26,7 +26,7 @@ const ModelAvaliacao = connectionDataBase.define('tb_avaliacao', {
         allowNull: true 
       }
 },
-_padraoTableDBExistence('tb_cidade')
+_padraoTableDBExistence('tb_avaliacao')
 )
 module.exports = {
     ModelAvaliacao

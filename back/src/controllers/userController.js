@@ -270,3 +270,8 @@ exports.selectCategoria = async (req, res) => {
   const categoria = await controller_User.selectCategorias();
   res.status(200).json(categoria);
 }
+exports.profissionalCard = async (req, res) => {
+  const populationProfissional = await controller_User.selectProfissional();
+  console.log(populationProfissional)
+  res.status(200).json(populationProfissional)
+}

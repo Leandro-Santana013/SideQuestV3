@@ -18,6 +18,11 @@ const ModelInfoProfissional = connectionDataBase.define('tb_infoProfissional', {
             key:'id_profissional'
         }
     },
+    ds_biografia: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+
 
     ds_curriculo: {
         type: DataTypes.TEXT,

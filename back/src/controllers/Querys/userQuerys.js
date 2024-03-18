@@ -1,4 +1,4 @@
-const { Model, Op } = require('sequelize')
+const { Model, Op, Sequelize } = require('sequelize')
 const { raw } = require("mysql2")
 const { ModelCliente,
     ModelProfissional,
@@ -8,17 +8,18 @@ const { ModelCliente,
     ModelPostagemServico,
     ModelConfirmacaoServico,
     ModelTerminoServico,
-    ModelAvaliacao } = require('../../models/index');
+    ModelAvaliacao,
+    ModelInfoProfissional } = require('../../models/index');
 
 module.exports = {
-    bindCookieBypkCliente: async  (req, res) => {
+    bindCookieBypkCliente: async (req, res) => {
         const { cd_cpfCliente } = req.params;
-       return ModelCliente.findOne({
-        attributes: ['id_cliente'],
-        where:{
-            cd_cpfCliente:cd_cpfCliente
-        }
-     })
+        return ModelCliente.findOne({
+            attributes: ['id_cliente'],
+            where: {
+                cd_cpfCliente: cd_cpfCliente
+            }
+        })
     },
 
     findEmailCliente: async (req, res) => {
@@ -140,5 +141,45 @@ module.exports = {
             id_endereco: id_endereco,
             ds_servico: ds_servico,
         })
+    },
+    selectProfissional: async (req, res) => {
+        try {
+            const profissionais = await ModelProfissional.findAll({
+                attributes: [
+                    'id_profissional',
+                    'nm_profissional',
+                    [Sequelize.col('tb_infoProfissional.ds_biografia'), 'ds_biografia'],
+                    [Sequelize.fn('COUNT', Sequelize.col('tb_confirmacaoServicos.tb_terminoServico.id_terminoServico')), 'num_servicos_terminados'],
+                    [Sequelize.fn('SUM', Sequelize.col('tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.nmr_avaliacao')), 'total_avaliacoes'],
+                    [Sequelize.fn('COUNT', Sequelize.col('tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao')), 'num_avaliacoes'],
+                    [Sequelize.fn('COALESCE', Sequelize.fn('AVG', Sequelize.col('tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.nmr_avaliacao')), 0), 'media_avaliacoes']
+                ],
+                include: [
+                    {
+                        model: ModelInfoProfissional,
+                        attributes: [],
+                    },
+                    {
+                        model: ModelConfirmacaoServico,
+                        attributes: [],
+                        include: [{
+                            model: ModelTerminoServico,
+                            attributes: [],
+                            include: [{
+                                model: ModelAvaliacao,
+                                attributes: [],
+                            }]
+                        }]
+                    }],
+                group: ['tb_profissional.id_profissional']
+            });
+
+            return profissionais;
+        } catch (error) {
+            console.error('Erro ao buscar profissionais:', error);
+            throw error;
+        }
     }
+
+
 }

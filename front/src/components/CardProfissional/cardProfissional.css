@@ -140,6 +140,27 @@ h2 {
     -webkit-line-clamp: initial;
 }
 
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8vw;
+    border-radius: 15px;
+    border: solid 1px var(--verde);
+    background-color: white;
+}
+
+.modal-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.container-card-filtros {
+
+}
+
 
 .vma-vme {
     cursor: pointer;

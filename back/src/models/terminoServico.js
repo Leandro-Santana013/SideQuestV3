@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 const { connectionDataBase } = require('../../database/db')
 const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 
-const ModelTerminoServico = connectionDataBase.define('tb_avaliacao',{
+const ModelTerminoServico = connectionDataBase.define('tb_terminoServico',{
     id_terminoServico: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
@@ -24,7 +24,7 @@ const ModelTerminoServico = connectionDataBase.define('tb_avaliacao',{
     }
 
 },
-_padraoTableDBExistence('tb_profissional')
+_padraoTableDBExistence('tb_terminoServico')
 )
 
 module.exports = {

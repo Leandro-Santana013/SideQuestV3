@@ -23,6 +23,7 @@ router.post('/registerPro', proControllers.registerPro)
 router.post('/login', userControllers.login);
 router.post('/validaemail', userControllers.validaEmail)
 router.post('/postarServico', userControllers.postarServico)
-router.post('/selectCategoria', userControllers.selectCategoria)
+router.get('/selectCategoria', userControllers.selectCategoria)
+router.get('/profissionaisCard', userControllers.profissionalCard)
 
 module.exports = router; 
