@@ -8,7 +8,7 @@ import imgCertificado from "../../assets/certificado.png";
 import { TextInputBusca } from "../index";
 import axios from 'axios';
 
-import { RiFilter2Fill } from "react-icons/ri";
+import { RiFilter2Fill, RiStarFill } from "react-icons/ri";
 
 export const CardProfissional = () => {
   const [dadosIniciais, setDadosIniciais] = useState([]);
@@ -93,8 +93,7 @@ export const CardProfissional = () => {
         </div>
       ) : (
         dadosIniciais.map((profissional) => (
-          <div className="card-servico" key={profissional.id_profissional}>
-            <div className="card-profissional">
+            <div className="card-profissional" key={profissional.id_profissional}>
               <div className="tamplate-img">
                 <img src={imgPerfil} alt="Imagem de perfil" />
               </div>
@@ -103,12 +102,12 @@ export const CardProfissional = () => {
                   <h2>{profissional.nm_profissional}</h2>
                   <div className="stars">
                     {[...Array(5)].map((_, index) => (
-                      <i
+                      <RiStarFill
                         key={index}
                         className={`ri-star-s-fill ${
                           index < profissional.media_avaliacoes ? "ava" : ""
                         }`}
-                      ></i>
+                      ></RiStarFill>
                     ))}
                   </div>
                 </div>
@@ -118,7 +117,7 @@ export const CardProfissional = () => {
                   <img src={imgMedalhaBronze} alt="Medalha de Bronze" />
                 </div>
                 <div className="content-desc">
-                  <p className="desc">{profissional.ds_biografia}</p>
+                  <p className="desc">{profissional.ds_biografia ? profissional.ds_biografia : "Não possui descrição"}</p>
                   <span className="vma-vme">ver mais</span>
                 </div>
               </div>
@@ -132,7 +131,6 @@ export const CardProfissional = () => {
                 </div>
               </div>
             </div>
-          </div>
         ))
       )}
     </section>

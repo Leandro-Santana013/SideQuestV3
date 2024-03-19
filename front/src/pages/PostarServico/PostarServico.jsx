@@ -331,14 +331,6 @@ const PostarServico = () => {
                     </div>
                   </div>
                   <div className="rightPostar" id="rightPostar2">
-                    <h4 className="postarH4">
-                      Leve o indicador até sua residência
-                    </h4>
-                    <div className="mapa"></div>
-                    <div className="zoom">
-                      <div className="mais-menos">+</div>
-                      <div className="mais-menos">-</div>
-                    </div>
                     <button className="btnProximo" onClick={handleNext}>
                       Próximo
                     </button>
