@@ -143,11 +143,18 @@ h2 {
     -webkit-line-clamp: initial;
 }
 
+.vma-vme {
+    cursor: pointer;
+    color: var(--azul);
+}
+
+/*filtros*/
+
 .modal {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 8vw;
+    width: 15vw;
     border-radius: 15px;
     border: solid 1px var(--verde);
     background-color: white;
@@ -158,11 +165,22 @@ h2 {
     align-items: center;
     flex-direction: column;
     padding: 5px;
+    gap: 20px;
 }
 
-
-.vma-vme {
-    cursor: pointer;
+.modal-content span {
     color: var(--azul);
+    font-size: 1.3vw;
 }
 
+.container-card-filtros {
+    display: flex;
+    gap: 1vw;
+}
+
+.card-filtro {
+    color: white;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--verde);
+}
