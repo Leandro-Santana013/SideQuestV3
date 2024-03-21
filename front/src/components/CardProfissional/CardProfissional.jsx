@@ -83,14 +83,14 @@ export const CardProfissional = () => {
               <div className="modal-content">
                 <span>Filtre por:</span>
                 <div className="container-card-filtros">
-                  <button className="card-filtro" onClick={() => {filtrarCards(1); alternarCor('botao1')}} style={{ backgroundColor: coresBotoes['botao1'] || 'red' }}>
+                  <button className="card-filtro" onClick={() => {filtrarCards(1); alternarCor('botao1')}} style={{ backgroundColor: coresBotoes['botao1'] || 'var(--verde)' }}>
                     <p>alguma coisa</p>
                   </button>
-                  <button className="card-filtro" onClick={() => {filtrarCards(1); alternarCor('botao2')}} style={{ backgroundColor: coresBotoes['botao2'] || 'red' }}>
+                  <button className="card-filtro" onClick={() => {filtrarCards(1); alternarCor('botao2')}} style={{ backgroundColor: coresBotoes['botao2'] || 'var(--verde)' }}>
                     <p>alguma coisa</p>
                   </button>
                 </div>
-                <button onClick={closeModal}>Fechar</button>
+                <button className="btn-close-modal" onClick={closeModal}>Fechar</button>
               </div>
             </div>
           )}
@@ -98,7 +98,7 @@ export const CardProfissional = () => {
       </div>
       {dadosIniciais.length === 0 ? (
         <div className="sem-profissionais">
-          <p>Sem profissionais cadastrados.</p>
+          <p>Nenhum profissional encontrado.</p>
         </div>
       ) : (
         dadosIniciais.map((profissional) => (

@@ -50,6 +50,7 @@ module.exports = {
             cd_senhaCliente: cd_senhaCliente
         });
     },
+    
     findtokenCliente: async (req, res) => {
         try {
             const { cd_emailCliente } = req.params;
