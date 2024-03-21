@@ -12,6 +12,8 @@ import Historico from "./pages/Historico/Historico";
 import HomeProfissionais from "./pages/HomeProfissional/HomeProfissional";
 import ServicosPendentesCliente from "./pages/ServicosPendentesCliente/ServicosPendentesCliente";
 
+import Login2 from "./pages/Login2/Login2";
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 const Router = () => {
@@ -30,6 +32,7 @@ const Router = () => {
         <Route exact path="/historicoCliente" element={<Historico />} />
         <Route exact path="/homeProfissionais" element={<HomeProfissionais />} />
         <Route exact path="/servicosPendentesCliente" element={<ServicosPendentesCliente />} />
+        <Route exact path="/login2" element={<Login2 />} />
       </Routes>
     </BrowserRouter>
   )

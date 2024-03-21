@@ -120,7 +120,7 @@ exports.login = async (req, res) => {
     const user = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
     });
-    
+
 
     if (user.length == 0) {
       return res.status(200).json({ message: "Email ou senha incorretos" });
@@ -187,7 +187,6 @@ exports.postarServico = async (req, res) => {
       categoriaSelecionada,
     } = req.body;
     console.log(nmrResidencia)
-
     var partes = uf_localidade.split(" - ");
     var estado = partes[0];
     var cidade = partes[1];

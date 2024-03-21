@@ -34,11 +34,11 @@ export const Cadastro = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/auth/register', formData);
+      const response = await axios.post('http://localhost:5002/auth/register', formData);
 
       setMessage(response.data.message);
 
-    } catch (error) {
+    } catch (error) { 
       console.error('Erro ao cadastrar:', error);
       setMessage(error.response?.data?.message || 'Erro ao cadastrar. Tente novamente.');
     }
@@ -48,7 +48,7 @@ export const Cadastro = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/auth/registerPro', formDatapro);
+      const response = await axios.post('http://localhost:5002/auth/registerPro', formDatapro);
 
       setMessage(response.data.message);
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios'; 2
+import axios from 'axios'; 
 import './login.css'
 import img_login1 from '../../assets/cad-img.png'
 import img_logo from "../../assets/sidequest_3.png"
@@ -18,7 +18,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/auth/login', formData);
+            const response = await axios.post('http://localhost:5002/auth/login', formData);
             if (response.status === 200) {
                 setMessage(response.data.message);
             } else if (response.status === 201) {
@@ -27,6 +27,7 @@ const Login = () => {
         } catch (error) {
             console.error(error.response.data.message);
         }
+        
     };
     const handleChange = (e) => {
         setFormData({
