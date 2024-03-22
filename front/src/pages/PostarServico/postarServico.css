@@ -84,7 +84,7 @@
     align-items: flex-start;
     flex-direction: column;
     margin-left: 5vw;
-    width: 40vw;
+    width: 100%;
 }
 
 .tituloServico {
@@ -113,7 +113,7 @@
     color: var(--verde);
 }
 
-.emergente input {}
+
 
 .categorias {
     width: fit-content;
@@ -130,26 +130,6 @@
     font-weight: 700;
 }
 
-.anexo {
-    width: 10vw;
-    height: 3vw;
-    border-radius: 10px;
-    background: transparent;
-    border: solid 0.5px #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1vw;
-    font-size: 1.5vw;
-    color: #000;
-    font-weight: 300;
-    margin-top: 1.8vw;
-    cursor: pointer;
-}
-
-.iconAnexo{
-    font-size: 1.9vw;
-}
 
 .rightPostar{
     height: inherit;
@@ -181,6 +161,24 @@
     font-size: 1vw;
     color: #474747;
     font-weight: 200;
+ }
+
+.cep-estado, .bairro-rua, .num-complemento{
+    display: flex;
+    gap: 3vw;
+}
+
+.linha-postar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: inherit;
+    height: inherit;
+    margin-top: 2vw;
+}
+
+.linha-postar .btnProximo{ 
+    margin-right: 2vw;
 }
 
 .rua-numero{
@@ -233,4 +231,35 @@
 font-size: 20px;
 font-weight: 400;
 
+}
+
+.anexoLabel {
+    width: 10vw;
+    height: 3vw;
+    border-radius: 10px;
+    background: transparent;
+    border: solid 0.5px #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    font-size: 1.5vw;
+    color: #000;
+    font-weight: 300;
+    margin-top: 1.8vw;
+    cursor: pointer;
+
+  }
+  
+  .anexoLabel:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .anexo {
+    display: none; /* Oculta o input file */
+  }
+  
+
+.iconAnexo{
+    font-size: 1.9vw;
 }

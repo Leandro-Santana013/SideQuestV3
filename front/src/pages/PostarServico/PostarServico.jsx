@@ -20,7 +20,7 @@ const PostarServico = () => {
   const [urgencia, setUrgencia] = useState(false);
   const [categorias, setCategorias] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
-
+  const [complemento, setComplemento] = useState("")
   const [formData, setFormData] = useState({
     titulo: null,
     dsServico: null,
@@ -35,6 +35,7 @@ const PostarServico = () => {
     valorfinal: null,
     urgencia: null,
     categoriaSelecionada: null,
+    complemento: "",
   });
 
   const handleNext = () => {
@@ -139,6 +140,14 @@ const PostarServico = () => {
     }));
   };
 
+  const handleComplemento = (event) => {
+    // Permitir que o usuário edite o campo "Estado - Cidade"
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      complemento: event.target.value,
+    }));
+  };
+
   useEffect(() => {
     // Função para buscar as categorias ao montar o componente
     const carregarCategorias = async () => {
@@ -178,7 +187,7 @@ const PostarServico = () => {
             <div className="publicarPassos">
               <div className={`publicar123 ${form === 1 ? "form" : ""}`}>1</div>
               <div className={`publicar123 ${form === 2 ? "form" : ""}`}>2</div>
-              <div className={`publicar123 ${form === 3 ? "form" : ""}`}>3</div>
+
             </div>
           </div>
           <form onSubmit={handleSubmit} className="postarServico1">
@@ -242,11 +251,12 @@ const PostarServico = () => {
                       }
                       value={formData.dsServico}
                     />
-                    
-                    <input type="file" className="anexo"/>
-                      Anexo
-                      <RiAttachment2 className="iconAnexo" />
-                    
+  <label htmlFor="anexo" className="anexoLabel">
+  Anexo
+  <RiAttachment2 className="iconAnexo" />
+</label>
+<input type="file" id="anexo" className="anexo" />
+
                   </div>
                   <div className="rightPostar">
                     <button className="btnProximo" onClick={handleNext}>
@@ -267,13 +277,15 @@ const PostarServico = () => {
                 <div className="left-rightPostar">
                   <div className="leftPostar">
                     <h3 className="tituloServico">Endereço</h3>
+                    <div className="cep-estado">
+                      <div>
                     <h4 className="postarH4">CEP</h4>
                     <div>
                       <TextInput
                         type="text"
                         name="cep"
                         size={{
-                          width: "6vw",
+                          width: "14vw",
                           height: "3vw",
                           border: cepError
                             ? "1px solid red"
@@ -284,7 +296,9 @@ const PostarServico = () => {
                         value={cep}
                       />
                       {cepError && <p className="cepError">CEP incorreto</p>}
+                      </div>
                     </div>
+                    <div>
                     <h4 className="postarH4">Estado - Cidade</h4>
                     <TextInput
                       type="text"
@@ -295,29 +309,35 @@ const PostarServico = () => {
                       value={formData.uf_localidade}
                       disabled
                     />
-
+                    </div>
+                    </div>
+                    <div className="bairro-rua">
+                      <div>
                     <h4 className="postarH4">Bairro</h4>
                     <TextInput
                       type="text"
                       name="bairro"
-                      size={{ width: "30vw", height: "3vw" }}
+                      size={{ width: "24vw", height: "3vw" }}
                       onChange={handlebairro}
                       placeholder={""}
                       value={formData.bairro}
                     />
-
-                    <div className="rua-numero">
+</div>
                       <div>
+                        <div>
                         <h4 className="postarH4">Nome da rua</h4>
                         <TextInput
                           type="text"
                           name="nmRua"
-                          size={{ width: "17vw", height: "3vw" }}
+                          size={{ width: "20vw", height: "3vw" }}
                           onChange={handlelogradouro}
                           placeholder={""}
                           value={formData.logradouro}
                         />
                       </div>
+                      </div>
+                      </div>
+                      <div className="num-complemento">
                       <div>
                         <h4 className="postarH4">Número da residência</h4>
                         <TextInput
@@ -329,88 +349,26 @@ const PostarServico = () => {
                           value={formData.nmrResidencia}
                         />
                       </div>
-                    </div>
-                  </div>
-                  <div className="rightPostar" id="rightPostar2">
-                    <button className="btnProximo" onClick={handleNext}>
+                      <div>
+                        <h4 className="postarH4">Complmento</h4>
+                        <TextInput
+                          type="text"
+                          name="complemento"
+                          size={{ width: "20vw", height: "3vw" }}
+                          onChange={handleComplemento}
+                          placeholder={""}
+                          value={formData.complemento}
+                        />
+                      </div>
+                      </div>
+                      <div className="linha-postar" id="rightPostar2">
+                    <button className="btnProximo" onClick={handleSubmit}>
                       Próximo
                     </button>
                   </div>
-                </div>
-              </div>
-            )}
-
-            {form === 3 && (
-              <div>
-                <div className="headerVoltar">
-                  <div className="btnVoltar" onClick={handleBefore}>
-                    <RiArrowLeftLine className="iconeVoltar" />
-                  </div>
-                </div>
-                <div className="left-rightPostar">
-                  <div className="leftPostar">
-                    <h3 className="tituloServico">Previsão de data</h3>
-                    <div className="inicio-fim">
-                      <div className="inicio">
-                        <h4 className="postarH4">Inicio</h4>
-                        <TextInput
-                          type="date"
-                          name="inicio"
-                          size={{ width: "8vw", height: "3vw" }}
-                          placeholder={""}
-                          onChange={handleFormSubmit}
-                          value={formData.inicio}
-                        />
-                      </div>
-                      <div className="fim">
-                        <h4 className="postarH4">fim</h4>
-                        <TextInput
-                          type="date"
-                          name="fim"
-                          size={{ width: "8vw", height: "3vw" }}
-                          placeholder={""}
-                          onChange={handleFormSubmit}
-                          value={formData.fim}
-                        />
-                      </div>
-                    </div>
-
-                    <h3 className="tituloServico">Pretensão de valores</h3>
-                    <h4 className="pretensaoH4">
-                      O quanto você pretende pagar (Esse valor não é definitivo)
-                    </h4>
-                    <div className="inicio-fim">
-                      <div className="inicio">
-                        <h4 className="postarH4">valor inicial</h4>
-                        <TextInput
-                          type="number"
-                          name="valorinicial"
-                          size={{ width: "8vw", height: "3vw" }}
-                          placeholder={""}
-                          onChange={handleFormSubmit}
-                          value={formData.valorinicial}
-                        />
-                      </div>
-                      <div className="fim">
-                        <h4 className="postarH4">fim</h4>
-                        <TextInput
-                          type="number"
-                          name="valorfinal"
-                          size={{ width: "8vw", height: "3vw" }}
-                          placeholder={""}
-                          onChange={handleFormSubmit}
-                          value={formData.valorfinal}
-                        />
-                      </div>
                     </div>
                   </div>
-                  <div className="rightPostar">
-                    <button type="submit" className="btnProximo">
-                      Publicar
-                    </button>
-                  </div>
                 </div>
-              </div>
             )}
           </form>
         </div>
