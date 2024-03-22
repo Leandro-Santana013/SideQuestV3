@@ -16,6 +16,12 @@ exports.register = async (req, res) => {
     const { name, email, cpf, senha, senhaConfirm } = req.body;
     const cpfNumerico = cpf.replace(/\D/g, "");
 
+    if(name == null || email == null || cpfNumerico == null || senha == null || senhaConfirm == null){
+      return res.status(200).json({
+        message: "Nenhum campo pode estar vazio",
+      })
+    }
+
     const emailResults = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
     });
@@ -106,7 +112,7 @@ exports.register = async (req, res) => {
     }
     sendmail();
 
-    return res.status(200).json({ message: "Verifique sua caixa de email" });
+    return res.status(202).json({ message: "Verifique sua caixa de email" });
   } catch (error) {
     console.error(error);
     return res.render("error404");

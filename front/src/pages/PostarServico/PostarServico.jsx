@@ -242,10 +242,11 @@ const PostarServico = () => {
                       }
                       value={formData.dsServico}
                     />
-                    <div className="anexo">
+                    
+                    <input type="file" className="anexo"/>
                       Anexo
                       <RiAttachment2 className="iconAnexo" />
-                    </div>
+                    
                   </div>
                   <div className="rightPostar">
                     <button className="btnProximo" onClick={handleNext}>
