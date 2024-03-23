@@ -48,7 +48,7 @@ const Login2 = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5002/auth/login', formData);
+            const response = await axios.post('http://localhost:5000/auth/login', formData);
             if (response.status === 200) {
                 setMessage(<p className='fail'>{response.data.message}</p>);
             } else if (response.status === 201) {

@@ -20,7 +20,8 @@ const PostarServico = () => {
   const [urgencia, setUrgencia] = useState(false);
   const [categorias, setCategorias] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
-  const [complemento, setComplemento] = useState("")
+  const [complemento, setComplemento] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
   const [formData, setFormData] = useState({
     titulo: null,
     dsServico: null,
@@ -167,14 +168,71 @@ const PostarServico = () => {
   const handleCategoriaChange = (event) => {
     const selectedCategoria = event.target.value;
     setCategoriaSelecionada(selectedCategoria);
-    
+
     // Atualize o estado categoriaSelecionada no formData
     setFormData((prevFormData) => ({
       ...prevFormData,
       categoriaSelecionada: selectedCategoria,
     }));
   };
-  
+
+  // const handleImageChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       setSelectedImage(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [showFilter, setShowFilter] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleImageChange = (event) => {
+    const files = event.target.files;
+    const imagesArray = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          imagesArray.push(reader.result);
+          if (imagesArray.length === files.length) {
+            const newImages = [...selectedImages, ...imagesArray];
+            setSelectedImages(newImages);
+            setShowFilter(newImages.length > 3);
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  };
+
+  const openModal = (index) => {
+    setCurrentImageIndex(index);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const handlePrevimg = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? selectedImages.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNextimg = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === selectedImages.length - 1 ? 0 : prevIndex + 1
+    );
+  };
 
   return (
     <>
@@ -187,7 +245,6 @@ const PostarServico = () => {
             <div className="publicarPassos">
               <div className={`publicar123 ${form === 1 ? "form" : ""}`}>1</div>
               <div className={`publicar123 ${form === 2 ? "form" : ""}`}>2</div>
-
             </div>
           </div>
           <form onSubmit={handleSubmit} className="postarServico1">
@@ -251,13 +308,74 @@ const PostarServico = () => {
                       }
                       value={formData.dsServico}
                     />
-  <label htmlFor="anexo" className="anexoLabel">
-  Anexo
-  <RiAttachment2 className="iconAnexo" />
-</label>
-<input type="file" id="anexo" className="anexo" />
+                    <div className="content-img-button">
+                      <input
+                        type="file"
+                        id="anexo"
+                        className="anexo"
+                        onChange={handleImageChange}
+                        accept="image/*"
+                        multiple // Allow multiple file selection
+                      />
+                      <label htmlFor="anexo" className="anexoLabel">
+                        Anexo
+                        <RiAttachment2 className="iconAnexo" />
+                      </label>
 
+                      {selectedImages.slice(0, 2).map((image, index) => (
+                        <div
+                          key={index}
+                          className="selected-image"
+                          onClick={() => openModal(index)}
+                        >
+                          <img
+                            src={image}
+                            alt={`Selected ${index}`}
+                            width="100"
+                            height="100"
+                          />
+                        </div>
+                      ))}
+
+                      {selectedImages.slice(2, 3).map((image, index) => (
+                        <div key={index + 2} className="selected-image">
+                          <img
+                            src={image}
+                            alt={`Selected ${index + 2}`}
+                            width="100"
+                            height="100"
+                          />
+                          {selectedImages.length > 3 && (
+                            <div className="filter">
+                              +{selectedImages.length - 3}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+
+                      {modalOpen && (
+                        <div className="main-image-container">
+                          <button
+                            className="fechar-fotos"
+                            onClick={() => closeModal()}
+                          ></button>  
+                          <button className="prev" onClick={handlePrevimg}>
+                            &#10094;
+                          </button>
+                          <img
+                            src={selectedImages[currentImageIndex]}
+                            alt={`Selected ${currentImageIndex}`}
+                            className="main-image"
+                          />
+                          
+                          <button className="next" onClick={handleNextimg}>
+                            &#10095;
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
+
                   <div className="rightPostar">
                     <button className="btnProximo" onClick={handleNext}>
                       Próximo
@@ -279,65 +397,67 @@ const PostarServico = () => {
                     <h3 className="tituloServico">Endereço</h3>
                     <div className="cep-estado">
                       <div>
-                    <h4 className="postarH4">CEP</h4>
-                    <div>
-                      <TextInput
-                        type="text"
-                        name="cep"
-                        size={{
-                          width: "14vw",
-                          height: "3vw",
-                          border: cepError
-                            ? "1px solid red"
-                            : "1px solid black",
-                        }}
-                        onChange={handleCepChange}
-                        placeholder={""}
-                        value={cep}
-                      />
-                      {cepError && <p className="cepError">CEP incorreto</p>}
+                        <h4 className="postarH4">CEP</h4>
+                        <div>
+                          <TextInput
+                            type="text"
+                            name="cep"
+                            size={{
+                              width: "14vw",
+                              height: "3vw",
+                              border: cepError
+                                ? "1px solid red"
+                                : "1px solid black",
+                            }}
+                            onChange={handleCepChange}
+                            placeholder={""}
+                            value={cep}
+                          />
+                          {cepError && (
+                            <p className="cepError">CEP incorreto</p>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <div>
-                    <h4 className="postarH4">Estado - Cidade</h4>
-                    <TextInput
-                      type="text"
-                      name="estado_cidade"
-                      size={{ width: "30vw", height: "3vw" }}
-                      onChange={handleEstadoCidadeChange}
-                      placeholder={""}
-                      value={formData.uf_localidade}
-                      disabled
-                    />
-                    </div>
+                      <div>
+                        <h4 className="postarH4">Estado - Cidade</h4>
+                        <TextInput
+                          type="text"
+                          name="estado_cidade"
+                          size={{ width: "30vw", height: "3vw" }}
+                          onChange={handleEstadoCidadeChange}
+                          placeholder={""}
+                          value={formData.uf_localidade}
+                          disabled
+                        />
+                      </div>
                     </div>
                     <div className="bairro-rua">
                       <div>
-                    <h4 className="postarH4">Bairro</h4>
-                    <TextInput
-                      type="text"
-                      name="bairro"
-                      size={{ width: "24vw", height: "3vw" }}
-                      onChange={handlebairro}
-                      placeholder={""}
-                      value={formData.bairro}
-                    />
-</div>
-                      <div>
-                        <div>
-                        <h4 className="postarH4">Nome da rua</h4>
+                        <h4 className="postarH4">Bairro</h4>
                         <TextInput
                           type="text"
-                          name="nmRua"
-                          size={{ width: "20vw", height: "3vw" }}
-                          onChange={handlelogradouro}
+                          name="bairro"
+                          size={{ width: "24vw", height: "3vw" }}
+                          onChange={handlebairro}
                           placeholder={""}
-                          value={formData.logradouro}
+                          value={formData.bairro}
                         />
                       </div>
+                      <div>
+                        <div>
+                          <h4 className="postarH4">Nome da rua</h4>
+                          <TextInput
+                            type="text"
+                            name="nmRua"
+                            size={{ width: "20vw", height: "3vw" }}
+                            onChange={handlelogradouro}
+                            placeholder={""}
+                            value={formData.logradouro}
+                          />
+                        </div>
                       </div>
-                      </div>
-                      <div className="num-complemento">
+                    </div>
+                    <div className="num-complemento">
                       <div>
                         <h4 className="postarH4">Número da residência</h4>
                         <TextInput
@@ -360,15 +480,15 @@ const PostarServico = () => {
                           value={formData.complemento}
                         />
                       </div>
-                      </div>
-                      <div className="linha-postar" id="rightPostar2">
-                    <button className="btnProximo" onClick={handleSubmit}>
-                      Próximo
-                    </button>
-                  </div>
+                    </div>
+                    <div className="linha-postar" id="rightPostar2">
+                      <button className="btnProximo" onClick={handleSubmit}>
+                        Próximo
+                      </button>
                     </div>
                   </div>
                 </div>
+              </div>
             )}
           </form>
         </div>
