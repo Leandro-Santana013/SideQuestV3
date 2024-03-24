@@ -273,7 +273,7 @@ font-weight: 400;
 
 .selected-image {
     position: relative;
-    display: inline-block;
+    cursor: pointer;
   }
   .filter {
     position: absolute;
@@ -292,20 +292,95 @@ font-weight: 400;
   .main-image-container{
     position: absolute;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: fit-content;
-    height: fit-content;
+    width: 49vw;
+    height: 30vw;
     border-radius: 1.3vw;
     padding: 1vw;
     align-items: center;
     top: 50%;
     left: 50%;
-    background-color: #474747;
+    background-color: #474747cf;
     transform: translate(-50%, -50%);
 
   }
   .fechar-fotos {
-    position: relative;
+    cursor: pointer;
+    font-size: 1.9vw;
+    background-color: transparent;
+    margin-top: 1vw;
+    color: rgb(223, 77, 77);
+    border: none;
    
   }
+
+  .main-image {
+    max-height: 25vw;
+    max-width: 25vw;
+    border-radius: 20px;
+  }
+
+
+  .prev-next{
+    background-color: var(--verde);
+    border: none;
+    outline: none;
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .images-modal{
+    display: flex;
+    gap: 1vw;
+    flex-direction: row;
+  }
+
+  .main-image-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30vw;
+    gap: 2vw;
+  }
+
+  .header-modal{
+    display: flex;
+    width: inherit;
+    height: 1vw;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .selected-image-modal:hover img{
+    transform: scale(1.2);
+
+  }
+
+  .delete-image{
+    position: absolute;
+    width: 4vw;
+    height: 1.4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    background-color: hsl(0, 0%, 98%);
+    cursor: pointer;
+    font-size: 1w;
+    border-radius: 10px;
+  }
+
+
+  .selected-image-modal:hover .delete-image {
+    visibility: visible;
+  }
+  
+  .invisible {
+    visibility: hidden;
+    z-index: 2;
+  }
+  

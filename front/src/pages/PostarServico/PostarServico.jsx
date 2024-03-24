@@ -205,6 +205,7 @@ const PostarServico = () => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [exceededLimit, setExceededLimit] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleImageChange = (event) => {
@@ -219,8 +220,16 @@ const PostarServico = () => {
           imagesArray.push(reader.result);
           if (imagesArray.length === files.length) {
             const newImages = [...selectedImages, ...imagesArray];
-            setSelectedImages(newImages);
-            setShowFilter(newImages.length > 3);
+            const limitedImages = newImages.slice(0, 5); // Limitando a 5 imagens
+            if(newImages.length > 5){
+              setExceededLimit(true)
+              setTimeout(() => {
+                setExceededLimit(false); 
+              }, 4000);
+              return;
+            }
+            setSelectedImages(limitedImages);
+            setShowFilter(limitedImages.length > 3);
           }
         };
         reader.readAsDataURL(file);
@@ -254,7 +263,7 @@ const PostarServico = () => {
       <Header />
       <SidebarCliente />
       <div className="content-midia">
-        <div className="main-content">
+        <div className="main-content main-content">
           <div className="publicarHeader">
             <h2 className="publicarTitulo">Publique um serviço</h2>
             <div className="publicarPassos">
@@ -346,8 +355,8 @@ const PostarServico = () => {
                           <img
                             src={image}
                             alt={`Selected ${index}`}
-                            width="100"
-                            height="100"
+                            width="70"
+                            height="70"
                           />
                         </div>
                       ))}
@@ -357,8 +366,8 @@ const PostarServico = () => {
                           <img
                             src={image}
                             alt={`Selected ${index + 2}`}
-                            width="100"
-                            height="100"
+                            width= "70"
+                            height= "70"
                           />
                           {selectedImages.length > 3 && (
                             <div className="filter">
@@ -370,11 +379,14 @@ const PostarServico = () => {
 
                       {modalOpen && (
                         <div className="main-image-container">
+                          <div className="header-modal">
                           <button
                             className="fechar-fotos"
                             onClick={() => closeModal()}
-                          ></button>  
-                          <button className="prev" onClick={handlePrevimg}>
+                          >x</button>  
+                          </div>
+                          <div className="main-image-buttons">
+                          <button className="prev prev-next" onClick={handlePrevimg}>
                             &#10094;
                           </button>
                           <img
@@ -383,9 +395,28 @@ const PostarServico = () => {
                             className="main-image"
                           />
                           
-                          <button className="next" onClick={handleNextimg}>
+                          <button className="next prev-next" onClick={handleNextimg}>
                             &#10095;
                           </button>
+                          </div>
+                          <div className="images-modal">
+                          {selectedImages.slice(0, 5).map((image, index) => (
+                        <div
+                          key={index}
+                          className="selected-image selected-image-modal"
+                          onClick={() => openModal(index)}
+                        >
+                          <div className="image-delete-button">
+                          <div className="delete-image invisible"> Excluir </div>
+                          <img
+                            src={image}
+                            alt={`Selected ${index}`}
+                            width="100"
+                            height="100"
+                            ></img>
+                        </div>
+                        </div>
+                      ))}</div>
                         </div>
                       )}
                     </div>

@@ -2,7 +2,6 @@ import React from "react";
 import logo from "../..//assets/logo_SideQuest.png";
 import { Link } from "react-router-dom";
 import "./HeaderLanding.css";
-import Login2 from "../../pages/Login2/Login2";
 export const HeaderLanding = () => {
   return (
     <header className="containerNavHome">
@@ -17,7 +16,7 @@ export const HeaderLanding = () => {
             </a>
           </li>
           <li className="navHomeLi">
-            <a href="login2"><Link to={"/login2"}>Trabalhe conosco</Link></a>
+            <a href="login"><Link to={"/login"}>Trabalhe conosco</Link></a>
           </li>
           <div className="subContainerNavHome">
             <li className="navHomeLi white">
@@ -26,8 +25,8 @@ export const HeaderLanding = () => {
               </a>
             </li>
             <li class="navHomeLi btnNavHome">
-              <a href="/cadastro" class="tab-link link">
-                <Link to={"/cadastro"}></Link>inscreva-se
+              <a href="/login" class="tab-link link">
+                <Link to={"/login"}></Link>inscreva-se
               </a>
             </li>
           </div>
