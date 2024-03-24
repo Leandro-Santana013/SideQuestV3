@@ -33,7 +33,7 @@ const ModelPostagemServico = connectionDataBase.define('tb_postagemServico', {
             model:'tb_endereco',
             key:'id_endereco' 
         }
-    },
+    },      
     ds_servico: {
         type: DataTypes.STRING(255),
         allowNull: false

@@ -13,11 +13,11 @@ const { ModelCliente,
 
 module.exports = {
     bindCookieBypkCliente: async (req, res) => {
-        const { cd_cpfCliente } = req.params;
+        const { cd_emailCliente } = req.params;
         return ModelCliente.findOne({
-            attributes: ['id_cliente'],
+            attributes: ['id_cliente', 'cd_emailCliente'],
             where: {
-                cd_cpfCliente: cd_cpfCliente
+                cd_emailCliente: cd_emailCliente
             }
         })
     },
@@ -135,12 +135,13 @@ module.exports = {
 
 
     CreateServico: async (req, res) => {
-        const { ds_servico, id_cliente, id_categoria, id_endereco } = req.params
+        const { ds_servico, ds_titulo, id_cliente, id_categoria, id_endereco } = req.params
         return ModelPostagemServico.create({
             id_cliente: id_cliente,
             id_categoria: id_categoria,
             id_endereco: id_endereco,
             ds_servico: ds_servico,
+            ds_titulo: ds_titulo
         })
     },
     selectProfissional: async (req, res) => {

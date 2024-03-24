@@ -18,7 +18,7 @@
           };
 
           // Faça uma solicitação para o servidor usando o Axios
-          const response = await axios.post('http://localhost:5002/auth/validaemail', dataToSend);
+          const response = await axios.post('http://localhost:5000/auth/validaemail', dataToSend);
 
           // Verifique se a resposta foi bem-sucedida (isso pode variar dependendo do seu servidor)
           if (response.status === 200) {

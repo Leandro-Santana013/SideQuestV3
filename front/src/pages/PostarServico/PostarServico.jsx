@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SidebarCliente, Header, TextInput } from "../../components";
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 import "./postarServico.css";
 import {
@@ -12,6 +13,7 @@ import {
 } from "react-icons/ri";
 
 const PostarServico = () => {
+  
   const navigate = useNavigate();
   const [form, setForm] = useState(1);
   const [cep, setCep] = useState("");
@@ -19,8 +21,8 @@ const PostarServico = () => {
   const [cepError, setCepError] = useState(false);
   const [urgencia, setUrgencia] = useState(false);
   const [categorias, setCategorias] = useState([]);
-  const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
-  const [complemento, setComplemento] = useState("");
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
+  const [complemento, setComplemento] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [formData, setFormData] = useState({
     titulo: null,
@@ -30,14 +32,26 @@ const PostarServico = () => {
     logradouro: null,
     bairro: null,
     nmrResidencia: null,
-    inicio: null,
-    fim: null,
-    valorinicial: null,
-    valorfinal: null,
-    urgencia: null,
     categoriaSelecionada: null,
-    complemento: "",
+    complemento: null,
+    idCliente: null,
+    email:null,
   });
+
+  const getCookieData = () => {
+    const userDataString = decodeURIComponent(Cookies.get('user'));
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      // Atualize o estado formData com os dados do cookie
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        idCliente: userData.id_cliente,
+        email: userData.email,
+      }));
+      console.log(userData.id_cliente)
+      console.log(userData.email)
+    }
+  };
 
   const handleNext = () => {
     setForm(form + 1);
@@ -150,7 +164,7 @@ const PostarServico = () => {
   };
 
   useEffect(() => {
-    // Função para buscar as categorias ao montar o componente
+   
     const carregarCategorias = async () => {
       try {
         const response = await axios.get(
@@ -160,6 +174,7 @@ const PostarServico = () => {
       } catch (error) {
         console.error("Erro ao buscar categorias:", error);
       }
+      getCookieData();
     };
 
     // Chama a função para buscar as categorias

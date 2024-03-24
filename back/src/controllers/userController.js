@@ -121,6 +121,7 @@ exports.login = async (req, res) => {
     const user = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
     });
+    
 
 
     if (user.length == 0) {
@@ -146,7 +147,8 @@ exports.login = async (req, res) => {
           message: "Confirme seu email, verifique na sua caixa de entrada",
         });
     } else {
-      return res.status(201).json();
+      const cookie = await controller_User.bindCookieBypkCliente({ params: { cd_emailCliente: email }});
+      return res.status(201).json({ id_cliente: cookie.id_cliente, email: cookie.cd_emailCliente });
     }
   } catch (error) {
     console.error(error);
@@ -186,56 +188,42 @@ exports.postarServico = async (req, res) => {
       bairro,
       nmrResidencia,
       categoriaSelecionada,
+      idCliente,
+    email
     } = req.body;
-    console.log(nmrResidencia)
+    console.log(titulo,
+      dsServico,
+      cep,
+      uf_localidade,
+      logradouro,
+      bairro,
+      nmrResidencia,
+      categoriaSelecionada,
+      idCliente,
+      email
+      )
     var partes = uf_localidade.split(" - ");
     var estado = partes[0];
     var cidade = partes[1];
     console.log(estado, cidade)
-
-    if (titulo.length < 10 || titulo.length > 50) {
-      return res
-        .status(200)
-        .json({ message: "O titulo deve conter entre 10 e 50 caracteres" });
-    }
-
-    if (dsServico.length < 10 || dsServico.length > 500) {
-      return res
-        .status(200)
-        .json({ message: "A descrição deve conter entre 10 e 500 caracteres" });
-    }
-
-    if (inicio > fim) {
-      return res
-        .status(200)
-        .json({ message: "A data inicial deve ser menor que o final" });
-    }
-
-    if (valorinicial > valorfinal) {
-      return res
-        .status(200)
-        .json({ message: "O valor inicial deve ser menor que o final" });
-    }
+   
 
     const categoriaInstance = await controller_User.selectCategoriaescolhida({
       params: { ds_categoria: categoriaSelecionada }
     });
 
-    console.log(globalCpf)
+  
     console.log(categoriaInstance)
 
     const cdCidade = await controller_User.selectCidadeAdress({
       params: { nm_cidade: cidade, sg_estado: estado }
     })
-    const cdCliente = await controller_User.findCdCliente({
-      params: { cd_cpfCliente: 23767673467 }
-    })
-    console.log(cdCliente)
 
+    
     const enderecoInstance = await controller_User.CreateadressService({
       params: {
-        id_cliente: cdCliente.id_cliente,
-        cd_cidade: cdCidade.cd_cidade,
+        id_cliente: idCliente,
+        id_cidade: cdCidade.id_cidade,
         nm_logradouro: logradouro,
         cd_cep: cep,
         nm_bairro: bairro,
@@ -248,15 +236,15 @@ exports.postarServico = async (req, res) => {
     try {
       const servicoInstance = await controller_User.CreateServico({
         params: {
-          cd_cliente: cdCliente.cd_cliente,
-          cd_categoria: categoriaInstance.cd_categoria,
-          cd_endereco: enderecoInstance.cd_endereco,
+          id_cliente: idCliente,
+          id_categoria: categoriaInstance.id_categoria,
+          id_endereco: enderecoInstance.id_endereco,
           ds_servico: dsServico,
-          ds_servico: titulo,
+          ds_titulo: titulo,
         }
       });
-    } catch (error) {
-      console.log(`Fudeu ${error}`)
+      } catch (error) {
+      console.log(`erro interno no servidor ${error}`)
     }
 
 
@@ -266,10 +254,12 @@ exports.postarServico = async (req, res) => {
     return res.json("erro");
   }
 };
+
 exports.selectCategoria = async (req, res) => {
   const categoria = await controller_User.selectCategorias();
   res.status(200).json(categoria);
 }
+
 exports.profissionalCard = async (req, res) => {
   const { Filtros } = req.body
 

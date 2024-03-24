@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './login2.css';
+import Cookies from 'js-cookie';
 import img_login1 from '../../assets/cad-img.png';
 import img_logo from '../../assets/sidequest_3.png';
 
@@ -52,6 +53,8 @@ const Login2 = () => {
             if (response.status === 200) {
                 setMessage(<p className='fail'>{response.data.message}</p>);
             } else if (response.status === 201) {
+                console.log("Cookie recebido:", response.data); // Verifique o conteúdo do cookie
+                Cookies.set('user', JSON.stringify(response.data));
                 navigate('/homeCliente');
             }
         } catch (error) {
@@ -62,7 +65,7 @@ const Login2 = () => {
     const handleSubmitCadastro = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5002/auth/register', formDataCadastro);
+            const response = await axios.post('http://localhost:5000/auth/register', formDataCadastro);
             setResponseStatus(response.status);
             if(response.status == 200){
                 setMessage2(<p className='fail'>{response.data.message}</p>)
