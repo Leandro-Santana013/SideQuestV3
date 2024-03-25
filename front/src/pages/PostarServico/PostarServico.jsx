@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SidebarCliente, Header, TextInput } from "../../components";
 import axios from "axios";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 import "./postarServico.css";
 import {
@@ -13,7 +13,6 @@ import {
 } from "react-icons/ri";
 
 const PostarServico = () => {
-  
   const navigate = useNavigate();
   const [form, setForm] = useState(1);
   const [cep, setCep] = useState("");
@@ -35,21 +34,22 @@ const PostarServico = () => {
     categoriaSelecionada: null,
     complemento: null,
     idCliente: null,
-    email:null,
+    email: null,
+    imagens: null,
   });
 
   const getCookieData = () => {
-    const userDataString = decodeURIComponent(Cookies.get('user'));
+    const userDataString = decodeURIComponent(Cookies.get("user"));
     if (userDataString) {
       const userData = JSON.parse(userDataString);
       // Atualize o estado formData com os dados do cookie
-      setFormData(prevFormData => ({
+      setFormData((prevFormData) => ({
         ...prevFormData,
         idCliente: userData.id_cliente,
         email: userData.email,
       }));
-      console.log(userData.id_cliente)
-      console.log(userData.email)
+      console.log(userData.id_cliente);
+      console.log(userData.email);
     }
   };
 
@@ -164,7 +164,6 @@ const PostarServico = () => {
   };
 
   useEffect(() => {
-   
     const carregarCategorias = async () => {
       try {
         const response = await axios.get(
@@ -221,15 +220,19 @@ const PostarServico = () => {
           if (imagesArray.length === files.length) {
             const newImages = [...selectedImages, ...imagesArray];
             const limitedImages = newImages.slice(0, 5); // Limitando a 5 imagens
-            if(newImages.length > 5){
-              setExceededLimit(true)
+            if (newImages.length > 5) {
+              setExceededLimit(true);
               setTimeout(() => {
-                setExceededLimit(false); 
+                setExceededLimit(false);
               }, 4000);
               return;
             }
             setSelectedImages(limitedImages);
             setShowFilter(limitedImages.length > 3);
+            setFormData((prevFormData) => ({
+              ...prevFormData,
+              imagens: limitedImages,
+            }));
           }
         };
         reader.readAsDataURL(file);
@@ -366,8 +369,8 @@ const PostarServico = () => {
                           <img
                             src={image}
                             alt={`Selected ${index + 2}`}
-                            width= "70"
-                            height= "70"
+                            width="70"
+                            height="70"
                           />
                           {selectedImages.length > 3 && (
                             <div className="filter">
@@ -380,43 +383,55 @@ const PostarServico = () => {
                       {modalOpen && (
                         <div className="main-image-container">
                           <div className="header-modal">
-                          <button
-                            className="fechar-fotos"
-                            onClick={() => closeModal()}
-                          >x</button>  
+                            <button
+                              className="fechar-fotos"
+                              onClick={() => closeModal()}
+                            >
+                              x
+                            </button>
                           </div>
                           <div className="main-image-buttons">
-                          <button className="prev prev-next" onClick={handlePrevimg}>
-                            &#10094;
-                          </button>
-                          <img
-                            src={selectedImages[currentImageIndex]}
-                            alt={`Selected ${currentImageIndex}`}
-                            className="main-image"
-                          />
-                          
-                          <button className="next prev-next" onClick={handleNextimg}>
-                            &#10095;
-                          </button>
+                            <button
+                              className="prev prev-next"
+                              onClick={handlePrevimg}
+                            >
+                              &#10094;
+                            </button>
+                            <img
+                              src={selectedImages[currentImageIndex]}
+                              alt={`Selected ${currentImageIndex}`}
+                              className="main-image"
+                            />
+
+                            <button
+                              className="next prev-next"
+                              onClick={handleNextimg}
+                            >
+                              &#10095;
+                            </button>
                           </div>
                           <div className="images-modal">
-                          {selectedImages.slice(0, 5).map((image, index) => (
-                        <div
-                          key={index}
-                          className="selected-image selected-image-modal"
-                          onClick={() => openModal(index)}
-                        >
-                          <div className="image-delete-button">
-                          <div className="delete-image invisible"> Excluir </div>
-                          <img
-                            src={image}
-                            alt={`Selected ${index}`}
-                            width="100"
-                            height="100"
-                            ></img>
-                        </div>
-                        </div>
-                      ))}</div>
+                            {selectedImages.slice(0, 5).map((image, index) => (
+                              <div
+                                key={index}
+                                className="selected-image selected-image-modal"
+                                onClick={() => openModal(index)}
+                              >
+                                <div className="image-delete-button">
+                                  <div className="delete-image invisible">
+                                    {" "}
+                                    Excluir{" "}
+                                  </div>
+                                  <img
+                                    src={image}
+                                    alt={`Selected ${index}`}
+                                    width="100"
+                                    height="100"
+                                  ></img>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       )}
                     </div>
@@ -516,7 +531,7 @@ const PostarServico = () => {
                         />
                       </div>
                       <div>
-                        <h4 className="postarH4">Complmento</h4>
+                        <h4 className="postarH4">Complemento</h4>
                         <TextInput
                           type="text"
                           name="complemento"

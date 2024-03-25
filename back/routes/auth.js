@@ -20,10 +20,17 @@ router.use(session({
 
 router.post('/register', userControllers.register);
 router.post('/registerPro', proControllers.registerPro)
-router.post('/login', userControllers.login);
-router.post('/validaemail', userControllers.validaEmail)
-router.post('/postarServico', userControllers.postarServico)
-router.get('/selectCategoria', userControllers.selectCategoria)
-router.get('/profissionaisCard', userControllers.profissionalCard)
 
+router.post('/login', userControllers.login);
+router.post('/loginPro', proControllers.loginPro)
+
+router.post('/validaemail', userControllers.validaEmail)
+router.post('/validaemailprofissional', proControllers.validaEmailPro)
+
+router.get('/selectCategoria', userControllers.selectCategoria)
+router.post('/postarServico', userControllers.postarServico)
+
+
+router.get('/profissionaisCard', userControllers.profissionalCard)
+router.get('/servicoscard', proControllers.cardservico)
 module.exports = router; 

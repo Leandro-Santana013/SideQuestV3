@@ -5,7 +5,6 @@ const smtpconfig = require("../../config/smtp");
 const controller_User = require("./Querys/userQuerys");
 
 
-
 let globalemail;
 let globaltoken;
 let globalCpf;
@@ -169,12 +168,12 @@ exports.validaEmail = async (req, res) => {
         .json({ message: "E-mail confirmado com sucesso!" });
     } else {
       console.error("Token inválido");
-      return res.status(200).json({ message: "E-mail fudido" });
+      return res.status(200).json({ message: "acesso não autorizado token invalido" });
     }
   } catch (error) {
     console.error(error);
-    return res.status(200).json({ message: "E-mail fudido2" });
-  }
+    return res.status(200).json({ message: "erro interno do servidor" });
+  } 
 };
 
 exports.postarServico = async (req, res) => {

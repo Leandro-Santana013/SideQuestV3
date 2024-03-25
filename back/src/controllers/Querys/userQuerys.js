@@ -1,6 +1,7 @@
 const { Model, Op, Sequelize } = require('sequelize')
 const { raw } = require("mysql2")
-const { ModelCliente,
+const { 
+    ModelCliente,
     ModelProfissional,
     ModelEndereco,
     ModelCategoria,

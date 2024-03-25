@@ -4,6 +4,10 @@ const tokenConfirmacao = require('../../tools/createToken')
 const smtpconfig = require('../../config/smtp')
 const controller_Pro = require('./Querys/proQuerys')
 
+
+let globalemail;
+let globaltoken;
+
 exports.registerPro = async (req, res) => {
 
     try {
@@ -14,8 +18,10 @@ exports.registerPro = async (req, res) => {
       const emailResults = await controller_Pro.findEmailProfissional({
         params: { cd_emailProfissional: email }
       });
-  
-        globalemail = email 
+
+           
+    globalemail = email;
+    globalCpf = cpfNumerico;
   
       if (emailResults.length > 0) {
         return res.status(200).json({ message: 'Email inválido ou já está em uso'})
@@ -38,6 +44,7 @@ exports.registerPro = async (req, res) => {
       const token = tokenConfirmacao.generateEmailConfirmationToken();
       globaltoken = token
       // Inserir novo cliente
+      console.log(globaltoken)
       
     await controller_Pro.insertProfissional({
       params: { nm_profissional: name, cd_emailProfissional: email, cd_cpfProfissional: cpfNumerico, cd_senhaProfissional: hash }
@@ -68,7 +75,7 @@ exports.registerPro = async (req, res) => {
         <body>
           <h1>Confirme seu Email</h1>
           <p>Clique no botão abaixo para confirmar seu email profissional. Você será redirecionado para outra página</p>
-          <a href="http://localhost:5000/confirmarEmail?token=${token}">Confirmar E-mail</a>
+          <a href="http://localhost:5173/validaEmailProfissional?token=${token}">Confirmar E-mail</a>
         </body>
       </html>
     `;
@@ -96,3 +103,70 @@ exports.registerPro = async (req, res) => {
       return res.render('error404');
     }
   };
+
+  exports.loginPro = async (req, res) =>{
+    try {
+      var { email, senha } = req.body;
+  
+      const user = await controller_Pro.findEmailProfissional({
+        params: { cd_emailProfissional: email },
+      });
+  
+      if (user.length == 0) {
+        return res.status(200).json({ message: "Email ou senha incorretos" });
+      }
+  
+      const match = await bcrypt.compare(senha, user[0].cd_senhaProfissional);
+  
+      if (!match) {
+        return res.status(200).json({ message: "Email ou senha incorretos" });
+      }
+  
+      const tokenconfirmed = await controller_Pro.findtokenProfissional({
+        params: { cd_emailProfissional: email },
+      });
+  
+      console.log("valor do token " + tokenconfirmed);
+  
+      if (!tokenconfirmed) {
+        return res
+          .status(200)
+          .json({
+            message: "Confirme seu email, verifique na sua caixa de entrada",
+          });
+      } else {
+        const cookie = await controller_Pro.bindCookieBypkProfissonal({ params: { cd_emailProfissional: email }});
+        return res.status(201).json({ id_profissional: cookie.id_profissional, email: cookie.cd_emailProfissional});
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Erro interno do servidor" });
+    }
+  },
+
+  exports.validaEmailPro = async (req, res) => {
+    try {
+      const { token } = req.params;
+      console.log(globaltoken);
+      if (globalemail) {
+        controller_Pro.updateTokenByEmail({
+          params: { cd_tokenProfissional: globaltoken, cd_emailProfissional: globalemail },
+        });
+        return res
+          .status(200)
+          .json({ message: "E-mail confirmado com sucesso!" });
+      } else {
+        console.error("Token inválido");
+        return res.status(200).json({ message: "acesso não autorizado token invalido" });
+      }
+    } catch (error) {
+      console.error(error);
+      return res.status(200).json({ message: "erro interno do servidor" });
+    }
+  };
+
+  exports.cardservico = async (req, res) => {
+    const populationService = await controller_Pro.findServices();
+    console.log(populationService)
+    res.status(200).json(populationService)
+  }

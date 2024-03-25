@@ -24,7 +24,7 @@ const HomeCliente = () => {
           <div className="menu-topo">
             <div className="actions">
               <div className="info-action">
-                <p>Adicionar serviço</p>
+                <p>Adicionar Serviço</p>
                 <a href="/postarServico">
                 <Link to={"/postarServico"}>
                 <div className="action">

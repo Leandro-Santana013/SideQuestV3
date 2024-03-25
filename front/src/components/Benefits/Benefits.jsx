@@ -49,7 +49,7 @@ export const Benefits = () => {
           <img src={img_Benefits_Calendario} alt="Agenda" className="agenda" />
           <h2>
             Agende serviços <br />
-            Facilmente
+            facilmente.
           </h2>
         </div>
 
