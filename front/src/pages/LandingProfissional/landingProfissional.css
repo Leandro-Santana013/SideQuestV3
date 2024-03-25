@@ -144,10 +144,6 @@
   /*Fim da sesao beneficios e inicio sessao planos*/
   /*Card 1*/
 
-  .cards-planos {
-    display: flex;
-  }
-
   .planos {
     margin-top: 10vh;
     display: flex;
@@ -160,8 +156,8 @@
 
   .planos .cards-planos {
     display: flex;
-    justify-content: space-between;
-    gap: 15vw;
+    justify-content: space-around;
+    width: 100vw;
   }
 
 
