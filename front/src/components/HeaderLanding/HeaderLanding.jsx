@@ -1,9 +1,24 @@
-import React from "react";
+import React, {useState, useContext} from "react";
 import logo from "../..//assets/logo_SideQuest.png";
 import { Link } from "react-router-dom";
 import "./HeaderLanding.css";
-
+import { setIsSignUpActive, useIsSignUpActive } from "./singUpState";
 export const HeaderLanding = () => {
+  const isSignUpActive = useIsSignUpActive();
+
+  const handleLoginClick = (isSignUpActiveValue) => {
+    setIsSignUpActive(isSignUpActiveValue);
+  };
+
+  const handleSignUpClick = () => {
+    setIsSignUpActive(true);
+  };
+
+  const handleSignInClick = () => {
+    setIsSignUpActive(false);
+  };
+
+
   return (
     <header className="containerNavHome">
       <nav className="navHomenav">
@@ -22,12 +37,12 @@ export const HeaderLanding = () => {
           <div className="subContainerNavHome">
             <li className="navHomeLi white">
               <a href="/login">
-                <Link to={"/login"}>Login</Link>
+                <Link to={"/login"} onClick={handleSignInClick}>Login</Link>
               </a>
             </li>
             <li class="navHomeLi btnNavHome">
               <a href="/login" class="tab-link link">
-                <Link to={"/login"}></Link>Inscreva-se
+                <Link to={"/login"} onClick={handleSignUpClick}>Inscreva-se</Link>
               </a>
             </li>
           </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import Landing from "./pages/Landing/landing";
-import Login from "./pages/Login/Login";
+import {Login} from "./pages/Login/Login";
 import LoginProfissional from "./pages/LoginProfissional/LoginPro";
 import ValidaEmail from "./pages/ValidaEmail/validaEmail";
 import ValidaEmailProfissional from "./pages/validaEmailProfissional/validaEmailProfissional";

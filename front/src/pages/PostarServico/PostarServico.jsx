@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { SidebarCliente, Header, TextInput } from "../../components";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -543,14 +543,32 @@ const PostarServico = () => {
                       </div>
                     </div>
                     <div className="linha-postar" id="rightPostar2">
-                      <button className="btnProximo" onClick={handleSubmit}>
-                        Próximo
-                      </button>
+                     <button className="btnProximo" onClick={handleSubmit()}> 
+                     <Link to={"/homeCliente"}>Publicar</Link> 
+                      </button> 
+                    
                     </div>
                   </div>
-                </div>
+
+                  {/* {modalOpen && (
+  <div className="modal-confirmacao">
+    <div>
+    <h2>Confirmação</h2>
+    <p>Deseja realmente publicar o serviço?</p>
+    <div>
+      <div className="buttons-modal">
+      <button onClick={() => closeModal()}>Cancelar</button>
+      <button onClick={handleSubmit()}>Confirmar</button>
+    </div>
+    </div>
+  </div>
+  </div>
+  )} */}
+  </div>
+ 
               </div>
             )}
+            
           </form>
         </div>
       </div>

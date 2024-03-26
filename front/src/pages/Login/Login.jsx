@@ -6,8 +6,14 @@ import Cookies from 'js-cookie';
 import img_login1 from '../../assets/cad-img.png';
 import img_logo from '../../assets/sidequest_3.png';
 
-const Login = () => {
-    const [isSignUpActive, setIsSignUpActive] = useState(false);
+import { HeaderLanding } from '../../components';
+
+import {useIsSignUpActive} from '../../components/HeaderLanding/singUpState'
+
+export const Login = () => {
+    
+    var VarisSignUpActive = useIsSignUpActive();
+    const [isSignUpActive,setIsSignUpActive] = useState(VarisSignUpActive);
     const [message, setMessage] = useState(null);
     const [message2, setMessage2] = useState(null);
     const [responseStatus, setResponseStatus] = useState(null);
@@ -130,4 +136,3 @@ const Login = () => {
     );
 };
 
-export default Login;
