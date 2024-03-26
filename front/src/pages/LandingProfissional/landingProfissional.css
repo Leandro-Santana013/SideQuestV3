@@ -1,378 +1,253 @@
-  b body {
-    margin: 0px;
-    padding: 0px;
-    overflow-x: hidden;
-  }
+body {
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+}
 
-  /*Inicio Menu*/
+/*Inicio Menu*/
 
-  .nav-profissa {
-    font-size: 1.5vw;
-    height: 80px;
-    padding-left: 25px;
-    padding-right: 25px;
-  }
-
-
-  .img-logoProfissa {
-    width: 8vw;
-    height: 3vw;
-  }
-
-  .navprofissaUl {
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .navprofissaLi {
-    font-size: 1.5vw;
-  }
-
-  .subContainerNavProfissa {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .navprofissaLi.btnNavProfissa {
-    font-weight: bolder;
-    background-color: white;
-    color: #144474;
-    padding: 15px;
-    border-radius: 50px;
-    font-size: 23px;
-    box-shadow: 0px 4px 6px 0px #00000042
-  }
-
-  /*Fim Menu e Início banner*/
-
-  .bannerProfissa {
-    background-image: url('../../assets/bannerProfissional.png');
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-size: cover;
-  }
-
-  .bannerProfissa .EduardoBanner {
-    width: 30vw;
-    align-self: flex-end;
-  }
-
-  .bannerProfissa .btn-txtBanner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-  }
-
-  .bannerProfissa .btn-txtBanner button {
-    width: 15vw;
-    height: 2.5vw;
-    border-radius: 20px;
-    background-color: var(--verde);
-    color: white;
-    border: none;
-    font-weight: bolder;
-    font-size: 1.1rem;
-    transition-duration: 0.5s;
-  }
-
-  .bannerProfissa .btn-txtBanner button:hover {
-    background-color: #144474;
-  }
-
-  .bannerProfissa .btn-txtBanner .title-banner {
-    font-size: 2.5rem;
-    width: 26.5vw;
-    color: white;
-    display: flex;
-  }
-
-  .lalezar-regular {
-    font-family: "Lalezar", system-ui;
-    font-weight: 400;
-    font-style: normal;
-  }
-
-  /*Fim sessao banner e inicio sessao beneficios*/
-
-  .beneficios>h1 {
-    font-size: 1.8rem;
-    color: #144474;
-    width: 100%;
-    line-height: 6.3vh;
-  }
-
-  .beneficios .beneficios-img {
-    display: flex;
-    gap: 16vw;
-
-  }
-
-  .beneficios .beneficios-img .txt-beneficios {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 5vh;
-    justify-content: center;
-  }
-
-  .beneficios .beneficios-img .txt-beneficios h2 {
-    font-size: 1.5rem;
-    color: #144474;
-  }
-
-  .beneficios .beneficios-img .txt-beneficios p {
-    font-size: 1.1rem;
-  }
-
-  .beneficios .beneficios-img .txt-beneficios img {
-    width: 3vw;
-    height: 3vw;
-  }
-
-  .beneficios .txt-beneficios .beneficios-cards {
-    display: flex;
-    width: 18vw;
-    justify-content: space-between;
-  }
-
-  /*Fim da sesao beneficios e inicio sessao planos*/
-  /*Card 1*/
-
-  .planos {
-    margin-top: 10vh;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 5vh;
-    margin-bottom: 10vh;
-  }
-
-  .planos .cards-planos {
-    display: flex;
-    justify-content: space-around;
-    width: 100vw;
-  }
+.nav-profissa {
+  font-size: 1.5vw;
+  height: 80px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
 
 
-  .planos .cards-planos .card-plano {
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.24);
-    border-radius: 20px;
-    width: 20vw;
-  }
+.img-logoProfissa {
+  width: 8vw;
+  height: 3vw;
+}
 
-  .planos .cards-planos .card-plano .card-superior {
-    padding-right: 37px;
-    padding-left: 37px;
-    padding-top: 20px;
-    padding-bottom: 10px;
-  }
+.navprofissaUl {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .planos .cards-planos .card-plano .gratis {
-    display: flex;
-    gap: 1vw;
-    align-items: center;
-  }
+.navprofissaLi {
+  font-size: 1.5vw;
+}
 
-  .planos .cards-planos .card-plano .card-superior .gratis p {
-    font-size: 1.4rem;
-    font-weight: bolder;
-  }
+.subContainerNavProfissa {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
 
-  .planos .cards-planos .card-plano .card-superior #vantagens-txt {
-    font-weight: lighter;
-    color: gray;
-    font-size: 1.1rem;
-  }
+.navprofissaLi.btnNavProfissa {
+  font-weight: bolder;
+  background-color: white;
+  color: #144474;
+  padding: 15px;
+  border-radius: 50px;
+  font-size: 23px;
+  box-shadow: 0px 4px 6px 0px #00000042
+}
 
-  .planos .cards-planos .card-plano .card-superior .beneficio {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
+/*Fim Menu e Início banner*/
 
-  .planos .cards-planos .card-plano .card-superior .beneficio img {
-    width: 2vw;
-    height: 2vw;
-  }
+.bannerProfissa {
+  background-image: url('../../assets/bannerProfissional.png');
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-size: cover;
+}
 
-  .planos .cards-planos .card-plano .card-inferior {
-    padding-right: 37px;
-    padding-left: 37px;
-    padding-top: 20px;
-    padding-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 20vh;
-    align-items: center;
-  }
+.bannerProfissa .EduardoBanner {
+  width: 30vw;
+  align-self: flex-end;
+}
 
-  .planos .cards-planos .card-plano .card-inferior>p {
-    font-weight: lighter;
-    color: gray;
-    font-size: 1.2rem;
-    align-self: flex-start;
-  }
+.bannerProfissa .btn-txtBanner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
 
-  .planos .cards-planos .card-plano .card-inferior p strong {
-    color: black;
-  }
+.bannerProfissa .btn-txtBanner button {
+  width: 15vw;
+  height: 2.5vw;
+  border-radius: 20px;
+  background-color: var(--verde);
+  color: white;
+  border: none;
+  font-weight: bolder;
+  font-size: 1.1rem;
+  transition-duration: 0.5s;
+}
 
+.bannerProfissa .btn-txtBanner button:hover {
+  background-color: #144474;
+}
 
-  .planos .cards-planos .card-plano .card-inferior button {
-    align-self: center;
-    background-color: #144474;
-    width: 15vw;
-    padding: 15px;
-    color: white;
-    font-weight: bolder;
-    font-size: 1rem;
-  }
+.bannerProfissa .btn-txtBanner .title-banner {
+  font-size: 2.5rem;
+  width: 26.5vw;
+  color: white;
+  display: flex;
+}
 
-  /*Card 2*/
+.lalezar-regular {
+  font-family: "Lalezar", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
 
-  .planos .cards-planos .card-plano {
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.24);
-    border-radius: 20px;
-  }
+/*Fim sessao banner e inicio sessao beneficios*/
 
-  .planos .cards-planos .card-plano .card-superior {
-    padding-right: 37px;
-    padding-left: 37px;
-    padding-top: 20px;
-    padding-bottom: 10px;
-  }
+.beneficios>h1 {
+  font-size: 1.8rem;
+  color: #144474;
+  width: 100%;
+  line-height: 6.3vh;
+}
 
-  .planos .cards-planos .card-plano .card-superior p {
-    font-size: 1.4rem;
-    font-weight: bolder;
-  }
+.beneficios .beneficios-img {
+  display: flex;
+  gap: 16vw;
 
-  .planos .cards-planos .card-plano .card-inferior .valor-plano {
-    display: flex;
-    align-items: center;
-  }
+}
 
-  .planos .cards-planos .card-plano .card-inferior .valor-plano #vlr {
-    font-weight: bolder;
-    font-size: 1.7rem;
-  }
+.beneficios .beneficios-img .txt-beneficios {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5vh;
+  justify-content: center;
+}
 
-  .planos .cards-planos .card-plano .card-inferior .valor-plano #mensal {
+.beneficios .beneficios-img .txt-beneficios h2 {
+  font-size: 1.5rem;
+  color: #144474;
+}
+
+.beneficios .beneficios-img .txt-beneficios p {
+  font-size: 1.1rem;
+}
+
+.beneficios .txt-beneficios .beneficios-cards {
+  display: flex;
+  width: 18vw;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*Fim da sesao beneficios e inicio sessao planos*/
+/*Card 1*/
+
+.planos {
+  margin-top: 10vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 5vh;
+  margin-bottom: 10vh;
+}
+
+.card-plano {
+  display: flex;
+  padding: 1vw;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.24); 
+  border-radius: 20px;
+  width: 20vw;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.planos .cards-planos {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+}
+
+.planos .cards-planos .card-plano .card-superior .gratis p {
+  font-size: 1.4rem;
+  font-weight: bolder;
+}
+
+.planos .cards-planos .card-plano .card-superior #vantagens-txt {
+  font-weight: lighter;
+  color: gray;
+  font-size: 1.1rem;
+}
+
+.list-beneficios .beneficio {
+  display: flex;
+  align-items: center;
+}
+
+.list-beneficios .beneficio p {
+  font-size: 1.4rem;
+  font-weight: bolder;
+}
+
+.card-superior {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-inferior {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Card 2*/
+
+.valor-do-plano{
+  font-weight: bolder;
+  font-size: 1.7rem;
+  color: black;
+
+  strong {
     font-weight: lighter;
     color: gray;
   }
+}
 
+/*Card 3*/
 
-  .planos .cards-planos .card-plano .card-inferior {
-    padding-right: 37px;
-    padding-left: 37px;
-    padding-top: 20px;
-    padding-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 20vh;
-    align-items: center;
-    gap: 2.5vh;
-  }
+.planos .cards-planos .card-plano .card-superior>p {
+  font-size: 1.4rem;
+  font-weight: bolder;
+}
 
-  .planos .cards-planos .card-plano .card-inferior .valor-plano {
-    align-self: flex-start;
-    display: flex;
-  }
+.planos .cards-planos .card-plano .card-superior #vantagens-txt {
+  font-weight: lighter;
+  color: gray;
+  font-size: 1.1rem;
+}
 
-  .planos .cards-planos .card-plano .card-inferior .beneficio {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
+.planos .cards-planos .card-plano .button {
+  align-self: center;
+  background-color: #144474;
+  width: 15vw;
+  padding: 15px;
+  color: white;
+  font-weight: bolder;
+  font-size: 1rem;
+}
 
-  .planos .cards-planos .card-plano .card-inferior button {
-    align-self: center;
-    background-color: #144474;
-    width: 15vw;
-    padding: 15px;
-    color: white;
-    font-weight: bolder;
-    font-size: 1rem;
-  }
+.btn-card-plano-op {
+  color: white;
+  width: 12vw;
+  font-size: .9vw;
+  background-color: var(--azul);
+  border: none;
+  padding: 1vw;
+  border-radius: 1.5vw;
+  transition: all .25s ;
+}
 
-  /*Card 3*/
-
-
-  .planos .cards-planos .card-plano {
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.24);
-    border-radius: 20px;
-  }
-
-  .planos .cards-planos .card-plano .card-superior {
-    padding-right: 37px;
-    padding-left: 37px;
-    padding-top: 20px;
-    padding-bottom: 10px;
-  }
-
-
-  .planos .cards-planos .card-plano .card-superior>p {
-    font-size: 1.4rem;
-    font-weight: bolder;
-  }
-
-  .planos .cards-planos .card-plano .card-superior #vantagens-txt {
-    font-weight: lighter;
-    color: gray;
-    font-size: 1.1rem;
-  }
-
-  .planos .cards-planos .card-plano .card-superior .beneficio {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-
-  .planos .cards-planos .card-plano .card-superior .beneficio img {
-    width: 2vw;
-    height: 2vw;
-  }
-
-  .planos .cards-planos .card-plano .card-inferior {
-    padding-right: 37px;
-    padding-left: 37px;
-    padding-top: 20px;
-    padding-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 20vh;
-    align-items: center;
-  }
-
-  .planos .cards-planos .card-plano .card-inferior>p {
-    font-weight: lighter;
-    color: gray;
-    font-size: 1.2rem;
-    align-self: flex-start;
-  }
-
-  .planos .cards-planos .card-plano .card-inferior p strong {
-    color: black;
-  }
-
-
-  .planos .cards-planos .card-plano .card-inferior button {
-    align-self: center;
-    background-color: #144474;
-    width: 15vw;
-    padding: 15px;
-    color: white;
-    font-weight: bolder;
-    font-size: 1rem;
-  }
+.btn-card-plano-op:hover {
+  background-color: var(--verde);
+}

@@ -9,9 +9,7 @@ import bandeirinha from "../../assets/bandeirinha.png";
 import LogoSideQuest from "../../assets/logo_SideQuest.png";
 import Eduardo from "../../assets/eduardo-mecanico.png";
 import negocios from "../../assets/negociando.png";
-import chave from "../../assets/chave-inglesa.png";
 import verificado from "../../assets/verificado.png";
-import linha from "../../assets/linha.png";
 import { Footer, HeaderLanding } from "../../components/index";
 
 const LandingProfissional = () => {
@@ -83,40 +81,34 @@ const LandingProfissional = () => {
                     <div className="card-plano">
                         <div className="card-superior">
                             <div className="gratis">
-                                <img src={chave} alt="chave-inglesa" />
                                 <p>Grátis</p>
                             </div>
                             <p id="vantagens-txt">Vantagens</p>
-                            <div className="beneficio">
-                                <img src={verificado} alt="verificado" />
-                                <p>Tenha visibilidade no mercado</p>
-                            </div>
-                            <div className="beneficio">
-                                <img src={verificado} alt="verificado" />
-                                <p>Tenha visibilidade</p>
-                            </div>
-                            <div className="beneficio">
-                                <img src={verificado} alt="verificado" />
-                                <p>Tenha visibilidade</p>
+                            <div className="list-beneficios">
+                                <div className="beneficio">
+                                    <img src={verificado} alt="verificado" />
+                                    <p>Tenha visibilidade no mercado</p>
+                                </div>
+                                <div className="beneficio">
+                                    <img src={verificado} alt="verificado" />
+                                    <p>Tenha visibilidade</p>
+                                </div>
+                                <div className="beneficio">
+                                    <img src={verificado} alt="verificado" />
+                                    <p>Tenha visibilidade</p>
+                                </div>
                             </div>
                         </div>
-                        
+
                         <div className="card-inferior">
-                            <p><strong>R$0</strong> /Mês</p>
-                            <Link to={"/cadastro"}><button>Crie sua conta grátis</button></Link>
+                            <p className="valor-do-plano">R$0<strong>/Mês</strong></p>
+                            <Link to={"/cadastro"}><button className="btn-card-plano-op">Crie sua conta grátis</button></Link>
                         </div>
                     </div>
 
                     <div className="card-plano">
                         <div className="card-superior">
                             <p>Plano Simples</p>
-                        </div>
-               
-                        <div className="card-inferior">
-                            <div className="valor-plano">
-                                <p id="vlr">R$20</p><p id="mensal">/Mês</p>
-                            </div>
-                            <button>Teste Grátis</button>
                             <div className="list-beneficios">
                                 <div className="beneficio">
                                     <img src={verificado} alt="verificado" />
@@ -128,29 +120,38 @@ const LandingProfissional = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className="card-inferior">
+                            
+                            <div className="valor-plano">
+                                <p className="valor-do-plano">R$20<strong>/Mês</strong></p>
+                            </div>
+                            <button className="btn-card-plano-op">Teste Grátis</button>
+                        </div>
                     </div>
 
                     <div className="card-plano">
                         <div className="card-superior">
                             <p>Plano irmãos à obra</p>
                             <p id="vantagens-txt">Vantagens</p>
-                            <div className="beneficio">
-                                <img src={verificado} alt="verificado" />
-                                <p>Tenha visibilidade no mercado</p>
-                            </div>
-                            <div className="beneficio">
-                                <img src={verificado} alt="verificado" />
-                                <p>Tenha visibilidade</p>
-                            </div>
-                            <div className="beneficio">
-                                <img src={verificado} alt="verificado" />
-                                <p>Tenha visibilidade</p>
+                            <div className="list-beneficios">
+                                <div className="beneficio">
+                                    <img src={verificado} alt="verificado" />
+                                    <p>Tenha visibilidade no mercado</p>
+                                </div>
+                                <div className="beneficio">
+                                    <img src={verificado} alt="verificado" />
+                                    <p>Tenha visibilidade</p>
+                                </div>
+                                <div className="beneficio">
+                                    <img src={verificado} alt="verificado" />
+                                    <p>Tenha visibilidade</p>
+                                </div>
                             </div>
                         </div>
-                        
+
                         <div className="card-inferior">
-                            <p><strong>R$1000</strong> /Ano</p>
-                            <Link to={"/loginProfissional"}><button>Escolha</button></Link>
+                            <p className="valor-do-plano"> R$1000<strong>/Ano</strong></p>
+                            <Link to={"/loginProfissional"}><button className="btn-card-plano-op">Escolha</button></Link>
                         </div>
                     </div>
                 </div>
