@@ -89,7 +89,7 @@ export const CarrosselSwiper = () => {
                   }}
                 >
                   {num === 1
-                    ? "Eletrica"
+                    ? "Elétrica"
                     : num === 2
                     ? "Pintura"
                     : num === 3

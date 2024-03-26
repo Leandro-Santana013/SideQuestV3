@@ -284,7 +284,7 @@ const PostarServico = () => {
                 </div>
                 <div className="left-rightPostar">
                   <div className="leftPostar">
-                    <h3 className="tituloServico">Titulo do serviço</h3>
+                    <h3 className="tituloServico">Título do serviço</h3>
                     <TextInput
                       name="titulo"
                       type="text"
@@ -543,10 +543,10 @@ const PostarServico = () => {
                       </div>
                     </div>
                     <div className="linha-postar" id="rightPostar2">
-                     <button className="btnProximo" onClick={handleSubmit()}> 
-                     <Link to={"/homeCliente"}>Publicar</Link> 
-                      </button> 
-                    
+                      <button className="btnProximo" onClick={handleSubmit()}>
+                        <Link to={"/homeCliente"}>Publicar</Link>
+                      </button>
+
                     </div>
                   </div>
 
@@ -564,11 +564,11 @@ const PostarServico = () => {
   </div>
   </div>
   )} */}
-  </div>
- 
+                </div>
+
               </div>
             )}
-            
+
           </form>
         </div>
       </div>

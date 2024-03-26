@@ -118,14 +118,14 @@ export const Login = () => {
                     <div className="painel-container">
                         <div className="painel">
                             <div className="painel-panel painel-left">
-                                <h1>Bem vindo a SideQuest</h1>
-                                <p>Já possui conte? Cadastre-se!</p>
-                                <button className="ghost" onClick={handleSignInClick}>Logar</button>
+                                <h1>Bem-vindo à SideQuest</h1>
+                                <p>Se você já possui uma conta, realize o seu login.</p>
+                                <button className="ghost" onClick={handleSignInClick}>Entrar</button>
                             </div>
                             <div className="painel-panel painel-right">
-                                <h2>Ainda não possui conta?</h2>
+                                <h2>Você ainda não possui uma conta?</h2>
                                 <p></p>
-                                <button className="ghost" onClick={handleSignUpClick}>Cadastrar-se</button>
+                                <button className="ghost" onClick={handleSignUpClick}>Cadastre-se!</button>
                             </div>
                         </div>
                     </div>

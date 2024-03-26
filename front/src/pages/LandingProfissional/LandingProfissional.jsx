@@ -37,7 +37,7 @@ const LandingProfissional = () => {
                         <div className="subContainerNavProfissa">
                             <li class="navprofissaLi btnNavProfissa">
                                 <a href="/loginProfissional" class="tab-link link">
-                                    <Link to={"/loginProfissional"}></Link>inscreva-se
+                                    <Link to={"/loginProfissional"}></Link>Inscreva-se
                                 </a>
                             </li>
                         </div>
@@ -47,7 +47,7 @@ const LandingProfissional = () => {
 
             <section className="bannerProfissa">
                 <div className="btn-txtBanner">
-                    <h1 className="title-banner">Se junte ao nosso time de profissionais!</h1>
+                    <h1 className="title-banner">Junte-se ao nosso time de profissionais!</h1>
                     <button>Inscreva-se</button>
                 </div>
                 <img className="EduardoBanner" src={Eduardo} alt="Eduardo Mecânico" />
@@ -58,18 +58,18 @@ const LandingProfissional = () => {
                 <div className="beneficios-img">
                     <img src={negocios} alt="negociando" />
                     <div className="txt-beneficios">
-                        <h2>benefícios</h2>
+                        <h2>Benefícios</h2>
                         <div className="beneficios-cards">
                             <img src={lupa} alt="lupa" />
-                            <p>Tenha visibilidade no mercado</p>
+                            <p>Tenha visibilidade no mercado;</p>
                         </div>
                         <div className="beneficios-cards">
                             <img src={bandeirinha} alt="bandeirinha" />
-                            <p>Encontre potenciais clientes</p>
+                            <p>Encontre os seus clientes;</p>
                         </div>
                         <div className="beneficios-cards">
                             <img src={relogio} alt="relógio" />
-                            <p>Flexibilidade no seu tempo</p>
+                            <p>Flexibilidade no seu tempo.</p>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ const LandingProfissional = () => {
                     <div className="card-plano">
                         <div className="card-superior">
                             <div className="gratis">
-                                <p>Grátis</p>
+                                <p>Plano Gratuito</p>
                             </div>
                             <p id="vantagens-txt">Vantagens</p>
                             <div className="list-beneficios">
@@ -131,7 +131,7 @@ const LandingProfissional = () => {
 
                     <div className="card-plano">
                         <div className="card-superior">
-                            <p>Plano irmãos à obra</p>
+                            <p>Plano Irmãos à Obra</p>
                             <p id="vantagens-txt">Vantagens</p>
                             <div className="list-beneficios">
                                 <div className="beneficio">
