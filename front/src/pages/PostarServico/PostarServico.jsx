@@ -543,7 +543,7 @@ const PostarServico = () => {
                       </div>
                     </div>
                     <div className="linha-postar" id="rightPostar2">
-                      <button className="btnProximo" onClick={handleSubmit()}>
+                      <button className="btnProximo" onClick={handleSubmit}>
                         <Link to={"/homeCliente"}>Publicar</Link>
                       </button>
 
