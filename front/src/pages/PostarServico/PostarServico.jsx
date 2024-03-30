@@ -206,6 +206,8 @@ const PostarServico = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [exceededLimit, setExceededLimit] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageToDeleteIndex, setImageToDeleteIndex] = useState(null);
+  
 
   const handleImageChange = (event) => {
     const files = event.target.files;
@@ -213,12 +215,13 @@ const PostarServico = () => {
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+      
       if (file) {
-        const reader = new FileReader();
+        const reader = new FileReader();  
         reader.onload = () => {
           imagesArray.push(reader.result);
           if (imagesArray.length === files.length) {
-            const newImages = [...selectedImages, ...imagesArray];
+          const newImages = [...selectedImages, ...imagesArray];
             const limitedImages = newImages.slice(0, 5); // Limitando a 5 imagens
             if (newImages.length > 5) {
               setExceededLimit(true);
@@ -227,18 +230,26 @@ const PostarServico = () => {
               }, 4000);
               return;
             }
+           
+
+          
             setSelectedImages(limitedImages);
             setShowFilter(limitedImages.length > 3);
             setFormData((prevFormData) => ({
               ...prevFormData,
               imagens: limitedImages,
             }));
+            
           }
+          
         };
         reader.readAsDataURL(file);
       }
     }
   };
+
+  
+
 
   const openModal = (index) => {
     setCurrentImageIndex(index);
@@ -250,16 +261,37 @@ const PostarServico = () => {
   };
 
   const handlePrevimg = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? selectedImages.length - 1 : prevIndex - 1
-    );
-  };
+  setCurrentImageIndex((prevIndex) =>
+    prevIndex === 0 ? selectedImages.length - 1 : prevIndex - 1
+  );
+};
 
-  const handleNextimg = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === selectedImages.length - 1 ? 0 : prevIndex + 1
-    );
-  };
+const handleNextimg = () => {
+  setCurrentImageIndex((prevIndex) =>
+    prevIndex === selectedImages.length - 1 ? 0 : prevIndex + 1
+  );
+};
+
+const deleteImage = (index) => {
+  const updatedImages = selectedImages.filter((_, idx) => idx !== index);
+  setSelectedImages(updatedImages);
+}
+
+
+
+useEffect(() => {
+  // Verificar se não há mais imagens selecionadas
+  if (selectedImages.length === 0) {
+    // Fechar o modal
+    closeModal();
+  } else {
+    // Verificar se a imagem atualmente exibida no modal foi excluída
+    if (currentImageIndex >= selectedImages.length) {
+      // Atualizar o índice da imagem atual no modal para a última imagem disponível
+      setCurrentImageIndex(selectedImages.length - 1);
+    }
+  }
+}, [selectedImages, currentImageIndex]);
 
   return (
     <>
@@ -418,7 +450,7 @@ const PostarServico = () => {
                                 onClick={() => openModal(index)}
                               >
                                 <div className="image-delete-button">
-                                  <div className="delete-image invisible">
+                                  <div className="delete-image invisible" onClick={() => deleteImage(index)}>
                                     {" "}
                                     Excluir{" "}
                                   </div>
