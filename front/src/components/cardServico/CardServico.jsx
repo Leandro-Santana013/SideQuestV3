@@ -57,7 +57,7 @@ export const CardServico = () => {
           </div>
         </div>
         <div className="btn-distancia">
-          <button>R$450</button>
+          <button>Ver mais</button>
           <div className="distancia">
             <i className="ri-map-pin-2-line"></i>
             <p>3km</p>

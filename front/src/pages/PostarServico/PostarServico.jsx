@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { SidebarCliente, Header, TextInput } from "../../components";
 import axios from "axios";
 import Cookies from "js-cookie";
+import JSZip from "jszip";
+
 
 import "./postarServico.css";
 import {
@@ -104,13 +106,17 @@ const PostarServico = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    // Gerar o arquivo ZIP
+    await zipImages();
+  
     try {
+      // Enviar o formulário com o estado formData atualizado
       const response = await axios.post(
         "http://localhost:5000/auth/postarServico",
         formData
       );
-
+  
       setMessage(response.data.message);
     } catch (error) {
       console.error("Erro ao cadastrar:", error);
@@ -119,7 +125,7 @@ const PostarServico = () => {
       );
     }
   };
-
+  
   const handleUrgenciaChange = (event) => {
     // Atualiza o estado da urgência com base no estado atual do checkbox
     setUrgencia(event.target.checked);
@@ -179,6 +185,7 @@ const PostarServico = () => {
     // Chama a função para buscar as categorias
     carregarCategorias();
   }, []);
+
   const handleCategoriaChange = (event) => {
     const selectedCategoria = event.target.value;
     setCategoriaSelecionada(selectedCategoria);
@@ -235,10 +242,6 @@ const PostarServico = () => {
           
             setSelectedImages(limitedImages);
             setShowFilter(limitedImages.length > 3);
-            setFormData((prevFormData) => ({
-              ...prevFormData,
-              imagens: limitedImages,
-            }));
             
           }
           
@@ -293,6 +296,37 @@ useEffect(() => {
   }
 }, [selectedImages, currentImageIndex]);
 
+const zipImages = async () => {
+  const zip = new JSZip();
+
+  // Adicione as imagens ao arquivo ZIP
+  selectedImages.forEach((image, index) => {
+    zip.file(`image_${index}.png`, image.split("base64,")[1], { base64: true });
+  });
+
+  try {
+    // Gerar o arquivo ZIP
+    const content = await zip.generateAsync({ type: "blob" });
+    console.log("Conteúdo do arquivo ZIP:", content);
+
+    // Adicione o arquivo ZIP ao FormData
+    const zipFile = new File([content], "images.zip");
+
+    // Atualize o estado formData com o arquivo ZIP
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      imagens: zipFile
+    }));
+
+    console.log("Objeto FormData após adicionar arquivo ZIP:", formData);
+
+  } catch (error) {
+    console.error("Erro ao gerar o arquivo ZIP:", error);
+  }
+};
+
+
+
   return (
     <>
       <Header />
@@ -327,22 +361,14 @@ useEffect(() => {
                     />
 
                     <div className="emergente-categorias">
-                      <div className="emergente">
-                        <input
-                          type="checkbox"
-                          id="targetemergencia"
-                          checked={urgencia}
-                          onChange={handleUrgenciaChange}
-                        />
-                        Serviço urgente
-                        <RiQuestionLine className="emergenteDuvida" />
-                      </div>
                       <select
                         id="categoriaSelect"
                         value={categoriaSelecionada}
                         onChange={handleCategoriaChange}
                         className="categorias"
                       >
+
+                      <option value="" disabled selected>Selecione uma categoria</option>
                         {categorias.map((categoria) => (
                           <option
                             name={categoria.ds_categoria}
@@ -576,7 +602,7 @@ useEffect(() => {
                     </div>
                     <div className="linha-postar" id="rightPostar2">
                       <button className="btnProximo" onClick={handleSubmit}>
-                        <Link to={"/homeCliente"}>Publicar</Link>
+                        
                       </button>
 
                     </div>

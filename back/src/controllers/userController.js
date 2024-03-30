@@ -185,6 +185,7 @@ exports.postarServico = async (req, res) => {
       uf_localidade,
       logradouro,
       bairro,
+      complemento,
       nmrResidencia,
       categoriaSelecionada,
       idCliente,
@@ -196,11 +197,13 @@ exports.postarServico = async (req, res) => {
       uf_localidade,
       logradouro,
       bairro,
+      complemento,
       nmrResidencia,
       categoriaSelecionada,
       idCliente,
-      email
+      email,
       )
+      
     var partes = uf_localidade.split(" - ");
     var estado = partes[0];
     var cidade = partes[1];

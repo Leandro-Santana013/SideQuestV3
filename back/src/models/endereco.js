@@ -43,6 +43,9 @@ const ModelEndereco = connectionDataBase.define('tb_endereco', {
     nmr_casa:{
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
+    },
+    txt_complemento:{
+        type: DataTypes.STRING(100),
     }
 },
     _padraoTableDBExistence('tb_endereco')
