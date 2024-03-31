@@ -29,14 +29,6 @@ const PerfilCliente = () => {
                   <p>Default</p>
                 </div>
               </div>
-
-              <div className="char">
-                <p>sobrenome</p>
-                <div className="name-content">
-                  <p>Default</p>
-                </div>
-              </div>
-
             </div>
 
             <div className="contact">
