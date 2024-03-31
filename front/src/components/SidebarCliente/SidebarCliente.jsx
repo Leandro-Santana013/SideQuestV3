@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./sidebarCliente.css";
+import iconPerfil from '../../assets/icone-perfil.png'
 
 export const SidebarCliente = () => {
   const [currentPage, setCurrentPage] = useState(window.location.pathname);
@@ -52,7 +53,6 @@ export const SidebarCliente = () => {
           </a>
         ))}
       </div>
-
       <a
         href="/config"
         className={`config ${currentPage.includes("config") ? "active" : ""}`}
@@ -75,6 +75,11 @@ export const SidebarCliente = () => {
           </p>
         </div>
       </a>
+      <div className="card-perfil-bottom">
+        <img src={iconPerfil} alt="Imagem de perfil" />
+        <p style={{color: "white"}}>Júlio Casares</p>
+      </div>
+
     </nav>
   );
 };

@@ -1,7 +1,7 @@
 .content-midia {
     display: flex;
     justify-content: flex-end;
-    
+
 }
 
 .main-content {
@@ -10,7 +10,7 @@
     align-items: center;
     width: 82vw;
     margin-top: 5vw;
-  }
+}
 
 .connected-bar {
     display: none;
@@ -24,12 +24,11 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    height: 76vh;
-    margin-left: 14px;
+    height: 85vh;
     width: 18vw;
-    margin-top: 7.5vw;
     position: fixed;
     font-size: 1vw;
+    bottom: 0;
 }
 
 .options {
@@ -37,7 +36,8 @@
     flex-direction: column;
     gap: 0.5vw;
 }
- .sidebarCliente a{
+
+.sidebarCliente a {
     text-decoration: none;
     color: black;
 }
@@ -47,10 +47,23 @@
     flex-direction: row;
     gap: 0.8vw;
     align-items: center;
-    cursor:pointer;
+    cursor: pointer;
     width: fit-content;
-    
+    padding-left: 1vw;
 }
-.option i{
+
+.option i {
     font-size: 1.2vw;
+}
+
+/* =carde do perfil final da tela*/
+
+.card-perfil-bottom {
+    display: flex;
+    bottom: 0;
+    width: 12vw;
+    height: 4vw;
+    padding: 1vw;
+    background-color: var(--azul);
+    border-radius: 0 1vw 0 0 ;
 }
