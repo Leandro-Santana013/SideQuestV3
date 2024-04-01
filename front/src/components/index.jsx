@@ -11,7 +11,7 @@ import { TextInput } from './TextInput/TextInput';
 import { TextInputBusca } from "./TextInputBusca/TextInputBusca";
 import { Typography } from "./Typography/Typography";
 import { CardServico } from "./cardServico/CardServico"
-
+import { Infoinc } from './Infoinc/Infoinc';
 export {
     Animation,
     Benefits,
@@ -23,6 +23,7 @@ export {
     NavHome,
     SidebarCliente,
     TextInput,
+    Infoinc,
     TextInputBusca,
     Typography,
     CardServico,    

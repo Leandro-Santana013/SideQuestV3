@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import "./homeCliente.css";
-import { SidebarCliente, CardProfissional, Header, TextInputBusca } from "../../components";
+import { SidebarCliente, CardProfissional, Header, Infoinc } from "../../components";
 import imgAproved from "../../assets/aproved.png";
 import imgReload from "../../assets/reload.png";
 import imgCalendario from "../../assets/calendario1.png";
@@ -17,6 +17,7 @@ const HomeCliente = () => {
   };
   return (
     <>
+    <Infoinc/>
       <Header />
       <SidebarCliente />
       <div className="content-midia">

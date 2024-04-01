@@ -176,6 +176,18 @@ exports.validaEmail = async (req, res) => {
   } 
 };
 
+exports.buscarattcls = async (req, res) => {
+  const { idCliente, email } = req.body;
+
+  const clientinfo = await controller_User.selectInfocliente({
+    params: {id_cliente: idCliente,  cd_emailCliente:email }
+  });
+
+  if (!clientinfo) {
+    res.status(202).json();
+  }
+};
+
 exports.postarServico = async (req, res) => {
   try {
     const {
