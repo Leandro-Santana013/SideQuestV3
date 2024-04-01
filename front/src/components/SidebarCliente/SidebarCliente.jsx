@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./sidebarCliente.css";
 import iconPerfil from '../../assets/icone-perfil.png'
-
+import { FaPaintBrush } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
 export const SidebarCliente = () => {
   const [currentPage, setCurrentPage] = useState(window.location.pathname);
 
@@ -13,6 +14,8 @@ export const SidebarCliente = () => {
     { id: 5, name: "histórico", href: "historicoCliente" },
     { id: 6, name: "pagamentos", href: "pagamentosCliente" },
   ];
+
+  const [openModalPerfil, setOpenModalPerfil] = useState(false)
 
   useEffect(() => {
     for (let i = 0; i < pages.length; i++) {
@@ -75,11 +78,26 @@ export const SidebarCliente = () => {
           </p>
         </div>
       </a>
-      <div className="card-perfil-bottom">
+      <div className="card-perfil-bottom" onClick={() => setOpenModalPerfil(true)}>
         <img src={iconPerfil} alt="Imagem de perfil" />
-        <p style={{color: "white"}}>Júlio Casares</p>
+        <p style={{ color: "white" }}>Júlio Casares</p>
       </div>
-
+      {
+        openModalPerfil && (
+          <div className="modal-card-perfil">
+            <div className="header-modal-card-perfil">
+              <IoMdClose className="close-editar-perfil" onClick={() => setOpenModalPerfil(false)}/>
+              <img src={iconPerfil} alt="Imagem de perfil" />
+              <FaPaintBrush className="icone-editar-perfil"/>
+            </div>
+            <div className="info-card-perfil">
+              <p>Júlio Casares</p>
+              <div className="linha-divisora"></div>
+              <span>13 991553369</span>
+            </div>
+          </div>
+        )
+      }
     </nav>
   );
 };
