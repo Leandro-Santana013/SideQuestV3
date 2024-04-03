@@ -278,7 +278,6 @@ exports.profissionalCard = async (req, res) => {
   const { Filtros } = req.body
 
   const populationProfissional = await controller_User.selectProfissional();
-  console.log(populationProfissional)
   res.status(200).json(populationProfissional)
 
   switch(Filtros){
@@ -290,5 +289,13 @@ exports.profissionalCard = async (req, res) => {
     
     break
   }
-  
+
+}
+exports.selectinfos = async (req, res) => {
+  const {idCliente, email} = req.body
+  const clientinfo = await controller_User.selectInfocliente({
+    params: {id_cliente: idCliente,  cd_emailCliente:email }
+  });
+  console.log(clientinfo)
+  res.status(200).json(clientinfo)
 }

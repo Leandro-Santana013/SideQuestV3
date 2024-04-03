@@ -25,6 +25,7 @@ export const CardProfissional = () => {
   const closeModal = () => {
     setModal(false);
   };
+  
   const fetchDataFromBackend = async () => {
     try {
       const response = await axios.get(

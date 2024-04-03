@@ -30,6 +30,8 @@ router.post('/validaemailprofissional', proControllers.validaEmailPro)
 router.get('/selectCategoria', userControllers.selectCategoria)
 router.post('/postarServico', userControllers.postarServico)
 
+router.post('/selectinfos', userControllers.selectinfos)
+
 router.post('/buscarattcls', userControllers.buscarattcls)
 
 

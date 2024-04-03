@@ -21,6 +21,8 @@ export const CardServico = () => {
     }
   };
 
+ 
+
   useEffect(() => {
     fetchDataFromBackend();
   }, []);

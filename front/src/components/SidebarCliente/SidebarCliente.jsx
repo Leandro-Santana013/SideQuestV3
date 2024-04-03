@@ -3,8 +3,17 @@ import "./sidebarCliente.css";
 import iconPerfil from '../../assets/icone-perfil.png'
 import { FaPaintBrush } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import axios from "axios"
+import Cookies from "js-cookie";
+  
 export const SidebarCliente = () => {
   const [currentPage, setCurrentPage] = useState(window.location.pathname);
+  const [infocliente, setinfocliente] = useState({})
+  const [formData, setFormData] = useState({
+    idCliente: null,
+    email:null
+  })
+  const [openModalPerfil, setOpenModalPerfil] = useState(false)
 
   const pages = [
     { id: 1, name: "home", href: "homeCliente" },
@@ -15,9 +24,35 @@ export const SidebarCliente = () => {
     { id: 6, name: "pagamentos", href: "pagamentosCliente" },
   ];
 
-  const [openModalPerfil, setOpenModalPerfil] = useState(false)
+  const getCookieData = () => {
+    const userDataString = decodeURIComponent(Cookies.get("user"));
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      // Atualize o estado formData com os dados do cookie
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        idCliente: userData.id_cliente,
+        email: userData.email,
+      }));
+    }
+  };
+
+    const infocli = async () => {
+      try {
+        
+        const response = await axios.get(
+          "http://localhost:5000/auth/selectinfos", formData
+        );
+      setinfocliente(response.data);
+      
+      } catch (error) {
+        console.error("Erro ao buscar categorias:", error);
+      }
+  
+    };
 
   useEffect(() => {
+    
     for (let i = 0; i < pages.length; i++) {
       if (currentPage.includes(pages[i])) {
         // Atualizar o estado para destacar a página atual
@@ -26,6 +61,11 @@ export const SidebarCliente = () => {
       }
     }
   }, [currentPage, pages]);
+
+  useEffect(() => {
+    getCookieData();
+  infocli();
+  }, []);
 
   return (
     <nav className="sidebarCliente">
@@ -78,9 +118,10 @@ export const SidebarCliente = () => {
           </p>
         </div>
       </a>
+      
       <div className="card-perfil-bottom" onClick={() => setOpenModalPerfil(true)}>
         <img src={iconPerfil} alt="Imagem de perfil" />
-        <p style={{ color: "white" }}>Júlio Casares</p>
+        <p style={{ color: "white" }}>{infocliente.nm_cliente}</p>
       </div>
       {
         openModalPerfil && (
@@ -91,9 +132,9 @@ export const SidebarCliente = () => {
               <FaPaintBrush className="icone-editar-perfil"/>
             </div>
             <div className="info-card-perfil">
-              <p>Júlio Casares</p>
-              <div className="linha-divisora"></div>
-              <span>13 991553369</span>
+                <p>{infocliente.nm_cliente}</p>
+                <div className="linha-divisora"></div>
+              <span>{infocliente.nmr_telefoneCliente}</span>
             </div>
           </div>
         )
