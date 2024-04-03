@@ -60,34 +60,29 @@ exports.register = async (req, res) => {
     });
 
     const htmlContent = `
-    <html>
-      <head>
-        <style>
-          /* Adicione seu CSS aqui */
-          body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-          }
-          .button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            background-color: #3498db;
-            color: #ffffff;
-            border-radius: 5px;
-          }
-        </style>
-      </head>
-      <body>
-        <h1>Confirme seu Email</h1>
-        <p>Clique no botão abaixo para confirmar seu email. Você será redirecionado para outra página</p>
-        <a href="http://localhost:5173/validaEmail?token=${token}">Confirmar E-mail</a>
-      </body>
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Confirme seu E-mail</title>
+    </head>
+    
+    <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; text-align: center;">
+        <h1 style="font-size: 40px; color: #3cbc8c;">Confirme seu E-mail</h1>
+        <p style="font-size: 20px;">Clique no botão abaixo para confirmar seu e-mail. Você será redirecionado para outra página.</p>
+        <table cellpadding="0" cellspacing="0" border="0" align="center">
+            <tr>
+                <td bgcolor="#3cbc8c" style="border-radius: 50px;">
+                    <a href="http://localhost:5173/validaEmail?token=${token}" style="color: white; text-decoration: none; display: inline-block; padding: 20px; font-size: 20px;">Confirmar E-mail</a>
+                </td>
+            </tr>
+        </table>
+    </body>
+    
     </html>
-  `;
+    `;
 
     const transporter = nodemailer.createTransport(smtpconfig);
 
@@ -168,11 +163,11 @@ exports.validaEmail = async (req, res) => {
         .json({ message: "E-mail confirmado com sucesso!" });
     } else {
       console.error("Token inválido");
-      return res.status(200).json({ message: "acesso não autorizado token invalido" });
+      return res.status(200).json({ message: "Acesso não autorizado token invalido" });
     }
   } catch (error) {
     console.error(error);
-    return res.status(200).json({ message: "erro interno do servidor" });
+    return res.status(200).json({ message: "Erro interno do servidor" });
   } 
 };
 

@@ -52,32 +52,55 @@ exports.registerPro = async (req, res) => {
 
       const htmlContent = `
       <html>
-        <head>
-          <style>
+
+    <head>
+        <style>
             /* Adicione seu CSS aqui */
             body {
-              font-family: Arial, sans-serif;
-              background-color: #f4f4f4;
-              text-align: center;
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
             }
-            .button {
-              display: inline-block;
-              padding: 10px 20px;
-              font-size: 16px;
-              font-weight: bold;
-              text-decoration: none;
-              background-color: #3498db;
-              color: #ffffff;
-              border-radius: 5px;
+
+            .titulo-confirme-email {
+                font-size: 40px;
+                color: #3cbc8c;
             }
-          </style>
-        </head>
-        <body>
-          <h1>Confirme seu Email</h1>
-          <p>Clique no botão abaixo para confirmar seu email profissional. Você será redirecionado para outra página</p>
-          <a href="http://localhost:5173/validaEmailProfissional?token=${token}">Confirmar E-mail</a>
-        </body>
-      </html>
+
+            .desc-confirme-email {
+                font-size: 20px;
+            }
+
+            .btn-confirme-email {
+                border: none;
+                padding: 20px;
+                background-color: #3cbc8c;
+                border-radius: 50px;
+                transition: all .25s ease-in-out;
+
+                a {
+                    text-decoration: none;
+                    color: white;
+                    font-size: 20px;
+                }
+            }
+
+            .btn-confirme-email:hover {
+                background-color: #144474;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1 class="titulo-confirme-email">Confirme seu Email</h1>
+        <p class="desc-confirme-email">Clique no botão abaixo para confirmar seu email. Você será redirecionado para outra página</p>
+        <button class="btn-confirme-email"><a href="http://localhost:5173/validaEmail?token=${token}">Confirmar E-mail</a></button>
+    </body>
+    </html>
     `;
   
       const transporter = nodemailer.createTransport(smtpconfig);

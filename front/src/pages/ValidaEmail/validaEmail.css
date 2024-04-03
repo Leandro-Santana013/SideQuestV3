@@ -1,0 +1,36 @@
+.container-mensagem-valida-email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.card-mensagem-valida-email {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-shadow:  0 0 25px black;
+    border-radius: 20px;
+
+    .icone-de-erro {
+        font-size: 150px;
+        color: red;
+    }
+
+    .icone-de-sucesso {
+        font-size: 150px;
+        color: var(--verde);
+    }
+
+    h3 {
+        font-size: 35px;
+        color: var(--azul);
+    }
+
+    p {
+        font-size: 30px;
+        margin: 0;
+    }
+}
