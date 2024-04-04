@@ -12,6 +12,7 @@ import { TextInputBusca } from "./TextInputBusca/TextInputBusca";
 import { Typography } from "./Typography/Typography";
 import { CardServico } from "./cardServico/CardServico"
 import { Infoinc } from './Infoinc/Infoinc';
+import { Perfilcli } from './Perfilcli/Perfilcli';
 export {
     Animation,
     Benefits,
@@ -19,6 +20,7 @@ export {
     CarrosselSwiper,
     Footer,
     Header,
+    Perfilcli,
     HeaderLanding,
     NavHome,
     SidebarCliente,
