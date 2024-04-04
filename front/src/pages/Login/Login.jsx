@@ -3,8 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
 import Cookies from 'js-cookie';
-import img_login1 from '../../assets/cad-img.png';
-import img_logo from '../../assets/sidequest_3.png';
+
 
 import { HeaderLanding } from '../../components';
 

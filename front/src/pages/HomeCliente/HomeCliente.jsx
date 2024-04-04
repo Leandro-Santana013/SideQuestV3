@@ -17,11 +17,11 @@ const HomeCliente = () => {
   };
   return (
     <>
-    <Infoinc/>
       <Header />
       <SidebarCliente />
       <div className="content-midia">
         <div className="main-content">
+              <Infoinc/>
           <div className="menu-topo">
             <div className="actions">
               <div className="info-action">

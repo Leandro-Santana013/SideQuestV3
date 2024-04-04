@@ -38,7 +38,7 @@ export const Perfilcli = () => {
 
   useEffect(() => {
     getCookieData();
-  }, []);
+  }, []); 
 
   useEffect(() => {
     if (formData.idCliente && !infocliente) {
