@@ -39,6 +39,7 @@
 
         span {
             color: var(--verde);
+            text-align: center;
         }
     }
 }
