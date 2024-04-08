@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './validaEmail.css'
+import { Link } from "react-router-dom";
 
 import { MdError } from "react-icons/md";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
@@ -44,7 +45,7 @@ const validaEmail = () => {
           <div className='card-mensagem-valida-email'>
             <MdError className='icone-de-erro'/>
             <h3 className="message">{message}</h3>
-            <p>Não foi possível confirmar o seu e-mail</p>
+            <p>Não foi possível confirmar o seu e-mail. Você já pode fechar essa página ou tentar cadastrar-se novamente clicando <Link><span>aqui</span>.</Link></p>
           </div>
         )
       } 
@@ -54,7 +55,7 @@ const validaEmail = () => {
           <div className='card-mensagem-valida-email'>
               <RiVerifiedBadgeFill  className='icone-de-sucesso'/>
               <h3 className="message">{message}</h3>
-              <p>Sucesso! Você já pode fechar essa página e realizar o seu login em nossa plataforma.</p>
+              <p>Sucesso! Você já pode fechar essa página ou realizar o seu login em nossa plataforma clicando <Link to={"/login"}><span>aqui</span>.</Link></p>
           </div>
         )
       }

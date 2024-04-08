@@ -99,8 +99,8 @@ export const Login = () => {
                             <h1>Login</h1>
                             <div className="social-container"></div>
                             {message && <div className="container-mensagem-erro">{message}</div>}
-                            <input placeholder="Digite seu email" type="email" name="email" value={formData.email} onChange={handleChange} />
-                            <input placeholder="Digite uma senha" type="password" name="senha" value={formData.senha} onChange={handleChange} />
+                            <input placeholder="Digite seu email" type="email" name="email" value={formData.email} />
+                            <input placeholder="Digite uma senha" type="password" name="senha" value={formData.senha} />
                             <a className="forgot" href="#">Esqueceu a sua senha?</a>
                             <button type='submit'>Entrar</button>
                         </form>
