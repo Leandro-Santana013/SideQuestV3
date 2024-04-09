@@ -8,7 +8,7 @@ import { useIsSignUpActive } from '../../components/HeaderLanding/singUpState';
 import { AuthContext } from '../../context/AuthContext';
 
 export const Login = () => {
-    const { formDataCadastro, updateCadastro } = useContext(AuthContext);
+    const { formDataCadastro, updateCadastro, registerUser, registerError, registerSucess} = useContext(AuthContext);
 
     var VarisSignUpActive = useIsSignUpActive();
     const [isSignUpActive, setIsSignUpActive] = useState(VarisSignUpActive);
@@ -58,33 +58,18 @@ export const Login = () => {
         }
     };
 
-    const handleSubmitCadastro = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:5000/auth/register', formDataCadastro);
-            setResponseStatus(response.status);
-            if(response.status == 200){
-                setMessage2(<p className='fail'>{response.data.message}</p>)
-            }else if(response.status == 202){
-                setMessage2(<p className='success'>{response.data.message}</p>);
-            }
-                
-        } catch (error) {
-            console.error('Erro ao cadastrar:', error);
-            setMessage2(error.response?.data?.message || <p className='fail'>Erro ao cadastrar</p>);
-        }
-    };
+
 
     return (
         <>
             <div className="container-forms">
                 <div className={`container ${isSignUpActive ? 'right-panel-active' : ''}`} id="container">
                     <div className="form-container sign-up-container">
-                        <form onSubmit={handleSubmitCadastro}>
+                        <form onSubmit={registerUser}>
                             <h1>Criar conta</h1>
                             <div className="social-container"></div>
-                            <div className={`container-mensagem-erro ${message2 && responseStatus === 202}`}>
-                                {message2}
+                            <div className={`container-mensagem-erro`}>
+                                {registerError?.message}
                             </div>
                             <input placeholder="Digite seu nome" type="text" name="name" onChange={(e) => updateCadastro({...formDataCadastro, name: e.target.value})} />
                             <input placeholder="Digite seu email" type="email" name="email"  onChange={(e) => updateCadastro({...formDataCadastro, email: e.target.value})}/>
@@ -99,8 +84,12 @@ export const Login = () => {
                             <h1>Login</h1>
                             <div className="social-container"></div>
                             {message && <div className="container-mensagem-erro">{message}</div>}
-                            <input placeholder="Digite seu email" type="email" name="email" value={formData.email} onChange={handleChange} />
-                            <input placeholder="Digite uma senha" type="password" name="senha" value={formData.senha} onChange={handleChange} />
+                            <input placeholder="Digite seu email" type="email" name="email" value={formData.email} />
+<<<<<<< HEAD
+                            <input placeholder="Digite uma senha" type="password" name="senha" value={formData.senha}  />
+=======
+                            <input placeholder="Digite uma senha" type="password" name="senha" value={formData.senha} />
+>>>>>>> 4325d26a5a843c45604f7c727be6423b32a8df4c
                             <a className="forgot" href="#">Esqueceu a sua senha?</a>
                             <button type='submit'>Entrar</button>
                         </form>

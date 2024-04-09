@@ -17,7 +17,6 @@ module.exports = {
   bindCookieBypkCliente: async (req, res) => {
     const { cd_emailCliente } = req.params;
     return ModelCliente.findOne({
-      attributes: ["id_cliente", "cd_emailCliente"],
       where: {
         cd_emailCliente: cd_emailCliente,
       },
