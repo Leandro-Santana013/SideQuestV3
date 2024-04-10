@@ -21,11 +21,15 @@ const createToken = (id_cliente) => {
 exports.register = async (req, res) => {
   try {
     const { name, email, cpf, senha, senhaConfirm } = req.body;
+    console.log(name, email, cpf, senha, senhaConfirm)
     const cpfNumerico = cpf.replace(/\D/g, "");
+    console.log(cpfNumerico)
+  
 
-    if (!name || !email || !cpfNumerico || !senha || !senhaConfirm)
-      return res.status(400).json( {error:"preencha todos os campos"} );
-
+    if (!name || !email || !cpfNumerico || !senha || !senhaConfirm){
+      console.log("a")
+      return res.status(400).json({error:"preencha todos os campos" });
+    }
     const emailResults = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
     });
@@ -34,15 +38,16 @@ exports.register = async (req, res) => {
     globalCpf = cpfNumerico;
 
     if (emailResults.length > 0) {
-      return res.status(400).json("Email inválido ou já está em uso",
-      );
+      console.log("b")
+      return res.status(400).json({error:"Email inválido ou já está em uso"});
     } else if (senha !== senhaConfirm) {
-      return res.status(400).json("As senhas estão incorretas");
+      return res.status(400).json({error:"As senhas estão incorretas"});
     }
     if (!validator.isStrongPassword(senha && senhaConfirm)) {
+      console.log("c")
       return res
         .status(400)
-        .json("As senhas näo são seguras o suficentes" );
+        .json({error:"As senhas näo são seguras o suficentes"});
     }
 
     const cpfResults = await controller_User.findcpfCliente({
@@ -50,7 +55,8 @@ exports.register = async (req, res) => {
     });
 
     if (cpfResults.length > 0) {
-      return res.status(400).json("Alguns dos dados já estão sendo utilizado");
+      console.log("d")
+      return res.status(400).json({error:"Alguns dos dados já estão sendo utilizado"});
     }
 
     // Hash da senha
@@ -111,6 +117,7 @@ exports.register = async (req, res) => {
     }
     sendmail();
     const secret = createToken(user.id_cliente)
+    console.log("sucess")
     console.log(user.id_cliente, name, email, cpfNumerico, secret)
     return res.status(200).json({ message: "Verifique sua caixa de email", userta: user.id_cliente, name, email, cpfNumerico, secret});
   } catch (error) {

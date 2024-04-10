@@ -7,11 +7,12 @@ export const postRequest = async (url, body) => {
         const response = await axios.post(baseUrl + url, body, {
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            body
         });
        
         const data = await response.json();
-
+        
         if(!response.ok){
             let message
 

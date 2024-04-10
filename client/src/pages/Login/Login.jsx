@@ -42,6 +42,7 @@ export const Login = () => {
         setCpf(cpfValue); // Atualiza o estado com o CPF formatado
     };
 
+  
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -59,7 +60,6 @@ export const Login = () => {
     };
 
 
-
     return (
         <>
             <div className="container-forms">
@@ -68,19 +68,22 @@ export const Login = () => {
                         <form onSubmit={registerUser}>
                             <h1>Criar conta</h1>
                             <div className="social-container"></div>
-                            <div className={`container-mensagem-erro`}>
-                                {registerError?.message}
-                            </div>
+                        
+                            {registerError && (
+                            <div className="container-mensagem-erro">{registerError}</div>)}
+                            {registerSucess && (
+                            <div className="container-mensagem-erro">{registerSucess}</div>)}
+                            
                             <input placeholder="Digite seu nome" type="text" name="name" onChange={(e) => updateCadastro({...formDataCadastro, name: e.target.value})} />
                             <input placeholder="Digite seu email" type="email" name="email"  onChange={(e) => updateCadastro({...formDataCadastro, email: e.target.value})}/>
-                            <input placeholder="Digite seu CPF" type="text" id="cpfInput" name="cpf"  value={cpf}  onChange={(e) => {  handleCPFChange(e); updateCadastro({...formDataCadastro, cpf: e.target.value});}}/>
+                            <input placeholder="Digite seu CPF" type="text" id="cpfInput" name="cpf"  value={cpf} maxLength={14} onChange={(e) => {  handleCPFChange(e); updateCadastro({...formDataCadastro, cpf: e.target.value});}}/>
                             <input placeholder="Digite uma senha" type="password" name="senha" onChange={(e) => updateCadastro({...formDataCadastro, senha: e.target.value})}  />
                             <input placeholder="Confirme sua senha" type="password" name="senhaConfirm" onChange={(e) => updateCadastro({...formDataCadastro, senhaConfirm: e.target.value})}  />
                             <button type="submit">Cadastrar</button>
                         </form>
                     </div>
                     <div className="form-container sign-in-container">
-                        <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                             <h1>Login</h1>
                             <div className="social-container"></div>
                             {message && <div className="container-mensagem-erro">{message}</div>}
