@@ -13,6 +13,7 @@ import { Typography } from "./Typography/Typography";
 import { CardServico } from "./cardServico/CardServico"
 import { Infoinc } from './Infoinc/Infoinc';
 import { Perfilcli } from './Perfilcli/Perfilcli';
+import { Loading } from './Loading/Loading';
 export {
     Animation,
     Benefits,
@@ -29,4 +30,5 @@ export {
     TextInputBusca,
     Typography,
     CardServico,    
+    Loading,
 }

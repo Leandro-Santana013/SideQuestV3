@@ -1,14 +1,13 @@
 import axios from 'axios';
 
-export const baseUrl = "http://localhost:5000/auth";
+export const baseUrl = "http://localhost:5000/auth";    
 
 export const postRequest = async (url, body) => {
+
+    
     try {
         const response = await axios.post(baseUrl + url, body, {
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body
+            
         });
        
         const data = await response.json();

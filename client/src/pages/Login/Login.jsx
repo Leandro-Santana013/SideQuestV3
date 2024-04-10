@@ -6,9 +6,10 @@ import Cookies from 'js-cookie';
 
 import { useIsSignUpActive } from '../../components/HeaderLanding/singUpState';
 import { AuthContext } from '../../context/AuthContext';
+import { Loading } from '../../components';
 
 export const Login = () => {
-    const { formDataCadastro, updateCadastro, registerUser, registerError, registerSucess} = useContext(AuthContext);
+    const { formDataCadastro, updateCadastro, registerUser, registerError, registerSucess, registerLoading} = useContext(AuthContext);
 
     var VarisSignUpActive = useIsSignUpActive();
     const [isSignUpActive, setIsSignUpActive] = useState(VarisSignUpActive);
@@ -42,7 +43,6 @@ export const Login = () => {
         setCpf(cpfValue); // Atualiza o estado com o CPF formatado
     };
 
-  
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -57,7 +57,9 @@ export const Login = () => {
         } catch (error) {
             console.error(error.response.data.message);
         }
+
     };
+
 
 
     return (
@@ -68,28 +70,32 @@ export const Login = () => {
                         <form onSubmit={registerUser}>
                             <h1>Criar conta</h1>
                             <div className="social-container"></div>
-                        
                             {registerError && (
-                            <div className="container-mensagem-erro">{registerError}</div>)}
+                            <div className={`container-mensagem-error`}>{registerError}</div>)}
                             {registerSucess && (
-                            <div className="container-mensagem-erro">{registerSucess}</div>)}
+                            <div className={`container-mensagem-sucess`}>{registerSucess}</div>)}
                             
                             <input placeholder="Digite seu nome" type="text" name="name" onChange={(e) => updateCadastro({...formDataCadastro, name: e.target.value})} />
                             <input placeholder="Digite seu email" type="email" name="email"  onChange={(e) => updateCadastro({...formDataCadastro, email: e.target.value})}/>
                             <input placeholder="Digite seu CPF" type="text" id="cpfInput" name="cpf"  value={cpf} maxLength={14} onChange={(e) => {  handleCPFChange(e); updateCadastro({...formDataCadastro, cpf: e.target.value});}}/>
                             <input placeholder="Digite uma senha" type="password" name="senha" onChange={(e) => updateCadastro({...formDataCadastro, senha: e.target.value})}  />
                             <input placeholder="Confirme sua senha" type="password" name="senhaConfirm" onChange={(e) => updateCadastro({...formDataCadastro, senhaConfirm: e.target.value})}  />
-                            <button type="submit">Cadastrar</button>
+                            <button type="submit" className='btn-cadastrar'>
+                            {registerLoading? <Loading/>: "Cadastrar"}
+                            </button>
                         </form>
                     </div>
                     <div className="form-container sign-in-container">
                     <form onSubmit={handleSubmit}>
                             <h1>Login</h1>
                             <div className="social-container"></div>
-                            {message && <div className="container-mensagem-erro">{message}</div>}
+                            <div className={`container-mensagem-erro ${message}`}>
+                                {message}
+                            </div>
                             <input placeholder="Digite seu email" type="email" name="email" value={formData.email} />
                             <input placeholder="Digite uma senha" type="password" name="senha" value={formData.senha} />
-                            <button type='submit'>Entrar</button>
+                            <button type='submit'>Entrar
+                            </button>
                         </form>
                     </div>
                     <div className="painel-container">

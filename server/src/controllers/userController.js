@@ -22,14 +22,14 @@ exports.register = async (req, res) => {
   try {
     const { name, email, cpf, senha, senhaConfirm } = req.body;
     console.log(name, email, cpf, senha, senhaConfirm)
+    if (!name || !email || !cpf || !senha || !senhaConfirm){
+      console.log("a")
+      return res.status(400).json({error:"Preencha todos os campos" });
+    }
+
     const cpfNumerico = cpf.replace(/\D/g, "");
     console.log(cpfNumerico)
-  
 
-    if (!name || !email || !cpfNumerico || !senha || !senhaConfirm){
-      console.log("a")
-      return res.status(400).json({error:"preencha todos os campos" });
-    }
     const emailResults = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
     });

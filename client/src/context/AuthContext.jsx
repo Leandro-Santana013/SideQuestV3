@@ -44,6 +44,7 @@ export const AuthContextProvider = ({ children }) => {
       console.log(response.data);
       setRegisterSucess(response.data.message);
       // ... (redirecionar para outra página, etc.)
+      setRegisterLoading(false);
     } catch (error) {
       // Erro na requisição
       setRegisterLoading(false);
@@ -68,7 +69,8 @@ export const AuthContextProvider = ({ children }) => {
         updateCadastro,
         registerUser,
         registerError,
-        registerSucess
+        registerSucess,
+        registerLoading,
       }}
     >
       {children}
