@@ -34,28 +34,26 @@ export const AuthContextProvider = ({ children }) => {
     e.preventDefault();
     setRegisterLoading(true);
     setRegisterError(null);
-  
+
     try {
-      const response = await axios.post(
-        "http://localhost:5000/auth/register",
-        formDataCadastro
-      );
-      // Registrou com sucesso
-      console.log(response.data);
-      setRegisterSucess(response.data.message);
-      // ... (redirecionar para outra página, etc.)
-      setRegisterLoading(false);
+        const req = await postRequest('/register', formDataCadastro);
+
+        // Se a resposta for uma mensagem de erro
+        if (req.error) {
+            setRegisterError(req.error); // Define o estado de erro com a mensagem de erro recebida
+            setRegisterSucess(null); // Limpa o estado de sucesso
+        } else {
+          setRegisterSucess(req); // Define o estado de sucesso com a mensagem de sucesso recebida
+            setRegisterError(null); // Limpa o estado de erro
+        }
+        setFormDataCadastro({}); // Limpa os dados do formulário após o registro bem-sucedido
+        setRegisterLoading(false);
     } catch (error) {
-      // Erro na requisição
-      setRegisterLoading(false);
-      if (error.response && error.response.status === 400) {
-        setRegisterError(error.response.data.error);
-      } else {
-        // Tratar outros tipos de erros
-        console.error(error);
-      }
+        setRegisterError("Erro ao cadastrar. Por favor, tente novamente."); // Define o estado de erro com uma mensagem genérica de erro
+        setRegisterLoading(false);
     }
-  }, [formDataCadastro]);
+}, [formDataCadastro, setRegisterError, setRegisterSucess, setRegisterLoading]);
+
   
   const updateCadastro = useCallback((info) => {
     setFormDataCadastro(info);
