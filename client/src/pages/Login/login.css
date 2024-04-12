@@ -234,13 +234,13 @@
 
 .container-mensagem-error {
 
-		color: red;
+		color: red !important;
 		margin: 0;
 }
 
 .container-mensagem-sucess	 {
 
-	color: var(--verde);
+	color: var(--verde) !important;
 	margin: 0;
 }
 

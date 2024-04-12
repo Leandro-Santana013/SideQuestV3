@@ -6,20 +6,27 @@ export const postRequest = async (url, body) => {
     try {
         const response = await axios.post(baseUrl + url, body);
        
-        let data;
+        let message;
+        let user;
 
         // Verificar se a resposta contém a chave "message" (sucesso)
         if (response.data && response.data.message) {
-            data = response.data.message;
-            console.log(data);
-            return data;
+            message = response.data.message;
+            console.log(response.data);
+            delete response.data.message;
+            delete response.data.cpfNumerico;
+             user = response.data
+        } else {
+            // Se não houver uma chave "message", trata-se de um erro
+            throw new Error('Erro ao processar a solicitação.');
         }
-        
+
+        return { message, user}; // Retorna um objeto com a chave "data" contendo a mensagem de sucesso
     } catch (error) {
-        if (error.response && error.response.status === 400) {
+        if (error.response && error.response.status >= 400 && error.response.status <=499) {
             const errorMessage = error.response.data.error;
             console.log(`Erro ${error.response.status}: ${errorMessage}`);
-            return errorMessage;
+            return { error: errorMessage }; // Retorna um objeto com a chave "error" contendo a mensagem de erro
         } else {
             // Tratar outros tipos de erros
             console.error(error);
@@ -27,6 +34,7 @@ export const postRequest = async (url, body) => {
         }
     }
 };
+
 
 
 // export const postRequest = async (url, body) => {
