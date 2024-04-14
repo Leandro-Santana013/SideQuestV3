@@ -505,7 +505,7 @@ const zipImages = async () => {
             )}
 
             {form === 2 && (
-              <div>
+              <div className="form2">
                 <div className="headerVoltar">
                   <div className="btnVoltar" onClick={handleBefore}>
                     <RiArrowLeftLine className="iconeVoltar" />

@@ -65,6 +65,11 @@ export const AuthContextProvider = ({ children }) => {
     }
 }, [formDataCadastro, setRegisterError, setRegisterSucess, setRegisterLoading]);
 
+const logoutUser = useCallback(()=>{
+  localStorage.removeItem("User")
+  setUser(null)
+}, [])
+
   
   const updateCadastro = useCallback((info) => {
     setFormDataCadastro(info);
@@ -80,6 +85,7 @@ export const AuthContextProvider = ({ children }) => {
         registerError,
         registerSucess,
         registerLoading,
+        logoutUser,
       }}
     >
       {children}

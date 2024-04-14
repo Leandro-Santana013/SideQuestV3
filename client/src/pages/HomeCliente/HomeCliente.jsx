@@ -26,8 +26,8 @@ const HomeCliente = () => {
             <div className="actions">
               <div className="info-action">
                 <p>Adicionar Serviço</p>
-                <a href="/postarServico">
-                <Link to={"/postarServico"}>
+                <a href="/homeCliente/postarSevico">
+                <Link to={"/homeCliente/postarSevico"}>
                 <div className="action">
                   <p>Publique um serviço e receba orçamentos</p>
                   <img src={imgAproved} alt="" />
