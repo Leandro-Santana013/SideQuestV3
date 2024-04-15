@@ -135,13 +135,13 @@ exports.login = async (req, res) => {
     });
 
     if (user.length == 0) {
-      return res.status(400).json({ message: "Email ou senha incorretos" });
+      return res.status(400).json({ error: "Email ou senha incorretos" });
     }
 
     const match = await bcrypt.compare(senha, user[0].cd_senhaCliente);
 
     if (!match) {
-      return res.status(400).json({ message: "Email ou senha incorretos" });
+      return res.status(400).json({ error: "Email ou senha incorretos" });
     }
 
     const tokenconfirmed = await controller_User.findtokenCliente({
@@ -152,20 +152,20 @@ exports.login = async (req, res) => {
 
     if (!tokenconfirmed) {
       return res.status(400).json({
-        message: "Confirme seu email, verifique na sua caixa de entrada",
+        error: "Confirme seu email, verifique na sua caixa de entrada",
       });
     } else {
       const login = await controller_User.bindCookieBypkCliente({
         params: { cd_emailCliente: email },
       });
-      const secret = createToken(cookie.id_cliente)
+      const secret = createToken(login.id_cliente)
       return res
         .status(200)
         .json({ id_cliente: login.id_cliente, email: login.cd_emailCliente, name: login.name, secret});
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Erro interno do servidor"  });
+    return res.status(500).json({ error: "Erro interno do servidor"  });
   }
 };
 

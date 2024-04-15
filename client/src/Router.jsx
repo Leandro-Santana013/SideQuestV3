@@ -26,7 +26,7 @@ const Router = () => {
       <AuthContextProvider>
         <Routes>
           <Route exact path="/" element={<Landing />} />
-          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/login" element={user ? <Navigate to="/homeCliente" /> : <Login />} />
           <Route exact path="/loginProfissional" element={<LoginProfissional />} />
           <Route exact path="/validaEmailProfissional" element={<ValidaEmailProfissional />} />
           <Route exact path="/validaemail" element={<ValidaEmail />} />
