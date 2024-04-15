@@ -27,7 +27,6 @@ export const Login = () => {
   const [isSignUpActive, setIsSignUpActive] = useState(VarisSignUpActive);
   const navigate = useNavigate();
 
-
   const [cpf, setCpf] = useState("");
 
   const handleSignUpClick = () => {
@@ -46,8 +45,6 @@ export const Login = () => {
     cpfValue = cpfValue.replace(/(\d{3})(\d{1,2})$/, "$1-$2"); // Adiciona o traço
     setCpf(cpfValue); // Atualiza o estado com o CPF formatado
   };
-
-
 
   return (
     <>
@@ -126,21 +123,28 @@ export const Login = () => {
           <div className="form-container sign-in-container">
             <form onSubmit={loginUser}>
               <h1>Login</h1>
-              <div className="social-container"></div>
-              <div className={`container-mensagem-erro`}>
-                {}
+
+              <div className="social-container">
+                {loginError && (
+                  <div className={`container-mensagem-error`}>{loginError}</div>
+                )}
               </div>
+
               <input
                 placeholder="Digite seu email"
                 type="email"
                 name="email"
-               onChange={(e) =>{updateLogininfo({...loginInfo, email: e.target.value})}}
+                onChange={(e) => {
+                  updateLogininfo({ ...loginInfo, email: e.target.value });
+                }}
               />
               <input
                 placeholder="Digite uma senha"
                 type="password"
                 name="senha"
-                onChange={(e) =>{updateLogininfo({...loginInfo, senha: e.target.value})}}
+                onChange={(e) => {
+                  updateLogininfo({ ...loginInfo, senha: e.target.value });
+                }}
               />
               <button type="submit">Entrar</button>
             </form>
