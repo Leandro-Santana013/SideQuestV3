@@ -10,6 +10,8 @@ export const AuthContext = createContext();
 import axios from "axios";
 
 export const AuthContextProvider = ({ children }) => {
+  
+  
   //objeto de usuario
   const [user, setUser] = useState({
     name: null,
@@ -88,12 +90,11 @@ export const AuthContextProvider = ({ children }) => {
     setloginInfo(info);
   }, []);
 
-  
-
   //logout
   const logoutUser = useCallback(() => {
     localStorage.removeItem("User");
     setUser(null);
+    window.location.reload();
   }, []);
 
   const loginUser = useCallback(async(e) => {
@@ -105,7 +106,9 @@ export const AuthContextProvider = ({ children }) => {
 
       if (response.error) setloginError(response.error);
       else {
+        console.log(response.user)
         localStorage.setItem("User", JSON.stringify(response.user));
+        window.location.reload();
       }
     } catch (error) {
       setRegisterError("Erro ao logar. Por favor, tente novamente."); // Define o estado de erro com uma mensagem genérica de erro

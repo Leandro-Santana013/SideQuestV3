@@ -161,7 +161,7 @@ exports.login = async (req, res) => {
       const secret = createToken(login.id_cliente)
       return res
         .status(200)
-        .json({ id_cliente: login.id_cliente, email: login.cd_emailCliente, name: login.name, secret});
+        .json({ id_cliente: login.id_cliente, email: login.cd_emailCliente, name: login.nm_cliente, secret});
     }
   } catch (error) {
     console.error(error);

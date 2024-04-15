@@ -11,6 +11,16 @@ export const Perfilcli = () => {
 
   const [openModalPerfil, setOpenModalPerfil] = useState(false);
 
+  const userName = user && user.name ? user.name : "Carregando...";
+  const userNameArray = userName.split(" ");
+  let formattedName = '';
+
+  if (userNameArray.length === 1) {
+    formattedName = userNameArray[0];
+  } else {
+    formattedName = `${userNameArray[0]} ${userNameArray[userNameArray.length - 1]}`;
+  }
+
   return (
     <>
       <div
@@ -33,7 +43,7 @@ export const Perfilcli = () => {
             <FaPaintBrush className="icone-editar-perfil" />
           </div>
           <div className="info-card-perfil">
-            <p>{user && user.name ? `${user.name.split(' ')[0]} ${user.name.split(' ').pop()}` : "Carregando..."} </p>
+            <p>{formattedName}</p>
             <div className="linha-divisora"></div>
             <span>
               {infocliente ? infocliente.nmr_telefoneCliente : "Carregando..."}

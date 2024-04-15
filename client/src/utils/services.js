@@ -10,7 +10,7 @@ export const postRequest = async (url, body) => {
         let user;
 
         // Verificar se a resposta contém a chave "message" (sucesso)
-        if (response.data && response.data.message) {
+        if (response.data && !response.data.error) {
             message = response.data.message;
             console.log(response.data);
             delete response.data.message;

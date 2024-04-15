@@ -139,7 +139,7 @@ export const Login = () => {
                 }}
               />
               <input
-                placeholder="Digite uma senha"
+                placeholder="Digite sua senha"
                 type="password"
                 name="senha"
                 onChange={(e) => {
