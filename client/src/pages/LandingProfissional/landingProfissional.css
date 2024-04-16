@@ -6,17 +6,25 @@ body {
 
 /*Inicio Menu*/
 
+
+.menu-profissa {
+  position: relative;
+}
+
+
 .nav-profissa {
   font-size: 1.5vw;
   height: 80px;
   padding-left: 25px;
-  padding-right: 25px;
+  padding-right: 30px;
 }
+
 
 
 .img-logoProfissa {
   width: 8vw;
   height: 3vw;
+
 }
 
 .navprofissaUl {
@@ -43,8 +51,56 @@ body {
   padding: 15px;
   border-radius: 50px;
   font-size: 23px;
-  box-shadow: 0px 4px 6px 0px #00000042
+  box-shadow: 0px 4px 6px 0px #00000042;
+  transition: ease-in-out 0.5s;
 }
+
+.navprofissaLi.btnNavProfissa:hover {
+  background-color: #144474;
+  color: white;
+  box-shadow: 0px 4px 8px 5px #00000042;
+}
+
+
+/*Criando icon do menu hamburguer*/
+
+.hamburguer {
+  border: none;
+  background: none;
+  border-top: 3.5px solid black;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  right: 29px;
+  top: 30px;
+  display: none;
+}
+
+.hamburguer::before,
+.hamburguer::after {
+  /*adiciona dois elementos em volta pra fazer os outros dois traços*/
+  content: " ";
+  display: block;
+  width: 30px;
+  height: 3px;
+  background-color: black;
+  margin-top: 4px;
+  position: relative;
+}
+
+.hamburguer::before,
+.hamburguer::after .active {
+  background-color: white;
+  /* Altera a cor das linhas ao ativar o menu */
+}
+
+
+.navprofissaLiTxtextra {
+  display: none;
+}
+
+
+
 
 /*Fim Menu e Início banner*/
 
@@ -135,6 +191,11 @@ body {
   width: 18vw;
   align-items: center;
   justify-content: space-between;
+  gap: 2vw;
+}
+
+.carrossel-Profissional {
+  display: none;
 }
 
 /*Fim da sesao beneficios e inicio sessao planos*/
@@ -252,62 +313,61 @@ body {
   background-color: var(--verde);
 }
 
-@media screen and (max-width: 376px) {
 
-  /*Arrumando Menu*/
-  .navprofissaUl {
-    display: none;
+/* Responsividade */
+
+/*min-width tem que ser em ordem crescente*/
+
+@media screen and (min-width: 760px) {
+  /*Arrumando menu*/
+
+  .img-logo {
+    width: 13vw;
+    height: 5vw;
   }
 
-  /*Arrumando banner*/
+  .nav-profissa .navprofissaUl .navprofissaLiTxt a {
+    font-size: 1.1rem;
+  }
+
+  .navprofissaLi.btnNavProfissa {
+    font-size: 1.1rem;
+  }
+
+  /*Arrumando sessao banner*/
+
   .bannerProfissa .btn-txtBanner .title-banner {
-    font-size: 0.9rem;
-    width: 39.5vw;
+    font-size: 2rem;
+    width: 46.5vw;
   }
 
   .bannerProfissa .btn-txtBanner button {
-    width: 19vw;
+    width: 20vw;
     height: 5.5vw;
-    font-size: 0.6rem;
   }
 
   /*Arrumando sessao beneficios*/
+
+  .beneficios>h1 {
+    font-size: 2rem;
+    line-height: 4.3vh;
+  }
 
   .beneficios .beneficios-img {
     flex-direction: column;
   }
 
-  .beneficios>h1 {
-    font-size: 1.1rem;
-    line-height: 3.3vh;
+  .beneficios .beneficios-img img {
+    width: 60vw;
   }
 
   .beneficios .beneficios-img .txt-beneficios h2 {
-    font-size: 1rem;
+    font-size: 1.7rem;
   }
 
-  .beneficios-img>img {
-    width: 60vw;
-    height: 40vw;
-  }
-
-  .beneficios .txt-beneficios .beneficios-cards img {
-    width: 5vw;
-    height: 5vw;
-  }
-
-  .beneficios .txt-beneficios .beneficios-cards {
-    gap: 2vw;
-  }
-
-  .beneficios .beneficios-img .txt-beneficios p {
-    font-size: 0.6rem;
-  }
-
-  /*Arrumando sessao planos*/
-
+  /*Arrumando sessao cards*/
   .planos>h2 {
-    font-size: 1rem;
+    font-size: 1.7rem;
   }
 
   .planos .cards-planos {
@@ -317,17 +377,347 @@ body {
   }
 
   .card-plano {
-    width: 38vw;
-    padding: 10px;
-    height: 59vw;
+    width: 40vw;
+    height: 58vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .list-beneficios .beneficio p {
+    font-size: 1.1rem;
+  }
+
+  .btn-card-plano-op {
+    width: 31vw;
+    font-size: 1.1rem;
+    padding: 2vw;
+  }
+
+  /*Arrumando Footer*/
+
+  footer {
+    padding: 2vw;
+  }
+
+  footer img {
+    width: 13vw;
+    height: 5vw;
+  }
+
+  footer h6 {
+    font-size: 1.3rem;
+  }
+
+  .termos a,
+  .sobre a {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+
+  /*Arrumando sessao beneficios*/
+
+
+  .beneficios>h1 {
+    line-height: 6.3vw;
+  }
+
+  .beneficios .txt-beneficios .beneficios-cards img {
+    width: 10vw;
+  }
+
+  /*Arrumando sessao cards*/
+
+  .card-plano {
+    height: 46vw;
+  }
+}
+
+
+@media screen and (min-width: 1280px) {
+  /*Arrumando menu*/
+
+  .img-logo {
+    width: 11vw;
+    height: 4vw;
+}
+
+  .nav-profissa .navprofissaUl .navprofissaLiTxt a {
+    font-size: 1.5rem;
+}
+
+.navprofissaLi.btnNavProfissa {
+  font-size: 1.5rem;
+}
+
+/*Arrumando sessao card*/
+
+.bannerProfissa .btn-txtBanner .title-banner {
+  font-size: 2.5rem;
+}
+
+.bannerProfissa .btn-txtBanner button {
+  font-size: 1.5rem;
+}
+
+/*Arrumando sessao beneficios*/
+
+.beneficios .beneficios-img img {
+  width: 50vw;
+}
+
+.beneficios>h1 {
+  line-height: 5.3vw;
+}
+
+.beneficios .beneficios-img .txt-beneficios h2 {
+  font-size: 2.2rem;
+}
+
+.beneficios .txt-beneficios .beneficios-cards img {
+  width: 7vw;
+}
+
+.beneficios .beneficios-img .txt-beneficios p {
+  font-size: 1.5rem;
+}
+
+/*Arrumando sessao cards*/
+
+.planos .cards-planos {
+  gap: 7vh;
+}
+
+.planos>h2 {
+  font-size: 2.2rem;
+}
+
+.planos .cards-planos .card-plano .card-superior .gratis p {
+  font-size: 1.8rem;
+}
+
+.planos .cards-planos .card-plano .card-superior #vantagens-txt {
+  font-size: 1.8rem;
+}
+
+.card-plano {
+  height: 45vw;
+  width: 34vw;
+}
+
+
+.list-beneficios .beneficio p {
+  font-size: 1.5rem;
+}
+}
+
+
+@media screen and (min-width: 1720px){
+  /*Arrumando banner*/
+
+  .bannerProfissa .btn-txtBanner button {
+    width: 10vw;
+    height: 3.5vw;
+}
+
+/*Arrumando a sessao beneficios*/
+
+.beneficios>h1 {
+  line-height: 3.3vw;
+}
+
+.beneficios .beneficios-img {
+  display: flex;
+  flex-direction: row;
+}
+
+
+/*Arrumando sessao cards*/
+
+.planos .cards-planos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.card-plano {
+    height: 29vw;
+    width: 22vw;
+}
+
+.card-plano {
+  height: 29vw;
+  width: 22vw;
+}
+
+.btn-card-plano-op {
+  width: 14vw;
+  padding: 1vw;
+}
+
+/*Arrumando footer*/
+
+footer img {
+  width: 11vw;
+  height: 4vw;
+}
+}
+
+
+/*Max width tem que ser em ordem decrescente*/
+
+@media screen and (max-width: 750px) {
+
+  .hamburguer {
+    display: block;
+    /*ocupa todo o espaço*/
+  }
+
+  .navprofissaUl {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.5rem;
+    background-color: #144474;
+    clip-path: circle(100px at 90% -15%);
+    /*esconde la encima*/
+    transition: 1s ease-out;
+    /* Adicionando transição */
+    width: 100vw;
+    height: 100vh;
+    gap: 0;
+    pointer-events: none;
+    position: fixed;
+    margin-top: 0;
+  }
+
+  .navprofissaUl.active {
+    /* Altura máxima do menu é a altura total da tela */
+    clip-path: circle(1500px at 90% -15%);
+    pointer-events: all;
+    position: fixed;
+    overflow: visible;
+
+  }
+
+  .navprofissaLiTxtextra {
+    display: block;
+  }
+
+  .hamburguer.active {
+    position: fixed;
+    border-top-color: transparent;
+  }
+
+  .hamburguer.active::before {
+    transform: rotate(135deg);
+  }
+
+  .hamburguer.active::after {
+    transform: rotate(-135deg);
+    top: -7px;
+  }
+
+  .navprofissaLi.btnNavProfissa {
+    display: none;
+  }
+
+  .navprofissaLi img {
+    display: none;
+  }
+
+
+  .navprofissaUl.active .navHomeA::nth-child(1) {
+    transition: 0.5s 0.2s;
+    color: white;
+  }
+
+  .navprofissaUl.active .navHomeA::nth-child(2) {
+    transition: 0.5s 0.4s;
+    color: white;
+  }
+
+  .navprofissaUl.active .navHomeA::nth-child(3) {
+    transition: 0.5s 0.6s;
+    color: white;
+  }
+
+  .nav-profissa {
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 25px;
+  }
+}
+
+
+@media screen and (max-width: 541px) {
+  /*Arrumando sessao banner*/
+
+  .bannerProfissa .btn-txtBanner .title-banner {
+    font-size: 1.5rem;
+    width: 45.5vw;
+  }
+
+  .bannerProfissa .btn-txtBanner button {
+    width: 23vw;
+    height: 7vw;
+    font-size: 0.9rem;
+  }
+
+  /*Arrumando sessao beneficios*/
+
+  .beneficios .beneficios-img {
+    flex-direction: column;
+  }
+
+  .beneficios>h1 {
+    font-size: 1.5rem;
+    line-height: 5.3vh;
+  }
+
+  .beneficios .beneficios-img img {
+    width: 60vw;
+  }
+
+  .beneficios .beneficios-img .txt-beneficios h2 {
+    font-size: 1.3rem;
+  }
+
+  .beneficios .beneficios-img .txt-beneficios p {
+    font-size: 0.9rem;
+  }
+
+  /*Arrumando sessao planos*/
+
+  .planos>h2 {
+    font-size: 1.3rem;
+  }
+
+  .planos .cards-planos {
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-plano {
+    width: 40vw;
+    height: 65vw;
+    display: flex;
+    justify-content: center;
+    padding: 2vw;
   }
 
   .planos .cards-planos .card-plano .card-superior .gratis p {
-    font-size: 0.7rem;
+    font-size: 1rem;
   }
 
   .planos .cards-planos .card-plano .card-superior #vantagens-txt {
-    font-size: 0.6rem;
+    font-size: 1rem;
   }
 
   .list-beneficios .beneficio {
@@ -335,61 +725,165 @@ body {
   }
 
   .list-beneficios .beneficio p {
-    font-size: 0.6rem;
+    font-size: 0.9rem;
   }
 
-  .list-beneficios .beneficio img {
+  .list-beneficios .beneficio>img {
     width: 5vw;
-    height: 5vw;
   }
 
   .valor-do-plano {
-    font-size: 0.6rem;
+    font-size: 1rem;
   }
 
   .btn-card-plano-op {
-    width: 29vw;
-    font-size: 0.6rem;
-    padding: 1vw;
-    height: 3vh;
+    width: 28vw;
+    height: 7vw;
+    font-size: 0.9rem;
   }
 
   .planos .cards-planos .card-plano .card-superior>p {
-    font-size: 0.4rem;
+    font-size: 1rem;
   }
 
+  /*Arrumando sessao footer*/
+
+  footer {
+    padding: 2vw;
+  }
+
+  footer img {
+    width: 13vw;
+    height: 5vw;
+  }
+
+  footer h6 {
+    font-size: 1.1rem;
+  }
+
+  .termos a,
+  .sobre a {
+    font-size: 0.9rem;
+  }
+}
+
+
+
+@media screen and (max-width: 431px) {
+
+  /*Arrumando banner*/
+  .bannerProfissa .btn-txtBanner .title-banner {
+    font-size: 1.3rem;
+    width: 54.5vw;
+  }
+
+  .bannerProfissa .EduardoBanner {
+    width: 35vw;
+  }
+
+  .bannerProfissa .btn-txtBanner button {
+    width: 21vw;
+    height: 6.5vw;
+    font-size: 0.7rem;
+  }
+
+  /*Arrumando sessão benefícios*/
+  .beneficios>h1 {
+    font-size: 1.3rem;
+    line-height: 4.3vh;
+  }
+
+  .beneficios .beneficios-img {
+    flex-direction: column;
+  }
+
+  .beneficios .beneficios-img img {
+    width: 55vw;
+  }
+
+  .beneficios .txt-beneficios .beneficios-cards img {
+    width: 10vw;
+  }
+
+  .beneficios .beneficios-img .txt-beneficios p {
+    font-size: 0.9rem;
+  }
+
+  /*Arrumando sessão planos*/
+
+  .planos .cards-planos {
+    flex-direction: column;
+    align-items: center;
+    gap: 5vh;
+  }
+
+  .card-plano {
+    width: 50vw;
+    height: 70vw;
+    padding: 20px;
+  }
+
+  .planos .cards-planos .card-plano .card-superior .gratis p {
+    font-size: 0.9rem;
+  }
+
+  .planos .cards-planos .card-plano .card-superior>p {
+    font-size: 0.9rem;
+  }
+
+  .planos .cards-planos .card-plano .card-superior #vantagens-txt {
+    font-size: 0.8rem;
+  }
+
+  .list-beneficios .beneficio p {
+    font-size: 0.7rem;
+  }
+
+  .list-beneficios .beneficio {
+    gap: 2vw;
+  }
+
+  .list-beneficios .beneficio>img {
+    width: 5vw;
+  }
+
+  .valor-do-plano {
+    font-size: 0.75rem;
+  }
+
+  .btn-card-plano-op {
+    width: 27vw;
+    height: 6.5vw;
+    font-size: 0.7rem;
+  }
 
   /*Arrumando Footer*/
 
-footer {
-  padding: 2vw;
-}
-
-  footer img {
-    width: 20vw;
-    height: 8vw;
+  footer {
+    padding: 5vw;
   }
 
-  h6 {
-    font-size: 0.7rem;
+  footer img {
+    width: 17vw;
+    height: 7vw;
+  }
+
+  footer h6 {
+    font-size: 0.78rem;
     margin: 4vw;
   }
 
-  .termos a, .sobre a {
-    font-size: 0.6rem;
-    margin: 1vw;
+  .termos a,
+  .sobre a {
+    font-size: 0.7rem;
+    gap: 0.5vh;
   }
+
+
 }
 
 
-
-
 @media screen and (max-width: 415px) {
-
-  /*Arrumando Menu*/
-  .navprofissaUl {
-    display: none;
-  }
 
   /*Arrumando banner*/
   .bannerProfissa .btn-txtBanner .title-banner {
@@ -451,7 +945,7 @@ footer {
   .card-plano {
     width: 38vw;
     padding: 10px;
-    height: 59vw;
+    height: 63vw;
   }
 
   .planos .cards-planos .card-plano .card-superior .gratis p {
@@ -487,15 +981,15 @@ footer {
   }
 
   .planos .cards-planos .card-plano .card-superior>p {
-    font-size: 0.4rem;
+    font-size: 0.7rem;
   }
 
 
   /*Arrumando Footer*/
 
-footer {
-  padding: 2vw;
-}
+  footer {
+    padding: 2vw;
+  }
 
   footer img {
     width: 20vw;
@@ -507,8 +1001,210 @@ footer {
     margin: 4vw;
   }
 
-  .termos a, .sobre a {
+  .termos a,
+  .sobre a {
     font-size: 0.6rem;
     margin: 1vw;
+  }
+}
+
+@media screen and (max-width: 376px) {
+
+  /*Arrumando banner*/
+  .bannerProfissa .btn-txtBanner .title-banner {
+    font-size: 0.9rem;
+    width: 39.5vw;
+  }
+
+  .bannerProfissa .btn-txtBanner button {
+    width: 19vw;
+    height: 5.5vw;
+    font-size: 0.6rem;
+  }
+
+  /*Arrumando sessao beneficios*/
+
+  .beneficios .beneficios-img {
+    flex-direction: column;
+  }
+
+  .beneficios>h1 {
+    font-size: 1.1rem;
+    line-height: 3.3vh;
+  }
+
+  .beneficios .beneficios-img .txt-beneficios h2 {
+    font-size: 1rem;
+  }
+
+  .beneficios-img>img {
+    width: 60vw;
+    height: 40vw;
+  }
+
+  .beneficios .txt-beneficios .beneficios-cards img {
+    width: 5vw;
+    height: 5vw;
+  }
+
+  .beneficios .txt-beneficios .beneficios-cards {
+    gap: 2vw;
+  }
+
+  .beneficios .beneficios-img .txt-beneficios p {
+    font-size: 0.6rem;
+  }
+
+  /*Arrumando sessao planos*/
+
+  .planos>h2 {
+    font-size: 1rem;
+  }
+
+  .planos .cards-planos {
+    flex-direction: column;
+    align-items: center;
+    gap: 4vh;
+  }
+
+  .card-plano {
+    width: 38vw;
+    padding: 10px;
+    height: 65vw;
+  }
+
+  .planos .cards-planos .card-plano .card-superior .gratis p {
+    font-size: 0.7rem;
+  }
+
+  .planos .cards-planos .card-plano .card-superior #vantagens-txt {
+    font-size: 0.6rem;
+  }
+
+  .list-beneficios .beneficio {
+    gap: 2vw;
+  }
+
+  .list-beneficios .beneficio p {
+    font-size: 0.6rem;
+  }
+
+  .list-beneficios .beneficio img {
+    width: 5vw;
+    height: 5vw;
+  }
+
+  .valor-do-plano {
+    font-size: 0.6rem;
+  }
+
+  .btn-card-plano-op {
+    width: 29vw;
+    font-size: 0.6rem;
+    padding: 1vw;
+    height: 3vh;
+  }
+
+  .planos .cards-planos .card-plano .card-superior>p {
+    font-size: 0.7rem;
+  }
+
+
+  /*Arrumando Footer*/
+
+  footer {
+    padding: 4vw;
+  }
+
+  footer img {
+    width: 20vw;
+    height: 8vw;
+  }
+
+  h6 {
+    font-size: 0.7rem;
+    margin: 4vw;
+  }
+
+  .termos a,
+  .sobre a {
+    font-size: 0.6rem;
+    margin: 1vw;
+  }
+}
+
+@media screen and (max-width:281px) {
+
+  /*Arrumando menu*/
+  .navprofissaUl {
+    clip-path: circle(105px at 95% -18%);
+  }
+
+  .navprofissaUl.active .navprofissaLiTxt>a {
+    font-size: 1.2rem;
+  }
+
+  .navprofissaUl.active .navprofissaLiTxtextra>a {
+    font-size: 1.2rem;
+  }
+
+  .navprofissaUl .navprofissaLiTxt>a {
+    font-size: 1.2rem;
+  }
+
+  .navprofissaUl .navprofissaLiTxtextra>a {
+    font-size: 1.2rem;
+  }
+
+  /*Arrumando Banner*/
+  .bannerProfissa .btn-txtBanner .title-banner {
+    font-size: 0.8rem;
+    width: 46.5vw;
+  }
+
+  .bannerProfissa .btn-txtBanner button {
+    width: 20vw;
+    height: 6.5vw;
+    font-size: 0.4rem;
+  }
+
+
+  /*Arrumando sessao Beneficios*/
+
+  .beneficios>h1 {
+    font-size: 0.8rem;
+    line-height: 2.3vh;
+  }
+
+  .beneficios .beneficios-img .txt-beneficios h2 {
+    font-size: 0.7rem;
+  }
+
+  /*Arrumando cards*/
+  .card-plano {
+    height: 85vw;
+  }
+
+  .btn-card-plano-op {
+    width: 29vw;
+    font-size: 0.5rem;
+    padding: 1vw;
+    height: 3vh;
+  }
+
+  .planos .cards-planos .card-plano .card-superior>p {
+    font-size: 0.7rem;
+  }
+
+
+  /*Arrumando footer*/
+  h6 {
+    font-size: 0.65rem;
+    margin: 4vw;
+  }
+
+  .termos a,
+  .sobre a {
+    font-size: 0.5rem;
   }
 }

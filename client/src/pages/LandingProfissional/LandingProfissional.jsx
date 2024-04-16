@@ -1,5 +1,6 @@
 import "./landingProfissional.css";
 import React from "react";
+import { useState } from "react";
 import { Form, Link } from "react-router-dom";
 import relogio from "../../assets/relogio.png";
 import bannerProfissa from "../../assets/bannerProfissional.png";
@@ -11,8 +12,21 @@ import Eduardo from "../../assets/eduardo-mecanico.png";
 import negocios from "../../assets/negociando.png";
 import verificado from "../../assets/verificado.png";
 import { Footer, HeaderLanding } from "../../components/index";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css';
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { EffectFade } from 'swiper/modules';
+
 
 const LandingProfissional = () => {
+    const [isActive, setIsActive] = useState(false); //isActive começa como falso, setIsActive muda o valor de isactive ao mudar os estado
+
+    const AcaoAoCLicar = () => {
+        setIsActive(!isActive); // Alterna o valor de isActive
+    };
+
 
     return (
         <>
@@ -22,26 +36,30 @@ const LandingProfissional = () => {
 
             <header className="menu-profissa">
                 <nav className="nav-profissa">
-                    <ul className="navprofissaUl">
+                    <ul className={`navprofissaUl ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}>
                         <li className="navprofissaLi">
                             <img class="img-logo" src={LogoSideQuest} alt="Logo do SideQuest" />
                         </li>
-                        <li className="navprofissaLi">
+                        <li className="navprofissaLiTxt">
                             <a href="" className="navHomeA">
                                 Encontrar serviços
                             </a>
                         </li>
-                        <li className="navprofissaLi">
+                        <li className="navprofissaLiTxt">
                             <a href="">Trabalhe conosco</a>
+                        </li>
+                        <li className="navprofissaLiTxtextra">
+                            <a href="/loginprofissional">Inscreva-se</a>
                         </li>
                         <div className="subContainerNavProfissa">
                             <li class="navprofissaLi btnNavProfissa">
                                 <a href="/loginProfissional" class="tab-link link">
-                                    <Link to={"/loginProfissional"}></Link>Inscreva-se
+                                    <Link to={"/loginProfissional"}></Link>inscreva-se
                                 </a>
                             </li>
                         </div>
                     </ul>
+                    <button className={`hamburguer ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}></button>
                 </nav>
             </header>
 
@@ -121,7 +139,7 @@ const LandingProfissional = () => {
                             </div>
                         </div>
                         <div className="card-inferior">
-                            
+
                             <div className="valor-plano">
                                 <p className="valor-do-plano">R$20<strong>/Mês</strong></p>
                             </div>
@@ -155,6 +173,97 @@ const LandingProfissional = () => {
                         </div>
                     </div>
                 </div>
+                { /* 
+                <Swiper className="carrossel-Profissional"
+                    spaceBetween={15}
+                    slidesPerView={2}
+                    pagination={{ clickable: true }}
+                    fade
+                    autoplay={{ delay: 3000 }}
+                >
+                    <SwiperSlide>
+                        <div className="card-plano">
+                            <div className="card-superior">
+                                <div className="gratis">
+                                    <p>Plano Gratuito</p>
+                                </div>
+                                <p id="vantagens-txt">Vantagens</p>
+                                <div className="list-beneficios">
+                                    <div className="beneficio">
+                                        <img src={verificado} alt="verificado" />
+                                        <p>Tenha visibilidade no mercado</p>
+                                    </div>
+                                    <div className="beneficio">
+                                        <img src={verificado} alt="verificado" />
+                                        <p>Tenha visibilidade</p>
+                                    </div>
+                                    <div className="beneficio">
+                                        <img src={verificado} alt="verificado" />
+                                        <p>Tenha visibilidade</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="card-inferior">
+                                <p className="valor-do-plano">R$0<strong>/Mês</strong></p>
+                                <Link to={"/cadastro"}><button className="btn-card-plano-op">Crie sua conta grátis</button></Link>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+
+                    <SwiperSlide>
+                        <div className="card-plano">
+                            <div className="card-superior">
+                                <p>Plano Simples</p>
+                                <div className="list-beneficios">
+                                    <div className="beneficio">
+                                        <img src={verificado} alt="verificado" />
+                                        <p>Tenha visibilidade no mercado</p>
+                                    </div>
+                                    <div className="beneficio">
+                                        <img src={verificado} alt="verificado" />
+                                        <p>Tenha visibilidade</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card-inferior">
+                                <div className="valor-plano">
+                                    <p className="valor-do-plano">R$20<strong>/Mês</strong></p>
+                                </div>
+                                <button className="btn-card-plano-op">Teste Grátis</button>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+
+                    <SwiperSlide>
+                        <div className="card-plano">
+                            <div className="card-superior">
+                                <p>Plano Irmãos à Obra</p>
+                                <p id="vantagens-txt">Vantagens</p>
+                                <div className="list-beneficios">
+                                    <div className="beneficio">
+                                        <img src={verificado} alt="verificado" />
+                                        <p>Tenha visibilidade no mercado</p>
+                                    </div>
+                                    <div className="beneficio">
+                                        <img src={verificado} alt="verificado" />
+                                        <p>Tenha visibilidade</p>
+                                    </div>
+                                    <div className="beneficio">
+                                        <img src={verificado} alt="verificado" />
+                                        <p>Tenha visibilidade</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card-inferior">
+                                <p className="valor-do-plano"> R$1000<strong>/Ano</strong></p>
+                                <Link to={"/loginProfissional"}><button className="btn-card-plano-op">Escolha</button></Link>
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                </Swiper>
+                */ }
+                
             </section>
 
             <Footer />
