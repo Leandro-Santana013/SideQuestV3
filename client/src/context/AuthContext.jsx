@@ -14,6 +14,7 @@ export const AuthContextProvider = ({ children }) => {
   
   //objeto de usuario
   const [user, setUser] = useState({
+    id: null,
     name: null,
     email: null,
     nmr: null,
@@ -22,6 +23,7 @@ export const AuthContextProvider = ({ children }) => {
     idade: null,
   });
 
+ 
 
   //objeto de registro
   const [formDataCadastro, setFormDataCadastro] = useState({
@@ -82,7 +84,7 @@ export const AuthContextProvider = ({ children }) => {
 // seta o usuario com o localstorage
   useEffect(() => {
     const user = localStorage.getItem("User");
-
+    
     setUser(JSON.parse(user));
   }, []);
 
@@ -114,6 +116,64 @@ export const AuthContextProvider = ({ children }) => {
       setRegisterError("Erro ao logar. Por favor, tente novamente."); // Define o estado de erro com uma mensagem genérica de erro
     setRegisterLoading(false);}
   }, [loginInfo]);
+
+
+  const [cep, setCepError] = useState(null)
+
+  const [postarServico, setPostarServico] = useState({
+    titulo: null,
+    dsServico: null,
+    cep: null,
+    uf_localidade: null,
+    logradouro: null,
+    bairro: null,
+    nmrResidencia: null,
+    categoriaSelecionada: null,
+    complemento: null,
+    idCliente: {user},
+    email: null,
+    imagens: null,
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://viacep.com.br/ws/${cep}/json/`
+        );
+        setAddressData(response.data);
+        console.log(response.data);
+
+        if (response.data.erro === true) {
+          setCepError(true);
+        } else {
+          setCepError(false);
+          // Preencha automaticamente o estado e a cidade (ou use outras informações, se necessário)
+          setPostarServico({
+            ...postarServico,
+            cep: cep,
+            uf_localidade: `${response.data.uf} - ${response.data.localidade}`,
+            bairro: response.data.bairro,
+            logradouro: response.data.logradouro,
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (cep.length === 8) {
+      fetchData();
+    }
+  }, [cep]);
+
+
+
+  const updatepostarServico = useCallback((info) => {
+    setPostarServico(info);
+  }, []);
+
+
 
   return (
     <AuthContext.Provider
