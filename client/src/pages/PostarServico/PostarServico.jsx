@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { SidebarCliente, Header, TextInput } from "../../components";
 import axios from "axios";
-import Cookies from "js-cookie";
 import JSZip from "jszip";
 
 
@@ -13,47 +12,24 @@ import {
   RiQuestionLine,
   RiAttachment2,
 } from "react-icons/ri";
+import { AuthContext } from "../../context/AuthContext";
 
 const PostarServico = () => {
+  const {PostarServico, updatepostarServico, categorias, Servico, fetchData, cepError, endereco, setEndereco} = useContext(AuthContext)
+  
+  const handleCepChange = (e) => {
+    const cep = e.target.value;
+    setEndereco({ ...endereco, cep }); // Atualiza o estado do CEP
+    const cepToFetch = cep; // Armazena o valor atual do CEP em uma variável local
+    if(cep.length === 8)
+    fetchData(cepToFetch); // Chama a função de busca de dados do CEP com o valor atual
+  };
+  
+  
+  
   const navigate = useNavigate();
   const [form, setForm] = useState(1);
-  const [cep, setCep] = useState("");
-  const [addressData, setAddressData] = useState({});
-  const [cepError, setCepError] = useState(false);
-  const [urgencia, setUrgencia] = useState(false);
-  const [categorias, setCategorias] = useState([]);
-  const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
-  const [complemento, setComplemento] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [formData, setFormData] = useState({
-    titulo: null,
-    dsServico: null,
-    cep: null,
-    uf_localidade: null,
-    logradouro: null,
-    bairro: null,
-    nmrResidencia: null,
-    categoriaSelecionada: null,
-    complemento: null,
-    idCliente: null,
-    email: null,
-    imagens: null,
-  });
-
-  const getCookieData = () => {
-    const userDataString = decodeURIComponent(Cookies.get("user"));
-    if (userDataString) {
-      const userData = JSON.parse(userDataString);
-      // Atualize o estado formData com os dados do cookie
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        idCliente: userData.id_cliente,
-        email: userData.email,
-      }));
-      console.log(userData.id_cliente);
-      console.log(userData.email);
-    }
-  };
+  
 
   const handleNext = () => {
     setForm(form + 1);
@@ -67,153 +43,14 @@ const PostarServico = () => {
     }
   };
 
-  const handleCepChange = (event) => {
-    setAddressData({}); // Limpar os dados do endereço ao editar manualmente o CEP
-    setCep(event.target.value);
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `https://viacep.com.br/ws/${cep}/json/`
-        );
-        setAddressData(response.data);
-        console.log(response.data);
-
-        if (response.data.erro === true) {
-          setCepError(true);
-        } else {
-          setCepError(false);
-          // Preencha automaticamente o estado e a cidade (ou use outras informações, se necessário)
-          setFormData({
-            ...formData,
-            cep: cep,
-            uf_localidade: `${response.data.uf} - ${response.data.localidade}`,
-            bairro: response.data.bairro,
-            logradouro: response.data.logradouro,
-          });
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    if (cep.length === 8) {
-      fetchData();
-    }
-  }, [cep]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    // Gerar o arquivo ZIP
-    await zipImages();
-  
-    try {
-      // Enviar o formulário com o estado formData atualizado
-      const response = await axios.post(
-        "http://localhost:5000/auth/postarServico",
-        formData
-      );
-  
-      setMessage(response.data.message);
-    } catch (error) {
-      console.error("Erro ao cadastrar:", error);
-      setMessage(
-        error.response?.data?.message || "Erro ao cadastrar. Tente novamente."
-      );
-    }
-  };
-  
-  const handleUrgenciaChange = (event) => {
-    // Atualiza o estado da urgência com base no estado atual do checkbox
-    setUrgencia(event.target.checked);
-  };
-
-  const handleFormSubmit = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleEstadoCidadeChange = (event) => {
-    // Permitir que o usuário edite o campo "Estado - Cidade"
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      uf_localidade: event.target.value,
-    }));
-  };
-  const handlebairro = (event) => {
-    // Permitir que o usuário edite o campo "Estado - Cidade"
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      bairro: event.target.value,
-    }));
-  };
-
-  const handlelogradouro = (event) => {
-    // Permitir que o usuário edite o campo "Estado - Cidade"
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      logradouro: event.target.value,
-    }));
-  };
-
-  const handleComplemento = (event) => {
-    // Permitir que o usuário edite o campo "Estado - Cidade"
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      complemento: event.target.value,
-    }));
-  };
-
-  useEffect(() => {
-    const carregarCategorias = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/auth/selectCategoria"
-        );
-        setCategorias(response.data);
-      } catch (error) {
-        console.error("Erro ao buscar categorias:", error);
-      }
-      getCookieData();
-    };
-
-    // Chama a função para buscar as categorias
-    carregarCategorias();
-  }, []);
-
-  const handleCategoriaChange = (event) => {
-    const selectedCategoria = event.target.value;
-    setCategoriaSelecionada(selectedCategoria);
-
-    // Atualize o estado categoriaSelecionada no formData
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      categoriaSelecionada: selectedCategoria,
-    }));
-  };
-
-  // const handleImageChange = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       setSelectedImage(reader.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
+ 
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [exceededLimit, setExceededLimit] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imageToDeleteIndex, setImageToDeleteIndex] = useState(null);
+ 
   
 
   const handleImageChange = (event) => {
@@ -237,12 +74,9 @@ const PostarServico = () => {
               }, 4000);
               return;
             }
-           
-
-          
             setSelectedImages(limitedImages);
             setShowFilter(limitedImages.length > 3);
-            
+          
           }
           
         };
@@ -313,10 +147,10 @@ const zipImages = async () => {
     const zipFile = new File([content], "images.zip");
 
     // Atualize o estado formData com o arquivo ZIP
-    setFormData(prevFormData => ({
-      ...prevFormData,
+    updatepostarServico({
+      ...Servico,
       imagens: zipFile
-    }));
+    });
 
     console.log("Objeto FormData após adicionar arquivo ZIP:", formData);
 
@@ -340,7 +174,7 @@ const zipImages = async () => {
               <div className={`publicar123 ${form === 2 ? "form" : ""}`}>2</div>
             </div>
           </div>
-          <form onSubmit={handleSubmit} className="postarServico1">
+          <form onSubmit={PostarServico} className="postarServico1">
             {form === 1 && (
               <div>
                 <div className="headerVoltar">
@@ -355,17 +189,19 @@ const zipImages = async () => {
                       name="titulo"
                       type="text"
                       size={{ width: "35vw", height: "3vw" }}
-                      onChange={handleFormSubmit}
                       placeholder={"Busque por serviços"}
-                      value={formData.titulo}
+                      onChange={(e) =>
+                        updatepostarServico({ ...Servico, titulo: e.target.value })
+                      }
                     />
 
                     <div className="emergente-categorias">
                       <select
                         id="categoriaSelect"
-                        value={categoriaSelecionada}
-                        onChange={handleCategoriaChange}
                         className="categorias"
+                        onChange={(e) =>
+                          updatepostarServico({ ...Servico, categoria: e.target.value })
+                        }
                       >
 
                       <option value="" disabled selected>Selecione uma categoria</option>
@@ -387,11 +223,13 @@ const zipImages = async () => {
                       name="dsServico"
                       type="text"
                       size={{ width: "35vw", height: "10vw" }}
-                      onChange={handleFormSubmit}
+                      
                       placeholder={
                         "Exemplo: Eu preciso de um pintor para pintar uma parede externa de 4 metros de altura e 6 metros de largura. A parede é feita de tijolos e precisa ser limpa e preparada antes da pintura. Eu gostaria que a parede fosse pintada com tinta acrílica branca. Já comprei toda a tinta necessária, caso precise de mais tinta posso comprar."
                       }
-                      value={formData.dsServico}
+                      onChange={(e) =>
+                        updatepostarServico({ ...Servico, dsServico: e.target.value })
+                      }
                     />
                     <div className="content-img-button">
                       <input
@@ -528,9 +366,10 @@ const zipImages = async () => {
                                 ? "1px solid red"
                                 : "1px solid black",
                             }}
-                            onChange={handleCepChange}
-                            placeholder={""}
-                            value={cep}
+                            onChange={(e) => {
+                              handleCepChange(e); // Chama a função handleCepChange existente
+                              updatepostarServico({ ...Servico, cep: e.target.value }); // Atualiza o estado do serviço com o novo valor do CEP
+                            }}
                           />
                           {cepError && (
                             <p className="cepError">CEP incorreto</p>
@@ -543,9 +382,8 @@ const zipImages = async () => {
                           type="text"
                           name="estado_cidade"
                           size={{ width: "30vw", height: "3vw" }}
-                          onChange={handleEstadoCidadeChange}
                           placeholder={""}
-                          value={formData.uf_localidade}
+                          value={endereco.uf_localidade}
                           disabled
                         />
                       </div>
@@ -557,9 +395,11 @@ const zipImages = async () => {
                           type="text"
                           name="bairro"
                           size={{ width: "24vw", height: "3vw" }}
-                          onChange={handlebairro}
                           placeholder={""}
-                          value={formData.bairro}
+                          value={endereco.bairro}
+                          onChange={(e) => {
+                            updatepostarServico({ ...Servico, bairro: e.target.value });
+                          }}
                         />
                       </div>
                       <div>
@@ -569,9 +409,11 @@ const zipImages = async () => {
                             type="text"
                             name="nmRua"
                             size={{ width: "20vw", height: "3vw" }}
-                            onChange={handlelogradouro}
                             placeholder={""}
-                            value={formData.logradouro}
+                            value={endereco.logradouro}
+                            onChange={(e) => {
+                              updatepostarServico({ ...Servico, logradouro: e.target.value });
+                            }}
                           />
                         </div>
                       </div>
@@ -579,13 +421,15 @@ const zipImages = async () => {
                     <div className="num-complemento">
                       <div>
                         <h4 className="postarH4">Número da residência</h4>
-                        <TextInput
+               
+                         <TextInput
                           type="number"
                           name="nmrResidencia"
                           size={{ width: "8vw", height: "3vw" }}
-                          onChange={handleFormSubmit}
                           placeholder={""}
-                          value={formData.nmrResidencia}
+                          onChange={(e) => {
+                            updatepostarServico({ ...Servico, nmrResidencia: e.target.value });
+                          }}
                         />
                       </div>
                       <div>
@@ -594,15 +438,17 @@ const zipImages = async () => {
                           type="text"
                           name="complemento"
                           size={{ width: "20vw", height: "3vw" }}
-                          onChange={handleComplemento}
+                          
                           placeholder={""}
-                          value={formData.complemento}
+                          onChange={(e) => {
+                            updatepostarServico({ ...Servico, complemento: e.target.value });
+                          }}
                         />
                       </div>
                     </div>
                     <div className="linha-postar" id="rightPostar2">
-                      <button className="btnProximo" onClick={handleSubmit}>
-                        
+                      <button className="btnProximo" type="submit">
+                        aaaa
                       </button>
 
                     </div>
