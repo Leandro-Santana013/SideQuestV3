@@ -27,11 +27,11 @@ const Router = () => {
       <AuthContextProvider>
         <Routes>
           <Route exact path="/" element={<Landing />} />
-          <Route exact path="/login" element={true ? <Navigate to="/homeCliente" /> : <Login />} />
+          <Route exact path="/login" element={user ? <Navigate to="/homeCliente" /> : <Login />} />
           <Route exact path="/loginProfissional" element={<LoginProfissional />} />
           <Route exact path="/validaEmailProfissional" element={<ValidaEmailProfissional />} />
           <Route exact path="/validaemail" element={<ValidaEmail />} />
-          <Route exact path="/homeCliente" element={true ? <HomeCliente /> : <Navigate to="/login" />} />
+          <Route exact path="/homeCliente" element={user ? <HomeCliente /> : <Navigate to="/login" />} />
           <Route exact path="/perfilCliente" element={<PerfilCliente />} />
           <Route exact path="/homeCliente/postarSevico" element={<PostarServico />} />
           <Route exact path="/pagamentosCliente" element={<PagamentosCliente />} />

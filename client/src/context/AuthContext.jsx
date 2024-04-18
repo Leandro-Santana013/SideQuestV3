@@ -5,25 +5,17 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import { postRequest, baseUrl } from "../utils/services";
+import { postRequest, baseUrl, getRequest } from "../utils/services";
 export const AuthContext = createContext();
 import axios from "axios";
 
 export const AuthContextProvider = ({ children }) => {
-  
-  
-  //objeto de usuario
-  const [user, setUser] = useState({
-    id: null,
-    name: null,
-    email: null,
-    nmr: null,
-    cpf: null,
-    sexo: null,
-    idade: null,
-  });
 
- 
+
+  //objeto de usuario
+  const [user, setUser] = useState({});
+
+
 
   //objeto de registro
   const [formDataCadastro, setFormDataCadastro] = useState({
@@ -44,8 +36,8 @@ export const AuthContextProvider = ({ children }) => {
     setFormDataCadastro(info);
   }, []);
 
-   // funcão de registro
-   const registerUser = useCallback(
+  // funcão de registro
+  const registerUser = useCallback(
     async (e) => {
       e.preventDefault();
       setRegisterLoading(true);
@@ -71,9 +63,9 @@ export const AuthContextProvider = ({ children }) => {
     },
     [formDataCadastro, setRegisterError, setRegisterSucess, setRegisterLoading]
   );
-  
 
-//login
+
+  //login
   const [loginError, setloginError] = useState(null);
   const [loginLoading, setloginLoading] = useState(false);
   const [loginInfo, setloginInfo] = useState({
@@ -81,30 +73,43 @@ export const AuthContextProvider = ({ children }) => {
     senha: null,
   });
 
-// seta o usuario com o localstorage
+  // seta o usuario com o localstorage
   useEffect(() => {
     const user = localStorage.getItem("User");
-    
+
     setUser(JSON.parse(user));
+  }, []);
+
+  useEffect(() => {
+    console.log(user)
 
     setServico((prevServico) => ({
       ...prevServico,
-      idCliente: user ? user.id : null,
+      idCliente: user ? user.id_cliente : null,
+      email: user ? user.email : null,
+
     }));
-  }, []);
+  }, [user]);
 
   const updateLogininfo = useCallback((info) => {
     setloginInfo(info);
   }, []);
 
+  useEffect(() => {
+    const user = localStorage.getItem("User");
+
+    setUser(JSON.parse(user));
+  }, []);
+  
   //logout
+
   const logoutUser = useCallback(() => {
     localStorage.removeItem("User");
     setUser(null);
     window.location.reload();
   }, []);
 
-  const loginUser = useCallback(async(e) => {
+  const loginUser = useCallback(async (e) => {
     e.preventDefault();
     setloginLoading(true);
     setloginError(null);
@@ -119,51 +124,42 @@ export const AuthContextProvider = ({ children }) => {
       }
     } catch (error) {
       setRegisterError("Erro ao logar. Por favor, tente novamente."); // Define o estado de erro com uma mensagem genérica de erro
-    setRegisterLoading(false);}
+      setRegisterLoading(false);
+    }
   }, [loginInfo]);
+
+
 
 
   const [cepError, setCepError] = useState(false);
   const [categorias, setCategorias] = useState([])
-  
+  const [form, setForm] = useState(1);
+
 
 
   const [Servico, setServico] = useState({
-    titulo: null,
+    titulo: null, 
     dsServico: null,
     cep: null,
     uf_localidade: null,
     logradouro: null,
     bairro: null,
     nmrResidencia: null,
-    categoriaSelecionada: null,
+    categoria: null,
     complemento: null,
     idCliente: null,
     email: null,
     imagens: null,
   });
 
-  const [endereco, setEndereco] = useState({
-    cep: null,
-    uf_localidade: null,
-    logradouro: null,
-    bairro: null,
-  });
 
-
-  
-  const PostarServico = useCallback(async(e) => {
+  const PostarServico = useCallback(async (e) => {
     e.preventDefault();
     console.log(Servico)
-    await zipImages();
-  
+
     try {
       // Enviar o formulário com o estado formData atualizado
-      const response = await axios.post(
-        "http://localhost:5000/auth/postarServico",
-        Servico
-      );
-  
+      const response = await postRequest("/postarServico", Servico);
       setMessage(response.data.message);
     } catch (error) {
       console.error("Erro ao cadastrar:", error);
@@ -171,28 +167,22 @@ export const AuthContextProvider = ({ children }) => {
         error.response?.data?.message || "Erro ao cadastrar. Tente novamente."
       );
     }
-  }, []);
+  }, [Servico]);
 
   const fetchData = async (cep) => {
     try {
       const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
       if (!response.data.erro) {
         const { uf, localidade, logradouro, bairro } = response.data;
-        updatepostarServico({
+        setCepError(false)
+        setServico({
           ...Servico,
           cep,
           uf_localidade: `${uf} - ${localidade}`,
           logradouro,
           bairro
         });
-        setEndereco({
-          ...endereco,
-          cep,
-          uf_localidade: `${uf} - ${localidade}`,
-          logradouro,
-          bairro
-        });
-        console.log(endereco);
+
 
       } else {
         setCepError(true)
@@ -201,30 +191,29 @@ export const AuthContextProvider = ({ children }) => {
       console.error("Erro ao buscar CEP:", error);
     }
   };
-  
+
 
 
   useEffect(() => {
     const carregarCategorias = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/auth/selectCategoria"
-        );
-        setCategorias(response.data);
+        const response = await getRequest("/selectCategoria");
+        setCategorias(response); // Aqui estamos definindo o estado das categorias com a resposta do servidor
+
       } catch (error) {
         console.error("Erro ao buscar categorias:", error);
       }
-     
     };
-
+  
     // Chama a função para buscar as categorias
     carregarCategorias();
   }, []);
+  
 
 
   const updatepostarServico = useCallback((info) => {
     setServico(info);
-    
+
   }, []);
 
 
@@ -247,8 +236,7 @@ export const AuthContextProvider = ({ children }) => {
         loginLoading,
         PostarServico,
         Servico,
-        endereco,
-        setEndereco,
+        setServico,
         updatepostarServico,
         categorias,
         fetchData,

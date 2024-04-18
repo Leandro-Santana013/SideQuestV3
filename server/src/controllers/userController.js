@@ -218,6 +218,7 @@ exports.postarServico = async (req, res) => {
       categoriaSelecionada,
       idCliente,
       email,
+      imagens
     } = req.body;
     console.log(
       titulo,
@@ -230,7 +231,8 @@ exports.postarServico = async (req, res) => {
       nmrResidencia,
       categoriaSelecionada,
       idCliente,
-      email
+      email,
+      imagens
     );
 
     var partes = uf_localidade.split(" - ");
@@ -238,9 +240,13 @@ exports.postarServico = async (req, res) => {
     var cidade = partes[1];
     console.log(estado, cidade);
 
+
     const categoriaInstance = await controller_User.selectCategoriaescolhida({
       params: { ds_categoria: categoriaSelecionada },
     });
+
+    if (categoriaInstance === 0)
+    return res.status(400).json({ error: "categoria não selecionada", formstatus: 1});
 
     console.log(categoriaInstance);
 
@@ -267,6 +273,7 @@ exports.postarServico = async (req, res) => {
           id_endereco: enderecoInstance.id_endereco,
           ds_servico: dsServico,
           ds_titulo: titulo,
+          img_servico:imagens
         },
       });
     } catch (error) {
@@ -280,6 +287,7 @@ exports.postarServico = async (req, res) => {
 
 exports.selectCategoria = async (req, res) => {
   const categoria = await controller_User.selectCategorias();
+  console.log(categoria)
   res.status(200).json(categoria);
 };
 

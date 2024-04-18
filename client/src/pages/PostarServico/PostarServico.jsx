@@ -15,21 +15,21 @@ import {
 import { AuthContext } from "../../context/AuthContext";
 
 const PostarServico = () => {
-  const {PostarServico, updatepostarServico, categorias, Servico, fetchData, cepError, endereco, setEndereco} = useContext(AuthContext)
-  
+  const { PostarServico, updatepostarServico, categorias, Servico, fetchData, cepError, setServico } = useContext(AuthContext)
+
   const handleCepChange = (e) => {
     const cep = e.target.value;
-    setEndereco({ ...endereco, cep }); // Atualiza o estado do CEP
+    setServico({ ...Servico, cep }); // Atualiza o estado do CEP
     const cepToFetch = cep; // Armazena o valor atual do CEP em uma variável local
-    if(cep.length === 8)
-    fetchData(cepToFetch); // Chama a função de busca de dados do CEP com o valor atual
+    if (cep.length === 8)
+      fetchData(cepToFetch); // Chama a função de busca de dados do CEP com o valor atual
   };
-  
-  
-  
+
+
+
   const navigate = useNavigate();
   const [form, setForm] = useState(1);
-  
+
 
   const handleNext = () => {
     setForm(form + 1);
@@ -43,15 +43,15 @@ const PostarServico = () => {
     }
   };
 
- 
+
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [exceededLimit, setExceededLimit] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
- 
-  
+
+
 
   const handleImageChange = (event) => {
     const files = event.target.files;
@@ -59,13 +59,13 @@ const PostarServico = () => {
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      
+
       if (file) {
-        const reader = new FileReader();  
+        const reader = new FileReader();
         reader.onload = () => {
           imagesArray.push(reader.result);
           if (imagesArray.length === files.length) {
-          const newImages = [...selectedImages, ...imagesArray];
+            const newImages = [...selectedImages, ...imagesArray];
             const limitedImages = newImages.slice(0, 5); // Limitando a 5 imagens
             if (newImages.length > 5) {
               setExceededLimit(true);
@@ -76,16 +76,16 @@ const PostarServico = () => {
             }
             setSelectedImages(limitedImages);
             setShowFilter(limitedImages.length > 3);
-          
+
           }
-          
+
         };
         reader.readAsDataURL(file);
       }
     }
   };
 
-  
+
 
 
   const openModal = (index) => {
@@ -98,66 +98,66 @@ const PostarServico = () => {
   };
 
   const handlePrevimg = () => {
-  setCurrentImageIndex((prevIndex) =>
-    prevIndex === 0 ? selectedImages.length - 1 : prevIndex - 1
-  );
-};
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? selectedImages.length - 1 : prevIndex - 1
+    );
+  };
 
-const handleNextimg = () => {
-  setCurrentImageIndex((prevIndex) =>
-    prevIndex === selectedImages.length - 1 ? 0 : prevIndex + 1
-  );
-};
+  const handleNextimg = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === selectedImages.length - 1 ? 0 : prevIndex + 1
+    );
+  };
 
-const deleteImage = (index) => {
-  const updatedImages = selectedImages.filter((_, idx) => idx !== index);
-  setSelectedImages(updatedImages);
-}
-
-
-
-useEffect(() => {
-  // Verificar se não há mais imagens selecionadas
-  if (selectedImages.length === 0) {
-    // Fechar o modal
-    closeModal();
-  } else {
-    // Verificar se a imagem atualmente exibida no modal foi excluída
-    if (currentImageIndex >= selectedImages.length) {
-      // Atualizar o índice da imagem atual no modal para a última imagem disponível
-      setCurrentImageIndex(selectedImages.length - 1);
-    }
+  const deleteImage = (index) => {
+    const updatedImages = selectedImages.filter((_, idx) => idx !== index);
+    setSelectedImages(updatedImages);
   }
-}, [selectedImages, currentImageIndex]);
 
-const zipImages = async () => {
-  const zip = new JSZip();
 
-  // Adicione as imagens ao arquivo ZIP
-  selectedImages.forEach((image, index) => {
-    zip.file(`image_${index}.png`, image.split("base64,")[1], { base64: true });
-  });
 
-  try {
-    // Gerar o arquivo ZIP
-    const content = await zip.generateAsync({ type: "blob" });
-    console.log("Conteúdo do arquivo ZIP:", content);
+  useEffect(() => {
+    // Verificar se não há mais imagens selecionadas
+    if (selectedImages.length === 0) {
+      // Fechar o modal
+      closeModal();
+    } else {
+      // Verificar se a imagem atualmente exibida no modal foi excluída
+      if (currentImageIndex >= selectedImages.length) {
+        // Atualizar o índice da imagem atual no modal para a última imagem disponível
+        setCurrentImageIndex(selectedImages.length - 1);
+      }
+    }
+  }, [selectedImages, currentImageIndex]);
 
-    // Adicione o arquivo ZIP ao FormData
-    const zipFile = new File([content], "images.zip");
+  const zipImages = async () => {
+    const zip = new JSZip();
 
-    // Atualize o estado formData com o arquivo ZIP
-    updatepostarServico({
-      ...Servico,
-      imagens: zipFile
+    // Adicione as imagens ao arquivo ZIP
+    selectedImages.forEach((image, index) => {
+      zip.file(`image_${index}.png`, image.split("base64,")[1], { base64: true });
     });
 
-    console.log("Objeto FormData após adicionar arquivo ZIP:", formData);
+    try {
+      // Gerar o arquivo ZIP
+      const content = await zip.generateAsync({ type: "blob" });
+      console.log("Conteúdo do arquivo ZIP:", content);
 
-  } catch (error) {
-    console.error("Erro ao gerar o arquivo ZIP:", error);
-  }
-};
+      // Adicione o arquivo ZIP ao FormData
+      const zipFile = new File([content], "images.zip");
+
+      // Atualize o estado formData com o arquivo ZIP
+      updatepostarServico({
+        ...Servico,
+        imagens: zipFile
+      });
+
+      console.log("Objeto FormData após adicionar arquivo ZIP:", formData);
+
+    } catch (error) {
+      console.error("Erro ao gerar o arquivo ZIP:", error);
+    }
+  };
 
 
 
@@ -204,7 +204,7 @@ const zipImages = async () => {
                         }
                       >
 
-                      <option value="" disabled selected>Selecione uma categoria</option>
+                        <option value="" disabled selected>Selecione uma categoria</option>
                         {categorias.map((categoria) => (
                           <option
                             name={categoria.ds_categoria}
@@ -223,7 +223,7 @@ const zipImages = async () => {
                       name="dsServico"
                       type="text"
                       size={{ width: "35vw", height: "10vw" }}
-                      
+
                       placeholder={
                         "Exemplo: Eu preciso de um pintor para pintar uma parede externa de 4 metros de altura e 6 metros de largura. A parede é feita de tijolos e precisa ser limpa e preparada antes da pintura. Eu gostaria que a parede fosse pintada com tinta acrílica branca. Já comprei toda a tinta necessária, caso precise de mais tinta posso comprar."
                       }
@@ -334,7 +334,12 @@ const zipImages = async () => {
                   </div>
 
                   <div className="rightPostar">
-                    <button className="btnProximo" onClick={handleNext}>
+                    <button className="btnProximo" onClick={() => {
+                      handleNext(); // Chama a função para avançar para o próximo formulário
+                      if (selectedImages.length > 0) {
+                        zipImages(); // Chama a função para zipar as imagens apenas se houver alguma imagem selecionada
+                      }
+                    }}>
                       Próximo
                     </button>
                   </div>
@@ -359,6 +364,7 @@ const zipImages = async () => {
                           <TextInput
                             type="text"
                             name="cep"
+                            autocomplete="off"
                             size={{
                               width: "14vw",
                               height: "3vw",
@@ -383,7 +389,7 @@ const zipImages = async () => {
                           name="estado_cidade"
                           size={{ width: "30vw", height: "3vw" }}
                           placeholder={""}
-                          value={endereco.uf_localidade}
+                          value={Servico.uf_localidade}
                           disabled
                         />
                       </div>
@@ -394,9 +400,10 @@ const zipImages = async () => {
                         <TextInput
                           type="text"
                           name="bairro"
+                          autocomplete="off"
                           size={{ width: "24vw", height: "3vw" }}
                           placeholder={""}
-                          value={endereco.bairro}
+                          value={Servico.bairro}
                           onChange={(e) => {
                             updatepostarServico({ ...Servico, bairro: e.target.value });
                           }}
@@ -408,9 +415,10 @@ const zipImages = async () => {
                           <TextInput
                             type="text"
                             name="nmRua"
+                            autocomplete="off"
                             size={{ width: "20vw", height: "3vw" }}
                             placeholder={""}
-                            value={endereco.logradouro}
+                            value={Servico.logradouro}
                             onChange={(e) => {
                               updatepostarServico({ ...Servico, logradouro: e.target.value });
                             }}
@@ -421,10 +429,11 @@ const zipImages = async () => {
                     <div className="num-complemento">
                       <div>
                         <h4 className="postarH4">Número da residência</h4>
-               
-                         <TextInput
+
+                        <TextInput
                           type="number"
                           name="nmrResidencia"
+                          autocomplete="off"
                           size={{ width: "8vw", height: "3vw" }}
                           placeholder={""}
                           onChange={(e) => {
@@ -437,8 +446,9 @@ const zipImages = async () => {
                         <TextInput
                           type="text"
                           name="complemento"
+                          autocomplete="off"
                           size={{ width: "20vw", height: "3vw" }}
-                          
+
                           placeholder={""}
                           onChange={(e) => {
                             updatepostarServico({ ...Servico, complemento: e.target.value });

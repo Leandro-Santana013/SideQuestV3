@@ -35,6 +35,15 @@ export const postRequest = async (url, body) => {
     }
 };
 
+export const getRequest = async (url) => {
+    try {
+        const response = await axios.get(baseUrl + url);
+        let info = response.data;
+        return info
+    } catch (error) {
+            return console.log(error); 
+    }
+}
 
 
 // export const postRequest = async (url, body) => {

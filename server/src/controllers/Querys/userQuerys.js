@@ -94,7 +94,9 @@ module.exports = {
     return ModelCategoria.findAll({
       attributes: ["ds_categoria"],
       order: [["ds_categoria", "ASC"]],
+      raw:true
     });
+    
   },
 
   selectCategoriaescolhida: async (req, res) => {
