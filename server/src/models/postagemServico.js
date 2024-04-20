@@ -42,7 +42,7 @@ const ModelPostagemServico = connectionDataBase.define('tb_postagemServico', {
         type: DataTypes.STRING(50),
         allowNull: false
     },
-    img_Servico: {
+    img_servico: {
         type: DataTypes.BLOB,
         allowNull: true,
       },

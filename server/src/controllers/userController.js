@@ -6,6 +6,7 @@ const controller_User = require("./Querys/userQuerys");
 const validator = require("validator");
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
+const Buffer = require('buffer').Buffer;
 
 
 let globalemail;
@@ -234,10 +235,10 @@ exports.postarServico = async (req, res) => {
       categoria,
       idCliente,
       email,
-      imagens
     );
 
-    
+    const imageBuffer = Buffer.from(imagens, 'base64');
+console.log(imageBuffer)
 
     var partes = uf_localidade.split(" - ");
     var estado = partes[0];
@@ -276,7 +277,7 @@ exports.postarServico = async (req, res) => {
           id_endereco: enderecoInstance.id_endereco,
           ds_servico: dsServico,
           ds_titulo: titulo,
-          img_servico: imagens,
+          img_servico: imageBuffer,
         },
       });
     } catch (error) {

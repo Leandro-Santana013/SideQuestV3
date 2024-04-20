@@ -158,7 +158,7 @@ module.exports = {
   },
 
   CreateServico: async (req, res) => {
-    const { ds_servico, ds_titulo, id_cliente, id_categoria, id_endereco } =
+    const { ds_servico, ds_titulo, id_cliente, id_categoria, id_endereco, img_servico } =
       req.params;
     return ModelPostagemServico.create({
       id_cliente: id_cliente,
@@ -166,6 +166,7 @@ module.exports = {
       id_endereco: id_endereco,
       ds_servico: ds_servico,
       ds_titulo: ds_titulo,
+      img_servico: img_servico,
     });
   },
 
