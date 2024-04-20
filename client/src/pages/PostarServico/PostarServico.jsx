@@ -4,7 +4,7 @@ import { SidebarCliente, Header, TextInput } from "../../components";
 import axios from "axios";
 import JSZip from "jszip";
 
-const { Image } = require("image-js");
+
 
 import "./postarServico.css";
 import {
@@ -135,51 +135,48 @@ const PostarServico = () => {
 
 
 
-const zipImages = async () => {
-  const zip = new JSZip();
-
-  // Função para redimensionar a imagem
-  const resizeImage = async (imageData, maxWidth, maxHeight) => {
-    const image = await Image.load(imageData);
-    await image.resize({
-      width: maxWidth,
-      height: maxHeight,
-      strategy: "best-fit",
+  const zipImages = async () => {
+    const zip = new JSZip();
+  
+    // Adicione as imagens ao arquivo ZIP
+    selectedImages.forEach((image, index) => {
+      zip.file(`image_${index}.png`, image.split("base64,")[1], { base64: true });
     });
-    return image.toDataURL("image/jpeg", 0.75); // Redimensiona para JPEG com qualidade 70%
+  
+    try {
+      // Gerar o arquivo ZIP
+      const content = await zip.generateAsync({ type: "blob" });
+      const blobSize = content.size;
+      
+      // Criar um FileReader
+      const reader = new FileReader();
+  
+      // Quando o FileReader carregar, converter para base64 e criar o objeto File
+      reader.onload = () => {
+        console.log(`Tamanho do arquivo ZIP: ${blobSize} bytes`);
+        const base64String = reader.result.split(",")[1];
+        const zipFile = {
+          name: "images.zip",
+          type: "application/zip",
+          content: base64String,
+        };
+  
+        // Converta zipFile para JSON
+        const jsonZipFile = JSON.stringify(zipFile);
+  
+        // Atualizar o serviço com as imagens
+        updatepostarServico({
+          ...Servico,
+          imagens: jsonZipFile,
+        });
+      };
+  
+      // Ler o conteúdo do arquivo como um ArrayBuffer
+      reader.readAsDataURL(content);
+    } catch (error) {
+      console.error("Erro ao gerar o arquivo ZIP:", error);
+    }
   };
-
-  selectedImages.forEach(async (imageData, index) => {
-    // Redimensionar a imagem antes de adicionar ao ZIP
-    const resizedImageData = await resizeImage(imageData, 800, 600); // usar calculo do css pra reformatar a imagem com vw 
-
-    // Adicionar a imagem redimensionada ao ZIP
-    zip.file(`image_${index}.jpg`, resizedImageData.split("base64,")[1], { base64: true });
-  });
-
-  try {
-    const content = await zip.generateAsync({ type: "blob" });
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      const zipFile = JSON.stringify({
-        name: "images.zip",
-        type: "application/zip",
-        content: reader.result.split(",")[1],
-      });
-
-      updatepostarServico({
-        ...Servico,
-        imagens: zipFile,
-      });
-    };
-
-    reader.readAsDataURL(content);
-  } catch (error) {
-    console.error("Erro ao gerar o arquivo ZIP:", error);
-  }
-};
-
 
 
 
