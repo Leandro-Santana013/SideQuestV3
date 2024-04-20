@@ -73,7 +73,7 @@ export const Login = () => {
                 type="text"
                 name="name"
                 onChange={(e) =>
-                  updateCadastro({ ...formDataCadastro, titulo: e.target.value })
+                  updateCadastro({ ...formDataCadastro, name: e.target.value })
                 }
               />
               <input

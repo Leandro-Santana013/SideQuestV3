@@ -7,6 +7,7 @@ const validator = require("validator");
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
+
 let globalemail;
 let globaltoken;
 let globalCpf;
@@ -215,11 +216,12 @@ exports.postarServico = async (req, res) => {
       bairro,
       complemento,
       nmrResidencia,
-      categoriaSelecionada,
+      categoria,
       idCliente,
       email,
       imagens
     } = req.body;
+    
     console.log(
       titulo,
       dsServico,
@@ -229,24 +231,25 @@ exports.postarServico = async (req, res) => {
       bairro,
       complemento,
       nmrResidencia,
-      categoriaSelecionada,
+      categoria,
       idCliente,
       email,
       imagens
     );
+
+    
 
     var partes = uf_localidade.split(" - ");
     var estado = partes[0];
     var cidade = partes[1];
     console.log(estado, cidade);
 
-
     const categoriaInstance = await controller_User.selectCategoriaescolhida({
-      params: { ds_categoria: categoriaSelecionada },
+      params: { ds_categoria: categoria },
     });
 
     if (categoriaInstance === 0)
-    return res.status(400).json({ error: "categoria não selecionada", formstatus: 1});
+      return res.status(400).json({ error: "categoria não selecionada", formstatus: 1 });
 
     console.log(categoriaInstance);
 
@@ -273,12 +276,14 @@ exports.postarServico = async (req, res) => {
           id_endereco: enderecoInstance.id_endereco,
           ds_servico: dsServico,
           ds_titulo: titulo,
-          img_servico:imagens
+          img_servico: imagens,
         },
       });
     } catch (error) {
       console.log(`erro interno no servidor ${error}`);
     }
+
+    return res.status(200).json({ message: "Serviço postado com sucesso" });
   } catch (error) {
     console.error(error);
     return res.json("erro");
@@ -287,7 +292,7 @@ exports.postarServico = async (req, res) => {
 
 exports.selectCategoria = async (req, res) => {
   const categoria = await controller_User.selectCategorias();
-  console.log(categoria)
+  console.log(categoria);
   res.status(200).json(categoria);
 };
 
@@ -307,6 +312,7 @@ exports.profissionalCard = async (req, res) => {
       break;
   }
 };
+
 exports.selectinfos = async (req, res) => {
   const { idCliente, email } = req.body;
   const clientinfo = await controller_User.selectInfocliente({

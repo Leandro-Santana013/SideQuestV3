@@ -4,6 +4,7 @@ import { SidebarCliente, Header, TextInput } from "../../components";
 import axios from "axios";
 import JSZip from "jszip";
 
+const { Image } = require("image-js");
 
 import "./postarServico.css";
 import {
@@ -130,34 +131,56 @@ const PostarServico = () => {
     }
   }, [selectedImages, currentImageIndex]);
 
-  const zipImages = async () => {
-    const zip = new JSZip();
 
-    // Adicione as imagens ao arquivo ZIP
-    selectedImages.forEach((image, index) => {
-      zip.file(`image_${index}.png`, image.split("base64,")[1], { base64: true });
+
+
+
+const zipImages = async () => {
+  const zip = new JSZip();
+
+  // Função para redimensionar a imagem
+  const resizeImage = async (imageData, maxWidth, maxHeight) => {
+    const image = await Image.load(imageData);
+    await image.resize({
+      width: maxWidth,
+      height: maxHeight,
+      strategy: "best-fit",
     });
+    return image.toDataURL("image/jpeg", 0.75); // Redimensiona para JPEG com qualidade 70%
+  };
 
-    try {
-      // Gerar o arquivo ZIP
-      const content = await zip.generateAsync({ type: "blob" });
-      console.log("Conteúdo do arquivo ZIP:", content);
+  selectedImages.forEach(async (imageData, index) => {
+    // Redimensionar a imagem antes de adicionar ao ZIP
+    const resizedImageData = await resizeImage(imageData, 800, 600); // usar calculo do css pra reformatar a imagem com vw 
 
-      // Adicione o arquivo ZIP ao FormData
-      const zipFile = new File([content], "images.zip");
+    // Adicionar a imagem redimensionada ao ZIP
+    zip.file(`image_${index}.jpg`, resizedImageData.split("base64,")[1], { base64: true });
+  });
 
-      // Atualize o estado formData com o arquivo ZIP
-      updatepostarServico({
-        ...Servico,
-        imagens: zipFile
+  try {
+    const content = await zip.generateAsync({ type: "blob" });
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const zipFile = JSON.stringify({
+        name: "images.zip",
+        type: "application/zip",
+        content: reader.result.split(",")[1],
       });
 
-      console.log("Objeto FormData após adicionar arquivo ZIP:", formData);
+      updatepostarServico({
+        ...Servico,
+        imagens: zipFile,
+      });
+    };
 
-    } catch (error) {
-      console.error("Erro ao gerar o arquivo ZIP:", error);
-    }
-  };
+    reader.readAsDataURL(content);
+  } catch (error) {
+    console.error("Erro ao gerar o arquivo ZIP:", error);
+  }
+};
+
+
 
 
 
