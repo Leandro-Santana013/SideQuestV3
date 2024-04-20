@@ -4,8 +4,12 @@
   const app = express();
   const ejs = require('ejs');
   const session = require('express-session');
+  const bodyParser = require('body-parser');
   const randomSession = require('../tools/autoToken');
   const cors = require('cors');
+  app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+
 
   app.use(cors());
   app.use(express.urlencoded({ extended: false }));
