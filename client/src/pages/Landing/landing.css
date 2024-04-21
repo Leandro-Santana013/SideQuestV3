@@ -74,3 +74,21 @@ body {
   text-decoration: underline;
 }
 
+@media screen and (max-width: 420px){
+
+  /*Sessao banner*/
+
+  .left-banner .h1Landing {
+    width: 41vw;
+    font-size: 4vw;
+  }
+}
+
+
+@media screen and (max-width: 770px) {
+  .left-banner .h1Landing {
+    width: 48vw;
+    font-size: 4.5vw;
+}
+}
+

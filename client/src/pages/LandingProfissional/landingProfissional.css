@@ -67,13 +67,14 @@ body {
 .hamburguer {
   border: none;
   background: none;
-  border-top: 3.5px solid black;
+  border-top: 4px solid black;
   cursor: pointer;
   padding: 0;
   position: absolute;
   right: 29px;
   top: 30px;
   display: none;
+  width: 40px;
 }
 
 .hamburguer::before,
@@ -81,8 +82,8 @@ body {
   /*adiciona dois elementos em volta pra fazer os outros dois traços*/
   content: " ";
   display: block;
-  width: 30px;
-  height: 3px;
+  width: 40px;
+  height: 4px;
   background-color: black;
   margin-top: 4px;
   position: relative;
@@ -569,7 +570,15 @@ footer img {
 
 /*Max width tem que ser em ordem decrescente*/
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 768px) {
+
+  .navprofissaLiTxtextra  {
+    font-size: 2.1rem;
+  }
+
+  .nav-profissa .navprofissaUl .navprofissaLiTxt a {
+    font-size: 2.1rem;
+}
 
   .hamburguer {
     display: block;
@@ -1009,6 +1018,15 @@ footer img {
 }
 
 @media screen and (max-width: 376px) {
+
+
+  .nav-profissa .navprofissaUl .navprofissaLiTxt a {
+    font-size: 1.1rem;
+}
+
+ .navprofissaLiTxtextra {
+  font-size: 1.1rem;
+ }
 
   /*Arrumando banner*/
   .bannerProfissa .btn-txtBanner .title-banner {

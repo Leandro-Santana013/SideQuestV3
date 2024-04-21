@@ -33,7 +33,7 @@
   }
   
   .show h2 {
-    margin-top: 20px;
+    margin-top: 6px;
     width: 100%;
     text-align: center;
     font-size: 1.4vw;
@@ -56,3 +56,35 @@
     height: 15vw;
   }
   
+
+  @media screen and (max-width: 770px){
+    .show {
+      width: 20vw;
+      align-items: center;
+    }
+
+    .show h2 {
+      font-size: 2.5vw;
+    }
+  
+    .review, .high-five {
+      width: 14vw;
+      height: 14vw;
+  }
+
+  .show1 h2 {
+    font-size: 3.5vw;
+  }
+
+  .show1 p {
+    font-size: 2.5vw;
+  }
+
+  .show1 a {
+    opacity: 1;
+    transform: translateY(0%);
+    transition-delay: 1100ms;
+    padding: 2vw;
+    font-size: 2.5vw;
+}
+  }

@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  
+
 }
 
 .content-input-busca {
@@ -26,8 +26,6 @@
   color: var(--verde);
   font-size: 1.4vw;
   margin-left: 5px;
-  
-  
 }
 
 .btn {
@@ -50,4 +48,195 @@
   color: var(--verde);
   font-size: 2vw;
   margin-left: 5px;
+}
+
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+}
+
+.content-input-busca {
+  padding-left: 0.3vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32vw;
+  height: 3vw;
+  border: solid 1px #144474;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
+  -webkit-box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
+  -moz-box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
+  color: var(--verde);
+  font-size: 1.4vw;
+  margin-left: 5px;
+}
+
+.btn {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--verde);
+  color: #ffffff;
+  border: none;
+  width: 7vw;
+  height: 100%;
+  border-radius: 0 10px 10px 0;
+  font-size: 1vw;
+  transition: all 0.5s ease;
+}
+
+
+.content-input-busca .iconSearch {
+  color: var(--verde);
+  font-size: 2vw;
+  margin-left: 5px;
+}
+
+
+
+@media screen and (max-width: 361px) {
+  .content-input-busca input {
+    padding: 3px 15px;
+  }
+
+  .content-input-busca {
+    width: 55vw;
+    height: 6vw;
+  }
+
+  .content-input-busca .iconSearch {
+    font-size: 3.5vw;
+    margin-left: 5px;
+    margin-right: 1vw;
+  }
+
+  .left-banner input::placeholder,
+  .left-banner input[type="text"] {
+    font-size: 2.5vw;
+  }
+
+  .content-input-busca .btn {
+    width: 11vw;
+    font-size: 2.5vw;
+  }
+
+  .content-input-busca input {
+    padding: 5.5px 15px;
+  }
+
+}
+
+@media screen and (min-width: 362px) and (max-width: 419px) {
+  .content-input-busca {
+    width: 55vw;
+    height: 6vw;
+  }
+
+  .content-input-busca .iconSearch {
+    font-size: 3.5vw;
+    margin-left: 5px;
+    margin-right: 1vw;
+  }
+
+  .left-banner input::placeholder,
+  .left-banner input[type="text"] {
+    font-size: 2.5vw;
+  }
+
+  .content-input-busca .btn {
+    width: 11vw;
+    font-size: 2.5vw;
+  }
+
+  .content-input-busca input {
+    padding: 5.5px 15px;
+  }
+}
+
+@media screen and (min-width: 420px) and (max-width: 569px) { /*essa regra funciona na tela de 820px, e a de 800px la embaico nao funciona para as regras de 800+*/
+  .content-input-busca {
+    width: 55vw;
+    height: 6vw;
+  }
+
+  .content-input-busca .iconSearch {
+    font-size: 3.5vw;
+    margin-left: 5px;
+    margin-right: 1vw;
+  }
+
+  .left-banner input::placeholder,
+  .left-banner input[type="text"] {
+    font-size: 2.7vw;
+  }
+
+  .content-input-busca .btn {
+    width: 16vw;
+    font-size: 2.7vw;
+  }
+
+  .content-input-busca input {
+    padding: 5px 13px;
+  }
+}
+
+@media screen and (min-width: 700px) and (max-width: 799px) {
+  .content-input-busca {
+    width: 46vw;
+    height: 5vw;
+  }
+
+  .content-input-busca input {
+    padding: 6px 15px;
+  }
+
+    .left-banner .btn {
+      font-size: 2vw;
+      width: 11vw;
+    }
+ 
+  .left-banner input {
+      width: 25vw;
+  }
+
+  .left-banner input::placeholder,
+  .left-banner input[type="text"] {
+    font-size: 2vw;
+  }
+
+  .content-input-busca .iconSearch {
+    font-size: 4vw;
+  }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1025px) {
+  .content-input-busca {
+    width: 55vw;
+    height: 6vw;
+  }
+
+  .content-input-busca .iconSearch {
+    font-size: 3.5vw;
+    margin-left: 5px;
+    margin-right: 1vw;
+  }
+
+  .left-banner input {
+    padding: 5px 15px;
+  }
+
+  .left-banner input::placeholder,
+  .left-banner input[type="text"] {
+    font-size: 2.7vw;
+  }
+
+  .content-input-busca .btn {
+    width: 16vw;
+    font-size: 2.7vw;
+  }
 }

@@ -14,7 +14,7 @@ footer {
   }
   
   .beneficios h3 {
-    font-size: 2vw;
+    font-size: 3vw;
     margin-bottom: 20px;
   }
   
@@ -37,4 +37,8 @@ footer {
     text-decoration: none;
   }
   
-  
+  @media screen and (max-width: 770px){
+    .beneficios h3 {
+      font-size: 4vw;
+    }
+  }
