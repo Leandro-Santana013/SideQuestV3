@@ -8,11 +8,19 @@ const Config = () => {
   const {user, logoutUser} = useContext(AuthContext)
   return (
     <>
-    {user && (
-      <Link className="btn-logout" to="/Login" onClick={() => logoutUser()}>LOGOUT</Link>
-    )}
+      <Header />
+      <SidebarCliente />
+      <div className="content-midia">
+        <div className="conteudo-config-perfil">
+          <div className="main-content">
+            
+          </div>
+        </div>
+      </div>
     </>
   );
 };
 
 export default Config;
+
+{/* <Link className="btn-logout" to="/Login" onClick={() => logoutUser()}>LOGOUT</Link> */}

@@ -31,7 +31,7 @@ const Router = () => {
           <Route exact path="/loginProfissional" element={<LoginProfissional />} />
           <Route exact path="/validaEmailProfissional" element={<ValidaEmailProfissional />} />
           <Route exact path="/validaemail" element={<ValidaEmail />} />
-          <Route exact path="/homeCliente" element={user ? <HomeCliente /> : <Navigate to="/login" />} />
+          <Route exact path="/homeCliente" element={true ? <HomeCliente /> : <Navigate to="/login" />} />
           <Route exact path="/perfilCliente" element={<PerfilCliente />} />
           <Route exact path="/homeCliente/postarSevico" element={<PostarServico />} />
           <Route exact path="/pagamentosCliente" element={<PagamentosCliente />} />
@@ -40,7 +40,7 @@ const Router = () => {
           <Route exact path="/homeProfissionais" element={<HomeProfissionais />} />
           <Route exact path="/servicosPendentesCliente" element={<ServicosPendentesCliente />} />
           <Route exact path="/landingProfissional" element={<LandingProfissional />} />
-          <Route exact path="/config" element={user ? <Config /> : <Navigate to="/login" />} />
+          <Route exact path="/config" element={true ? <Config /> : <Navigate to="/login" />} />
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
