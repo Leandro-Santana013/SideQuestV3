@@ -1,20 +1,21 @@
-const chatController = require("./Querys/proQuerys")
+const chatModel = require("../models/chatModel")
 
-exports.criarChats = async (req, res) => {
-    const { id_cliente, id_profissional } = req.body
-    try {
+const createchat = async(req, res) =>{
+    const {idCliente, idProfissional} = req.params 
 
-        const chat = await chatController.findChat({
-            params: {
-                id_cliente: id_cliente,
-                id_profissional: id_profissional
-            }
-        });
+    try{
+        const chat = await chatModel.findOne({
+            members: {$all: {idCliente, idProfissional}}
+        })
+        if(chat) return res.status(200).json(chat)
 
+        const newChat = new chatModel({
+            members: [idCliente, idProfissional]
+        })
+        const response = await  newChat.save()
 
-    }
-    catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: "Erro interno do servidor" });
+        res.status(200).json(response)
+    }catch(error){
+        console.log("erro" + error)
     }
 }

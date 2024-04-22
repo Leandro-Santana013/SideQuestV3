@@ -1,33 +1,15 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const mongoose = require("moongoose")
 const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 const { connectionDataBase } = require('../../database/db')
 
-const ModelChat = connectionDataBase.define('tb_chat', {
-    id_chat: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+const chatSchema = new mongoose.Schema(
+    {
+    members: Array,
     },
-    id_cliente: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'tb_cliente',
-            key: 'id_cliente'
-        }
-    },
-    id_profissional: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'tb_profissional',
-            key: 'id_profissional'
-        }
+    {
+        timestamps: true,
     }
-},
-_padraoTableDBExistence('tb_avaliacao')
 )
+   const chatModel = mongoose.model("Chat", chatSchema)
 
-module.exports = {
-    ModelChat
-}
+   module.exports = chatModel;
