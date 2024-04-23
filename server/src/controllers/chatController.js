@@ -1,6 +1,6 @@
 const chatModel = require("../models/chatModel")
 
-export const createchat = async(req, res) =>{
+exports.createchat = async(req, res) =>{
     const {idCliente, idProfissional} = req.body
 
     try{
@@ -20,7 +20,7 @@ export const createchat = async(req, res) =>{
     }
 }
 
-export const findUserChats = async(req, res) =>{
+exports.findUserChats = async(req, res) =>{
     const idCliente = req.params.idCliente
 
     try{
@@ -34,7 +34,7 @@ export const findUserChats = async(req, res) =>{
     }
 }
 
- export const findChat = async(req, res) =>{
+ exports.findChat = async(req, res) =>{
     const {idCliente, idProfissional} = req.params
 
     try{

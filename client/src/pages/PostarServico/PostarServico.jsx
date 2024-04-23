@@ -16,7 +16,7 @@ import {
 import { AuthContext } from "../../context/AuthContext";
 
 const PostarServico = () => {
-  const { PostarServico, updatepostarServico, categorias, Servico, fetchData, cepError, setServico } = useContext(AuthContext)
+  const { PostarServico, updatepostarServico, categorias, Servico, fetchData, cepError, setServico, modalPostar } = useContext(AuthContext)
 
   const handleCepChange = (e) => {
     const cep = e.target.value;

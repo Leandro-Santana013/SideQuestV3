@@ -1,4 +1,4 @@
-const mongoose = require("moongoose")
+const mongoose = require("mongoose")
 const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 const { connectionDataBase } = require('../../database/db')
 
