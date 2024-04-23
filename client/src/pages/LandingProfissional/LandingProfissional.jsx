@@ -34,7 +34,7 @@ const LandingProfissional = () => {
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
             <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet" />
 
-            <header className="menu-profissa">
+            {/* <header className="menu-profissa">
                 <nav className="nav-profissa">
                     <ul className={`navprofissaUl ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}>
                         <li className="navprofissaLi">
@@ -61,7 +61,9 @@ const LandingProfissional = () => {
                     </ul>
                     <button className={`hamburguer ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}></button>
                 </nav>
-            </header>
+            </header> */}
+
+            <HeaderLanding />
 
             <section className="bannerProfissa">
                 <div className="btn-txtBanner">

@@ -37,8 +37,8 @@ export const HeaderLanding = () => {
             <img class="img-logo" src={logo} alt="Logo do SideQuest" />
           </li>
           <li className="navHomeLi">
-            <a href="" className="navHomeA">
-              Encontrar serviços
+            <a className="navHomeA">
+              <Link to={"/"}>Encontrar serviços</Link>
             </a>
           </li>
           <li className="navHomeLi">
