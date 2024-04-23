@@ -5,7 +5,6 @@ import { CarrosselSwiper } from "./CarrosselSwiper/CarrosselSwiper";
 import { Footer } from "./Footer/Footer";
 import { Header } from "./Header/Header";
 import { HeaderLanding } from "./HeaderLanding/HeaderLanding";
-import { NavHome } from "./NavHome/Navhome";
 import { SidebarCliente } from "./SidebarCliente/SidebarCliente";
 import { TextInput } from './TextInput/TextInput';
 import { TextInputBusca } from "./TextInputBusca/TextInputBusca";
@@ -23,7 +22,6 @@ export {
     Header,
     Perfilcli,
     HeaderLanding,
-    NavHome,
     SidebarCliente,
     TextInput,
     Infoinc,

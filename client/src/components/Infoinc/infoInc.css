@@ -11,7 +11,7 @@
     flex-direction: column;
 }
 
-form {
+.form-infoInc {
     background-color: #FFFFFF;
     
     align-items: center;
@@ -22,7 +22,7 @@ form {
     text-align: center;
 }
 
-input {
+.input-infoInc {
     background-color: #eee;
     border: none;
     padding: 12px 15px;

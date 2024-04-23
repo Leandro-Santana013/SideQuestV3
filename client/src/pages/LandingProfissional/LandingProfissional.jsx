@@ -34,36 +34,7 @@ const LandingProfissional = () => {
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
             <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet" />
 
-            {/* <header className="menu-profissa">
-                <nav className="nav-profissa">
-                    <ul className={`navprofissaUl ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}>
-                        <li className="navprofissaLi">
-                            <img class="img-logo" src={LogoSideQuest} alt="Logo do SideQuest" />
-                        </li>
-                        <li className="navprofissaLiTxt">
-                            <a href="" className="navHomeA">
-                                Encontrar serviços
-                            </a>
-                        </li>
-                        <li className="navprofissaLiTxt">
-                            <a href="">Trabalhe conosco</a>
-                        </li>
-                        <li className="navprofissaLiTxtextra">
-                            <a href="/loginprofissional">Inscreva-se</a>
-                        </li>
-                        <div className="subContainerNavProfissa">
-                            <li class="navprofissaLi btnNavProfissa">
-                                <a href="/loginProfissional" class="tab-link link">
-                                    <Link to={"/loginProfissional"}></Link>inscreva-se
-                                </a>
-                            </li>
-                        </div>
-                    </ul>
-                    <button className={`hamburguer ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}></button>
-                </nav>
-            </header> */}
-
-            <HeaderLanding />
+            <HeaderLanding colorLogin={"var(--azul)"} colorInsc={'white'} colorBtnInsc={"var(--azul)"}/>
 
             <section className="bannerProfissa">
                 <div className="btn-txtBanner">

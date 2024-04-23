@@ -29,11 +29,11 @@ export const Infoinc = () => {
           />  
            <h2>Conclua seu registro.</h2>
             <h5>personalize sua conta para uma melhor experiência</h5>
-          <form>
+          <form className="form-infoInc">
             <div className="social-container"></div>
             {message && <div className="container-mensagem-erro">{message}</div>}
-            <input placeholder="Digite seu email" type="email" name="email" value={formData.email} onChange={handleChange} />
-            <input placeholder="Digite uma senha" type="date" name="senha" value={formData.senha} onChange={handleChange} />
+            <input className="input-infoInc" placeholder="Digite seu email" type="email" name="email" value={formData.email} onChange={handleChange} />
+            <input className="input-infoInc" placeholder="Digite uma senha" type="date" name="senha" value={formData.senha} onChange={handleChange} />
            
             <select
                         id="categoriaSelect"

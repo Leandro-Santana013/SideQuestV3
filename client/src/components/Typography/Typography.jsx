@@ -24,7 +24,7 @@ export const Typography = ({
     yellow: { style: "yellow" },
     green: { style: "green " },
     red: { style: "red" },
-    black: { style: "lack " },
+    black: { style: "black " },
     white: { style: "white" },
   }[color];
 

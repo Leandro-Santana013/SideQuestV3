@@ -44,18 +44,23 @@
   padding: 10px;
 }
 .swiper-button-next {
-  color: #fff;
+  color: #fff !important;
   background-color: var(--verde);
   position: relative;
 }
 
 .swiper-button-prev {
-  color: var(--verde);
+  color: var(--verde) !important;
   background-color: transparent;
   outline: 1px solid var(--verde);
   outline-offset: -1px;
   position: relative;
 }
+
+.swiper-button-prev:hover {
+  color: white !important;
+}
+
 .carrossel {
   display: flex;
   justify-content: space-between;
