@@ -30,8 +30,8 @@ import { file } from "jszip";
     //mensagens de erro sucesso e carre gamento
     const [registerError, setRegisterError] = useState(null);
     const [registerSucess, setRegisterSucess] = useState(null);
-    const [registerLoading, setRegisterLoading] = useState(false);
-
+    const [registerLoading, setRegisterLoading] = useState(false); 
+    const [message, setMessage] = useState(false);
     //atualiza as informações de registro
     const updateCadastro = useCallback((info) => {
       setFormDataCadastro(info);
@@ -158,12 +158,11 @@ import { file } from "jszip";
       
   e.preventDefault()
   setModalPostar(false)
-  console.log(Servico.imagens)
+
       try {
         // Enviar o formulário com o estado formData atualizado
         const response = await postRequest("/postarServico", Servico);
-        setMessage(response.data.message);
-        setModalPostar(true);
+        setModalPostar(true); 
       } catch (error) {
         console.error("Erro ao cadastrar:", error);
         setMessage(
@@ -245,7 +244,9 @@ import { file } from "jszip";
           fetchData,
           cepError,
           modalPostar,
-        }}
+          message,
+        }
+      }
       >
         {children}
       </AuthContext.Provider>

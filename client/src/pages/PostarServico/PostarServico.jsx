@@ -16,7 +16,7 @@ import {
 import { AuthContext } from "../../context/AuthContext";
 
 const PostarServico = () => {
-  const { PostarServico, updatepostarServico, categorias, Servico, fetchData, cepError, setServico, modalPostar } = useContext(AuthContext)
+  const { PostarServico, updatepostarServico, categorias, Servico, fetchData, cepError, setServico, modalPostar, message } = useContext(AuthContext)
 
   const handleCepChange = (e) => {
     const cep = e.target.value;
@@ -376,6 +376,15 @@ const PostarServico = () => {
                 </div>
                 <div className="left-rightPostar">
                   <div className="leftPostar">
+                  {modalPostar && (
+                  <div className={`modal-postar-sucess`}>
+                    <h3>Serviço postado</h3>
+                    <div>Profissionas poderão vizualizar seu problema</div>
+                    <button className="close-modal-postar" onClick={() => {
+                      modalPostar(false)
+                    }}>Fechar</button>
+                  </div>
+                )}
                     <h3 className="tituloServico">Endereço</h3>
                     <div className="cep-estado">
                       <div>
@@ -474,13 +483,13 @@ const PostarServico = () => {
                             updatepostarServico({ ...Servico, complemento: e.target.value });
                           }}
                         />
+
                       </div>
                     </div>
                     <div className="linha-postar" id="rightPostar2">
                       <button className="btnProximo" type="submit">
                         aaaa
                       </button>
-
                     </div>
                   </div>
 
@@ -499,7 +508,6 @@ const PostarServico = () => {
   </div>
   )} */}
                 </div>
-
               </div>
             )}
 

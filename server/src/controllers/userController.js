@@ -236,9 +236,11 @@ exports.postarServico = async (req, res) => {
       idCliente,
       email,
     );
-
-    const imageBuffer = Buffer.from(imagens, 'base64');
-console.log(imageBuffer)
+    let imageBuffer;
+    if(imagens){
+    imageBuffer = Buffer.from(imagens, 'base64');
+    console.log(imageBuffer)
+    }
 
     var partes = uf_localidade.split(" - ");
     var estado = partes[0];
@@ -277,7 +279,7 @@ console.log(imageBuffer)
           id_endereco: enderecoInstance.id_endereco,
           ds_servico: dsServico,
           ds_titulo: titulo,
-          img_servico: imageBuffer,
+          img_servico: imageBuffer ? imageBuffer : null,
         },
       });
     } catch (error) {
@@ -287,7 +289,6 @@ console.log(imageBuffer)
     return res.status(200).json({ message: "Serviço postado com sucesso" });
   } catch (error) {
     console.error(error);
-    return res.json("erro");
   }
 };
 
