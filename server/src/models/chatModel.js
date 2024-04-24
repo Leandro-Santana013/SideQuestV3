@@ -1,6 +1,4 @@
 const mongoose = require("mongoose")
-const { _padraoTableDBExistence } = require('../../config/configTablesDB')
-const { connectionDataBase } = require('../../database/db')
 
 const chatSchema = new mongoose.Schema(
     {
