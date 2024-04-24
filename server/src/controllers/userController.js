@@ -236,6 +236,23 @@ exports.postarServico = async (req, res) => {
       idCliente,
       email,
     );
+
+    if(!cep){
+      return res.status(400).json({ error: "Insira o CEP corretamente", formstatus: 2 });
+    }
+
+    if(!titulo && !dsServico && !categoria){
+      return res.status(400).json({ error: "Insira as informações corretamente", formstatus: 1 });
+    }; 
+
+    if(!cep &&
+      !uf_localidade &&
+      !logradouro &&
+      !bairro &&
+      !nmrResidencia){
+        return res.status(400).json({ error: "Insira as informações corretamente", formstatus: 2 });
+      }
+
     let imageBuffer;
     if(imagens){
     imageBuffer = Buffer.from(imagens, 'base64');

@@ -136,7 +136,8 @@ import { file } from "jszip";
     const [categorias, setCategorias] = useState([])
     const [form, setForm] = useState(1);
     const [modalPostar, setModalPostar] = useState(false);   
-
+    const [errorPostar, setErrorPostar] = useState(null);
+    const [messageErrorPostar, setmessageErrorPostar] = useState(null)
 
     const [Servico, setServico] = useState({
       titulo: null, 
@@ -157,12 +158,27 @@ import { file } from "jszip";
     const PostarServico = useCallback(async (e) => {
       
   e.preventDefault()
-  setModalPostar(false)
+  setModalPostar(false);
 
       try {
         // Enviar o formulário com o estado formData atualizado
         const response = await postRequest("/postarServico", Servico);
+        console.log(response)
+        if (response.error){
+          setmessageErrorPostar(response.error)
+          setErrorPostar(true);
+        
+            setForm(response.formstatus);
+          console.log(response.formstatus)
+          setTimeout(() => {
+            setErrorPostar(null);
+            setmessageErrorPostar(null)
+          }, 4000);
+        
+        } 
+        else{
         setModalPostar(true); 
+        }
       } catch (error) {
         console.error("Erro ao cadastrar:", error);
         setMessage(
@@ -243,8 +259,12 @@ import { file } from "jszip";
           categorias,
           fetchData,
           cepError,
+          setModalPostar,
           modalPostar,
-          message,
+          errorPostar,
+          form,
+          setForm,
+          messageErrorPostar
         }
       }
       >

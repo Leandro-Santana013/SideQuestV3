@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { SidebarCliente, Header, TextInput } from "../../components";
 import axios from "axios";
 import JSZip from "jszip";
-
+import imgApproved from "../../assets/approved.png"
 
 
 import "./postarServico.css";
@@ -16,8 +16,14 @@ import {
 import { AuthContext } from "../../context/AuthContext";
 
 const PostarServico = () => {
-  const { PostarServico, updatepostarServico, categorias, Servico, fetchData, cepError, setServico, modalPostar, message } = useContext(AuthContext)
+  const { PostarServico, updatepostarServico, categorias, Servico, fetchData, cepError, setServico, setModalPostar, messageErrorPostar, errorPostar, form, 
+    setForm, modalPostar} = useContext(AuthContext)
 
+    useEffect(()=>{
+      console.log(form)
+    }, [form])
+
+  
   const handleCepChange = (e) => {
     const cep = e.target.value;
     setServico({ ...Servico, cep }); // Atualiza o estado do CEP
@@ -27,9 +33,7 @@ const PostarServico = () => {
   };
 
 
-
   const navigate = useNavigate();
-  const [form, setForm] = useState(1);
 
 
   const handleNext = () => {
@@ -194,6 +198,9 @@ const PostarServico = () => {
               <div className={`publicar123 ${form === 2 ? "form" : ""}`}>2</div>
             </div>
           </div>
+          {errorPostar && (
+            <div className={errorPostar? "message-error-postar-initial": "message-error-postar-end"}>{messageErrorPostar}</div>
+          )}
           <form onSubmit={PostarServico} className="postarServico1">
             {form === 1 && (
               <div>
@@ -377,13 +384,19 @@ const PostarServico = () => {
                 <div className="left-rightPostar">
                   <div className="leftPostar">
                   {modalPostar && (
+                    <>
+                    <div className="fade">
                   <div className={`modal-postar-sucess`}>
                     <h3>Serviço postado</h3>
-                    <div>Profissionas poderão vizualizar seu problema</div>
-                    <button className="close-modal-postar" onClick={() => {
-                      modalPostar(false)
-                    }}>Fechar</button>
+                    <img src={imgApproved}/>
+                    <p>Profissionas poderão vizualizar seu problema</p>
+                    <Link to={"/homeCliente"}>
+                    <button className="close-modal-postar"onClick={() => {
+      setModalPostar(null); // Adicione esta linha para fechar o modal ao clicar em "Fechar"
+    }}> Fechar</button></Link>
                   </div>
+                  </div>
+                  </>
                 )}
                     <h3 className="tituloServico">Endereço</h3>
                     <div className="cep-estado">

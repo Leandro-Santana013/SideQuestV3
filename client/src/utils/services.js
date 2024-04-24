@@ -8,11 +8,12 @@
         
             let message;
             let user;
+            
 
             // Verificar se a resposta contém a chave "message" (sucesso)
             if (response.data && !response.data.error) {
+                
                 message = response.data.message;
-                console.log(response.data);
                 delete response.data.message;
                 delete response.data.cpfNumerico;
                 user = response.data
@@ -23,10 +24,14 @@
 
             return { message, user}; // Retorna um objeto com a chave "data" contendo a mensagem de sucesso
         } catch (error) {
+            let formstatus = null
             if (error.response && error.response.status >= 400 && error.response.status <=499) {
                 const errorMessage = error.response.data.error;
+                if(error.response.data.formstatus){
+                formstatus = error.response.data.formstatus
+                }
                 console.log(`Erro ${error.response.status}: ${errorMessage}`);
-                return { error: errorMessage }; // Retorna um objeto com a chave "error" contendo a mensagem de erro
+                return { error: errorMessage, formstatus}; // Retorna um objeto com a chave "error" contendo a mensagem de erro
             } else {
                 // Tratar outros tipos de erros
                 console.error(error);
