@@ -5,7 +5,7 @@ import "./login.css";
 import Cookies from "js-cookie";
 
 import { useIsSignUpActive } from "../../components/HeaderLanding/singUpState";
-import { AuthContext } from "../../context/AuthContext";
+import { UserContext } from "../../context/UserContext";
 import { Loading } from "../../components";
 
 export const Login = () => {
@@ -21,7 +21,7 @@ export const Login = () => {
     updateLogininfo,
     loginError,
     loginLoading,
-  } = useContext(AuthContext);
+  } = useContext(UserContext);
 
   var VarisSignUpActive = useIsSignUpActive();
   const [isSignUpActive, setIsSignUpActive] = useState(VarisSignUpActive);

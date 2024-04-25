@@ -13,16 +13,16 @@ import {
   RiQuestionLine,
   RiAttachment2,
 } from "react-icons/ri";
-import { AuthContext } from "../../context/AuthContext";
+import { UserContext } from "../../context/UserContext";
 
 const PostarServico = () => {
   const { PostarServico, updatepostarServico, categorias, Servico, fetchData, cepError, setServico, setModalPostar, messageErrorPostar, errorPostar, form, 
-    setForm, modalPostar} = useContext(AuthContext)
+    setForm, modalPostar} = useContext(UserContext)
 
     useEffect(()=>{
       console.log(form)
     }, [form])
-
+    
   
   const handleCepChange = (e) => {
     const cep = e.target.value;

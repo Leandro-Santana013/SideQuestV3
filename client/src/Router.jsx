@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
-import { AuthContext, AuthContextProvider } from "./context/AuthContext";
+import { ChatContext, ChatContextProvider } from "./context/ChatContext";
+import { UserContextProvider, UserContext } from "./context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 import Landing from "./pages/Landing/landing";
@@ -18,13 +19,13 @@ import HomeProfissionais from "./pages/HomeProfissional/HomeProfissional";
 import ServicosPendentesCliente from "./pages/ServicosPendentesCliente/ServicosPendentesCliente";
 import LandingProfissional from "./pages/LandingProfissional/LandingProfissional";
 import Config from "./pages/Config/Config";
-
+import { Chats } from "./pages/Chats/Chats";
 const Router = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(UserContext);
 
   return (
     <BrowserRouter>
-      <AuthContextProvider>
+      <ChatContextProvider user={user}>
         <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/login" element={user ? <Navigate to="/homeCliente" /> : <Login />} />
@@ -41,8 +42,9 @@ const Router = () => {
           <Route exact path="/servicosPendentesCliente" element={<ServicosPendentesCliente />} />
           <Route exact path="/landingProfissional" element={<LandingProfissional />} />
           <Route exact path="/config" element={user ? <Config /> : <Navigate to="/login" />} />
+          <Route exact path="/chats" element={user ? <Chats /> : <Navigate to="/login" />} />
         </Routes>
-      </AuthContextProvider>
+      </ChatContextProvider>
     </BrowserRouter>
   );
 }

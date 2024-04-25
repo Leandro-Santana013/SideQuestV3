@@ -21,7 +21,7 @@ exports.createchat = async(req, res) =>{
 }
 
 exports.findUserChats = async(req, res) =>{
-    const idCliente = req.params.idCliente
+    const idCliente = req.params.id_cliente
 
     try{
         const chats = await chatModel.find({

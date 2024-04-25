@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Router from './Router'
-import { AuthContext, AuthContextProvider } from "./context/AuthContext";
+import { UserContext, UserContextProvider } from "./context/UserContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthContextProvider>
+    <UserContextProvider>
     <Router/>
-    </AuthContextProvider>
+    </UserContextProvider>
   </React.StrictMode>
 );

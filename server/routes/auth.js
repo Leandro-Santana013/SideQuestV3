@@ -7,17 +7,6 @@ const router = express.Router();
 const randomSession = require('../tools/autoToken');
 
 
-const secretSession = randomSession.jwtSecret;
-
-// Configure o uso desses middlewares
-router.use(cookieParser());
-router.use(session({
-    secret: secretSession,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Defina como true se estiver usando HTTPS
-}));// Backend
-
 router.post('/register', userControllers.register);
 router.post('/registerPro', proControllers.registerPro)
 

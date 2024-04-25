@@ -5,11 +5,11 @@
     useState,
   } from "react";
   import { postRequest, baseUrl, getRequest } from "../utils/services";
-  export const AuthContext = createContext();
+  export const UserContext = createContext();
   import axios from "axios";
 import { file } from "jszip";
 
-  export const AuthContextProvider = ({ children }) => {
+  export const UserContextProvider = ({ children }) => {
 
 
     //objeto de usuario
@@ -30,7 +30,7 @@ import { file } from "jszip";
     const [registerError, setRegisterError] = useState(null);
     const [registerSucess, setRegisterSucess] = useState(null);
     const [registerLoading, setRegisterLoading] = useState(false); 
-    const [message, setMessage] = useState(false);
+    
     //atualiza as informações de registro
     const updateCadastro = useCallback((info) => {
       setFormDataCadastro(info);
@@ -95,12 +95,7 @@ import { file } from "jszip";
       setloginInfo(info);
     }, []);
 
-    useEffect(() => {
-      const user = localStorage.getItem("User");
 
-      setUser(JSON.parse(user));
-    }, []);
-    
     //logout
 
     const logoutUser = useCallback(() => {
@@ -119,7 +114,7 @@ import { file } from "jszip";
         if (response.error) setloginError(response.error);
         else {
           console.log(response.user)
-          localStorage.setItem("User", JSON.stringify(response.user));
+          localStorage.setItem("Pro", JSON.stringify(response.user));
           window.location.reload();
         }
       } catch (error) {
@@ -237,7 +232,7 @@ import { file } from "jszip";
 
 
     return (
-      <AuthContext.Provider
+      <UserContext.Provider
         value={{
           user,
           formDataCadastro,
@@ -269,6 +264,6 @@ import { file } from "jszip";
       }
       >
         {children}
-      </AuthContext.Provider>
+      </UserContext.Provider>
     );
   };
