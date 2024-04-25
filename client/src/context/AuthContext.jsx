@@ -3,7 +3,6 @@
     useCallback,
     useEffect,
     useState,
-    useSyncExternalStore,
   } from "react";
   import { postRequest, baseUrl, getRequest } from "../utils/services";
   export const AuthContext = createContext();
@@ -45,7 +44,7 @@ import { file } from "jszip";
         setRegisterError(null);
 
         try {
-          const response = await postRequest("/register", formDataCadastro);
+          const response = await postRequest("/auth/register", formDataCadastro);
 
           // Se a resposta for uma mensagem de erro
           if (response.error) {
@@ -115,7 +114,7 @@ import { file } from "jszip";
       setloginLoading(true);
       setloginError(null);
       try {
-        const response = await postRequest("/login", loginInfo);
+        const response = await postRequest("/auth/login", loginInfo);
 
         if (response.error) setloginError(response.error);
         else {
@@ -162,12 +161,13 @@ import { file } from "jszip";
 
       try {
         // Enviar o formulário com o estado formData atualizado
-        const response = await postRequest("/postarServico", Servico);
+        const response = await postRequest("/auth/postarServico", Servico);
         console.log(response)
         if (response.error){
           setmessageErrorPostar(response.error)
           setErrorPostar(true);
-        
+          const audio = new Audio("error_sound.mp3");
+        audio.play();
             setForm(response.formstatus);
           console.log(response.formstatus)
           setTimeout(() => {
@@ -215,7 +215,7 @@ import { file } from "jszip";
     useEffect(() => {
       const carregarCategorias = async () => {
         try {
-          const response = await getRequest("/selectCategoria");
+          const response = await getRequest("/auth/selectCategoria");
           setCategorias(response); // Aqui estamos definindo o estado das categorias com a resposta do servidor
 
         } catch (error) {
