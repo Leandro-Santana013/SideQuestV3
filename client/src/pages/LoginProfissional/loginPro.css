@@ -246,6 +246,87 @@
 
 
 
+/*Responsividade*/
+
+@media screen and (min-width: 600px) and (max-width: 1050px) {
+	.container-forms .container {
+		width: 95%;
+	}
+
+	.container-forms .container.right-panel-active {
+		width: 95%;
+	}
+
+	.painel-panel.painel-right .ghost {
+		padding: 12px 27px
+	}
+
+
+	.container-forms p {
+		font-size: 2vw;
+	}
+
+	.container-forms input::placeholder {
+		font-size: 2vw;
+	}
+
+	.container-forms h1 {
+		font-size: 3.5vw;
+	}
+
+	.form-container.sign-up-container .btn-cadastrar {
+		padding: 18px 58px;
+		;
+		font-size: 1.5vw
+	}
+
+	.container-forms button.ghost {
+		font-size: 1.5vw;
+	}
+}
+
+/*
+@media screen and (max-width: 430px){
+	
+.container-forms .container {
+	min-height: 420px;
+	width: 95%;
+}
+
+.container-forms h1 {
+
+}
+
+.form-container.sign-in-container h1{
+font-size: 5.3vw;
+}
+
+.container-mensagem-error {
+    font-size: 3.5vw;
+}
+
+.container-forms .painel-panel {
+	width: 30%;
+}
+
+.painel-panel.painel-right h2{
+font-size: 4.3vw;
+}
+
+.container-forms button.ghost{
+	padding: 8px 3px;
+}
+
+.container-forms input::placeholder {
+	font-size: 2.5vw;
+}
+
+}
+
+/*
+
+
+
 /* .container-mensagem-erro {
 	display: flex;
 	position: fixed;
