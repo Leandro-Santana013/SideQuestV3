@@ -22,7 +22,7 @@ const Config = () => {
             <div className="card-info-config-perfil">
               <div className="line-info-config-perfil">
                 <div className="column-info-config-perfil">
-                  <p>Nome</p>
+                  <h4>Nome</h4>
                   <p>Vitorino</p>
                 </div>
                 <button className="btn-config-editar-perfil">Editar</button>
@@ -30,7 +30,7 @@ const Config = () => {
 
               <div className="line-info-config-perfil">
                 <div className="column-info-config-perfil">
-                  <p>Email</p>
+                  <h4>Email</h4>
                   <p>vitorino@outlook.com</p>
                 </div>
                 <button className="btn-config-editar-perfil">Editar</button>
@@ -38,7 +38,7 @@ const Config = () => {
 
               <div className="line-info-config-perfil">
                 <div className="column-info-config-perfil">
-                  <p>Número</p>
+                  <h4>Número</h4>
                   <p>99199-9999</p>
                 </div>
                 <button className="btn-config-editar-perfil">Editar</button>

@@ -45,4 +45,21 @@
 
 .column-info-config-perfil {
 
+    h4 {
+        color: var(--verde);
+    }
+}
+
+.btn-config-editar-perfil {
+    background-color: var(--azul);
+    color: white;
+    border: none;
+    padding: .50vw 1vw .50vw 1vw;
+    border-radius: 1vw;
+    border: solid 2px var(--azul);
+    transition: .25s;
+}
+
+.btn-config-editar-perfil:hover {
+    background-color: var(--verde);
 }

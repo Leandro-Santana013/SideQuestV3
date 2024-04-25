@@ -242,6 +242,7 @@ body {
 .list-beneficios .beneficio {
   display: flex;
   align-items: center;
+  gap: 1vw;
 }
 
 .list-beneficios .beneficio p {
@@ -728,12 +729,6 @@ body {
 
   .planos .cards-planos .card-plano .card-superior #vantagens-txt {
     font-size: 1rem;
-  }
-
-
-
-  .list-beneficios .beneficio>img {
-    width: 5vw;
   }
 
   .valor-do-plano {
