@@ -25,6 +25,7 @@
     width: 15vw;
     border: solid 2px black;
     padding: 5px;
+    margin: 5px;
     justify-content: space-between;
     border-radius: 20px;
 }
@@ -42,7 +43,7 @@
     box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
     border-radius: 20px;
     padding-bottom: 20px;
-    width: 70vw;
+    width: 73vw;
 }
 
 .historicos {
@@ -66,9 +67,10 @@
 .card-historico {
     display: flex;
     align-items: center;
-    padding: 5px;
+    padding: 10px;
     border: solid 1px black;
     border-radius: 50px;
+    gap: 1vw;
 }
 
 .alinhadorHist {
@@ -78,7 +80,7 @@
     width: 15vw;
 }
 
-.info-prof p{
+.info-prof p {
     margin: 0;
 }
 
@@ -87,7 +89,7 @@
     font-size: 1vw;
 }
 
-.info-prof img{
+.info-prof img {
     width: 3.5vw;
 }
 
@@ -107,22 +109,74 @@
 }
 
 
-@media screen and (max-width: 376px) {
+@media screen and (max-width: 800px) {
+    .containerHeader {
+        height: 5vw;
+    }
 
-.conteudo-historico  h2 {
-font-size: 0.8rem;
+    .notificacao i {
+        font-size: 3.5vw;
+    }
+
+    .containerHeader .img-logo {
+        width: 11vw;
+    }
+
+    .conteudo-historico h2 {
+        font-size: 1.2rem;
+    }
+
+    .historicos p {
+        font-size: 0.75rem;
+    }
+    .card-historico {
+        border-radius: 21px;
+    }
+
+    .card-historico .categoria {
+        width: 70px;
+        height: 35px;
+    }
+
 }
 
-.historicos p{
-font-size: 0.5rem;
-}
+@media screen and (max-width: 500px) {
 
-.card-historico {
-border-radius: 21px;
-}
+    .containerHeader {
+        height: 11vw;
+    }
 
-.card-historico .categoria {
-    width: 50px;
-    height: 35px;
-}
+    .notificacao i {
+        font-size: 5.5vw;
+    }
+
+    .containerHeader .img-logo {
+        width: 14vw;
+    }
+
+    .input-procurar {
+        width: 22vw;
+    }
+
+    .input-procurar input::placeholder, 
+    .input-procurar input[type="text"] {
+        font-size: 0.7rem;
+    }
+
+    .conteudo-historico h2 {
+        font-size: 0.8rem;
+    }
+
+    .historicos p {
+        font-size: 0.6rem;
+    }
+
+    .card-historico {
+        border-radius: 21px;
+    }
+
+    .card-historico .categoria {
+        width: 50px;
+        height: 35px;
+    }
 }
