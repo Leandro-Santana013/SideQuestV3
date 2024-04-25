@@ -17,7 +17,7 @@ const Config = () => {
           <div className="conteudo-config-perfil">
             <div className="header-conteudo-config-perfil">
               <img src={imgPerfil} alt="Imagem de perfil" className="img-config-perfil" />
-              <button className="btn-config-editar-perfil">Editar</button>
+              
             </div>
             <div className="card-info-config-perfil">
               <div className="line-info-config-perfil">

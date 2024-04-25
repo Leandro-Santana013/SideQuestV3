@@ -8,11 +8,10 @@ export const SidebarCliente = () => {
 
   const pages = [
     { id: 1, name: "home", href: "homeCliente" },
-    { id: 2, name: "perfil", href: "perfilCliente" },
-    { id: 3, name: "chats", href: "chats" }, ,
-    { id: 4, name: "favoritos", href: "favoritosCliente" },
-    { id: 5, name: "histórico", href: "historicoCliente" },
-    { id: 6, name: "pagamentos", href: "pagamentosCliente" },
+    { id: 2, name: "chats", href: "chats" }, ,
+    { id: 3, name: "favoritos", href: "favoritosCliente" },
+    { id: 4, name: "histórico", href: "historicoCliente" },
+    { id: 5, name: "pagamentos", href: "pagamentosCliente" },
   ];
 
 
@@ -91,8 +90,6 @@ const getIcon = (page) => {
   switch (page.href) {
     case "homeCliente":
       return "fa-solid fa-house";
-    case "perfilCliente":
-      return "fa-regular fa-user";
     case "chats":
       return "fa-regular fa-comments";
     case "favoritosCliente":

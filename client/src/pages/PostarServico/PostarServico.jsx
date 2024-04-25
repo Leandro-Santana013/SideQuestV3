@@ -351,13 +351,14 @@ const zipImages = async () => {
                 <div className="left-rightPostar">
                   <div className="leftPostar">
                     <h3 className="tituloServico">Título do serviço</h3>
-                    <TextInput
+                    <TextInput className="componente-content-input input-busque-por-servicos"
                       name="titulo"
                       type="text"
-                      size={{ width: "35vw", height: "3vw" }}
+                      size={{ width: "35vw", height: "1.5vw", padding: ".5vw 0 .5vw 0"}}
                       onChange={handleFormSubmit}
                       placeholder={"Busque por serviços"}
                       value={formData.titulo}
+                      
                     />
 
                     <div className="emergente-categorias">
@@ -386,7 +387,7 @@ const zipImages = async () => {
                     <TextInput
                       name="dsServico"
                       type="text"
-                      size={{ width: "35vw", height: "10vw" }}
+                      size={{ width: "35vw", height: "10vw"}}
                       onChange={handleFormSubmit}
                       placeholder={
                         "Exemplo: Eu preciso de um pintor para pintar uma parede externa de 4 metros de altura e 6 metros de largura. A parede é feita de tijolos e precisa ser limpa e preparada antes da pintura. Eu gostaria que a parede fosse pintada com tinta acrílica branca. Já comprei toda a tinta necessária, caso precise de mais tinta posso comprar."
@@ -523,10 +524,11 @@ const zipImages = async () => {
                             name="cep"
                             size={{
                               width: "14vw",
-                              height: "3vw",
+                              height: "1.5vw",
                               border: cepError
-                                ? "1px solid red"
-                                : "1px solid black",
+                                ? "2px solid red"
+                                : "2px solid #eee",
+          
                             }}
                             onChange={handleCepChange}
                             placeholder={""}
@@ -542,7 +544,7 @@ const zipImages = async () => {
                         <TextInput
                           type="text"
                           name="estado_cidade"
-                          size={{ width: "30vw", height: "3vw" }}
+                          size={{ width: "30vw", height: "1.5vw" }}
                           onChange={handleEstadoCidadeChange}
                           placeholder={""}
                           value={formData.uf_localidade}
@@ -556,7 +558,7 @@ const zipImages = async () => {
                         <TextInput
                           type="text"
                           name="bairro"
-                          size={{ width: "24vw", height: "3vw" }}
+                          size={{ width: "24vw", height: "1.5vw" }}
                           onChange={handlebairro}
                           placeholder={""}
                           value={formData.bairro}
@@ -568,7 +570,7 @@ const zipImages = async () => {
                           <TextInput
                             type="text"
                             name="nmRua"
-                            size={{ width: "20vw", height: "3vw" }}
+                            size={{ width: "20vw", height: "1.5vw" }}
                             onChange={handlelogradouro}
                             placeholder={""}
                             value={formData.logradouro}
@@ -582,7 +584,7 @@ const zipImages = async () => {
                         <TextInput
                           type="number"
                           name="nmrResidencia"
-                          size={{ width: "8vw", height: "3vw" }}
+                          size={{ width: "8vw", height: "1.5vw" }}
                           onChange={handleFormSubmit}
                           placeholder={""}
                           value={formData.nmrResidencia}
@@ -593,7 +595,7 @@ const zipImages = async () => {
                         <TextInput
                           type="text"
                           name="complemento"
-                          size={{ width: "20vw", height: "3vw" }}
+                          size={{ width: "20vw", height: "1.5vw" }}
                           onChange={handleComplemento}
                           placeholder={""}
                           value={formData.complemento}
@@ -602,7 +604,7 @@ const zipImages = async () => {
                     </div>
                     <div className="linha-postar" id="rightPostar2">
                       <button className="btnProximo" onClick={handleSubmit}>
-                        
+                        Postar
                       </button>
 
                     </div>

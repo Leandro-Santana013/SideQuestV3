@@ -1,31 +1,31 @@
 :root {
-    --verde: #3cbc8c;
-    --azul: #144474;
-    --verde-claro: #e8fff7;
-  }
-  
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  
-  .content-input{
-    padding-left: 0.5vw;
-    width: 32vw;
-    height: 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: solid 1px #144474;
-    border-radius: 10px 10px 10px 10px;
-    box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
-    -webkit-box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
-    -moz-box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
-    color: #353535;
-    font-size: 1.4vw;
-    margin-left: 5px;
-    outline: none;
-    font-size: 1vw;
-  }
+  --verde: #3cbc8c;
+  --azul: #144474;
+  --verde-claro: #e8fff7;
+}
 
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.componente-content-input {
+  width: 32vw;
+  height: 5vw;
+  font-size: 1.4vw;
+  margin-left: 5px;
+  outline: none;
+  font-size: 1vw;
+  font-family: 'Inter';
+  resize: none;
+  background-color: #eee;
+  border: none;
+  padding: .5vw .5vw .5vw 0;
+  border: solid 2px #eee;
+  border-radius: 5px;
+}
+
+.componente-content-input:focus {
+  border: solid 2px black;
+}

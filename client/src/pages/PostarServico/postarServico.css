@@ -149,14 +149,18 @@
   height: 3vw;
   justify-content: center;
   align-items: center;
-  border-radius: 4px;
-  background: #3cbc8c;
-  box-shadow: 0px 5px 15px 0px rgba(20, 68, 116, 0.15),
-    0px 2px 4px 0px rgba(136, 144, 194, 0.2);
-  color: #fff;
+  border-radius: 2vw;
+  background-color: #3cbc8c;
+  color: white;
   font-size: 1.2vw;
   font-weight: 600;
   cursor: pointer;
+  border: none;
+  transition: 0.25s;
+}
+
+.btnProximo:hover {
+  background-color: var(--azul);
 }
 
 .postarH4 {
@@ -452,5 +456,3 @@
 .modal-buttons button:last-child:hover {
   background-color: #f00;
 }
-
-

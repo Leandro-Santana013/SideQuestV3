@@ -9,8 +9,7 @@
     width: 45vw;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to bottom, var(--verde) 25%, white 25%);
-    box-shadow: 0 0 25px black;
+    background: linear-gradient(to bottom, var(--azul) 25%, #eee 25%);
     padding: 1vw;
     gap: 5vw;
     border-radius: 20px;
@@ -32,7 +31,6 @@
     flex-direction: column;
     background-color: white;
     width: 35vw;
-    box-shadow:  0 0 20px black;
     border-radius: 10px;
 }
 
@@ -56,7 +54,6 @@
     border: none;
     padding: .50vw 1vw .50vw 1vw;
     border-radius: 1vw;
-    border: solid 2px var(--azul);
     transition: .25s;
 }
 
