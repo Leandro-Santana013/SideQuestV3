@@ -1,16 +1,18 @@
 import {
   createContext,
-  useState
+  useState,
+  useEffect,
+  useCallback
 } from "react";
-
+import { postRequest, baseUrl, getRequest } from "../utils/services";
 export const ProfessionalContext = createContext();
 
 export const ProfessionalContextProvider = ({children}) => {
 
-  const [Pro, setPro] = useState({})
+  const [pro, setPro] = useState({})
 
   useEffect(()=>{
-      const pro = localStorage.getItem("Pro");
+      const pro = localStorage.getItem("pro");
       setPro(JSON.parse(pro));
   },)
 
@@ -40,7 +42,7 @@ export const ProfessionalContextProvider = ({children}) => {
         setRegisterError(null);
 
         try {
-          const response = await postRequest("/auth/registerPro", formDataCadastroPro);
+          const response = await postRequest("/professional/registerPro", formDataCadastroPro);
 
           // Se a resposta for uma mensagem de erro
           if (response.error) {
@@ -61,7 +63,7 @@ export const ProfessionalContextProvider = ({children}) => {
     );
 
     const logoutUser = useCallback(() => {
-      localStorage.removeItem("Pro");
+      localStorage.removeItem("pro");
       setPro(null);
       window.location.reload();
     }, []);
@@ -76,9 +78,9 @@ export const ProfessionalContextProvider = ({children}) => {
 
 
   useEffect(() => {
-    console.log(Pro)
+    console.log(pro)
 
-  }, [Pro]);
+  }, [pro]);
 
   const updateLogininfo = useCallback((info) => {
     setloginInfo(info);
@@ -89,7 +91,7 @@ export const ProfessionalContextProvider = ({children}) => {
     setloginLoading(true);
     setloginError(null);
     try {
-      const response = await postRequest("/auth/login", loginInfo);
+      const response = await postRequest("/professional/login/", loginInfo);
 
       if (response.error) setloginError(response.error);
       else {
@@ -101,13 +103,14 @@ export const ProfessionalContextProvider = ({children}) => {
       setRegisterError("Erro ao logar. Por favor, tente novamente."); // Define o estado de erro com uma mensagem genérica de erro
       setRegisterLoading(false);
     }
+
   }, [loginInfo]);
 
     
 return (
   <ProfessionalContext.Provider
       value={{
-          Pro,
+          pro,
           updateCadastro,
           formDataCadastroPro,
           registerError,

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./loginPro.css";
 import Cookies from "js-cookie";
-import { ProfessionalContext } from "./context/ProfessionalContext";
+import { useIsSignUpActive } from "../../components/HeaderLanding/singUpState";
+import { ProfessionalContext } from "../../context/ProfissionalContext";
 
 const LoginProfissional = () => {
   const {
@@ -19,6 +20,29 @@ const LoginProfissional = () => {
     loginError,
     loginLoading,
   } = useContext(ProfessionalContext);
+
+  var VarisSignUpActive = useIsSignUpActive();
+  const [isSignUpActive, setIsSignUpActive] = useState(VarisSignUpActive);
+  const navigate = useNavigate();
+
+  const [cpf, setCpf] = useState("");
+
+  const handleSignUpClick = () => {
+    setIsSignUpActive(true);
+  };
+
+  const handleSignInClick = () => {
+    setIsSignUpActive(false);
+  };
+
+  const handleCPFChange = (e) => {
+    let cpfValue = e.target.value.replace(/\D/g, "");
+    cpfValue = cpfValue.slice(0, 11); // Remove todos os caracteres não numéricos
+    cpfValue = cpfValue.replace(/(\d{3})(\d)/, "$1.$2"); // Adiciona o primeiro ponto
+    cpfValue = cpfValue.replace(/(\d{3})(\d)/, "$1.$2"); // Adiciona o segundo ponto
+    cpfValue = cpfValue.replace(/(\d{3})(\d{1,2})$/, "$1-$2"); // Adiciona o traço
+    setCpf(cpfValue); // Atualiza o estado com o CPF formatado
+  };
   return (
     <>
       <div className="container-forms">
@@ -41,13 +65,7 @@ const LoginProfissional = () => {
                   </div>
                 )}
               </div>
-              <div
-                className={`container-mensagem-erro ${
-                  message2 && responseStatus === 202
-                }`}
-              >
-                {message2}
-              </div>
+              
               <input
                 placeholder="Digite seu nome"
                 type="text"
@@ -75,12 +93,12 @@ const LoginProfissional = () => {
                 type="text"
                 id="cpfInput"
                 name="cpf"
-                onChange={(e) =>
-                  updateCadastro({
-                    ...formDataCadastroPro,
-                    cpf: e.target.value,
-                  })
-                }
+                value={cpf}
+                maxLength={14}
+                onChange={(e) => {
+                  handleCPFChange(e);
+                  updateCadastro({ ...formDataCadastroPro, cpf: e.target.value });
+                }}
               />
               <input
                 placeholder="Digite uma senha"

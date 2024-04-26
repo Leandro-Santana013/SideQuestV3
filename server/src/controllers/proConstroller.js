@@ -18,8 +18,13 @@ exports.registerPro = async (req, res) => {
 
     try {
       const { name, email, cpf, senha, senhaConfirm } = req.body;
-      const cpfNumerico = cpf.replace(/\D/g, '');
+      
       console.log(name, email, cpf, senha, senhaConfirm)
+      if (!name || !email || !cpf || !senha || !senhaConfirm){
+        console.log("a")
+        return res.status(400).json({error:"Preencha todos os campos" });
+      }
+      const cpfNumerico = cpf.replace(/\D/g, '');
      
       const emailResults = await controller_Pro.findEmailProfissional({
         params: { cd_emailProfissional: email }
@@ -30,9 +35,9 @@ exports.registerPro = async (req, res) => {
     globalCpf = cpfNumerico;
   
       if (emailResults.length > 0) {
-        return res.status(200).json({ message: 'Email inválido ou já está em uso'})
+        return res.status(400).json({ error: 'Email inválido ou já está em uso'})
       } else if (senha !== senhaConfirm) {
-        return res.status(200).json({ message: 'As senhas estão incorretas' });
+        return res.status(400).json({ error: 'As senhas estão incorretas' });
       }
   
       const cpfResults = await controller_Pro.findcpfProfissional({
@@ -40,7 +45,7 @@ exports.registerPro = async (req, res) => {
       });
 
       if (cpfResults.length > 0) {
-        return res.status(200).json({ message: 'Alguns desses dados estão incorretos ou estão sendo utilizados'});
+        return res.status(400).json({ error: 'Alguns desses dados estão incorretos ou estão sendo utilizados'});
       }
       
       // Hash da senha 
@@ -120,12 +125,12 @@ exports.registerPro = async (req, res) => {
             to: email
           })
           console.log(mailSend);
-        } catch {
+        } catch(error) {
           console.error(`erro ao enviar email ${error}`)
         }
       }
       sendmail();
-      return res.status(200).json({ message: 'Verifique sua caixa de email para confirma-lo' });
+      return res.status(400).json({ error: 'Verifique sua caixa de email para confirma-lo' });
      
     } catch (error) {
       console.error(error);
@@ -142,13 +147,13 @@ exports.registerPro = async (req, res) => {
       });
   
       if (user.length == 0) {
-        return res.status(200).json({ message: "Email ou senha incorretos" });
+        return res.status(400).json({ error: "Email ou senha incorretos" });
       }
   
       const match = await bcrypt.compare(senha, user[0].cd_senhaProfissional);
   
       if (!match) {
-        return res.status(200).json({ message: "Email ou senha incorretos" });
+        return res.status(400).json({ message: "Email ou senha incorretos" });
       }
   
       const tokenconfirmed = await controller_Pro.findtokenProfissional({
@@ -159,7 +164,7 @@ exports.registerPro = async (req, res) => {
   
       if (!tokenconfirmed) {
         return res
-          .status(200)
+          .status(400)
           .json({
             message: "Confirme seu email, verifique na sua caixa de entrada",
           });
