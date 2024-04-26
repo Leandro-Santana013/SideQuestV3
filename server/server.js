@@ -1,7 +1,8 @@
 // app.js
 const app = require('./config/express.js');
 const {connectionDataBase} = require("./database/db.js")
-const authController = require ('./routes/auth.js');
+const userRoutes = require ('./routes/user.js');
+const proRoutes = require ('./routes/professionalRoutes.js');
 const chatRoutes = require ('./routes/chatRoutes');
 const messageRoutes = require ('./routes/messageRoutes');
 const {connectMongo} = require("./database/mongodb.js")
@@ -9,8 +10,9 @@ const {connectMongo} = require("./database/mongodb.js")
 
 
 
-app.use('/auth', authController);  // Em seguida, use o roteador de pages.js para o caminho raiz
+app.use('/user', userRoutes);  // Em seguida, use o roteador de pages.js para o caminho raiz
 app.use('/chat', chatRoutes);
+app.use('/professional', proRoutes);
 app.use('/message', messageRoutes);
 
 (async () => {

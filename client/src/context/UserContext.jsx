@@ -44,8 +44,8 @@ import { file } from "jszip";
         setRegisterError(null);
 
         try {
-          const response = await postRequest("/auth/register", formDataCadastro);
-
+          const response = await postRequest("/user/register", formDataCadastro);
+          
           // Se a resposta for uma mensagem de erro
           if (response.error) {
             setRegisterError(response.error); // Define o estado de erro com a mensagem de erro recebida
@@ -109,7 +109,7 @@ import { file } from "jszip";
       setloginLoading(true);
       setloginError(null);
       try {
-        const response = await postRequest("/auth/login", loginInfo);
+        const response = await postRequest("/user/login", loginInfo);
 
         if (response.error) setloginError(response.error);
         else {
@@ -156,7 +156,7 @@ import { file } from "jszip";
 
       try {
         // Enviar o formulário com o estado formData atualizado
-        const response = await postRequest("/auth/postarServico", Servico);
+        const response = await postRequest("/user/postarServico", Servico);
         console.log(response)
         if (response.error){
           setmessageErrorPostar(response.error)
@@ -210,7 +210,7 @@ import { file } from "jszip";
     useEffect(() => {
       const carregarCategorias = async () => {
         try {
-          const response = await getRequest("/auth/selectCategoria");
+          const response = await getRequest("/user/selectCategoria");
           setCategorias(response); // Aqui estamos definindo o estado das categorias com a resposta do servidor
 
         } catch (error) {

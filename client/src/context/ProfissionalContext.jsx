@@ -76,9 +76,9 @@ export const ProfessionalContextProvider = ({children}) => {
 
 
   useEffect(() => {
-    console.log(user)
+    console.log(Pro)
 
-  }, [user]);
+  }, [Pro]);
 
   const updateLogininfo = useCallback((info) => {
     setloginInfo(info);
@@ -109,10 +109,10 @@ return (
       value={{
           Pro,
           updateCadastro,
+          formDataCadastroPro,
           registerError,
           registerSucess,
           registerLoading,
-          updateCadastro,
           registerPro,
           logoutUser,
           updateLogininfo,
@@ -120,7 +120,6 @@ return (
           loginPro,
           loginError,
           loginLoading
-
       }}
   >
    {children}

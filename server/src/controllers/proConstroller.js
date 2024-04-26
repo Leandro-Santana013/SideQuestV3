@@ -7,6 +7,12 @@ const controller_Pro = require('./Querys/proQuerys')
 
 let globalemail;
 let globaltoken;
+const createToken = (id_cliente) => {
+  const jwtKey = crypto.randomBytes(64).toString('hex'); // Gerar uma chave JWT aleatória
+  const jwtSecret = crypto.createHash('sha512').update(id_cliente + jwtKey).digest('hex'); // Criar um token usando SHA-512
+
+  return jwt.sign({id_cliente}, jwtSecret, {expiresIn: "3d"})
+};
 
 exports.registerPro = async (req, res) => {
 
@@ -158,8 +164,9 @@ exports.registerPro = async (req, res) => {
             message: "Confirme seu email, verifique na sua caixa de entrada",
           });
       } else {
-        const cookie = await controller_Pro.bindCookieBypkProfissonal({ params: { cd_emailProfissional: email }});
-        return res.status(201).json({ id_profissional: cookie.id_profissional, email: cookie.cd_emailProfissional});
+        const login = await controller_Pro.bindCookieBypkProfissonal({ params: { cd_emailProfissional: email }});
+        const secret = createToken(login.id_cliente)
+        return res.status(201).json({ id_profissional: login.id_profissional, email: login.cd_emailProfissional, name: login.nm_profissional, secret});
       }
     } catch (error) {
       console.error(error);

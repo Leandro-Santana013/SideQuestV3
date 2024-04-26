@@ -67,7 +67,7 @@ export const Login = () => {
                   {registerSucess}
                 </div>
               )}
-
+              
               <input
                 placeholder="Digite seu nome"
                 type="text"
