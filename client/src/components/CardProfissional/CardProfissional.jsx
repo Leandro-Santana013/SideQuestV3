@@ -29,7 +29,7 @@ export const CardProfissional = () => {
   const fetchDataFromBackend = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/auth/profissionaisCard", filtrados
+        "http://localhost:5000/user/profissionaisCard", filtrados
       );
       setDadosIniciais(response.data);
 
