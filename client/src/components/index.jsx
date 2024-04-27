@@ -13,6 +13,8 @@ import { CardServico } from "./cardServico/CardServico"
 import { Infoinc } from './Infoinc/Infoinc';
 import { Perfilcli } from './Perfilcli/Perfilcli';
 import { Loading } from './Loading/Loading';
+import { SidebarProfissional } from './SidebarProfissional/SidebarProfissional';
+
 export {
     Animation,
     Benefits,
@@ -29,4 +31,5 @@ export {
     Typography,
     CardServico,    
     Loading,
+    SidebarProfissional
 }

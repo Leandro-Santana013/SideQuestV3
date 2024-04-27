@@ -17,6 +17,7 @@ import HomeProfissionais from "./pages/HomeProfissional/HomeProfissional";
 import ServicosPendentesCliente from "./pages/ServicosPendentesCliente/ServicosPendentesCliente";
 import LandingProfissional from "./pages/LandingProfissional/LandingProfissional";
 import Config from "./pages/Config/Config";
+import SidebarProfissional from './pages/HomeProfissional/HomeProfissional'
 
 const Router = () => {
   const { user } = useContext(AuthContext);
@@ -26,19 +27,24 @@ const Router = () => {
       <AuthContextProvider>
         <Routes>
           <Route exact path="/" element={<Landing />} />
+          <Route exact path="/landingProfissional" element={<LandingProfissional />} />
           <Route exact path="/login" element={user ? <Navigate to="/homeCliente" /> : <Login />} />
-          <Route exact path="/loginProfissional" element={<LoginProfissional />} />
-          <Route exact path="/validaEmailProfissional" element={<ValidaEmailProfissional />} />
-          <Route exact path="/validaemail" element={<ValidaEmail />} />
+
+          {/* páginas cliente */}
           <Route exact path="/homeCliente" element={true ? <HomeCliente /> : <Navigate to="/login" />} />
           <Route exact path="/homeCliente/postarSevico" element={<PostarServico />} />
-          <Route exact path="/pagamentosCliente" element={<PagamentosCliente />} />
+          <Route exact path="/validaemail" element={<ValidaEmail />} />
           <Route exact path="/favoritosCliente" element={<Favoritos />} />
           <Route exact path="/historicoCliente" element={<Historico />} />
-          <Route exact path="/homeProfissionais" element={<HomeProfissionais />} />
+          <Route exact path="/pagamentosCliente" element={<PagamentosCliente />} />
           <Route exact path="/servicosPendentesCliente" element={<ServicosPendentesCliente />} />
-          <Route exact path="/landingProfissional" element={<LandingProfissional />} />
           <Route exact path="/config" element={true ? <Config /> : <Navigate to="/login" />} />
+
+          {/* páginas profissional */}
+
+          <Route exact path="/loginProfissional" element={<LoginProfissional />} />
+          <Route exact path="/homeProfissionais" element={<HomeProfissionais />} />
+          <Route exact path="/validaEmailProfissional" element={<ValidaEmailProfissional />} />
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>

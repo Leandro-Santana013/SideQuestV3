@@ -1,0 +1,142 @@
+.content-midia {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.main-content {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    width: 82vw;
+    margin-top: 5vw;
+}
+
+.connected-bar {
+    display: none;
+    width: 0.5vw;
+    height: 0.5vw;
+    border-radius: 50%;
+    background-color: var(--verde);
+}
+
+.sidebarProfissional {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 85vh;
+    width: 18vw;
+    position: fixed;
+    font-size: 1vw;
+    bottom: 0;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vw;
+}
+
+.sidebarProfissional a {
+    text-decoration: none;
+    color: black;
+}
+
+.option {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8vw;
+    align-items: center;
+    cursor: pointer;
+    width: fit-content;
+    padding-left: 1vw;
+}
+
+.option i {
+    font-size: 1.2vw;
+}
+
+/* =carde do perfil final da tela*/
+
+.card-perfil-bottom {
+    display: flex;
+    bottom: 0;
+    width: 10vw;
+    height: 4vw;
+    padding: 1vw;
+    background-color: var(--azul);
+    border-radius: 0 1vw 0 0 ;
+    justify-content: space-around;
+
+    img {
+        width: 3vw;
+        height: 3vw;
+    }
+
+}
+
+.modal-card-perfil {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 7vw;
+    left: 1vw;
+    background: linear-gradient(to bottom, var(--verde) 25% , white 25%);
+    width: 15vw;
+    height: 20vw;
+    border-radius: 1vw;
+    border: solid 1px var(--verde);
+}
+
+.header-modal-card-perfil {
+    display: flex;
+    align-items: center;
+    height: 7vw;
+
+    img {
+        border: solid 3px var(--azul);
+        border-radius: 50%;
+        margin-left: 1vw;
+        position: absolute;
+        bottom: 13vw;
+    }
+
+    .icone-editar-perfil {
+        background-color: grey;
+        padding: 10px;
+        width: 1.5vw;
+        height: 1.5vw;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .close-editar-perfil {
+        position: absolute;
+        font-size: 1.5vw;
+        top: 10px;
+        left: 10px;
+        color: red;
+        cursor: pointer;
+    }
+}
+
+.info-card-perfil {
+    display: flex;
+    flex-direction: column;
+    padding: 1vw;
+    gap: 1vw;
+
+    .linha-divisora {
+        width: 12vw;
+        height: 3px;
+        background-color: black;
+    }
+
+    p {
+        font-size: 1.5vw;
+        margin: 0;
+    }
+}
