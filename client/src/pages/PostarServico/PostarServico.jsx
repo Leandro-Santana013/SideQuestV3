@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { SidebarCliente, Header, TextInput } from "../../components";
 import axios from "axios";
-import Cookies from "js-cookie";
 import JSZip from "jszip";
+import imgApproved from "../../assets/approved.png"
 
 
 import "./postarServico.css";
@@ -13,47 +13,28 @@ import {
   RiQuestionLine,
   RiAttachment2,
 } from "react-icons/ri";
+import { UserContext } from "../../context/UserContext";
 
 const PostarServico = () => {
-  const navigate = useNavigate();
-  const [form, setForm] = useState(1);
-  const [cep, setCep] = useState("");
-  const [addressData, setAddressData] = useState({});
-  const [cepError, setCepError] = useState(false);
-  const [urgencia, setUrgencia] = useState(false);
-  const [categorias, setCategorias] = useState([]);
-  const [categoriaSelecionada, setCategoriaSelecionada] = useState(null);
-  const [complemento, setComplemento] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [formData, setFormData] = useState({
-    titulo: null,
-    dsServico: null,
-    cep: null,
-    uf_localidade: null,
-    logradouro: null,
-    bairro: null,
-    nmrResidencia: null,
-    categoriaSelecionada: null,
-    complemento: null,
-    idCliente: null,
-    email: null,
-    imagens: null,
-  });
+  const { PostarServico, updatepostarServico, categorias, Servico, fetchData, cepError, setServico, setModalPostar, messageErrorPostar, errorPostar, form,
+    setForm, modalPostar } = useContext(UserContext)
 
-  const getCookieData = () => {
-    const userDataString = decodeURIComponent(Cookies.get("user"));
-    if (userDataString) {
-      const userData = JSON.parse(userDataString);
-      // Atualize o estado formData com os dados do cookie
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        idCliente: userData.id_cliente,
-        email: userData.email,
-      }));
-      console.log(userData.id_cliente);
-      console.log(userData.email);
-    }
+  useEffect(() => {
+    console.log(form)
+  }, [form])
+
+
+  const handleCepChange = (e) => {
+    const cep = e.target.value;
+    setServico({ ...Servico, cep }); // Atualiza o estado do CEP
+    const cepToFetch = cep; // Armazena o valor atual do CEP em uma variável local
+    if (cep.length === 8)
+      fetchData(cepToFetch); // Chama a função de busca de dados do CEP com o valor atual
   };
+
+
+  const navigate = useNavigate();
+
 
   const handleNext = () => {
     setForm(form + 1);
@@ -67,154 +48,15 @@ const PostarServico = () => {
     }
   };
 
-  const handleCepChange = (event) => {
-    setAddressData({}); // Limpar os dados do endereço ao editar manualmente o CEP
-    setCep(event.target.value);
-  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `https://viacep.com.br/ws/${cep}/json/`
-        );
-        setAddressData(response.data);
-        console.log(response.data);
-
-        if (response.data.erro === true) {
-          setCepError(true);
-        } else {
-          setCepError(false);
-          // Preencha automaticamente o estado e a cidade (ou use outras informações, se necessário)
-          setFormData({
-            ...formData,
-            cep: cep,
-            uf_localidade: `${response.data.uf} - ${response.data.localidade}`,
-            bairro: response.data.bairro,
-            logradouro: response.data.logradouro,
-          });
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    if (cep.length === 8) {
-      fetchData();
-    }
-  }, [cep]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    // Gerar o arquivo ZIP
-    await zipImages();
-  
-    try {
-      // Enviar o formulário com o estado formData atualizado
-      const response = await axios.post(
-        "http://localhost:5000/auth/postarServico",
-        formData
-      );
-  
-      setMessage(response.data.message);
-    } catch (error) {
-      console.error("Erro ao cadastrar:", error);
-      setMessage(
-        error.response?.data?.message || "Erro ao cadastrar. Tente novamente."
-      );
-    }
-  };
-  
-  const handleUrgenciaChange = (event) => {
-    // Atualiza o estado da urgência com base no estado atual do checkbox
-    setUrgencia(event.target.checked);
-  };
-
-  const handleFormSubmit = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleEstadoCidadeChange = (event) => {
-    // Permitir que o usuário edite o campo "Estado - Cidade"
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      uf_localidade: event.target.value,
-    }));
-  };
-  const handlebairro = (event) => {
-    // Permitir que o usuário edite o campo "Estado - Cidade"
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      bairro: event.target.value,
-    }));
-  };
-
-  const handlelogradouro = (event) => {
-    // Permitir que o usuário edite o campo "Estado - Cidade"
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      logradouro: event.target.value,
-    }));
-  };
-
-  const handleComplemento = (event) => {
-    // Permitir que o usuário edite o campo "Estado - Cidade"
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      complemento: event.target.value,
-    }));
-  };
-
-  useEffect(() => {
-    const carregarCategorias = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/auth/selectCategoria"
-        );
-        setCategorias(response.data);
-      } catch (error) {
-        console.error("Erro ao buscar categorias:", error);
-      }
-      getCookieData();
-    };
-
-    // Chama a função para buscar as categorias
-    carregarCategorias();
-  }, []);
-
-  const handleCategoriaChange = (event) => {
-    const selectedCategoria = event.target.value;
-    setCategoriaSelecionada(selectedCategoria);
-
-    // Atualize o estado categoriaSelecionada no formData
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      categoriaSelecionada: selectedCategoria,
-    }));
-  };
-
-  // const handleImageChange = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       setSelectedImage(reader.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [exceededLimit, setExceededLimit] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imageToDeleteIndex, setImageToDeleteIndex] = useState(null);
-  
+
+
 
   const handleImageChange = (event) => {
     const files = event.target.files;
@@ -222,13 +64,13 @@ const PostarServico = () => {
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      
+
       if (file) {
-        const reader = new FileReader();  
+        const reader = new FileReader();
         reader.onload = () => {
           imagesArray.push(reader.result);
           if (imagesArray.length === files.length) {
-          const newImages = [...selectedImages, ...imagesArray];
+            const newImages = [...selectedImages, ...imagesArray];
             const limitedImages = newImages.slice(0, 5); // Limitando a 5 imagens
             if (newImages.length > 5) {
               setExceededLimit(true);
@@ -237,21 +79,18 @@ const PostarServico = () => {
               }, 4000);
               return;
             }
-           
-
-          
             setSelectedImages(limitedImages);
             setShowFilter(limitedImages.length > 3);
-            
+
           }
-          
+
         };
         reader.readAsDataURL(file);
       }
     }
   };
 
-  
+
 
 
   const openModal = (index) => {
@@ -264,66 +103,85 @@ const PostarServico = () => {
   };
 
   const handlePrevimg = () => {
-  setCurrentImageIndex((prevIndex) =>
-    prevIndex === 0 ? selectedImages.length - 1 : prevIndex - 1
-  );
-};
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? selectedImages.length - 1 : prevIndex - 1
+    );
+  };
 
-const handleNextimg = () => {
-  setCurrentImageIndex((prevIndex) =>
-    prevIndex === selectedImages.length - 1 ? 0 : prevIndex + 1
-  );
-};
+  const handleNextimg = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === selectedImages.length - 1 ? 0 : prevIndex + 1
+    );
+  };
 
-const deleteImage = (index) => {
-  const updatedImages = selectedImages.filter((_, idx) => idx !== index);
-  setSelectedImages(updatedImages);
-}
+  const deleteImage = (index) => {
+    const updatedImages = selectedImages.filter((_, idx) => idx !== index);
+    setSelectedImages(updatedImages);
+  }
 
 
 
-useEffect(() => {
-  // Verificar se não há mais imagens selecionadas
-  if (selectedImages.length === 0) {
-    // Fechar o modal
-    closeModal();
-  } else {
-    // Verificar se a imagem atualmente exibida no modal foi excluída
-    if (currentImageIndex >= selectedImages.length) {
-      // Atualizar o índice da imagem atual no modal para a última imagem disponível
-      setCurrentImageIndex(selectedImages.length - 1);
+  useEffect(() => {
+    // Verificar se não há mais imagens selecionadas
+    if (selectedImages.length === 0) {
+      // Fechar o modal
+      closeModal();
+    } else {
+      // Verificar se a imagem atualmente exibida no modal foi excluída
+      if (currentImageIndex >= selectedImages.length) {
+        // Atualizar o índice da imagem atual no modal para a última imagem disponível
+        setCurrentImageIndex(selectedImages.length - 1);
+      }
     }
-  }
-}, [selectedImages, currentImageIndex]);
+  }, [selectedImages, currentImageIndex]);
 
-const zipImages = async () => {
-  const zip = new JSZip();
 
-  // Adicione as imagens ao arquivo ZIP
-  selectedImages.forEach((image, index) => {
-    zip.file(`image_${index}.png`, image.split("base64,")[1], { base64: true });
-  });
 
-  try {
-    // Gerar o arquivo ZIP
-    const content = await zip.generateAsync({ type: "blob" });
-    console.log("Conteúdo do arquivo ZIP:", content);
 
-    // Adicione o arquivo ZIP ao FormData
-    const zipFile = new File([content], "images.zip");
 
-    // Atualize o estado formData com o arquivo ZIP
-    setFormData(prevFormData => ({
-      ...prevFormData,
-      imagens: zipFile
-    }));
+  const zipImages = async () => {
+    const zip = new JSZip();
 
-    console.log("Objeto FormData após adicionar arquivo ZIP:", formData);
+    // Adicione as imagens ao arquivo ZIP
+    selectedImages.forEach((image, index) => {
+      zip.file(`image_${index}.png`, image.split("base64,")[1], { base64: true });
+    });
 
-  } catch (error) {
-    console.error("Erro ao gerar o arquivo ZIP:", error);
-  }
-};
+    try {
+      // Gerar o arquivo ZIP
+      const content = await zip.generateAsync({ type: "blob" });
+      const blobSize = content.size;
+
+      // Criar um FileReader
+      const reader = new FileReader();
+
+      // Quando o FileReader carregar, converter para base64 e criar o objeto File
+      reader.onload = () => {
+        console.log(`Tamanho do arquivo ZIP: ${blobSize} bytes`);
+        const base64String = reader.result.split(",")[1];
+        const zipFile = {
+          name: "images.zip",
+          type: "application/zip",
+          content: base64String,
+        };
+
+        // Converta zipFile para JSON
+        const jsonZipFile = JSON.stringify(zipFile);
+
+        // Atualizar o serviço com as imagens
+        updatepostarServico({
+          ...Servico,
+          imagens: jsonZipFile,
+        });
+      };
+
+      // Ler o conteúdo do arquivo como um ArrayBuffer
+      reader.readAsDataURL(content);
+    } catch (error) {
+      console.error("Erro ao gerar o arquivo ZIP:", error);
+    }
+  };
+
 
 
 
@@ -340,7 +198,10 @@ const zipImages = async () => {
               <div className={`publicar123 ${form === 2 ? "form" : ""}`}>2</div>
             </div>
           </div>
-          <form onSubmit={handleSubmit} className="postarServico1">
+          {errorPostar && (
+            <div className={errorPostar ? "message-error-postar-initial" : "message-error-postar-end"}>{messageErrorPostar}</div>
+          )}
+          <form onSubmit={PostarServico} className="postarServico1">
             {form === 1 && (
               <div>
                 <div className="headerVoltar">
@@ -354,22 +215,23 @@ const zipImages = async () => {
                     <TextInput className="componente-content-input input-busque-por-servicos"
                       name="titulo"
                       type="text"
-                      size={{ width: "35vw", height: "1.5vw", padding: ".5vw 0 .5vw 0"}}
-                      onChange={handleFormSubmit}
+                      size={{ width: "35vw", height: "1.5vw", padding: ".5vw 0 .5vw 0" }}
                       placeholder={"Busque por serviços"}
-                      value={formData.titulo}
-                      
+                      onChange={(e) =>
+                        updatepostarServico({ ...Servico, titulo: e.target.value })
+                      }
                     />
 
                     <div className="emergente-categorias">
                       <select
                         id="categoriaSelect"
-                        value={categoriaSelecionada}
-                        onChange={handleCategoriaChange}
                         className="categorias"
+                        onChange={(e) =>
+                          updatepostarServico({ ...Servico, categoria: e.target.value })
+                        }
                       >
 
-                      <option value="" disabled selected>Selecione uma categoria</option>
+                        <option value="" disabled selected>Selecione uma categoria</option>
                         {categorias.map((categoria) => (
                           <option
                             name={categoria.ds_categoria}
@@ -387,12 +249,14 @@ const zipImages = async () => {
                     <TextInput
                       name="dsServico"
                       type="text"
-                      size={{ width: "35vw", height: "10vw"}}
-                      onChange={handleFormSubmit}
+                      size={{ width: "35vw", height: "10vw" }}
+
                       placeholder={
                         "Exemplo: Eu preciso de um pintor para pintar uma parede externa de 4 metros de altura e 6 metros de largura. A parede é feita de tijolos e precisa ser limpa e preparada antes da pintura. Eu gostaria que a parede fosse pintada com tinta acrílica branca. Já comprei toda a tinta necessária, caso precise de mais tinta posso comprar."
                       }
-                      value={formData.dsServico}
+                      onChange={(e) =>
+                        updatepostarServico({ ...Servico, dsServico: e.target.value })
+                      }
                     />
                     <div className="content-img-button">
                       <input
@@ -497,7 +361,12 @@ const zipImages = async () => {
                   </div>
 
                   <div className="rightPostar">
-                    <button className="btnProximo" onClick={handleNext}>
+                    <button className="btnProximo" onClick={() => {
+                      handleNext(); // Chama a função para avançar para o próximo formulário
+                      if (selectedImages.length > 0) {
+                        zipImages(); // Chama a função para zipar as imagens apenas se houver alguma imagem selecionada
+                      }
+                    }}>
                       Próximo
                     </button>
                   </div>
@@ -514,6 +383,21 @@ const zipImages = async () => {
                 </div>
                 <div className="left-rightPostar">
                   <div className="leftPostar">
+                    {modalPostar && (
+                      <>
+                        <div className="fade">
+                          <div className={`modal-postar-sucess`}>
+                            <h3>Serviço postado</h3>
+                            <img src={imgApproved} />
+                            <p>Profissionas poderão vizualizar seu problema</p>
+                            <Link to={"/homeCliente"}>
+                              <button className="close-modal-postar" onClick={() => {
+                                setModalPostar(null); // Adicione esta linha para fechar o modal ao clicar em "Fechar"
+                              }}> Fechar</button></Link>
+                          </div>
+                        </div>
+                      </>
+                    )}
                     <h3 className="tituloServico">Endereço</h3>
                     <div className="cep-estado">
                       <div>
@@ -522,17 +406,19 @@ const zipImages = async () => {
                           <TextInput
                             type="text"
                             name="cep"
+                            autocomplete="off"
                             size={{
                               width: "14vw",
                               height: "1.5vw",
                               border: cepError
                                 ? "2px solid red"
                                 : "2px solid #eee",
-          
+
                             }}
-                            onChange={handleCepChange}
-                            placeholder={""}
-                            value={cep}
+                            onChange={(e) => {
+                              handleCepChange(e); // Chama a função handleCepChange existente
+                              updatepostarServico({ ...Servico, cep: e.target.value }); // Atualiza o estado do serviço com o novo valor do CEP
+                            }}
                           />
                           {cepError && (
                             <p className="cepError">CEP incorreto</p>
@@ -545,9 +431,8 @@ const zipImages = async () => {
                           type="text"
                           name="estado_cidade"
                           size={{ width: "30vw", height: "1.5vw" }}
-                          onChange={handleEstadoCidadeChange}
                           placeholder={""}
-                          value={formData.uf_localidade}
+                          value={Servico.uf_localidade}
                           disabled
                         />
                       </div>
@@ -558,10 +443,13 @@ const zipImages = async () => {
                         <TextInput
                           type="text"
                           name="bairro"
+                          autocomplete="off"
                           size={{ width: "24vw", height: "1.5vw" }}
-                          onChange={handlebairro}
                           placeholder={""}
-                          value={formData.bairro}
+                          value={Servico.bairro}
+                          onChange={(e) => {
+                            updatepostarServico({ ...Servico, bairro: e.target.value });
+                          }}
                         />
                       </div>
                       <div>
@@ -570,10 +458,13 @@ const zipImages = async () => {
                           <TextInput
                             type="text"
                             name="nmRua"
+                            autocomplete="off"
                             size={{ width: "20vw", height: "1.5vw" }}
-                            onChange={handlelogradouro}
                             placeholder={""}
-                            value={formData.logradouro}
+                            value={Servico.logradouro}
+                            onChange={(e) => {
+                              updatepostarServico({ ...Servico, logradouro: e.target.value });
+                            }}
                           />
                         </div>
                       </div>
@@ -581,13 +472,16 @@ const zipImages = async () => {
                     <div className="num-complemento">
                       <div>
                         <h4 className="postarH4">Número da residência</h4>
+
                         <TextInput
                           type="number"
                           name="nmrResidencia"
+                          autocomplete="off"
                           size={{ width: "8vw", height: "1.5vw" }}
-                          onChange={handleFormSubmit}
                           placeholder={""}
-                          value={formData.nmrResidencia}
+                          onChange={(e) => {
+                            updatepostarServico({ ...Servico, nmrResidencia: e.target.value });
+                          }}
                         />
                       </div>
                       <div>
@@ -595,18 +489,21 @@ const zipImages = async () => {
                         <TextInput
                           type="text"
                           name="complemento"
+                          autocomplete="off"
                           size={{ width: "20vw", height: "1.5vw" }}
-                          onChange={handleComplemento}
+
                           placeholder={""}
-                          value={formData.complemento}
+                          onChange={(e) => {
+                            updatepostarServico({ ...Servico, complemento: e.target.value });
+                          }}
                         />
+
                       </div>
                     </div>
                     <div className="linha-postar" id="rightPostar2">
-                      <button className="btnProximo" onClick={handleSubmit}>
+                      <button className="btnProximo" type="submit">
                         Postar
                       </button>
-
                     </div>
                   </div>
 
@@ -625,7 +522,6 @@ const zipImages = async () => {
   </div>
   )} */}
                 </div>
-
               </div>
             )}
 

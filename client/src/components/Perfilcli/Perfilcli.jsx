@@ -3,10 +3,10 @@ import iconPerfil from "../../assets/icone-perfil.png";
 import { FaPaintBrush } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import axios from "axios";
-import { AuthContext } from "../../context/AuthContext";
+import { UserContext } from "../../context/UserContext";
 
 export const Perfilcli = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(UserContext);
   const [infocliente, setinfocliente] = useState(null);
 
   const [openModalPerfil, setOpenModalPerfil] = useState(false);

@@ -50,6 +50,7 @@ ModelTerminoServico.belongsTo(ModelConfirmacaoServico, { foreignKey: 'id_confirm
 ModelTerminoServico.hasOne(ModelAvaliacao, {foreignKey: 'id_terminoServico'})
 ModelAvaliacao.belongsTo(ModelTerminoServico, {foreignKey: 'id_terminoServico'})
 
+
 module.exports = {
    ModelCliente,
     ModelProfissional,
@@ -60,5 +61,6 @@ module.exports = {
     ModelPostagemServico,
     ModelConfirmacaoServico,
     ModelTerminoServico,
-    ModelAvaliacao
+    ModelAvaliacao,
+
 };

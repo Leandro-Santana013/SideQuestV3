@@ -10,7 +10,6 @@ module.exports = {
   bindCookieBypkProfissonal: async (req, res) => {
     const { cd_emailProfissional } = req.params;
     return ModelProfissional.findOne({
-      attributes: ["id_profissional", "cd_emailProfissional"],
       where: {
         cd_emailProfissional: cd_emailProfissional,
       },

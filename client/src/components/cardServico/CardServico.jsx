@@ -12,7 +12,7 @@ export const CardServico = () => {
   const fetchDataFromBackend = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/auth/servicoscard"
+        "http://localhost:5000/professional/servicoscard"
       );
       setDadosIniciais(response.data);
     } catch (error) {

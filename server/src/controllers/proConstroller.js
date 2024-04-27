@@ -3,17 +3,31 @@ const nodemailer = require('nodemailer')
 const tokenConfirmacao = require('../../tools/createToken')
 const smtpconfig = require('../../config/smtp')
 const controller_Pro = require('./Querys/proQuerys')
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const validator = require("validator");
 
 
 let globalemail;
 let globaltoken;
+const createToken = (id_cliente) => {
+  const jwtKey = crypto.randomBytes(64).toString('hex'); // Gerar uma chave JWT aleatória
+  const jwtSecret = crypto.createHash('sha512').update(id_cliente + jwtKey).digest('hex'); // Criar um token usando SHA-512
+
+  return jwt.sign({id_cliente}, jwtSecret, {expiresIn: "3d"})
+};
 
 exports.registerPro = async (req, res) => {
 
     try {
       const { name, email, cpf, senha, senhaConfirm } = req.body;
-      const cpfNumerico = cpf.replace(/\D/g, '');
+      
       console.log(name, email, cpf, senha, senhaConfirm)
+      if (!name || !email || !cpf || !senha || !senhaConfirm){
+        console.log("a")
+        return res.status(400).json({error:"Preencha todos os campos" });
+      }
+      const cpfNumerico = cpf.replace(/\D/g, '');
      
       const emailResults = await controller_Pro.findEmailProfissional({
         params: { cd_emailProfissional: email }
@@ -24,9 +38,9 @@ exports.registerPro = async (req, res) => {
     globalCpf = cpfNumerico;
   
       if (emailResults.length > 0) {
-        return res.status(200).json({ message: 'Email inválido ou já está em uso'})
+        return res.status(400).json({ error: 'Email inválido ou já está em uso'})
       } else if (senha !== senhaConfirm) {
-        return res.status(200).json({ message: 'As senhas estão incorretas' });
+        return res.status(400).json({ error: 'As senhas estão incorretas' });
       }
   
       const cpfResults = await controller_Pro.findcpfProfissional({
@@ -34,7 +48,7 @@ exports.registerPro = async (req, res) => {
       });
 
       if (cpfResults.length > 0) {
-        return res.status(200).json({ message: 'Alguns desses dados estão incorretos ou estão sendo utilizados'});
+        return res.status(400).json({ error: 'Alguns desses dados estão incorretos ou estão sendo utilizados'});
       }
       
       // Hash da senha 
@@ -98,7 +112,7 @@ exports.registerPro = async (req, res) => {
     <body>
         <h1 class="titulo-confirme-email">Confirme seu Email</h1>
         <p class="desc-confirme-email">Clique no botão abaixo para confirmar seu email. Você será redirecionado para outra página</p>
-        <button class="btn-confirme-email"><a href="http://localhost:5173/validaEmail?token=${token}">Confirmar E-mail</a></button>
+        <button class="btn-confirme-email"><a href="http://localhost:5173/validaEmailProfissional?token=${token}">Confirmar E-mail</a></button>
     </body>
     </html>
     `;
@@ -114,7 +128,7 @@ exports.registerPro = async (req, res) => {
             to: email
           })
           console.log(mailSend);
-        } catch {
+        } catch(error) {
           console.error(`erro ao enviar email ${error}`)
         }
       }
@@ -136,13 +150,13 @@ exports.registerPro = async (req, res) => {
       });
   
       if (user.length == 0) {
-        return res.status(200).json({ message: "Email ou senha incorretos" });
+        return res.status(400).json({ error: "Email ou senha incorretos" });
       }
   
       const match = await bcrypt.compare(senha, user[0].cd_senhaProfissional);
   
       if (!match) {
-        return res.status(200).json({ message: "Email ou senha incorretos" });
+        return res.status(400).json({ error: "Email ou senha incorretos" });
       }
   
       const tokenconfirmed = await controller_Pro.findtokenProfissional({
@@ -153,13 +167,14 @@ exports.registerPro = async (req, res) => {
   
       if (!tokenconfirmed) {
         return res
-          .status(200)
+          .status(400)
           .json({
             message: "Confirme seu email, verifique na sua caixa de entrada",
           });
       } else {
-        const cookie = await controller_Pro.bindCookieBypkProfissonal({ params: { cd_emailProfissional: email }});
-        return res.status(201).json({ id_profissional: cookie.id_profissional, email: cookie.cd_emailProfissional});
+        const login = await controller_Pro.bindCookieBypkProfissonal({ params: { cd_emailProfissional: email }});
+        const secret = createToken(login.id_cliente)
+        return res.status(200).json({ id_profissional: login.id_profissional, email: login.cd_emailProfissional, name: login.nm_profissional, secret});
       }
     } catch (error) {
       console.error(error);

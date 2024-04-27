@@ -6,6 +6,8 @@ const controller_User = require("./Querys/userQuerys");
 const validator = require("validator");
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
+const Buffer = require('buffer').Buffer;
+
 
 let globalemail;
 let globaltoken;
@@ -215,10 +217,12 @@ exports.postarServico = async (req, res) => {
       bairro,
       complemento,
       nmrResidencia,
-      categoriaSelecionada,
+      categoria,
       idCliente,
       email,
+      imagens
     } = req.body;
+    
     console.log(
       titulo,
       dsServico,
@@ -228,10 +232,32 @@ exports.postarServico = async (req, res) => {
       bairro,
       complemento,
       nmrResidencia,
-      categoriaSelecionada,
+      categoria,
       idCliente,
-      email
+      email,
     );
+
+    if(!cep){
+      return res.status(400).json({ error: "Insira o CEP corretamente", formstatus: 2 });
+    }
+
+    if(!titulo && !dsServico && !categoria){
+      return res.status(400).json({ error: "Insira as informações corretamente", formstatus: 1 });
+    }; 
+
+    if(!cep &&
+      !uf_localidade &&
+      !logradouro &&
+      !bairro &&
+      !nmrResidencia){
+        return res.status(400).json({ error: "Insira as informações corretamente", formstatus: 2 });
+      }
+
+    let imageBuffer;
+    if(imagens){
+    imageBuffer = Buffer.from(imagens, 'base64');
+    console.log(imageBuffer)
+    }
 
     var partes = uf_localidade.split(" - ");
     var estado = partes[0];
@@ -239,8 +265,11 @@ exports.postarServico = async (req, res) => {
     console.log(estado, cidade);
 
     const categoriaInstance = await controller_User.selectCategoriaescolhida({
-      params: { ds_categoria: categoriaSelecionada },
+      params: { ds_categoria: categoria },
     });
+
+    if (categoriaInstance === 0)
+      return res.status(400).json({ error: "categoria não selecionada", formstatus: 1 });
 
     console.log(categoriaInstance);
 
@@ -267,19 +296,22 @@ exports.postarServico = async (req, res) => {
           id_endereco: enderecoInstance.id_endereco,
           ds_servico: dsServico,
           ds_titulo: titulo,
+          img_servico: imageBuffer ? imageBuffer : null,
         },
       });
     } catch (error) {
       console.log(`erro interno no servidor ${error}`);
     }
+
+    return res.status(200).json({ message: "Serviço postado com sucesso" });
   } catch (error) {
     console.error(error);
-    return res.json("erro");
   }
 };
 
 exports.selectCategoria = async (req, res) => {
   const categoria = await controller_User.selectCategorias();
+  console.log(categoria);
   res.status(200).json(categoria);
 };
 
@@ -299,6 +331,7 @@ exports.profissionalCard = async (req, res) => {
       break;
   }
 };
+
 exports.selectinfos = async (req, res) => {
   const { idCliente, email } = req.body;
   const clientinfo = await controller_User.selectInfocliente({
