@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 import imgPerfil from '../../assets/icone-perfil.png'
 
 const Config = () => {
-  const {user, logoutUser} = useContext(UserContext)
+  const { user, logoutUser } = useContext(UserContext)
   return (
     <>
       <Header />
@@ -17,13 +17,13 @@ const Config = () => {
           <div className="conteudo-config-perfil">
             <div className="header-conteudo-config-perfil">
               <img src={imgPerfil} alt="Imagem de perfil" className="img-config-perfil" />
-              
+
             </div>
             <div className="card-info-config-perfil">
               <div className="line-info-config-perfil">
                 <div className="column-info-config-perfil">
                   <h4>Nome</h4>
-                  <p>Vitorino</p>
+                  <p>{user.name}</p>
                 </div>
                 <button className="btn-config-editar-perfil">Editar</button>
               </div>
@@ -31,7 +31,7 @@ const Config = () => {
               <div className="line-info-config-perfil">
                 <div className="column-info-config-perfil">
                   <h4>Email</h4>
-                  <p>vitorino@outlook.com</p>
+                  <p>{user.email}</p>
                 </div>
                 <button className="btn-config-editar-perfil">Editar</button>
               </div>
@@ -39,7 +39,7 @@ const Config = () => {
               <div className="line-info-config-perfil">
                 <div className="column-info-config-perfil">
                   <h4>Número</h4>
-                  <p>99199-9999</p>
+                  <p>{user.numero ? user.numero : <><div className="buttonAddNumber"><button>adicionar numero</button></div></>}</p>
                 </div>
                 <button className="btn-config-editar-perfil">Editar</button>
               </div>
