@@ -14,7 +14,7 @@ export const ProfessionalContextProvider = ({children}) => {
   useEffect(()=>{
       const pro = localStorage.getItem("pro");
       setPro(JSON.parse(pro));
-  },)
+  },[])
 
   const [formDataCadastroPro, setFormDataCadastroPro] = useState({
       name: null,
@@ -79,8 +79,8 @@ export const ProfessionalContextProvider = ({children}) => {
 
   useEffect(() => {
     console.log(pro)
-
-  }, [pro]);
+    
+  }, []);
 
   const updateLogininfo = useCallback((info) => {
     setloginInfo(info);
@@ -91,12 +91,12 @@ export const ProfessionalContextProvider = ({children}) => {
     setloginLoading(true);
     setloginError(null);
     try {
-      const response = await postRequest("/professional/login/", loginInfo);
+      const response = await postRequest("/professional/loginPro", loginInfo);
 
       if (response.error) setloginError(response.error);
       else {
         console.log(response.user)
-        localStorage.setItem("Pro", JSON.stringify(response.user));
+        localStorage.setItem("pro", JSON.stringify(response.user));
         window.location.reload();
       }
     } catch (error) {

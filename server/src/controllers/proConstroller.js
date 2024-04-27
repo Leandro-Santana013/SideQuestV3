@@ -3,6 +3,9 @@ const nodemailer = require('nodemailer')
 const tokenConfirmacao = require('../../tools/createToken')
 const smtpconfig = require('../../config/smtp')
 const controller_Pro = require('./Querys/proQuerys')
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const validator = require("validator");
 
 
 let globalemail;
@@ -109,7 +112,7 @@ exports.registerPro = async (req, res) => {
     <body>
         <h1 class="titulo-confirme-email">Confirme seu Email</h1>
         <p class="desc-confirme-email">Clique no botão abaixo para confirmar seu email. Você será redirecionado para outra página</p>
-        <button class="btn-confirme-email"><a href="http://localhost:5173/validaEmail?token=${token}">Confirmar E-mail</a></button>
+        <button class="btn-confirme-email"><a href="http://localhost:5173/validaEmailProfissional?token=${token}">Confirmar E-mail</a></button>
     </body>
     </html>
     `;
@@ -130,7 +133,7 @@ exports.registerPro = async (req, res) => {
         }
       }
       sendmail();
-      return res.status(400).json({ error: 'Verifique sua caixa de email para confirma-lo' });
+      return res.status(200).json({ message: 'Verifique sua caixa de email para confirma-lo' });
      
     } catch (error) {
       console.error(error);
@@ -153,7 +156,7 @@ exports.registerPro = async (req, res) => {
       const match = await bcrypt.compare(senha, user[0].cd_senhaProfissional);
   
       if (!match) {
-        return res.status(400).json({ message: "Email ou senha incorretos" });
+        return res.status(400).json({ error: "Email ou senha incorretos" });
       }
   
       const tokenconfirmed = await controller_Pro.findtokenProfissional({
@@ -171,7 +174,7 @@ exports.registerPro = async (req, res) => {
       } else {
         const login = await controller_Pro.bindCookieBypkProfissonal({ params: { cd_emailProfissional: email }});
         const secret = createToken(login.id_cliente)
-        return res.status(201).json({ id_profissional: login.id_profissional, email: login.cd_emailProfissional, name: login.nm_profissional, secret});
+        return res.status(200).json({ id_profissional: login.id_profissional, email: login.cd_emailProfissional, name: login.nm_profissional, secret});
       }
     } catch (error) {
       console.error(error);

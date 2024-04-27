@@ -20,18 +20,20 @@ import ServicosPendentesCliente from "./pages/ServicosPendentesCliente/ServicosP
 import LandingProfissional from "./pages/LandingProfissional/LandingProfissional";
 import Config from "./pages/Config/Config";
 import { Chats } from "./pages/Chats/Chats";
+import { use } from "../../server/routes/professionalRoutes";
 const Router = () => {
-  const { user } = useContext(UserContext);
+   const { user } = useContext(UserContext);
+  const { pro } = useContext(ProfessionalContext)
   
   return (
     <BrowserRouter>
-      <ChatContextProvider user={user}>
+     < ChatContextProvider user={user}>
       <ProfessionalContextProvider>
         <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/login" element={user ? <Navigate to="/homeCliente" /> : <Login />} />
           <Route exact path="/validaemail" element={<ValidaEmail />} />
-          <Route exact path="/homeCliente" element={user ? <HomeCliente /> : <Navigate to="/login" />} />
+          <Route exact path="/homeCliente" element={true ? <HomeCliente /> : <Navigate to="/login" />} />
           <Route exact path="/perfilCliente" element={<PerfilCliente />} />
           <Route exact path="/homeCliente/postarSevico" element={<PostarServico />} />
           <Route exact path="/pagamentosCliente" element={<PagamentosCliente />} />
@@ -41,13 +43,13 @@ const Router = () => {
           <Route exact path="/landingProfissional" element={<LandingProfissional />} />
           <Route exact path="/config" element={user ? <Config /> : <Navigate to="/login" />} />
           <Route exact path="/chats" element={user ? <Chats /> : <Navigate to="/login" />} />
-          <Route exact path="/loginProfissional" element={<LoginProfissional />} />
-          <Route exact path="/landingProfissional" element={true ? <LandingProfissional /> : <Navigate to="/loginProfissional"/>} />
-          <Route exact path="/validaEmailProfissional" element={true? <ValidaEmailProfissional />  : <Navigate to="/loginProfissional"/>} />
+          <Route exact path="/loginProfissional" element={pro ? <Navigate to="/homeProfissionais" /> : <LoginProfissional /> } />
+          <Route exact path="/landingProfissional" element={pro ? <LandingProfissional /> : <Navigate to="/loginProfissional"/>} />
+          <Route exact path="/validaEmailProfissional" element={pro? <ValidaEmailProfissional />  : <Navigate to="/loginProfissional"/>} />
           <Route exact path="/homeProfissionais" element={<HomeProfissionais />} />
         </Routes>
         </ProfessionalContextProvider>
-      </ChatContextProvider>
+        </ChatContextProvider>
     </BrowserRouter>
   );
 }

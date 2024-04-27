@@ -3,7 +3,7 @@
   import axios from 'axios';
   import { useParams } from 'react-router-dom';
 
-  const validaEmail = () => {
+  const validaemailprofissional = () => {
 
     
     const { token } = useParams();
@@ -18,7 +18,7 @@
           };
 
           // Faça uma solicitação para o servidor usando o Axios
-          const response = await axios.post('http://localhost:5000/auth/validaemailprofissional', dataToSend);
+          const response = await axios.post('http://localhost:5000/professional//validaemailprofissional', dataToSend);
 
           // Verifique se a resposta foi bem-sucedida (isso pode variar dependendo do seu servidor)
           if (response.status === 200) {
@@ -44,4 +44,4 @@
     );
   };
 
-  export default validaEmail
+  export default validaemailprofissional
