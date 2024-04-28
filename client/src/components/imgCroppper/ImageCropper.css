@@ -1,0 +1,8 @@
+.Content-display-cropper {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.span-img-picker {
+    color: aqua;
+}

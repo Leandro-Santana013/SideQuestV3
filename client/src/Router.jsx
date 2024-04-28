@@ -18,6 +18,7 @@ import HomeProfissionais from "./pages/HomeProfissional/HomeProfissional";
 import ServicosPendentesCliente from "./pages/ServicosPendentesCliente/ServicosPendentesCliente";
 import LandingProfissional from "./pages/LandingProfissional/LandingProfissional";
 import Config from "./pages/Config/Config";
+import PaiSandu from "./pages/teste"
 
 import { Chats } from "./pages/Chats/Chats";
 const Router = () => {
@@ -31,6 +32,7 @@ const Router = () => {
           
           <Routes>
             <Route exact path="/" element={<Landing />} />
+            <Route exact path="/teste" element={<PaiSandu />} />
             <Route exact path="/landingProfissional" element={<LandingProfissional />} />
             <Route exact path="/login" element={user ? <Navigate to="/homeCliente" /> : <Login />} />
             <Route exact path="/validaemail" element={<ValidaEmail />} />

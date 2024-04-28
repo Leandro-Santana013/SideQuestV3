@@ -14,7 +14,7 @@ import { Infoinc } from './Infoinc/Infoinc';
 import { Perfilcli } from './Perfilcli/Perfilcli';
 import { Loading } from './Loading/Loading';
 import { SidebarProfissional } from './SidebarProfissional/SidebarProfissional';
-
+import {ImageCropper} from './imgCroppper/ImageCropper' 
 export {
     Animation,
     Benefits,
@@ -31,5 +31,6 @@ export {
     Typography,
     CardServico,    
     Loading,
-    SidebarProfissional
+    SidebarProfissional,
+    ImageCropper
 }
