@@ -1,17 +1,28 @@
-.Content-display-cropper {
+.content-display-cropper {
     position: absolute;
     top: 50%;
     width: 100%;
     height: 100%;
     left: 50%;
     transform: translate(-50%, -50%);
-
-}
-.Content-display-cropper img{
-width: MAX-content;
-height: max-content;
+    
+    
 }
 
-.span-img-picker {
-    color: aqua;
+.content-display-cropper img {
+   
+}
+
+.label-input-img-cropper {
+    
+}
+
+.input-img-cropper {
+    display: none;
+}
+
+.icon-label-input-img-cropper {
+    color: var(--verde );
+    font-size: 1.5vw;
+    
 }

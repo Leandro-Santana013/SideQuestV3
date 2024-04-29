@@ -20,8 +20,8 @@
     display: flex;
     position: relative;
     top: 50px;
-    justify-content: space-around;
     align-items: center;
+    justify-content: center;
     width: 40vw;
 }
 
@@ -60,3 +60,4 @@
 .btn-config-editar-perfil:hover {
     background-color: var(--verde);
 }
+

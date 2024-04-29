@@ -8,8 +8,35 @@ import imgPerfil from '../../assets/icone-perfil.png'
 
 const Config = () => {
 const avatarUrl = useRef(imgPerfil)
+const [changedUserData, setChangedUserData] = useState({});
+const [showModal, setShowModal] = useState(false);
+
+const updateUserData = (newData) => {
+  const changes = {};
+  // Verifica se as propriedades name, email ou numero foram alteradas
+  if (newData.name !== user.name) {
+    changes.name = newData.name;
+  }
+  if (newData.email !== user.email) {
+    changes.email = newData.email;
+  }
+  if (newData.numero !== user.numero) {
+    changes.numero = newData.numero;
+  }
+  if (newData.foto !== imgPerfil && newData.foto !== user.foto) {
+    changes.foto = newData.foto;
+  }
+  setChangedUserData(changes);
+  if (Object.keys(changes).length > 0) {
+    setShowModal(true); // Mostra o modal se houver alterações
+  }
+  setChangedUserData(changes);
+};
+
+
   const updatefoto = (ImgSrc) => {
     avatarUrl.current.src = ImgSrc; // Atualizando a imagem de perfil
+    updateUserData({ ...changedUserData, foto: ImgSrc });
   };
 
   const { user, logoutUser } = useContext(UserContext)
@@ -21,7 +48,7 @@ const avatarUrl = useRef(imgPerfil)
         <div className="main-content">
           <div className="conteudo-config-perfil">
             <div className="header-conteudo-config-perfil">
-              <img ref={avatarUrl} src={imgPerfil} alt="Imagem de perfil" className="img-config-perfil" style={{ border: "1px groove black",
+              <img id="img" htmlFor="comp" ref={avatarUrl} src={imgPerfil} alt="Imagem de perfil" className="img-config-perfil" style={{ border: "1px groove black",
                 objectFit: "contain",
                 width: "120px",
                 height: "120px",
@@ -56,6 +83,16 @@ const avatarUrl = useRef(imgPerfil)
           </div>
         </div>
       </div>
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close">&times;</span>
+            <p>Seu perfil foi alterado. Deseja salvar as alterações?</p>
+            <button >Cancelar</button>
+            <button>Salvar</button>
+          </div>
+        </div>
+      )}
     </>
   );
 };

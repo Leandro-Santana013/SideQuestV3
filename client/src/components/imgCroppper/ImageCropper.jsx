@@ -8,6 +8,7 @@ import ReactCrop, {
 import "./ImageCropper.css";
 import "react-image-crop/dist/ReactCrop.css";
 import setCanvasPreview from "./SetcanvasPreview";
+import { FaPen } from "react-icons/fa6";
 
 const ASPECT_RATIO = 1;
 const MIN_DIMENSION = 250;
@@ -56,20 +57,20 @@ export const ImageCropper = ({updatefoto}) => {
       width,
       height
     );
-    const centeredCrop = centerCrop(crop, width, height);
+    const centeredCrop = centerCrop(crop, width, height); 
     setCrop(centeredCrop);
   };
 
   return (
     <>
-      <label>
-        <span className="span-img-picker">escolha sua foto</span>
-        <input type="file" accept="image/*" onChange={onSelectFile}></input>
+     <input id="fotoAvatar"className="input-img-cropper" type="file" accept="image/*" onChange={onSelectFile}></input>
+      <label htmlFor="fotoAvatar" className="label-input-img-cropper">
+        <FaPen className="icon-label-input-img-cropper"/>
       </label>
       {error && <p>{error}</p>}
 
-      {ImgSrc && (
-        <div className="Content-display-cropper">
+      {ImgSrc && (  
+        <div className="content-display-cropper">
          <h2> Editando imagem</h2>
           <ReactCrop
             crop={crop}
