@@ -131,6 +131,7 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     var { email, senha } = req.body;
+    console.log( email, senha)
 
     const user = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },

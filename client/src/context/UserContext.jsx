@@ -114,7 +114,7 @@ import { file } from "jszip";
         if (response.error) setloginError(response.error);
         else {
           console.log(response.user)
-          localStorage.setItem("Pro", JSON.stringify(response.user));
+          localStorage.setItem("User", JSON.stringify(response.user));
           window.location.reload();
         }
       } catch (error) {
@@ -220,7 +220,7 @@ import { file } from "jszip";
     
       // Chama a função para buscar as categorias
       carregarCategorias();
-    }, []);
+    }, [user]);
     
 
 

@@ -95,7 +95,7 @@ export const ProfessionalContextProvider = ({children}) => {
 
       if (response.error) setloginError(response.error);
       else {
-        console.log(response.user)
+        console.log(response)
         localStorage.setItem("pro", JSON.stringify(response.user));
         window.location.reload();
       }
