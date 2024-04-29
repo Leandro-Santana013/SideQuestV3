@@ -1,8 +1,17 @@
 .Content-display-cropper {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
+.Content-display-cropper img{
+width: MAX-content;
+height: max-content;
+}
+
 .span-img-picker {
     color: aqua;
 }
