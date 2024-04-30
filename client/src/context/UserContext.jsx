@@ -4,7 +4,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { postRequest, baseUrl, getRequest, patchRequest } from "../utils/services";
+import { postRequest, baseUrl, getRequest, putRequest } from "../utils/services";
 export const UserContext = createContext();
 import axios from "axios";
 import { file } from "jszip";
@@ -75,7 +75,7 @@ export const UserContextProvider = ({ children }) => {
 
   // seta o usuario com o localstorage
   useEffect(() => {
-    const user = localStorage.getItem("User");
+    let user = localStorage.getItem("User");
 
     setUser(JSON.parse(user));
   }, []);
@@ -89,6 +89,11 @@ export const UserContextProvider = ({ children }) => {
       email: user ? user.email : null,
 
     }));
+    setChangedUserData((rest) => ({
+      ...rest,
+      id_cliente: user ? user.id_cliente : null
+    }))
+
   }, [user]);
 
   const updateLogininfo = useCallback((info) => {
@@ -100,11 +105,10 @@ export const UserContextProvider = ({ children }) => {
   const [changedUserData, setChangedUserData] = useState({});
 
 
-  const functionUpdateInfoUser = useCallback(async(changedUserData)=>{
-     
-    const response = await patchRequest("/user/façaArotavitor", changedUserData);
-    console.log(response.data)
-    
+  const functionUpdateInfoUser = useCallback(async ()=>{
+     console.log(changedUserData)
+    const response = await putRequest("/user/updateInfoUser", changedUserData);
+    console.log(response.info)
   }, [changedUserData])
   
   /********************/
@@ -177,8 +181,6 @@ setModalPostar(false);
       if (response.error){
         setmessageErrorPostar(response.error)
         setErrorPostar(true);
-        const audio = new Audio("error_sound.mp3");
-      audio.play();
           setForm(response.formstatus);
         console.log(response.formstatus)
         setTimeout(() => {
@@ -236,7 +238,7 @@ setModalPostar(false);
   
     // Chama a função para buscar as categorias
     carregarCategorias();
-  }, []);
+  }, [user]);
   
 
 

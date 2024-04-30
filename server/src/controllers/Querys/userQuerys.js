@@ -83,7 +83,6 @@ module.exports = {
     return ModelCliente.findOne({
       where: {
         id_cliente: id_cliente,
-        cd_emailCliente: cd_emailCliente
       },
       raw: true,
     });
@@ -94,9 +93,9 @@ module.exports = {
     return ModelCategoria.findAll({
       attributes: ["ds_categoria"],
       order: [["ds_categoria", "ASC"]],
-      raw:true
+      raw: true
     });
-    
+
   },
 
   selectCategoriaescolhida: async (req, res) => {
@@ -250,4 +249,20 @@ module.exports = {
       throw error;
     }
   },
+
+  updateInfoCli: async (req, res) => {
+    const { id_cliente, nm_cliente, cd_emailCliente, img_cliente } = req.params
+    return ModelCliente.update(
+      { nm_cliente: nm_cliente, cd_emailCliente: cd_emailCliente, img_cliente: img_cliente },
+      { where: { id_cliente: id_cliente } }
+    )
+  }
 };
+
+updateTokenByEmail: async (req, res) => {
+  const { cd_emailCliente, cd_tokenCliente } = req.params;
+  return ModelCliente.update(
+    { cd_tokenCliente: cd_tokenCliente },
+    { where: { cd_emailCliente: cd_emailCliente } }
+  );
+}

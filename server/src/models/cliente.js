@@ -46,6 +46,11 @@ const ModelCliente = connectionDataBase.define('tb_cliente', {
     cd_tokenCliente: {
         type: DataTypes.STRING(255),
         allowNull: true
+    },
+
+    img_cliente: {
+        type: DataTypes.BLOB,
+        allowNull:  true
     }
 },
     _padraoTableDBExistence('tb_cliente')

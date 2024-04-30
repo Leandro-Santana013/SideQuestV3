@@ -17,16 +17,16 @@ const createToken = (id_cliente) => {
   const jwtKey = crypto.randomBytes(64).toString('hex'); // Gerar uma chave JWT aleatória
   const jwtSecret = crypto.createHash('sha512').update(id_cliente + jwtKey).digest('hex'); // Criar um token usando SHA-512
 
-  return jwt.sign({id_cliente}, jwtSecret, {expiresIn: "3d"})
+  return jwt.sign({ id_cliente }, jwtSecret, { expiresIn: "3d" })
 };
 
 exports.register = async (req, res) => {
   try {
     const { name, email, cpf, senha, senhaConfirm } = req.body;
     console.log(name, email, cpf, senha, senhaConfirm)
-    if (!name || !email || !cpf || !senha || !senhaConfirm){
+    if (!name || !email || !cpf || !senha || !senhaConfirm) {
       console.log("a")
-      return res.status(400).json({error:"Preencha todos os campos" });
+      return res.status(400).json({ error: "Preencha todos os campos" });
     }
 
     const cpfNumerico = cpf.replace(/\D/g, "");
@@ -41,15 +41,15 @@ exports.register = async (req, res) => {
 
     if (emailResults.length > 0) {
       console.log("b")
-      return res.status(400).json({error:"Email inválido ou já está em uso"});
+      return res.status(400).json({ error: "Email inválido ou já está em uso" });
     } else if (senha !== senhaConfirm) {
-      return res.status(400).json({error:"As senhas estão incorretas"});
+      return res.status(400).json({ error: "As senhas estão incorretas" });
     }
     if (!validator.isStrongPassword(senha && senhaConfirm)) {
       console.log("c")
       return res
         .status(400)
-        .json({error:"As senhas näo são seguras o suficentes"});
+        .json({ error: "As senhas näo são seguras o suficentes" });
     }
 
     const cpfResults = await controller_User.findcpfCliente({
@@ -58,7 +58,7 @@ exports.register = async (req, res) => {
 
     if (cpfResults.length > 0) {
       console.log("d")
-      return res.status(400).json({error:"Alguns dos dados já estão sendo utilizado"});
+      return res.status(400).json({ error: "Alguns dos dados já estão sendo utilizado" });
     }
 
     // Hash da senha
@@ -68,7 +68,7 @@ exports.register = async (req, res) => {
     globaltoken = token;
     // Inserir novo cliente
 
-   const user = await controller_User.insertClient({
+    const user = await controller_User.insertClient({
       params: {
         nm_cliente: name,
         cd_emailCliente: email,
@@ -121,7 +121,7 @@ exports.register = async (req, res) => {
     const secret = createToken(user.id_cliente)
     console.log("sucess")
     console.log(user.id_cliente, name, email, cpfNumerico, secret)
-    return res.status(200).json({ message: "Verifique sua caixa de email", userta: user.id_cliente, name, email, cpfNumerico, secret});
+    return res.status(200).json({ message: "Verifique sua caixa de email", userta: user.id_cliente, name, email, cpfNumerico, secret });
   } catch (error) {
     console.error(error);
     return res.render("error404");
@@ -163,11 +163,11 @@ exports.login = async (req, res) => {
       const secret = createToken(login.id_cliente)
       return res
         .status(200)
-        .json({ id_cliente: login.id_cliente, email: login.cd_emailCliente, name: login.nm_cliente, secret});
+        .json({ id_cliente: login.id_cliente, email: login.cd_emailCliente, name: login.nm_cliente, secret });
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Erro interno do servidor"  });
+    return res.status(500).json({ error: "Erro interno do servidor" });
   }
 };
 
@@ -222,7 +222,7 @@ exports.postarServico = async (req, res) => {
       email,
       imagens
     } = req.body;
-    
+
     console.log(
       titulo,
       dsServico,
@@ -237,26 +237,26 @@ exports.postarServico = async (req, res) => {
       email,
     );
 
-    if(!cep){
+    if (!cep) {
       return res.status(400).json({ error: "Insira o CEP corretamente", formstatus: 2 });
     }
 
-    if(!titulo && !dsServico && !categoria){
+    if (!titulo && !dsServico && !categoria) {
       return res.status(400).json({ error: "Insira as informações corretamente", formstatus: 1 });
-    }; 
+    };
 
-    if(!cep &&
+    if (!cep &&
       !uf_localidade &&
       !logradouro &&
       !bairro &&
-      !nmrResidencia){
-        return res.status(400).json({ error: "Insira as informações corretamente", formstatus: 2 });
-      }
+      !nmrResidencia) {
+      return res.status(400).json({ error: "Insira as informações corretamente", formstatus: 2 });
+    }
 
     let imageBuffer;
-    if(imagens){
-    imageBuffer = Buffer.from(imagens, 'base64');
-    console.log(imageBuffer)
+    if (imagens) {
+      imageBuffer = Buffer.from(imagens, 'base64');
+      console.log(imageBuffer)
     }
 
     var partes = uf_localidade.split(" - ");
@@ -340,3 +340,31 @@ exports.selectinfos = async (req, res) => {
   console.log(clientinfo);
   res.status(200).json(clientinfo);
 };
+
+/****************************************/
+/* atualizar os dados da conta do usuário cliente (user) */
+
+exports.updateInfoUser = async (req, res) => {
+  const { id_cliente, nm_cliente, cd_emailCliente, img_cliente } = req.body
+  try {
+
+    const clientinfo = await controller_User.selectInfocliente({
+      params: { id_cliente: id_cliente },
+    });
+
+    const clientinfoupdated = await controller_User.selectInfocliente({
+      params: {
+        id_cliente: id_cliente,
+        nm_cliente: nm_cliente ? nm_cliente : clientinfo.nm_cliente,
+        cd_emailCliente: cd_emailCliente ? cd_emailCliente : clientinfo.cd_emailCliente,
+        img_cliente: img_cliente ? img_cliente : clientinfo.img_cliente ? clientinfo.img_cliente : null
+      }
+    })
+    console.log(clientinfoupdated)
+    return res.status(200).json({id: clientinfoupdated.idCliente, email: clientinfoupdated.name});
+  } catch (error) {
+    return res.status(500).json({ error: "Erro interno do servidor" });
+  }
+}
+
+/****************************************/

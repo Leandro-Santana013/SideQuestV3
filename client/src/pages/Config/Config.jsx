@@ -13,7 +13,7 @@ const [showModal, setShowModal] = useState(false);
 
 const updateUserData = (newData) => {
   const changes = {};
-  // Verifica se as propriedades name, email ou numero foram alteradas
+  changes.id_cliente = user.id_cliente;
   if (newData.name !== user.name) {
     changes.name = newData.name;
   }
@@ -39,9 +39,7 @@ const updateUserData = (newData) => {
     updateUserData({ ...changedUserData, foto: ImgSrc });
   };
 
-  const saveUpdate = () =>{
-    functionUpdateInfoUser();
-  }
+
   const deleteUpdate = () =>{
     avatarUrl.current.src = null
     setChangedUserData(null);
@@ -96,7 +94,7 @@ const updateUserData = (newData) => {
             <span className="close">&times;</span>
             <p>Seu perfil foi alterado. Deseja salvar as alterações?</p>
             <button onClick={deleteUpdate} >Cancelar</button>
-            <button onClick={saveUpdate}>Salvar</button>
+            <button onClick={functionUpdateInfoUser}>Salvar</button>
           </div>
         </div>
       )}

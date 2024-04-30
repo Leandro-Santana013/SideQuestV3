@@ -50,7 +50,7 @@ const Router = () => {
             <Route exact path="/landingProfissional" element={pro ? <LandingProfissional /> : <Navigate to="/loginProfissional" />} />
             <Route exact path="/validaEmailProfissional" element={pro ? <ValidaEmailProfissional /> : <Navigate to="/loginProfissional" />} />
             <Route exact path="/homeProfissionais" element={pro ?<HomeProfissionais /> : <Navigate to={"/loginProfissional"}/>} />
-            <Route exact path="/VisualizarServico" element={<VisualizarServico/>}/>
+            <Route exact path="/VisualizarServico" element={<VisualizarServico/>}/> 
           </Routes>
         </ProfessionalContextProvider>
       </ChatContextProvider>
