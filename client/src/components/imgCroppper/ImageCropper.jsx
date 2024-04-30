@@ -13,7 +13,7 @@ import { FaPen } from "react-icons/fa6";
 const ASPECT_RATIO = 1;
 const MIN_DIMENSION = 250;
 
-export const ImageCropper = ({updatefoto}) => {
+export const ImageCropper = ({ updatefoto }) => {
   const [ImgSrc, setImageSrc] = useState(null);
   const [crop, setCrop] = useState();
   const [error, setError] = useState(null);
@@ -57,65 +57,68 @@ export const ImageCropper = ({updatefoto}) => {
       width,
       height
     );
-    const centeredCrop = centerCrop(crop, width, height); 
+    const centeredCrop = centerCrop(crop, width, height);
     setCrop(centeredCrop);
   };
 
   return (
     <>
-     <input id="fotoAvatar"className="input-img-cropper" type="file" accept="image/*" onChange={onSelectFile}></input>
+      <input id="fotoAvatar" className="input-img-cropper" type="file" accept="image/*" onChange={onSelectFile}></input>
       <label htmlFor="fotoAvatar" className="label-input-img-cropper">
-        <FaPen className="icon-label-input-img-cropper"/>
+        <FaPen className="icon-label-input-img-cropper" />
       </label>
       {error && <p>{error}</p>}
 
-      {ImgSrc && (  
+      {ImgSrc && (
         <div className="content-display-cropper">
-         <h2> Editando imagem</h2>
-          <ReactCrop
-            crop={crop}
-            onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
-            circularCrop
-            keepSelection
-            aspect={ASPECT_RATIO}
-            minWidth={MIN_DIMENSION}
-          >
-            <img
-              ref={imgRef}
-              src={ImgSrc}
-              alt="Uploaded"
-              style={{ maxHeight: "70vh" }}
-              onLoad={onImageLoad}
-            />
-          </ReactCrop>
-          <button
-            onClick={() => {
-              setCanvasPreview(
-                imgRef.current,
-                PreviewCanvasRef.current,
-                convertToPixelCrop(
-                  crop,
-                  imgRef.current.width,
-                  imgRef.current.height
-                )
-              );
-              const dataUrl = PreviewCanvasRef.current.toDataURL()
-              updatefoto(dataUrl)
-              setImageSrc(null)
-            }}
-          ></button>
-          {crop && (
-            <canvas
-              ref={PreviewCanvasRef}
-              style={{
-                display:"none",
-                border: "1px groove black",
-                objectFit: "contain",
-                width: "150px",
-                height: "150px",
+          <div className="modal-content-display-cropper">
+            <h2> Editando imagem</h2>
+            <ReactCrop
+              crop={crop}
+              onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
+              circularCrop
+              keepSelection
+              aspect={ASPECT_RATIO}
+              minWidth={MIN_DIMENSION}
+            >
+              <img
+                ref={imgRef}
+                src={ImgSrc}
+                alt="Uploaded"
+                style={{ maxHeight: "70vh" }}
+                onLoad={onImageLoad}
+              />
+            </ReactCrop>
+            <button
+              className="btn-modal-content-display-cropper"
+              onClick={() => {
+                setCanvasPreview(
+                  imgRef.current,
+                  PreviewCanvasRef.current,
+                  convertToPixelCrop(
+                    crop,
+                    imgRef.current.width,
+                    imgRef.current.height
+                  )
+                );
+                const dataUrl = PreviewCanvasRef.current.toDataURL()
+                updatefoto(dataUrl)
+                setImageSrc(null)
               }}
-            ></canvas>
-          )}
+            >Confirmar</button>
+            {crop && (
+              <canvas
+                ref={PreviewCanvasRef}
+                style={{
+                  display: "none",
+                  border: "1px groove black",
+                  objectFit: "contain",
+                  width: "150px",
+                  height: "150px",
+                }}
+              ></canvas>
+            )}
+          </div>
         </div>
       )}
     </>

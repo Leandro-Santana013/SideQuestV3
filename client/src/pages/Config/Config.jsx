@@ -8,7 +8,7 @@ import imgPerfil from '../../assets/icone-perfil.png'
 
 const Config = () => {
 const avatarUrl = useRef(imgPerfil)
-const [changedUserData, setChangedUserData] = useState({});
+const { user, logoutUser, setChangedUserData, changedUserData, functionUpdateInfoUser } = useContext(UserContext)
 const [showModal, setShowModal] = useState(false);
 
 const updateUserData = (newData) => {
@@ -39,7 +39,14 @@ const updateUserData = (newData) => {
     updateUserData({ ...changedUserData, foto: ImgSrc });
   };
 
-  const { user, logoutUser } = useContext(UserContext)
+  const saveUpdate = () =>{
+    functionUpdateInfoUser();
+  }
+  const deleteUpdate = () =>{
+    avatarUrl.current.src = null
+    setChangedUserData(null);
+  }
+  
   return (
     <>
       <Header />
@@ -88,8 +95,8 @@ const updateUserData = (newData) => {
           <div className="modal-content">
             <span className="close">&times;</span>
             <p>Seu perfil foi alterado. Deseja salvar as alterações?</p>
-            <button >Cancelar</button>
-            <button>Salvar</button>
+            <button onClick={deleteUpdate} >Cancelar</button>
+            <button onClick={saveUpdate}>Salvar</button>
           </div>
         </div>
       )}

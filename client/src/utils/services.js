@@ -50,6 +50,25 @@
         }
     }
 
+    export const patchRequest = async(url, body) => {
+        try{
+        const response = await axios.patch(baseUrl, url, body)
+        let info = response.data
+        return info
+        }
+        catch(error){
+            if (error.response && error.response.status >= 400 && error.response.status <=499) {
+                const errorMessage = error.response.data.error;
+                console.log(`Erro ${error.response.status}: ${errorMessage}`);
+                return {errorMessage}
+            }
+            else {
+                console.error(error);
+                throw error;
+            }
+        }
+    }
+
 
     // export const postRequest = async (url, body) => {
     //     try {

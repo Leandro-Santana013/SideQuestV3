@@ -4,7 +4,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { postRequest, baseUrl, getRequest } from "../utils/services";
+import { postRequest, baseUrl, getRequest, patchRequest } from "../utils/services";
 export const UserContext = createContext();
 import axios from "axios";
 import { file } from "jszip";
@@ -94,6 +94,20 @@ export const UserContextProvider = ({ children }) => {
   const updateLogininfo = useCallback((info) => {
     setloginInfo(info);
   }, []);
+
+  /********************/
+
+  const [changedUserData, setChangedUserData] = useState({});
+
+
+  const functionUpdateInfoUser = useCallback(async(changedUserData)=>{
+     
+    const response = await patchRequest("/user/façaArotavitor", changedUserData);
+    console.log(response.data)
+    
+  }, [changedUserData])
+  
+  /********************/
 
 
   //logout 
@@ -261,7 +275,10 @@ setModalPostar(false);
         errorPostar,
         form,
         setForm,
-        messageErrorPostar
+        messageErrorPostar,
+        setChangedUserData,
+        changedUserData,
+        functionUpdateInfoUser
       }
     }
     >
