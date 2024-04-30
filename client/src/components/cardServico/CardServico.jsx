@@ -15,6 +15,7 @@ export const CardServico = () => {
         "http://localhost:5000/professional/servicoscard"
       );
       setDadosIniciais(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("Erro ao buscar dados do backend:", error);
       // Tratamento de erro adicional conforme necessário

@@ -195,18 +195,6 @@ exports.validaEmail = async (req, res) => {
   }
 };
 
-exports.buscarattcls = async (req, res) => {
-  const { idCliente, email } = req.body;
-
-  const clientinfo = await controller_User.selectInfocliente({
-    params: { id_cliente: idCliente, cd_emailCliente: email },
-  });
-
-  if (!clientinfo) {
-    res.status(202).json();
-  }
-};
-
 exports.postarServico = async (req, res) => {
   try {
     const {
@@ -334,9 +322,9 @@ exports.profissionalCard = async (req, res) => {
 };
 
 exports.selectinfos = async (req, res) => {
-  const { idCliente, email } = req.body;
+  const { idCliente} = req.body;
   const clientinfo = await controller_User.selectInfocliente({
-    params: { id_cliente: idCliente, cd_emailCliente: email },
+    params: { id_cliente: idCliente},
   });
   console.log(clientinfo);
   res.status(200).json(clientinfo);

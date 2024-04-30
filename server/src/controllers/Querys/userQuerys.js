@@ -79,11 +79,10 @@ module.exports = {
   },
 
   selectInfocliente: async (req, res) => {
-    const { id_cliente, cd_emailCliente } = req.params;
+    const { id_cliente } = req.params;
     return ModelCliente.findOne({
       where: {
         id_cliente: id_cliente,
-        cd_emailCliente: cd_emailCliente
       },
       raw: true,
     });

@@ -14,7 +14,12 @@ exports.createchat = async(req, res) =>{
         })
         const response = await  newChat.save()
 
-        res.status(200).json(response)
+        const info = await controller_User.selectInfocliente({
+            params: { id_cliente: idCliente },
+          });
+
+        res.status(200).json({response, info})
+        
     }catch(error){
         console.log("erro" + error)
     }
@@ -36,7 +41,7 @@ exports.findUserChats = async(req, res) =>{
 
  exports.findChat = async(req, res) =>{
     const {idCliente, idProfissional} = req.params
-
+    
     try{
         const chats = await chatModel.find({
             members: {$all: [idCliente, idProfissional]}

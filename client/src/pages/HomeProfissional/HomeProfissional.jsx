@@ -58,9 +58,9 @@ const HomeProfissionais = () => {
                     <h1>Encontre os melhores profissionais para o seu problema</h1>
 
                     <section className="area-servicos">
-            <a href="/visualizarServico">
+            
                 <CardServico/>  
-            </a>
+            
         </section>
                 </div>
             </div>

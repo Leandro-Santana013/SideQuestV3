@@ -6,7 +6,7 @@ export const axiosRecipientUser = (chat, user) =>{
     const {recipientUser, setRecipientUser} = useState(null);
     const [error, setError] = useState(null)
 
-    const recipientId = chat?.members.find((idCliente) => idCliente !==user?.idCliente )
+    const recipientId = chat?.members.find((idCliente) => idCliente !==user?.idCliente)
 
     useEffect(() =>{
         const getUser = async()=>{
