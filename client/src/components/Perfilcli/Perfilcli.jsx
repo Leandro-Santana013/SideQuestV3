@@ -4,9 +4,10 @@ import { FaPaintBrush } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
-
+import { ProfessionalContext } from "../../context/ProfissionalContext";
 export const Perfilcli = () => {
   const { user } = useContext(UserContext);
+  const { pro } = useContext(ProfessionalContext);
   const [infocliente, setinfocliente] = useState(null);
 
   const [openModalPerfil, setOpenModalPerfil] = useState(false);
@@ -15,10 +16,21 @@ export const Perfilcli = () => {
   const userNameArray = userName.split(" ");
   let formattedName = '';
 
+  const proName = pro && pro.name ? pro.name : "Carregando...";
+  const proNameArray = userName.split(" ");
+  let formattedNamePro = '';
+
+
   if (userNameArray.length === 1) {
     formattedName = userNameArray[0];
   } else {
     formattedName = `${userNameArray[0]} ${userNameArray[userNameArray.length - 1]}`;
+  }
+
+  if (proNameArray.length === 1) {
+    formattedNamePro = userNameArray[0];
+  } else {
+    formattedNamePro = `${proNameArray[0]} ${proNameArray[proNameArray.length - 1]}`;
   }
 
   return (
@@ -29,8 +41,8 @@ export const Perfilcli = () => {
       >
         <img src={iconPerfil} alt="Imagem de perfil" />
         <p style={{ color: "white" }}>
-          {user && user.name ? `${user.name.split(" ")[0]}`: "Carregando..."}
-        </p>
+  {user && user.name ? `${user.name.split(" ")[0]}`: (pro && pro.name ? `${pro.name.split(" ")[0]}` : "Carregando...")}
+</p>
       </div>
       {openModalPerfil && (
         <div className="modal-card-perfil">
@@ -43,7 +55,7 @@ export const Perfilcli = () => {
             <FaPaintBrush className="icone-editar-perfil" />
           </div>
           <div className="info-card-perfil">
-            <p>{formattedName}</p>
+            <p>{formattedName ? formattedName : formattedNamePro }</p>
             <div className="linha-divisora"></div>
             <span>
               {infocliente ? infocliente.nmr_telefoneCliente : "Carregando..."}

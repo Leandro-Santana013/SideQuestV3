@@ -27,9 +27,11 @@ const Router = () => {
   
   return (
     <BrowserRouter>
+    <ProfessionalContextProvider>
      < ChatContextProvider user={user}>
-      <ProfessionalContextProvider>
+      
         <Routes>
+          
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/login" element={user ? <Navigate to="/homeCliente" /> : <Login />} />
           <Route exact path="/validaemail" element={<ValidaEmail />} />
@@ -48,8 +50,9 @@ const Router = () => {
           <Route exact path="/validaEmailProfissional" element={pro? <ValidaEmailProfissional />  : <Navigate to="/loginProfissional"/>} />
           <Route exact path="/homeProfissionais" element={pro ? <HomeProfissionais/>  : <Navigate to="/loginProfissional"/>} />
         </Routes>
-        </ProfessionalContextProvider>
+        
         </ChatContextProvider>
+        </ProfessionalContextProvider>
     </BrowserRouter>
   );
 }

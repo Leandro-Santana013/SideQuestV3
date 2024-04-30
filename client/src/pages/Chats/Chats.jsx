@@ -5,6 +5,7 @@ import { RiSendPlane2Fill } from "react-icons/ri";
 import {ChatContext} from "../../context/ChatContext"
 import { UserChat } from "./UserChat";
 import {UserContext} from "../../context/UserContext"
+import { PotentialChats } from "./PotentialChats";
 
 export const Chats = () => {
   const {user} = useContext(UserContext)
@@ -21,6 +22,7 @@ export const Chats = () => {
                 <div className="chat-list">
                   <h3>Conversas</h3>
                   <div className="chats-actives">
+                    <PotentialChats/>
                     {userChats?.map((chat,index) =>{
                       return(
                         <div key={index}>
@@ -28,7 +30,6 @@ export const Chats = () => {
                         </div>
                       )
                     })}
-                    <div className="message-box">João Silva</div>
                     <div className="message-box">Carlos Emanuel</div>
                   </div>
                 </div>
