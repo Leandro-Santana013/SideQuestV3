@@ -1,62 +1,251 @@
-.btn-logout {
-    width: fit-content;
-    margin: 0, 1vw, 0, 1vw;
-    height: 3vw;
-    background-color: rgb(218, 18, 18);
-}
-
 .conteudo-config-perfil {
-    width: 45vw;
+    width: 60vw;
+    padding: 10px;
+    position: relative;
+}
+
+.cabecalho-editar {
+    height: 15vw;
     display: flex;
-    flex-direction: column;
-    background: linear-gradient(to bottom, var(--azul) 25%, #eee 25%);
-    padding: 1vw;
-    border-radius: 20px;
-    align-items: center;
-}
-
-.header-conteudo-config-perfil {
-    display: flex;
-    top: 50px;
-    align-items: center;
-    justify-content: center;
-    width: 40vw;
-    height: 12vw;
-}
-
-.card-info-config-perfil {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-color: white;
-    width: 35vw;
-    border-radius: 10px;
-}
-
-.line-info-config-perfil {
-    display: flex;
-    width: 30vw;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.column-info-config-perfil {
-
-    h4 {
-        color: var(--verde);
-    }
-}
-
-.btn-config-editar-perfil {
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 20px;
     background-color: var(--azul);
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.cabecalho-editar button {
+    width: 7.5vw;
+    height: 2vw;
+    font-weight: bold;
+    background-color: var(--verde);
     color: white;
     border: none;
-    padding: .50vw 1vw .50vw 1vw;
-    border-radius: 1vw;
-    transition: .25s;
+    border-radius: 15px;
 }
 
-.btn-config-editar-perfil:hover {
-    background-color: var(--verde);
+.cabecalho-editar #img {
+    position: absolute;
+    top: 13vw;
+    right: 27vw;
 }
 
+.icon-label-input-img-cropper {
+    position: absolute;
+    top: 17.35vw;
+    right: 21vw;
+}
+
+.sessao-config {
+    background-color: #EEEEEE;
+    padding: 53px;
+    gap: 5vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-infoPessoais {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.edit-infoPessoais h3 {
+    font-size: 1.1rem;
+    color: gray;
+}
+
+.edit-infoPessoais .input-pessoais {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.edit-infoPessoais .input-pessoais .input-nome-num p {
+    color: var(--verde);
+    font-weight: bold;
+}
+
+.edit-infoPessoais .input-pessoais .input-nome-num input {
+    padding: 6.5px;
+    border-radius: 5px;
+    width: 15vw;
+}
+
+.edit-infoPessoais .input-pessoais .input-email-local p {
+    color: var(--verde);
+    font-weight: bold;
+}
+
+.edit-infoPessoais .input-pessoais .input-email-local input {
+    padding: 6.5px;
+    border-radius: 5px;
+    width: 15vw;
+}
+
+.edit-perfil {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.edit-perfil h3 {
+    font-size: 1.1rem;
+    color: gray;
+}
+
+
+.edit-perfil p {
+    color: var(--verde);
+    font-weight: bold;
+}
+
+.edit-perfil .profissoes {
+    display: flex;
+    gap: 2vw;
+    align-items: center;
+}
+
+.edit-perfil .profissao {
+    padding: 11px;
+    border-radius: 10px;
+    background-color: #d9d9d9;
+    width: 8vw;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-perfil .profissao-add{
+    padding: 11px;
+    border-radius: 100%;
+    background-color: #d9d9d9;
+    width: 2vw;
+    height: 2vw;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-assinatura {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.edit-assinatura {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-assinatura .planos {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 6vh;
+    margin-top: 6vh;
+}
+
+.edit-assinatura .planos #plano {
+    background: #d9d9d9;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.edit-assinatura .planos #atualizar {
+    color: var(--verde);
+    font-weight: bold;
+}
+
+.edit-assinatura .cartao {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 25vw;
+    height: 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    margin: 1vw;
+}
+
+.edit-assinatura .add-cartao {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 25vw;
+    height: 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    margin: 1vw;
+    gap: 1vw;
+}
+
+.edit-assinatura .add-cartao .add-cartao-novo{
+    padding: 11px;
+    border-radius: 100%;
+    background-color: #d9d9d9;
+    width: 2.5vw;
+    height: 2.5vw;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+}
+
+.edit-seguranca {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    gap: 1vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-seguranca p {
+    color: gray;
+    font-weight: bold;
+}
+
+.edit-seguranca .alt-senha {
+    display: flex;
+    gap: 1vw;
+    align-items: center;
+}
+
+.edit-seguranca .alt-senha input {
+    padding: 6.5px;
+    border-radius: 5px;
+    width: 15vw;
+    height: 1vw;
+}
+
+.edit-seguranca .sair-excluirBtn {
+    display: flex;
+    gap: 2vw;
+}
+
+.edit-seguranca .sair-excluirBtn #sair {
+    width: 10vw;
+    height: 3vw;
+    color: gray;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.edit-seguranca .sair-excluirBtn #excluir {
+    width: 10vw;
+    height: 3vw;
+    color: red;
+    background-color: white;
+    border: 1px solid red;
+    border-radius: 5px;
+}
