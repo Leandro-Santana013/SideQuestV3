@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from "react"
-import { Header, SidebarCliente, ImageCropper } from "../../components"
+import { Header, SidebarCliente, ImageCropper, TextInput } from "../../components"
 import "./config.css"
 import { UserContext } from "../../context/UserContext"
 import { Link } from "react-router-dom"
@@ -7,9 +7,9 @@ import { Link } from "react-router-dom"
 import imgPerfil from '../../assets/icone-perfil.png'
 
 const Config = () => {
-const avatarUrl = useRef(imgPerfil)
-const { user, logoutUser, setChangedUserData, changedUserData, functionUpdateInfoUser } = useContext(UserContext)
-const [showModal, setShowModal] = useState(false);
+  const avatarUrl = useRef(imgPerfil)
+  const [changedUserData, setChangedUserData] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
 const updateUserData = (newData) => {
   const changes = {};
@@ -46,6 +46,7 @@ const updateUserData = (newData) => {
     setShowModal(false)
   }
   
+  const { user, logoutUser } = useContext(UserContext)
   return (
     <>
       <Header />
@@ -53,40 +54,83 @@ const updateUserData = (newData) => {
       <div className="content-midia">
         <div className="main-content">
           <div className="conteudo-config-perfil">
-            <div className="header-conteudo-config-perfil">
-              <img id="img" htmlFor="comp" ref={avatarUrl} src={user.img_cliente ?  user.img_cliente : imgPerfil} alt="Imagem de perfil" className="img-config-perfil" style={{ border: "1px groove black",
+            <div className="cabecalho-editar">
+              <img id="img" htmlFor="comp" ref={avatarUrl} src={user.img_cliente ? user.img_cliente : imgPerfil} alt="Imagem de perfil" className="img-config-perfil" style={{
+                border: "1px groove black",
                 objectFit: "contain",
                 width: "120px",
                 height: "120px",
-                borderRadius: "50%"}}/>
+                borderRadius: "50%"
+              }} />
               <ImageCropper updatefoto={updatefoto} />
+              <button>Editar</button>
             </div>
-            <div className="card-info-config-perfil">
-              <div className="line-info-config-perfil">
-                <div className="column-info-config-perfil">
-                  <h4>Nome</h4>
-                  <p>{user.nm_cliente ? user.nm_cliente : ""}</p>
+            <div className="sessao-config">
+              <div className="edit-infoPessoais">
+                <h2>Informações Pessoais</h2>
+                <h3>Essas informações não estão públicas</h3>
+                <div className="input-pessoais">
+                  <div className="input-nome-num">
+                    <p>Nome</p>
+                    <input type="text" id="input-nome"/>
+                    <p>número</p>
+                    <input type="text" id="input-num"/>
+                  </div>
+                  <div className="input-email-local">
+                    <p>Email</p>
+                   <input type="text" id="input-email" />
+                    <p>Localização</p>
+                    <input type="text" id="input-local" />
+                  </div>
                 </div>
-                <button className="btn-config-editar-perfil">Editar</button>
               </div>
-
-              <div className="line-info-config-perfil">
-                <div className="column-info-config-perfil">
-                  <h4>Email</h4>
-                  <p>{user.cd_emailCliente ? user.cd_emailCliente : ""}</p>
+              <div className="edit-perfil">
+                <h2>Informações de Perfil</h2>
+                <h3>Estas informações para seu perfil público</h3>
+                <p>Sobre</p>
+                <TextInput />
+                <p>Profissão</p>
+                <div className="profissoes">
+                  <div className="profissao">
+                    Eletricista
+                  </div>
+                  <div className="profissao-add">
+                    +
+                  </div>
                 </div>
-                <button className="btn-config-editar-perfil">Editar</button>
               </div>
-
-              <div className="line-info-config-perfil">
-                <div className="column-info-config-perfil">
-                  <h4>Número</h4>
-                  <p>{user.numero ? user.numero : <><div className="buttonAddNumber"><button>adicionar numero</button></div></>}</p>
+              <div className="edit-assinatura">
+                <h2>Pagamento e assinatura</h2>
+                <div className="planos">
+                  <p id="plano">Plano irmãos a obra</p>
+                  <p id="atualizar">Atualizar</p>
                 </div>
-                <button className="btn-config-editar-perfil">Editar</button>
+                <h2>Detalhes do cartão</h2>
+                <div className="cartao">
+                  <p>Mastercard - 1111</p>
+                </div>
+                <div className="add-cartao">
+                <div className="add-cartao-novo">
+                    +
+                  </div>
+                  <p>Adicionar cartão de crédito</p>
+                </div>
+              </div>
+              <div className="edit-seguranca">
+                <h2>Segurança da conta</h2>
+                <p>senha</p>
+                <div className="alt-senha">
+                <input type="text" id="senha-alterar" />
+                <p>alterar senha</p>
+                </div>
+                <div className="sair-excluirBtn">
+                  <button id="sair">Sair</button>
+                  <button id="excluir">Excluir</button>
+                </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
       {showModal && (
@@ -94,8 +138,8 @@ const updateUserData = (newData) => {
           <div className="modal-content">
             <span className="close">&times;</span>
             <p>Seu perfil foi alterado. Deseja salvar as alterações?</p>
-            <button onClick={deleteUpdate} >Cancelar</button>
-            <button onClick={functionUpdateInfoUser}>Salvar</button>
+            <button >Cancelar</button>
+            <button>Salvar</button>
           </div>
         </div>
       )}
