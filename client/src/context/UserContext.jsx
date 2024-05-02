@@ -102,6 +102,7 @@ export const UserContextProvider = ({ children }) => {
   const [imgSrc, setImageSrc] = useState(null)
 
   const [changedUserData, setChangedUserData] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   const functionUpdateInfoUser = useCallback(async () => {
     console.log(changedUserData);
@@ -110,6 +111,7 @@ export const UserContextProvider = ({ children }) => {
     setUser(response.user)
     console.log(response.user); 
     localStorage.setItem("User", JSON.stringify(response.user));
+    setShowModal(null)
 }, [changedUserData]);
 
 
@@ -272,6 +274,8 @@ export const UserContextProvider = ({ children }) => {
         setChangedUserData,
         changedUserData,
         functionUpdateInfoUser,
+        showModal,
+        setShowModal,
         imgSrc
       }}
     >
