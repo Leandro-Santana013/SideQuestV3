@@ -20,6 +20,8 @@ import LandingProfissional from "./pages/LandingProfissional/LandingProfissional
 import Config from "./pages/Config/Config";
 import PaiSandu from "./pages/teste"
 import VisualizarServico from "./pages/VisualizarServico/VisualizarServico";
+import ServicosConcluidosProfissional from "./pages/ServicoConcluidos/ServicosConcluidos";
+import ServicosAtivosProfissa from "./pages/ServicosAtivosProfissa/ServicosAtivosProfissa";
 
 import { Chats } from "./pages/Chats/Chats";
 const Router = () => {
@@ -50,7 +52,8 @@ const Router = () => {
             <Route exact path="/landingProfissional" element={pro ? <LandingProfissional /> : <Navigate to="/loginProfissional" />} />
             <Route exact path="/validaEmailProfissional" element={pro ? <ValidaEmailProfissional /> : <Navigate to="/loginProfissional" />} />
             <Route exact path="/homeProfissionais" element={pro ?<HomeProfissionais /> : <Navigate to={"/loginProfissional"}/>} />
-            <Route exact path="/VisualizarServico" element={<VisualizarServico/>}/> 
+            <Route exact path="/ServicosConcluidosProfissional" element={<ServicosConcluidosProfissional/>}/> 
+            <Route exact path="/ServicosAtivosProfissa" element={<ServicosAtivosProfissa/>}/> 
           </Routes>
         </ProfessionalContextProvider>
       </ChatContextProvider>

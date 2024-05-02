@@ -1,2 +1,129 @@
+.card-visualizar {
+    width: 60vw;
+    box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
+    border-radius: 15px;
+}
+
+.card-visualizar .card-superior-servico {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 25px;
+    align-items: flex-end;
+}
+
+.card-visualizar .card-superior-servico button {
+    width: 8vw;
+    height: 3vw;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    background-color: var(--verde);
+    color: white;
+}
+
+.card-visualizar .card-inferior-servico {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 25px;
+}
+
+.card-inferior-servico .proposta-servico {
+    gap: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-inferior-servico .proposta-servico button {
+    width: 8vw;
+    height: 3vw;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    background-color: var(--verde);
+    color: white;
+}
+
+.proposta-servico .perfil-avaliacao .avaliacao-icon-nome {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+.avaliacao-icon-nome img {
+    width: 3.5vw;
+    height: 3.5vw;
+}
+
+.nome-avaliacao {
+    display: flex;
+    flex-direction: column;
+}
+
+.nome-avaliacao>p {
+    margin: 0;
+}
+
+.avaliacao {
+    display: flex;
+    gap: 1vw;
+    align-items: center;
+}
+
+.avaliacao>img {
+    width: 6vw;
+    height: 2vw;
+}
+
+.avaliacao p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.distancia {
+    display: flex;
+    gap: 2vw;
+    align-items: flex-end;
+}
+
+.distancia img {
+    width: 2.5vw;
+    height: 3.5vw;
+}
+
+.distancia p {
+    margin-top: 0;
+}
 
 
+.desc-servico {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.data-servico {
+    display: flex;
+    justify-content: space-around;
+}
+
+.data-servico .inicio {
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+}
+.data-servico .inicio img {
+    width: 4.5vw;
+    height: 4.5vw;
+}
+
+.data-servico .fim {
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+}
+.data-servico .fim img {
+    width: 3.5vw;
+    height: 3.5vw;
+}
