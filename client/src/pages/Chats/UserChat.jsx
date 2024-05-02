@@ -2,7 +2,7 @@ import { axiosRecipientUser } from "../../hooks/axiosRecipient"
 
 export const UserChat = ({chat, user}) =>{
     const {recipientUser} = axiosRecipientUser(chat, user);
-   
+   console.log(recipientUser)
     return (
      <div className="message-box">
         <div className="foto-perfil"></div>

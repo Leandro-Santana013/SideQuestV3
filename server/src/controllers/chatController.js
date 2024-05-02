@@ -32,11 +32,11 @@ exports.createchat = async(req, res) =>{
 }
 
 exports.findUserChats = async(req, res) =>{
-    const idCliente = req.params.id_cliente
+    const idProfissional = req.params.id_profissional
 
     try{
         const chats = await chatModel.find({
-            members: {$in:[idCliente]}
+            members: {$in:[idProfissional]}
         })
         res.status(200).json(chats)
     }catch(error){

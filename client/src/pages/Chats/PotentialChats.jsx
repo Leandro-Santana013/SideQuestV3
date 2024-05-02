@@ -5,7 +5,6 @@ import { UserContext } from "../../context/UserContext";
 export const PotentialChats = () => {
     const {user} = useContext(UserContext)
     const {potentialChats, createChat} = useContext(ChatContext);
-    console.log("PotentialChats", potentialChats)
     return (
     <>
     <div className="all-pro">

@@ -10,5 +10,5 @@ router.post('/postarServico', userControllers.postarServico)
 router.post('/selectinfos', userControllers.selectinfos)
 router.get('/find/:idProfissional', userControllers.findPro)
 router.get('/profissionaisCard', userControllers.profissionalCard)
-router.get('/', userControllers.findAllProfissionais)
+router.get('/allProfissionais', userControllers.findAllProfissionais)
 module.exports = router; 
