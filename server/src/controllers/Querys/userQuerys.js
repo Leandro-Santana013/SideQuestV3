@@ -79,7 +79,7 @@ module.exports = {
   },
 
   selectInfocliente: async (req, res) => {
-    const { id_cliente, cd_emailCliente } = req.params;
+    const { id_cliente } = req.params;
     return ModelCliente.findOne({
       where: {
         id_cliente: id_cliente,
@@ -157,8 +157,7 @@ module.exports = {
   },
 
   CreateServico: async (req, res) => {
-    const { ds_servico, ds_titulo, id_cliente, id_categoria, id_endereco, img_servico } =
-      req.params;
+    const { ds_servico, ds_titulo, id_cliente, id_categoria, id_endereco, img_servico } =req.params;
     return ModelPostagemServico.create({
       id_cliente: id_cliente,
       id_categoria: id_categoria,
@@ -258,11 +257,3 @@ module.exports = {
     )
   }
 };
-
-updateTokenByEmail: async (req, res) => {
-  const { cd_emailCliente, cd_tokenCliente } = req.params;
-  return ModelCliente.update(
-    { cd_tokenCliente: cd_tokenCliente },
-    { where: { cd_emailCliente: cd_emailCliente } }
-  );
-}

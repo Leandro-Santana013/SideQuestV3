@@ -161,9 +161,13 @@ exports.login = async (req, res) => {
         params: { cd_emailCliente: email },
       });
       const secret = createToken(login.id_cliente)
+      delete login.cd_cpfCliente
+      delete login.cd_senhaCliente
+     
+      console.log(login)
       return res
         .status(200)
-        .json({ id_cliente: login.id_cliente, email: login.cd_emailCliente, name: login.nm_cliente, secret });
+        .json(login);
     }
   } catch (error) {
     console.error(error);
@@ -333,9 +337,9 @@ exports.profissionalCard = async (req, res) => {
 };
 
 exports.selectinfos = async (req, res) => {
-  const { idCliente, email } = req.body;
+  const { idCliente } = req.body;
   const clientinfo = await controller_User.selectInfocliente({
-    params: { id_cliente: idCliente, cd_emailCliente: email },
+    params: { id_cliente: idCliente },
   });
   console.log(clientinfo);
   res.status(200).json(clientinfo);
@@ -345,26 +349,36 @@ exports.selectinfos = async (req, res) => {
 /* atualizar os dados da conta do usuário cliente (user) */
 
 exports.updateInfoUser = async (req, res) => {
-  const { id_cliente, nm_cliente, cd_emailCliente, img_cliente } = req.body
+  const { id_cliente, nm_cliente, cd_emailCliente, foto } = req.body;
   try {
 
+    // Converter base64 para Blob
     const clientinfo = await controller_User.selectInfocliente({
       params: { id_cliente: id_cliente },
     });
+   
 
-    const clientinfoupdated = await controller_User.selectInfocliente({
+    const clientinfoupdated = await controller_User.updateInfoCli({
       params: {
         id_cliente: id_cliente,
         nm_cliente: nm_cliente ? nm_cliente : clientinfo.nm_cliente,
         cd_emailCliente: cd_emailCliente ? cd_emailCliente : clientinfo.cd_emailCliente,
-        img_cliente: img_cliente ? img_cliente : clientinfo.img_cliente ? clientinfo.img_cliente : null
+        img_cliente: foto
       }
-    })
-    console.log(clientinfoupdated)
-    return res.status(200).json({id: clientinfoupdated.idCliente, email: clientinfoupdated.name});
+    });
+
+    const client = await controller_User.selectInfocliente({
+      params: { id_cliente: id_cliente },
+    });
+    delete client.cd_cpfCliente;
+    delete client.cd_senhaCliente;
+    
+    return res.status(200).json(client);
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ error: "Erro interno do servidor" });
   }
 }
+
 
 /****************************************/

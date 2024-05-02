@@ -1,21 +1,19 @@
+import { createContext, useCallback, useEffect, useState } from "react";
 import {
-  createContext,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
-import { postRequest, baseUrl, getRequest, putRequest } from "../utils/services";
+  postRequest,
+  baseUrl,
+  getRequest,
+  putRequest,
+} from "../utils/services";
 export const UserContext = createContext();
 import axios from "axios";
 import { file } from "jszip";
 
+
+
 export const UserContextProvider = ({ children }) => {
-
-
   //objeto de usuario
   const [user, setUser] = useState({});
-
-
 
   //objeto de registro
   const [formDataCadastro, setFormDataCadastro] = useState({
@@ -29,8 +27,8 @@ export const UserContextProvider = ({ children }) => {
   //mensagens de erro sucesso e carre gamento
   const [registerError, setRegisterError] = useState(null);
   const [registerSucess, setRegisterSucess] = useState(null);
-  const [registerLoading, setRegisterLoading] = useState(false); 
-  
+  const [registerLoading, setRegisterLoading] = useState(false);
+
   //atualiza as informações de registro
   const updateCadastro = useCallback((info) => {
     setFormDataCadastro(info);
@@ -45,7 +43,7 @@ export const UserContextProvider = ({ children }) => {
 
       try {
         const response = await postRequest("/user/register", formDataCadastro);
-        
+
         // Se a resposta for uma mensagem de erro
         if (response.error) {
           setRegisterError(response.error); // Define o estado de erro com a mensagem de erro recebida
@@ -64,7 +62,6 @@ export const UserContextProvider = ({ children }) => {
     [formDataCadastro, setRegisterError, setRegisterSucess, setRegisterLoading]
   );
 
-
   //login
   const [loginError, setloginError] = useState(null);
   const [loginLoading, setloginLoading] = useState(false);
@@ -73,27 +70,25 @@ export const UserContextProvider = ({ children }) => {
     senha: null,
   });
 
-  // seta o usuario com o localstorage
-  useEffect(() => {
-    let user = localStorage.getItem("User");
 
-    setUser(JSON.parse(user));
-  }, []);
 
   useEffect(() => {
-    console.log(user)
+    const userFromStorage = localStorage.getItem("User");
   
+    
+      setUser(JSON.parse(userFromStorage));
+    
+  }, []); 
+  
+
+  useEffect(() => {
+    console.log(user);
+
     setServico((prevServico) => ({
       ...prevServico,
       idCliente: user ? user.id_cliente : null,
-      email: user ? user.email : null,
-
+      email: user ? user.cd_emailCliente : null,
     }));
-    setChangedUserData((rest) => ({
-      ...rest,
-      id_cliente: user ? user.id_cliente : null
-    }))
-
   }, [user]);
 
   const updateLogininfo = useCallback((info) => {
@@ -102,19 +97,28 @@ export const UserContextProvider = ({ children }) => {
 
   /********************/
 
+
   const [changedUserData, setChangedUserData] = useState({});
+  const [showModal, setShowModal] = useState(false);
+
+  const functionUpdateInfoUser = useCallback(async () => {
+    console.log(changedUserData);
+    
+    const response = await postRequest("/user/updateInfoUser", changedUserData);
+    setUser(response.user)
+    console.log(response.user); 
+    localStorage.setItem("User", JSON.stringify(response.user));
+    setShowModal(null)
+}, [changedUserData]);
 
 
-  const functionUpdateInfoUser = useCallback(async ()=>{
-     console.log(changedUserData)
-    const response = await putRequest("/user/updateInfoUser", changedUserData);
-    console.log(response.info)
-  }, [changedUserData])
-  
+
+
+
+
   /********************/
 
-
-  //logout 
+  //logout
 
   const logoutUser = useCallback(() => {
     localStorage.removeItem("User");
@@ -122,37 +126,36 @@ export const UserContextProvider = ({ children }) => {
     window.location.reload();
   }, []);
 
-  const loginUser = useCallback(async (e) => {
-    e.preventDefault();
-    setloginLoading(true);
-    setloginError(null);
-    try {
-      const response = await postRequest("/user/login", loginInfo);
+  const loginUser = useCallback(
+    async (e) => {
+      e.preventDefault();
+      setloginLoading(true);
+      setloginError(null);
+      try {
+        const response = await postRequest("/user/login", loginInfo);
 
-      if (response.error) setloginError(response.error);
-      else {
-        console.log(response.user)
-        localStorage.setItem("User", JSON.stringify(response.user));
-        window.location.reload();
+        if (response.error) setloginError(response.error);
+        else {
+          localStorage.setItem("User", JSON.stringify(response.user));
+          window.location.reload();
+        }
+      } catch (error) {
+        setRegisterError("Erro ao logar. Por favor, tente novamente."); // Define o estado de erro com uma mensagem genérica de erro
+        setRegisterLoading(false);
       }
-    } catch (error) {
-      setRegisterError("Erro ao logar. Por favor, tente novamente."); // Define o estado de erro com uma mensagem genérica de erro
-      setRegisterLoading(false);
-    }
-  }, [loginInfo]);
-
-
-
+    },
+    [loginInfo]
+  );
 
   const [cepError, setCepError] = useState(false);
-  const [categorias, setCategorias] = useState([])
+  const [categorias, setCategorias] = useState([]);
   const [form, setForm] = useState(1);
-  const [modalPostar, setModalPostar] = useState(false);   
+  const [modalPostar, setModalPostar] = useState(false);
   const [errorPostar, setErrorPostar] = useState(null);
-  const [messageErrorPostar, setmessageErrorPostar] = useState(null)
+  const [messageErrorPostar, setmessageErrorPostar] = useState(null);
 
   const [Servico, setServico] = useState({
-    titulo: null, 
+    titulo: null,
     dsServico: null,
     cep: null,
     uf_localidade: null,
@@ -166,88 +169,75 @@ export const UserContextProvider = ({ children }) => {
     imagens: null,
   });
 
-useEffect(()=>{
-console.log(loginInfo)
-}, [loginInfo])
-  const PostarServico = useCallback(async (e) => {
-    
-e.preventDefault()
-setModalPostar(false);
+  const PostarServico = useCallback(
+    async (e) => {
+      e.preventDefault();
+      setModalPostar(false);
 
-    try {
-      // Enviar o formulário com o estado formData atualizado
-      const response = await postRequest("/user/postarServico", Servico);
-      console.log(response)
-      if (response.error){
-        setmessageErrorPostar(response.error)
-        setErrorPostar(true);
+      try {
+        // Enviar o formulário com o estado formData atualizado
+        const response = await postRequest("/user/postarServico", Servico);
+
+        if (response.error) {
+          setmessageErrorPostar(response.error);
+          setErrorPostar(true);
           setForm(response.formstatus);
-        console.log(response.formstatus)
-        setTimeout(() => {
-          setErrorPostar(null);
-          setmessageErrorPostar(null)
-        }, 4000);
-      
-      } 
-      else{
-      setModalPostar(true); 
+
+          setTimeout(() => {
+            setErrorPostar(null);
+            setmessageErrorPostar(null);
+          }, 4000);
+        } else {
+          setModalPostar(true);
+        }
+      } catch (error) {
+        console.error("Erro ao cadastrar:", error);
+        setMessage(
+          error.response?.data?.message || "Erro ao cadastrar. Tente novamente."
+        );
       }
-    } catch (error) {
-      console.error("Erro ao cadastrar:", error);
-      setMessage(
-        error.response?.data?.message || "Erro ao cadastrar. Tente novamente."
-      );
-    }
-  }, [Servico]);
+    },
+    [Servico]
+  );
 
   const fetchData = async (cep) => {
     try {
       const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
       if (!response.data.erro) {
         const { uf, localidade, logradouro, bairro } = response.data;
-        setCepError(false)
+        setCepError(false);
         setServico({
           ...Servico,
           cep,
           uf_localidade: `${uf} - ${localidade}`,
           logradouro,
-          bairro
+          bairro,
         });
-
-
       } else {
-        setCepError(true)
+        setCepError(true);
       }
     } catch (error) {
       console.error("Erro ao buscar CEP:", error);
     }
   };
 
-
-
   useEffect(() => {
     const carregarCategorias = async () => {
       try {
         const response = await getRequest("/user/selectCategoria");
         setCategorias(response); // Aqui estamos definindo o estado das categorias com a resposta do servidor
-
       } catch (error) {
         console.error("Erro ao buscar categorias:", error);
       }
     };
-  
+
     // Chama a função para buscar as categorias
     carregarCategorias();
   }, [user]);
-  
-
 
   const updatepostarServico = useCallback((info) => {
     setServico(info);
-
   }, []);
-
-
 
   return (
     <UserContext.Provider
@@ -280,9 +270,11 @@ setModalPostar(false);
         messageErrorPostar,
         setChangedUserData,
         changedUserData,
-        functionUpdateInfoUser
-      }
-    }
+        functionUpdateInfoUser,
+        showModal,
+        setShowModal,
+        
+      }}
     >
       {children}
     </UserContext.Provider>
