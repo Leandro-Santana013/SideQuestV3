@@ -2,28 +2,28 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { baseUrl, getRequest } from "../utils/services";
 
-export const axiosRecipientUser = (chat, user) =>{
-    const {recipientUser, setRecipientUser} = useState(null);
-    const [error, setError] = useState(null)
+export const axiosRecipientUser = (chat, user) => {
+    const [recipientUser, setRecipientUser] = useState(null);
+    const [error, setError] = useState(null);
+    console.log(chat.members)
+    const recipientId = chat?.members && chat.members.find((idProfissional) => String(idProfissional) !== String(user?.id_profissional));
 
-    const recipientId = chat?.members.find((idCliente) => idCliente !==user?.idCliente)
 
-    useEffect(() =>{
-        const getUser = async()=>{
+    useEffect(() => {
+        const getUser = async () => {
+            if (!recipientId) return null;
 
-            if(!recipientId) return null
-
-            const response = await getRequest(`/user/find/${recipientId}`)
-
-            if(response.error){
-                return setError(error);
+            try {
+                const response = await getRequest(`/user/find/${recipientId}`);
+                setRecipientUser(response);
+                console(response)
+            } catch (error) {
+                setError(error);
             }
-
-            setRecipientUser(response);
-        }
+        };
 
         getUser();
-    },[])
+    }, [recipientId]);
 
-    return {recipientUser}
-}
+    return { recipientUser, error };
+};

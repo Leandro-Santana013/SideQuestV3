@@ -329,3 +329,28 @@ exports.selectinfos = async (req, res) => {
   console.log(clientinfo);
   res.status(200).json(clientinfo);
 };
+
+exports.findPro = async (req, res) =>{
+  const {idProfissional} = req.params;
+
+  try{
+      const proInfo = await controller_User.selectInfoProfissional({
+    params: { id_profissional:  idProfissional},  
+  });
+    
+    res.status(200).json(proInfo)
+  }catch(error){
+    console.log(error);
+    res.status(500).json(error);
+  }
+}
+
+exports.findAllProfissionais = async (req, res) =>{
+  try{
+      const allPro = await controller_User.selectallprofissionais();
+    res.status(200).json(allPro)
+  }catch(error){
+    console.log(error);
+    res.status(500).json(error);
+  }
+}

@@ -12,7 +12,18 @@ module.exports = {
     return ModelProfissional.findOne({
       where: {
         cd_emailProfissional: cd_emailProfissional,
+        
       },
+      
+    });
+  },
+  infoprofissional: async (req, res) => {
+    const { id_profissional } = req.params;
+    return ModelProfissional.findOne({
+      where: {
+        id_profissional: id_profissional,
+      },
+      raw:true
     });
   },
   findEmailProfissional: async (req, res) => {

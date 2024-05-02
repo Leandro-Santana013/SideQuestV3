@@ -9,7 +9,6 @@ export const Infoinc = () => {
   const [message, setMessage] = useState(null);
  
 
-  console.log(infoDados)
 
   const handleChange = (e) => {
     const { name, value } = e.target;

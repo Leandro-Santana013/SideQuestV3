@@ -1,27 +1,33 @@
 const chatModel = require("../models/chatModel")
+const controller_User = require("./Querys/userQuerys");
+const controller_Pro = require('./Querys/proQuerys')
 
 exports.createchat = async(req, res) =>{
-    const {idCliente, idProfissional} = req.body
+    const {id_cliente, id_profissional} = req.body
 
     try{
         const chat = await chatModel.findOne({
-            members: {$all: [idCliente, idProfissional]}
+            members: {$all: [id_cliente, id_profissional]}
         })
-        if(chat) return res.status(200).json(chat)
+        const info = await controller_User.selectInfocliente({
+            params: { id_cliente: id_cliente },
+          });
+          const infoProfissional = await controller_Pro.infoprofissional({
+            params: {  id_profissional:  id_profissional },
+          });
+          console.log(info, infoProfissional)
+        if(chat) return res.status(200).json({chat, info, infoProfissional})
 
         const newChat = new chatModel({
-            members: [idCliente, idProfissional]
+            members: [id_cliente, id_profissional]
         })
         const response = await  newChat.save()
 
-        const info = await controller_User.selectInfocliente({
-            params: { id_cliente: idCliente },
-          });
-
-        res.status(200).json({response, info})
+        return res.status(200).json({response, info, infoProfissional})
         
     }catch(error){
         console.log("erro" + error)
+        
     }
 }
 

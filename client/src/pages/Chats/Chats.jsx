@@ -6,9 +6,10 @@ import {ChatContext} from "../../context/ChatContext"
 import { UserChat } from "./UserChat";
 import {UserContext} from "../../context/UserContext"
 import { PotentialChats } from "./PotentialChats";
+import { ProfessionalContext } from "../../context/ProfissionalContext";
 
 export const Chats = () => {
-  const {user} = useContext(UserContext)
+  const {pro} = useContext(ProfessionalContext)
   const  {userChats, isUserChatsLoading, userChatsError} = useContext(ChatContext)
   return (
     <>
@@ -26,11 +27,10 @@ export const Chats = () => {
                     {userChats?.map((chat,index) =>{
                       return(
                         <div key={index}>
-                          <UserChat chat={chat} user={user}></UserChat>
+                          <UserChat chat={chat} user={pro}></UserChat>
                         </div>
                       )
                     })}
-                    <div className="message-box">Carlos Emanuel</div>
                   </div>
                 </div>
                 <div className="chat-box">
