@@ -46,6 +46,12 @@ const updateUserData = (newData) => {
     setChangedUserData(null);
     setShowModal(false)
   }
+
+  /***************************************************/
+
+  const [modalEditar, setModalEditar] = useState(false)
+
+  /***************************************************/
   
 
   return (
@@ -64,7 +70,7 @@ const updateUserData = (newData) => {
                 borderRadius: "50%"
               }} />
               <ImageCropper updatefoto={updatefoto} />
-              <button>Editar</button>
+              <button onClick={() => setModalEditar(true)}>Editar</button>
             </div>
             <div className="sessao-config">
               <div className="edit-infoPessoais">
@@ -73,7 +79,14 @@ const updateUserData = (newData) => {
                 <div className="input-pessoais">
                   <div className="input-nome-num">
                     <p>Nome</p>
-                    <input type="text" id="input-nome"/>
+                    {
+                      modalEditar? (
+                        <input type="text" id="input-nome" placeholder={user.nm_cliente}/>
+                      ) : (
+                        <p>{user.nm_cliente}</p>
+                      )
+                    }
+                    
                     <p>número</p>
                     <input type="text" id="input-num"/>
                   </div>

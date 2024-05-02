@@ -74,12 +74,11 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     const userFromStorage = localStorage.getItem("User");
-    if (userFromStorage) {
-      // Se o usuário já estiver no armazenamento local, define-o no estado
+  
+    
       setUser(JSON.parse(userFromStorage));
-    }
-  }, []); // Adicionando localStorage.getItem("User") como dependência
-  // Adicionando userFromStorage como dependência
+    
+  }, []); 
   
 
   useEffect(() => {
