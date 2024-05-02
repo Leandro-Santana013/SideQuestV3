@@ -4,9 +4,9 @@ import { FaPaintBrush } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
-
+import imgPerfil from '../../assets/icone-perfil.png'
 export const Perfilcli = () => {
-  const { user, imgSrc } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [infocliente, setinfocliente] = useState(null);
 
   const [openModalPerfil, setOpenModalPerfil] = useState(false);
@@ -29,7 +29,7 @@ export const Perfilcli = () => {
         className="card-perfil-bottom"
         onClick={() => setOpenModalPerfil(true)}
       >
-       <img src={user.img_cliente ? user.img_cliente : imgSrc} style={{borderRadius:50}} alt="User" />
+       <img src={user.img_cliente ? user.img_cliente : imgPerfil} style={{borderRadius:50}} alt="User" />
         <p style={{ color: "white" }}>
           {user && user.nm_cliente ? `${user.nm_cliente.split(" ")[0]}`: "Carregando..."}
         </p>

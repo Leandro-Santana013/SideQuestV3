@@ -9,9 +9,6 @@ export const UserContext = createContext();
 import axios from "axios";
 import { file } from "jszip";
 
-import imageType  from "image-type";
-
-import { Buffer } from 'buffer';
 
 
 export const UserContextProvider = ({ children }) => {
@@ -77,10 +74,11 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     const userFromStorage = localStorage.getItem("User");
-    const userData = JSON.parse(userFromStorage);
-  
-    setUser(userData);
-  }, [localStorage.getItem("User")]); // Adicionando localStorage.getItem("User") como dependência
+    if (userFromStorage) {
+      // Se o usuário já estiver no armazenamento local, define-o no estado
+      setUser(JSON.parse(userFromStorage));
+    }
+  }, []); // Adicionando localStorage.getItem("User") como dependência
   // Adicionando userFromStorage como dependência
   
 
@@ -99,7 +97,7 @@ export const UserContextProvider = ({ children }) => {
   }, []);
 
   /********************/
-  const [imgSrc, setImageSrc] = useState(null)
+
 
   const [changedUserData, setChangedUserData] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -276,7 +274,7 @@ export const UserContextProvider = ({ children }) => {
         functionUpdateInfoUser,
         showModal,
         setShowModal,
-        imgSrc
+        
       }}
     >
       {children}
