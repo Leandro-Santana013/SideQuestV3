@@ -15,7 +15,9 @@
                 
                 message = response.data.message;
                 delete response.data.message;
-                delete response.data.cpfNumerico;
+                delete response.data.cd_cpfCliente
+                delete response.data.cd_senhaCliente
+                delete response.cd_tokenCliente
                 user = response.data
             } else {
                 // Se não houver uma chave "message", trata-se de um erro

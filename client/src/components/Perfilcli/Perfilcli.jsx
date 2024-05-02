@@ -6,12 +6,12 @@ import axios from "axios";
 import { UserContext } from "../../context/UserContext";
 
 export const Perfilcli = () => {
-  const { user } = useContext(UserContext);
+  const { user, imgSrc } = useContext(UserContext);
   const [infocliente, setinfocliente] = useState(null);
 
   const [openModalPerfil, setOpenModalPerfil] = useState(false);
 
-  const userName = user && user.name ? user.name : "Carregando...";
+  const userName = user && user.nm_cliente ? user.nm_cliente : "Carregando...";
   const userNameArray = userName.split(" ");
   let formattedName = '';
 
@@ -21,15 +21,17 @@ export const Perfilcli = () => {
     formattedName = `${userNameArray[0]} ${userNameArray[userNameArray.length - 1]}`;
   }
 
+  
+  
   return (
     <>
       <div
         className="card-perfil-bottom"
         onClick={() => setOpenModalPerfil(true)}
       >
-        <img src={iconPerfil} alt="Imagem de perfil" />
+       <img src={user.img_cliente ? user.img_cliente : imgSrc} style={{borderRadius:50}} alt="User" />
         <p style={{ color: "white" }}>
-          {user && user.name ? `${user.name.split(" ")[0]}`: "Carregando..."}
+          {user && user.nm_cliente ? `${user.nm_cliente.split(" ")[0]}`: "Carregando..."}
         </p>
       </div>
       {openModalPerfil && (
@@ -39,7 +41,7 @@ export const Perfilcli = () => {
               className="close-editar-perfil"
               onClick={() => setOpenModalPerfil(false)}
             />
-            <img src={iconPerfil} alt="Imagem de perfil" />
+            <img src={user.img_cliente ? user.img_cliente : imgSrc} style={{width:"5vw"}}alt="Imagem de perfil" />
             <FaPaintBrush className="icone-editar-perfil" />
           </div>
           <div className="info-card-perfil">

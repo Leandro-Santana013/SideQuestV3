@@ -25,6 +25,7 @@ const updateUserData = (newData) => {
   }
   if (newData.foto !== imgPerfil && newData.foto !== user.foto) {
     changes.foto = newData.foto;
+    console.log("Tamanho da imagem:", newData.foto.length);
   }
   setChangedUserData(changes);
   if (Object.keys(changes).length > 0) {
@@ -33,7 +34,6 @@ const updateUserData = (newData) => {
   setChangedUserData(changes);
 };
 
-
   const updatefoto = (ImgSrc) => {
     avatarUrl.current.src = ImgSrc; // Atualizando a imagem de perfil
     updateUserData({ ...changedUserData, foto: ImgSrc });
@@ -41,8 +41,9 @@ const updateUserData = (newData) => {
 
 
   const deleteUpdate = () =>{
-    avatarUrl.current.src = null
+    avatarUrl.current.src = user.img_cliente ? user.img_cliente : imgPerfil
     setChangedUserData(null);
+    setShowModal(false)
   }
   
   return (
@@ -53,7 +54,7 @@ const updateUserData = (newData) => {
         <div className="main-content">
           <div className="conteudo-config-perfil">
             <div className="header-conteudo-config-perfil">
-              <img id="img" htmlFor="comp" ref={avatarUrl} src={imgPerfil} alt="Imagem de perfil" className="img-config-perfil" style={{ border: "1px groove black",
+              <img id="img" htmlFor="comp" ref={avatarUrl} src={user.img_cliente ?  user.img_cliente : imgPerfil} alt="Imagem de perfil" className="img-config-perfil" style={{ border: "1px groove black",
                 objectFit: "contain",
                 width: "120px",
                 height: "120px",
@@ -64,7 +65,7 @@ const updateUserData = (newData) => {
               <div className="line-info-config-perfil">
                 <div className="column-info-config-perfil">
                   <h4>Nome</h4>
-                  <p>{user.name ? user.name : ""}</p>
+                  <p>{user.nm_cliente ? user.nm_cliente : ""}</p>
                 </div>
                 <button className="btn-config-editar-perfil">Editar</button>
               </div>
@@ -72,7 +73,7 @@ const updateUserData = (newData) => {
               <div className="line-info-config-perfil">
                 <div className="column-info-config-perfil">
                   <h4>Email</h4>
-                  <p>{user.email ? user.email : ""}</p>
+                  <p>{user.cd_emailCliente ? user.cd_emailCliente : ""}</p>
                 </div>
                 <button className="btn-config-editar-perfil">Editar</button>
               </div>
