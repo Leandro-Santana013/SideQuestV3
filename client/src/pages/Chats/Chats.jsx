@@ -12,7 +12,6 @@ export const Chats = () => {
             <SidebarCliente />
             <div className="content-midia">
                 <div className="main-content">
-                    <Infoinc />
                     <div className="container-chatList">
                         <p>Conversas</p>
                         <div className="chatList"></div>

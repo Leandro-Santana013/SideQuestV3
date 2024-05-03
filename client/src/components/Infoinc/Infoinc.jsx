@@ -4,10 +4,10 @@ import Cookies from "js-cookie";
 import { IoMdClose } from "react-icons/io";
 import './infoInc.css';
 export const Infoinc = () => {
-  const [infoDados, setinfoDados] = useState();
+  const [infoDados, setinfoDados] = useState(false);
   const [openModalPerfil, setOpenModalPerfil] = useState(false);
   const [message, setMessage] = useState(null);
- 
+
 
   console.log(infoDados)
 
@@ -21,35 +21,48 @@ export const Infoinc = () => {
 
   return (
     <>
-      {infoDados && (
-        <div className="modalInfoCLi">
-          <IoMdClose
-            className="close-editar-perfil"
-            onClick={() => setOpenModalPerfil(false)}
-          />  
-           <h2>Conclua seu registro.</h2>
-            <h5>personalize sua conta para uma melhor experiência</h5>
-          <form className="form-infoInc">
-            <div className="social-container"></div>
-            {message && <div className="container-mensagem-erro">{message}</div>}
-            <input className="input-infoInc" placeholder="Digite seu email" type="email" name="email" value={formData.email} onChange={handleChange} />
-            <input className="input-infoInc" placeholder="Digite uma senha" type="date" name="senha" value={formData.senha} onChange={handleChange} />
-           
-            <select
-                        id="categoriaSelect"
-                        className="select-sexo"
-                      >
-                      <option value="" disabled selected>Gênero</option>
-                        <option>Masculino</option>
-                        <option>Feminino</option>
-                        <option>Prefiro não dizer</option>
-
-                      </select>
-            <a className="forgot" href="#">Esqueceu a sua senha?</a>
-            <button type='submit'>Entrar</button>
-          </form>
+      <div className="modal-card-conclua-registro">
+        <div className="card-conclua-registro">
+          <div className="top-card-conclua-registro">
+            <h1>Conclua o seu registro</h1>
+            <p>Finalize o seu cadastro para uma melhor experiência em nossa plataforma</p>
+          </div>
+          <div className="inputs-card-conclua-registro">
+            <input className="nmr-telefone" type="tel" placeholder="Telefone / Celular" />
+            <input className="data" type="date" />
+            <select name="" id="" aria-placeholder="">
+              <option value="">Prefiro não dizer</option>
+              <option value="">Homem Macho</option>
+              <option value="">Mulher Feminina</option>
+            </select>
+          </div>
+          <div className="bottom-card-conclua-registro">
+            <p>Deixar para depois</p>
+            <button>Próximo</button>
+          </div>
         </div>
-      )}
+
+        <div className="card-conclua-registro">
+          <div className="top-card-conclua-registro">
+            <h1>Conclua o seu registro</h1>
+            <p>Insira o seu endereço (você poderá adicionar outros posteriormente).</p>
+          </div>
+          <div className="inputs-card-conclua-registro">
+            <div className="grid-2x2-card-conclua-registro">
+              <input className="padrao-input-card-conclua-registro" type="number" />
+              <input className="padrao-input-card-conclua-registro" type="text" />
+              <input className="padrao-input-card-conclua-registro" type="text" />
+              <input className="padrao-input-card-conclua-registro" type="text" />
+              <input className="padrao-input-card-conclua-registro" type="number" />
+              <input className="padrao-input-card-conclua-registro" type="text" />
+            </div>
+          </div>
+          <div className="bottom-card-conclua-registro">
+            <p>voltar</p>
+            <button>Finalizar</button>
+          </div>
+        </div>
+      </div>
     </>
   )
 }
