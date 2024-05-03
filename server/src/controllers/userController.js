@@ -349,9 +349,9 @@ exports.selectinfos = async (req, res) => {
 /* atualizar os dados da conta do usuário cliente (user) */
 
 exports.updateInfoUser = async (req, res) => {
-  const { id_cliente, nm_cliente, cd_emailCliente, foto } = req.body;
+  const { id_cliente, name, email, numero, foto } = req.body;
   try {
-
+    console.log(id_cliente, name, email, numero, foto)
     // Converter base64 para Blob
     const clientinfo = await controller_User.selectInfocliente({
       params: { id_cliente: id_cliente },
@@ -361,9 +361,9 @@ exports.updateInfoUser = async (req, res) => {
     const clientinfoupdated = await controller_User.updateInfoCli({
       params: {
         id_cliente: id_cliente,
-        nm_cliente: nm_cliente ? nm_cliente : clientinfo.nm_cliente,
-        cd_emailCliente: cd_emailCliente ? cd_emailCliente : clientinfo.cd_emailCliente,
-        img_cliente: foto
+        nm_cliente: name ? name : clientinfo.nm_cliente,
+        cd_emailCliente: email ? email : clientinfo.cd_emailCliente,
+        img_cliente: foto ? foto : clientinfo.img_cliente
       }
     });
 

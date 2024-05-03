@@ -97,7 +97,7 @@ export const UserContextProvider = ({ children }) => {
 
   /********************/
 
-
+ 
   const [changedUserData, setChangedUserData] = useState({});
   const [showModal, setShowModal] = useState(false);
 
@@ -107,8 +107,10 @@ export const UserContextProvider = ({ children }) => {
     const response = await postRequest("/user/updateInfoUser", changedUserData);
     setUser(response.user)
     console.log(response.user); 
+
     localStorage.setItem("User", JSON.stringify(response.user));
     setShowModal(null)
+    
 }, [changedUserData]);
 
 
@@ -273,6 +275,7 @@ export const UserContextProvider = ({ children }) => {
         functionUpdateInfoUser,
         showModal,
         setShowModal,
+       
         
       }}
     >
