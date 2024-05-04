@@ -41,7 +41,7 @@ export const Perfilcli = () => {
               className="close-editar-perfil"
               onClick={() => setOpenModalPerfil(false)}
             />
-            <img src={user.img_cliente ? user.img_cliente : imgSrc} style={{width:"5vw"}}alt="Imagem de perfil" />
+            <img src={user.img_cliente ? user.img_cliente : imgPerfil} style={{width:"5vw"}}alt="Imagem de perfil" />
             <FaPaintBrush className="icone-editar-perfil" />
           </div>
           <div className="info-card-perfil">

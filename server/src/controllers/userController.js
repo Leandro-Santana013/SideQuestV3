@@ -323,6 +323,7 @@ exports.profissionalCard = async (req, res) => {
   const { Filtros } = req.body;
 
   const populationProfissional = await controller_User.selectProfissional();
+  console.log(populationProfissional)
   res.status(200).json(populationProfissional);
 
   switch (Filtros) {

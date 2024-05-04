@@ -175,6 +175,7 @@ module.exports = {
         attributes: [
           "id_profissional",
           "nm_profissional",
+          "sg_sexoProfissional",
           [Sequelize.col("tb_infoProfissional.ds_biografia"), "ds_biografia"],
           [
             Sequelize.fn(

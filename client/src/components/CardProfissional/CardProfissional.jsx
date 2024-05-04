@@ -14,6 +14,7 @@ export const CardProfissional = () => {
   const [dadosIniciais, setDadosIniciais] = useState([]);
   const [filtrados, setFiltrado] = useState(null);
   const [modal, setModal] = useState(false);
+  const [filtrosSelecionados, setFiltrosSelecionados] = useState([]);
   let paragrafo = document.querySelector(".desc");
   let botaoVerMais = document.querySelector(".vma-vme");
 
@@ -24,26 +25,38 @@ export const CardProfissional = () => {
   // Função para fechar o modal
   const closeModal = () => {
     setModal(false);
+    setFiltrosSelecionados([]); // Redefine os filtros ao fechar o modal
+    aplicarFiltros(); // Aplica os filtros redefinidos
   };
   
-  const fetchDataFromBackend = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:5000/user/profissionaisCard", filtrados
-      );
-      setDadosIniciais(response.data);
-
-    } catch (error) {
-      console.error("Erro ao buscar dados do backend:", error);
-      // Tratamento de erro adicional conforme necessário
-    }
+  // Função para aplicar os filtros selecionados
+  const aplicarFiltros = () => {
+  // Lógica para aplicar os filtros selecionados
+  const parametrosFiltro = {
+    maisBemAvaliados: filtrosSelecionados.includes('maisBemAvaliados'),
+    maisServicosPrestados: filtrosSelecionados.includes('maisServicosPrestados'),
+    profissionaisFemininas: filtrosSelecionados.includes('profissionaisFemininas'),
   };
+  setFiltrado(parametrosFiltro);
+  };
+
+  // Modifique a função fetchDataFromBackend para passar os filtros como parâmetros
+  const fetchDataFromBackend = async () => {
+  try {
+    const response = await axios.get(
+      "http://localhost:5000/user/profissionaisCard", { params: filtrados }
+    );
+    setDadosIniciais(response.data);
+
+  } catch (error) {
+    console.error("Erro ao buscar dados do backend:", error);
+    // Tratamento de erro adicional conforme necessário
+  }
+} ;
 
   useEffect(() => {
     fetchDataFromBackend();
   }, []);
-
-
 
   function verMaisEMenos() {
     if (paragrafo.classList.contains("expandido")) {
@@ -55,10 +68,16 @@ export const CardProfissional = () => {
     }
   }
 
-  const filtrarCards = (valor) => {
-    console.log(valor)
-    setFiltrado(valor)
+  // Atualize a função filtrarCards para adicionar ou remover filtros selecionados
+  const filtrarCards = (filtro) => {
+  let novosFiltros = [...filtrosSelecionados];
+  if (novosFiltros.includes(filtro)) {
+    novosFiltros = novosFiltros.filter(f => f !== filtro);
+  } else {
+    novosFiltros.push(filtro);
   }
+  setFiltrosSelecionados(novosFiltros);
+};
 
   const [coresBotoes, setCoresBotoes] = useState({});
 
@@ -84,14 +103,17 @@ export const CardProfissional = () => {
               <div className="modal-content">
                 <span>Filtre por:</span>
                 <div className="container-card-filtros">
-                  <button className="card-filtro" onClick={() => {filtrarCards(1); alternarCor('botao1')}} style={{ backgroundColor: coresBotoes['botao1'] || 'var(--verde)' }}>
-                    <p>alguma coisa</p>
+                  <button className="card-filtro" onClick={() => { filtrarCards('maisBemAvaliados'); alternarCor('botao1') }} style={{ backgroundColor: coresBotoes['botao1'] || 'var(--verde)' }}>
+                    <p><strong>Mais bem avaliados</strong></p>
                   </button>
-                  <button className="card-filtro" onClick={() => {filtrarCards(1); alternarCor('botao2')}} style={{ backgroundColor: coresBotoes['botao2'] || 'var(--verde)' }}>
-                    <p>alguma coisa</p>
+                  <button className="card-filtro" onClick={() => { filtrarCards('maisServicosPrestados'); alternarCor('botao2') }} style={{ backgroundColor: coresBotoes['botao2'] || 'var(--verde)' }}>
+                    <p><strong>4+ estrelas</strong></p>
+                  </button>
+                  <button className="card-filtro" onClick={() => { filtrarCards('profissionaisFemininas'); alternarCor('botao3') }} style={{ backgroundColor: coresBotoes['botao3'] || 'var(--verde)' }}>
+                    <p><strong>Somente profissionais femininas</strong></p>
                   </button>
                 </div>
-                <button className="btn-close-modal" onClick={closeModal}>Fechar</button>
+                <button className="btn-close-modal" onClick={() => { closeModal(); aplicarFiltros(); }}>Fechar</button>
               </div>
             </div>
           )}
@@ -102,9 +124,24 @@ export const CardProfissional = () => {
           <p>Nenhum profissional encontrado.</p>
         </div>
       ) : (
-        dadosIniciais.map((profissional) => (
-          <div className="card-profissional" key={profissional.id_profissional}>
-            <div className="tamplate-img">
+        dadosIniciais.sort((a, b) => b.media_avaliacoes - a.media_avaliacoes).map((profissional) => {
+          if (filtrosSelecionados.includes('profissionaisFemininas') && profissional.sg_sexoProfissional !== 'F') { 
+            return null;
+          }
+          
+          if (filtrosSelecionados.includes('maisBemAvaliados') && profissional.media_avaliacoes < 4) {
+            return null;
+          }
+          
+          // Se o filtro de mais serviços prestados estiver ativado, não exibe os profissionais com menos de 10 serviços realizados -- ALTERAR
+          if (filtrosSelecionados.includes('maisServicosPrestados') && profissional.num_servicos_terminados < 10) {
+            return null;
+          }
+
+          // Fechamento da chave final
+          return (
+            <div className="card-profissional" key={profissional.id_profissional}>
+                          <div className="tamplate-img">
               <img src={imgPerfil} alt="Imagem de perfil" />
             </div>
             <div className="desc-cliente">
@@ -140,8 +177,8 @@ export const CardProfissional = () => {
               </div>
             </div>
           </div>
-        ))
+          );
+        })
       )}
     </section>
-  );
-};
+  )}
