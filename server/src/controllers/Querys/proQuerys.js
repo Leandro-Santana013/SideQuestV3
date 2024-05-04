@@ -111,5 +111,19 @@ module.exports = {
         }
     },
 
+    selectallUsers: async (req, res) => {
+      return ModelCliente.findAll({
+        raw: true,
+      });
+    },
 
+    selectInfoCliente: async (req, res) => {
+      const { id_cliente } = req.params;
+      return ModelCliente.findOne({
+        where: {
+          id_cliente: id_cliente,
+        },
+        raw: true,
+      });
+    }
 };

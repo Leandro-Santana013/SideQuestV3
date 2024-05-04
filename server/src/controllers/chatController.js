@@ -4,6 +4,7 @@ const controller_Pro = require('./Querys/proQuerys')
 
 exports.createchat = async(req, res) =>{
     const {id_cliente, id_profissional} = req.body
+            console.log(id_cliente, id_profissional)
 
     try{
         const chat = await chatModel.findOne({
@@ -32,7 +33,7 @@ exports.createchat = async(req, res) =>{
 }
 
 exports.findUserChats = async(req, res) =>{
-    const idProfissional = req.params.id_profissional
+    const idProfissional = req.params.id_cliente
 
     try{
         const chats = await chatModel.find({
@@ -44,6 +45,21 @@ exports.findUserChats = async(req, res) =>{
         res.status(500).json(error)
     }
 }
+exports.findUserPro = async(req, res) =>{
+    const idProfissional = req.params.id_Profissional
+
+    try{
+        const chats = await chatModel.find({
+            members: {$in:[idProfissional]}
+        })
+        res.status(200).json(chats)
+    }catch(error){
+        console.log(error)
+        res.status(500).json(error)
+    }
+}
+
+
 
  exports.findChat = async(req, res) =>{
     const {idCliente, idProfissional} = req.params

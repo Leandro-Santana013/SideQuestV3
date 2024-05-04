@@ -7,16 +7,18 @@ import {
 import { postRequest, baseUrl, getRequest } from "../utils/services";
 export const ChatContext = createContext();
 
-export const ChatContextProvider = ({ children, user,}) => {
+export const ChatContextProvider = ({ children, user, pro}) => {
     const [userChats, setUserChats] = useState([]);
     const [isUserLoading, setIsUserLoading] = useState(false);
     const [userChatsError, setUserChatsError] = useState(null);
     const [potentialChats, setPotentialChats] = useState([])
-
+   
+    
     useEffect(() => {
+    
+        if(user !==null){
         const getPros = async () => {
             const response = await getRequest(`/user/allProfissionais`);
-    
             if (response.error) {
                 return console.log("Erro ao buscar usuários", response);
             }
@@ -37,9 +39,26 @@ export const ChatContextProvider = ({ children, user,}) => {
         };
     
         getPros();
-    }, [userChats]);
+    }
+
+    if(pro !== null){
+        const getUsers = async () => {
+            const response = await getRequest(`/professional/allUsers`);
+            if (response.error) {
+                return console.log("Erro ao buscar usuários", response);
+            }
+    
+            setPotentialChats(response);
+            
+        };
+    
+        getUsers();
+    }
+    }, [userChats, user, pro]);
+    
 
     useEffect(() => {
+
         const getUserChats = async () => {
             if (user?.id_cliente) {
 
@@ -47,6 +66,21 @@ export const ChatContextProvider = ({ children, user,}) => {
                 setUserChatsError(null);
 
                 const response = await getRequest(`/chat/${user?.id_cliente}`)
+                console.log("SEXO2",response)    
+                setIsUserLoading(true);
+
+                if (response.error) {
+                    return setUserChatsError(response);
+                }
+                setUserChats(response);
+            }
+            
+            if (pro?.id_profissional) {
+
+                setIsUserLoading(true);
+                setUserChatsError(null);
+
+                const response = await getRequest(`/chat/${pro?.id_profissional}`)
 
                 setIsUserLoading(true);
 
@@ -57,9 +91,10 @@ export const ChatContextProvider = ({ children, user,}) => {
             }
         }
         getUserChats();
-    }, [user])
+    }, [])
 
     const createChat = useCallback(async (id_cliente, id_profissional) => {
+        console.log(id_cliente, id_profissional)
         const newChatData = {
             id_cliente: id_cliente,
             id_profissional: id_profissional

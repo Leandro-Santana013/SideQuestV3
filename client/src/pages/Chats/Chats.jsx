@@ -10,6 +10,7 @@ import { ProfessionalContext } from "../../context/ProfissionalContext";
 
 export const Chats = () => {
   const {user} = useContext(UserContext)
+  const {pro} = useContext(ProfessionalContext)
   const  {userChats, isUserChatsLoading, userChatsError} = useContext(ChatContext)
   return (
     <>
@@ -27,7 +28,7 @@ export const Chats = () => {
                     {userChats?.map((chat,index) =>{
                       return(
                         <div key={index}>
-                          <UserChat chat={chat} user={user}></UserChat>
+                          <UserChat chat={chat} user={user} pro={pro}></UserChat>
                         </div>
                       )
                     })}

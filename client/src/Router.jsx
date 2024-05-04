@@ -24,6 +24,7 @@ import { Chats } from "./pages/Chats/Chats";
 const Router = () => {
   const { user } = useContext(UserContext);
   const { pro } = useContext(ProfessionalContext)
+  console.log("AAAAAAA",pro)
   return (
     <BrowserRouter>
       <ProfessionalContextProvider>
