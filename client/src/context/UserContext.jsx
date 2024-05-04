@@ -8,6 +8,7 @@ import {
 export const UserContext = createContext();
 import axios from "axios";
 import { file } from "jszip";
+import { Infoinc } from "../components/Infoinc/Infoinc";
 
 
 
@@ -74,12 +75,12 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     const userFromStorage = localStorage.getItem("User");
-  
-    
-      setUser(JSON.parse(userFromStorage));
-    
-  }, []); 
-  
+
+
+    setUser(JSON.parse(userFromStorage));
+
+  }, []);
+
 
   useEffect(() => {
     console.log(user);
@@ -97,26 +98,34 @@ export const UserContextProvider = ({ children }) => {
 
   /********************/
 
- 
+
   const [changedUserData, setChangedUserData] = useState({});
   const [showModal, setShowModal] = useState(false);
 
   const functionUpdateInfoUser = useCallback(async () => {
     console.log(changedUserData);
-    
+
     const response = await postRequest("/user/updateInfoUser", changedUserData);
     setUser(response.user)
-    console.log(response.user); 
+    console.log(response.user);
 
     localStorage.setItem("User", JSON.stringify(response.user));
     setShowModal(null)
-    
-}, [changedUserData]);
 
+  }, [changedUserData]);
 
+  const [modal, setModal] = useState(0)
 
+  useEffect(() => {
+    if (user.nmr_telefone == null || user.sg_sexoCliente || user.qt_idadeCliente)
+      setModal(1)
+  }, [])
+  
+  const { infoConfirm, setInfoConfirm } = useState({})
 
-
+  useEffect(() => {
+    console.log("agua de batata", infoConfirm)
+  }, [Infoinc])
 
   /********************/
 
@@ -133,7 +142,7 @@ export const UserContextProvider = ({ children }) => {
       e.preventDefault();
       setloginLoading(true);
       setloginError(null);
-      try {
+      try { 
         const response = await postRequest("/user/login", loginInfo);
 
         if (response.error) setloginError(response.error);
@@ -275,8 +284,10 @@ export const UserContextProvider = ({ children }) => {
         functionUpdateInfoUser,
         showModal,
         setShowModal,
-       
-        
+        modal,
+        setModal,
+        infoConfirm, 
+        setInfoConfirm
       }}
     >
       {children}

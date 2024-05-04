@@ -40,14 +40,19 @@
 .inputs-card-conclua-registro {
     display: flex;
     flex-direction: column;
-    width: 25vw;
+    align-items: center;
+    width: 22vw;
     gap: 1vw;
+
+    p {
+        margin: 0;
+    }
 
     .grid-2x2-card-conclua-registro {
         display: flex;
         justify-content: center;
         flex-flow: wrap;
-        gap: 1vw;
+        gap: .5vw;
 
         .padrao-input-card-conclua-registro {
             width: 10vw;
@@ -77,6 +82,7 @@
         border-radius: 5px;
         padding: 3px;
         font-size: 15px;
+        font-family: "Inter", sans-serif;
     }
 
     select {
@@ -107,7 +113,7 @@
         color: white;
         border-radius: 20px;
         font-size: 20px;
-        padding: 20px;
+        padding: .5vw 1vw .5vw 1vw;
         transition: all .25s ease-in-out;
     }
 

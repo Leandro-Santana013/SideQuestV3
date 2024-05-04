@@ -15,14 +15,21 @@
     border-top-left-radius: 20px;
 }
 
-.cabecalho-editar button {
-    width: 7.5vw;
-    height: 2vw;
-    font-weight: bold;
-    background-color: var(--verde);
+.cabecalho-editar > button{
+    padding: .5vw 2vw .5vw 2vw;
+    font-size: 1vw;
     color: white;
     border: none;
-    border-radius: 15px;
+    background-color: var(--verde);
+    border-radius: 20vw;
+    transition: all .25s;
+    border: solid 1px var(--verde);
+}
+
+.cabecalho-editar > button:hover{
+    border: solid 1px white;
+    background-color: var(--azul);
+    
 }
 
 .cabecalho-editar #img {

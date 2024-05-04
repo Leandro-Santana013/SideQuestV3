@@ -5,6 +5,7 @@ import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
 import imgPerfil from '../../assets/icone-perfil.png'
+
 export const Perfilcli = () => {
   const { user } = useContext(UserContext);
   const [infocliente, setinfocliente] = useState(null);
