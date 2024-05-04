@@ -121,11 +121,11 @@ export const UserContextProvider = ({ children }) => {
       setModal(1)
   }, [])
   
-  const { infoConfirm, setInfoConfirm } = useState({})
+  const [ infoConfirm, setInfoConfirm ] = useState({})
 
   useEffect(() => {
     console.log("agua de batata", infoConfirm)
-  }, [Infoinc])
+  }, [infoConfirm])
 
   /********************/
 
@@ -286,8 +286,8 @@ export const UserContextProvider = ({ children }) => {
         setShowModal,
         modal,
         setModal,
-        infoConfirm, 
-        setInfoConfirm
+        infoConfirm,
+         setInfoConfirm
       }}
     >
       {children}
