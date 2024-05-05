@@ -5,8 +5,8 @@ import { baseUrl, getRequest } from "../utils/services";
 export const axiosRecipientUser = (chat, user) => {
     const [recipientUser, setRecipientUser] = useState(null);
     const [error, setError] = useState(null);
-    console.log("CHAT1", chat)
     const recipientId = chat?.user.infoProfissional.id_profissional;
+    console.log(recipientId)
     useEffect(() => {
         const getUser = async () => {
             if (!recipientId) return null;
@@ -25,11 +25,11 @@ export const axiosRecipientUser = (chat, user) => {
     return { recipientUser, error };
 };
 
-export const axiosRecipientPro = (chat, pro, user) => {
+export const axiosRecipientPro = (chat, pro) => {
     const [recipientPro, setRecipientPro] = useState(null);
     const [error, setError] = useState(null);
-    console.log("CHAT2", chat)
     const recipientId = chat?.user.info.id_cliente;
+    console.log(recipientId)
 
     useEffect(() => {
         const getPro = async () => {

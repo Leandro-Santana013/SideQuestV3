@@ -7,11 +7,12 @@ import { UserChat } from "./UserChat";
 import {UserContext} from "../../context/UserContext"
 import { PotentialChats } from "./PotentialChats";
 import { ProfessionalContext } from "../../context/ProfissionalContext";
-
+import { ChatBox } from "./chatBox";
 export const Chats = () => {
   const {user} = useContext(UserContext)
   const {pro} = useContext(ProfessionalContext)
-  const  {userChats, isUserChatsLoading, userChatsError} = useContext(ChatContext)
+  const  {userChats, isUserChatsLoading, userChatsError, updateCurrentChat} = useContext(ChatContext)
+ 
   return (
     <>
       <Header />
@@ -27,24 +28,14 @@ export const Chats = () => {
                     <PotentialChats/>
                     {userChats?.map((chat,index) =>{
                       return(
-                        <div key={index}>
+                        <div key={index} onClick={() => updateCurrentChat(chat)}>
                           <UserChat chat={chat} user={user} pro={pro}></UserChat>
                         </div>
                       )
                     })}
                   </div>
                 </div>
-                <div className="chat-box">
-                  <div className="chat-header">joão Silva</div>
-                  <div className="chat-main"></div>
-                  <div className="chat-sub"><TextInput
-                          type="text"
-                          size={{ width: "35vw", height: "1.5vw" }}
-                          
-                        />
-                        <button className="send-button"><RiSendPlane2Fill className="icon-send" /></button>
-                        </div>
-                </div>
+                <ChatBox/>
               </div>
       </div>
       </div>

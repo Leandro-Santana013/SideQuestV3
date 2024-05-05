@@ -21,14 +21,11 @@ exports.createMessage = async (req, res) => {
 
 exports.getMessage = async (req, res) => {
     const {chatId} = req.params 
+    console.log(chatId)
     
-    const messages = new mensagensModel.find({
-        chatId,
-    })
-
     try {
-        const response = await messages.save()
-        res.status(200).json(response)
+        const messages = await mensagensModel.find({chatId})
+        res.status(200).json(messages)
     }catch(error){
         console.log(error)
         res.status(500).json(error)

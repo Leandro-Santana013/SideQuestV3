@@ -78,8 +78,8 @@ export const ProfessionalContextProvider = ({children}) => {
 
 
   useEffect(() => {
-    console.log(pro)
-    
+
+    console.log(pro) 
   }, []);
 
   const updateLogininfo = useCallback((info) => {

@@ -25,7 +25,7 @@ export const PotentialChats = () => {
                 {potentialChats && potentialChats.map((u, index) => {
                     return (
                         <div className="single-prof" key={index} onClick={() => handleClick(u)}>
-                            {user ? u.nm_profissional : u.nm_cliente}
+                            {user? u.nm_profissional: ""} {pro? u.nm_cliente:""}
                             <span className="user-online"></span>
                         </div>
                     );
