@@ -19,11 +19,15 @@ import ServicosPendentesCliente from "./pages/ServicosPendentesCliente/ServicosP
 import LandingProfissional from "./pages/LandingProfissional/LandingProfissional";
 import Config from "./pages/Config/Config";
 import PaiSandu from "./pages/teste"
-import VisualizarServico from "./pages/VisualizarServico/VisualizarServico";
 import ServicosConcluidosProfissional from "./pages/ServicoConcluidos/ServicosConcluidos";
 import ServicosAtivosProfissa from "./pages/ServicosAtivosProfissa/ServicosAtivosProfissa";
+import VisualizarServicoCliente from "./pages/VisualizarServicoCliente/VisualizarServicoCliente";
+import VisualizarServicoProfissa from "./pages/VisualizarServicoProfissa/VisualizarServicoProfissa";
+import ServicosAtivosCliente from "./pages/ServicosAtivosCliente/ServicosAtivosCliente";
+import ConfigProfissa from "./pages/ConfigProfissa/ConfigProfissa";
 
 import { Chats } from "./pages/Chats/Chats";
+
 const Router = () => {
   const { user } = useContext(UserContext);
   const { pro } = useContext(ProfessionalContext)
@@ -47,6 +51,7 @@ const Router = () => {
             <Route exact path="/servicosPendentesCliente" element={<ServicosPendentesCliente />} />
             <Route exact path="/landingProfissional" element={<LandingProfissional />} />
             <Route exact path="/config" element={user ? <Config /> : <Navigate to="/login" />} />
+            <Route exact path="/ConfigProfissa" element={<ConfigProfissa/>}/>
             <Route exact path="/chats" element={user ? <Chats /> : <Navigate to="/login" />} />
             <Route exact path="/loginProfissional" element={pro ? <Navigate to="/homeProfissionais" /> : <LoginProfissional />} />
             <Route exact path="/landingProfissional" element={pro ? <LandingProfissional /> : <Navigate to="/loginProfissional" />} />
@@ -54,6 +59,9 @@ const Router = () => {
             <Route exact path="/homeProfissionais" element={pro ?<HomeProfissionais /> : <Navigate to={"/loginProfissional"}/>} />
             <Route exact path="/ServicosConcluidosProfissional" element={<ServicosConcluidosProfissional/>}/> 
             <Route exact path="/ServicosAtivosProfissa" element={<ServicosAtivosProfissa/>}/> 
+            <Route exact path="/VisualizarServicoCliente" element={<VisualizarServicoCliente/>}/> 
+            <Route exact path="/VisualizarServicoProfissa" element={<VisualizarServicoProfissa/>}/> 
+            <Route exact path="/ServicosAtivosCliente" element={<ServicosAtivosCliente/>}/> 
           </Routes>
         </ProfessionalContextProvider>
       </ChatContextProvider>

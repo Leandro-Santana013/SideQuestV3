@@ -11,7 +11,7 @@
 }
 .modal{
     position: absolute;
-
+    right: 1vw;
 }
 
 .card-profissional {
@@ -164,7 +164,7 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 15vw;
+    width: 27vw;
     border-radius: 15px;
     border: solid 2px var(--azul);
     background-color: white;

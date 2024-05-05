@@ -1,0 +1,171 @@
+.vizuPedido {
+    box-shadow: 0px 4px 4px 0px #00000055;
+    width: 60vw;
+}
+
+
+/*Fazendo o cabeçalho do card*/
+.cabecalho-pedido {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10vw;
+
+}
+
+.cabecalho-pedido h1 {
+    font-size: 2rem;
+}
+
+.cabecalho-pedido .preco-pedido {
+    display: flex;
+    justify-content: space-between;
+    width: 35vw;
+    margin-bottom: 10px;
+}
+
+.cabecalho-pedido .preco-pedido button {
+    background-color: var(--verde);
+    color: white;
+    border: none;
+    width: 6.5vw;
+    height: 5.5vh;
+    border-radius: 20px;
+    font-size: 1.10rem;
+}
+
+.cabecalho-pedido .preco-pedido #btn-preco {
+    background-color: var(--verde);
+    color: white;
+    border: none;
+    width: 10.5vw;
+    height: 5.5vh;
+    border-radius: 20px;
+    font-size: 1.10rem;
+}
+
+
+/*Fim do cabeçalho e início da descrição do serviço*/
+
+.descricao-cliente {
+    padding: 40px;
+    gap: 25px;
+    display: flex;
+}
+
+.descricao-cliente .btn-Usuario {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.descricao-cliente .btn-Usuario button {
+    margin: 10px;
+    height: 5vh;
+    border: none;
+    background-color: var(--verde);
+    color: white;
+    font-size: 1.10rem;
+    border-radius: 5px;
+    font-weight: bolder;
+}
+
+.descricao-cliente .btn-Usuario #btn-verde {
+    margin: 10px;
+    width: 8.5vw;
+    height: 5vh;
+    border: none;
+    background-color: var(--verde);
+    color: white;
+    font-size: 1.10rem;
+    border-radius: 5px;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.descricao-cliente .btn-Usuario img {
+    width: 1.5vw;
+    height: 2.5vh;
+}
+
+.descricao-cliente .btn-Usuario #excluir {
+    margin: 10px;
+    width: 8.5vw;
+    height: 5vh;
+    border: none;
+    background-color: white;
+    color: red;
+    font-size: 1.10rem;
+    border-radius: 5px;
+    border: 1px solid red;
+    font-weight: bolder;
+}
+
+
+
+.descricao-cliente .btn-Usuario .usuario-desc {
+    display: flex;
+    gap: 10px;
+}
+
+.descricao-cliente .btn-Usuario .usuario-desc #perfil {
+    width: 4vw;
+    height: 7vh;
+}
+
+.descricao-cliente .usuario-desc .nome p {
+    margin-bottom: 0px;
+}
+
+.descricao-cliente .btn-Usuario .usuario-desc .nome .avaliacao {
+    display: flex;
+    align-items: flex-end;
+    gap: 7px;
+}
+
+.descricao-cliente .btn-Usuario .usuario-desc .avaliacao #estrela {
+    width: 7vw;
+    height: 3vh;
+}
+
+.descricao-cliente .btn-Usuario .distancia {
+    display: flex;
+    gap: 20px;
+}
+
+.descricao-cliente .desc-tempo-perdido .tempo-pedido {
+    display: flex;
+    gap: 7vw;
+    margin-top: 7vh;
+    justify-content: center;
+}
+
+
+.descricao-cliente .desc-tempo-perdido .tempo-inicio img {
+    height: 5vh;
+    width: 3vw;
+}
+
+.descricao-cliente .desc-tempo-perdido .tempo-inicio {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.descricao-cliente .desc-tempo-perdido .tempo-inicio img {
+    width: 3.5vw;
+    height: 3.5vw;
+}
+
+.descricao-cliente .desc-tempo-perdido .tempo-fim {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.descricao-cliente .desc-tempo-perdido .tempo-fim img {
+    width: 2.5vw;
+    height: 2.5vw;
+}

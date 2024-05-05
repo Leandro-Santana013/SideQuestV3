@@ -5,13 +5,14 @@ import {
   ImageCropper,
   TextInput,
 } from "../../components";
-import "./config.css";
 import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
-
+import "./configProfissa.css";
 import imgPerfil from "../../assets/icone-perfil.png";
 
-const Config = () => {
+
+/**/
+const configProfissa = () => {
   const avatarUrl = useRef(imgPerfil);
   const {
     user,
@@ -151,6 +152,32 @@ const Config = () => {
                   </div>
                 </div>
               </div>
+              <div className="edit-perfil">
+                <h2>Informações de Perfil</h2>
+                <h3>Estas informações para seu perfil público</h3>
+                <p>Sobre</p>
+                <TextInput />
+                <p>Profissão</p>
+                <div className="profissoes">
+                  <div className="profissao">Eletricista</div>
+                  <div className="profissao-add">+</div>
+                </div>
+              </div>
+              <div className="edit-assinatura">
+                <h2>Pagamento e assinatura</h2>
+                <div className="planos">
+                  <p id="plano">Plano irmãos a obra</p>
+                  <p id="atualizar">Atualizar</p>
+                </div>
+                <h2>Detalhes do cartão</h2>
+                <div className="cartao">
+                  <p>Mastercard - 1111</p>
+                </div>
+                <div className="add-cartao">
+                  <div className="add-cartao-novo">+</div>
+                  <p>Adicionar cartão de crédito</p>
+                </div>
+              </div>
               <div className="edit-seguranca">
                 <h2>Segurança da conta</h2>
                 <p>senha</p>
@@ -159,7 +186,7 @@ const Config = () => {
                   <p>alterar senha</p>
                 </div>
                 <div className="sair-excluirBtn">
-                <Link id="sair" to="/Login" onClick={() => logoutUser()}>LOGOUT</Link>
+                <Link id="sair" to="/Login" onClick={() => logoutUser()}>Logout</Link>
                   <button id="excluir">Excluir</button>
                 </div>
               </div>
@@ -182,7 +209,7 @@ const Config = () => {
   );
 };
 
-export default Config;
+export default configProfissa;
 
 {
   /* <Link className="btn-logout" to="/Login" onClick={() => logoutUser()}>LOGOUT</Link> */

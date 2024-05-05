@@ -1,5 +1,5 @@
 import React from "react";
-import "./VisualizarServico.css";
+import "./VisualizarServicoProfissa.css";
 import { SidebarCliente, Header } from "../../components/index";
 import bandeira from "../../assets/bandeira.png";
 import iconeperfil from "../../assets/icone-perfil.png";
@@ -7,7 +7,7 @@ import endereco from "../../assets/endereco.png";
 import btnplay from "../../assets/botao-play.png";
 import avaliacao from "../../assets/estrelinha.png";
 
-const VisualizarServico = () => {
+const VisualizarServicoProfissa = () => {
 
 
     return (
@@ -70,4 +70,4 @@ const VisualizarServico = () => {
     );
 }
 
-export default VisualizarServico;
+export default VisualizarServicoProfissa;
