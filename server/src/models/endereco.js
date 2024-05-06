@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize')
+const { DataTypes, BOOLEAN } = require('sequelize')
 const { connectionDataBase } = require('../../database/db')
 const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 
@@ -46,6 +46,9 @@ const ModelEndereco = connectionDataBase.define('tb_endereco', {
     },
     txt_complemento:{
         type: DataTypes.STRING(100),
+    },
+    end_principal:{
+        type:DataTypes.BOOLEAN
     }
 },
     _padraoTableDBExistence('tb_endereco')

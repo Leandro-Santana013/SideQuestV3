@@ -93,9 +93,8 @@ module.exports = {
     return ModelCategoria.findAll({
       attributes: ["ds_categoria"],
       order: [["ds_categoria", "ASC"]],
-      raw: true
+      raw: true,
     });
-
   },
 
   selectCategoriaescolhida: async (req, res) => {
@@ -157,7 +156,14 @@ module.exports = {
   },
 
   CreateServico: async (req, res) => {
-    const { ds_servico, ds_titulo, id_cliente, id_categoria, id_endereco, img_servico } =req.params;
+    const {
+      ds_servico,
+      ds_titulo,
+      id_cliente,
+      id_categoria,
+      id_endereco,
+      img_servico,
+    } = req.params;
     return ModelPostagemServico.create({
       id_cliente: id_cliente,
       id_categoria: id_categoria,
@@ -174,8 +180,8 @@ module.exports = {
       const profissionais = await ModelProfissional.findAll({
         attributes: [
           "id_profissional",
-          "nm_profissional",
           "sg_sexoProfissional",
+          "nm_profissional",
           [Sequelize.col("tb_infoProfissional.ds_biografia"), "ds_biografia"],
           [
             Sequelize.fn(
@@ -251,10 +257,14 @@ module.exports = {
   },
 
   updateInfoCli: async (req, res) => {
-    const { id_cliente, nm_cliente, cd_emailCliente, img_cliente } = req.params
+    const { id_cliente, nm_cliente, cd_emailCliente, img_cliente } = req.params;
     return ModelCliente.update(
-      { nm_cliente: nm_cliente, cd_emailCliente: cd_emailCliente, img_cliente: img_cliente },
+      {
+        nm_cliente: nm_cliente,
+        cd_emailCliente: cd_emailCliente,
+        img_cliente: img_cliente,
+      },
       { where: { id_cliente: id_cliente } }
-    )
-  }
+    );
+  },
 };

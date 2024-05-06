@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./sidebarProfissional.css";
-import { Perfilcli } from "../index";
+
 
   
 export const SidebarProfissional = () => {
@@ -57,7 +57,7 @@ export const SidebarProfissional = () => {
         ))}
       </div>
       <a
-        href="/config"
+        href="/ConfigProfissa"
         className={`config ${currentPage.includes("config") ? "active" : ""}`}
       >
         <div
@@ -78,7 +78,6 @@ export const SidebarProfissional = () => {
           </p>
         </div>
       </a>
-    <Perfilcli/>
     </nav>
   );
 };

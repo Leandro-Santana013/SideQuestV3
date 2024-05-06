@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./cardServico.css";
 import ImgPerfil from "../../assets/icone-perfil.png";
 import imgSucesso from "../../assets/sucesso1.png";
@@ -6,27 +6,10 @@ import { TextInputBusca } from "../index";
 import { RiFilter2Fill } from "react-icons/ri";
 import axios from "axios";
 
+import { ProfessionalContext } from "../../context/ProfissionalContext";
 export const CardServico = () => {
-  const [Dadosiniciais, setDadosIniciais] = useState([]);
 
-  const fetchDataFromBackend = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:5000/professional/servicoscard"
-      );
-      setDadosIniciais(response.data);
-    } catch (error) {
-      console.error("Erro ao buscar dados do backend:", error);
-      // Tratamento de erro adicional conforme necessário
-    }
-  };
-
- 
-
-  useEffect(() => {
-    fetchDataFromBackend();
-  }, []);
-
+  const { Dadosiniciais } = useContext(ProfessionalContext)
   return (
     <>
       <div className="input-filtros">
@@ -50,12 +33,15 @@ export const CardServico = () => {
           </p>
           <div className="info-usuario">
             <p>Publicação: 2 Horas atrás</p>
-            <div className="avaliacao">
-              <img src={ImgPerfil} alt="Ícone de perfil" id="perfil" />
-              <p>{servicos.tb_cliente.nm_cliente}</p>
-              <i className="fa-regular fa-star"></i>
-              <p>4.9</p>
-            </div>
+            
+  <div className="avaliacao">
+    <img style={{borderRadius:"50%"}}src={servicos['tb_cliente.img_cliente'] ? servicos['tb_cliente.img_cliente'] : ImgPerfil } alt="Ícone de perfil" id="perfil" />
+    <p>{servicos['tb_cliente.nm_cliente']}</p>
+    <i className="fa-regular fa-star"></i>
+    <p>4.9</p>
+  </div>
+
+
           </div>
         </div>
         <div className="btn-distancia">

@@ -76,9 +76,7 @@ export const UserContextProvider = ({ children }) => {
   useEffect(() => {
     const userFromStorage = localStorage.getItem("User");
 
-
     setUser(JSON.parse(userFromStorage));
-
   }, []);
 
 
@@ -89,6 +87,11 @@ export const UserContextProvider = ({ children }) => {
       ...prevServico,
       idCliente: user ? user.id_cliente : null,
       email: user ? user.cd_emailCliente : null,
+    }));
+
+    setInfoConfirm((prevServico) => ({
+      ...prevServico,
+      id_cliente: user ? user.id_cliente : null,
     }));
   }, [user]);
 
@@ -116,24 +119,40 @@ export const UserContextProvider = ({ children }) => {
 
   const [modal, setModal] = useState(0)
 
-  useEffect(() => {
+  useEffect(() => { 
+   const modalAlreadyShown = localStorage.getItem("modalShown");
+
+  // Se o modal ainda não foi exibido, exibe-o e define a variável de estado para indicar que o modal foi exibido
+  if (!modalAlreadyShown) {
+    setModal(1);
+    setModalShown(true);
+    localStorage.setItem("modalShown", true);
     if (user.nmr_telefone == null || user.sg_sexoCliente || user.qt_idadeCliente)
       setModal(1)
+    }
   }, [])
   
   const [ infoConfirm, setInfoConfirm ] = useState({})
 
-  useEffect(() => {
-    console.log("agua de batata", infoConfirm)
-  }, [infoConfirm])
+
 
   /********************/
+  const [ConclussioncadError , setConclusioncadError] = useState(null)
+  const [modalShown, setModalShown] = useState(null);
 
+const concluirCad = useCallback(async(e)=>{
+const response = await postRequest("/user/concluirCad", infoConfirm)
+if (response.error) {
+  setConclusioncadError(response.error);
+}
+}, [infoConfirm])
   //logout
 
   const logoutUser = useCallback(() => {
     localStorage.removeItem("User");
     setUser(null);
+    localStorage.removeItem("modalShown");
+    setModalShown(null);
     window.location.reload();
   }, []);
 
@@ -147,8 +166,13 @@ export const UserContextProvider = ({ children }) => {
 
         if (response.error) setloginError(response.error);
         else {
+         const pro = localStorage.getItem("pro")
+          if(pro)
+            localStorage.removeItem("pro");
+          else{
           localStorage.setItem("User", JSON.stringify(response.user));
           window.location.reload();
+        }
         }
       } catch (error) {
         setRegisterError("Erro ao logar. Por favor, tente novamente."); // Define o estado de erro com uma mensagem genérica de erro
@@ -188,7 +212,6 @@ export const UserContextProvider = ({ children }) => {
       try {
         // Enviar o formulário com o estado formData atualizado
         const response = await postRequest("/user/postarServico", Servico);
-
         if (response.error) {
           setmessageErrorPostar(response.error);
           setErrorPostar(true);
@@ -244,7 +267,7 @@ export const UserContextProvider = ({ children }) => {
 
     // Chama a função para buscar as categorias
     carregarCategorias();
-  }, [user]);
+  }, []);
 
   const updatepostarServico = useCallback((info) => {
     setServico(info);
@@ -287,7 +310,8 @@ export const UserContextProvider = ({ children }) => {
         modal,
         setModal,
         infoConfirm,
-         setInfoConfirm
+        setInfoConfirm,
+        concluirCad
       }}
     >
       {children}

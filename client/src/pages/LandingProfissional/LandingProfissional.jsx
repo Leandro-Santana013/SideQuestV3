@@ -11,7 +11,7 @@ import LogoSideQuest from "../../assets/logo_SideQuest.png";
 import Eduardo from "../../assets/eduardo-mecanico.png";
 import negocios from "../../assets/negociando.png";
 import verificado from "../../assets/verificado.png";
-import { Footer, HeaderLanding } from "../../components/index";
+import { Footer, HeaderLandingPro } from "../../components/index";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import "swiper/css/navigation";
@@ -34,7 +34,7 @@ const LandingProfissional = () => {
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
             <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet" />
 
-            <HeaderLanding colorLogin={"var(--azul)"} colorInsc={'white'} colorBtnInsc={"var(--azul)"}/>
+            <HeaderLandingPro colorLogin={"var(--azul)"} colorInsc={'white'} colorBtnInsc={"var(--azul)"}/>
 
             <section className="bannerProfissa">
                 <div className="btn-txtBanner">

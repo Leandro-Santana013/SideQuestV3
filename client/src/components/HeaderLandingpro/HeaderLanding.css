@@ -1,0 +1,155 @@
+.navHomenav {
+  font-size: 1.5vw;
+  height: 80px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.img-logo {
+  width: 8vw;
+  height: 3vw;
+}
+
+.navHomeUl {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navHomeLi {
+  font-size: 30px;
+}
+
+.navHomeLi.white {
+  font-weight: bolder;
+  color: white;
+}
+
+.subContainerNavHome {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.navHomeLi.btnNavHome {
+  font-weight: bolder;
+  background-color: white;
+  color: var(--verde);
+  padding: 15px;
+  border-radius: 50px;
+  font-size: 23px;
+}
+
+.menuResp {
+  display: none;
+}
+
+.hamburguer-resp {
+  border: none;
+  background: none;
+  border-top: 4px solid black;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  right: 29px;
+  top: 30px;
+  width: 40px;
+}
+.hamburguer-resp::before, .hamburguer-resp::after {
+  content: " ";
+  display: block;
+  width: 40px;
+  height: 4px;
+  background-color: black;
+  margin-top: 4px;
+  position: relative;
+}
+
+.hamburguer-resp.active {
+  position: fixed;
+  border-top-color: transparent;
+  z-index: 1000;
+}
+
+.hamburguer-resp.active::before {
+  transform: rotate(135deg);
+}
+
+.hamburguer-resp.active::after {
+  transform: rotate(-135deg);
+  top: -7px;
+}
+
+/*Responsividade*/
+
+
+@media  screen and (max-width: 440px) {
+  .hamburguer-resp {
+    width: 30px;
+  }
+
+  .hamburguer-resp::before, .hamburguer-resp::after {
+    width: 30px;
+  }
+}
+
+
+@media screen and (max-width: 1025px){
+  
+  .containerNavHome {
+    display: none;
+  }
+
+  .menuResp {
+    display: flex;
+    justify-content: space-around;
+    width: 100vw;
+  }
+
+  .nav-resp {
+    width: 100vw;
+    margin: 0;
+  }
+  
+  .respNavUl {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    font-size: 1.5rem;
+    background-color: var(--verde);
+    clip-path: circle(100px at 90% -15%);
+    /*esconde la encima*/
+    transition: 1s ease-out;
+    /* Adicionando transição */
+    width: 100vw;
+    height: 100vh;
+    gap: 0;
+    pointer-events: none;
+    position: fixed;
+    margin-top: 0;
+    z-index: 1000;
+  }
+
+  .respNavUl.active {
+    height: 100vh;  
+    clip-path: circle(2000px at 90% -15%);
+    pointer-events: all;
+    position: fixed;
+    overflow: visible;
+    z-index: 1000;
+  }
+
+  .respNavUl .respNavLi {
+    list-style: none;
+  }
+
+
+}
+
+
+@media  screen and (min-width: 700px) and (max-width: 1025px) {
+  .nav-resp .respNavUl .respNavLi {
+    font-size: 2rem;
+}
+}

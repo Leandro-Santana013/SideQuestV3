@@ -1,18 +1,20 @@
 import { useContext, useRef, useState } from "react";
 import {
   Header,
-  SidebarCliente,
+  SidebarProfissional,
   ImageCropper,
   TextInput,
+  
 } from "../../components";
 import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 import "./configProfissa.css";
 import imgPerfil from "../../assets/icone-perfil.png";
 
-
+import { ProfessionalContext } from "../../context/ProfissionalContext";
 /**/
 const configProfissa = () => {
+  const { pro } = useContext(ProfessionalContext)
   const avatarUrl = useRef(imgPerfil);
   const {
     user,
@@ -62,7 +64,7 @@ const configProfissa = () => {
   
 
   const deleteUpdate = () => {
-    avatarUrl.current.src = user.img_cliente ? user.img_cliente : imgPerfil;
+    avatarUrl.current.src = pro.img_profissional ? pro.img_profissional : imgPerfil;
     setChangedUserData(null);
     setShowModal(false);
     setModalEditar(false);
@@ -80,7 +82,7 @@ const configProfissa = () => {
   return (
     <>
       <Header />
-      <SidebarCliente />
+      <SidebarProfissional />
       <div className="content-midia">
         <div className="main-content">
           <div className="conteudo-config-perfil">
@@ -89,7 +91,7 @@ const configProfissa = () => {
                 id="img"
                 htmlFor="comp"
                 ref={avatarUrl}
-                src={user.img_cliente ? user.img_cliente : imgPerfil}
+                src={user && user.img_cliente ? user.img_cliente : pro && pro.img_profissional ? pro.img_profissional : imgPerfil }
                 alt="Imagem de perfil"
                 className="img-config-perfil"
                 style={{
@@ -114,12 +116,12 @@ const configProfissa = () => {
                       <input
                         type="text"
                         id="input-nome"
-                        value={(changedUserData && changedUserData.name) || user.nm_cliente}
+                        value={(changedUserData && changedUserData.name) || pro.nm_profissional}
 
                         onChange={(event) => handleFieldChange("name", event)}
                       />
                     ) : (
-                      <p>{user.nm_cliente}</p>
+                      <p>{pro.nm_profissional}</p>
                     )}
 
                     <p>número</p>
@@ -127,12 +129,12 @@ const configProfissa = () => {
                       <input
                         type="text"
                         id="input-num"
-                        value={(changedUserData && changedUserData.numero) || user.nmr_telefoneCliente}
+                        value={(changedUserData && changedUserData.numero) || pro.nmr_telefoneProfissional}
 
                         onChange={(event) => handleFieldChange("numero", event)}
                       />
                     ) : (
-                      <p>{user.nmr_telefoneCliente}</p>
+                      <p>{pro.nmr_telefoneProfissional}</p>
                     )}
                   </div>
                   <div className="input-email-local">
@@ -141,11 +143,12 @@ const configProfissa = () => {
                       <input
                         type="text"
                         id="input-num"
-                        value={(changedUserData && changedUserData.email) || user.cd_emailCliente}
+                        value={(changedUserData && changedUserData.email) || pro.cd_emailProfissional
+                        }
                         onChange={(event) => handleFieldChange("email", event)}
                       />
                     ) : (
-                      <p>{user.cd_emailCliente}</p>
+                      <p>{pro.cd_emailProfissional}</p>
                     )}
                     <p>Localização</p>
                     <input type="text" id="input-local" />

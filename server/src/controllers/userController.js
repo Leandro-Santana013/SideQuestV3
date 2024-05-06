@@ -326,15 +326,7 @@ exports.profissionalCard = async (req, res) => {
   console.log(populationProfissional)
   res.status(200).json(populationProfissional);
 
-  switch (Filtros) {
-    case 1:
-      {
-        populationProfissional = await controller_User;
-      }
-      break;
-    default:
-      break;
-  }
+
 };
 
 exports.selectinfos = async (req, res) => {
@@ -383,3 +375,39 @@ exports.updateInfoUser = async (req, res) => {
 
 
 /****************************************/
+exports.concluirCad = async (req, res) => {
+  const {telefone, data, sexo, cep, numeroResidencia, complemento, id_cliente} = req.body
+  console.log(telefone, data, sexo, cep, numeroResidencia, complemento)
+
+    const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      if (!response.data.erro) {
+        const { uf, localidade, logradouro, bairro } = response.data;
+
+        const cdCidade = await controller_User.selectCidadeAdress({
+          params: { nm_cidade: localidade, sg_estado: estado }})
+
+
+          const enderecoInstance = await controller_User.CreateadressService({
+            params: {
+              id_cliente: id_cliente,
+              id_cidade: cdCidade.id_cidade,
+              nm_logradouro: logradouro,
+              cd_cep: cep,
+              nm_bairro: bairro,
+              nmr_casa: numeroResidencia,
+            },
+          });
+}else{
+  response.status(400).json({error: "cep incorreto"})
+}
+
+
+
+
+
+  
+ 
+
+
+
+}

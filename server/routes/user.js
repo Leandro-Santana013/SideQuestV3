@@ -11,5 +11,6 @@ router.post('/selectinfos', userControllers.selectinfos)
 router.post('/buscarattcls', userControllers.buscarattcls)
 router.get('/profissionaisCard', userControllers.profissionalCard)
 router.post('/updateInfoUser', userControllers.updateInfoUser)
+router.post('/concluirCad', userControllers.concluirCad)
 
 module.exports = router; 

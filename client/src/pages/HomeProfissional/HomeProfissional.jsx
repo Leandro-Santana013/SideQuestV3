@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { SidebarProfissional, Header, CardServico } from "../../components";
 import "./homeProfissional.css";
 import "../../assets/icone-perfil.png";
@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 import { RiFilter2Fill } from "react-icons/ri";
 
 const HomeProfissionais = () => {
+
+    
     const [text, setText] = useState("");
     const handleChange = (newValue) => {
         console.log("Novo valor:", newValue);

@@ -90,10 +90,13 @@ module.exports = {
                 include: [{
                     model: ModelCliente,
                     required:true,
+                    raw:true,
                     attributes: [
-                        ["nm_cliente", "nm_cliente"],
+                       [ "nm_cliente", "nm_cliente"],
+                       ["img_cliente", "img_cliente"]
                     ]
-                }]
+                }],
+                raw:true
             });
         } catch (err) {
             console.error(`Erro: ${err}`);

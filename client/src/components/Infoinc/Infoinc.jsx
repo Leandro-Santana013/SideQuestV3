@@ -6,7 +6,7 @@ import "./infoInc.css";
 import { UserContext } from "../../context/UserContext";
 
 export const Infoinc = () => {
-  const { user, modal, setModal, setInfoConfirm } = useContext(UserContext);
+  const { user, modal, setModal, setInfoConfirm, concluirCad} = useContext(UserContext);
   const [infoDados, setinfoDados] = useState(false);
   const [openModalPerfil, setOpenModalPerfil] = useState(false);
   const [message, setMessage] = useState(null);
@@ -46,7 +46,7 @@ export const Infoinc = () => {
                   className="nmr-telefone"
                   type="tel"
                   accept="number"
-                  placeholder="Telefone / Celular"
+                  placeholder="Ex: 13991165590"
                   onChange={(event) => handleChange("telefone", event)}
                 />
                 <p>Data de nascimento</p>
@@ -92,32 +92,26 @@ export const Infoinc = () => {
                   <input
                     className="padrao-input-card-conclua-registro"
                     type="number"
-                  />
-                  <input
-                    className="padrao-input-card-conclua-registro"
-                    type="text"
-                  />
-                  <input
-                    className="padrao-input-card-conclua-registro"
-                    type="text"
-                  />
-                  <input
-                    className="padrao-input-card-conclua-registro"
-                    type="text"
+                    placeholder="Cep"
+                    onChange={(event) => handleChange("cep", event)}
                   />
                   <input
                     className="padrao-input-card-conclua-registro"
                     type="number"
+                    placeholder="Nº"
+                    onChange={(event) => handleChange("numeroResidencia", event)}
                   />
                   <input
                     className="padrao-input-card-conclua-registro"
                     type="text"
+                    placeholder="Comlemento"
+                    onChange={(event) => handleChange("complemento", event)}
                   />
                 </div>
               </div>
               <div className="bottom-card-conclua-registro">
                 <p onClick={() => setModalConcluaRegistro(2)}>voltar</p>
-                <button>Finalizar</button>
+                <button onClick={concluirCad}>Finalizar</button>
               </div>
             </div>
           )}

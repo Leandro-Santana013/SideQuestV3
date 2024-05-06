@@ -15,6 +15,7 @@ import { Perfilcli } from './Perfilcli/Perfilcli';
 import { Loading } from './Loading/Loading';
 import { SidebarProfissional } from './SidebarProfissional/SidebarProfissional';
 import {ImageCropper} from './imgCroppper/ImageCropper' 
+import {HeaderLandingPro} from './HeaderLandingpro/HeaderLandingpro'
 export {
     Animation,
     Benefits,
@@ -24,6 +25,7 @@ export {
     Header,
     Perfilcli,
     HeaderLanding,
+    HeaderLandingPro,
     SidebarCliente,
     TextInput,
     Infoinc,

@@ -137,7 +137,6 @@ exports.registerPro = async (req, res) => {
      
     } catch (error) {
       console.error(error);
-      return res.render('error404');
     }
   };
 
@@ -174,7 +173,7 @@ exports.registerPro = async (req, res) => {
       } else {
         const login = await controller_Pro.bindCookieBypkProfissonal({ params: { cd_emailProfissional: email }});
         const secret = createToken(login.id_cliente)
-        return res.status(200).json({ id_profissional: login.id_profissional, email: login.cd_emailProfissional, name: login.nm_profissional, secret});
+        return res.status(200).json(login);
       }
     } catch (error) {
       console.error(error);
@@ -185,7 +184,7 @@ exports.registerPro = async (req, res) => {
   exports.validaEmailPro = async (req, res) => {
     try {
       const { token } = req.params;
-      console.log(globaltoken);
+      console.log("penis pinto",globaltoken, globalemail);
       if (globalemail) {
         controller_Pro.updateTokenByEmail({
           params: { cd_tokenProfissional: globaltoken, cd_emailProfissional: globalemail },

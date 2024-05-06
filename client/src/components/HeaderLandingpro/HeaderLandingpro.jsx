@@ -6,7 +6,7 @@ import { setIsSignUpActive, useIsSignUpActive } from "./singUpState";
 
 
 
-export const HeaderLanding = ({ colorLogin, colorBtnInsc, colorInsc }) => {
+export const HeaderLandingPro = ({ colorLogin, colorBtnInsc, colorInsc }) => {
   const [isActive, setIsActive] = useState(false); //isActive começa como falso, setIsActive muda o valor de isactive ao mudar os estado
 
   const AcaoAoCLicar = () => {
@@ -47,7 +47,7 @@ export const HeaderLanding = ({ colorLogin, colorBtnInsc, colorInsc }) => {
                 <Link style={{ color: colorLogin }} to={"/loginProfissional"} onClick={handleSignInClick}>Login</Link>
               </li>
               <li className="navHomeLi btnNavHome" style={{ backgroundColor: colorBtnInsc, color: colorInsc }}>
-                <Link to={"/login"} onClick={handleSignUpClick}>Inscreva-se</Link>
+                <Link to={"/loginProfissional"} onClick={handleSignUpClick}>Inscreva-se</Link>
               </li>
             </div>
           </ul>
@@ -62,10 +62,10 @@ export const HeaderLanding = ({ colorLogin, colorBtnInsc, colorInsc }) => {
             <li className="respNavLi">Encontrar serviços</li>
             <li className="respNavLi"><a href="/landingProfissional"><Link to={"/landingProfissional"}>Trabalhe conosco</Link></a></li>
             <li className="respNavLi">
-                <Link to={"/login"} onClick={handleSignInClick}>Login</Link>
+                <Link to={"/loginProfissional"} onClick={handleSignInClick}>Login</Link>
             </li>
             <li className="respNavLi">
-              <Link to={"/login"} onClick={handleSignUpClick}>Inscreva-se</Link>
+              <Link to={"/loginProfissional"} onClick={handleSignUpClick}>Inscreva-se</Link>
             </li>
           </ul>
         </nav>
