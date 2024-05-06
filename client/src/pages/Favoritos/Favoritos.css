@@ -89,3 +89,52 @@
     font-size: 2vw;
     color: var(--azul);
 }
+
+
+@media screen and (max-width: 500px) {
+
+    .conteudo-favoritos {
+      margin-right: 3.5vw;
+    }
+  
+    .prof-fav-pesq h2 {
+      font-size: 3.5vw;
+    }
+  
+    .input-procurar {
+      height: 2vh;
+      width: 23vw;
+    }
+  
+    .input-procurar input {
+      font-size: 0.6rem;
+    }
+  
+    .card-prof-fav {
+      width: 52vw;
+      height: 3vh;
+      padding: 4px;
+    }
+  
+    .card-prof-fav p {
+      font-size: 0.7rem;
+    }
+  
+    .card-prof-fav .info-prof-fav img {
+      width: 7.5vw;
+    }
+  
+  }
+  
+
+  @media screen and (max-width: 950px) {
+    .card-prof-fav .info-prof-fav img {
+      width: 7.5vw;
+  }
+  
+  .input-procurar {
+    width: 22vw;
+    padding: 5px;
+    margin: 6px;
+  }
+  }

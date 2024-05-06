@@ -25,6 +25,7 @@ import VisualizarServicoCliente from "./pages/VisualizarServicoCliente/Visualiza
 import VisualizarServicoProfissa from "./pages/VisualizarServicoProfissa/VisualizarServicoProfissa";
 import ServicosAtivosCliente from "./pages/ServicosAtivosCliente/ServicosAtivosCliente";
 import ConfigProfissa from "./pages/ConfigProfissa/ConfigProfissa";
+import PerfilProfissional from "./pages/PerfilProfissional/PerfilProfissional";
 
 import { Chats } from "./pages/Chats/Chats";
 
@@ -62,6 +63,7 @@ const Router = () => {
             <Route exact path="/VisualizarServicoCliente" element={<VisualizarServicoCliente/>}/> 
             <Route exact path="/VisualizarServicoProfissa" element={<VisualizarServicoProfissa/>}/> 
             <Route exact path="/ServicosAtivosCliente" element={<ServicosAtivosCliente/>}/> 
+            <Route exact path="/PerfilProfissional" element={<PerfilProfissional/>}/>
           </Routes>
         </ProfessionalContextProvider>
       </ChatContextProvider>
