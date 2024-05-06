@@ -30,7 +30,7 @@ export const Perfilcli = () => {
         className="card-perfil-bottom"
         onClick={() => setOpenModalPerfil(true)}
       >
-       <img src={user.img_cliente ? user.img_cliente : imgPerfil } style={{borderRadius:50}} alt="User" />
+       <img src={user && user.img_cliente ? user.img_cliente : imgPerfil } style={{borderRadius:50}} alt="User" />
         <p style={{ color: "white" }}>
           {user && user.nm_cliente ? `${user.nm_cliente.split(" ")[0]}`: "Carregando..."}
         </p>
