@@ -71,7 +71,9 @@
     
 
     // Atualize a função filtrarCards para adicionar ou remover filtros selecionados
-    const filtrarCards = (filtro) => {
+  
+  // Atualize a função filtrarCards para adicionar ou remover filtros selecionados
+  const filtrarCards = (filtro) => {
     let novosFiltros = [...filtrosSelecionados];
     if (novosFiltros.includes(filtro)) {
       novosFiltros = novosFiltros.filter(f => f !== filtro);
@@ -81,73 +83,105 @@
     setFiltrosSelecionados(novosFiltros);
   };
 
-    const [coresBotoes, setCoresBotoes] = useState({});
+  const [coresBotoes, setCoresBotoes] = useState({});
 
-    // Função para alternar a cor do botão
-    const alternarCor = (id) => {
-      setCoresBotoes(prevState => {
-        const novaCor = prevState[id] === 'var(--azul)' ? 'var(--verde)' : 'var(--azul)';
-        return { ...prevState, [id]: novaCor };
-      });
-    };
+  // Função para alternar a cor do botão
+  const alternarCor = (id) => {
+    setCoresBotoes(prevState => {
+      const novaCor = prevState[id] === 'var(--verde)' ? 'var(--azul)' : 'var(--verde)';
+      return { ...prevState, [id]: novaCor };
+    });
+  };
 
-    return (
-      <section className="area-servicos">
-        <div className="input-filtros">
-        <TextInputBusca 
-    placeholder={"Encontre profissionais"} 
-    value={busca} 
-    onChange={handleBuscaChange} 
-  />
-          <div className="ifopenf">
-            <div className="filtros" onClick={openModal}>
-              <p>Filtros</p>
-              <RiFilter2Fill className="iconFilter" />
-            </div>
-            {modal && (
-              <div className="modal">
-                <div className="modal-content">
-                  <span>Filtre por:</span>
-                  <div className="container-card-filtros">
-                    <button className="card-filtro" onClick={() => { filtrarCards('maisBemAvaliados'); alternarCor('botao1') }} style={{ backgroundColor: coresBotoes['botao1'] || 'var(--verde)' }}>
-                      <p><strong>Mais bem avaliados</strong></p>
-                    </button>
-                    <button className="card-filtro" onClick={() => { filtrarCards('maisServicosPrestados'); alternarCor('botao2') }} style={{ backgroundColor: coresBotoes['botao2'] || 'var(--verde)' }}>
-                      <p><strong>4+ estrelas</strong></p>
-                    </button>
-                    <button className="card-filtro" onClick={() => { filtrarCards('profissionaisFemininas'); alternarCor('botao3') }} style={{ backgroundColor: coresBotoes['botao3'] || 'var(--verde)' }}>
-                      <p><strong>Somente profissionais femininas</strong></p>
-                    </button>
-                  </div>
-                  <button className="btn-close-modal" onClick={() => { closeModal(); aplicarFiltros(); }}>Fechar</button>
+  return (
+    <section className="area-servicos">
+      <div className="input-filtros">
+        <TextInputBusca placeholder={"Encontre profissionais"} />
+        <div className="ifopenf">
+          <div className="filtros" onClick={openModal}>
+            <p>Filtros</p>
+            <RiFilter2Fill className="iconFilter" />
+          </div>
+          {modal && (
+            <div className="modal">
+              <div className="modal-content">
+                <span>Filtre por:</span>
+                <div className="container-card-filtros">
+                  <button
+                    className="card-filtro"
+                    onClick={() => {
+                      filtrarCards("maisBemAvaliados");
+                    }}
+                    style={{
+                      backgroundColor: filtrosSelecionados.includes("maisBemAvaliados")
+                        ? "var(--azul)"
+                        : "var(--verde)",
+                    }}
+                  >
+                    <p>
+                      <strong>Mais bem avaliados</strong>
+                    </p>
+                  </button>
+                  <button
+                    className="card-filtro"
+                    onClick={() => {
+                      filtrarCards("maisServicosPrestados")
+                    }}
+                    style={{
+                      backgroundColor: filtrosSelecionados.includes("maisServicosPrestados")
+                        ? "var(--azul)"
+                        : "var(--verde)",
+                    }}
+                  >
+                    <p>
+                      <strong>4+ estrelas</strong>
+                    </p>
+                  </button>
+                  <button
+                    className="card-filtro"
+                    onClick={() => {
+                      filtrarCards("profissionaisFemininas")
+                    }}
+                    style={{
+                      backgroundColor: filtrosSelecionados.includes("profissionaisFemininas")
+                        ? "var(--azul)"
+                        : "var(--verde)",
+                    }}
+                  >
+                    <p>
+                      <strong>Somente profissionais femininas</strong>
+                    </p>
+                  </button>
                 </div>
+                <button className="btn-close-modal" onClick={() => { closeModal(); aplicarFiltros() }}>Fechar</button>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
-        {dadosIniciais.length === 0 ? (
-          <div className="sem-profissionais">
-            <p>Nenhum profissional encontrado.</p>
-          </div>
-        ) : (
-          dadosIniciais.sort((a, b) => b.media_avaliacoes - a.media_avaliacoes).map((profissional) => {
-            if (filtrosSelecionados.includes('profissionaisFemininas') && profissional.sg_sexoProfissional !== 'F') { 
-              return null;
-            }
-            
-            if (filtrosSelecionados.includes('maisBemAvaliados') && profissional.media_avaliacoes < 4) {
-              return null;
-            }
-            
-            // Se o filtro de mais serviços prestados estiver ativado, não exibe os profissionais com menos de 10 serviços realizados -- ALTERAR
-            if (filtrosSelecionados.includes('maisServicosPrestados') && profissional.num_servicos_terminados < 10) {
-              return null;
-            }
+      </div>
+      {dadosIniciais.length === 0 ? (
+        <div className="sem-profissionais">
+          <p>Nenhum profissional encontrado.</p>
+        </div>
+      ) : (
+        dadosIniciais.sort((a, b) => b.media_avaliacoes - a.media_avaliacoes).map((profissional) => {
+          if (filtrosSelecionados.includes('profissionaisFemininas') && profissional.sg_sexoProfissional !== 'F') {
+            return null;
+          }
 
-            // Fechamento da chave final
-            return (
-              <div className="card-profissional" key={profissional.id_profissional}>
-                            <div className="tamplate-img">
+          if (filtrosSelecionados.includes('maisBemAvaliados') && profissional.media_avaliacoes < 4) {
+            return null;
+          }
+
+          // Se o filtro de mais serviços prestados estiver ativado, não exibe os profissionais com menos de 10 serviços realizados -- ALTERAR
+          if (filtrosSelecionados.includes('maisServicosPrestados') && profissional.num_servicos_terminados < 10) {
+            return null;
+          }
+
+          // Fechamento da chave final
+          return (
+            <div className="card-profissional" key={profissional.id_profissional}>
+              <div className="tamplate-img">
                 <img src={imgPerfil} alt="Imagem de perfil" />
               </div>
               <div className="desc-cliente">
@@ -183,8 +217,9 @@
                 </div>
               </div>
             </div>
-            );
-          })
-        )}
-      </section>
-    )}
+          );
+        })
+      )}
+    </section>
+  )
+}

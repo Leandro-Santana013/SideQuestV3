@@ -20,7 +20,7 @@ app.use('/message', messageRoutes);
     connectionDataBase.authenticate().then(() => {
       console.log("Conexão bem sucedida")
   }).catch(erroConn => {
-      console.error("Incapaz de fazer conexão", erroConn)
+      console.error("Incapaz de fazer conexão.", erroConn)
   })
    
 

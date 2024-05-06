@@ -1,10 +1,5 @@
 /*CARD*/
 
-.area-servicos {
-    display: flex;
-    flex-direction: column;
-}
-
 .card-servico {
     display: flex;
     justify-content: space-around;

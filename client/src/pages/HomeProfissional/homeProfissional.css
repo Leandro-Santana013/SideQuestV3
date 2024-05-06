@@ -105,7 +105,7 @@ h1 {
     justify-content: center;
     width: 6vw;
     height: 3vw;
-    border: solid 1px var(--verde);
+    border: solid 2px #eee;
 }
 
 .filtros p {
@@ -141,11 +141,6 @@ padding-right: 0px;
 display: flex;
 justify-content: flex-start;
 }
-
- .area-servicos a {
-    text-decoration: none;
-    color: black;
-    }
 
 .card-servicoProfissa .icon-sucesso {
 background-color: #3cbc8c;

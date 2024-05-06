@@ -80,7 +80,7 @@
   justify-content: center;
   width: 6vw;
   height: 3vw;
-  border: solid 1px var(--verde);
+  border: solid 2px #eee;
 }
 
 .filtros p {
@@ -90,39 +90,4 @@
 .filtros .iconFilter {
   font-size: 1.5vw;
   color: var(--verde);
-}
-
-@media screen and (max-width: 376px) {
-
-  .conteudo-favoritos {
-    margin-right: 3.5vw;
-  }
-
-  .prof-fav-pesq h2 {
-    font-size: 0.8rem;
-  }
-
-  .input-procurar {
-    height: 2vh;
-    width: 23vw;
-  }
-
-  .input-procurar input {
-    font-size: 0.6rem;
-  }
-
-  .card-prof-fav {
-    width: 52vw;
-    height: 3vh;
-    padding: 4px;
-  }
-
-  .card-prof-fav p {
-    font-size: 0.7rem;
-  }
-
-  .card-prof-fav .info-prof-fav img {
-    width: 7.5vw;
-  }
-
 }

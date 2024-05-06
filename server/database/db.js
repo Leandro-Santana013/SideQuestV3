@@ -2,8 +2,19 @@ const { password, name, usu } = require("../config/connectInfo.js")
 const { Sequelize, QueryTypes } = require("sequelize")
 
 const connectionDataBase = new Sequelize(
-    `mysql://${usu}:${password}@localhost:3306/${name}`
-)
+    name, // Nome do banco de dados
+    usu, // Nome de usuário
+    password, // Senha
+    {
+        host: "localhost",
+        dialect: "mysql",
+        port: 3306,
+        // Definindo o tempo limite de aquisição de conexão para 60 segundos (em milissegundos)
+        pool: {
+            acquire: 6000000
+        }
+    }
+); 
 
 module.exports = { connectionDataBase }
 
@@ -17,7 +28,7 @@ const flagFilePath = path.join(__dirname, 'script-rodado.txt');
 
 // Verificação do arquivo de flag
 if (fs.existsSync(flagFilePath)) {
-  console.log('Script já foi executado anteriormente. Saindo.');
+  console.log('Script já foi executado anteriormente. Saindo');
   return;
 }
 

@@ -141,3 +141,24 @@
     border: 1px solid red;
     border-radius: 5px;
 }
+
+
+@media screen and (max-width: 500px){
+
+    .cabecalho-editar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .cabecalho-editar #img {
+        top: 13vw;
+        right: 27vw;
+    } 
+}
+
+@media screen and (max-width: 700px){
+    .cabecalho-editar {
+        width: 40px;
+        height: 40px;
+    }
+}

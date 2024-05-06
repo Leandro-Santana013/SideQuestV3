@@ -65,7 +65,7 @@
     height: 4vw;
     padding: 1vw;
     background-color: var(--azul);
-    border-radius: 0 1vw 0 0 ;
+    border-radius: 0 1vw 0 0;
     justify-content: space-around;
 
     img {
@@ -81,7 +81,7 @@
     position: fixed;
     bottom: 7vw;
     left: 1vw;
-    background: linear-gradient(to bottom, var(--verde) 25% , white 25%);
+    background: linear-gradient(to bottom, var(--verde) 25%, white 25%);
     width: 15vw;
     height: 20vw;
     border-radius: 1vw;
@@ -138,5 +138,111 @@
     p {
         font-size: 1.5vw;
         margin: 0;
+    }
+}
+
+.hamburguer-sidebarcliente {
+    border: none;
+    background: none;
+    border-top: 4px solid black;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    right: 29px;
+    top: 40px;
+    width: 40px;
+}
+
+.hamburguer-sidebarcliente::before,
+.hamburguer-sidebarcliente::after {
+    content: " ";
+    display: block;
+    width: 40px;
+    height: 4px;
+    background-color: black;
+    margin-top: 4px;
+    position: relative;
+}
+
+.hamburguer-sidebarcliente.active {
+    position: fixed;
+    border-top-color: transparent;
+    z-index: 1000;
+}
+
+.hamburguer-sidebarcliente.active::before {
+    transform: rotate(135deg);
+}
+
+.hamburguer-sidebarcliente.active::after {
+    transform: rotate(-135deg);
+    top: -7px;
+}
+
+.sidebarCliente-responsivo {
+    display: none;
+}
+
+@media screen and (max-width: 1025px) {
+    .sidebarCliente {
+        display: none;
+    }
+
+    .sidebarCliente-responsivo {
+        display: flex;
+        justify-content: space-around;
+        width: 100vw;
+    }
+
+    .navCliente-responsivo {
+        width: 100vw;
+        margin: 0;
+    }
+
+    .ulCliente-responsivo {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0;
+        font-size: 1.5rem;
+        background-color: var(--verde);
+        clip-path: circle(100px at 93% -25%);
+        /*esconde la encima*/
+        transition: 1s ease-out;
+        /* Adicionando transição */
+        width: 100vw;
+        height: 100vh;
+        gap: 0;
+        pointer-events: none;
+        position: fixed;
+        margin-top: 0;
+        z-index: 1000;
+    }
+
+    .ulCliente-responsivo.active {
+        height: 100vh;
+        clip-path: circle(2000px at 90% -15%);
+        pointer-events: all;
+        position: fixed;
+        overflow: visible;
+        z-index: 1000;
+    }
+
+    .ulCliente-responsivo li {
+        list-style: none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .hamburguer-sidebarcliente{
+        width: 30px;
+        height: 3px;
+    }
+    
+    .hamburguer-sidebarcliente::before,
+    .hamburguer-sidebarcliente::after {
+        width: 30px;
+        height: 3px;
     }
 }

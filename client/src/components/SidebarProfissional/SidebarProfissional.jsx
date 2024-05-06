@@ -28,6 +28,7 @@ export const SidebarProfissional = () => {
   }, [currentPage, pages]);
 
   return (
+    <>
     <nav className="sidebarProfissional">
       <link
         rel="stylesheet"
@@ -79,6 +80,19 @@ export const SidebarProfissional = () => {
         </div>
       </a>
     </nav>
+
+    <header className="sidebarProfissa-responsivo">
+        <nav className="navProfissa-responsivo"> 
+          <ul className={`ulProfissa-responsivo ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}>
+          <li><Link to={"/homeProfissionais"}>Home</Link></li>
+              <li><Link to={"/chats"}>Chats</Link></li>
+              <li><Link to={"/ConfigProfissa"}>Configurações</Link></li>
+          </ul>
+        </nav>
+        <button className={`hamburguer-sidebarProfissa ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}>
+        </button>
+      </header>
+    </>
   );
 };
 
