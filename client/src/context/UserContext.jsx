@@ -119,18 +119,22 @@ export const UserContextProvider = ({ children }) => {
 
   const [modal, setModal] = useState(0)
 
-  useEffect(() => { 
-   const modalAlreadyShown = localStorage.getItem("modalShown");
 
-  // Se o modal ainda não foi exibido, exibe-o e define a variável de estado para indicar que o modal foi exibido
-  if (!modalAlreadyShown) {
-    setModal(1);
-    setModalShown(true);
-    localStorage.setItem("modalShown", true);
-    if (user.nmr_telefone == null || user.sg_sexoCliente || user.qt_idadeCliente)
-      setModal(1)
+
+  useEffect(() => { 
+    const modalAlreadyShown = localStorage.getItem("modalShown");
+  
+    // Verifica se o modal já foi exibido, se o usuário está logado e se está na página inicial
+    if (!modalAlreadyShown && user && window.location.pathname === '/homeCliente') {
+      // Verifica se é necessário exibir o modal com base nas informações do usuário
+      if (user.nmr_telefone == null || user.sg_sexoCliente || user.qt_idadeCliente) {
+        setModal(1);
+        setModalShown(true);
+        localStorage.setItem("modalShown", true);
+      }
     }
-  }, [])
+  }, [user]);
+  
   
   const [ infoConfirm, setInfoConfirm ] = useState({})
 

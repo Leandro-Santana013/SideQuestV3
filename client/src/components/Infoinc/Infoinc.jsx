@@ -8,9 +8,7 @@ import { UserContext } from "../../context/UserContext";
 export const Infoinc = () => {
   const { user, modal, setModal, setInfoConfirm, concluirCad} = useContext(UserContext);
   const [infoDados, setinfoDados] = useState(false);
-  const [openModalPerfil, setOpenModalPerfil] = useState(false);
-  const [message, setMessage] = useState(null);
-
+  
   console.log(infoDados);
 
   const handleChange = (field, event) => {

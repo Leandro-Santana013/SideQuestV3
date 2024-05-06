@@ -44,7 +44,7 @@ export const HeaderLanding = ({ colorLogin, colorBtnInsc, colorInsc }) => {
             </li>
             <div className="subContainerNavHome">
               <li className="navHomeLi white">
-                <Link style={{ color: colorLogin }} to={"/loginProfissional"} onClick={handleSignInClick}>Login</Link>
+                <Link style={{ color: colorLogin }} to={"/login"} onClick={handleSignInClick}>Login</Link>
               </li>
               <li className="navHomeLi btnNavHome" style={{ backgroundColor: colorBtnInsc, color: colorInsc }}>
                 <Link to={"/login"} onClick={handleSignUpClick}>Inscreva-se</Link>
