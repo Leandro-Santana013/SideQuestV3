@@ -36,7 +36,7 @@ const PerfilProfissional = () => {
                         </div>
                         <div className="descricao-profissional">
                             <div className="avaliacao">
-                                <button>Editar</button>
+                                {/* <button>Editar</button> */}
                                 <div className="num-avaliacao">
                                     <p>5.00</p>
                                     <div className="estrela">
