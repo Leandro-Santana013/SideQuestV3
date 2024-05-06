@@ -6,9 +6,17 @@ import "./infoInc.css";
 import { UserContext } from "../../context/UserContext";
 
 export const Infoinc = () => {
-  const { user, modal, setModal, setInfoConfirm, concluirCad} = useContext(UserContext);
+  const { user, modal, setModal, setInfoConfirm, concluirCad, fetchDataConcluir, cepError } = useContext(UserContext);
   const [infoDados, setinfoDados] = useState(false);
-  
+
+  const handleCepChange = (e) => {
+    const cep = e.target.value;
+    const cepToFetch = cep; // Armazena o valor atual do CEP em uma variável local
+    if (cep.length === 8)
+      fetchDataConcluir(cepToFetch); // Chama a função de busca de dados do CEP com o valor atual
+  };
+
+
   console.log(infoDados);
 
   const handleChange = (field, event) => {
@@ -87,12 +95,24 @@ export const Infoinc = () => {
               </div>
               <div className="inputs-card-conclua-registro">
                 <div className="grid-2x2-card-conclua-registro">
+                  <div className="inputs-card-conclua-registro-cep">
+                  {cepError && (
+                    <p className="cepError-conluircad">CEP incorreto</p>
+                  )}
                   <input
                     className="padrao-input-card-conclua-registro"
                     type="number"
                     placeholder="Cep"
-                    onChange={(event) => handleChange("cep", event)}
+                    style={{
+                      border: cepError && "2px solid red"
+                    }}
+                    onChange={(event) => {
+                      handleChange("cep", event);
+                      handleCepChange(event);
+                    }}
                   />
+                  
+                  </div>
                   <input
                     className="padrao-input-card-conclua-registro"
                     type="number"

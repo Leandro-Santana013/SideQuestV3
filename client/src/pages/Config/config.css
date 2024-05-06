@@ -142,6 +142,20 @@
     border-radius: 5px;
 }
 
+/*editar endereço*/
+.sessao-endereco-prinpal {
+    background-color: #EEEEEE;
+    padding: 53px;
+    gap: 5vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-info-endereco-principal {
+    background-color: white;
+    padding: 44px;
+}
+
 
 @media screen and (max-width: 500px){
 

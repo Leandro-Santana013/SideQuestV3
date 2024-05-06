@@ -267,4 +267,18 @@ module.exports = {
       { where: { id_cliente: id_cliente } }
     );
   },
+
+
+updateInfoCliente: async (req, res) => {
+  const { id_cliente, qt_idadeCliente,   sg_sexoCliente, nmr_telefoneCliente } = req.params;
+  return ModelCliente.update(
+    {
+      qt_idadeCliente: qt_idadeCliente,
+      sg_sexoCliente: sg_sexoCliente,
+      nmr_telefoneCliente: nmr_telefoneCliente,
+    },
+    { where: { id_cliente: id_cliente } }
+  );
+},
+
 };

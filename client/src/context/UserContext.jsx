@@ -106,7 +106,7 @@ export const UserContextProvider = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
 
   const functionUpdateInfoUser = useCallback(async () => {
-    console.log(changedUserData);
+    console.log("aaaaaaaaaaasdasas",changedUserData);
 
     const response = await postRequest("/user/updateInfoUser", changedUserData);
     setUser(response.user)
@@ -121,35 +121,38 @@ export const UserContextProvider = ({ children }) => {
 
 
 
-  useEffect(() => { 
+  useEffect(() => {
     const modalAlreadyShown = localStorage.getItem("modalShown");
-  
+
     // Verifica se o modal já foi exibido, se o usuário está logado e se está na página inicial
     if (!modalAlreadyShown && user && window.location.pathname === '/homeCliente') {
       // Verifica se é necessário exibir o modal com base nas informações do usuário
-      if (user.nmr_telefone == null || user.sg_sexoCliente || user.qt_idadeCliente) {
+      if (Object.keys(user).length) {
+        if(user.qt_idadeCliente == null &&  user.qt_idadeCliente == null)
         setModal(1);
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", user)
         setModalShown(true);
         localStorage.setItem("modalShown", true);
       }
     }
   }, [user]);
-  
-  
-  const [ infoConfirm, setInfoConfirm ] = useState({})
+
+
+  const [infoConfirm, setInfoConfirm] = useState({})
 
 
 
   /********************/
-  const [ConclussioncadError , setConclusioncadError] = useState(null)
+  const [ConclussioncadError, setConclusioncadError] = useState(null)
   const [modalShown, setModalShown] = useState(null);
 
-const concluirCad = useCallback(async(e)=>{
-const response = await postRequest("/user/concluirCad", infoConfirm)
-if (response.error) {
-  setConclusioncadError(response.error);
-}
-}, [infoConfirm])
+  const concluirCad = useCallback(async (e) => {
+    console.log(infoConfirm)
+    const response = await postRequest("/user/concluirCad", infoConfirm)
+    if (response.error) {
+      setConclusioncadError(response.error);
+    }
+  }, [infoConfirm])
   //logout
 
   const logoutUser = useCallback(() => {
@@ -165,18 +168,18 @@ if (response.error) {
       e.preventDefault();
       setloginLoading(true);
       setloginError(null);
-      try { 
+      try {
         const response = await postRequest("/user/login", loginInfo);
 
         if (response.error) setloginError(response.error);
         else {
-         const pro = localStorage.getItem("pro")
-          if(pro)
+          const pro = localStorage.getItem("pro")
+          if (pro)
             localStorage.removeItem("pro");
-          else{
-          localStorage.setItem("User", JSON.stringify(response.user));
-          window.location.reload();
-        }
+          else {
+            localStorage.setItem("User", JSON.stringify(response.user));
+            window.location.reload();
+          }
         }
       } catch (error) {
         setRegisterError("Erro ao logar. Por favor, tente novamente."); // Define o estado de erro com uma mensagem genérica de erro
@@ -259,6 +262,36 @@ if (response.error) {
     }
   };
 
+  const fetchDataConcluir = async (cep) => {
+    try {
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      if (!response.data.erro) {
+        const { uf, localidade, logradouro, bairro } = response.data;
+        setCepError(false);
+        setInfoConfirm({
+          ...infoConfirm,
+          cep,
+          uf,
+          localidade,
+          logradouro,
+          bairro,
+        });
+      } else {
+        setCepError(true);
+        setInfoConfirm({
+          ...infoConfirm,
+          cep,
+          uf: null,
+          localidade: null,
+          logradouro: null,
+          bairro: null,
+        });
+      }
+    } catch (error) {
+      console.error("Erro ao buscar CEP:", error);
+    }
+  };
+
   useEffect(() => {
     const carregarCategorias = async () => {
       try {
@@ -315,7 +348,8 @@ if (response.error) {
         setModal,
         infoConfirm,
         setInfoConfirm,
-        concluirCad
+        concluirCad,
+        fetchDataConcluir
       }}
     >
       {children}

@@ -376,15 +376,29 @@ exports.updateInfoUser = async (req, res) => {
 
 /****************************************/
 exports.concluirCad = async (req, res) => {
-  const {telefone, data, sexo, cep, numeroResidencia, complemento, id_cliente} = req.body
-  console.log(telefone, data, sexo, cep, numeroResidencia, complemento)
+  const {telefone, data, sexo, cep, numeroResidencia, complemento, id_cliente, uf, localidade, logradouro, bairro} = req.body
+  if(!telefone || !data || !sexo || !cep || !numeroResidencia || !complemento  || !id_cliente  || !uf || !localidade || !logradouro || !bairro)
+     res.status(400).json({error: 'preencha todas as informações'})
+try{
 
-    const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
-      if (!response.data.erro) {
-        const { uf, localidade, logradouro, bairro } = response.data;
-
+  const birthDate = new Date(data);
+  const today = new Date();
+  const age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;  
+  }
+       const userReset = await controller_User.updateInfoCliente({
+        params: {
+          id_cliente: id_cliente,
+          qt_idadeCliente: age,
+          sg_sexoCliente: sexo,
+          nmr_telefoneCliente: telefone
+       }
+      })
+      
         const cdCidade = await controller_User.selectCidadeAdress({
-          params: { nm_cidade: localidade, sg_estado: estado }})
+          params: { nm_cidade: localidade, sg_estado: uf }})
 
 
           const enderecoInstance = await controller_User.CreateadressService({
@@ -395,19 +409,11 @@ exports.concluirCad = async (req, res) => {
               cd_cep: cep,
               nm_bairro: bairro,
               nmr_casa: numeroResidencia,
+              end_principal: true
             },
           });
-}else{
-  response.status(400).json({error: "cep incorreto"})
-}
-
-
-
-
-
-  
- 
-
-
-
+          res.status(200).json(enderecoInstance)
+        }catch(error){
+          res.status(500).json({error: "erro interno no servidor"})
+        }
 }
