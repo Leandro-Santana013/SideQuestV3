@@ -80,7 +80,7 @@
   justify-content: center;
   width: 6vw;
   height: 3vw;
-  border: solid 1px var(--verde);
+  border: solid 2px #eee;
 }
 
 .filtros p {

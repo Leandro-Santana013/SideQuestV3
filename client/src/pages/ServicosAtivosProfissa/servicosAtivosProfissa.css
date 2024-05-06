@@ -20,11 +20,6 @@ display: flex;
 justify-content: flex-start;
 }
 
- .area-servicos a {
-    text-decoration: none;
-    color: black;
-    }
-
 .card-servicoProfissa .icon-sucesso {
 background-color: #3cbc8c;
 height: 8vh;
