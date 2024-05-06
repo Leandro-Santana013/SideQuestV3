@@ -1,7 +1,6 @@
 import React,{useContext, useState} from "react";
 import "./chats.css";
 import { SidebarCliente, CardProfissional, Header, Infoinc, TextInput} from "../../components";
-import { RiSendPlane2Fill } from "react-icons/ri";
 import {ChatContext} from "../../context/ChatContext"
 import { UserChat } from "./UserChat";
 import {UserContext} from "../../context/UserContext"
@@ -35,7 +34,9 @@ export const Chats = () => {
                     })}
                   </div>
                 </div>
+                <div className="chat-box">
                 <ChatBox/>
+                </div>
               </div>
       </div>
       </div>

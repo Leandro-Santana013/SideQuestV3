@@ -1,23 +1,21 @@
-import { axiosRecipientUser, axiosRecipientPro } from "../../hooks/axiosRecipient";
-
+import { useRecipient } from "../../hooks/axiosRecipient";
 export const UserChat = ({ chat, user, pro }) => {
-    let recipientUser = null;
-    let recipientPro = null;
+    let recipient = null;
 
     if (user !== null) {
-        const userHookResult = axiosRecipientUser(chat, user);
-        recipientUser = userHookResult.recipientUser;
+        const { recipient: userRecipient } = useRecipient(chat, 'user');
+        recipient = userRecipient;
     }
 
     if (pro !== null) {
-        const proHookResult = axiosRecipientPro(chat, pro);
-        recipientPro = proHookResult.recipientPro;
+        const { recipient: proRecipient } = useRecipient(chat, 'pro');
+        recipient = proRecipient;
     }
 
     return (
         <div className="message-box">
             <div className="foto-perfil"></div>
-            <div className="chatName">{user ? recipientUser?.nm_profissional:""}{pro?  recipientPro?.nm_cliente: ""}</div>
+            <div className="chatName">{recipient ? recipient.nm_profissional || recipient.nm_cliente : ""}</div>
             <div className="text-chat-list">Text mesage</div>
             <div className="date-message">10/10/1010</div>
             <div className="chat-notification">3</div>

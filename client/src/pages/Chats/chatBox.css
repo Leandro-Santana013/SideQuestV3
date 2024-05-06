@@ -1,0 +1,29 @@
+.msg-enviada{
+    color: green;
+}
+
+.msg-recebida{
+    color: red;
+}
+
+
+.chat-sub{
+    height: 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: inherit;
+}
+
+.send-button{
+    width: 3vw;
+    height: 2.7vw;
+    background-color: var(--verde);
+    border: none;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.icon-send {
+    font-size: 1.5vw;
+    color: #FFF;
+}
