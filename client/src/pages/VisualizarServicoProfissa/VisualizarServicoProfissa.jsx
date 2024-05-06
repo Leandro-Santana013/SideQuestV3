@@ -1,6 +1,6 @@
 import React from "react";
 import "./VisualizarServicoProfissa.css";
-import { SidebarCliente, Header } from "../../components/index";
+import {  SidebarProfissional, Header } from "../../components/index";
 import bandeira from "../../assets/bandeira.png";
 import iconeperfil from "../../assets/icone-perfil.png";
 import endereco from "../../assets/endereco.png";
@@ -12,8 +12,8 @@ const VisualizarServicoProfissa = () => {
 
     return (
         <>
-            <Header />
-            <SidebarCliente />
+            <Header/>
+           < SidebarProfissional/>  
             <div className="content-midia">
                 <div className="main-content">
                 <div className="card-visualizar">

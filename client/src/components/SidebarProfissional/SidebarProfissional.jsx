@@ -65,7 +65,7 @@ export const SidebarProfissional = () => {
         ))}
       </div>
       <a
-        href="/config"
+        href="/ConfigProfissa"
         className={`config ${currentPage.includes("config") ? "active" : ""}`}
       >
         <div
