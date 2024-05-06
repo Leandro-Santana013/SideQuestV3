@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./sidebarProfissional.css";
-import { Perfilcli } from "../index";
+
 import { Link } from "react-router-dom";
 
   
@@ -86,7 +86,6 @@ export const SidebarProfissional = () => {
           </p>
         </div>
       </a>
-    <Perfilcli/>
     </nav>
 
     <header className="sidebarProfissa-responsivo">
