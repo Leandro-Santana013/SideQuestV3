@@ -37,7 +37,7 @@ export const ChatBox = () => {
         <div
             key={index}
             className={`${
-                message.senderId == userId && message.senderType === senderMessageTe ? 'msg-enviada' : 'msg-recebida'
+                message.senderId == userId && message.senderType === senderMessageType ? 'msg-enviada' : 'msg-recebida'
             }`}
         >
             <span>{message.text}</span>

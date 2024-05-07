@@ -126,10 +126,10 @@ export const ChatContextProvider = ({ children, user, pro }) => {
     useEffect(() => {
 
         const getMessages = async () => {
-            setMessagesLoading(true);
+            setMessagesLoading(false)
             setMessagesError(false);
-
             try {
+            setMessagesLoading(true);
                 const response = await getRequest(`/message/${currentChat._id}`)   
                 SetMessages(response);
                 setMessagesLoading(false);
