@@ -10,17 +10,17 @@ import { RiSendPlane2Fill } from 'react-icons/ri';
 export const ChatBox = () => {
   const { user } = useContext(UserContext);
   const { pro } = useContext(ProfessionalContext);
-  const { currentChat, messages, isMessagesLoading, chat, sendTextMessage, senderMessageType} = useContext(ChatContext);
+  const { currentChat, messages, isMessagesLoading, chat, sendTextMessage, senderMessageType } = useContext(ChatContext);
   const { recipient, userType } = useRecipient(chat, user ? 'user' : 'pro');
   const [textMessage, setTextMessage] = useState('');
   const userId = user ? user.id_cliente : pro.id_profissional;
 
   const handleMessageSend = () => {
-    sendTextMessage(textMessage, userId, currentChat._id, userType , setTextMessage);
+    sendTextMessage(textMessage, userId, currentChat._id, userType, setTextMessage);
   };
 
   if (!recipient) {
-    return <p>Nenhuma conversa selecionada...</p>;
+    return <div className='container-nenhum-chat-selecionado'><p className='nenhum-chat-selecionado'>Clique em algum chat para iniciar a conversa!</p></div>;
   }
 
   if (isMessagesLoading) {
@@ -29,26 +29,26 @@ export const ChatBox = () => {
 
   return (
     <>
-      <div className="chat-header">{recipient.nm_profissional || recipient.nm_cliente}</div>
+      <div className="chat-header">
+        <h3>{recipient.nm_profissional || recipient.nm_cliente}</h3>
+      </div>
       <div className="chat-main">
-        <div className="messages">
         {messages &&
-    messages.map((message, index) => (
-        <div
-            key={index}
-            className={`${
-                message.senderId == userId && message.senderType === senderMessageType ? 'msg-enviada' : 'msg-recebida'
-            }`}
-        >
-            <span>{message.text}</span>
-            <span>{moment(message.createdAt).calendar()}</span>
-        </div>
-))}
-
-        </div>
+          messages.map((message, index) => (
+            <div className="mensagens-chat-main">
+              <div
+                key={index}
+                className={`${message.senderId == userId && message.senderType === senderMessageType ? 'msg-enviada' : 'msg-recebida'
+                  }`}
+              >
+                <span className='msg-mensagens-chat-main'>{message.text}</span>
+                <span className='time-mensagens-chat-main'>{moment(message.createdAt).calendar()}</span>
+              </div>
+            </div>
+          ))}
       </div>
       <div className="chat-sub">
-        <input value={textMessage} onChange={(e) => setTextMessage(e.target.value)} />
+        <input placeholder='Digite sua mensagem' value={textMessage} onChange={(e) => setTextMessage(e.target.value)} />
         <button className="send-button" onClick={handleMessageSend}>
           <RiSendPlane2Fill />
         </button>

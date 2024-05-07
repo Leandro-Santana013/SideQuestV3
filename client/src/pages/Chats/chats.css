@@ -1,56 +1,80 @@
-.chat-container{
+.chat-container {
     display: flex;
     height: 40vw;
     gap: 2vw;
+    background-color: #eee;
+    padding: 20px;
+    border-radius: 15px;
 }
 
-.chat-list{
+.chat-list {
     width: 22vw;
-height: inherit;
-filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.25));
-background-color: rgb(255, 255, 255);
-border-radius: 30px;
+    height: inherit;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px 0 0 15px;
+    overflow: hidden;
 }
 
-.chat-list > h3{
+.chat-list>h3 {
+    position: absolute;
     font-size: 1.7vw;
-    margin-left: 1vw;
+    margin: 0;
+    background-color: white;
+    border-bottom: solid 5px var(--verde);
+    border-radius: 15px 0 0 0;
+    padding: 20px;
+    width: 20vw;
 }
 
-.chats-actives{
+.chats-actives {
     display: flex;
     align-items: center;
     justify-content: center;
     width: inherit;
+    height: 34vw;
     flex-direction: column;
     gap: 1vw;
-}
-.message-box{
-height: 5vw;
-width: 20vw;
-border-radius: 20px;
-background: #D4D4D4;
-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-top: 100px;
 }
 
-.chat-box{
+.message-box {
+    width: 19vw;
+    border-bottom: solid 3px var(--verde);
+    padding: 5px;
+}
+
+.chat-box {
     width: 44vw;
     height: inherit;
     border-radius: 20px;
-background: #FFF;
-border-radius: 20px;
-box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.25);
-display: flex;
-flex-direction: column;
+    background: #FFF;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
-.chat-header{
+.chat-header {
+    display: flex;
+    align-items: center;
+    padding: 5px;
     width: inherit;
     height: 5vw;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-bottom: solid 3px #eee;
 }
 
-.chat-main{
+.chat-main {
     height: 30vw;
+    overflow: hidden;
+    overflow-y: scroll;
+}
 
+/*css a mais*/
+
+.container-chats-criados {
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-left: solid 4px #eee;
+    border-top: solid 4px #eEe;
 }
