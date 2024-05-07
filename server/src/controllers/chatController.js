@@ -39,7 +39,9 @@ exports.findUserChats = async(req, res) =>{
         const chats = await chatModel.find({
             members: {$in:[idProfissional]}
         })
+        console.log("nananan", chats)
         res.status(200).json(chats)
+        
     }catch(error){
         console.log(error)
         res.status(500).json(error)

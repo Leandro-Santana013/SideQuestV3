@@ -24,5 +24,5 @@ console.log(chat)
         getUser();
     }, [recipientId, userType]);    
 
-    return { recipient, error, recipientinfo };
+    return { recipient, error, recipientinfo, userType };
 };

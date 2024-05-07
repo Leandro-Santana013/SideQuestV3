@@ -2,12 +2,13 @@ const mensagensModel = require("../models/messagens")
 
 
 exports.createMessage = async (req, res) => {
-    const {chatId, senderId, text} = req.body
+    const {chatId, senderId, text, senderType} = req.body
 
     const message = new mensagensModel({
         chatId,
         senderId,
         text,
+        senderType,
     })
 
     try {

@@ -19,7 +19,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
     const [chat, setChat] = useState(null)
     const [sendTextMessageError, setSendTextMessageError] = useState(null)
     const [newMessage, setNewMessage] = useState(null)
-
+    const [senderMessageType, setSenderMessageType] = useState(null)
     useEffect(() => {
         const fetchChats = async () => {
             if (!user && !pro) return;
@@ -69,6 +69,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 setUserChatsError(null);
                 const endpoint = user?.id_cliente ? `/chat/${user.id_cliente}` : `/chat/${pro.id_profissional}`;
                 const response = await getRequest(endpoint)
+                console.log("namemkdsd", response)
                 setIsUserLoading(true);
 
                 if (response.error) {
@@ -78,7 +79,12 @@ export const ChatContextProvider = ({ children, user, pro }) => {
             }
         }
         getUserChats();
-    }, [user, pro])
+    }, [])
+
+    const updateCurrentChat = useCallback((chat) => {
+        setCurrentChat(chat.user.chat)
+        setChat(chat)
+    }, [])
 
     const createChat = useCallback(async (id_cliente, id_profissional) => {
         try {
@@ -101,10 +107,13 @@ export const ChatContextProvider = ({ children, user, pro }) => {
             };
 
             const response = await postRequest(`/chat/`, newChatData)
-
             if (response.error) {
                 return console.log("ERRO", response)
-            } else {
+            } else if(!response.user.response){
+                setUserChats((prev) => [...prev, response])
+                setCurrentChat(response.user.chat)
+            }            
+            else{
                 setUserChats((prev) => [...prev, response])
             }
         } catch (error) {
@@ -112,10 +121,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
         }
     }, [pro, setUserChats])
 
-    const updateCurrentChat = useCallback((chat) => {
-        setCurrentChat(chat.user.chat)
-        setChat(chat)
-    }, [])
+  
 
     useEffect(() => {
 
@@ -133,27 +139,26 @@ export const ChatContextProvider = ({ children, user, pro }) => {
            
         }
         getMessages();
-    }, [currentChat])
+    }, [currentChat, newMessage])
 
-    const sendTextMessage = useCallback(async(textMessage, sender, currentChatId, setTextMessage) => {
-        if(!textMessage) return console.log("Digite algo...")
+    const sendTextMessage = useCallback(async(textMessage, sender, currentChatId, senderType, setTextMessage) => {
+        if(!textMessage) return console.log("Digite algo...");
         const sendMessageData = {
             chatId: currentChatId,
             senderId: sender,
+            senderType: senderType, // Adicionando o tipo de remetente
             text: textMessage
         };
-        console.log(sendMessageData)
-       const response = await postRequest(`/message`, sendMessageData);
-        
-       if(response.error){
-        return setSendTextMessageError(response);
-       }
-       
-       setNewMessage(response);
-       SetMessages((prev)=> [...prev, response])
-       setTextMessage("");
-    }, [])
-
+        const response = await postRequest(`/message`, sendMessageData);
+        if(response.error){
+            return setSendTextMessageError(response);
+        }    
+        setNewMessage(response);
+        setSenderMessageType(response.user.senderType)
+        SetMessages((prev)=> [...prev, response]);
+        setTextMessage("");
+    }, []);
+    
     return (
         <ChatContext.Provider
             value={{
@@ -169,6 +174,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 messagesError,
                 chat,
                 sendTextMessage,
+                senderMessageType,
             }}
         >
             {children}
