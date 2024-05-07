@@ -56,9 +56,9 @@ const Config = () => {
     updateUserData({
       ...changedUserData,
       [field]: newValue,
-  });
+    });
   };
-  
+
 
   const deleteUpdate = () => {
     avatarUrl.current.src = user.img_cliente ? user.img_cliente : imgPerfil;
@@ -102,6 +102,8 @@ const Config = () => {
               <ImageCropper updatefoto={updatefoto} />
               <button onClick={() => setModalEditar(true)}>Editar</button>
             </div>
+
+
             <div className="sessao-config">
               <div className="edit-infoPessoais">
                 <h2>Informações Pessoais</h2>
@@ -151,6 +153,141 @@ const Config = () => {
                   </div>
                 </div>
               </div>
+              <div className="edit-info-endereco-principal">
+                <div className="leftPostar leftPostar-de-config">
+                  {/* {modalPostar && (
+                      <>
+                        <div className="fade">
+                          <div className={`modal-postar-sucess`}>
+                            <h3>Serviço postado</h3>
+                            <img src={imgApproved} />
+                            <p>Profissionas poderão vizualizar seu problema</p>
+                            <Link to={"/homeCliente"}>
+                              <button className="close-modal-postar" onClick={() => {
+                                setModalPostar(null); // Adicione esta linha para fechar o modal ao clicar em "Fechar"
+                              }}> Fechar</button></Link>
+                          </div>
+                        </div>
+                      </>
+                    )} */}
+                  <h2>Endereço Principal</h2>
+                  <div className="cep-estado">
+                    <div>
+                      <h4 className="postarH4">CEP</h4>
+                      <div>
+                        <TextInput
+                          type="text"
+                          name="cep"
+                          autocomplete="off"
+                          size={{
+                            width: "14vw",
+                            height: "1.5vw",
+                            // border: cepError
+                            //   ? "2px solid red"
+                            //   : "2px solid #eee",
+
+                          }}
+                        // onChange={(e) => {
+                        //   handleCepChange(e); // Chama a função handleCepChange existente
+                        //   updatepostarServico({ ...Servico, cep: e.target.value }); // Atualiza o estado do serviço com o novo valor do CEP
+                        // }}
+                        />
+                        {/* {cepError && (
+                            <p className="cepError">CEP incorreto</p>
+                          )} */}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="postarH4">Estado - Cidade</h4>
+                      <TextInput
+                        type="text"
+                        name="estado_cidade"
+                        size={{ width: "30vw", height: "1.5vw" }}
+                        placeholder={""}
+                        // value={Servico.uf_localidade}
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div className="bairro-rua">
+                    <div>
+                      <h4 className="postarH4">Bairro</h4>
+                      <TextInput
+                        type="text"
+                        name="bairro"
+                        autocomplete="off"
+                        size={{ width: "24vw", height: "1.5vw" }}
+                        placeholder={""}
+                      // value={Servico.bairro}
+                      // onChange={(e) => {
+                      //   updatepostarServico({ ...Servico, bairro: e.target.value });
+                      // }}
+                      />
+                    </div>
+                    <div>
+                      <div>
+                        <h4 className="postarH4">Nome da rua</h4>
+                        <TextInput
+                          type="text"
+                          name="nmRua"
+                          autocomplete="off"
+                          size={{ width: "20vw", height: "1.5vw" }}
+                          placeholder={""}
+                        // value={Servico.logradouro}
+                        // onChange={(e) => {
+                        //   updatepostarServico({ ...Servico, logradouro: e.target.value });
+                        // }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="num-complemento">
+                    <div>
+                      <h4 className="postarH4">Número da residência</h4>
+
+                      <TextInput
+                        type="number"
+                        name="nmrResidencia"
+                        autocomplete="off"
+                        size={{ width: "8vw", height: "1.5vw" }}
+                        placeholder={""}
+                      // onChange={(e) => {
+                      //   updatepostarServico({ ...Servico, nmrResidencia: e.target.value });
+                      // }}
+                      />
+                    </div>
+                    <div>
+                      <h4 className="postarH4">Complemento</h4>
+                      <TextInput
+                        type="text"
+                        name="complemento"
+                        autocomplete="off"
+                        size={{ width: "20vw", height: "1.5vw" }}
+                        placeholder={""}
+                      // onChange={(e) => {
+                      //   updatepostarServico({ ...Servico, complemento: e.target.value });
+                      // }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* {modalOpen && (
+  <div className="modal-confirmacao">
+    <div>
+    <h2>Confirmação</h2>
+    <p>Deseja realmente publicar o serviço?</p>
+    <div>
+      <div className="buttons-modal">
+      <button onClick={() => closeModal()}>Cancelar</button>
+      <button onClick={handleSubmit()}>Confirmar</button>
+    </div>
+    </div>
+  </div>
+  </div>
+  )} */}
+
+              </div>
               <div className="edit-seguranca">
                 <h2>Segurança da conta</h2>
                 <p>senha</p>
@@ -159,27 +296,23 @@ const Config = () => {
                   <p>alterar senha</p>
                 </div>
                 <div className="sair-excluirBtn">
-                <Link id="sair" to="/Login" onClick={() => logoutUser()}>LOGOUT</Link>
+                  <Link id="sair" to="/Login" onClick={() => logoutUser()}>LOGOUT</Link>
                   <button id="excluir">Excluir</button>
                 </div>
               </div>
             </div>
-            <div className="sessao-endereco-prinpal">
-              <div className="edit-info-endereco-principal">
 
-              </div>
-            </div>
           </div>
         </div>
       </div>
       {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close">&times;</span>
+        <div className="centralizador-modal-salvar-alteracoes">
+          <div className="modal-salvar-alteracoes">
             <p>Seu perfil foi alterado. Deseja salvar as alterações?</p>
-            <button onClick={deleteUpdate.bind(this)}>Cancelar</button>
-
-            <button onClick={handleSave}>Salvar</button>
+            <div className="botoes-modal-salvar-alteracoes">
+              <button className="btn-confirmar-alteracoes" onClick={handleSave}>Salvar</button>
+              <button className="btn-cancelar-alteracoes" onClick={deleteUpdate.bind(this)}>Cancelar</button>
+            </div>
           </div>
         </div>
       )}

@@ -15,7 +15,7 @@
     border-top-left-radius: 20px;
 }
 
-.cabecalho-editar > button{
+.cabecalho-editar>button {
     padding: .5vw 2vw .5vw 2vw;
     font-size: 1vw;
     color: white;
@@ -26,10 +26,10 @@
     border: solid 1px var(--verde);
 }
 
-.cabecalho-editar > button:hover{
+.cabecalho-editar>button:hover {
     border: solid 1px white;
     background-color: var(--azul);
-    
+
 }
 
 .cabecalho-editar #img {
@@ -143,21 +143,71 @@
 }
 
 /*editar endereço*/
-.sessao-endereco-prinpal {
-    background-color: #EEEEEE;
-    padding: 53px;
-    gap: 5vh;
-    display: flex;
-    flex-direction: column;
-}
-
 .edit-info-endereco-principal {
     background-color: white;
-    padding: 44px;
+    border-radius: 15px;
+    padding: 40px;
+}
+
+.leftPostar-de-config {
+    margin-left: 0;
+
+    background-color: white;
+    border-radius: 15px;
+}
+
+/*salvar alterações*/
+
+.centralizador-modal-salvar-alteracoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: calc(50px/10);
+    width: 100%;
+}
+
+.modal-salvar-alteracoes {
+    display: flex;
+    border-radius: 15px;
+    width: 27vw;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: #00000090;
+    flex-direction: column;
+    
+    p {
+            color: white;
+        }
+
+    .botoes-modal-salvar-alteracoes {
+        display: flex;
+        gap: 1vw;
+
+        .btn-confirmar-alteracoes {
+            border: none;
+            background-color: var(--verde);
+            padding: .5vw 1vw .5vw 1vw;
+            border-radius: 50px;
+            color: white;
+        }
+
+        .btn-cancelar-alteracoes {
+            border: none;
+            background-color: red;
+            padding: .5vw 1vw .5vw 1vw;
+            border-radius: 50px;
+            color: white;
+        }
+        
+    }
 }
 
 
-@media screen and (max-width: 500px){
+
+
+@media screen and (max-width: 500px) {
 
     .cabecalho-editar {
         width: 40px;
@@ -167,10 +217,10 @@
     .cabecalho-editar #img {
         top: 13vw;
         right: 27vw;
-    } 
+    }
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 700px) {
     .cabecalho-editar {
         width: 40px;
         height: 40px;

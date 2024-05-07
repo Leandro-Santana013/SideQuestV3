@@ -10,10 +10,6 @@
     flex-direction: column;
     
 }
-.modal{
-    position: absolute;
-    right: 1vw;
-}
 
 .card-profissional {
     display: flex;
@@ -168,6 +164,7 @@ h2 {
     border-radius: 15px;
     border: solid 2px #eee;
     background-color: white;
+    position: -ms-page;
 }
 
 .modal-content {
