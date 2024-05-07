@@ -6,14 +6,14 @@
         try {
             const response = await axios.post(baseUrl + url, body);
         
-            let message;
+            let message = null;
             let user;
             
 
             // Verificar se a resposta contém a chave "message" (sucesso)
             if (response.data && !response.data.error) {
                 
-                message = response.data.message;
+                message = response.data.message ? response.data.message : null;
                 delete response.data.message;
                 delete response.data.cd_cpfCliente
                 delete response.data.cd_senhaCliente

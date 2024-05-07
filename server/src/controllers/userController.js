@@ -131,6 +131,7 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     var { email, senha } = req.body;
+    console.log( email, senha)
 
     const user = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
@@ -195,18 +196,6 @@ exports.validaEmail = async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(200).json({ message: "Erro interno do servidor" });
-  }
-};
-
-exports.buscarattcls = async (req, res) => {
-  const { idCliente, email } = req.body;
-
-  const clientinfo = await controller_User.selectInfocliente({
-    params: { id_cliente: idCliente, cd_emailCliente: email },
-  });
-
-  if (!clientinfo) {
-    res.status(202).json();
   }
 };
 
@@ -422,4 +411,30 @@ if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate()))
         }catch(error){
           res.status(500).json({error: "erro interno no servidor"})
         }
+      }
+      
+exports.findPro = async (req, res) =>{
+  const {idProfissional} = req.params;
+
+  try{
+      const proInfo = await controller_User.selectInfoProfissional({
+    params: { id_profissional:  idProfissional},  
+  });
+    
+    res.status(200).json(proInfo)
+  }catch(error){
+    console.log(error);
+    res.status(500).json(error);
+  }
+}
+
+
+exports.findAllProfissionais = async (req, res) =>{
+  try{
+      const allPro = await controller_User.selectallprofissionais();
+    res.status(200).json(allPro)
+  }catch(error){
+    console.log(error);
+    res.status(500).json(error);
+  }
 }

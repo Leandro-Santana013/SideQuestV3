@@ -1,0 +1,56 @@
+.chat-container{
+    display: flex;
+    height: 40vw;
+    gap: 2vw;
+}
+
+.chat-list{
+    width: 22vw;
+height: inherit;
+filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.25));
+background-color: rgb(255, 255, 255);
+border-radius: 30px;
+}
+
+.chat-list > h3{
+    font-size: 1.7vw;
+    margin-left: 1vw;
+}
+
+.chats-actives{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: inherit;
+    flex-direction: column;
+    gap: 1vw;
+}
+.message-box{
+height: 5vw;
+width: 20vw;
+border-radius: 20px;
+background: #D4D4D4;
+box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.chat-box{
+    width: 44vw;
+    height: inherit;
+    border-radius: 20px;
+background: #FFF;
+border-radius: 20px;
+box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.25);
+display: flex;
+flex-direction: column;
+}
+
+.chat-header{
+    width: inherit;
+    height: 5vw;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.chat-main{
+    height: 30vw;
+
+}

@@ -281,4 +281,22 @@ updateInfoCliente: async (req, res) => {
   );
 },
 
-};
+
+  
+  selectallprofissionais: async (req, res) => {
+    return ModelProfissional.findAll({
+      raw: true,
+    });
+  },
+  
+  selectInfoProfissional: async (req, res) => {
+  const { id_profissional } = req.params;
+  return ModelProfissional.findOne({
+    where: {
+      id_profissional: id_profissional,
+    },
+    raw: true,
+  });
+}
+
+}

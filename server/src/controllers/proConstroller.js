@@ -207,3 +207,28 @@ exports.registerPro = async (req, res) => {
     console.log(populationService)
     res.status(200).json(populationService)
   }
+
+  exports.findAllUsers = async (req, res) =>{
+    try{
+        const allUser = await controller_Pro.selectallUsers();
+      res.status(200).json(allUser)
+    }catch(error){
+      console.log(error);
+      res.status(500).json(error);
+    }
+  }
+
+  exports.findUser = async (req, res) =>{
+    const {idCliente} = req.params;
+  
+    try{
+        const userInfo = await controller_Pro.selectInfoCliente({
+      params: { id_cliente:  idCliente},  
+    });
+      
+      res.status(200).json(userInfo)
+    }catch(error){
+      console.log(error);
+      res.status(500).json(error);
+    }
+  }

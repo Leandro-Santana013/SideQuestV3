@@ -8,6 +8,7 @@ import imgPerfil from '../../assets/icone-perfil.png'
 
 export const Perfilcli = () => {
   const { user } = useContext(UserContext);
+ 
   const [infocliente, setinfocliente] = useState(null);
 
   const [openModalPerfil, setOpenModalPerfil] = useState(false);
@@ -15,6 +16,9 @@ export const Perfilcli = () => {
   const userName = user && user.nm_cliente ? user.nm_cliente : "Carregando...";
   const userNameArray = userName.split(" ");
   let formattedName = '';
+
+
+
 
   if (userNameArray.length === 1) {
     formattedName = userNameArray[0];
@@ -46,7 +50,7 @@ export const Perfilcli = () => {
             <FaPaintBrush className="icone-editar-perfil" />
           </div>
           <div className="info-card-perfil">
-            <p>{formattedName}</p>
+            <p>{formattedName ? formattedName : formattedNamePro }</p>
             <div className="linha-divisora"></div>
             <span>
               {infocliente ? infocliente.nmr_telefoneCliente : "Carregando..."}

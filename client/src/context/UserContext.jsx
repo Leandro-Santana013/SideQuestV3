@@ -130,7 +130,6 @@ export const UserContextProvider = ({ children }) => {
       if (Object.keys(user).length > 0) {
         if(user.qt_idadeCliente == null &&  user.qt_idadeCliente == null)
         setModal(1);
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", user)
         setModalShown(true);
         localStorage.setItem("modalShown", true);
       }

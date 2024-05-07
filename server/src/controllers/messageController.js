@@ -2,12 +2,13 @@ const mensagensModel = require("../models/messagens")
 
 
 exports.createMessage = async (req, res) => {
-    const {chatId, senderId, text} = req.body
-    
+    const {chatId, senderId, text, senderType} = req.body
+
     const message = new mensagensModel({
         chatId,
         senderId,
         text,
+        senderType,
     })
 
     try {
@@ -20,15 +21,11 @@ exports.createMessage = async (req, res) => {
 }
 
 exports.getMessage = async (req, res) => {
-    const {chatId} = req.params 
-    
-    const messages = new mensagensModel.find({
-        chatId,
-    })
-
+    const {chatId} = req.params   
     try {
-        const response = await messages.save()
-        res.status(200).json(response)
+        const messages = await mensagensModel.find({chatId})
+        res.status(200).json(messages)
+        console.log(chatId,"================================A",messages)
     }catch(error){
         console.log(error)
         res.status(500).json(error)

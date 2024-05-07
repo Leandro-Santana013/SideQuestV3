@@ -1,28 +1,45 @@
-import { useContext } from "react";
-import { ChatContext } from "../../context/ChatContext";
-import { SidebarCliente, Header, Infoinc } from "../../components";
+import React,{useContext, useState} from "react";
 import "./chats.css";
+import { SidebarCliente, CardProfissional, Header, Infoinc, TextInput} from "../../components";
+import {ChatContext} from "../../context/ChatContext"
+import { UserChat } from "./UserChat";
+import {UserContext} from "../../context/UserContext"
+import { PotentialChats } from "./PotentialChats";
+import { ProfessionalContext } from "../../context/ProfissionalContext";
+import { ChatBox } from "./chatBox";
 export const Chats = () => {
-    const { userChats, isUserLoading, userChatsError } = useContext(ChatContext);
-    console.log(userChats);
+  const {user} = useContext(UserContext)
+  const {pro} = useContext(ProfessionalContext)
+  const  {userChats, isUserChatsLoading, userChatsError, updateCurrentChat} = useContext(ChatContext)
+ 
+  return (
+    <>
+      <Header />
+      <SidebarCliente />
+      <div className="content-midia">
 
-    return (
-        <>
-            <Header />
-            <SidebarCliente />
-            <div className="content-midia">
-                <div className="main-content">
-                    <div className="container-chatList">
-                        <p>Conversas</p>
-                        <div className="chatList"></div>
-                    </div>
-                    <div className="chatBox">
-                        <div className="header-chats"></div>
-                        <div className="chat"></div>
-                        <div className=""></div>
-                    </div>
+        <div className="main-content">
+              <Infoinc/>
+              <div className="chat-container">
+                <div className="chat-list">
+                  <h3>Conversas</h3>
+                  <div className="chats-actives">
+                    <PotentialChats/>
+                    {userChats?.map((chat,index) =>{
+                      return(
+                        <div key={index} onClick={() => updateCurrentChat(chat)}>
+                          <UserChat chat={chat} user={user} pro={pro}></UserChat>
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
-            </div>
-        </>
-    );
+                <div className="chat-box">
+                <ChatBox/>
+                </div>
+              </div>
+      </div>
+      </div>
+    </>
+  );
 };
