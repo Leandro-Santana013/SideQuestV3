@@ -382,12 +382,18 @@ exports.concluirCad = async (req, res) => {
 try{
 
   const birthDate = new Date(data);
-  const today = new Date();
-  const age = today.getFullYear() - birthDate.getFullYear();
-  const monthDiff = today.getMonth() - birthDate.getMonth();
-  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-      age--;  
-  }
+const today = new Date();
+
+let age = today.getFullYear() - birthDate.getFullYear();
+
+const monthDiff = today.getMonth() - birthDate.getMonth();
+
+if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--;  
+}
+
+
+  
        const userReset = await controller_User.updateInfoCliente({
         params: {
           id_cliente: id_cliente,

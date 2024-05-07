@@ -127,7 +127,7 @@ export const UserContextProvider = ({ children }) => {
     // Verifica se o modal já foi exibido, se o usuário está logado e se está na página inicial
     if (!modalAlreadyShown && user && window.location.pathname === '/homeCliente') {
       // Verifica se é necessário exibir o modal com base nas informações do usuário
-      if (Object.keys(user).length) {
+      if (Object.keys(user).length > 0) {
         if(user.qt_idadeCliente == null &&  user.qt_idadeCliente == null)
         setModal(1);
         console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", user)
@@ -151,6 +151,8 @@ export const UserContextProvider = ({ children }) => {
     const response = await postRequest("/user/concluirCad", infoConfirm)
     if (response.error) {
       setConclusioncadError(response.error);
+    }else{
+      localStorage.setItem("User", JSON.stringify(response.user));
     }
   }, [infoConfirm])
   //logout
