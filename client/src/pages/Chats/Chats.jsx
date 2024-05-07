@@ -10,12 +10,12 @@ import { ChatBox } from "./chatBox";
 export const Chats = () => {
   const { user } = useContext(UserContext)
   const { pro } = useContext(ProfessionalContext)
-  const { userChats, isUserChatsLoading, userChatsError, updateCurrentChat } = useContext(ChatContext)
+  const { userChats, isUserChatsLoading, userChatsError, updateCurrentChat, SidebarProfissional} = useContext(ChatContext)
 
   return (
     <>
       <Header />
-      <SidebarCliente />
+      {pro ?<SidebarProfissional/> : <SidebarCliente />  }
       <div className="content-midia">
         <div className="main-content">
           <Infoinc />
