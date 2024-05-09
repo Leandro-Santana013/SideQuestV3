@@ -8,7 +8,7 @@ const connectionDataBase = new Sequelize(
     {
         host: "localhost",
         dialect: "mysql",
-        port: 3306,
+        port: 3307,
         // Definindo o tempo limite de aquisição de conexão para 60 segundos (em milissegundos)
         pool: {
             acquire:  6000000
@@ -21,7 +21,7 @@ module.exports = { connectionDataBase }
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql2');
-
+ 
 // Construa o caminho completo para o arquivo JSON
 const filePath = path.join(__dirname, 'estados-cidades.json');
 const flagFilePath = path.join(__dirname, 'script-rodado.txt');
@@ -54,7 +54,7 @@ estados.forEach(estado => {
                 console.log(`{Cidade ${cidade} do estado ${estado.sigla} inserida com sucesso.}`);
             })
             .catch(err => {
-                console.error(`Erro ao inserir cidade ${cidade} do estado ${estado.sigla}: ${err.message}`);
+                console.error(`Erro ao inserir cidade ${cidade} do estado ${estado.sigla}: ${err.messag}`);
             });
     });
 });
