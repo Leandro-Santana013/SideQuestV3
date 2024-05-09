@@ -273,7 +273,6 @@ body {
 }
 
 /*Card 3*/
-
 .planos .cards-planos .card-plano .card-superior>p {
   font-size: 1.4rem;
   font-weight: bolder;
@@ -312,74 +311,62 @@ body {
 
 /* Responsividade */
 
-@media screen and (max-width: 1450px) {
+@media screen and (max-width: 1050px) {
   
-}
-
-@media screen and (min-width: 1280px) {
-  /*Arrumando menu*/
-
-  .img-logo {
-    width: 11vw;
-    height: 4vw;
-  }
-
-  .nav-profissa .navprofissaUl .navprofissaLiTxt a {
-    font-size: 1.5rem;
-  }
-
-  .navprofissaLi.btnNavProfissa {
-    font-size: 1.5rem;
-  }
-
-  /*Arrumando sessao card*/
-
+  /*Sessao banner*/
   .bannerProfissa .btn-txtBanner .title-banner {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
+    width: 38.5vw;
   }
 
   .bannerProfissa .btn-txtBanner button {
+    width: 17vw;
+    height: 5vw;
+  }
+
+  /*Sessao beneficios*/
+  .beneficios>h1 {
+    line-height: 3.3vh;
     font-size: 1.5rem;
   }
 
-  /*Arrumando sessao beneficios*/
+  .beneficios .beneficios-img {
+    flex-direction: column;
+  }
 
   .beneficios .beneficios-img img {
+    width: 48vw;
+  }
+
+  /*Sessao cards*/
+
+  .card-plano {
     width: 50vw;
+    height: 60vw;
+    padding: 20px;
   }
 
-  .beneficios .beneficios-img .txt-beneficios h2 {
-    font-size: 2.2rem;
+  .btn-card-plano-op {
+    width: 30vw;
+    font-size: 1.1rem;
+    height: 5vw;
   }
 
-  .beneficios .txt-beneficios .beneficios-cards img {
-    width: 7vw;
-  }
-
-  .beneficios .beneficios-img .txt-beneficios p {
-    font-size: 1.5rem;
-  }
-
-  /*Arrumando sessao cards*/
-
-  .planos>h2 {
-    font-size: 2.2rem;
-  }
-
-  .planos .cards-planos .card-plano .card-superior .gratis p {
-    font-size: 1.8rem;
-  }
-
-  .planos .cards-planos .card-plano .card-superior #vantagens-txt {
-    font-size: 1.8rem;
-  }
-
-  .list-beneficios .beneficio p {
-    font-size: 1.5rem;
-  }
+  /*Footer*/
+  footer img {
+    width: 13vw;
+    height: 5vw;
 }
 
-@media screen and (max-width: 768px) {
+ footer h6 {
+    font-size: 1.1rem;
+  }
+
+  .termos a,
+  .sobre a {
+    font-size: 0.9rem;
+  }
+
 
   .navprofissaLiTxtextra {
     font-size: 2.1rem;
@@ -473,7 +460,7 @@ body {
 }
 
 
-@media screen and (max-width: 541px) {
+@media screen and (max-width: 601px) {
   /*Arrumando sessao banner*/
 
   .bannerProfissa .btn-txtBanner .title-banner {
@@ -511,6 +498,13 @@ body {
   }
 
   /*Arrumando sessao planos*/
+
+  .card-plano {
+    width: 50vw;
+    height: 85vw;
+    padding: 20px;
+}
+
 
   .planos>h2 {
     font-size: 1.3rem;
@@ -639,38 +633,43 @@ body {
       font-size: 0.6rem;
     }
 
+    .list-beneficios .beneficio img {
+      width: 5.5vw;
+    }
+
     .valor-do-plano {
       font-size: 0.75rem;
     }
 
     .btn-card-plano-op {
-      width: 27vw;
+      width: 32vw;
       height: 6.5vw;
       font-size: 0.7rem;
     }
-
-    /*Arrumando Footer*/
-
-    footer {
-      padding: 5vw;
-    }
-
-    footer img {
-      width: 17vw;
-      height: 7vw;
-    }
-
-    footer h6 {
-      font-size: 0.78rem;
-      margin: 4vw;
-    }
-
-    .termos a,
-    .sobre a {
-      font-size: 0.7rem;
-      gap: 0.5vh;
-    }
   }
+
+  /*Arrumando Footer*/
+
+  footer {
+    padding: 5vw;
+  }
+
+  footer img {
+    width: 17vw;
+    height: 7vw;
+  }
+
+  footer h6 {
+    font-size: 0.78rem;
+    margin: 4vw;
+  }
+
+  .termos a,
+  .sobre a {
+    font-size: 0.7rem;
+    gap: 0.5vh;
+  }
+
 }
 
 

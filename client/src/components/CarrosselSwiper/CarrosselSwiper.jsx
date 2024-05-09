@@ -97,6 +97,7 @@ export const CarrosselSwiper = () => {
                     : num === 4
                     ? "Carpintaria"
                     : "Outros"}
+    
                 </p>
               </div>
             ))}
