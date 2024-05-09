@@ -11,7 +11,7 @@ import axios from 'axios';
 import { UserContext } from "../../context/UserContext";
 import { RiFilter2Fill, RiStarFill } from "react-icons/ri";
 
-export const CardProfissional = () => {
+export const CardProfissional = React.memo(() => {
   const [busca, setBusca] = useState();
   const handleBuscaChange = (event) => {
     setBusca(event.target.value);
@@ -223,4 +223,4 @@ return (
     )}
   </section>
 )
-}
+});

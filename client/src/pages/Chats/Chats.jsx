@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./chats.css";
-import { SidebarCliente, CardProfissional, Header, Infoinc, TextInput } from "../../components";
+import { SidebarCliente, CardProfissional, Header, Infoinc, TextInput, SidebarProfissional} from "../../components";
 import { ChatContext } from "../../context/ChatContext"
 import { UserChat } from "./UserChat";
 import { UserContext } from "../../context/UserContext"
@@ -10,7 +10,7 @@ import { ChatBox } from "./chatBox";
 export const Chats = () => {
   const { user } = useContext(UserContext)
   const { pro } = useContext(ProfessionalContext)
-  const { userChats, isUserChatsLoading, userChatsError, updateCurrentChat, SidebarProfissional} = useContext(ChatContext)
+  const { userChats, isUserChatsLoading, userChatsError, updateCurrentChat, } = useContext(ChatContext)
 
   return (
     <>

@@ -276,7 +276,7 @@ updateInfoCliente: async (req, res) => {
       qt_idadeCliente: qt_idadeCliente,
       sg_sexoCliente: sg_sexoCliente,
       nmr_telefoneCliente: nmr_telefoneCliente,
-    },
+    },  
     { where: { id_cliente: id_cliente } }
   );
 },
@@ -297,6 +297,44 @@ updateInfoCliente: async (req, res) => {
     },
     raw: true,
   });
-}
+},
+
+createadresscli: async (req, res) => {
+  const {
+    id_cliente,
+    nm_logradouro,
+    cd_cep,
+    id_cidade,
+    nm_bairro,
+    nmr_casa,
+    end_principal
+  } = req.params;
+  try {
+    return  ModelEndereco.create({
+        id_cliente: id_cliente,
+        id_cidade: id_cidade,
+        nm_logradouro: nm_logradouro,
+        cd_cep: cd_cep,
+        nm_bairro: nm_bairro,
+        nmr_casa: nmr_casa,
+        end_principal: end_principal
+    });
+  } catch (error) {
+    console.error("Erro ao criar ou encontrar endereço:", error);
+    throw error;
+  }
+},
+
+selectLocalcli: async (req, res) =>{
+  const { id_cliente, end_principal } = req.params;
+  return ModelEndereco.findOne({
+    where: {
+      id_cliente: id_cliente,
+      end_principal : end_principal
+    },
+    raw:true
+  })
+},
+
 
 }

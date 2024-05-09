@@ -4,33 +4,35 @@ const tokenConfirmacao = require("../../tools/createToken");
 const smtpconfig = require("../../config/smtp");
 const controller_User = require("./Querys/userQuerys");
 const validator = require("validator");
-const crypto = require('crypto');
-const jwt = require('jsonwebtoken');
-const Buffer = require('buffer').Buffer;
-
+const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+const Buffer = require("buffer").Buffer;
 
 let globalemail;
 let globaltoken;
 let globalCpf;
 
 const createToken = (id_cliente) => {
-  const jwtKey = crypto.randomBytes(64).toString('hex'); // Gerar uma chave JWT aleatória
-  const jwtSecret = crypto.createHash('sha512').update(id_cliente + jwtKey).digest('hex'); // Criar um token usando SHA-512
+  const jwtKey = crypto.randomBytes(64).toString("hex"); // Gerar uma chave JWT aleatória
+  const jwtSecret = crypto
+    .createHash("sha512")
+    .update(id_cliente + jwtKey)
+    .digest("hex"); // Criar um token usando SHA-512
 
-  return jwt.sign({ id_cliente }, jwtSecret, { expiresIn: "3d" })
+  return jwt.sign({ id_cliente }, jwtSecret, { expiresIn: "3d" });
 };
 
 exports.register = async (req, res) => {
   try {
     const { name, email, cpf, senha, senhaConfirm } = req.body;
-    console.log(name, email, cpf, senha, senhaConfirm)
+    console.log(name, email, cpf, senha, senhaConfirm);
     if (!name || !email || !cpf || !senha || !senhaConfirm) {
-      console.log("a")
+      console.log("a");
       return res.status(400).json({ error: "Preencha todos os campos" });
     }
 
     const cpfNumerico = cpf.replace(/\D/g, "");
-    console.log(cpfNumerico)
+    console.log(cpfNumerico);
 
     const emailResults = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
@@ -40,13 +42,15 @@ exports.register = async (req, res) => {
     globalCpf = cpfNumerico;
 
     if (emailResults.length > 0) {
-      console.log("b")
-      return res.status(400).json({ error: "Email inválido ou já está em uso" });
+      console.log("b");
+      return res
+        .status(400)
+        .json({ error: "Email inválido ou já está em uso" });
     } else if (senha !== senhaConfirm) {
       return res.status(400).json({ error: "As senhas estão incorretas" });
     }
     if (!validator.isStrongPassword(senha && senhaConfirm)) {
-      console.log("c")
+      console.log("c");
       return res
         .status(400)
         .json({ error: "As senhas näo são seguras o suficentes" });
@@ -57,8 +61,10 @@ exports.register = async (req, res) => {
     });
 
     if (cpfResults.length > 0) {
-      console.log("d")
-      return res.status(400).json({ error: "Alguns dos dados já estão sendo utilizado" });
+      console.log("d");
+      return res
+        .status(400)
+        .json({ error: "Alguns dos dados já estão sendo utilizado" });
     }
 
     // Hash da senha
@@ -118,10 +124,19 @@ exports.register = async (req, res) => {
       }
     }
     sendmail();
-    const secret = createToken(user.id_cliente)
-    console.log("sucess")
-    console.log(user.id_cliente, name, email, cpfNumerico, secret)
-    return res.status(200).json({ message: "Verifique sua caixa de email", userta: user.id_cliente, name, email, cpfNumerico, secret });
+    const secret = createToken(user.id_cliente);
+    console.log("sucess");
+    console.log(user.id_cliente, name, email, cpfNumerico, secret);
+    return res
+      .status(200)
+      .json({
+        message: "Verifique sua caixa de email",
+        userta: user.id_cliente,
+        name,
+        email,
+        cpfNumerico,
+        secret,
+      });
   } catch (error) {
     console.error(error);
     return res.render("error404");
@@ -131,7 +146,7 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     var { email, senha } = req.body;
-    console.log( email, senha)
+    console.log(email, senha);
 
     const user = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
@@ -158,17 +173,19 @@ exports.login = async (req, res) => {
         error: "Confirme seu email, verifique na sua caixa de entrada",
       });
     } else {
-      const login = await controller_User.bindCookieBypkCliente({
+      const clienteuser = await controller_User.bindCookieBypkCliente({
         params: { cd_emailCliente: email },
       });
-      const secret = createToken(login.id_cliente)
-      delete login.cd_cpfCliente
-      delete login.cd_senhaCliente
-     
-      console.log(login)
-      return res
-        .status(200)
-        .json(login);
+      const secret = createToken(clienteuser.clienteuser);
+      delete clienteuser.cd_cpfCliente;
+      delete clienteuser.cd_senhaCliente;
+
+      console.log(clienteuser);
+      const localizacaoprincipal = await controller_User.selectLocalcli({
+        params: {id_cliente: clienteuser.id_cliente, end_principal:true }
+      })
+      
+      return res.status(200).json({clienteuser, localizacaoprincipal});
     }
   } catch (error) {
     console.error(error);
@@ -213,7 +230,7 @@ exports.postarServico = async (req, res) => {
       categoria,
       idCliente,
       email,
-      imagens
+      imagens,
     } = req.body;
 
     console.log(
@@ -227,29 +244,31 @@ exports.postarServico = async (req, res) => {
       nmrResidencia,
       categoria,
       idCliente,
-      email,
+      email
     );
 
     if (!cep) {
-      return res.status(400).json({ error: "Insira o CEP corretamente", formstatus: 2 });
+      return res
+        .status(400)
+        .json({ error: "Insira o CEP corretamente", formstatus: 2 });
     }
 
     if (!titulo && !dsServico && !categoria) {
-      return res.status(400).json({ error: "Insira as informações corretamente", formstatus: 1 });
-    };
+      return res
+        .status(400)
+        .json({ error: "Insira as informações corretamente", formstatus: 1 });
+    }
 
-    if (!cep &&
-      !uf_localidade &&
-      !logradouro &&
-      !bairro &&
-      !nmrResidencia) {
-      return res.status(400).json({ error: "Insira as informações corretamente", formstatus: 2 });
+    if (!cep && !uf_localidade && !logradouro && !bairro && !nmrResidencia) {
+      return res
+        .status(400)
+        .json({ error: "Insira as informações corretamente", formstatus: 2 });
     }
 
     let imageBuffer;
     if (imagens) {
-      imageBuffer = Buffer.from(imagens, 'base64');
-      console.log(imageBuffer)
+      imageBuffer = Buffer.from(imagens, "base64");
+      console.log(imageBuffer);
     }
 
     var partes = uf_localidade.split(" - ");
@@ -262,7 +281,9 @@ exports.postarServico = async (req, res) => {
     });
 
     if (categoriaInstance === 0)
-      return res.status(400).json({ error: "categoria não selecionada", formstatus: 1 });
+      return res
+        .status(400)
+        .json({ error: "categoria não selecionada", formstatus: 1 });
 
     console.log(categoriaInstance);
 
@@ -312,10 +333,8 @@ exports.profissionalCard = async (req, res) => {
   const { Filtros } = req.body;
 
   const populationProfissional = await controller_User.selectProfissional();
-  console.log(populationProfissional)
+  console.log(populationProfissional);
   res.status(200).json(populationProfissional);
-
-
 };
 
 exports.selectinfos = async (req, res) => {
@@ -333,20 +352,19 @@ exports.selectinfos = async (req, res) => {
 exports.updateInfoUser = async (req, res) => {
   const { id_cliente, name, email, numero, foto } = req.body;
   try {
-    console.log(id_cliente, name, email, numero, foto)
+    console.log(id_cliente, name, email, numero, foto);
     // Converter base64 para Blob
     const clientinfo = await controller_User.selectInfocliente({
       params: { id_cliente: id_cliente },
     });
-   
 
     const clientinfoupdated = await controller_User.updateInfoCli({
       params: {
         id_cliente: id_cliente,
         nm_cliente: name ? name : clientinfo.nm_cliente,
         cd_emailCliente: email ? email : clientinfo.cd_emailCliente,
-        img_cliente: foto ? foto : clientinfo.img_cliente
-      }
+        img_cliente: foto ? foto : clientinfo.img_cliente,
+      },
     });
 
     const client = await controller_User.selectInfocliente({
@@ -354,87 +372,121 @@ exports.updateInfoUser = async (req, res) => {
     });
     delete client.cd_cpfCliente;
     delete client.cd_senhaCliente;
-    
+
     return res.status(200).json(client);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(500).json({ error: "Erro interno do servidor" });
   }
-}
-
+};
 
 /****************************************/
 exports.concluirCad = async (req, res) => {
-  const {telefone, data, sexo, cep, numeroResidencia, complemento, id_cliente, uf, localidade, logradouro, bairro} = req.body
-  if(!telefone || !data || !sexo || !cep || !numeroResidencia || !complemento  || !id_cliente  || !uf || !localidade || !logradouro || !bairro)
-     res.status(400).json({error: 'preencha todas as informações'})
-try{
+  const {
+    telefone,
+    data,
+    sexo,
+    cep,
+    numeroResidencia,
+    complemento,
+    id_cliente,
+    uf,
+    localidade,
+    logradouro,
+    bairro,
+  } = req.body;
+  if (
+    !telefone ||
+    !data ||
+    !sexo ||
+    !cep ||
+    !numeroResidencia ||
+    !complemento ||
+    !id_cliente ||
+    !uf ||
+    !localidade ||
+    !logradouro ||
+    !bairro
+  )
+    res.status(400).json({ error: "preencha todas as informações" });
+  try {
+    const birthDate = new Date(data);
+    const today = new Date();
 
-  const birthDate = new Date(data);
-const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
 
-let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
 
-const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
 
-if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-    age--;  
-}
+    const userReset = await controller_User.updateInfoCliente({
+      params: {
+        id_cliente: id_cliente,
+        qt_idadeCliente: age,
+        sg_sexoCliente: sexo,
+        nmr_telefoneCliente: telefone,
+      },
+    });
+
+    const cdCidade = await controller_User.selectCidadeAdress({
+      params: { nm_cidade: localidade, sg_estado: uf },
+    });
+
+    const enderecoInstance = await controller_User.createadresscli({
+      params: {
+        id_cliente: id_cliente,
+        id_cidade: cdCidade.id_cidade,
+        nm_logradouro: logradouro,
+        cd_cep: cep,
+        nm_bairro: bairro,
+        nmr_casa: numeroResidencia,
+        end_principal: true,
+      },
+    });
+    console.log(enderecoInstance)
+
+    const clienteuser = await controller_User.selectInfocliente({
+      params: { id_cliente: id_cliente }
+    });
+
+    const localizacaoprincipal = await controller_User.selectLocalcli({
+      params: { id_cliente: id_cliente, end_principal: true },
+    });
 
 
-  
-       const userReset = await controller_User.updateInfoCliente({
-        params: {
-          id_cliente: id_cliente,
-          qt_idadeCliente: age,
-          sg_sexoCliente: sexo,
-          nmr_telefoneCliente: telefone
-       }
-      })
-      
-        const cdCidade = await controller_User.selectCidadeAdress({
-          params: { nm_cidade: localidade, sg_estado: uf }})
+    res.status(200).json({clienteuser, localizacaoprincipal});
+  } catch (error) {
+    console.log("nananananna",error)
+    res.status(500).json({ error: "erro interno no servidor" });
+  }
+};
 
+exports.findPro = async (req, res) => {
+  const { idProfissional } = req.params;
 
-          const enderecoInstance = await controller_User.CreateadressService({
-            params: {
-              id_cliente: id_cliente,
-              id_cidade: cdCidade.id_cidade,
-              nm_logradouro: logradouro,
-              cd_cep: cep,
-              nm_bairro: bairro,
-              nmr_casa: numeroResidencia,
-              end_principal: true
-            },
-          });
-          res.status(200).json(enderecoInstance)
-        }catch(error){
-          res.status(500).json({error: "erro interno no servidor"})
-        }
-      }
-      
-exports.findPro = async (req, res) =>{
-  const {idProfissional} = req.params;
+  try {
+    const proInfo = await controller_User.selectInfoProfissional({
+      params: { id_profissional: idProfissional },
+    });
 
-  try{
-      const proInfo = await controller_User.selectInfoProfissional({
-    params: { id_profissional:  idProfissional},  
-  });
-    
-    res.status(200).json(proInfo)
-  }catch(error){
+    res.status(200).json(proInfo);
+  } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
-}
+};
 
-
-exports.findAllProfissionais = async (req, res) =>{
-  try{
-      const allPro = await controller_User.selectallprofissionais();
-    res.status(200).json(allPro)
-  }catch(error){
+exports.findAllProfissionais = async (req, res) => {
+  try {
+    const allPro = await controller_User.selectallprofissionais();
+    res.status(200).json(allPro);
+  } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
-}
+};

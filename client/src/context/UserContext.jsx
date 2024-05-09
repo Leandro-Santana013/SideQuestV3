@@ -13,6 +13,7 @@ export const UserContext = createContext();
 export const UserContextProvider = ({ children }) => {
   //objeto de usuario
   const [user, setUser] = useState({});
+  const [locationuser, setlocationuser] = useState(null)
 
   //objeto de registro
   const [formDataCadastro, setFormDataCadastro] = useState({
@@ -82,11 +83,13 @@ export const UserContextProvider = ({ children }) => {
           const pro = localStorage.getItem("pro")
           if (pro) {
             localStorage.removeItem("pro");
-            localStorage.setItem("User", JSON.stringify(response.user));
-            window.location.reload();
+            setlocationuser(response.user.localizacaoprincipal)
+            localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
+           window.location.reload
           }
           else {
-            localStorage.setItem("User", JSON.stringify(response.user));
+            localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
+            setlocationuser(response.user.localizacaoprincipal)
             window.location.reload();
           }
         }
@@ -164,10 +167,11 @@ export const UserContextProvider = ({ children }) => {
     if (!modalAlreadyShown && user && window.location.pathname === '/homeCliente') {
       // Verifica se é necessário exibir o modal com base nas informações do usuário
       if (Object.keys(user).length > 0) {
-        if (user.qt_idadeCliente == null && user.qt_idadeCliente == null)
+        if (user.qt_idadeCliente == null && user.qt_idadeCliente == null){
           setModal(1);
         setModalShown(true);
         localStorage.setItem("modalShown", true);
+        }
       }
     }
   }, [user]);
@@ -186,7 +190,11 @@ export const UserContextProvider = ({ children }) => {
     if (response.error) {
       setConclusioncadError(response.error);
     } else {
-      localStorage.setItem("User", JSON.stringify(response.user));
+      setModal(modal + 1)
+      localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
+      setlocationuser(response.user.localizacaoprincipal)
+      console.warn("MENSAGEM BOA abaixo |")
+      console.log(locationuser)
     }
   }, [infoConfirm])
 

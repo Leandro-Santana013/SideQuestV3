@@ -12,12 +12,12 @@
 
             // Verificar se a resposta contém a chave "message" (sucesso)
             if (response.data && !response.data.error) {
-                
+                console.log(response)
                 message = response.data.message ? response.data.message : null;
-                delete response.data.message;
-                delete response.data.cd_cpfCliente
-                delete response.data.cd_senhaCliente
-                delete response.cd_tokenCliente
+                delete response.data.clienteuser.message;
+                delete response.data.clienteuser.cd_cpfCliente
+                delete response.data.clienteuser.cd_senhaCliente
+                delete response.data.clienteuser.cd_tokenCliente
                 user = response.data
             } else {
                 // Se não houver uma chave "message", trata-se de um erro
