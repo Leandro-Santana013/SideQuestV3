@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
-const tokenConfirmacao = require("../../tools/createToken");
-const smtpconfig = require("../../config/smtp");
+const tokenConfirmacao = require("../tools/createToken");
+const smtpconfig = require("../config/smtp");
 const controller_User = require("./Querys/userQuerys");
 const validator = require("validator");
 const crypto = require("crypto");
@@ -127,16 +127,14 @@ exports.register = async (req, res) => {
     const secret = createToken(user.id_cliente);
     console.log("sucess");
     console.log(user.id_cliente, name, email, cpfNumerico, secret);
-    return res
-      .status(200)
-      .json({
-        message: "Verifique sua caixa de email",
-        userta: user.id_cliente,
-        name,
-        email,
-        cpfNumerico,
-        secret,
-      });
+    return res.status(200).json({
+      message: "Verifique sua caixa de email",
+      userta: user.id_cliente,
+      name,
+      email,
+      cpfNumerico,
+      secret,
+    });
   } catch (error) {
     console.error(error);
     return res.render("error404");
@@ -182,10 +180,10 @@ exports.login = async (req, res) => {
 
       console.log(clienteuser);
       const localizacaoprincipal = await controller_User.selectLocalcli({
-        params: {id_cliente: clienteuser.id_cliente, end_principal:true }
-      })
-      
-      return res.status(200).json({clienteuser, localizacaoprincipal});
+        params: { id_cliente: clienteuser.id_cliente, end_principal: true },
+      });
+
+      return res.status(200).json({ clienteuser, localizacaoprincipal });
     }
   } catch (error) {
     console.error(error);
@@ -448,20 +446,19 @@ exports.concluirCad = async (req, res) => {
         end_principal: true,
       },
     });
-    console.log(enderecoInstance)
+    console.log(enderecoInstance);
 
     const clienteuser = await controller_User.selectInfocliente({
-      params: { id_cliente: id_cliente }
+      params: { id_cliente: id_cliente },
     });
 
     const localizacaoprincipal = await controller_User.selectLocalcli({
       params: { id_cliente: id_cliente, end_principal: true },
     });
 
-
-    res.status(200).json({clienteuser, localizacaoprincipal});
+    res.status(200).json({ clienteuser, localizacaoprincipal });
   } catch (error) {
-    console.log("nananananna",error)
+    console.log("nananananna", error);
     res.status(500).json({ error: "erro interno no servidor" });
   }
 };

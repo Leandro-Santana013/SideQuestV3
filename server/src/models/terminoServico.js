@@ -1,32 +1,33 @@
-const { DataTypes } = require('sequelize')
-const { connectionDataBase } = require('../../database/db')
-const { _padraoTableDBExistence } = require('../../config/configTablesDB')
+const { DataTypes } = require("sequelize");
+const { connectionDataBase } = require("../database/db");
+const { _padraoTableDBExistence } = require("../config/configTablesDB");
 
-const ModelTerminoServico = connectionDataBase.define('tb_terminoServico',{
+const ModelTerminoServico = connectionDataBase.define(
+  "tb_terminoServico",
+  {
     id_terminoServico: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        autoIncrement: true,
-        primaryKey: true,
-        allowNull: false
+      type: DataTypes.INTEGER.UNSIGNED,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
     },
     id_confirmacaoServico: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
-        unique: true,
-        references:{
-            model:'tb_confirmacaoServico',
-            key:'id_confirmacaoServico'
-        }
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      unique: true,
+      references: {
+        model: "tb_confirmacaoServico",
+        key: "id_confirmacaoServico",
+      },
     },
     dt_terminoServico: {
-        type: DataTypes.DATE,
-        allowNull:false 
-    }
-
-},
-_padraoTableDBExistence('tb_terminoServico')
-)
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+  },
+  _padraoTableDBExistence("tb_terminoServico")
+);
 
 module.exports = {
-    ModelTerminoServico
-}
+  ModelTerminoServico,
+};
