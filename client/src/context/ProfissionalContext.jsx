@@ -110,22 +110,22 @@ export const ProfessionalContextProvider = ({ children }) => {
 
   const [Dadosiniciais, setDadosIniciais] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchDataFromBackend = async () => {
-     
+
       try {
         const response = await getRequest("/professional/servicoscard");
         console.log(response);
         setDadosIniciais(response);
-       
+
       } catch (error) {
         console.error("Erro ao buscar dados do backend:", error);
       }
     };
-    
+
     fetchDataFromBackend()
   }, [])
-  
+
 
   return (
     <ProfessionalContext.Provider

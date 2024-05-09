@@ -5,13 +5,11 @@ import {
   getRequest,
   putRequest,
 } from "../utils/services";
-export const UserContext = createContext();
 import axios from "axios";
 import { file } from "jszip";
 import { Infoinc } from "../components/Infoinc/Infoinc";
 
-
-
+export const UserContext = createContext();
 export const UserContextProvider = ({ children }) => {
   //objeto de usuario
   const [user, setUser] = useState({});
@@ -71,14 +69,54 @@ export const UserContextProvider = ({ children }) => {
     senha: null,
   });
 
+  const loginUser = useCallback(
+    async (e) => {
+      e.preventDefault();
+      setloginLoading(true);
+      setloginError(null);
+      try {
+        const response = await postRequest("/user/login", loginInfo);
 
+        if (response.error) setloginError(response.error);
+        else {
+          const pro = localStorage.getItem("pro")
+          if (pro) {
+            localStorage.removeItem("pro");
+            localStorage.setItem("User", JSON.stringify(response.user));
+            window.location.reload();
+          }
+          else {
+            localStorage.setItem("User", JSON.stringify(response.user));
+            window.location.reload();
+          }
+        }
+      } catch (error) {
+        setRegisterError("Erro ao logar. Por favor, tente novamente."); // Define o estado de erro com uma mensagem genérica de erro
+        setRegisterLoading(false);
+      }
+    },
+    [loginInfo]
+  );
 
   useEffect(() => {
     const userFromStorage = localStorage.getItem("User");
-
     setUser(JSON.parse(userFromStorage));
   }, []);
 
+  //logout
+
+  const [ConclussioncadError, setConclusioncadError] = useState(null)
+  const [modalShown, setModalShown] = useState(null);
+
+  const logoutUser = useCallback(() => {
+    localStorage.removeItem("User");
+    setUser(null);
+    localStorage.removeItem("modalShown");
+    setModalShown(null);
+    window.location.reload();
+  }, []);
+
+  
 
   useEffect(() => {
     console.log(user);
@@ -106,7 +144,7 @@ export const UserContextProvider = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
 
   const functionUpdateInfoUser = useCallback(async () => {
-    console.log("aaaaaaaaaaasdasas",changedUserData);
+    console.log("funfou", changedUserData);
 
     const response = await postRequest("/user/updateInfoUser", changedUserData);
     setUser(response.user)
@@ -119,8 +157,6 @@ export const UserContextProvider = ({ children }) => {
 
   const [modal, setModal] = useState(0)
 
-
-
   useEffect(() => {
     const modalAlreadyShown = localStorage.getItem("modalShown");
 
@@ -128,8 +164,8 @@ export const UserContextProvider = ({ children }) => {
     if (!modalAlreadyShown && user && window.location.pathname === '/homeCliente') {
       // Verifica se é necessário exibir o modal com base nas informações do usuário
       if (Object.keys(user).length > 0) {
-        if(user.qt_idadeCliente == null &&  user.qt_idadeCliente == null)
-        setModal(1);
+        if (user.qt_idadeCliente == null && user.qt_idadeCliente == null)
+          setModal(1);
         setModalShown(true);
         localStorage.setItem("modalShown", true);
       }
@@ -142,53 +178,18 @@ export const UserContextProvider = ({ children }) => {
 
 
   /********************/
-  const [ConclussioncadError, setConclusioncadError] = useState(null)
-  const [modalShown, setModalShown] = useState(null);
+  
 
   const concluirCad = useCallback(async (e) => {
     console.log(infoConfirm)
     const response = await postRequest("/user/concluirCad", infoConfirm)
     if (response.error) {
       setConclusioncadError(response.error);
-    }else{
+    } else {
       localStorage.setItem("User", JSON.stringify(response.user));
     }
   }, [infoConfirm])
-  //logout
 
-  const logoutUser = useCallback(() => {
-    localStorage.removeItem("User");
-    setUser(null);
-    localStorage.removeItem("modalShown");
-    setModalShown(null);
-    window.location.reload();
-  }, []);
-
-  const loginUser = useCallback(
-    async (e) => {
-      e.preventDefault();
-      setloginLoading(true);
-      setloginError(null);
-      try {
-        const response = await postRequest("/user/login", loginInfo);
-
-        if (response.error) setloginError(response.error);
-        else {
-          const pro = localStorage.getItem("pro")
-          if (pro)
-            localStorage.removeItem("pro");
-          else {
-            localStorage.setItem("User", JSON.stringify(response.user));
-            window.location.reload();
-          }
-        }
-      } catch (error) {
-        setRegisterError("Erro ao logar. Por favor, tente novamente."); // Define o estado de erro com uma mensagem genérica de erro
-        setRegisterLoading(false);
-      }
-    },
-    [loginInfo]
-  );
 
   const [cepError, setCepError] = useState(false);
   const [categorias, setCategorias] = useState([]);

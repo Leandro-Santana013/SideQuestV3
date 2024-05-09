@@ -18,7 +18,6 @@ import HomeProfissionais from "./pages/HomeProfissional/HomeProfissional";
 import ServicosPendentesCliente from "./pages/ServicosPendentesCliente/ServicosPendentesCliente";
 import LandingProfissional from "./pages/LandingProfissional/LandingProfissional";
 import Config from "./pages/Config/Config";
-import PaiSandu from "./pages/teste";
 import ServicosConcluidosProfissional from "./pages/ServicoConcluidos/ServicosConcluidos";
 import ServicosAtivosProfissa from "./pages/ServicosAtivosProfissa/ServicosAtivosProfissa";
 import VisualizarServicoCliente from "./pages/VisualizarServicoCliente/VisualizarServicoCliente";
@@ -35,10 +34,8 @@ const Router = () => {
   return (
     <BrowserRouter>
       <ChatContextProvider user={user} pro={pro}>
-        <ProfessionalContextProvider>
           <Routes>
             <Route exact path="/" element={<Landing />} />
-            <Route exact path="/teste" element={<PaiSandu />} />
             <Route exact path="/landingProfissional" element={<LandingProfissional />} />
             <Route exact path="/login" element={user ? <Navigate to="/homeCliente" /> : <Login />} />
             <Route exact path="/validaemail" element={<ValidaEmail />} />
@@ -61,7 +58,6 @@ const Router = () => {
             <Route exact path="/ServicosAtivosCliente" element={<ServicosAtivosCliente/>}/> 
             <Route exact path="/PerfilProfissional" element={<PerfilProfissional/>}/>
           </Routes>
-        </ProfessionalContextProvider>
       </ChatContextProvider>
     </BrowserRouter>
   );

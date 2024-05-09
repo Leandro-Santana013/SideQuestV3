@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Router from './Router'
 import { UserContext, UserContextProvider } from "./context/UserContext";
-import {ProfessionalContext, ProfessionalContextProvider } from "./context/ProfissionalContext";
+import { ProfessionalContext, ProfessionalContextProvider } from "./context/ProfissionalContext";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <UserContextProvider>
       <ProfessionalContextProvider>
-    <Router/>
-    </ProfessionalContextProvider>
+        <Router />
+      </ProfessionalContextProvider>
     </UserContextProvider>
   </React.StrictMode>
 );

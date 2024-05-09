@@ -6,11 +6,9 @@ body {
 
 /*Inicio Menu*/
 
-
 .menu-profissa {
   position: relative;
 }
-
 
 .nav-profissa {
   font-size: 1.5vw;
@@ -18,8 +16,6 @@ body {
   padding-left: 25px;
   padding-right: 30px;
 }
-
-
 
 .img-logoProfissa {
   width: 8vw;
@@ -101,8 +97,6 @@ body {
 }
 
 
-
-
 /*Fim Menu e Início banner*/
 
 .bannerProfissa {
@@ -127,9 +121,9 @@ body {
 }
 
 .bannerProfissa .btn-txtBanner button {
-  width: 15vw;
-  height: 2.5vw;
-  border-radius: 20px;
+  width: 12vw;
+  height: 3vw;
+  border-radius: 50vw;
   background-color: var(--verde);
   color: white;
   border: none;
@@ -217,7 +211,6 @@ body {
   padding: 1vw;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.24);
   border-radius: 20px;
-  width: 20vw;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -225,6 +218,8 @@ body {
 .planos .cards-planos {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 3vw;
   width: 100vw;
 }
 
@@ -315,128 +310,11 @@ body {
   background-color: var(--verde);
 }
 
-
 /* Responsividade */
 
-/*min-width tem que ser em ordem crescente*/
-
-@media screen and (min-width: 760px) {
-  /*Arrumando menu*/
-
-  .img-logo {
-    width: 13vw;
-    height: 5vw;
-  }
-
-  .nav-profissa .navprofissaUl .navprofissaLiTxt a {
-    font-size: 1.1rem;
-  }
-
-  .navprofissaLi.btnNavProfissa {
-    font-size: 1.1rem;
-  }
-
-  /*Arrumando sessao banner*/
-
-  .bannerProfissa .btn-txtBanner .title-banner {
-    font-size: 2rem;
-    width: 46.5vw;
-  }
-
-  .bannerProfissa .btn-txtBanner button {
-    width: 20vw;
-    height: 5.5vw;
-  }
-
-  /*Arrumando sessao beneficios*/
-
-  .beneficios>h1 {
-    font-size: 2rem;
-    line-height: 4.3vh;
-  }
-
-  .beneficios .beneficios-img {
-    flex-direction: column;
-  }
-
-  .beneficios .beneficios-img img {
-    width: 60vw;
-  }
-
-  .beneficios .beneficios-img .txt-beneficios h2 {
-    font-size: 1.7rem;
-  }
-
-  /*Arrumando sessao cards*/
-  .planos>h2 {
-    font-size: 1.7rem;
-  }
-
-  .planos .cards-planos {
-    flex-direction: column;
-    align-items: center;
-    gap: 4vh;
-  }
-
-  .card-plano {
-    width: 40vw;
-    height: 58vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .list-beneficios .beneficio p {
-    font-size: 1.1rem;
-  }
-
-  .btn-card-plano-op {
-    width: 31vw;
-    font-size: 1.1rem;
-    padding: 2vw;
-  }
-
-  /*Arrumando Footer*/
-
-  footer {
-    padding: 2vw;
-  }
-
-  footer img {
-    width: 13vw;
-    height: 5vw;
-  }
-
-  footer h6 {
-    font-size: 1.3rem;
-  }
-
-  .termos a,
-  .sobre a {
-    font-size: 1.1rem;
-  }
+@media screen and (max-width: 1450px) {
+  
 }
-
-@media screen and (min-width: 1000px) {
-
-  /*Arrumando sessao beneficios*/
-
-
-  .beneficios>h1 {
-    line-height: 6.3vw;
-  }
-
-  .beneficios .txt-beneficios .beneficios-cards img {
-    width: 10vw;
-  }
-
-  /*Arrumando sessao cards*/
-
-  .card-plano {
-    height: 46vw;
-  }
-}
-
 
 @media screen and (min-width: 1280px) {
   /*Arrumando menu*/
@@ -470,10 +348,6 @@ body {
     width: 50vw;
   }
 
-  .beneficios>h1 {
-    line-height: 5.3vw;
-  }
-
   .beneficios .beneficios-img .txt-beneficios h2 {
     font-size: 2.2rem;
   }
@@ -488,10 +362,6 @@ body {
 
   /*Arrumando sessao cards*/
 
-  .planos .cards-planos {
-    gap: 7vh;
-  }
-
   .planos>h2 {
     font-size: 2.2rem;
   }
@@ -504,73 +374,10 @@ body {
     font-size: 1.8rem;
   }
 
-  .card-plano {
-    height: 45vw;
-    width: 34vw;
-  }
-
-
   .list-beneficios .beneficio p {
     font-size: 1.5rem;
   }
 }
-
-
-
-@media screen and (min-width: 1720px) {
-  /*Arrumando banner*/
-
-  .bannerProfissa .btn-txtBanner button {
-    width: 10vw;
-    height: 3.5vw;
-  }
-
-  /*Arrumando a sessao beneficios*/
-
-  .beneficios>h1 {
-    line-height: 3.3vw;
-  }
-
-  .beneficios .beneficios-img {
-    display: flex;
-    flex-direction: row;
-  }
-
-
-  /*Arrumando sessao cards*/
-
-  .planos .cards-planos {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  .card-plano {
-    height: 29vw;
-    width: 22vw;
-  }
-
-  .card-plano {
-    height: 29vw;
-    width: 22vw;
-  }
-
-  .btn-card-plano-op {
-    width: 14vw;
-    padding: 1vw;
-  }
-
-  /*Arrumando footer*/
-
-  footer img {
-    width: 11vw;
-    height: 4vw;
-  }
-}
-
-
-/*Max width tem que ser em ordem decrescente*/
 
 @media screen and (max-width: 768px) {
 
@@ -715,13 +522,7 @@ body {
     align-items: center;
   }
 
-  .card-plano {
-    width: 40vw;
-    height: 65vw;
-    display: flex;
-    justify-content: center;
-    padding: 2vw;
-  }
+
 
   .planos .cards-planos .card-plano .card-superior .gratis p {
     font-size: 1rem;
@@ -808,75 +609,68 @@ body {
     font-size: 0.9rem;
   }
 
+
+
   /*Arrumando sessão planos*/
 
   .planos .cards-planos {
     flex-direction: column;
     align-items: center;
-    gap: 5vh;
+
+    .card-plano {
+      width: 50vw;
+      height: 70vw;
+      padding: 20px;
+    }
+
+    .planos .cards-planos .card-plano .card-superior .gratis p {
+      font-size: 0.9rem;
+    }
+
+    .planos .cards-planos .card-plano .card-superior>p {
+      font-size: 0.9rem;
+    }
+
+    .planos .cards-planos .card-plano .card-superior #vantagens-txt {
+      font-size: 0.8rem;
+    }
+
+    .list-beneficios .beneficio p {
+      font-size: 0.6rem;
+    }
+
+    .valor-do-plano {
+      font-size: 0.75rem;
+    }
+
+    .btn-card-plano-op {
+      width: 27vw;
+      height: 6.5vw;
+      font-size: 0.7rem;
+    }
+
+    /*Arrumando Footer*/
+
+    footer {
+      padding: 5vw;
+    }
+
+    footer img {
+      width: 17vw;
+      height: 7vw;
+    }
+
+    footer h6 {
+      font-size: 0.78rem;
+      margin: 4vw;
+    }
+
+    .termos a,
+    .sobre a {
+      font-size: 0.7rem;
+      gap: 0.5vh;
+    }
   }
-
-  .card-plano {
-    width: 50vw;
-    height: 70vw;
-    padding: 20px;
-  }
-
-  .planos .cards-planos .card-plano .card-superior .gratis p {
-    font-size: 0.9rem;
-  }
-
-  .planos .cards-planos .card-plano .card-superior>p {
-    font-size: 0.9rem;
-  }
-
-  .planos .cards-planos .card-plano .card-superior #vantagens-txt {
-    font-size: 0.8rem;
-  }
-
-  .list-beneficios .beneficio p {
-    font-size: 0.6rem;
-  }
-
-    {
-    gap: 2vw;
-  }
-
-
-
-  .valor-do-plano {
-    font-size: 0.75rem;
-  }
-
-  .btn-card-plano-op {
-    width: 27vw;
-    height: 6.5vw;
-    font-size: 0.7rem;
-  }
-
-  /*Arrumando Footer*/
-
-  footer {
-    padding: 5vw;
-  }
-
-  footer img {
-    width: 17vw;
-    height: 7vw;
-  }
-
-  footer h6 {
-    font-size: 0.78rem;
-    margin: 4vw;
-  }
-
-  .termos a,
-  .sobre a {
-    font-size: 0.7rem;
-    gap: 0.5vh;
-  }
-
-
 }
 
 
@@ -936,7 +730,6 @@ body {
   .planos .cards-planos {
     flex-direction: column;
     align-items: center;
-    gap: 4vh;
   }
 
   .card-plano {
@@ -1063,7 +856,6 @@ body {
   .planos .cards-planos {
     flex-direction: column;
     align-items: center;
-    gap: 4vh;
   }
 
   .card-plano {
@@ -1167,9 +959,6 @@ body {
   }
 
   /*Arrumando cards*/
-  .card-plano {
-    height: 85vw;
-  }
 
   .btn-card-plano-op {
     width: 29vw;
