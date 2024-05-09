@@ -17,7 +17,7 @@ import { UserContext } from "../../context/UserContext";
 
 const PostarServico = () => {
   const { PostarServico, updatepostarServico, categorias, Servico, fetchData, cepError, setServico, setModalPostar, messageErrorPostar, errorPostar, form,
-    setForm, modalPostar } = useContext(UserContext)
+    setForm, modalPostar, locationuser, isCheckedLocation, setIsCheckedLocation, PostarServicoWithLoc } = useContext(UserContext)
 
   useEffect(() => {
     console.log(form)
@@ -121,6 +121,7 @@ const PostarServico = () => {
 
 
 
+
   useEffect(() => {
     // Verificar se não há mais imagens selecionadas
     if (selectedImages.length === 0) {
@@ -201,7 +202,7 @@ const PostarServico = () => {
           {errorPostar && (
             <div className={errorPostar ? "message-error-postar-initial" : "message-error-postar-end"}>{messageErrorPostar}</div>
           )}
-          <form onSubmit={PostarServico} className="postarServico1">
+          <form onSubmit={isCheckedLocation ? PostarServicoWithLoc : PostarServico} className="postarServico1">
             {form === 1 && (
               <div>
                 <div className="headerVoltar">
@@ -234,13 +235,14 @@ const PostarServico = () => {
                         <option value="" disabled selected>Selecione uma categoria</option>
                         {categorias.map((categoria) => (
                           <option
+                            key={categoria.cd_categoria} // Adicione a chave única aqui
                             name={categoria.ds_categoria}
-                            key={categoria.cd_categoria}
                             value={categoria.cd_categoria}
                           >
                             {categoria.ds_categoria}
                           </option>
                         ))}
+
                       </select>
                     </div>
                     <h3 className="tituloServico">
@@ -271,6 +273,14 @@ const PostarServico = () => {
                         Anexo
                         <RiAttachment2 className="iconAnexo" />
                       </label>
+
+                      {locationuser && (<div>
+                        <p>usar endereço principal</p><input
+                          type="checkbox"
+                          id="loc"
+                          checked={isCheckedLocation}
+                          onChange={(e) => { setIsCheckedLocation(e.target.checked) }}
+                        /></div>)}
 
                       {selectedImages.slice(0, 2).map((image, index) => (
                         <div
@@ -361,14 +371,23 @@ const PostarServico = () => {
                   </div>
 
                   <div className="rightPostar">
-                    <button className="btnProximo" onClick={() => {
+                    {locationuser ? (<><button className="btnProximo" type={isCheckedLocation ? "submit" : ""} onClick={() => {
+                      if (selectedImages.length > 0) {
+                        zipImages(); // Chama a função para zipar as imagens apenas se houver alguma imagem selecionada
+                      }
+
+                    }}>
+                      Próximo
+                    </button></>) : <button className="btnProximo" onClick={() => {
                       handleNext(); // Chama a função para avançar para o próximo formulário
                       if (selectedImages.length > 0) {
                         zipImages(); // Chama a função para zipar as imagens apenas se houver alguma imagem selecionada
                       }
+
                     }}>
                       Próximo
-                    </button>
+                    </button>}
+
                   </div>
                 </div>
               </div>

@@ -133,9 +133,7 @@ export const Infoinc = () => {
               </div>
             </div>
           )}
-          {modal == 3 && (<>
-          
-          </>)}
+          {modal == 3 && (<></>)}
         </div>
       )}
     </>

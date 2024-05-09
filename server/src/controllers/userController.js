@@ -323,6 +323,88 @@ exports.postarServico = async (req, res) => {
   }
 };
 
+exports.postarServicoLoc = async (req, res) => {
+  try {
+    const {
+      idCliente,
+      Location,
+      servico
+      
+    } = req.body;
+
+    console.log(
+      idCliente,
+      Location,
+      servico
+    );
+
+   
+
+    if (!servico.titulo && !servico.dsServico && !servico.categoria) {
+      return res
+        .status(400)
+        .json({ error: "Insira as informações corretamente", formstatus: 1 });
+    }
+
+    
+    let imageBuffer;
+    if (imagens) {
+      imageBuffer = Buffer.from(imagens, "base64");
+      console.log(imageBuffer);
+    }
+
+    var partes = uf_localidade.split(" - ");
+    var estado = partes[0];
+    var cidade = partes[1];
+    console.log(estado, cidade);
+
+    const categoriaInstance = await controller_User.selectCategoriaescolhida({
+      params: { ds_categoria: categoria },
+    });
+
+    if (categoriaInstance === 0)
+      return res
+        .status(400)
+        .json({ error: "categoria não selecionada", formstatus: 1 });
+
+    console.log(categoriaInstance);
+
+    const cdCidade = await controller_User.selectCidadeAdress({
+      params: { nm_cidade: cidade, sg_estado: estado },
+    });
+
+    const enderecoInstance = await controller_User.CreateadressService({
+      params: {
+        id_cliente: idCliente,
+        id_cidade: cdCidade.id_cidade,
+        nm_logradouro: logradouro,
+        cd_cep: cep,
+        nm_bairro: bairro,
+        nmr_casa: nmrResidencia,
+      },
+    });
+
+    try {
+      const servicoInstance = await controller_User.CreateServico({
+        params: {
+          id_cliente: idCliente,
+          id_categoria: categoriaInstance.id_categoria,
+          id_endereco: enderecoInstance.id_endereco,
+          ds_servico: dsServico,
+          ds_titulo: titulo,
+          img_servico: imageBuffer ? imageBuffer : null,
+        },
+      });
+    } catch (error) {
+      console.log(`erro interno no servidor ${error}`);
+    }
+
+    return res.status(200).json({ message: "Serviço postado com sucesso" });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 exports.selectCategoria = async (req, res) => {
   const categoria = await controller_User.selectCategorias();
   console.log(categoria);

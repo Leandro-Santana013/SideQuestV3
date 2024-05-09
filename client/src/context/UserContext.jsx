@@ -85,11 +85,12 @@ export const UserContextProvider = ({ children }) => {
             localStorage.removeItem("pro");
             setlocationuser(response.user.localizacaoprincipal)
             localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
+            localStorage.setItem("loc", JSON.stringify(response.user.localizacaoprincipal))
            window.location.reload
           }
           else {
             localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
-            setlocationuser(response.user.localizacaoprincipal)
+            localStorage.setItem("loc", JSON.stringify(response.user.localizacaoprincipal))
             window.location.reload();
           }
         }
@@ -104,6 +105,9 @@ export const UserContextProvider = ({ children }) => {
   useEffect(() => {
     const userFromStorage = localStorage.getItem("User");
     setUser(JSON.parse(userFromStorage));
+
+    const locFromStorage = localStorage.getItem("loc");
+    setlocationuser(JSON.parse(locFromStorage));
   }, []);
 
   //logout
@@ -121,21 +125,7 @@ export const UserContextProvider = ({ children }) => {
 
   
 
-  useEffect(() => {
-    console.log(user);
-
-    setServico((prevServico) => ({
-      ...prevServico,
-      idCliente: user ? user.id_cliente : null,
-      email: user ? user.cd_emailCliente : null,
-    }));
-
-    setInfoConfirm((prevServico) => ({
-      ...prevServico,
-      id_cliente: user ? user.id_cliente : null,
-    }));
-  }, [user]);
-
+  
   const updateLogininfo = useCallback((info) => {
     setloginInfo(info);
   }, []);
@@ -192,8 +182,7 @@ export const UserContextProvider = ({ children }) => {
     } else {
       setModal(modal + 1)
       localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
-      setlocationuser(response.user.localizacaoprincipal)
-      console.warn("MENSAGEM BOA abaixo |")
+      localStorage.setItem("loc", JSON.stringify(response.user.localizacaoprincipal))
       console.log(locationuser)
     }
   }, [infoConfirm])
@@ -206,21 +195,11 @@ export const UserContextProvider = ({ children }) => {
   const [errorPostar, setErrorPostar] = useState(null);
   const [messageErrorPostar, setmessageErrorPostar] = useState(null);
 
-  const [Servico, setServico] = useState({
-    titulo: null,
-    dsServico: null,
-    cep: null,
-    uf_localidade: null,
-    logradouro: null,
-    bairro: null,
-    nmrResidencia: null,
-    categoria: null,
-    complemento: null,
-    idCliente: null,
-    email: null,
-    imagens: null,
-  });
+  const [Servico, setServico] = useState({});
+  const [dataServico, setDataServico] = useState({})
 
+
+  const [isCheckedLocation, setIsCheckedLocation] = useState(false);
   const PostarServico = useCallback(
     async (e) => {
       e.preventDefault();
@@ -250,6 +229,61 @@ export const UserContextProvider = ({ children }) => {
     },
     [Servico]
   );
+
+  const PostarServicoWithLoc = useCallback(
+    async (e) => {
+      e.preventDefault();
+      console.log(dataServico)
+      setModalPostar(false);
+
+      try {
+        // Enviar o formulário com o estado formData atualizado
+        const response = await postRequest("/user/postarServicoLoc", dataServico);
+        if (response.error) {
+          setmessageErrorPostar(response.error);
+          setErrorPostar(true);
+          setForm(response.formstatus);
+
+          setTimeout(() => {
+            setErrorPostar(null);
+            setmessageErrorPostar(null);
+          }, 4000);
+        } else {
+          setModalPostar(true);
+        }
+      } catch (error) {
+        console.error("Erro ao cadastrar:", error);
+        setMessage(
+          error.response?.data?.message || "Erro ao cadastrar. Tente novamente."
+        );
+      }
+    },
+    [Servico]
+  );
+
+  useEffect(() => {
+    console.log(user);
+
+    setServico((prevServico) => ({
+      ...prevServico,
+      idCliente: user ? user.id_cliente : null,
+      email: user ? user.cd_emailCliente : null,
+    }));
+
+    setInfoConfirm((prevServico) => ({
+      ...prevServico,
+      id_cliente: user ? user.id_cliente : null,
+    }));
+  }, [user, locationuser]);
+
+  useEffect(() => {
+    setDataServico((setDataServico) => ({
+      ...setDataServico,
+    idCliente: user ? user.id_cliente : null,
+    location: locationuser ? locationuser.id_endereco : null,
+    servico : Servico
+    }))
+  }, [user, Servico, locationuser]);
 
   const fetchData = async (cep) => {
     try {
@@ -359,7 +393,11 @@ export const UserContextProvider = ({ children }) => {
         infoConfirm,
         setInfoConfirm,
         concluirCad,
-        fetchDataConcluir
+        fetchDataConcluir,
+        locationuser,
+        isCheckedLocation,
+        setIsCheckedLocation,
+        PostarServicoWithLoc,
       }}
     >
       {children}
