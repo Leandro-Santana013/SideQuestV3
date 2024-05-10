@@ -3,7 +3,7 @@ const {
   ModelPostagemServico,
   ModelCliente
 } = require("../../models/index");
-const { Model, Op } = require("sequelize");
+const { Model, Op, Sequelize } = require("sequelize");
 const { raw } = require("mysql2");
 
 module.exports = {
@@ -95,24 +95,34 @@ module.exports = {
     );
   },
 
-    findServices: async (req, res) => {
-        try {
-            return ModelPostagemServico.findAll({
-                include: [{
-                    model: ModelCliente,
-                    required:true,
-                    raw:true,
-                    attributes: [
-                       [ "nm_cliente", "nm_cliente"],
-                       ["img_cliente", "img_cliente"]
-                    ]
-                }],
-                raw:true
-            });
-        } catch (err) {
-            console.error(`Erro: ${err}`);
-        }
-    },
+  findServices: async (req, res) => {
+    try {
+        return ModelPostagemServico.findAll({
+            where: {
+                id_postagemServico: {
+                    [Op.notIn]: Sequelize.literal(
+                        `(SELECT id_postagemServico FROM tb_confirmacaoServico)`
+                    )
+                }
+            },
+            include: [{
+                model: ModelCliente,
+                required: true,
+                raw: true,
+                attributes: [
+                    ["nm_cliente", "nm_cliente"],
+                    ["img_cliente", "img_cliente"]
+                ]
+            }],
+            raw: true
+        });
+        
+    } catch (err) {
+        console.error(`Erro: ${err}`);
+    }
+},
+
+
 
     selectallUsers: async (req, res) => {
       return ModelCliente.findAll({

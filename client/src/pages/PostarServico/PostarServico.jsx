@@ -371,22 +371,23 @@ const PostarServico = () => {
                   </div>
 
                   <div className="rightPostar">
-                    {locationuser ? (<><button className="btnProximo" type={isCheckedLocation ? "submit" : ""} onClick={() => {
+                    {locationuser && (
+                    <>
+                    <button className="btnProximo" type={isCheckedLocation ? "submit" : ""} onClick={() => {
+                     if(!isCheckedLocation){
+                     
+                      handleNext()
+                    }
+                    else{
                       if (selectedImages.length > 0) {
                         zipImages(); // Chama a função para zipar as imagens apenas se houver alguma imagem selecionada
                       }
+                    }
 
                     }}>
-                      Próximo
-                    </button></>) : <button className="btnProximo" onClick={() => {
-                      handleNext(); // Chama a função para avançar para o próximo formulário
-                      if (selectedImages.length > 0) {
-                        zipImages(); // Chama a função para zipar as imagens apenas se houver alguma imagem selecionada
-                      }
-
-                    }}>
-                      Próximo
-                    </button>}
+                    {isCheckedLocation ? "Postar": "Próximo" }
+                    </button></>) }
+                  
 
                   </div>
                 </div>

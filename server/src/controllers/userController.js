@@ -327,18 +327,17 @@ exports.postarServicoLoc = async (req, res) => {
   try {
     const {
       idCliente,
-      Location,
+      location,
       servico
       
     } = req.body;
 
     console.log(
       idCliente,
-      Location,
+      location,
       servico
     );
 
-   
 
     if (!servico.titulo && !servico.dsServico && !servico.categoria) {
       return res
@@ -348,18 +347,13 @@ exports.postarServicoLoc = async (req, res) => {
 
     
     let imageBuffer;
-    if (imagens) {
+    if (servico.imagens) {
       imageBuffer = Buffer.from(imagens, "base64");
       console.log(imageBuffer);
     }
 
-    var partes = uf_localidade.split(" - ");
-    var estado = partes[0];
-    var cidade = partes[1];
-    console.log(estado, cidade);
-
     const categoriaInstance = await controller_User.selectCategoriaescolhida({
-      params: { ds_categoria: categoria },
+      params: { ds_categoria: servico.categoria },
     });
 
     if (categoriaInstance === 0)
@@ -367,31 +361,16 @@ exports.postarServicoLoc = async (req, res) => {
         .status(400)
         .json({ error: "categoria não selecionada", formstatus: 1 });
 
-    console.log(categoriaInstance);
-
-    const cdCidade = await controller_User.selectCidadeAdress({
-      params: { nm_cidade: cidade, sg_estado: estado },
-    });
-
-    const enderecoInstance = await controller_User.CreateadressService({
-      params: {
-        id_cliente: idCliente,
-        id_cidade: cdCidade.id_cidade,
-        nm_logradouro: logradouro,
-        cd_cep: cep,
-        nm_bairro: bairro,
-        nmr_casa: nmrResidencia,
-      },
-    });
+   
 
     try {
       const servicoInstance = await controller_User.CreateServico({
         params: {
           id_cliente: idCliente,
           id_categoria: categoriaInstance.id_categoria,
-          id_endereco: enderecoInstance.id_endereco,
-          ds_servico: dsServico,
-          ds_titulo: titulo,
+          id_endereco: location,
+          ds_servico: servico.dsServico,
+          ds_titulo: servico.titulo,
           img_servico: imageBuffer ? imageBuffer : null,
         },
       });
@@ -434,7 +413,7 @@ exports.selectinfos = async (req, res) => {
 exports.updateInfoUser = async (req, res) => {
   const { id_cliente, name, email, numero, foto } = req.body;
   try {
-    console.log(id_cliente, name, email, numero, foto);
+    
     // Converter base64 para Blob
     const clientinfo = await controller_User.selectInfocliente({
       params: { id_cliente: id_cliente },
@@ -454,6 +433,7 @@ exports.updateInfoUser = async (req, res) => {
     });
     delete client.cd_cpfCliente;
     delete client.cd_senhaCliente;
+    console.log(client)
 
     return res.status(200).json(client);
   } catch (error) {
