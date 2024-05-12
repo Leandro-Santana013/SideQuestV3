@@ -335,6 +335,126 @@ selectLocalcli: async (req, res) =>{
     raw:true
   })
 },
+selectProfissionalinfo: async (req, res) => {
+  const { id_profissional } = req.params;
+  try {
+    const profissionais = await ModelProfissional.findOne({
+      where: {
+        id_profissional: id_profissional,
+      },
+      attributes: [
+        "id_profissional",
+        "sg_sexoProfissional",
+        "img_profissional",
+        "nm_profissional",
+        [Sequelize.col("tb_infoProfissional.ds_biografia"), "ds_biografia"],
+        [
+          Sequelize.fn(
+            "COUNT",
+            Sequelize.col(
+              "tb_confirmacaoServicos.tb_terminoServico.id_terminoServico"
+            )
+          ),
+          "num_servicos_terminados",
+        ],
+        [
+          Sequelize.fn(
+            "SUM",
+            Sequelize.col(
+              "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
+            )
+          ),
+          "total_avaliacoes",
+        ],
+        [
+          Sequelize.fn(
+            "COUNT",
+            Sequelize.col(
+              "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao"
+            )
+          ),
+          "num_avaliacoes",
+        ],
+        [
+          Sequelize.fn(
+            "COALESCE",
+            Sequelize.fn(
+              "AVG",
+              Sequelize.col(
+                "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
+              )
+            ),
+            0
+          ),
+          "media_avaliacoes",
+        ],
+      ],
+      include: [
+        {
+          model: ModelInfoProfissional,
+          attributes: [],
+        },
+        {
+          model: ModelConfirmacaoServico,
+          attributes: [],
+          include: [
+            {
+              model: ModelTerminoServico,
+              attributes: [],
+              include: [
+                {
+                  model: ModelAvaliacao,
+                  attributes: [
+                    "id_avaliacao",
+                    "nmr_avaliacao",
+                    "ds_comentario",
+                    "img_servico",
+                  ],
+                  where: {
+                    id_profissional: id_profissional, // Filtra as avaliações para este profissional específico
+                  },
+                  include: [
+                    {
+                      model: ModelTerminoServico,
+                      attributes: [],
+                      include: [
+                        {
+                          model: ModelConfirmacaoServico,
+                          attributes: [],
+                          include: [
+                            {
+                              model: ModelPostagemServico,
+                              attributes: [],
+                              include: [
+                                {
+                                  model: ModelCliente,
+                                  attributes: [
+                                    "id_cliente",
+                                    "nm_cliente",
+                                    "img_cliente",
+                                  ],
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      group: ["tb_profissional.id_profissional"],
+    });
 
+    return profissionais;
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+},
 
 }

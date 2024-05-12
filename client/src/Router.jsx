@@ -56,7 +56,7 @@ const Router = () => {
             <Route exact path="/VisualizarServicoCliente" element={<VisualizarServicoCliente/>}/> 
             <Route exact path="/VisualizarServicoProfissa" element={<VisualizarServicoProfissa/>}/> 
             <Route exact path="/ServicosAtivosCliente" element={<ServicosAtivosCliente/>}/> 
-            <Route exact path="/PerfilProfissional" element={<PerfilProfissional/>}/>
+            <Route exact path="/perfilProfissional/:id" element={<PerfilProfissional/>}/>
           </Routes>
       </ChatContextProvider>
     </BrowserRouter>

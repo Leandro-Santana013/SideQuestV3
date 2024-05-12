@@ -24,6 +24,10 @@ const ModelAvaliacao = connectionDataBase.define('tb_avaliacao', {
       ds_comentario: {
         type: DataTypes.TEXT,
         allowNull: true 
+      },
+      img_servico: {
+        type: DataTypes.TEXT('long'),
+        allowNull:  true
       }
 },
 _padraoTableDBExistence('tb_avaliacao')

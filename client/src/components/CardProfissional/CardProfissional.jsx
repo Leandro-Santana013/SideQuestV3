@@ -7,10 +7,15 @@ import imgMedalhaBronze from "../../assets/medelhabronze.png";
 import imgCertificado from "../../assets/certificado.png";
 import { TextInputBusca } from "../index";
 import axios from 'axios';
+import { Link } from "react-router-dom";
+
+
+
 
 import { RiFilter2Fill, RiStarFill } from "react-icons/ri";
 
 export const CardProfissional = () => {
+  
   const [dadosIniciais, setDadosIniciais] = useState([]);
   const [filtrados, setFiltrado] = useState(null);
   const [modal, setModal] = useState(false);
@@ -162,7 +167,9 @@ export const CardProfissional = () => {
                 </div>
               </div>
               <div className="contrate">
+              <Link to={`/perfilProfissional/${profissional.id_profissional}`}>
                 <button className="btn-contratar">Contratar</button>
+                </Link>
                 <div className="serv-realizados">
                   <img src={imgCertificado} alt="certificado" />
                   <p>Serviços realizados: {profissional.num_servicos_terminados}</p>

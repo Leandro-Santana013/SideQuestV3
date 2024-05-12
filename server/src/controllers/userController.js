@@ -552,3 +552,18 @@ exports.findAllProfissionais = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+exports.perfilpro = async (req, res) => {
+  const {id_profissional} = req.params
+  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", id_profissional)
+  try {
+    const Pro = await controller_User.selectProfissionalinfo({
+      params:{id_profissional: id_profissional}
+    });
+    console.log(Pro)
+    res.status(200).json(Pro);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};

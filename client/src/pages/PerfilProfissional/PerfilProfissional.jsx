@@ -1,19 +1,45 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import "./perfilProfissional.css";
-import { SidebarProfissional, Header, } from "../../components";
+import { SidebarProfissional, Header, SidebarCliente } from "../../components";
 import iconeperfil from "../../assets/icone-perfil.png";
+import { useParams } from "react-router-dom";
 import medalhaouro from "../../assets/medalhaouro.png"
 import medalha10k from "../../assets/medalha10k.png";
 import medalhabronze from "../../assets/medalha10k.png";
 import estrelas from "../../assets/estrelinha.png";
 import agenda from "../../assets/agenda.png";
 import certificado from "../../assets/certificado.png";
-
+import {
+    postRequest,
+    baseUrl,
+    getRequest,
+    putRequest,
+  } from "../../utils/services";
 const PerfilProfissional = () => {
+    const { id } = useParams();
+    
+    const [profissional, setProfissional] = useState(null);
+
+    useEffect(() => {
+        console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeee", id)
+      const fetchData = async () => {
+        try {
+          // Fazendo a solicitação para buscar informações do profissional com base no ID
+          const response = await getRequest(`/user/perfil/profissionais/${id}`);
+          // Configurando os dados do profissional no estado local
+          setProfissional(response.data);
+        } catch (error) {
+          console.error("Erro ao buscar informações do profissional:", error);
+          // Tratamento de erro adicional conforme necessário
+        }
+      };
+  
+      fetchData();
+    }, [id]);
     return (
         <>
             <Header />
-            <SidebarProfissional />
+            <SidebarCliente />
             <section className="content-midia">
                 <div className="main-content">
                     <div className="perfil-profissional">

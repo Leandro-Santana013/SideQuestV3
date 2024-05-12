@@ -46,6 +46,10 @@ const ModelPostagemServico = connectionDataBase.define('tb_postagemServico', {
         type: DataTypes.BLOB,
         allowNull: true,
       },
+      tm_postagem:  {
+        type: DataTypes.INTEGER,
+        allowNull:false
+      }
 },
     _padraoTableDBExistence('tb_postagemServico')
 )
