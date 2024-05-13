@@ -339,11 +339,14 @@ selectLocalcli: async (req, res) =>{
  queryPart1: async (req, res) =>{
   const {id_profissional}= req.params
  return  ModelProfissional.findOne({
-  where: { id_profissional:id_profissional },
+  where: { id_profissional: id_profissional },
   include: [
     {
       model: ModelInfoProfissional,
       attributes: [],
+    },
+    {
+      
     },
     {
       model: ModelConfirmacaoServico,
@@ -419,7 +422,6 @@ selectLocalcli: async (req, res) =>{
       ),
       "num_avaliacoes",
     ],
-    [ Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.img_servico"), "midias"],
     [
       Sequelize.fn(
         "COALESCE",
@@ -434,7 +436,7 @@ selectLocalcli: async (req, res) =>{
       "media_avaliacoes",
     ],
   ],
-  group: ['tb_profissional.id_profissional', 'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.img_servico',
+  group: ['tb_profissional.id_profissional',  
     'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.id_cliente',
     'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao'] // Inclua todas as colunas não agregadas na cláusula GROUP BY
 });

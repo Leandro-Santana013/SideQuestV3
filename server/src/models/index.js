@@ -9,6 +9,8 @@ const { ModelPostagemServico } = require('./postagemServico');
 const { ModelConfirmacaoServico } = require('./confirmacaoServico');
 const { ModelTerminoServico } = require('./terminoServico');
 const { ModelAvaliacao } = require('./avaliacao');
+const { ClienteProfissionalFavorito } = require('./fav')
+const { ModelProfissionalProfileImg } = require('./profissionalProfileImg')
 
 //um cliente tem muitas postagens e uma postagem tem um cliente
 ModelCliente.hasMany(ModelPostagemServico, { foreignKey: 'id_cliente' });
@@ -34,6 +36,9 @@ ModelEndereco.belongsTo(ModelCidade, { foreignKey: 'id_cidade' });
 ModelPostagemServico.hasOne(ModelConfirmacaoServico, { foreignKey: 'id_confirmacaoServico' });
 ModelConfirmacaoServico.belongsTo(ModelPostagemServico, { foreignKey: 'id_confirmacaoServico' });
 
+
+ModelCliente.belongsToMany(ModelProfissional, { through: ClienteProfissionalFavorito, foreignKey: 'id_cliente' });
+ModelProfissional.belongsToMany(ModelCliente, { through: ClienteProfissionalFavorito, foreignKey: 'id_profissional' });
 
 
 //as informaçôes de profissionais tem um profissional e um profissional tem uma informação de profissional
