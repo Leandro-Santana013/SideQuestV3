@@ -19,9 +19,13 @@ const PerfilProfissional = () => {
     const { id } = useParams();
     
     const [profissional, setProfissional] = useState(null);
+    const [Form, setForm] = useState(1);
+    const handleState = (n) => {
+        setForm(n)
+    }
 
     useEffect(() => {
-        console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeee", id)
+        
       const fetchData = async () => {
         try {
           // Fazendo a solicitação para buscar informações do profissional com base no ID
@@ -55,9 +59,9 @@ const PerfilProfissional = () => {
                             </div>
                             <div className="menu-perfil">
                                 <ul>
-                                    <li>Sobre</li>
-                                    <li>Mídia(4)</li>
-                                    <li>Avaliações</li>
+                                    <li onClick={handleState(1)}>Sobre</li>
+                                    <li onClick={handleState(2)}>Mídia(4)</li>
+                                    <li onClick={handleState(3)}>Avaliações</li>
                                 </ul>
                             </div>
                             <hr />

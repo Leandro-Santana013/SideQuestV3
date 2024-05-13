@@ -1,4 +1,3 @@
-
 const { ModelCliente } = require('./cliente');
 const { ModelProfissional } = require('./profissional');
 const { ModelInfoProfissional } = require('./infoProfissional');
@@ -20,6 +19,8 @@ ModelPostagemServico.belongsTo(ModelCliente, { foreignKey: 'id_cliente' });
 ModelCategoria.hasMany(ModelPostagemServico, { foreignKey: 'id_categoria' });
 ModelPostagemServico.belongsTo(ModelCategoria, { foreignKey: 'id_categoria' });
 
+ModelProfissional.hasMany(ModelProfissionalProfileImg, {foreignKey:  'id_profissional'})
+ModelProfissionalProfileImg.belongsTo(ModelProfissional, {foreignKey: 'id_profissional'})
 //um endereço tem muitas postagens e uma postagem tem um endereço
 ModelEndereco.hasMany(ModelPostagemServico, { foreignKey: 'id_endereco' });
 ModelPostagemServico.belongsTo(ModelEndereco, { foreignKey: 'id_endereco' });
@@ -67,5 +68,6 @@ module.exports = {
     ModelConfirmacaoServico,
     ModelTerminoServico,
     ModelAvaliacao,
-
+    ClienteProfissionalFavorito,
+    ModelProfissionalProfileImg
 };
