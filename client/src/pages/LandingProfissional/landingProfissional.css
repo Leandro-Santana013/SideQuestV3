@@ -301,7 +301,7 @@ body {
   background-color: var(--azul);
   border: none;
   padding: 1vw;
-  border-radius: 1.5vw;
+  border-radius: 100vw;
   transition: all .25s;
 }
 
@@ -339,12 +339,6 @@ body {
   }
 
   /*Sessao cards*/
-
-  .card-plano {
-    width: 50vw;
-    height: 60vw;
-    padding: 20px;
-  }
 
   .btn-card-plano-op {
     width: 30vw;
@@ -498,12 +492,6 @@ body {
   }
 
   /*Arrumando sessao planos*/
-
-  .card-plano {
-    width: 50vw;
-    height: 85vw;
-    padding: 20px;
-}
 
 
   .planos>h2 {
@@ -855,12 +843,6 @@ body {
   .planos .cards-planos {
     flex-direction: column;
     align-items: center;
-  }
-
-  .card-plano {
-    width: 38vw;
-    padding: 10px;
-    height: 65vw;
   }
 
   .planos .cards-planos .card-plano .card-superior .gratis p {

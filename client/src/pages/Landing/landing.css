@@ -70,7 +70,9 @@ body {
 }
 
 .left-banner strong {
-  color: var(--verde);
+  background: linear-gradient(to right, var(--verde), var(--azul));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-decoration: underline;
 }
 
