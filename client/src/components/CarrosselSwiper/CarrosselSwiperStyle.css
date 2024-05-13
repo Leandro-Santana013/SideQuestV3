@@ -106,7 +106,7 @@
 }
 
 .swiper-wrapper {
-  height: 120% !important;
+  height: 20% !important;
 }
 
 .swiper {
@@ -121,6 +121,7 @@
   background: #fff;
   display: flex;
   justify-content: center;
+  
   align-items: center;
 }
 
@@ -138,16 +139,12 @@
 }
 
 .swiper-slide .card-carrossel .btn-buscar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 6vw;
-  height: 3vw;
-  border-radius: 6px;
+  border: none;
   background-color: var(--verde);
-  font-size: 1.3vw;
-  transition: 0.25s ease-in-out;
-  cursor: pointer;
+  padding: 12px 17px 12px 17px;
+  font-size: 1.5vw;
+  border-radius: 50vw;
+  transition: all .25s;
 }
 
 .swiper-slide .card-carrossel .btn-buscar:hover {

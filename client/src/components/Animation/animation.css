@@ -54,7 +54,7 @@
     width: auto;
     height: auto;
     border-radius: 0.8vw;
-    background-color: var(--verde);
+    background: linear-gradient(to right, var(--verde), var(--azul));
     color: #ffffff;
     font-size: 1vw;
   }

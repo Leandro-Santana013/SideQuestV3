@@ -16,9 +16,6 @@
   justify-content: space-between;
   align-items: center;
 }
-.navHomeLi {
-  font-size: 30px;
-}
 
 .navHomeLi.white {
   font-weight: bolder;
@@ -35,8 +32,7 @@
   background-color: white;
   color: var(--verde);
   padding: 15px;
-  border-radius: 50px;
-  font-size: 23px;
+  border-radius: 50vw;
 }
 
 .menuResp {

@@ -68,7 +68,7 @@ export const CarrosselSwiper = () => {
       </div>
       <div className="carrossel">
         <div className="left-carrossel">
-          <div>
+          <div className="slaman">
             {[1, 2, 3, 4, 5].map((num) => (
               <div
                 className="carrossel-btn"
@@ -77,8 +77,8 @@ export const CarrosselSwiper = () => {
                 style={{
                   borderLeft:
                     activeCarrossel === num
-                      ? "1.5px groove var(--verde)"
-                      : "1px solid black",
+                      ? "4px solid var(--verde)"
+                      : "4px solid #f4f4f4",
                 }}
               >
                 <p
@@ -125,9 +125,9 @@ export const CarrosselSwiper = () => {
                       <div className="card-carrossel">
                         <img src={slide.image} alt={slide.text} />
                         <p>{slide.text}</p>
-                        <div className="btn-buscar">
+                        <button className="btn-buscar">
                           <a href={slide.htref}>Buscar</a>
-                        </div>
+                        </button>
                       </div>
                     </div>
                   </div>
