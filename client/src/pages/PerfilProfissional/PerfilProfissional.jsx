@@ -27,7 +27,8 @@ const PerfilProfissional = () => {
           // Fazendo a solicitação para buscar informações do profissional com base no ID
           const response = await getRequest(`/user/perfil/profissionais/${id}`);
           // Configurando os dados do profissional no estado local
-          setProfissional(response.data);
+          setProfissional(response);
+          console.log(response)
         } catch (error) {
           console.error("Erro ao buscar informações do profissional:", error);
           // Tratamento de erro adicional conforme necessário
@@ -42,12 +43,13 @@ const PerfilProfissional = () => {
             <SidebarCliente />
             <section className="content-midia">
                 <div className="main-content">
+                    {profissional && (
                     <div className="perfil-profissional">
                         <div className="cabecalho-perfil">
                             <div className="perfil-nome">
-                                <img src={iconeperfil} alt="icone de perfil" />
+                                <img src={profissional && profissional.img_profissional ? profissional.img_profissional : iconeperfil} alt="icone de perfil" />
                                 <div className="nome-profissao">
-                                    <h1>Caio Bezerra</h1>
+                                    <h1>{profissional[0].nm_profissional}</h1>
                                     <h2>Eletricista</h2>
                                 </div>
                             </div>
@@ -64,7 +66,7 @@ const PerfilProfissional = () => {
                             <div className="avaliacao">
                                 {/* <button>Editar</button> */}
                                 <div className="num-avaliacao">
-                                    <p>5.00</p>
+                                    <p>{profissional[0].media_avaliacoes}</p>
                                     <div className="estrela">
                                         <img src={estrelas} alt="estrelas" />
                                         <p>210 avaliações</p>
@@ -79,7 +81,7 @@ const PerfilProfissional = () => {
                             <div className="info-pessoais">
                                 <div className="sobremim">
                                     <h2>Sobre mim</h2>
-                                    <p>Eu sou um eletricista formado pela FATEC e tenho 5 anos de experiência em instalações elétricas e manutenção. Sou especializado em reparos elétricos residenciais e comerciais, incluindo a instalação de novos sistemas elétricos, reparos de fiação, iluminação e muito mais. Tenho conhecimento em tecnologia e inovação e estou sempre atualizado com as últimas tendências do setor. Sou capaz de trabalhar bem em equipe e tenho excelentes habilidades de comunicação.</p>
+                                    <p>{profissional[0].ds_biografia}.</p>
                                 </div>
                                 <div className="registro-servicos">
                                     <div className="registro">
@@ -88,12 +90,14 @@ const PerfilProfissional = () => {
                                     </div>
                                     <div className="servicos">
                                         <img src={certificado} alt="certificado" />
-                                        <p>Serviços Realizados: 210</p>
+                                        <p>Serviços Realizados: {profissional[0].num_servicos_terminados
+}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    )}
                 </div>
             </section>
         </>

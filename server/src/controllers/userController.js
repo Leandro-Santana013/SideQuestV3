@@ -557,11 +557,17 @@ exports.perfilpro = async (req, res) => {
   const {id_profissional} = req.params
   console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", id_profissional)
   try {
-    const Pro = await controller_User.selectProfissionalinfo({
+    const pt1 = await controller_User.queryPart1({
       params:{id_profissional: id_profissional}
     });
-    console.log(Pro)
-    res.status(200).json(Pro);
+    const pt2 = await controller_User.queryPart2({
+      params:{id_profissional: id_profissional}
+    });
+    const result = [pt1, pt2];
+
+
+    console.log(result)
+    res.status(200).json(result);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);

@@ -335,126 +335,179 @@ selectLocalcli: async (req, res) =>{
     raw:true
   })
 },
-selectProfissionalinfo: async (req, res) => {
-  const { id_profissional } = req.params;
-  try {
-    const profissionais = await ModelProfissional.findOne({
-      where: {
-        id_profissional: id_profissional,
-      },
-      attributes: [
-        "id_profissional",
-        "sg_sexoProfissional",
-        "img_profissional",
-        "nm_profissional",
-        [Sequelize.col("tb_infoProfissional.ds_biografia"), "ds_biografia"],
-        [
-          Sequelize.fn(
-            "COUNT",
-            Sequelize.col(
-              "tb_confirmacaoServicos.tb_terminoServico.id_terminoServico"
-            )
-          ),
-          "num_servicos_terminados",
-        ],
-        [
-          Sequelize.fn(
-            "SUM",
-            Sequelize.col(
-              "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
-            )
-          ),
-          "total_avaliacoes",
-        ],
-        [
-          Sequelize.fn(
-            "COUNT",
-            Sequelize.col(
-              "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao"
-            )
-          ),
-          "num_avaliacoes",
-        ],
-        [
-          Sequelize.fn(
-            "COALESCE",
-            Sequelize.fn(
-              "AVG",
-              Sequelize.col(
-                "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
-              )
-            ),
-            0
-          ),
-          "media_avaliacoes",
-        ],
-      ],
+
+ queryPart1: async (req, res) =>{
+  const {id_profissional}= req.params
+ return  ModelProfissional.findOne({
+  where: { id_profissional:id_profissional },
+  include: [
+    {
+      model: ModelInfoProfissional,
+      attributes: [],
+    },
+    {
+      model: ModelConfirmacaoServico,
+      attributes: [],
       include: [
         {
-          model: ModelInfoProfissional,
-          attributes: [],
-        },
-        {
-          model: ModelConfirmacaoServico,
+          model: ModelTerminoServico,
           attributes: [],
           include: [
             {
-              model: ModelTerminoServico,
+              model: ModelAvaliacao,
               attributes: [],
               include: [
                 {
-                  model: ModelAvaliacao,
-                  attributes: [
-                    "id_avaliacao",
-                    "nmr_avaliacao",
-                    "ds_comentario",
-                    "img_servico",
-                  ],
-                  where: {
-                    id_profissional: id_profissional, // Filtra as avaliações para este profissional específico
-                  },
+                  model: ModelTerminoServico,
+                  attributes: [],
                   include: [
                     {
-                      model: ModelTerminoServico,
+                      model: ModelConfirmacaoServico,
                       attributes: [],
                       include: [
                         {
-                          model: ModelConfirmacaoServico,
+                          model: ModelPostagemServico,
                           attributes: [],
                           include: [
                             {
-                              model: ModelPostagemServico,
-                              attributes: [],
-                              include: [
-                                {
-                                  model: ModelCliente,
-                                  attributes: [
-                                    "id_cliente",
-                                    "nm_cliente",
-                                    "img_cliente",
-                                  ],
-                                },
-                              ],
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-      group: ["tb_profissional.id_profissional"],
-    });
+                              model: ModelCliente,
+                              attributes: []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  attributes: [
+    'id_profissional',
+    'sg_sexoProfissional',
+    'img_profissional',
+    'nm_profissional',
+    [Sequelize.col("tb_infoProfissional.ds_biografia"), "ds_biografia"],
+    [
+      Sequelize.fn(
+        "COUNT",
+        Sequelize.col(
+          "tb_confirmacaoServicos.tb_terminoServico.id_terminoServico"
+        )
+      ),
+      "num_servicos_terminados",
+    ],
+    [
+      Sequelize.fn(
+        "SUM",
+        Sequelize.col(
+          "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
+        )
+      ),
+      "total_avaliacoes",
+    ],
+    [
+      Sequelize.fn(
+        "COUNT",
+        Sequelize.col(
+          "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao"
+        )
+      ),
+      "num_avaliacoes",
+    ],
+    [ Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.img_servico"), "midias"],
+    [
+      Sequelize.fn(
+        "COALESCE",
+        Sequelize.fn(
+          "AVG",
+          Sequelize.col(
+            "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
+          )
+        ),
+        0
+      ),
+      "media_avaliacoes",
+    ],
+  ],
+  group: ['tb_profissional.id_profissional', 'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.img_servico',
+    'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.id_cliente',
+    'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao'] // Inclua todas as colunas não agregadas na cláusula GROUP BY
+});
+ },
 
-    return profissionais;
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-},
+queryPart2: async(req, res)  =>{ 
+  const {id_profissional}= req.params
+  return ModelProfissional.findAll({
+    where: { id_profissional:id_profissional },
+  include: [
+    {
+      model: ModelInfoProfissional,
+      attributes: [],
+    },
+    {
+      model: ModelConfirmacaoServico,
+      attributes: [],
+      include: [
+        {
+          model: ModelTerminoServico,
+          attributes: [],
+          include: [
+            {
+              model: ModelAvaliacao,
+              attributes: [],
+              include: [
+                {
+                  model: ModelTerminoServico,
+                  attributes: [],
+                  include: [
+                    {
+                      model: ModelConfirmacaoServico,
+                      attributes: [],
+                      include: [
+                        {
+                          model: ModelPostagemServico,
+                          attributes: [],
+                          include: [
+                            {
+                              model: ModelCliente,
+                              attributes: []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  attributes: [
+    // Adicionando atributos do cliente
+    [ Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.id_cliente"), "cliente_id"],
+    [ Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.nm_cliente"), "cliente_nome"],
+    [ Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.img_cliente"), "cliente_imagem"],
+    // Adicionando atributos da avaliação
+    [ Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao"), "avaliacao_id"],
+    [ Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.nmr_avaliacao"), "avaliacao_numero"],
+    [ Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.ds_comentario"), "avaliacao_comentario"],
+  ],
+  group: ['tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.id_cliente',
+  'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao'
+  ] // agrupando pelo id do cliente
+});
+}
+
+
+
 
 }
+
