@@ -334,7 +334,7 @@ exports.postarServicoLoc = async (req, res) => {
     console.log(
       idCliente,
       location,
-      servico
+      servico,
     );
 
 
