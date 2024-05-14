@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const connectionDataBase = new Sequelize(
     name, // Nome do banco de dados
     usu, // Nome de usuário
-    password, // Senha
+    password, // Senhaa
     {
         host: "localhost",
         dialect: "mysql",
