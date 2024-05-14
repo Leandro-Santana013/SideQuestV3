@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import { RiFilter2Fill, RiStarFill } from "react-icons/ri";
 
 export const CardProfissional = () => {
-  
+
   const [dadosIniciais, setDadosIniciais] = useState([]);
   const [filtrados, setFiltrado] = useState(null);
   const [modal, setModal] = useState(false);
@@ -90,7 +90,7 @@ export const CardProfissional = () => {
       <div className="input-filtros">
         <TextInputBusca placeholder={"Encontre profissionais"} />
         <div className="ifopenf">
-          <div className="filtros" onClick={openModal}>
+          <div className="filtros" onClick={openModal} style={{display: modal == true ? "none" : 'flex' }}>
             <p>Filtros</p>
             <RiFilter2Fill className="iconFilter" />
           </div>
@@ -125,11 +125,11 @@ export const CardProfissional = () => {
             if (filtrosSelecionados.includes('profissionaisFemininas') && profissional.sg_sexoProfissional !== 'F') {
               return false;
             }
-            
+
             if (filtrosSelecionados.includes('maisBemAvaliados') && profissional.media_avaliacoes < 4) {
               return false;
             }
-            
+
             return true;
           })
           .sort((a, b) => {
@@ -167,8 +167,8 @@ export const CardProfissional = () => {
                 </div>
               </div>
               <div className="contrate">
-              <Link to={`/perfilProfissional/${profissional.id_profissional}`}>
-                <button className="btn-contratar">Contratar</button>
+                <Link to={`/perfilProfissional/${profissional.id_profissional}`}>
+                  <button className="btn-contratar">Contratar</button>
                 </Link>
                 <div className="serv-realizados">
                   <img src={imgCertificado} alt="certificado" />

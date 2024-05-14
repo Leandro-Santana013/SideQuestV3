@@ -124,8 +124,8 @@ body {
   width: 12vw;
   height: 3vw;
   border-radius: 50vw;
-  background-color: var(--verde);
-  color: white;
+  background-color: white;
+  color: var(--azul);
   border: none;
   font-weight: bolder;
   font-size: 1.1rem;
@@ -133,7 +133,8 @@ body {
 }
 
 .bannerProfissa .btn-txtBanner button:hover {
-  background-color: #144474;
+  background-color: var(--verde);
+  color: white;
 }
 
 .bannerProfissa .btn-txtBanner .title-banner {
@@ -155,7 +156,6 @@ body {
   font-size: 1.8rem;
   color: #144474;
   width: 100%;
-  line-height: 6.3vh;
 }
 
 .beneficios .beneficios-img {
@@ -326,7 +326,6 @@ body {
 
   /*Sessao beneficios*/
   .beneficios>h1 {
-    line-height: 3.3vh;
     font-size: 1.5rem;
   }
 
@@ -476,7 +475,6 @@ body {
 
   .beneficios>h1 {
     font-size: 1.5rem;
-    line-height: 5.3vh;
   }
 
   .beneficios .beneficios-img img {
@@ -572,7 +570,6 @@ body {
   /*Arrumando sessão benefícios*/
   .beneficios>h1 {
     font-size: 1.3rem;
-    line-height: 4.3vh;
   }
 
   .beneficios .beneficios-img {
@@ -683,7 +680,6 @@ body {
 
   .beneficios>h1 {
     font-size: 1.2rem;
-    line-height: 2.3vh;
   }
 
   .beneficios .beneficios-img .txt-beneficios h2 {
@@ -809,7 +805,6 @@ body {
 
   .beneficios>h1 {
     font-size: 1.1rem;
-    line-height: 3.3vh;
   }
 
   .beneficios .beneficios-img .txt-beneficios h2 {
@@ -932,7 +927,6 @@ body {
 
   .beneficios>h1 {
     font-size: 0.8rem;
-    line-height: 2.3vh;
   }
 
   .beneficios .beneficios-img .txt-beneficios h2 {

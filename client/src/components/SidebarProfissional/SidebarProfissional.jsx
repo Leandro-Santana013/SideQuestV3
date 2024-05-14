@@ -43,16 +43,16 @@ export const SidebarProfissional = () => {
       ></link>
       <div className="options">
         {pages.map((page, index) => (
-          <a
-            key={index}
-            href={`/${page.href}`}
-            className={`option ${currentPage.includes(page.href) ? "active" : ""}`}
+          <Link
+          key={index}
+          to={`/${page.href}`}
+          className={`option ${currentPage.includes(page.href) ? "active" : ""}`}
+        >
+          <div
+            className={`connected-bar  ${currentPage.includes(page.href) ? "active" : ""
+              }`}
+            style={{ backgroundColor: currentPage.includes(page.href) ? "#3cbc8c50" : "" }}
           >
-            <div
-              className={`connected-bar  ${currentPage.includes(page.href) ? "active" : ""
-                }`}
-              style={{ display: currentPage.includes(page.href) ? "flex" : "none" }}
-            ></div>
             <i
               className={`${getIcon(page)} ${currentPage.includes(page) ? "active" : ""
                 }`}
@@ -61,31 +61,30 @@ export const SidebarProfissional = () => {
             <p style={{ color: currentPage.includes(page.href) ? "#3cbc8c" : "" }}>
               {getPageLabel(page)}
             </p>
-          </a>
+          </div>
+        </Link>
         ))}
       </div>
-      <a
-        href="/ConfigProfissa"
-        className={`config ${currentPage.includes("config") ? "active" : ""}`}
-      >
-        <div
-          className={`option ${currentPage.includes("config") ? "active" : ""}`}
+      <Link
+          to="/config"
+          className={`config ${currentPage.includes("config") ? "active" : ""}`}
         >
           <div
             className={`connected-bar ${currentPage.includes("config") ? "active" : ""
               }`}
-            style={{ display: currentPage.includes("config") ? "flex" : "" }}
-          ></div>
-          <i
-            className={`fa-solid fa-gear ${currentPage.includes("config") ? "active" : ""
-              }`}
-            style={{ color: currentPage.includes("config") ? "#3cbc8c" : "" }}
-          ></i>
-          <p style={{ color: currentPage.includes("config") ? "#3cbc8c" : "" }}>
-            Configurações
-          </p>
-        </div>
-      </a>
+            style={{ backgroundColor: currentPage.includes("config") ? "#3cbc8c50" : "" }}
+          >
+            <i
+              className={`fa-solid fa-gear ${currentPage.includes("config") ? "active" : ""
+                }`}
+              style={{ color: currentPage.includes("config") ? "#3cbc8c" : "" }}
+            ></i>
+            <p style={{ color: currentPage.includes("config") ? "#3cbc8c" : "" }}>
+              Configurações
+            </p>
+          </div>
+
+        </Link>
     </nav>
 
     <header className="sidebarProfissa-responsivo">

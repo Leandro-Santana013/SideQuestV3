@@ -236,6 +236,8 @@
         console.log(dataServico)
         setModalPostar(false);
 
+        console.log(dataServico)
+
         try {
           // Enviar o formulário com o estado formData atualizado
           const response = await postRequest("/user/postarServicoLoc", dataServico);
