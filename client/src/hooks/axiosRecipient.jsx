@@ -5,24 +5,34 @@ import { baseUrl, getRequest } from "../utils/services";
 export const useRecipient = (chat, userType) => {
     const [recipient, setRecipient] = useState(null);
     const [error, setError] = useState(null);
-    const recipientId = userType === 'pro' ? chat?.user.info.id_cliente : chat?.user.infoProfissional.id_profissional;
-    const recipientinfo = userType === 'pro' ? chat?.user.info : chat?.user.infoProfissional;
-console.log(chat)
+    let recipientIds = []
+    let recipientInfo = [];
+    console.log(chat, "CHAT GAY")
+
+    if (userType === 'pro') {
+        recipientIds = [chat?.infoCliente.id_cliente];
+        recipientInfo = chat?.infoCliente;
+    } else {
+        for (var i = 0; i < chat?.infoProfissional.length; i++) {
+            recipientIds.push(chat?.infoProfissional[i].id_profissional);
+            recipientInfo.push(chat?.infoProfissional[i]);
+        }
+    }
     useEffect(() => {
         const getUser = async () => {
-            if (!recipientId) return;
-
             try {
-                const endpoint = userType === 'pro' ? `/professional/find/${recipientId}` : `/user/find/${recipientId}`;
-                const response = await getRequest(endpoint);
-                setRecipient(response);
+                const responses = await Promise.all(recipientIds.map(async id => {
+                    const endpoint = userType === 'pro' ? `/professional/find/${id}` : `/user/find/${id}`;
+                    return await getRequest(endpoint);
+                }));
+                setRecipient(responses);
             } catch (error) {
                 setError(error);
             }
         };
-
+    
         getUser();
-    }, [recipientId, userType]);    
-
-    return { recipient, error, recipientinfo, userType };
+    }, [chat]);
+       
+    return { recipient, error, recipientInfo, userType };
 };

@@ -15,10 +15,9 @@ export const Chats = () => {
   return (
     <>
       <Header />
-      {pro ?<SidebarProfissional/> : <SidebarCliente />  }
+      {pro ? <SidebarProfissional /> : <SidebarCliente />}
       <div className="content-midia">
         <div className="main-content">
-          <Infoinc />
           <div className="chat-container">
             <div className="chat-list">
               <h3>Conversas</h3>
@@ -26,13 +25,11 @@ export const Chats = () => {
                 <h3>Clique no profissional para criar chat</h3>
                 <PotentialChats />
                 <div className="container-chats-criados">
-                  {userChats?.map((chat, index) => {
-                    return (
-                      <div key={index} onClick={() => updateCurrentChat(chat)}>
-                        <UserChat chat={chat} user={user} pro={pro}></UserChat>
-                      </div>
-                    )
-                  })}
+                  {userChats?.chats?.map((chat, index) => (
+                    <div key={index} onClick={() => updateCurrentChat(chat)}>
+                      <UserChat chat={userChats} user={user} pro={pro} />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -44,4 +41,4 @@ export const Chats = () => {
       </div>
     </>
   );
-};
+}
