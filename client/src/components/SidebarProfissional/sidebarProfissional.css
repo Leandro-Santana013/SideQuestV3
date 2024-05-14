@@ -10,25 +10,28 @@
     align-items: center;
     width: 82vw;
     margin-top: 5vw;
+    min-height: 101vh;
 }
 
 .connected-bar {
-    display: none;
-    width: 0.5vw;
-    height: 0.5vw;
-    border-radius: 50%;
-    background-color: var(--verde);
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    border-radius: 15px;
+    gap: .5vw;
 }
 
 .sidebarProfissional {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: column;
-    height: 85vh;
-    width: 18vw;
+    height: 80vh;
+    padding: 20px 20px 0 20px;
     position: fixed;
     font-size: 1vw;
     bottom: 0;
+    border-radius: 0 20px 0 0;
+    background-color: white;
 }
 
 .options {
@@ -49,7 +52,6 @@
     align-items: center;
     cursor: pointer;
     width: fit-content;
-    padding-left: 1vw;
 }
 
 .option i {

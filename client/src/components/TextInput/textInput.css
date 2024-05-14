@@ -4,12 +4,6 @@
   --verde-claro: #e8fff7;
 }
 
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
 .componente-content-input {
   width: 32vw;
   height: 5vw;

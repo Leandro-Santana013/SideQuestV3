@@ -236,6 +236,8 @@
         console.log(dataServico)
         setModalPostar(false);
 
+        console.log(dataServico)
+
         try {
           console.log(dataServico)
           // Enviar o formulário com o estado formData atualizado

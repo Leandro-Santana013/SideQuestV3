@@ -17,6 +17,7 @@
     width: 55vw;
     height: 15vw;
     border: 2px solid #eee;
+    background-color: white;
     border-radius: 20px;
     padding: 0px;
 }
@@ -148,6 +149,7 @@ h2 {
 
 .filtros {
     cursor: pointer;
+    background-color: white;
 }
 
 .sem-profissionais {

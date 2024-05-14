@@ -16,7 +16,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
     const [messages, SetMessages] = useState(null);
     const [isMessagesLoading, setMessagesLoading] = useState(false);
     const [messagesError, setMessagesError] = useState(null)
-    const [chat, setChat] = useState(null)
+
     const [sendTextMessageError, setSendTextMessageError] = useState(null)
     const [newMessage, setNewMessage] = useState(null)
     const [senderMessageType, setSenderMessageType] = useState(null)
@@ -40,10 +40,10 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                     setUserChatsError(response.error);
                     return;
                 }
-
+                
                 const filteredChats = response.filter(item => {
                     const userId = user ? item.id_profissional : item.id_cliente;
-                    return !userChats.some(chat => chat.user.chat.members.includes(userId));
+                    return !userChats.some(chat => chat.response.members.includes(userId));
                 })
                 // Retornar true apenas para profissionais sem chat associado
 
@@ -57,7 +57,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
             }
         }
         fetchChats();
-    }, [userChats, user, pro]);
+    }, [user, pro]);
 
 
     useEffect(() => {
@@ -68,6 +68,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 setIsUserLoading(true);
                 setUserChatsError(null);
                 const endpoint = user?.id_cliente ? `/chat/${user.id_cliente}` : `/chat/${pro.id_profissional}`;
+                console.log("ENDI", endpoint)
                 const response = await getRequest(endpoint)
                 console.log("namemkdsd", response)
                 setIsUserLoading(true);
@@ -79,11 +80,10 @@ export const ChatContextProvider = ({ children, user, pro }) => {
             }
         }
         getUserChats();
-    }, [])
+    }, [user, pro])
 
     const updateCurrentChat = useCallback((chat) => {
-        setCurrentChat(chat.user.chat)
-        setChat(chat)
+        console.log(chat, "CHAATtttttttttttttttttttttttt")
     }, [])
 
     const createChat = useCallback(async (id_cliente, id_profissional) => {
@@ -119,7 +119,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
         } catch (error) {
             console.log("erro ao criar chat: ", error)
         }
-    }, [pro, setUserChats])
+    }, [])
 
   
 
@@ -172,7 +172,6 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 messages,
                 isMessagesLoading,
                 messagesError,
-                chat,
                 sendTextMessage,
                 senderMessageType,
             }}

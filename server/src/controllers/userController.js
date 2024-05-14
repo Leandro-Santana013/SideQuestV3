@@ -329,7 +329,6 @@ exports.postarServicoLoc = async (req, res) => {
       idCliente,
       location,
       servico
-      
     } = req.body;
 
     console.log(
@@ -348,7 +347,7 @@ exports.postarServicoLoc = async (req, res) => {
     
     let imageBuffer;
     if (servico.imagens) {
-      imageBuffer = Buffer.from(imagens, "base64");
+      imageBuffer = Buffer.from(servico.imagens, "base64");
       console.log(imageBuffer);
     }
 
