@@ -212,8 +212,10 @@ const PostarServico = () => {
             {form === 1 && (
               <div>
                 <div className="headerVoltar">
-                  <div className="btnVoltar" onClick={handleBefore}>
+                  <div id="tata" className="btnVoltar" onClick={handleBefore}>
+                    
                     <RiArrowLeftLine className="iconeVoltar" />
+                  
                   </div>
                 </div>
                 <div className="left-rightPostar">

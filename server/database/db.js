@@ -12,7 +12,7 @@ const connectionDataBase = new Sequelize(
         port: 3307,
         // Definindo o tempo limite de aquisição de conexão para 60 segundos (em milissegundos)
         pool: {
-            acquire:  60000000
+            acquire:  600000000
         }
     }
 ); 

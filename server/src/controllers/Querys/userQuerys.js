@@ -165,6 +165,7 @@ module.exports = {
       id_categoria,
       id_endereco,
       img_servico,
+      tm_postagem
     } = req.params;
     return ModelPostagemServico.create({
       id_cliente: id_cliente,
@@ -173,6 +174,7 @@ module.exports = {
       ds_servico: ds_servico,
       ds_titulo: ds_titulo,
       img_servico: img_servico,
+      tm_postagem: tm_postagem
     });
   },
 

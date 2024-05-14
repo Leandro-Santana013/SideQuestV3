@@ -246,6 +246,8 @@ exports.postarServico = async (req, res) => {
       idCliente,
       email
     );
+    const datanow = Date.now();
+
 
     if (!cep) {
       return res
@@ -311,6 +313,7 @@ exports.postarServico = async (req, res) => {
           ds_servico: dsServico,
           ds_titulo: titulo,
           img_servico: imageBuffer ? imageBuffer : null,
+          tm_postagem: datanow,
         },
       });
     } catch (error) {
@@ -336,20 +339,16 @@ exports.postarServicoLoc = async (req, res) => {
       location,
       servico,
     );
-
+    const datanow = new Date();
+   
+    
 
     if (!servico.titulo && !servico.dsServico && !servico.categoria) {
       return res
         .status(400)
         .json({ error: "Insira as informações corretamente", formstatus: 1 });
     }
-
-    
-    let imageBuffer;
-    if (servico.imagens) {
-      imageBuffer = Buffer.from(servico.imagens, "base64");
-      console.log(imageBuffer);
-    }
+  
 
     const categoriaInstance = await controller_User.selectCategoriaescolhida({
       params: { ds_categoria: servico.categoria },
@@ -360,7 +359,7 @@ exports.postarServicoLoc = async (req, res) => {
         .status(400)
         .json({ error: "categoria não selecionada", formstatus: 1 });
 
-   
+   console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", datanow)
 
     try {
       const servicoInstance = await controller_User.CreateServico({
@@ -370,7 +369,8 @@ exports.postarServicoLoc = async (req, res) => {
           id_endereco: location,
           ds_servico: servico.dsServico,
           ds_titulo: servico.titulo,
-          img_servico: imageBuffer ? imageBuffer : null,
+          img_servico: servico.imagens ? servico.imagens : null,
+          tm_postagem:  datanow
         },
       });
     } catch (error) {

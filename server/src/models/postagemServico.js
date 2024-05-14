@@ -47,7 +47,7 @@ const ModelPostagemServico = connectionDataBase.define('tb_postagemServico', {
         allowNull: true,
       },
       tm_postagem:  {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DATE,
         allowNull:false
       }
 },

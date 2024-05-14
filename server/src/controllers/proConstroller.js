@@ -202,9 +202,40 @@ exports.registerPro = async (req, res) => {
     }
   };
 
+  const calcularDiferencaTempo = (dataPostagem) => {
+    const dataAtual = new Date();
+    const diffTempo = dataAtual - new Date(dataPostagem);
+    
+    const umMinuto = 60 * 1000;
+    const umaHora = umMinuto * 60;
+    const umDia = umaHora * 24;
+    const umaSemana = umDia * 7;
+    const umMes = umDia * 30; // Aproximadamente 30 dias
+    
+    if (diffTempo < umMinuto) {
+        return 'Menos de 1 minuto atrás';
+    } else if (diffTempo < umaHora) {
+        return Math.floor(diffTempo / umMinuto) + ' minutos atrás';
+    } else if (diffTempo < umDia) {
+        return Math.floor(diffTempo / umaHora) + ' horas atrás';
+    } else if (diffTempo < umaSemana) {
+        return Math.floor(diffTempo / umDia) + ' dias atrás';
+    } else if (diffTempo < umMes) {
+        return Math.floor(diffTempo / umDia / 30) + ' meses atrás';
+    } else {
+        return Math.floor(diffTempo / umaSemana) + ' semanas atrás';
+    }
+};
+
+
+
   exports.cardservico = async (req, res) => {
     const populationService = await controller_Pro.findServices();
-    console.log(populationService)
+    const servicosComDiferencaTempo = populationService.map((servico) => ({
+      ...servico,
+      diferencaTempo: calcularDiferencaTempo(servico.tm_postagem)
+  }));
+    console.log(servicosComDiferencaTempo)
     res.status(200).json(populationService)
   }
 
