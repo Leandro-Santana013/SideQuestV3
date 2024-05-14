@@ -328,14 +328,16 @@ exports.postarServicoLoc = async (req, res) => {
     const {
       idCliente,
       location,
-      servico
+      servico,
+      imagens
       
     } = req.body;
 
     console.log(
       idCliente,
       location,
-      servico
+      servico,
+      imagens
     );
 
 

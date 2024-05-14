@@ -69,7 +69,6 @@ h1 {
     display: flex;
     justify-content: space-between;
     width: 55vw;
-    margin-bottom: 4vw;
 }
 
 .input-filtros input {

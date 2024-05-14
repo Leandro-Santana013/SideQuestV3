@@ -107,7 +107,6 @@ export const CarrosselSwiper = () => {
           <Swiper
             key={num}
             modules={[Navigation]}
-            spaceBetween={50}
             slidesPerView={3}
             navigation={{
               nextEl: ".swiper-button-next",

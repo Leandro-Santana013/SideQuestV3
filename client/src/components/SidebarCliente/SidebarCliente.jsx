@@ -42,39 +42,37 @@ export const SidebarCliente = () => {
         ></link>
         <div className="options">
           {pages.map((page, index) => (
-            <a
+            <Link
               key={index}
-              href={`/${page.href}`}
+              to={`/${page.href}`}
               className={`option ${currentPage.includes(page.href) ? "active" : ""}`}
             >
               <div
                 className={`connected-bar  ${currentPage.includes(page.href) ? "active" : ""
                   }`}
-                style={{ display: currentPage.includes(page.href) ? "flex" : "none" }}
-              ></div>
-              <i
-                className={`${getIcon(page)} ${currentPage.includes(page) ? "active" : ""
-                  }`}
-                style={{ color: currentPage.includes(page.href) ? "#3cbc8c" : "" }}
-              ></i>
-              <p style={{ color: currentPage.includes(page.href) ? "#3cbc8c" : "" }}>
-                {getPageLabel(page)}
-              </p>
-            </a>
+                style={{ backgroundColor: currentPage.includes(page.href) ? "#3cbc8c50" : "" }}
+              >
+                <i
+                  className={`${getIcon(page)} ${currentPage.includes(page) ? "active" : ""
+                    }`}
+                  style={{ color: currentPage.includes(page.href) ? "#3cbc8c" : "" }}
+                ></i>
+                <p style={{ color: currentPage.includes(page.href) ? "#3cbc8c" : "" }}>
+                  {getPageLabel(page)}
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
-        <a
-          href="/config"
+        <Link
+          to="/config"
           className={`config ${currentPage.includes("config") ? "active" : ""}`}
         >
           <div
-            className={`option ${currentPage.includes("config") ? "active" : ""}`}
+            className={`connected-bar ${currentPage.includes("config") ? "active" : ""
+              }`}
+            style={{ backgroundColor: currentPage.includes("config") ? "#3cbc8c50" : "" }}
           >
-            <div
-              className={`connected-bar ${currentPage.includes("config") ? "active" : ""
-                }`}
-              style={{ display: currentPage.includes("config") ? "flex" : "" }}
-            ></div>
             <i
               className={`fa-solid fa-gear ${currentPage.includes("config") ? "active" : ""
                 }`}
@@ -84,19 +82,20 @@ export const SidebarCliente = () => {
               Configurações
             </p>
           </div>
-        </a>
-        <Perfilcli />
+
+        </Link>
+        {/* <Perfilcli /> */}
       </nav>
 
-      
+
       <header className="sidebarCliente-responsivo">
-        <nav className="navCliente-responsivo"> 
+        <nav className="navCliente-responsivo">
           <ul className={`ulCliente-responsivo ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}>
-          <li><Link to={"/homeCliente"}>Home</Link></li>
-              <li><Link to={"/chats"}>Chats</Link></li>
-              <li><Link to={"/favoritosCliente"}>Favoritos</Link></li>
-              <li><Link to={"/historicoCliente"}>Historico</Link></li>
-              <li><Link to={"/config"}>Configurações</Link></li>
+            <li><Link to={"/homeCliente"}>Home</Link></li>
+            <li><Link to={"/chats"}>Chats</Link></li>
+            <li><Link to={"/favoritosCliente"}>Favoritos</Link></li>
+            <li><Link to={"/historicoCliente"}>Historico</Link></li>
+            <li><Link to={"/config"}>Configurações</Link></li>
           </ul>
         </nav>
         <button className={`hamburguer-sidebarcliente ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}>

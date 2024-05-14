@@ -4,13 +4,6 @@
   --verde-claro: #e8fff7;
 }
 
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
-}
-
 .content-input-busca {
   padding-left: 0.3vw;
   display: flex;
@@ -19,6 +12,7 @@
   width: 32vw;
   height: 3vw;
   border: solid 2px #eee;
+  background-color: white;
   border-radius: 10px;
   color: var(--verde);
   font-size: 1.4vw;
@@ -45,14 +39,6 @@
   color: var(--verde);
   font-size: 2vw;
   margin-left: 5px;
-}
-
-
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
 }
 
 .btn {
