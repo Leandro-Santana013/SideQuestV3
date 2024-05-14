@@ -19,10 +19,8 @@ const PerfilProfissional = () => {
     const { id } = useParams();
     
     const [profissional, setProfissional] = useState(null);
-    const [Form, setForm] = useState(1);
-    const handleState = (n) => {
-        setForm(n)
-    }
+    const [ typeForm, setTypeForm ] = useState(1)
+ 
 
     useEffect(() => {
         
@@ -59,9 +57,9 @@ const PerfilProfissional = () => {
                             </div>
                             <div className="menu-perfil">
                                 <ul>
-                                    <li onClick={handleState(1)}>Sobre</li>
-                                    <li onClick={handleState(2)}>Mídia(4)</li>
-                                    <li onClick={handleState(3)}>Avaliações</li>
+                                    <li>Sobre</li>
+                                    <li>Mídia(4)</li>
+                                    <li>Avaliações</li>
                                 </ul>
                             </div>
                             <hr />

@@ -3,9 +3,14 @@ const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 const { connectionDataBase } = require('../../database/db') // Importe a instância de conexão com o banco de dados
 
 const ModelProfissionalProfileImg = connectionDataBase.define('tb_profissionalProfileImg', {
+    id_confirmacaoServico: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false
+    },
     id_profissional: {
         type: DataTypes.INTEGER.UNSIGNED,
-        primaryKey: true,
         allowNull: false,
         references: {
             model: 'tb_profissional', // Nome da tabela de profissionais
@@ -20,4 +25,6 @@ const ModelProfissionalProfileImg = connectionDataBase.define('tb_profissionalPr
 _padraoTableDBExistence('tb_profissionalProfileImg')
 );
 
-module.exports = { ModelProfissionalProfileImg }
+module.exports = { 
+    ModelProfissionalProfileImg
+ }

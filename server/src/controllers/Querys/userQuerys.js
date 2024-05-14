@@ -348,10 +348,6 @@ module.exports = {
           attributes: [],
         },
         {
-          model: ModelProfissionalProfileImg,
-          attributes: [],
-        },
-        {
           model: ModelConfirmacaoServico,
           attributes: [],
           include: [
@@ -399,10 +395,6 @@ module.exports = {
         'nm_profissional',
         [Sequelize.col("tb_infoProfissional.ds_biografia"), "ds_biografia"],
         [
-          Sequelize.fn("COALESCE",
-            Sequelize.col("tb_profissionalProfileImg.Img_profile:"), "midia"
-          )],
-        [
           Sequelize.fn(
             "COUNT",
             Sequelize.col(
@@ -445,20 +437,32 @@ module.exports = {
       ],
       group: ['tb_profissional.id_profissional',
         'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.id_cliente',
-        'tb_profissionalProfileImg.Img_profile',
         'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao'] // Inclua todas as colunas não agregadas na cláusula GROUP BY
     });
   },
-
   queryPart2: async (req, res) => {
     const { id_profissional } = req.params
     return ModelProfissional.findAll({
       where: { id_profissional: id_profissional },
       include: [
         {
-          model: ModelInfoProfissional,
+          model: ModelProfissionalProfileImg,
           attributes: [],
+          required:false
         },
+      ],
+      attributes: [  
+        [Sequelize.fn('COALESCE', Sequelize.col("tb_profissionalProfileImgs.img_profile"), null), "img_profile"],
+    ],
+    group: ["tb_profissionalProfileImgs.img_profile"]
+    })
+  },
+
+  queryPart3: async (req, res) => {
+    const { id_profissional } = req.params
+    return ModelProfissional.findAll({
+      where: { id_profissional: id_profissional },
+      include: [
         {
           model: ModelConfirmacaoServico,
           attributes: [],
@@ -511,7 +515,7 @@ module.exports = {
         [Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.ds_comentario"), "avaliacao_comentario"],
       ],
       group: ['tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.id_cliente',
-        'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao'
+        'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao',
       ] // agrupando pelo id do cliente
     });
   }

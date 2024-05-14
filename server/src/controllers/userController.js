@@ -563,7 +563,10 @@ exports.perfilpro = async (req, res) => {
     const pt2 = await controller_User.queryPart2({
       params:{id_profissional: id_profissional}
     });
-    const result = [pt1, pt2];
+    const pt3 = await controller_User.queryPart3({
+      params:{id_profissional: id_profissional}
+    });
+    const result = [pt1, pt2, pt3];
 
 
     console.log(result)

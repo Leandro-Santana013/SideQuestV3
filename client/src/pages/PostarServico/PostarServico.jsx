@@ -3,8 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { SidebarCliente, Header, TextInput } from "../../components";
 import axios from "axios";
 import JSZip from "jszip";
-import imgApproved from "../../assets/approved.png"
-
+import imgApproved from "../../assets/approved.png";
 
 import "./postarServico.css";
 import {
@@ -16,25 +15,38 @@ import {
 import { UserContext } from "../../context/UserContext";
 
 const PostarServico = () => {
-  const { PostarServico, updatepostarServico, categorias, Servico, fetchData, cepError, setServico, setModalPostar, messageErrorPostar, errorPostar, form,
-    setForm, modalPostar, locationuser, isCheckedLocation, setIsCheckedLocation, PostarServicoWithLoc } = useContext(UserContext)
+  const {
+    PostarServico,
+    updatepostarServico,
+    categorias,
+    Servico,
+    fetchData,
+    cepError,
+    setServico,
+    setModalPostar,
+    messageErrorPostar,
+    errorPostar,
+    form,
+    setForm,
+    modalPostar,
+    locationuser,
+    isCheckedLocation,
+    setIsCheckedLocation,
+    PostarServicoWithLoc,
+  } = useContext(UserContext);
 
   useEffect(() => {
-    console.log(form)
-  }, [form])
-
+    console.log(form);
+  }, [form]);
 
   const handleCepChange = (e) => {
     const cep = e.target.value;
     setServico({ ...Servico, cep }); // Atualiza o estado do CEP
     const cepToFetch = cep; // Armazena o valor atual do CEP em uma variável local
-    if (cep.length === 8)
-      fetchData(cepToFetch); // Chama a função de busca de dados do CEP com o valor atual
+    if (cep.length === 8) fetchData(cepToFetch); // Chama a função de busca de dados do CEP com o valor atual
   };
 
-
   const navigate = useNavigate();
-
 
   const handleNext = () => {
     setForm(form + 1);
@@ -48,15 +60,11 @@ const PostarServico = () => {
     }
   };
 
-
-
   const [selectedImages, setSelectedImages] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [exceededLimit, setExceededLimit] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-
 
   const handleImageChange = (event) => {
     const files = event.target.files;
@@ -81,17 +89,12 @@ const PostarServico = () => {
             }
             setSelectedImages(limitedImages);
             setShowFilter(limitedImages.length > 3);
-
           }
-
         };
         reader.readAsDataURL(file);
       }
     }
   };
-
-
-
 
   const openModal = (index) => {
     setCurrentImageIndex(index);
@@ -117,10 +120,7 @@ const PostarServico = () => {
   const deleteImage = (index) => {
     const updatedImages = selectedImages.filter((_, idx) => idx !== index);
     setSelectedImages(updatedImages);
-  }
-
-
-
+  };
 
   useEffect(() => {
     // Verificar se não há mais imagens selecionadas
@@ -136,16 +136,14 @@ const PostarServico = () => {
     }
   }, [selectedImages, currentImageIndex]);
 
-
-
-
-
   const zipImages = async () => {
     const zip = new JSZip();
 
     // Adicione as imagens ao arquivo ZIP
     selectedImages.forEach((image, index) => {
-      zip.file(`image_${index}.png`, image.split("base64,")[1], { base64: true });
+      zip.file(`image_${index}.png`, image.split("base64,")[1], {
+        base64: true,
+      });
     });
 
     try {
@@ -183,9 +181,6 @@ const PostarServico = () => {
     }
   };
 
-
-
-
   return (
     <>
       <Header />
@@ -200,9 +195,20 @@ const PostarServico = () => {
             </div>
           </div>
           {errorPostar && (
-            <div className={errorPostar ? "message-error-postar-initial" : "message-error-postar-end"}>{messageErrorPostar}</div>
+            <div
+              className={
+                errorPostar
+                  ? "message-error-postar-initial"
+                  : "message-error-postar-end"
+              }
+            >
+              {messageErrorPostar}
+            </div>
           )}
-          <form onSubmit={isCheckedLocation ? PostarServicoWithLoc : PostarServico} className="postarServico1">
+          <form
+            onSubmit={isCheckedLocation ? PostarServicoWithLoc : PostarServico}
+            className="postarServico1"
+          >
             {form === 1 && (
               <div>
                 <div className="headerVoltar">
@@ -213,13 +219,21 @@ const PostarServico = () => {
                 <div className="left-rightPostar">
                   <div className="leftPostar">
                     <h3 className="tituloServico">Título do serviço</h3>
-                    <TextInput className="componente-content-input input-busque-por-servicos"
+                    <TextInput
+                      className="componente-content-input input-busque-por-servicos"
                       name="titulo"
                       type="text"
-                      size={{ width: "35vw", height: "1.5vw", padding: ".5vw 0 .5vw 0" }}
+                      size={{
+                        width: "35vw",
+                        height: "1.5vw",
+                        padding: ".5vw 0 .5vw 0",
+                      }}
                       placeholder={"Busque por serviços"}
                       onChange={(e) =>
-                        updatepostarServico({ ...Servico, titulo: e.target.value })
+                        updatepostarServico({
+                          ...Servico,
+                          titulo: e.target.value,
+                        })
                       }
                     />
 
@@ -228,11 +242,15 @@ const PostarServico = () => {
                         id="categoriaSelect"
                         className="categorias"
                         onChange={(e) =>
-                          updatepostarServico({ ...Servico, categoria: e.target.value })
+                          updatepostarServico({
+                            ...Servico,
+                            categoria: e.target.value,
+                          })
                         }
                       >
-
-                        <option value="" disabled selected>Selecione uma categoria</option>
+                        <option value="" disabled selected>
+                          Selecione uma categoria
+                        </option>
                         {categorias.map((categoria) => (
                           <option
                             key={categoria.cd_categoria} // Adicione a chave única aqui
@@ -242,7 +260,6 @@ const PostarServico = () => {
                             {categoria.ds_categoria}
                           </option>
                         ))}
-
                       </select>
                     </div>
                     <h3 className="tituloServico">
@@ -252,12 +269,14 @@ const PostarServico = () => {
                       name="dsServico"
                       type="text"
                       size={{ width: "35vw", height: "10vw" }}
-
                       placeholder={
                         "Exemplo: Eu preciso de um pintor para pintar uma parede externa de 4 metros de altura e 6 metros de largura. A parede é feita de tijolos e precisa ser limpa e preparada antes da pintura. Eu gostaria que a parede fosse pintada com tinta acrílica branca. Já comprei toda a tinta necessária, caso precise de mais tinta posso comprar."
                       }
                       onChange={(e) =>
-                        updatepostarServico({ ...Servico, dsServico: e.target.value })
+                        updatepostarServico({
+                          ...Servico,
+                          dsServico: e.target.value,
+                        })
                       }
                     />
                     <div className="content-img-button">
@@ -274,13 +293,19 @@ const PostarServico = () => {
                         <RiAttachment2 className="iconAnexo" />
                       </label>
 
-                      {locationuser && (<div>
-                        <p>usar endereço principal</p><input
-                          type="checkbox"
-                          id="loc"
-                          checked={isCheckedLocation}
-                          onChange={(e) => { setIsCheckedLocation(e.target.checked) }}
-                        /></div>)}
+                      {locationuser && (
+                        <div>
+                          <p>usar endereço principal</p>
+                          <input
+                            type="checkbox"
+                            id="loc"
+                            checked={isCheckedLocation}
+                            onChange={(e) => {
+                              setIsCheckedLocation(e.target.checked);
+                            }}
+                          />
+                        </div>
+                      )}
 
                       {selectedImages.slice(0, 2).map((image, index) => (
                         <div
@@ -351,7 +376,10 @@ const PostarServico = () => {
                                 onClick={() => openModal(index)}
                               >
                                 <div className="image-delete-button">
-                                  <div className="delete-image invisible" onClick={() => deleteImage(index)}>
+                                  <div
+                                    className="delete-image invisible"
+                                    onClick={() => deleteImage(index)}
+                                  >
                                     {" "}
                                     Excluir{" "}
                                   </div>
@@ -372,23 +400,27 @@ const PostarServico = () => {
 
                   <div className="rightPostar">
                     {locationuser && (
-                    <>
-                    <button className="btnProximo" type={isCheckedLocation ? "submit" : ""} onClick={() => {
-                     if(!isCheckedLocation){
-                     
-                      handleNext()
-                    }
-                    else{
-                      if (selectedImages.length > 0) {
-                        zipImages(); // Chama a função para zipar as imagens apenas se houver alguma imagem selecionada
-                      }
-                    }
-
-                    }}>
-                    {isCheckedLocation ? "Postar": "Próximo" }
-                    </button></>) }
-                  
-
+                      <>
+                        <button
+                          className="btnProximo"
+                          type={isCheckedLocation ? "submit" : ""}
+                          onClick={async () => {
+                            if (!isCheckedLocation) {
+                              if (selectedImages.length > 0) {
+                                await zipImages(); // Espera a função zipImages() ser concluída antes de prosseguir
+                              }
+                              handleNext();
+                            } else {
+                              if (selectedImages.length > 0) {
+                                await zipImages(); // Espera a função zipImages() ser concluída antes de prosseguir
+                              }
+                            }
+                          }}
+                        >
+                          {isCheckedLocation ? "Postar" : "Próximo"}
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -411,9 +443,16 @@ const PostarServico = () => {
                             <img src={imgApproved} />
                             <p>Profissionas poderão vizualizar seu problema</p>
                             <Link to={"/homeCliente"}>
-                              <button className="close-modal-postar" onClick={() => {
-                                setModalPostar(null); // Adicione esta linha para fechar o modal ao clicar em "Fechar"
-                              }}> Fechar</button></Link>
+                              <button
+                                className="close-modal-postar"
+                                onClick={() => {
+                                  setModalPostar(null); // Adicione esta linha para fechar o modal ao clicar em "Fechar"
+                                }}
+                              >
+                                {" "}
+                                Fechar
+                              </button>
+                            </Link>
                           </div>
                         </div>
                       </>
@@ -433,11 +472,13 @@ const PostarServico = () => {
                               border: cepError
                                 ? "2px solid red"
                                 : "2px solid #eee",
-
                             }}
                             onChange={(e) => {
                               handleCepChange(e); // Chama a função handleCepChange existente
-                              updatepostarServico({ ...Servico, cep: e.target.value }); // Atualiza o estado do serviço com o novo valor do CEP
+                              updatepostarServico({
+                                ...Servico,
+                                cep: e.target.value,
+                              }); // Atualiza o estado do serviço com o novo valor do CEP
                             }}
                           />
                           {cepError && (
@@ -468,7 +509,10 @@ const PostarServico = () => {
                           placeholder={""}
                           value={Servico.bairro}
                           onChange={(e) => {
-                            updatepostarServico({ ...Servico, bairro: e.target.value });
+                            updatepostarServico({
+                              ...Servico,
+                              bairro: e.target.value,
+                            });
                           }}
                         />
                       </div>
@@ -483,7 +527,10 @@ const PostarServico = () => {
                             placeholder={""}
                             value={Servico.logradouro}
                             onChange={(e) => {
-                              updatepostarServico({ ...Servico, logradouro: e.target.value });
+                              updatepostarServico({
+                                ...Servico,
+                                logradouro: e.target.value,
+                              });
                             }}
                           />
                         </div>
@@ -500,7 +547,10 @@ const PostarServico = () => {
                           size={{ width: "8vw", height: "1.5vw" }}
                           placeholder={""}
                           onChange={(e) => {
-                            updatepostarServico({ ...Servico, nmrResidencia: e.target.value });
+                            updatepostarServico({
+                              ...Servico,
+                              nmrResidencia: e.target.value,
+                            });
                           }}
                         />
                       </div>
@@ -513,10 +563,12 @@ const PostarServico = () => {
                           size={{ width: "20vw", height: "1.5vw" }}
                           placeholder={""}
                           onChange={(e) => {
-                            updatepostarServico({ ...Servico, complemento: e.target.value });
+                            updatepostarServico({
+                              ...Servico,
+                              complemento: e.target.value,
+                            });
                           }}
                         />
-
                       </div>
                     </div>
                     <div className="linha-postar" id="rightPostar2">
@@ -543,7 +595,6 @@ const PostarServico = () => {
                 </div>
               </div>
             )}
-
           </form>
         </div>
       </div>
