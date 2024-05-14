@@ -206,109 +206,85 @@ body {
   margin-bottom: 10vh;
 }
 
-.card-plano {
-  display: flex;
-  padding: 1vw;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.24);
-  border-radius: 20px;
-  flex-direction: column;
-  justify-content: space-between;
-}
 
 .planos .cards-planos {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 3vw;
+  justify-content: space-evenly;
   width: 100vw;
 }
 
-.planos .cards-planos .card-plano .card-superior .gratis p {
-  font-size: 1.4rem;
+.planos .cards-planos .card-plano {
+  width: 22vw;
+  border: 1px solid #888888;
+  border-radius: 20px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.card-plano p {
+  font-size: 1.2rem;
+}
+
+.card-plano h3 {
+  font-size: 1.6rem;
+}
+
+.card-plano hr {
+  border: 1px solid rgba(0, 0, 0, 0.616);
+  margin-top: 1.25vw;
+  margin-bottom: 1.25vw;
+  width: 20vw;
+}
+
+.card-plano #gray-hr{
+margin-top: 2vw;
+margin-bottom: 2vw;
+color: gray;
+}
+
+.card-plano #preco {
+  font-size: 3.6rem;
   font-weight: bolder;
+  margin: 20px;
 }
 
-.planos .cards-planos .card-plano .card-superior #vantagens-txt {
+.card-plano #preco span {
+  color: rgba(0, 0, 0, 0.671);
   font-weight: lighter;
-  color: gray;
-  font-size: 1.1rem;
+  font-size: 2.5rem;
 }
 
-.list-beneficios .beneficio {
+.card-plano button {
+width: 20vw;
+padding: 15px;
+border-radius: 5px;
+background-color: white;
+font-weight: bolder;
+font-size: 1.3rem;
+align-self: center;
+transition: .5s;
+}
+
+.card-plano button:hover {
+  background-color: black;
+  color: white;
+}
+
+.card-plano .beneficios-plano {
+  align-self: center;
   display: flex;
   align-items: center;
   gap: 1vw;
+  margin-left: 0;
+  margin-right: 0;
 }
 
-.list-beneficios .beneficio p {
-  font-size: 1.4rem;
-  font-weight: bolder;
+.card-plano .beneficios-plano img {
+  width: 2vw;
+  height: 2vw;
 }
-
-.card-superior {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.card-inferior {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/*Card 2*/
-
-.valor-do-plano {
-  font-weight: bolder;
-  font-size: 1.7rem;
-  color: black;
-
-  strong {
-    font-weight: lighter;
-    color: gray;
-  }
-}
-
-/*Card 3*/
-.planos .cards-planos .card-plano .card-superior>p {
-  font-size: 1.4rem;
-  font-weight: bolder;
-}
-
-.planos .cards-planos .card-plano .card-superior #vantagens-txt {
-  font-weight: lighter;
-  color: gray;
-  font-size: 1.1rem;
-}
-
-.planos .cards-planos .card-plano .button {
-  align-self: center;
-  background-color: #144474;
-  width: 15vw;
-  padding: 15px;
-  color: white;
-  font-weight: bolder;
-  font-size: 1rem;
-}
-
-.btn-card-plano-op {
-  color: white;
-  width: 12vw;
-  font-size: .9vw;
-  background-color: var(--azul);
-  border: none;
-  padding: 1vw;
-  border-radius: 100vw;
-  transition: all .25s;
-}
-
-.btn-card-plano-op:hover {
-  background-color: var(--verde);
-}
-
 /* Responsividade */
 
 @media screen and (max-width: 1050px) {

@@ -1,46 +1,36 @@
-
 footer {
-    display: flex;
-    border-top: solid 1px var(--verde);
-    align-items: center;
-    justify-content: space-around;
-    margin-bottom: 2vw;
-  }
-  
-  .beneficios {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 150px;
-    margin-bottom: 200px;
-  }
-  
-  .beneficios h3 {
-    font-size: 3vw;
-    margin-bottom: 20px;
-  }
-  
-  .termos,
-  .sobre {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    font-size: 1.2vw;
-  }
-  
-  footer img {
-    width: 8vw;
-    height: 3vw;
-  }
-  
-  .termos a,
-  .sobre a {
-    color: #000000;
-    text-decoration: none;
-  }
-  
-  @media screen and (max-width: 770px){
-    .beneficios h3 {
-      font-size: 4vw;
-    }
-  }
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 5vw;
+  background-color: #FCF7F8;
+}
+
+footer .superior-footer {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 3vw;
+  width: 78vw;
+}
+
+footer .superior-footer .sidequest-bordao {
+  width: 15vw;
+}
+
+footer .superior-footer .sidequest-bordao img {
+  width: 8vw;
+  height: 3vw;
+  margin-top: 21.28px;
+}
+
+
+
+footer .inferior-footer hr {
+  border: 0.5px solid #B1B1B1;
+  margin: 5vw 0 5vw 0;
+  width: 78vw;
+}
+
+footer .inferior-footer p {
+  color: #b1b1b1;
+}

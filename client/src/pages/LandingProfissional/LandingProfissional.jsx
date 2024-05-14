@@ -34,7 +34,7 @@ const LandingProfissional = () => {
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
             <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet" />
 
-            <HeaderLandingPro colorLogin={"var(--azul)"} colorInsc={'white'} colorBtnInsc={"var(--azul)"}/>
+            <HeaderLandingPro colorLogin={"var(--azul)"} colorInsc={'white'} colorBtnInsc={"var(--azul)"} />
 
             <section className="bannerProfissa">
                 <div className="btn-txtBanner">
@@ -70,175 +70,79 @@ const LandingProfissional = () => {
                 <h2>Planos de pagamento</h2>
                 <div className="cards-planos">
                     <div className="card-plano">
-                        <div className="card-superior">
-                            <div className="gratis">
-                                <p>Plano Gratuito</p>
-                            </div>
-                            <p id="vantagens-txt">Vantagens</p>
-                            <div className="list-beneficios">
-                                <div className="beneficio">
-                                    <img src={verificado} alt="verificado" />
-                                    <p>Tenha visibilidade no mercado</p>
-                                </div>
-                                <div className="beneficio">
-                                    <img src={verificado} alt="verificado" />
-                                    <p>Tenha visibilidade</p>
-                                </div>
-                                <div className="beneficio">
-                                    <img src={verificado} alt="verificado" />
-                                    <p>Tenha visibilidade</p>
-                                </div>
-                            </div>
+                        <h3>Plano Grátis</h3>
+                        <p>Feito para você usar os benefícios básicos da plataforma</p>
+                        <hr />
+                        <p id="preco">R$0<span>/Mês</span></p>
+                        <button>Crie sua conta grátis</button>
+                        <hr id="gray-hr" />
+                        <div className="beneficios-plano">
+                            <img src={verificado} alt="verificado" />
+                            <p>Teste gratuitamente por 30 dias</p>
                         </div>
-
-                        <div className="card-inferior">
-                            <p className="valor-do-plano">R$0<strong>/Mês</strong></p>
-                            <Link to={"/cadastro"}><button className="btn-card-plano-op">Crie sua conta grátis</button></Link>
+                        <div className="beneficios-plano">
+                        <img src={verificado} alt="verificado" />
+                            <p>Teste gratuitamente por 30 dias</p>
+                        </div>
+                        <div className="beneficios-plano">
+                        <img src={verificado} alt="verificado" />
+                            <p>Teste gratuitamente por 30 dias</p>
+                        </div>
+                        <div className="beneficios-plano">
+                        <img src={verificado} alt="verificado" />
+                            <p>Teste gratuitamente por 30 dias</p>
                         </div>
                     </div>
-
                     <div className="card-plano">
-                        <div className="card-superior">
-                            <p>Plano Simples</p>
-                            <div className="list-beneficios">
-                                <div className="beneficio">
-                                    <img src={verificado} alt="verificado" />
-                                    <p>Tenha visibilidade no mercado</p>
-                                </div>
-                                <div className="beneficio">
-                                    <img src={verificado} alt="verificado" />
-                                    <p>Tenha visibilidade</p>
-                                </div>
-                            </div>
+                        <h3>Plano Simples</h3>
+                        <p>Feito para você que quer ter mais benefícios que os usuários comuns</p>
+                        <hr />
+                        <p id="preco">R$0<span>/Mês</span></p>
+                        <button>Teste grátis</button>
+                        <hr id="gray-hr" />
+                        <div className="beneficios-plano">
+                            <img src={verificado} alt="verificado" />
+                            <p>Teste gratuitamente por 30 dias</p>
                         </div>
-                        <div className="card-inferior">
-
-                            <div className="valor-plano">
-                                <p className="valor-do-plano">R$20<strong>/Mês</strong></p>
-                            </div>
-                            <button className="btn-card-plano-op">Teste Grátis</button>
+                        <div className="beneficios-plano">
+                        <img src={verificado} alt="verificado" />
+                            <p>Teste gratuitamente por 30 dias</p>
+                        </div>
+                        <div className="beneficios-plano">
+                        <img src={verificado} alt="verificado" />
+                            <p>Teste gratuitamente por 30 dias</p>
+                        </div>
+                        <div className="beneficios-plano">
+                        <img src={verificado} alt="verificado" />
+                            <p>Teste gratuitamente por 30 dias</p>
                         </div>
                     </div>
-
                     <div className="card-plano">
-                        <div className="card-superior">
-                            <p>Plano Irmãos à Obra</p>
-                            <p id="vantagens-txt">Vantagens</p>
-                            <div className="list-beneficios">
-                                <div className="beneficio">
-                                    <img src={verificado} alt="verificado" />
-                                    <p>Tenha visibilidade no mercado</p>
-                                </div>
-                                <div className="beneficio">
-                                    <img src={verificado} alt="verificado" />
-                                    <p>Tenha visibilidade</p>
-                                </div>
-                                <div className="beneficio">
-                                    <img src={verificado} alt="verificado" />
-                                    <p>Tenha visibilidade</p>
-                                </div>
-                            </div>
+                        <h3>Plano Irmãos a Obra</h3>
+                        <p>Feito para você que quer ter todos os benefícios da plataforma</p>
+                        <hr />
+                        <p id="preco">R$0<span>/Mês</span></p>
+                        <button>Melhor escolha</button>
+                        <hr id="gray-hr" />
+                        <div className="beneficios-plano">
+                            <img src={verificado} alt="verificado" />
+                            <p>Teste gratuitamente por 30 dias</p>
                         </div>
-
-                        <div className="card-inferior">
-                            <p className="valor-do-plano"> R$1000<strong>/Ano</strong></p>
-                            <Link to={"/loginProfissional"}><button className="btn-card-plano-op">Escolha</button></Link>
+                        <div className="beneficios-plano">
+                        <img src={verificado} alt="verificado" />
+                            <p>Teste gratuitamente por 30 dias</p>
+                        </div>
+                        <div className="beneficios-plano">
+                        <img src={verificado} alt="verificado" />
+                            <p>Teste gratuitamente por 30 dias</p>
+                        </div>
+                        <div className="beneficios-plano">
+                        <img src={verificado} alt="verificado" />
+                            <p>Teste gratuitamente por 30 dias</p>
                         </div>
                     </div>
                 </div>
-                { /* 
-                <Swiper className="carrossel-Profissional"
-                    spaceBetween={15}
-                    slidesPerView={2}
-                    pagination={{ clickable: true }}
-                    fade
-                    autoplay={{ delay: 3000 }}
-                >
-                    <SwiperSlide>
-                        <div className="card-plano">
-                            <div className="card-superior">
-                                <div className="gratis">
-                                    <p>Plano Gratuito</p>
-                                </div>
-                                <p id="vantagens-txt">Vantagens</p>
-                                <div className="list-beneficios">
-                                    <div className="beneficio">
-                                        <img src={verificado} alt="verificado" />
-                                        <p>Tenha visibilidade no mercado</p>
-                                    </div>
-                                    <div className="beneficio">
-                                        <img src={verificado} alt="verificado" />
-                                        <p>Tenha visibilidade</p>
-                                    </div>
-                                    <div className="beneficio">
-                                        <img src={verificado} alt="verificado" />
-                                        <p>Tenha visibilidade</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="card-inferior">
-                                <p className="valor-do-plano">R$0<strong>/Mês</strong></p>
-                                <Link to={"/cadastro"}><button className="btn-card-plano-op">Crie sua conta grátis</button></Link>
-                            </div>
-                        </div>
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <div className="card-plano">
-                            <div className="card-superior">
-                                <p>Plano Simples</p>
-                                <div className="list-beneficios">
-                                    <div className="beneficio">
-                                        <img src={verificado} alt="verificado" />
-                                        <p>Tenha visibilidade no mercado</p>
-                                    </div>
-                                    <div className="beneficio">
-                                        <img src={verificado} alt="verificado" />
-                                        <p>Tenha visibilidade</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-inferior">
-                                <div className="valor-plano">
-                                    <p className="valor-do-plano">R$20<strong>/Mês</strong></p>
-                                </div>
-                                <button className="btn-card-plano-op">Teste Grátis</button>
-                            </div>
-                        </div>
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        <div className="card-plano">
-                            <div className="card-superior">
-                                <p>Plano Irmãos à Obra</p>
-                                <p id="vantagens-txt">Vantagens</p>
-                                <div className="list-beneficios">
-                                    <div className="beneficio">
-                                        <img src={verificado} alt="verificado" />
-                                        <p>Tenha visibilidade no mercado</p>
-                                    </div>
-                                    <div className="beneficio">
-                                        <img src={verificado} alt="verificado" />
-                                        <p>Tenha visibilidade</p>
-                                    </div>
-                                    <div className="beneficio">
-                                        <img src={verificado} alt="verificado" />
-                                        <p>Tenha visibilidade</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-inferior">
-                                <p className="valor-do-plano"> R$1000<strong>/Ano</strong></p>
-                                <Link to={"/loginProfissional"}><button className="btn-card-plano-op">Escolha</button></Link>
-                            </div>
-                        </div>
-                    </SwiperSlide>
-                </Swiper>
-                */ }
-                
             </section>
-
             <Footer />
         </>
     );

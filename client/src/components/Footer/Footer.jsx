@@ -4,17 +4,27 @@ import "./footer.css"
 export const Footer = () => {
   return (
     <footer>
-      <img src={img_logo} alt="logo da SideQuest" />
-
-      <div class="termos">
-        <h6>Termos</h6>
-        <a>Termos de uso</a>
-        <a>Política de privacidade</a>
+      <div className="superior-footer">
+        <div className="sidequest-bordao">
+          <img src={img_logo} alt="SideQuest" />
+          <p>Estamos aqui para simplificar sua vida, ao cuidar de sua casa!</p>
+          </div>
+          <div className="termos">
+            <h4>Termos</h4>
+            <p>Termos de uso</p>
+            <p>Política de privacidade</p>
+            <p>Lorem ipsum dot</p>
+          </div>
+          <div className="sobre">
+            <h4>Sobre</h4>
+            <p>Sobre nós</p>
+            <p>Time SideQuest</p>
+          <p>Lorem ipsum dot</p>
+        </div>
       </div>
-      <div class="sobre">
-        <h6>Sobre</h6>
-        <a>Sobre nós</a>
-        <a>Equipe SideQuest</a>
+      <div className="inferior-footer">
+        <hr />
+        <p>Copyright© 2024 SideQuest. Todos os direitos reservados.</p>
       </div>
     </footer>
   );  
