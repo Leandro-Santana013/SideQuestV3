@@ -18,7 +18,7 @@ app.use('/message', messageRoutes);
     await connectionDataBase.sync()
     connectMongo()
     connectionDataBase.authenticate().then(() => {
-      console.log("Conexão bem sucedida")
+      console.log("Conexão bem  sucedida")
   }).catch(erroConn => {
       console.error("Incapaz de fazer conexão.", erroConn)
   })

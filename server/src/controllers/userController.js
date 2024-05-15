@@ -369,7 +369,7 @@ exports.postarServicoLoc = async (req, res) => {
           id_endereco: location,
           ds_servico: servico.dsServico,
           ds_titulo: servico.titulo,
-          img_servico: servico.imagens ? servico.imagens : null,
+          img_servico: servico.imagens,
           tm_postagem:  datanow
         },
       });
