@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 let isSignUpActiveState = false;
 
 export const setIsSignUpActive = (value) => {

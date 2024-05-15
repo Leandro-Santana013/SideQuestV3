@@ -6,16 +6,23 @@ import "./infoInc.css";
 import { UserContext } from "../../context/UserContext";
 
 export const Infoinc = () => {
-  const { user, modal, setModal, setInfoConfirm, concluirCad, fetchDataConcluir, cepError } = useContext(UserContext);
+  const {
+    user,
+    modal,
+    setModal,
+    setInfoConfirm,
+    concluirCad,
+    fetchDataConcluir,
+    cepError,
+  } = useContext(UserContext);
   const [infoDados, setinfoDados] = useState(false);
+  const [cepDigitado, setCepDigitado] = useState("");
 
   const handleCepChange = (e) => {
     const cep = e.target.value;
     const cepToFetch = cep; // Armazena o valor atual do CEP em uma variável local
-    if (cep.length === 8)
-      fetchDataConcluir(cepToFetch); // Chama a função de busca de dados do CEP com o valor atual
+    if (cep.length === 8) fetchDataConcluir(cepToFetch); // Chama a função de busca de dados do CEP com o valor atual
   };
-
 
   console.log(infoDados);
 
@@ -96,28 +103,29 @@ export const Infoinc = () => {
               <div className="inputs-card-conclua-registro">
                 <div className="grid-2x2-card-conclua-registro">
                   <div className="inputs-card-conclua-registro-cep">
-                  {cepError && (
-                    <p className="cepError-conluircad">CEP incorreto</p>
-                  )}
-                  <input
-                    className="padrao-input-card-conclua-registro"
-                    type="number"
-                    placeholder="Cep"
-                    style={{
-                      border: cepError && "2px solid red"
-                    }}
-                    onChange={(event) => {
-                      handleChange("cep", event);
-                      handleCepChange(event);
-                    }}
-                  />
-                  
+                    {cepError && (
+                      <p className="cepError-conluircad">CEP incorreto</p>
+                    )}
+                    <input
+                      className="padrao-input-card-conclua-registro"
+                      type="number"
+                      placeholder="Cep"
+                      style={{
+                        border: cepError && "2px solid red",
+                      }}
+                      onChange={(event) => {
+                        handleChange("cep", event);
+                        handleCepChange(event);
+                      }}
+                    />
                   </div>
                   <input
                     className="padrao-input-card-conclua-registro"
                     type="number"
                     placeholder="Nº"
-                    onChange={(event) => handleChange("numeroResidencia", event)}
+                    onChange={(event) =>
+                      handleChange("numeroResidencia", event)
+                    }
                   />
                   <input
                     className="padrao-input-card-conclua-registro"
@@ -133,9 +141,7 @@ export const Infoinc = () => {
               </div>
             </div>
           )}
-          {modal == 3 && (<>
-          
-          </>)}
+          {modal == 3 && <></>}
         </div>
       )}
     </>
