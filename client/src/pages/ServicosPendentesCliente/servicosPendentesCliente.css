@@ -64,21 +64,6 @@ h2 {
     justify-content: center;
 }
 
-.btn-contratar {
-    background-color: var(--verde);
-    color: white;
-    width: 8vw;
-    font-size: 1vw;
-    height: 3vw;
-    border: none;
-    border-radius: 1vw;
-    transition: 0.25s ease-in-out;
-}
-
-.btn-contratar:hover {
-    background-color: var(--azul);
-}
-
 .serv-realizados {
     display: flex;
     align-items: center;

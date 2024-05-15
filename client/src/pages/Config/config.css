@@ -5,43 +5,19 @@
 }
 
 .cabecalho-editar {
-    height: 15vw;
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
     padding: 20px;
-    background-color: var(--azul);
+    background: linear-gradient(to right, var(--verde), var(--azul)) ;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
 }
 
-.cabecalho-editar>button {
-    padding: .5vw 2vw .5vw 2vw;
-    font-size: 1vw;
-    color: white;
-    border: none;
-    background-color: var(--verde);
-    border-radius: 20vw;
-    transition: all .25s;
-    border: solid 1px var(--verde);
-}
-
-.cabecalho-editar>button:hover {
-    border: solid 1px white;
-    background-color: var(--azul);
-
-}
-
-.cabecalho-editar #img {
-    position: absolute;
-    top: 13vw;
-    right: 27vw;
-}
-
-.icon-label-input-img-cropper {
-    position: absolute;
-    top: 17.35vw;
-    right: 21vw;
+.area-img-perfil-edit {
+    background-color: white;
+    display: flex;
+    align-items: end;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .sessao-config {
@@ -50,6 +26,26 @@
     gap: 5vh;
     display: flex;
     flex-direction: column;
+}
+
+.header-edit-info-pessoais {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+        padding: .5vw 2vw .5vw 2vw;
+        font-size: 1vw;
+        color: white;
+        border: none;
+        background-color: var(--verde);
+        border-radius: 20vw;
+        transition: all .25s;
+    }
+
+    button:hover {
+        background-color: var(--azul);
+    }
 }
 
 .edit-infoPessoais {
@@ -176,10 +172,10 @@
     justify-content: center;
     background-color: #00000090;
     flex-direction: column;
-    
+
     p {
-            color: white;
-        }
+        color: white;
+    }
 
     .botoes-modal-salvar-alteracoes {
         display: flex;
@@ -200,7 +196,7 @@
             border-radius: 50px;
             color: white;
         }
-        
+
     }
 }
 
@@ -214,15 +210,5 @@
         height: 40px;
     }
 
-    .cabecalho-editar #img {
-        top: 13vw;
-        right: 27vw;
-    }
-}
 
-@media screen and (max-width: 700px) {
-    .cabecalho-editar {
-        width: 40px;
-        height: 40px;
-    }
 }

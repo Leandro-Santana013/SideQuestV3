@@ -84,30 +84,35 @@ const Config = () => {
         <div className="main-content">
           <div className="conteudo-config-perfil">
             <div className="cabecalho-editar">
-              <img
-                id="img"
-                htmlFor="comp"
-                ref={avatarUrl}
-                src={user.img_cliente ? user.img_cliente : imgPerfil}
-                alt="Imagem de perfil"
-                className="img-config-perfil"
-                style={{
-                  border: "1px groove black",
-                  objectFit: "contain",
-                  width: "120px",
-                  height: "120px",
-                  borderRadius: "50%",
-                }}
-              />
-              <ImageCropper updatefoto={updatefoto} />
-              <button onClick={() => setModalEditar(true)}>Editar</button>
+              <div className="area-img-perfil-edit">
+                <img
+                  id="img"
+                  htmlFor="comp"
+                  ref={avatarUrl}
+                  src={user.img_cliente ? user.img_cliente : imgPerfil}
+                  alt="Imagem de perfil"
+                  className="img-config-perfil"
+                  style={{
+                    objectFit: "contain",
+                    width: "120px",
+                    height: "120px",
+                    borderRadius: "50%",
+                  }}
+                />
+                <ImageCropper updatefoto={updatefoto} />
+              </div>
+                  <p>owqwehoueohiun</p>
             </div>
-
-
             <div className="sessao-config">
               <div className="edit-infoPessoais">
-                <h2>Informações Pessoais</h2>
-                <h3>Essas informações não estão públicas</h3>
+                <div className="header-edit-info-pessoais">
+                  <div>
+                    <h2>Informações Pessoais</h2>
+                    <h3>Essas informações não estão públicas</h3>
+                  </div>
+                  <button onClick={() => setModalEditar(true)}>Editar</button>
+                </div>
+
                 <div className="input-pessoais">
                   <div className="input-nome-num">
                     <p>Nome</p>
@@ -123,7 +128,7 @@ const Config = () => {
                       <p>{user.nm_cliente}</p>
                     )}
 
-                    <p>número</p>
+
                     {modalEditar ? (
                       <input
                         type="text"
@@ -148,8 +153,6 @@ const Config = () => {
                     ) : (
                       <p>{user.cd_emailCliente}</p>
                     )}
-                    <p>Localização</p>
-                    <input type="text" id="input-local" />
                   </div>
                 </div>
               </div>

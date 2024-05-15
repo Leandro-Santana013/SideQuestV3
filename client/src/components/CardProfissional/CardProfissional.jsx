@@ -100,42 +100,27 @@ export const CardProfissional = () => {
         }
       })
       .map(profissional => (
-        <div className="card-profissional" key={profissional.id_profissional}>
-          <div className="tamplate-img">
-            <img src={imgPerfil} alt="Imagem de perfil" />
-          </div>
-          <div className="desc-cliente">
-            <div className="perfil-avaliado">
-              <h2>{profissional.nm_profissional}</h2>
-              <div className="stars">
-                {[...Array(5)].map((_, index) => (
-                  <RiStarFill
-                    key={index}
-                    className={`ri-star-s-fill ${index < profissional.media_avaliacoes ? "ava" : ""}`}
-                  ></RiStarFill>
-                ))}
+        <Link to={`/perfilProfissional/${profissional.id_profissional}`}>
+          <div className="card-profissional" key={profissional.id_profissional}>
+            <div className="tamplate-img">
+              <img src={imgPerfil} alt="Imagem de perfil" />
+              <div className="perfil-avaliado">
+                <h2>{profissional.nm_profissional}</h2>
+                <div className="stars">
+                  {[...Array(5)].map((_, index) => (
+                    <RiStarFill
+                      key={index}
+                      className={`ri-star-s-fill ${index < profissional.media_avaliacoes ? "ava" : ""}`}
+                    ></RiStarFill>
+                  ))}
+                </div>
               </div>
             </div>
-            {/* <div className="emblemas">
-              <img src={imgMedalha10K} alt="Medalha 10k" />
-              <img src={imgMedalhaOuro} alt="Medalha de Ouro" />
-              <img src={imgMedalhaBronze} alt="Medalha de Bronze" />
-            </div> */}
-            <div className="content-desc">
+            <div className="desc-cliente">
               <p className="desc">{profissional.ds_biografia ? profissional.ds_biografia : "Não possui descrição"}</p>
-              <span className="vma-vme">ver mais</span>
             </div>
           </div>
-          <div className="contrate">
-            <Link to={`/perfilProfissional/${profissional.id_profissional}`}>
-              <button className="btn-contratar">Contratar</button>
-            </Link>
-            <div className="serv-realizados">
-              <img src={imgCertificado} alt="certificado" />
-              <p>Serviços realizados: {profissional.num_servicos_terminados}</p>
-            </div>
-          </div>
-        </div>
+        </Link>
       ));
   };
 

@@ -64,11 +64,12 @@ export const ImageCropper = ({ updatefoto }) => {
   return (
     <>
       <input id="fotoAvatar" className="input-img-cropper" type="file" accept="image/*" onChange={onSelectFile}></input>
-      <label htmlFor="fotoAvatar" className="label-input-img-cropper">
-        <FaPen className="icon-label-input-img-cropper" />
-      </label>
+      <div className="container-pen-edit">
+        <label htmlFor="fotoAvatar" className="label-input-img-cropper">
+          <FaPen className="icon-label-input-img-cropper" style={{ cursor: 'pointer' }} />
+        </label>
+      </div>
       {error && <p>{error}</p>}
-
       {ImgSrc && (
         <div className="content-display-cropper">
           <div className="modal-content-display-cropper">
@@ -111,7 +112,6 @@ export const ImageCropper = ({ updatefoto }) => {
                 ref={PreviewCanvasRef}
                 style={{
                   display: "none",
-                  border: "1px groove black",
                   objectFit: "contain",
                   width: "150px",
                   height: "150px",

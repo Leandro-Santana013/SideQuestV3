@@ -3,6 +3,17 @@ body {
   overflow-x: hidden;
 }
 
+.beneficios {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 250px 0;
+  gap: 100px;
+  h3 {
+    font-size: 2vw;
+  }
+}
+
 .banner {
   display: flex;
   align-items: center;

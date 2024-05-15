@@ -4,16 +4,7 @@
     position: relative;
 }
 
-.cabecalho-editar {
-    height: 15vw;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    padding: 20px;
-    background-color: var(--azul);
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-}
+
 
 .cabecalho-editar button {
     width: 7.5vw;
@@ -23,18 +14,6 @@
     color: white;
     border: none;
     border-radius: 15px;
-}
-
-.cabecalho-editar #img {
-    position: absolute;
-    top: 13vw;
-    right: 27vw;
-}
-
-.icon-label-input-img-cropper {
-    position: absolute;
-    top: 15vw;
-    right: 23vw;
 }
 
 .sessao-config {
@@ -254,22 +233,4 @@
     border-radius: 5px;
 }
 
-@media screen and (max-width: 500px){
 
-    .cabecalho-editar {
-        width: 40px;
-        height: 40px;
-    }
-
-    .cabecalho-editar #img {
-        top: 13vw;
-        right: 27vw;
-    } 
-}
-
-@media screen and (max-width: 700px){
-    .cabecalho-editar {
-        width: 40px;
-        height: 40px;
-    }
-}

@@ -95,7 +95,6 @@ const configProfissa = () => {
                 alt="Imagem de perfil"
                 className="img-config-perfil"
                 style={{
-                  border: "1px groove black",
                   objectFit: "contain",
                   width: "120px",
                   height: "120px",
