@@ -1,47 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useRecipient } from "../../hooks/axiosRecipient";
+import { ChatContext } from "../../context/ChatContext";
 
-export const UserChat = ({ chat, user, pro }) => {
-    let recipient = null;
-    let recipientName
+export const UserChat = ({ chat }) => {
+    const { recipient, error, recipientInfo, userType } = useRecipient(chat, 'user');
+    const { updateCurrentChat } = useContext(ChatContext);
 
-    const [recipientNames, setRecipientNames] = useState([]);
-    // Verifica se o usuário é do tipo cliente
-    if (user !== null) {
-        const { recipient: userRecipient } = useRecipient(chat, 'user');
-        recipient = userRecipient;
+    if (error) {
+        return <div>Error: {error.message}</div>;
     }
 
-    // Verifica se o usuário é do tipo profissional
-    if (pro !== null) {
-        const { recipient: proRecipient } = useRecipient(chat, 'pro');
-        recipient = proRecipient;
-    }
+    return (
+        <>
+            {recipient && recipient.length > 0 && recipient.map((recipientItem, index) => {
+                const chatItem = chat.chats[index]; 
+                const infoCliente = chat.infoCliente; // InfoCliente for the chat
+                const infoProfissional = chat.infoProfissional[index]; // Corresponding infoProfissional item
 
-    if (recipient && recipient.length > 0) {
-        recipientName = pro ? recipient[0].nm_cliente : recipient.map(item => item.nm_profissional);
-    }
-    
-    useEffect(() => {
-        if (recipient) {
-            const names = recipient.map(rec => rec.nm_profissional);
-            setRecipientNames(names);
-        }
-    }, [recipient]);
-
-    console.log("RECI", recipient)
-    return (<>
-       {recipientNames.map((name, index) => (
-        <div className="message-box">
-            <div className="foto-perfil"></div>
-            <div className="chatName" key={index}>{name}</div>
-            <div className="text-chat-list">Text message</div>
-            <div className="date-message">10/10/1010</div>
-            <div className="chat-notification">3</div>
-            <span className="user-online"></span>
-        </div>
-        
-    ))}
+                return (
+                    <div className="message-box" key={index} onClick={() => updateCurrentChat(chatItem, recipientItem)}
+                    >
+                        <div className="foto-perfil"></div>
+                        <div className="chatName">{userType === 'pro' ? infoCliente.nm_cliente : infoProfissional.nm_profissional}</div>
+                        <div className="text-chat-list">{chatItem.text}</div> {/* Assuming there's a text property in chat item */}
+                        <div className="date-message">10/10/1010</div> {/* Use chatItem.date or something similar */}
+                        <div className="chat-notification">3</div> {/* Use chatItem.notificationCount or something similar */}
+                        <span className="user-online"></span>
+                    </div>
+                );
+            })}
         </>
     );
 };
