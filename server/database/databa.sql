@@ -36,6 +36,14 @@ create table if not exists tb_profissional (
     constraint check (qt_idadeProfissional >= 18 and qt_idadeProfissional <= 130)
 );
 
+	create table if not exists tb_profissionalProfileImg (
+		id_profissional int not null,
+		Img_profile longtext,
+		
+		constraint pk_profissional_profile primary key (id_profissional	),
+		constraint fk_profissional_profile foreign key (id_profissional) references tb_profissional(id_profissional)
+);
+
 create table if not exists tb_infoProfissional (
     id_infoProfissional int not null auto_increment,
     id_profissional int not null unique,
@@ -48,11 +56,38 @@ create table if not exists tb_infoProfissional (
     constraint fk_infoProfissional_profissional foreign key (id_profissional) references tb_profissional(id_profissional)
 );
 
+create table if not exists tb_cliente_profissional_favorito (
+    id_cliente int not null,
+    id_profissional int not null,
+    
+    constraint pk_cliente_profissional primary key (id_cliente),
+    constraint fk_cliente foreign key (id_cliente) references tb_cliente (id_cliente),
+    constraint fk_profissional foreign key (id_profissional) references tb_profissional (id_profissional)
+);
+
+create table if not exists tb_cliente_profissional_favorito (
+    id_cliente int not null,
+    id_profissional int not null,
+    
+    constraint pk_cliente_profissional primary key (id_cliente),
+    constraint fk_cliente foreign key (id_cliente) references tb_cliente (id_cliente),
+    constraint fk_profissional foreign key (id_profissional) references tb_profissional (id_profissional)
+);
+
 create table if not exists tb_categoria (
     id_categoria int not null auto_increment,
     ds_categoria varchar(100) not null,
     
     constraint pk_categoria primary key (id_categoria)
+);
+
+create table if not exists tb_profissional_categoria (
+	id_profissional int not null,
+    id_categoria int not null,
+    
+    constraint pk_profissional_categoria primary key (id_profissional),
+    constraint fk_profissionalCategoria foreign key (id_profissional) references tb_profissional (id_profissional),
+    constraint fk_categoria foreign key (id_categoria) references tb_categoria (id_categoria)
 );
 
 create table if not exists tb_cidade (
@@ -87,6 +122,7 @@ create table if not exists tb_postagemServico (
     ds_servico varchar(255) not null,
     ds_titulo varchar(50) not null,
     img_servico longblob,
+	tm_postagem int,
 
     constraint pk_postagemServico primary key (id_postagemServico),
     constraint fk_postagemServico_cliente foreign key (id_cliente) references tb_cliente(id_cliente),
@@ -116,13 +152,14 @@ create table if not exists tb_terminoServico (
 
 create table if not exists tb_avaliacao (
     id_avaliacao int not null auto_increment,
-    id_terminoServico int not null unique,
-	nmr_avaliacao int not null,
+    id_terminoservico int not null unique,
+    nmr_avaliacao int not null,
     ds_comentario text,
-
-	constraint pk_avaliacao primary key (id_avaliacao),
-	constraint fk_avaliacao_terminoServico foreign key (id_terminoServico) references tb_terminoServico(id_terminoServico)
+    constraint pk_avaliacao primary key (id_avaliacao),
+    constraint fk_avaliacao_terminoservico foreign key (id_terminoservico) references tb_terminoservico (id_terminoservico)
 );
+
+/*
 
 insert into tb_categoria (ds_categoria)
 values
@@ -168,7 +205,6 @@ values
 ('Beatriz Lima', '87654321098', 'F', 30, '012345678', 'beatriz@exemplo.com', 'senha678', '4lPo7KjI3u'),
 ('Vinicius Oliveira', '76543210987', 'M', 37, '101010103', 'vinicius@exemplo.com', 'senha901', '5vCn8MbL2s');
 
-
 insert into tb_infoProfissional (id_profissional, ds_biografia, ds_curriculo, ds_historicoProfissional, ds_formacoes)
 values
 (1, 'Sou eletricista há 5 anos e tenho vasta experiência em instalações elétricas residenciais e comerciais.', 'Formado em Eletricidade pela Universidade XYZ.', 'Trabalhei em diversas empresas renomadas da área, onde pude aprimorar minhas habilidades.', 'Curso de Segurança em Instalações Elétricas, Curso Avançado de Eletricista Industrial.'),
@@ -213,7 +249,7 @@ values
 
 
 	-- RODAR JSON DE CIDADES PRIMEIRO
-/*
+
 insert into tb_endereco (id_cliente, id_cidade, nm_logradouro, cd_cep, nm_bairro, nmr_casa)
 values
 (1, 5356, 'Rua das Flores', '12345678', 'Centro', 123),

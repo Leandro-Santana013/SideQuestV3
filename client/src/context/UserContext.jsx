@@ -212,13 +212,14 @@
             setmessageErrorPostar(response.error);
             setErrorPostar(true);
             setForm(response.formstatus);
-
+            
             setTimeout(() => {
               setErrorPostar(null);
               setmessageErrorPostar(null);
             }, 4000);
           } else {
             setModalPostar(true);
+            setServico({})
           }
         } catch (error) {
           console.error("Erro ao cadastrar:", error);
@@ -242,10 +243,12 @@
           console.log(dataServico)
           // Enviar o formulário com o estado formData atualizado
           const response = await postRequest("/user/postarServicoLoc", dataServico);
+          
           if (response.error) {
             setmessageErrorPostar(response.error);
             setErrorPostar(true);
             setForm(response.formstatus);
+
 
             setTimeout(() => {
               setErrorPostar(null);
@@ -253,6 +256,7 @@
             }, 4000);
           } else {
             setModalPostar(true);
+            setDataServico({})
           }
         } catch (error) {
           console.error("Erro ao cadastrar:", error);

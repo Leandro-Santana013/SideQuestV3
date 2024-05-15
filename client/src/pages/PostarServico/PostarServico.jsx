@@ -138,7 +138,8 @@ const PostarServico = () => {
 
   const zipImages = async () => {
     const zip = new JSZip();
-
+    
+      console.log("ssfdsfs", selectedImages)
     // Adicione as imagens ao arquivo ZIP
     selectedImages.forEach((image, index) => {
       zip.file(`image_${index}.png`, image.split("base64,")[1], {
@@ -172,6 +173,7 @@ const PostarServico = () => {
           ...Servico,
           imagens: jsonZipFile,
         });
+        setSelectedImages([])
       };
 
       // Ler o conteúdo do arquivo como um ArrayBuffer
@@ -179,6 +181,7 @@ const PostarServico = () => {
     } catch (error) {
       console.error("Erro ao gerar o arquivo ZIP:", error);
     }
+  
   };
 
   return (
@@ -411,11 +414,14 @@ const PostarServico = () => {
                               if (selectedImages.length > 0) {
                                 await zipImages(); // Espera a função zipImages() ser concluída antes de prosseguir
                               }
+                              
                               handleNext();
                             } else {
                               if (selectedImages.length > 0) {
+                                console.log("3242134",selectedImages)
                                 await zipImages(); // Espera a função zipImages() ser concluída antes de prosseguir
                               }
+                              
                             }
                           }}
                         >
