@@ -68,9 +68,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 setIsUserLoading(true);
                 setUserChatsError(null);
                 const endpoint = user?.id_cliente ? `/chat/${user.id_cliente}` : `/chat/${pro.id_profissional}`;
-                console.log("ENDI", endpoint)
                 const response = await getRequest(endpoint)
-                console.log("namemkdsd", response)
                 setIsUserLoading(true);
 
                 if (response.error) {
@@ -82,46 +80,49 @@ export const ChatContextProvider = ({ children, user, pro }) => {
         getUserChats();
     }, [user, pro])
 
-    const updateCurrentChat = useCallback((chat) => {
-        console.log(chat, "CHAATtttttttttttttttttttttttt")
+    const [infoChat, setInfoChat] = useState()
+    const updateCurrentChat = useCallback((chat, chatItem) => { 
+        setCurrentChat(chat)
+        setInfoChat(chatItem)
+        
     }, [])
 
-    const createChat = useCallback(async (id_cliente, id_profissional) => {
-        try {
-            // Swap IDs if 'pro' is not null
-            if (pro !== null) {
-                console.log("Professional");
-                if (Object.keys(pro).length === 0) {
-                    console.log("profissional sem informaçoes");
+        const createChat = useCallback(async (id_cliente, id_profissional) => {
+            try {
+                // Swap IDs if 'pro' is not null
+                if (pro !== null) {
+                    console.log("Professional");
+                    if (Object.keys(pro).length === 0) {
+                        console.log("profissional sem informaçoes");
+                    } else {
+                        console.log("Swapping IDs");
+                        [id_cliente, id_profissional] = [id_profissional, id_cliente];
+                    }
                 } else {
-                    console.log("Swapping IDs");
-                    [id_cliente, id_profissional] = [id_profissional, id_cliente];
+                    console.log("No professional provided");
                 }
-            } else {
-                console.log("No professional provided");
+
+                const newChatData = {
+                    id_cliente: id_cliente,
+                    id_profissional: id_profissional
+                };
+
+                const response = await postRequest(`/chat/`, newChatData)
+                console.log("respomse", response)
+                if (response.user && response.user.chat) {
+                    setUserChats((prev) => [...prev, response]);
+                    setCurrentChat(response.user.chat);
+                    console.log("LAURA");
+                } else {
+                    setUserChats((prev) => [...prev, response]);
+                    console.log("MARIA");
+                }
+                
+            } catch (error) {
+                console.log("erro ao criar chat: ", error)
             }
+        }, [])
 
-            const newChatData = {
-                id_cliente: id_cliente,
-                id_profissional: id_profissional
-            };
-
-            const response = await postRequest(`/chat/`, newChatData)
-            if (response.error) {
-                return console.log("ERRO", response)
-            } else if(!response.user.response){
-                setUserChats((prev) => [...prev, response])
-                setCurrentChat(response.user.chat)
-            }            
-            else{
-                setUserChats((prev) => [...prev, response])
-            }
-        } catch (error) {
-            console.log("erro ao criar chat: ", error)
-        }
-    }, [])
-
-  
 
     useEffect(() => {
 
@@ -174,6 +175,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 messagesError,
                 sendTextMessage,
                 senderMessageType,
+                infoChat,
             }}
         >
             {children}
