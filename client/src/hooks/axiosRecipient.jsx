@@ -7,13 +7,13 @@ export const useRecipient = (chat, userType) => {
     const [error, setError] = useState(null);
     let recipientIds = []
     let recipientInfo = [];
-    console.log(chat, "CHAT GAY")
+
 
     if (userType === 'pro') {
         recipientIds = [chat?.infoCliente.id_cliente];
         recipientInfo = chat?.infoCliente;
     } else {
-        for (var i = 0; i < chat?.infoProfissional.length; i++) {
+        for (var i = 0; i < chat?.infoProfissional?.length; i++) {
             recipientIds.push(chat?.infoProfissional[i].id_profissional);
             recipientInfo.push(chat?.infoProfissional[i]);
         }
@@ -34,5 +34,5 @@ export const useRecipient = (chat, userType) => {
         getUser();
     }, [chat]);
        
-    return { recipient, error, recipientInfo, userType };
+    return { recipient, error, recipientInfo, userType, chat };
 };

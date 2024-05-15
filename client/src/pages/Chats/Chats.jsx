@@ -25,13 +25,9 @@ export const Chats = () => {
                 <h3>Clique no profissional para criar chat</h3>
                 <PotentialChats />
                 <div className="container-chats-criados">
-                  {userChats?.chats?.map((chat, index) => (
-                    <div key={index} onClick={() => updateCurrentChat(chat)}>
                       <UserChat chat={userChats} user={user} pro={pro} />
+                    </div>             
                     </div>
-                  ))}
-                </div>
-              </div>
             </div>
             <div className="chat-box">
               <ChatBox />

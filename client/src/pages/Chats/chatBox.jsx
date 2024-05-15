@@ -10,11 +10,10 @@ import { RiSendPlane2Fill } from 'react-icons/ri';
 export const ChatBox = () => {
   const { user } = useContext(UserContext);
   const { pro } = useContext(ProfessionalContext);
-  const { currentChat, messages, isMessagesLoading, chat, sendTextMessage, senderMessageType } = useContext(ChatContext);
-  const { recipient, userType } = useRecipient(chat, user ? 'user' : 'pro');
+  const { currentChat, messages, isMessagesLoading, sendTextMessage, senderMessageType, infoChat } = useContext(ChatContext);
+  const { recipient, userType } = useRecipient(currentChat, user ? 'user' : 'pro');
   const [textMessage, setTextMessage] = useState('');
   const userId = user ? user.id_cliente : pro.id_profissional;
-
   const handleMessageSend = () => {
     sendTextMessage(textMessage, userId, currentChat._id, userType, setTextMessage);
   };
@@ -30,7 +29,7 @@ export const ChatBox = () => {
   return (
     <>
       <div className="chat-header">
-        <h3>{recipient.nm_profissional || recipient.nm_cliente}</h3>
+        <h3>{infoChat.nm_profissional || infoChat.nm_cliente}</h3>
       </div>
       <div className="chat-main">
         {messages &&
