@@ -6,4 +6,4 @@ ENV MYSQL_DATABASE=db_sidequest
 
 # Copia arquivos SQL para serem executados durante a inicialização
 RUN mkdir -p /docker-entrypoint-mysql-initdb.d
-COPY ./database.sql /docker-entrypoint-mysql-initdb.d/
+# COPY ./src/database.sql /docker-entrypoint-mysql-initdb.d/
