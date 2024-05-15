@@ -23,19 +23,6 @@
     border-radius: 50%;
 }
 
-.perfil-avaliado {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.desc-cliente {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.6vw;
-}
-
 .star {
     display: flex;
     width: 200vw;
@@ -63,14 +50,6 @@ h2 {
 .content-desc {
     height: auto;
 }
-
-.desc {
-    width: 25vw;
-    font-size: 1vw;
-    height: auto;
-}
-
-
 
 .emblemas img {
     width: 2vw;

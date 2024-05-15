@@ -11,15 +11,22 @@
     
 }
 
+.cards-container {
+    width: 70vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3vw;
+}
+
 .card-profissional {
     display: flex;
-    justify-content: space-around;
-    width: 55vw;
-    height: 15vw;
+    flex-direction: column;
+    width: 300px;
     border: 2px solid #eee;
     background-color: white;
     border-radius: 20px;
-    padding: 0px;
+    padding: 10px;
 }
 
 .tamplate-img {
@@ -40,6 +47,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
 }
 
 .desc-cliente {
@@ -47,7 +55,6 @@
     flex-direction: column;
     justify-content: center;
     gap: 0.6vw;
-    margin-left: -3.5vw;
 }
 
 .star {
@@ -79,7 +86,6 @@ h2 {
 }
 
 .desc {
-    width: 25vw;
     font-size: 1vw;
     height: auto;
 }
