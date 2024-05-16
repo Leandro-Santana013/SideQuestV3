@@ -5,6 +5,7 @@ import img_Benefits_high_five from "../../assets/high_five.png";
 
 import "./benefits.css"
 
+
 export const Benefits = () => {
   const [visibleCards, setVisibleCards] = useState([]);
 
@@ -30,7 +31,7 @@ export const Benefits = () => {
 
   return (
     <section className="beneficios">
-      <h3>Principais benefícios</h3>
+      <h3> Benefícios </h3>
       <div className="animation1">
         <div
           id="card1"

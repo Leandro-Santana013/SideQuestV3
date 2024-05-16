@@ -39,9 +39,11 @@ const Home = () => {
           <img className="img-banner" src={ftbanner} alt="furadeira" />
         </div>
       </div>
-      <CarrosselSwiper />
-      <Benefits />
+      
       <Animation />
+      
+      <Benefits />
+      <CarrosselSwiper />
       <Footer />
     </>
   );
