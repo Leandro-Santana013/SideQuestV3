@@ -200,14 +200,17 @@
 
 
     const [isCheckedLocation, setIsCheckedLocation] = useState(false);
+    const [selectedImages, setSelectedImages] = useState([]);
     const PostarServico = useCallback(
       async (e) => {
         e.preventDefault();
         setModalPostar(false);
 
         try {
+          console.log(Servico)
           // Enviar o formulário com o estado formData atualizado
           const response = await postRequest("/user/postarServico", Servico);
+          console.log("serviço 1")
           if (response.error) {
             setmessageErrorPostar(response.error);
             setErrorPostar(true);
@@ -218,14 +221,13 @@
               setmessageErrorPostar(null);
             }, 4000);
           } else {
+            console.log("bbbbbbbbbbbbbbbbbbbbbb")
             setModalPostar(true);
+            setSelectedImages([])
             setServico({})
           }
         } catch (error) {
-          console.error("Erro ao cadastrar:", error);
-          setMessage(
-            error.response?.data?.message || "Erro ao cadastrar. Tente novamente."
-          );
+          console.error("Erro ao postar:", error);
         }
       },
       [Servico]
@@ -234,15 +236,17 @@
     const PostarServicoWithLoc = useCallback(
       async (e) => {
         e.preventDefault();
-        console.log(dataServico)
+        
         setModalPostar(false);
 
+       
         console.log(dataServico)
-
         try {
-          console.log(dataServico)
+          
           // Enviar o formulário com o estado formData atualizado
           const response = await postRequest("/user/postarServicoLoc", dataServico);
+          console.log("serviço com loc")
+          console.log(dataServico)
           
           if (response.error) {
             setmessageErrorPostar(response.error);
@@ -255,17 +259,17 @@
               setmessageErrorPostar(null);
             }, 4000);
           } else {
+            console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
             setModalPostar(true);
-            setDataServico({})
+            setSelectedImages([])
+            setServico({})
           }
         } catch (error) {
-          console.error("Erro ao cadastrar:", error);
-          setMessage(
-            error.response?.data?.message || "Erro ao cadastrar. Tente novamente."
-          );
+          console.error("Erro ao postar:", error);
+    
         }
       },
-      [Servico]
+      [dataServico]
     );
 
     useEffect(() => {
@@ -405,6 +409,8 @@
           isCheckedLocation,
           setIsCheckedLocation,
           PostarServicoWithLoc,
+          selectedImages,
+          setSelectedImages
         }}
       >
         {children}

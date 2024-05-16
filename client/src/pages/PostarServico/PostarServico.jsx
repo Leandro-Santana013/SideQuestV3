@@ -33,6 +33,8 @@ const PostarServico = () => {
     isCheckedLocation,
     setIsCheckedLocation,
     PostarServicoWithLoc,
+    selectedImages,
+    setSelectedImages,
   } = useContext(UserContext);
 
   useEffect(() => {
@@ -60,7 +62,6 @@ const PostarServico = () => {
     }
   };
 
-  const [selectedImages, setSelectedImages] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [exceededLimit, setExceededLimit] = useState(false);
@@ -138,8 +139,8 @@ const PostarServico = () => {
 
   const zipImages = async () => {
     const zip = new JSZip();
-    
-      console.log("ssfdsfs", selectedImages)
+
+    console.log("ssfdsfs", selectedImages);
     // Adicione as imagens ao arquivo ZIP
     selectedImages.forEach((image, index) => {
       zip.file(`image_${index}.png`, image.split("base64,")[1], {
@@ -173,7 +174,6 @@ const PostarServico = () => {
           ...Servico,
           imagens: jsonZipFile,
         });
-        setSelectedImages([])
       };
 
       // Ler o conteúdo do arquivo como um ArrayBuffer
@@ -181,7 +181,6 @@ const PostarServico = () => {
     } catch (error) {
       console.error("Erro ao gerar o arquivo ZIP:", error);
     }
-  
   };
 
   return (
@@ -216,13 +215,36 @@ const PostarServico = () => {
               <div>
                 <div className="headerVoltar">
                   <div id="tata" className="btnVoltar" onClick={handleBefore}>
-                    
                     <RiArrowLeftLine className="iconeVoltar" />
-                  
                   </div>
                 </div>
                 <div className="left-rightPostar">
                   <div className="leftPostar">
+                  {modalPostar && (
+                      <>
+                        <div className="fade">
+                          <div className={`modal-postar-sucess`}>
+                            <h3>Serviço postado</h3>
+                            <img src={imgApproved} />
+                            <p>Profissionas poderão vizualizar seu problema</p>
+                            <Link to={"/homeCliente"}>
+                              <button
+                                className="close-modal-postar"
+                                onClick={() => {
+                                  setModalPostar(null);
+                                  setSelectedImages([])
+                                  setServico({})
+                                  // Adicione esta linha para fechar o modal ao clicar em "Fechar"
+                                }}
+                              >
+                                {" "}
+                                Fechar
+                              </button>
+                            </Link>
+                          </div>
+                        </div>
+                      </>
+                    )}
                     <h3 className="tituloServico">Título do serviço</h3>
                     <TextInput
                       className="componente-content-input input-busque-por-servicos"
@@ -414,30 +436,32 @@ const PostarServico = () => {
                               if (selectedImages.length > 0) {
                                 await zipImages(); // Espera a função zipImages() ser concluída antes de prosseguir
                               }
-                              
                               handleNext();
                             } else {
                               if (selectedImages.length > 0) {
-                                console.log("3242134",selectedImages)
+                                console.log("3242134", selectedImages);
                                 await zipImages(); // Espera a função zipImages() ser concluída antes de prosseguir
                               }
-                              
                             }
                           }}
                         >
                           {isCheckedLocation ? "Postar" : "Próximo"}
                         </button>
                       </>
-                    ) : (<>
-                      <button className="btnProximo" onClick={() => {
-                        handleNext(); // Chama a função para avançar para o próximo formulário
-                        if (selectedImages.length > 0) {
-                          zipImages(); // Chama a função para zipar as imagens apenas se houver alguma imagem selecionada
-                        }
-                      }}>
-                        Próximo
-                      </button>
-                    </>
+                    ) : (
+                      <>
+                        <button
+                          className="btnProximo"
+                          onClick={() => {
+                            handleNext(); // Chama a função para avançar para o próximo formulário
+                            if (selectedImages.length > 0) {
+                              zipImages(); // Chama a função para zipar as imagens apenas se houver alguma imagem selecionada
+                            }
+                          }}
+                        >
+                          Próximo
+                        </button>
+                      </>
                     )}
                   </div>
                 </div>
