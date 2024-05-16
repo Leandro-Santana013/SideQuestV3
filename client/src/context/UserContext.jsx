@@ -261,8 +261,7 @@
           } else {
             console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
             setModalPostar(true);
-            setSelectedImages([])
-            setServico({})
+    
           }
         } catch (error) {
           console.error("Erro ao postar:", error);
