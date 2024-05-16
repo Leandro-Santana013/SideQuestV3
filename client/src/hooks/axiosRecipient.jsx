@@ -10,8 +10,10 @@ export const useRecipient = (chat, userType) => {
 
 
     if (userType === 'pro') {
-        recipientIds = [chat?.infoCliente.id_cliente];
-        recipientInfo = chat?.infoCliente;
+        for (var i = 0; i < chat?.infoCliente?.length; i++) {
+            recipientIds.push(chat?.infoCliente[i].id_cliente);
+            recipientInfo.push(chat?.infoCliente[i]);
+        }
     } else {
         for (var i = 0; i < chat?.infoProfissional?.length; i++) {
             recipientIds.push(chat?.infoProfissional[i].id_profissional);

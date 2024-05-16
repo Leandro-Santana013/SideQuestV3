@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import "./perfilProfissional.css";
 import { SidebarProfissional, Header, SidebarCliente } from "../../components";
 import iconeperfil from "../../assets/icone-perfil.png";
@@ -9,15 +9,14 @@ import medalhabronze from "../../assets/medalha10k.png";
 import estrelas from "../../assets/estrelinha.png";
 import agenda from "../../assets/agenda.png";
 import certificado from "../../assets/certificado.png";
+import { ChatContext } from "../../context/ChatContext";
 import {
-    postRequest,
-    baseUrl,
-    getRequest,
-    putRequest,
-} from "../../utils/services";
+    postRequest, baseUrl, getRequest, putRequest,} from "../../utils/services";
+import { UserContext } from "../../context/UserContext";
 const PerfilProfissional = () => {
     const { id } = useParams();
-
+    const { potentialChats, createChat } = useContext(ChatContext);
+    const {user} = useContext(UserContext)
     const [profissional, setProfissional] = useState(null);
     const [typeForm, setTypeForm] = useState(1)
 
@@ -47,6 +46,14 @@ const PerfilProfissional = () => {
 
         fetchData();
     }, [id]);
+
+    const handleClick = (u) => {
+        if (user !== null) {
+
+            createChat(user.id_cliente, u);
+        }
+
+    };
     return (
         <>
             <Header />
@@ -82,6 +89,7 @@ const PerfilProfissional = () => {
                                             <p>210 avaliações</p>
                                         </div>
                                     </div>
+                                    <div onClick={() => handleClick(id)}>chat</div>
                                     <div className="medalhas">
                                         <img src={medalha10k} alt="medalha 10" />
                                         <img src={medalhaouro} alt="medalha de ouro" />

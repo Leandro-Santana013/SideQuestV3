@@ -20,46 +20,8 @@ export const ChatContextProvider = ({ children, user, pro }) => {
     const [sendTextMessageError, setSendTextMessageError] = useState(null)
     const [newMessage, setNewMessage] = useState(null)
     const [senderMessageType, setSenderMessageType] = useState(null)
-    useEffect(() => {
-        const fetchChats = async () => {
-            if (!user && !pro) return;
 
-            setIsUserLoading(true);
-            setUserChatsError(null);
-
-            try {
-                let response;
-                if (user) {
-                    response = await getRequest(`/user/allProfissionais`);
-                } else if (pro) {
-                    response = await getRequest(`/professional/allUsers`);
-                }
-
-                if (response.error) {
-                    console.error("Erro ao buscar usuários:", response.error);
-                    setUserChatsError(response.error);
-                    return;
-                }
-                
-                const filteredChats = response.filter(item => {
-                    const userId = user ? item.id_profissional : item.id_cliente;
-                    return !userChats.some(chat => chat.response.members.includes(userId));
-                })
-                // Retornar true apenas para profissionais sem chat associado
-
-
-                setPotentialChats(filteredChats);
-            } catch (error) {
-                console.error("Erro ao buscar usuários:", error);
-                setUserChatsError(error);
-            } finally {
-                setIsUserLoading(false)
-            }
-        }
-        fetchChats();
-    }, [user, pro]);
-
-
+        
     useEffect(() => {
 
         const getUserChats = async () => {
@@ -69,6 +31,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 setUserChatsError(null);
                 const endpoint = user?.id_cliente ? `/chat/${user.id_cliente}` : `/chat/${pro.id_profissional}`;
                 const response = await getRequest(endpoint)
+                console.log("RESPONDE", response)
                 setIsUserLoading(true);
 
                 if (response.error) {
@@ -88,6 +51,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
     }, [])
 
         const createChat = useCallback(async (id_cliente, id_profissional) => {
+            console.log(id_cliente, id_profissional)
             try {
                 // Swap IDs if 'pro' is not null
                 if (pro !== null) {
@@ -108,16 +72,9 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 };
 
                 const response = await postRequest(`/chat/`, newChatData)
-                console.log("respomse", response)
-                if (response.user && response.user.chat) {
-                    setUserChats((prev) => [...prev, response]);
-                    setCurrentChat(response.user.chat);
-                    console.log("LAURA");
-                } else {
-                    setUserChats((prev) => [...prev, response]);
-                    console.log("MARIA");
-                }
                 
+                    setCurrentChat(response.user.chat);
+                    
             } catch (error) {
                 console.log("erro ao criar chat: ", error)
             }

@@ -1,6 +1,4 @@
-body {
-    background-color: #f4f4f4;
-}    
+
 
 .content-midia {
     display: flex;
@@ -19,11 +17,10 @@ body {
 
 .connected-bar {
     display: flex;
-    align-items: center;
-    
-    min-width: 8vw;
+    align-items: center;   
+    width: 10vw; 
     border-radius: 15px;
-    gap: .5vw;
+    gap: 0.5vw;
 }
 
 .sidebarCliente {
@@ -31,12 +28,16 @@ body {
     justify-content: space-around;
     flex-direction: column;
     height: 80vh;
+    width: 12vw;
     padding: 20px 20px 0 20px;
     position: fixed;
+    margin-left: 1vw;
     font-size: 1vw;
     bottom: 0;
-    border-radius: 0 20px 0 0;
+    border-radius:20px;
     background-color: white;
+    align-items: center;
+    
 }
 
 .options {
@@ -61,6 +62,17 @@ body {
 
 .option i {
     font-size: 1.2vw;
+}
+
+.config {
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10vw;
+    height: 2vw;
+background: linear-gradient(90deg, #3CBC8C 0%, #144574 100%);
+color: white !important;
 }
 
 /* =carde do perfil final da tela*/

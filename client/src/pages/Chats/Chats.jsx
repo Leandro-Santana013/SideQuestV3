@@ -4,14 +4,13 @@ import { SidebarCliente, CardProfissional, Header, Infoinc, TextInput, SidebarPr
 import { ChatContext } from "../../context/ChatContext"
 import { UserChat } from "./UserChat";
 import { UserContext } from "../../context/UserContext"
-import { PotentialChats } from "./PotentialChats";
 import { ProfessionalContext } from "../../context/ProfissionalContext";
 import { ChatBox } from "./chatBox";
 export const Chats = () => {
   const { user } = useContext(UserContext)
   const { pro } = useContext(ProfessionalContext)
   const { userChats, isUserChatsLoading, userChatsError, updateCurrentChat, } = useContext(ChatContext)
-
+  console.log(userChats, "userhats")
   return (
     <>
       <Header />
@@ -22,13 +21,9 @@ export const Chats = () => {
             <div className="chat-list">
               <h3>Conversas</h3>
               <div className="chats-actives">
-                <h3>Clique no profissional para criar chat</h3>
-                <PotentialChats />
-                <div className="container-chats-criados">
-                      <UserChat chat={userChats} user={user} pro={pro} />
+                      <UserChat chat={userChats} user={user ? user : pro} pro={pro} />
                     </div>             
                     </div>
-            </div>
             <div className="chat-box">
               <ChatBox />
             </div>
