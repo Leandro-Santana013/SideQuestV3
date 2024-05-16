@@ -9,20 +9,6 @@
     border-radius: 25px;
 }
 
-.tamplate-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 65%;
-}
-
-.tamplate-img img {
-    width: 5vw;
-    height: 5vw;
-    border: solid 2px grey;
-    border-radius: 50%;
-}
-
 .star {
     display: flex;
     width: 200vw;

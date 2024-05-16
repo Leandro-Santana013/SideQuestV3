@@ -68,21 +68,11 @@ export const SidebarCliente = () => {
           to="/config"
           className={`config ${currentPage.includes("config") ? "active" : ""}`}
         >
-          <div
-            className={`connected-bar ${currentPage.includes("config") ? "active" : ""
-              }`}
-            style={{ backgroundColor: currentPage.includes("config") ? "#3cbc8c50" : "" }}
-          >
-            <i
-              className={`fa-solid fa-gear ${currentPage.includes("config") ? "active" : ""
-                }`}
-              style={{ color: currentPage.includes("config") ? "#3cbc8c" : "" }}
-            ></i>
-            <p style={{ color: currentPage.includes("config") ? "#3cbc8c" : "" }}>
-              Configurações
-            </p>
-          </div>
-
+          <i className={`fa-solid fa-gear ${currentPage.includes("config") ? "active" : ""}`}>
+          </i>
+          <p>
+            Configurações
+          </p>
         </Link>
         {/* <Perfilcli /> */}
       </nav>

@@ -232,8 +232,7 @@ const PostarServico = () => {
                                 className="close-modal-postar"
                                 onClick={() => {
                                   setModalPostar(null);
-                                  setSelectedImages([])
-                                  setServico({})
+                                  
                                   // Adicione esta linha para fechar o modal ao clicar em "Fechar"
                                 }}
                               >
@@ -442,6 +441,8 @@ const PostarServico = () => {
                                 console.log("3242134", selectedImages);
                                 await zipImages(); // Espera a função zipImages() ser concluída antes de prosseguir
                               }
+                              setSelectedImages([])
+                                  setServico({})
                             }
                           }}
                         >
