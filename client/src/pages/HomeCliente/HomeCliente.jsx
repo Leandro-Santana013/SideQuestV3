@@ -21,6 +21,7 @@ const HomeCliente = () => {
       <Header />
       <SidebarCliente />
       <div className="content-midia">
+        
         <div className="main-content">
           <div className="menu-topo">
             <div className="actions">

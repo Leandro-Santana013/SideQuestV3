@@ -43,7 +43,7 @@ exports.findUserChats = async (req, res) => {
         const chats = await chatModel.find({
             members: { $in: [idCliente] }
         });
-
+        console.log(chats, "============================================")
         if (chats.length > 0) {
             for (const chat of chats) {
                 const secondMember = chat.members.find(member => member !== idCliente);
