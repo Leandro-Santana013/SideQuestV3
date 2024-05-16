@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./VisualizarServicoProfissa.css";
 import {  SidebarProfissional, Header } from "../../components/index";
 import bandeira from "../../assets/bandeira.png";
@@ -6,9 +6,32 @@ import iconeperfil from "../../assets/icone-perfil.png";
 import endereco from "../../assets/endereco.png";
 import btnplay from "../../assets/botao-play.png";
 import avaliacao from "../../assets/estrelinha.png";
+import { useParams } from "react-router-dom";
+import {
+    postRequest, baseUrl, getRequest, putRequest,} from "../../utils/services";
+
 
 const VisualizarServicoProfissa = () => {
+    const { id } = useParams();
+const [servico, setServico] = useState(null)
 
+    useEffect(() => {
+
+        const fetchData = async () => {
+            try {
+                // Fazendo a solicitação para buscar informações do profissional com base no ID
+                const response = await getRequest(`/professional/servico/${id}`);
+                // Configurando os dados do profissional no estado local
+                setServico(response);
+                console.log(response)
+            } catch (error) {
+                console.error("Erro ao buscar informações do profissional:", error);
+                // Tratamento de erro adicional conforme necessário
+            }
+        };
+
+        fetchData();
+    }, [id]);
 
     return (
         <>
@@ -17,7 +40,10 @@ const VisualizarServicoProfissa = () => {
             <div className="content-midia">
                 <div className="main-content">
                 <div className="card-visualizar">
+                {servico  && (
+                    <>
                     <div className="card-superior-servico">
+                        
                         <div className="titulo-servico">
                             <h2>Pintura de Parede 4M²</h2>
                             <h3>Pintura</h3>
@@ -62,7 +88,10 @@ const VisualizarServicoProfissa = () => {
                                 </div>
                             </div>
                         </div>
+                    
                     </div>
+                    </>
+                 )}
                 </div>
                 </div>
             </div>

@@ -123,6 +123,38 @@ module.exports = {
 },
 
 
+findService: async (req, res) => {
+  const { id_postagemServico } = req.params;
+  try {
+      return ModelPostagemServico.findOne({
+          where: {
+              id_postagemServico: {
+                  [Op.notIn]: Sequelize.literal(
+                      `(SELECT id_postagemServico FROM tb_confirmacaoServico)`
+                  )
+              },
+            id_postagemServico : id_postagemServico
+
+          },
+          include: [{
+              model: ModelCliente,
+              required: true,
+              raw: true,
+              attributes: [
+                  ["nm_cliente", "nm_cliente"],
+                  ["img_cliente", "img_cliente"]
+              ]
+          }],
+          raw: true
+      });
+      
+  } catch (err) {
+      console.error(`Erro: ${err}`);
+  }
+},
+
+
+
 
     selectallUsers: async (req, res) => {
       return ModelCliente.findAll({

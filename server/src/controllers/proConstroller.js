@@ -227,7 +227,7 @@ exports.registerPro = async (req, res) => {
     }
 };
 
-
+''
 
   exports.cardservico = async (req, res) => {
     const populationService = await controller_Pro.findServices();
@@ -235,9 +235,30 @@ exports.registerPro = async (req, res) => {
       ...servico,
       diferencaTempo: calcularDiferencaTempo(servico.tm_postagem)
   }));
-    console.log(servicosComDiferencaTempo)
-    res.status(200).json(populationService)
+    
+    res.status(200).json(servicosComDiferencaTempo)
   }
+
+  exports.visuService = async (req, res) => {
+    try {
+        const { id_servico } = Number(req.params);
+        console.log(id_servico);
+
+        // Busque o serviço usando o controlador
+        const populationService = await controller_Pro.findService({
+            params: { id_postagemServico: id_servico }
+        });
+        console.log(populationService);
+        
+        // Envie a resposta com os serviços modificados
+        res.status(200).json(servicosComDiferencaTempo);
+    } catch (error) {
+        // Se houver um erro, envie uma resposta de erro
+        console.error("Erro ao processar solicitação:", error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+    }
+};
+
 
   exports.findAllUsers = async (req, res) =>{
     try{

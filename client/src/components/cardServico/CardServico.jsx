@@ -5,6 +5,8 @@ import imgSucesso from "../../assets/sucesso1.png";
 import { TextInputBusca } from "../index";
 import { RiFilter2Fill } from "react-icons/ri";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 
 import { ProfessionalContext } from "../../context/ProfissionalContext";
 export const CardServico = () => {
@@ -21,6 +23,7 @@ export const CardServico = () => {
 
       {Dadosiniciais.map((servicos) => (
         <div className="card-servicoProfissa">
+          <Link to={`/VisualizarServicoProfissa/${servicos.id_postagemServico}`}>
           <div className="icon-sucesso">
             <img src={imgSucesso} alt="Ícone de sucesso" />
           </div>
@@ -54,6 +57,7 @@ export const CardServico = () => {
               <p>3km</p>
             </div>
           </div>
+          </Link>
         </div>
       ))}
     </>

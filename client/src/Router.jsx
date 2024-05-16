@@ -54,7 +54,7 @@ const Router = () => {
             <Route exact path="/ServicosConcluidosProfissional" element={<ServicosConcluidosProfissional/>}/> 
             <Route exact path="/ServicosAtivosProfissa" element={<ServicosAtivosProfissa/>}/> 
             <Route exact path="/VisualizarServicoCliente" element={<VisualizarServicoCliente/>}/> 
-            <Route exact path="/VisualizarServicoProfissa" element={<VisualizarServicoProfissa/>}/> 
+            <Route exact path="/VisualizarServicoProfissa/:id" element={<VisualizarServicoProfissa/>}/> 
             <Route exact path="/ServicosAtivosCliente" element={<ServicosAtivosCliente/>}/> 
             <Route exact path="/perfilProfissional/:id" element={<PerfilProfissional/>}/>
           </Routes>
