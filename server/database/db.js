@@ -9,9 +9,9 @@ const connectionDataBase = new Sequelize(
     {
         host: "localhost",
         dialect: "mysql",
-        port: 3307,
+        port: 3306,
         // Definindo o tempo limite de  aquisição de conexão para 60 segundos (em milissegundos)
-        pool: {
+        pool: { 
             acquire:  600000000
         }
     }

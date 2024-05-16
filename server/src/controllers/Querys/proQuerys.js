@@ -114,6 +114,7 @@ module.exports = {
                     ["img_cliente", "img_cliente"]
                 ]
             }],
+            order: [[Sequelize.literal('id_postagemServico'), 'DESC']],
             raw: true
         });
         

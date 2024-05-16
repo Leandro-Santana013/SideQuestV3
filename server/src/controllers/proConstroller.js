@@ -227,7 +227,7 @@ exports.registerPro = async (req, res) => {
     }
 };
 
-''
+
 
   exports.cardservico = async (req, res) => {
     const populationService = await controller_Pro.findServices();
@@ -241,7 +241,7 @@ exports.registerPro = async (req, res) => {
 
   exports.visuService = async (req, res) => {
     try {
-        const { id_servico } = Number(req.params);
+        const { id_servico } = req.params;
         console.log(id_servico);
 
         // Busque o serviço usando o controlador
@@ -249,9 +249,19 @@ exports.registerPro = async (req, res) => {
             params: { id_postagemServico: id_servico }
         });
         console.log(populationService);
+
+          
+          // Calcule a diferença de tempo
+          const diferencaTempo = calcularDiferencaTempo(populationService.tm_postagem);
+
+          // Adicione a diferença de tempo ao objeto
+        populationService.diferencaTempo = diferencaTempo;
+
+          console.log(populationService);
         
         // Envie a resposta com os serviços modificados
-        res.status(200).json(servicosComDiferencaTempo);
+        res.status(200).json(populationService);
+        
     } catch (error) {
         // Se houver um erro, envie uma resposta de erro
         console.error("Erro ao processar solicitação:", error);

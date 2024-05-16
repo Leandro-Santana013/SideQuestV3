@@ -45,7 +45,7 @@ const [servico, setServico] = useState(null)
                     <div className="card-superior-servico">
                         
                         <div className="titulo-servico">
-                            <h2>Pintura de Parede 4M²</h2>
+                            <h2>{servico.ds_titulo}</h2>
                             <h3>Pintura</h3>
                         </div>
                         <button>R1450</button>
@@ -57,7 +57,7 @@ const [servico, setServico] = useState(null)
                             <button>Fazer proposta</button>
                             <div className="perfil-avaliacao">
                             <div className="avaliacao-icon-nome">
-                            <img src={iconeperfil} alt="icon-perfil" />
+                            <img src={servico.img_cliente ? servico.img_cliente : iconeperfil} alt="icon-perfil" />
                                 <div className="nome-avaliacao">
                                     <p>Joao Silva</p>
                                     <div className="avaliacao">
@@ -75,7 +75,7 @@ const [servico, setServico] = useState(null)
                         <div className="desc-servico">
                             <div className="descricao">
                             <h3>Descrição</h3>
-                            <p>Preciso de uma pintura bem feita em uma parede de 4m². Quero um serviço de qualidade e sem fazer muita sujeira. O serviço deve ser concluido em no máximo 2 dias.</p>
+                            <p>{servico.ds_servico}</p>
                             </div>
                             <div className="data-servico">
                                 <div className="inicio">
@@ -86,6 +86,7 @@ const [servico, setServico] = useState(null)
                                     <img src={bandeira} alt="fim" />
                                     <p>Fim</p>
                                 </div>
+                                <p>Postado há: {servico.diferencaTempo}</p>
                             </div>
                         </div>
                     
