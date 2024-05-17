@@ -1,78 +1,89 @@
 .beneficios {
   margin: 10vw 0;
+
+  h3 {
+    background: linear-gradient(to right, var(--verde), var(--azul));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: underline;
+    font-size: 3vw;
+  }
 }
 
 
 .animation1 {
-    display: flex;
-    gap: 13vw;
-    justify-content: center;
-    align-items: center;
-  }
+  display: flex;
+  gap: 13vw;
+  justify-content: center;
+  align-items: center;
+
   
-  .hidden {
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-    transform: translateX(+120%);
-    transition: all 2s;
-  }
-  
-  .card {
-    width: 15vw;
-    height: 20vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
+}
+
+.hidden {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateX(+120%);
+  transition: all 2s;
+}
+
+.card {
+  width: 15vw;
+  height: 20vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.show {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 2.5s;
+}
+
+.show h2 {
+  margin-top: 6px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.4vw;
+  font-weight: 200;
+}
+
+
+.review,
+.high-five {
+  width: 17vw;
+  height: 17vw;
+}
+
+.high-five {
+  margin-top: -20px;
+}
+
+.agenda {
+  width: 21vw;
+  height: 15vw;
+}
+
+
+@media screen and (max-width: 770px) {
   .show {
-    display: flex;
-    flex-direction: column;
-    color: black;
-    opacity: 1;
-    transform: translateX(0);
-    transition: all 2.5s;
+    width: 20vw;
+    align-items: center;
   }
-  
+
   .show h2 {
-    margin-top: 6px;
-    width: 100%;
-    text-align: center;
-    font-size: 1.4vw;
-    font-weight: 200;
+    font-size: 2.5vw;
   }
-  
-  
+
   .review,
   .high-five {
-    width: 17vw;
-    height: 17vw;
-  }
-  
-  .high-five {
-    margin-top: -20px;
-  }
-  
-  .agenda {
-    width: 21vw;
-    height: 15vw;
-  }
-  
-
-  @media screen and (max-width: 770px){
-    .show {
-      width: 20vw;
-      align-items: center;
-    }
-
-    .show h2 {
-      font-size: 2.5vw;
-    }
-  
-    .review, .high-five {
-      width: 14vw;
-      height: 14vw;
+    width: 14vw;
+    height: 14vw;
   }
 
   .show1 h2 {
@@ -89,5 +100,5 @@
     transition-delay: 1100ms;
     padding: 2vw;
     font-size: 2.5vw;
-}
   }
+}

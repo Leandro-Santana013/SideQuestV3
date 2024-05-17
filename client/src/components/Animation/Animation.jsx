@@ -1,56 +1,29 @@
 import React, { useEffect } from "react";
+import tri1 from '../../assets/tri-animation.png';
+import "./animation.css";
 
-
-// import ani1 from "../../assets/triangulo-animation2.png";
-// import ani2 from "../../assets/substitutir.png";
-
-import tri1 from '../../assets/tri-animation.png'
-
-import "./animation.css"
 export const Animation = () => {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("show1");
-          // Comente ou remova a linha abaixo se você quiser que o elemento não seja escondido novamente
-          // entry.target.classList.remove("hidden1");
         }
       });
     });
 
-    const observer2 = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show2");
-          // Comente ou remova a linha abaixo se você quiser que o elemento não seja escondido novamente
-          // entry.target.classList.remove("hidden1");
-        }
-      });
-    });
-    const items = document.querySelectorAll(".hidden1");
-    items.forEach((element) => observer.observe(element));
-
-    const items2 = document.querySelectorAll(".hidden2");
+    const items = document.querySelectorAll(".hidden1, .hidden2");
     items.forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
-  }, []); // Executa o efeito apenas uma vez durante a montagem do componente
+  }, []);
 
   return (
     <section className="animation2">
       <img className="hidden2" src={tri1} alt="Ilustração de design" />
-      {/* <div className="poster">
-        <div className="hidden1">
-          <img className="inner-img-ani1" src={ani1} alt="" />
-        </div>
-        <div className="hidden1">
-          <img className="inner-img-ani2" src={ani2} alt="" />
-        </div>
-      </div> */}
       <div className="conteudo-animation2">
         <div className="hidden1">
-          <h2>O que é a SideQuest?</h2>
+          <h2>O que é a <span>SideQuest?</span></h2>
         </div>
         <div className="hidden1">
           <p>

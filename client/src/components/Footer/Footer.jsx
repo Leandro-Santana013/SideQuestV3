@@ -7,7 +7,7 @@ export const Footer = () => {
       <div className="superior-footer">
         <div className="sidequest-bordao">
           <img src={img_logo} alt="SideQuest" />
-          <p>Estamos aqui para simplificar sua vida, ao cuidar de sua casa!</p>
+          <p>Estamos aqui para simplificar sua vida, ao cuidar de sua residência!</p>
           </div>
           <div className="termos">
             <h4>Termos</h4>

@@ -77,6 +77,13 @@
   transition-delay: 700ms;
 }
 
+.hidden1 span {
+  background: linear-gradient(to right, var(--verde), var(--azul));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: underline;
+}
+
 .hidden1 p {
   opacity: 0;
   transform: translateX(100%);
@@ -103,3 +110,24 @@
 }
 
 /* hiden dos triangulos*/
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.hidden2 {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.show1 {
+  opacity: 1;
+  transform: translateX(0);
+}
