@@ -29,7 +29,7 @@ export const ChatBox = () => {
   return (
     <>
       <div className="chat-header">
-        <h3>{infoChat.nm_profissional || infoChat.nm_cliente}</h3>
+        <h3>{ user? infoChat.nm_profissional : infoChat.nm_cliente}</h3>
       </div>
       <div className="chat-main">
         {messages &&

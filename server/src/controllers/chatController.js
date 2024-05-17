@@ -62,6 +62,7 @@ exports.findUserChats = async (req, res) => {
 
         console.log("CHATS:", chats);
         console.log("Informação dos profissionais:", infoProfissional);
+        console.log("Informação dos Cliente:", infoCliente);
 
         res.status(200).json({ chats, infoCliente, infoProfissional });
 
@@ -71,20 +72,56 @@ exports.findUserChats = async (req, res) => {
     }
 };
 
-exports.findUserPro = async (req, res) => {
-    const idProfissional = req.params.id_Profissional;
+exports.findUserChatsPro = async (req, res) => {
+    const idProfissional = Number(req.params.id_profissional);
+    console.log(idProfissional, "===========a");
+    let infoCliente = [];
 
     try {
         const chats = await chatModel.find({
             members: { $in: [idProfissional] }
         });
+        console.log(chats, "============================================")
+        if (chats.length > 0) {
+            for (const chat of chats) {
+                const secondMember = chat.members.find(member => member !== idProfissional);
+                if (secondMember) {
+                    const info = await controller_User.selectInfocliente({
+                        params: { id_cliente: secondMember },
+                    });
+                    infoCliente.push(info);
+                }
+            }
+        }
 
-        res.status(200).json(chats);
+        const infoProfissional = await controller_Pro.infoprofissional({
+            params: { id_profissional: idProfissional },
+        });
+
+        console.log("CHATS:", chats);
+        console.log("Informação dos profissionais:", infoProfissional);
+        console.log("Informação dos Cliente:", infoCliente);
+
+        res.status(200).json({ chats, infoCliente, infoProfissional });
+
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Erro interno do servidor" });
     }
 };
+//     const idProfissional = req.params.id_Profissional;
+
+//     try {
+//         const chats = await chatModel.find({
+//             members: { $in: [idProfissional] }
+//         });
+
+//         res.status(200).json(chats);
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ error: "Erro interno do servidor" });
+//     }
+// };
 
 exports.findChat = async (req, res) => {
     const { idCliente, idProfissional } = req.params;

@@ -21,7 +21,7 @@ export const Chats = () => {
             <div className="chat-list">
               <h3>Conversas</h3>
               <div className="chats-actives">
-                      <UserChat chat={userChats} user={user ? user : pro} pro={pro} />
+                      <UserChat chat={userChats} userType={pro ? pro : user} />
                     </div>             
                     </div>
             <div className="chat-box">

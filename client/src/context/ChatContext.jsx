@@ -26,10 +26,9 @@ export const ChatContextProvider = ({ children, user, pro }) => {
 
         const getUserChats = async () => {
             if (user?.id_cliente || pro?.id_profissional) {
-
                 setIsUserLoading(true);
                 setUserChatsError(null);
-                const endpoint = user?.id_cliente ? `/chat/${user.id_cliente}` : `/chat/${pro.id_profissional}`;
+                const endpoint = user?.id_cliente ? `/chat/user/${user.id_cliente}` : `/chat/pro/${pro.id_profissional}`;
                 const response = await getRequest(endpoint)
                 console.log("RESPONDE", response)
                 setIsUserLoading(true);
@@ -47,6 +46,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
     const updateCurrentChat = useCallback((chat, chatItem) => { 
         setCurrentChat(chat)
         setInfoChat(chatItem)
+        console.log("CHAAAA", chatItem, "aaaa", chat)
         
     }, [])
 

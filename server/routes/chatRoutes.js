@@ -6,6 +6,7 @@ const router = express.Router();
 
 
 router.post("/", chatController.createchat)
-router.get("/:id_cliente", chatController.findUserChats)
+router.get("/user/:id_cliente", chatController.findUserChats)
+router.get("/pro/:id_profissional", chatController.findUserChatsPro)
 router.get("/find/:idCliente/:idProfissional", chatController.findChat)
-module.exports = router;    
+module.exports = router;
