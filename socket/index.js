@@ -17,6 +17,14 @@ io.on("connection", (socket) => {
         console.log("usuarios online", onlineUsers);
     });
 
+    socket.on('sendMessage', (message) => {
+        console.log(message)
+        const user = onlineUsers.find((user) => user.userID === message.recipientOnChat)
+    if(user){
+        io.to(user.socketId).emit("getMessage", message)
+    }
+    })
+
     socket.on("disconnect", () => {
         onlineUsers = onlineUsers.filter((user) => user.socketId !== socket.id);
     })

@@ -5,6 +5,7 @@ import {
     useState,
 } from "react";
 import { postRequest, baseUrl, getRequest } from "../utils/services";
+import { useRecipient } from "../hooks/axiosRecipient";
 export const ChatContext = createContext();
 import { io } from "socket.io-client"
 
@@ -22,6 +23,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
     const [senderMessageType, setSenderMessageType] = useState(null)
     const [socket, setSocket] = useState(null)
     const [onlineUsers, setOnlineUsers] = useState(null)
+    const [recipientOnChat, setRecipientOnChat] = useState(null)
 
     useEffect(() => {
         const newSocket = io('http://localhost:3000')
@@ -31,7 +33,6 @@ export const ChatContextProvider = ({ children, user, pro }) => {
             newSocket.disconnect()
         }
     }, [user, pro])
-    console.log("online", onlineUsers)
 
     useEffect(() => {   
         if (socket === null) return;
@@ -46,11 +47,31 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 setOnlineUsers(res)
             });
 
-            return () => {
-                socket.off("getOnlineUsers")
-            }
+           
         }
     }, [socket])
+  
+
+    useEffect(() => {   
+        if (socket === null) return;
+       socket.emit("sendMessage", {newMessage: newMessage, recipientOnChat})
+    }, [newMessage])
+
+    useEffect(() => {  
+        if (socket === null) return;
+       socket.on("getMessage", res => {
+        if(currentChat?._id !== res.newMessage.user.chatId) return
+        SetMessages((prev) => [...prev, res.newMessage.user]);
+       })
+       return () => {
+        socket.off("getMessage")
+    }
+    }, [socket, currentChat,newMessage])
+
+
+    const updateChatRecipientState = useCallback((info) => {
+        setRecipientOnChat(info);
+      }, []);
     useEffect(() => {
 
         const getUserChats = async () => {
@@ -59,7 +80,6 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 setUserChatsError(null);
                 const endpoint = user?.id_cliente ? `/chat/user/${user.id_cliente}` : `/chat/pro/${pro.id_profissional}`;
                 const response = await getRequest(endpoint)
-                console.log("RESPONDE", response)
                 setIsUserLoading(true);
 
                 if (response.error) {
@@ -144,6 +164,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
         setSenderMessageType(response.user.senderType)
         SetMessages((prev) => [...prev, response]);
         setTextMessage("");
+
     }, []);
 
     return (
@@ -161,6 +182,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 sendTextMessage,
                 senderMessageType,
                 infoChat,
+                updateChatRecipientState,
                 onlineUsers,
             }}
         >
