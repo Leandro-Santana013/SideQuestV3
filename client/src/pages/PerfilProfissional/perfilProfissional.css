@@ -133,3 +133,10 @@
     width: 3vw;
     height: 5.5vh;
 }
+
+.user-online{
+    width: 1vw;
+    height:1vw;
+    border-radius: 50%;
+    background-color: var(--verde);
+}

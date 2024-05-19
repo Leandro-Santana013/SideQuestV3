@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./chats.css";
 import { SidebarCliente, CardProfissional, Header, Infoinc, TextInput, SidebarProfissional} from "../../components";
 import { ChatContext } from "../../context/ChatContext"
@@ -21,7 +21,7 @@ export const Chats = () => {
             <div className="chat-list">
               <h3>Conversas</h3>
               <div className="chats-actives">
-                      <UserChat chat={userChats} userType={pro ? pro : user} />
+                      <UserChat userType={pro ? pro : user} chat={userChats}  />
                     </div>             
                     </div>
             <div className="chat-box">

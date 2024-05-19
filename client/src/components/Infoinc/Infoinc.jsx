@@ -16,9 +16,6 @@ export const Infoinc = () => {
       fetchDataConcluir(cepToFetch); // Chama a função de busca de dados do CEP com o valor atual
   };
 
-
-  console.log(infoDados);
-
   const handleChange = (field, event) => {
     const novoValor = event.target.value;
     setInfoConfirm((prevFormData) => ({

@@ -6,12 +6,12 @@ import {
 } from "react";
 import { postRequest, baseUrl, getRequest } from "../utils/services";
 export const ChatContext = createContext();
+import { io } from "socket.io-client"
 
 export const ChatContextProvider = ({ children, user, pro }) => {
     const [userChats, setUserChats] = useState([]);
     const [isUserLoading, setIsUserLoading] = useState(false);
     const [userChatsError, setUserChatsError] = useState(null);
-    const [potentialChats, setPotentialChats] = useState([])
     const [currentChat, setCurrentChat] = useState(null)
     const [messages, SetMessages] = useState(null);
     const [isMessagesLoading, setMessagesLoading] = useState(false);
@@ -20,8 +20,37 @@ export const ChatContextProvider = ({ children, user, pro }) => {
     const [sendTextMessageError, setSendTextMessageError] = useState(null)
     const [newMessage, setNewMessage] = useState(null)
     const [senderMessageType, setSenderMessageType] = useState(null)
+    const [socket, setSocket] = useState(null)
+    const [onlineUsers, setOnlineUsers] = useState(null)
 
-        
+    useEffect(() => {
+        const newSocket = io('http://localhost:3000')
+        setSocket(newSocket)
+
+        return () => {
+            newSocket.disconnect()
+        }
+    }, [user, pro])
+    console.log("online", onlineUsers)
+
+    useEffect(() => {   
+        if (socket === null) return;
+        try {
+            if (user) {
+                socket.emit("newAddUser", { id: user.id_cliente, type: "user" });
+            } else if (pro) {
+                socket.emit("newAddUser", { id: pro.id_profissional, type: "pro" });
+            }
+        } finally {
+            socket.on("getOnlineUsers", (res) => {
+                setOnlineUsers(res)
+            });
+
+            return () => {
+                socket.off("getOnlineUsers")
+            }
+        }
+    }, [socket])
     useEffect(() => {
 
         const getUserChats = async () => {
@@ -43,42 +72,42 @@ export const ChatContextProvider = ({ children, user, pro }) => {
     }, [user, pro])
 
     const [infoChat, setInfoChat] = useState()
-    const updateCurrentChat = useCallback((chat, chatItem) => { 
+    const updateCurrentChat = useCallback((chat, chatItem) => {
         setCurrentChat(chat)
         setInfoChat(chatItem)
         console.log("CHAAAA", chatItem, "aaaa", chat)
-        
+
     }, [])
 
-        const createChat = useCallback(async (id_cliente, id_profissional) => {
-            console.log(id_cliente, id_profissional)
-            try {
-                // Swap IDs if 'pro' is not null
-                if (pro !== null) {
-                    console.log("Professional");
-                    if (Object.keys(pro).length === 0) {
-                        console.log("profissional sem informaçoes");
-                    } else {
-                        console.log("Swapping IDs");
-                        [id_cliente, id_profissional] = [id_profissional, id_cliente];
-                    }
+    const createChat = useCallback(async (id_cliente, id_profissional) => {
+        console.log(id_cliente, id_profissional)
+        try {
+            // Swap IDs if 'pro' is not null
+            if (pro !== null) {
+                console.log("Professional");
+                if (Object.keys(pro).length === 0) {
+                    console.log("profissional sem informaçoes");
                 } else {
-                    console.log("No professional provided");
+                    console.log("Swapping IDs");
+                    [id_cliente, id_profissional] = [id_profissional, id_cliente];
                 }
-
-                const newChatData = {
-                    id_cliente: id_cliente,
-                    id_profissional: id_profissional
-                };
-
-                const response = await postRequest(`/chat/`, newChatData)
-                
-                    setCurrentChat(response.user.chat);
-                    
-            } catch (error) {
-                console.log("erro ao criar chat: ", error)
+            } else {
+                console.log("No professional provided");
             }
-        }, [])
+
+            const newChatData = {
+                id_cliente: id_cliente,
+                id_profissional: id_profissional
+            };
+
+            const response = await postRequest(`/chat/`, newChatData)
+
+            setCurrentChat(response.user.chat);
+
+        } catch (error) {
+            console.log("erro ao criar chat: ", error)
+        }
+    }, [])
 
 
     useEffect(() => {
@@ -87,20 +116,20 @@ export const ChatContextProvider = ({ children, user, pro }) => {
             setMessagesLoading(false)
             setMessagesError(false);
             try {
-            setMessagesLoading(true);
-                const response = await getRequest(`/message/${currentChat._id}`)   
+                setMessagesLoading(true);
+                const response = await getRequest(`/message/${currentChat._id}`)
                 SetMessages(response);
                 setMessagesLoading(false);
             } catch (error) {
                 return setMessagesError(error);
             }
-           
+
         }
         getMessages();
     }, [currentChat, newMessage])
 
-    const sendTextMessage = useCallback(async(textMessage, sender, currentChatId, senderType, setTextMessage) => {
-        if(!textMessage) return console.log("Digite algo...");
+    const sendTextMessage = useCallback(async (textMessage, sender, currentChatId, senderType, setTextMessage) => {
+        if (!textMessage) return console.log("Digite algo...");
         const sendMessageData = {
             chatId: currentChatId,
             senderId: sender,
@@ -108,22 +137,21 @@ export const ChatContextProvider = ({ children, user, pro }) => {
             text: textMessage
         };
         const response = await postRequest(`/message`, sendMessageData);
-        if(response.error){
+        if (response.error) {
             return setSendTextMessageError(response);
-        }    
+        }
         setNewMessage(response);
         setSenderMessageType(response.user.senderType)
-        SetMessages((prev)=> [...prev, response]);
+        SetMessages((prev) => [...prev, response]);
         setTextMessage("");
     }, []);
-    
+
     return (
         <ChatContext.Provider
             value={{
                 userChats,
                 isUserLoading,
                 userChatsError,
-                potentialChats,
                 createChat,
                 updateCurrentChat,
                 currentChat,
@@ -133,6 +161,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 sendTextMessage,
                 senderMessageType,
                 infoChat,
+                onlineUsers,
             }}
         >
             {children}
