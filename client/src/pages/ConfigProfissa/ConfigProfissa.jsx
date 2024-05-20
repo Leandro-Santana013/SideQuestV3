@@ -14,50 +14,49 @@ import imgPerfil from "../../assets/icone-perfil.png";
 import { ProfessionalContext } from "../../context/ProfissionalContext";
 /**/
 const configProfissa = () => {
-  const { pro } = useContext(ProfessionalContext)
-  const avatarUrl = useRef(imgPerfil);
   const {
-    user,
+    pro,
     logoutUser,
-    setChangedUserData,
-    changedUserData,
+    changedProData,
+    setChangedProData,
     functionUpdateInfoUser,
     showModal,
-    setShowModal,
-  } = useContext(UserContext);
+    setShowModal, } = useContext(ProfessionalContext)
+  const avatarUrl = useRef(imgPerfil);
+
 
   const updateUserData = (newData) => {
     const changes = {};
-    changes.id_cliente = user.id_cliente;
-    if (newData.name !== user.name) {
+    changes.id_profissional = pro.id_profissional;
+    if (newData.name !== pro.nm_profissional) {
       changes.name = newData.name;
     }
-    if (newData.email !== user.email) {
+    if (newData.email !== pro.cd_emailProfissional) {
       changes.email = newData.email;
     }
-    if (newData.numero !== user.numero) {
+    if (newData.numero !== pro.nmr_telefoneProfissional) {
       changes.numero = newData.numero;
     }
-    if (newData.foto !== imgPerfil && newData.foto !== user.foto) {
+    if (newData.foto !== imgPerfil && newData.foto !== pro.foto) {
       changes.foto = newData.foto;
       console.log("Tamanho da imagem:", newData.foto.length);
     }
-    setChangedUserData(changes);
+    setChangedProData(changes);
     if (Object.keys(changes).length > 0) {
       setShowModal(true); // Mostra o modal se houver alterações
     }
-    setChangedUserData(changes);
+    setChangedProData(changes);
   };
 
   const updatefoto = (ImgSrc) => {
     avatarUrl.current.src = ImgSrc; // Atualizando a imagem de perfil
-    updateUserData({ ...changedUserData, foto: ImgSrc });
+    updateUserData({ ...changedProData, foto: ImgSrc });
   };
 
   const handleFieldChange = (field, event) => {
     const newValue = event.target.value;
     updateUserData({
-      ...changedUserData,
+      ...changedProData,
       [field]: newValue,
   });
   };
@@ -65,7 +64,7 @@ const configProfissa = () => {
 
   const deleteUpdate = () => {
     avatarUrl.current.src = pro.img_profissional ? pro.img_profissional : imgPerfil;
-    setChangedUserData(null);
+    setChangedProData(null);
     setShowModal(false);
     setModalEditar(false);
   };
@@ -91,7 +90,7 @@ const configProfissa = () => {
                 id="img"
                 htmlFor="comp"
                 ref={avatarUrl}
-                src={user && user.img_cliente ? user.img_cliente : pro && pro.img_profissional ? pro.img_profissional : imgPerfil }
+                src={pro && pro.img_profissional ? pro.img_profissional : imgPerfil }
                 alt="Imagem de perfil"
                 className="img-config-perfil"
                 style={{

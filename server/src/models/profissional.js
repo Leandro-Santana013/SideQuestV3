@@ -41,7 +41,12 @@ const ModelProfissional = connectionDataBase.define('tb_profissional', {
     cd_tokenProfissional: {
         type: DataTypes.STRING(255),
         allowNull: true
+    },
+    img_profissional:{
+        type: DataTypes.TEXT("long"),
+        allowNull:true
     }
+
 
 },
 _padraoTableDBExistence('tb_profissional')

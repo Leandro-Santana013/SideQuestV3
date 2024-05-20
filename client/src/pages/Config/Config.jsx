@@ -128,18 +128,21 @@ const Config = () => {
                       <span>{user.nm_cliente}</span>
                     )}
 
-                    <p>Número</p>
-                    {modalEditar ? (
-                      <input
-                        type="text"
-                        id="input-num"
-                        value={(changedUserData && changedUserData.numero) || user.nmr_telefoneCliente}
+                    {user && user.nmr_telefoneCliente && (<>
+                      <p>número</p>
+                      {modalEditar ? (
+                        <input
+                          type="text"
+                          id="input-num"
+                          value={(changedUserData && changedUserData.numero) || user.nmr_telefoneCliente}
 
-                        onChange={(event) => handleFieldChange("numero", event)}
-                      />
-                    ) : (
-                      <span>{user.nmr_telefoneCliente}</span>
-                    )}
+                          onChange={(event) => handleFieldChange("numero", event)}
+                        />
+                      ) : (
+                        <p>{user.nmr_telefoneCliente}</p>
+                      )}
+                    </>)
+                    }
                   </div>
                   <div className="input-email-local">
                     <p>Email</p>

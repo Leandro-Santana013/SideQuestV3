@@ -50,7 +50,7 @@ const ModelCliente = connectionDataBase.define('tb_cliente', {
 
     img_cliente: {
         type: DataTypes.TEXT('long'),
-        allowNull:  true
+        allowNull: true
     }
 },
     _padraoTableDBExistence('tb_cliente')

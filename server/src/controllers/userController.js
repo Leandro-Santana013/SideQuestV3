@@ -534,7 +534,7 @@ exports.findPro = async (req, res) => {
     const proInfo = await controller_User.selectInfoProfissional({
       params: { id_profissional: idProfissional },
     });
-
+console.log(proInfo)
     res.status(200).json(proInfo);
   } catch (error) {
     console.log(error);
