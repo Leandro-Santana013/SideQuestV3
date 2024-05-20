@@ -4,15 +4,18 @@
   margin-top: 120px;
   z-index: 0;
 }
+
 .header-siwpper {
   display: flex;
   justify-content: space-between;
   margin-bottom: 2.5vw;
 }
+
 .header-siwpper h2 {
   font-size: 2vw;
   font-weight: 700;
 }
+
 .header-siwpper h2 strong {
   color: var(--verde);
 }
@@ -22,10 +25,12 @@
   gap: 3vw;
   transition: 0.35s ease-in-out;
 }
+
 .btn-swipper {
   width: 50px;
   height: 50px;
 }
+
 .btn-swipper:hover {
   background-color: #144474;
   outline: none;
@@ -35,6 +40,7 @@
 .btn-swipper::after {
   font-size: 2vw !important;
 }
+
 .swiper-button-next,
 .swiper-button-prev {
   border-radius: 50%;
@@ -43,6 +49,7 @@
   height: 2vw !important;
   padding: 10px;
 }
+
 .swiper-button-next {
   color: #fff !important;
   background-color: var(--verde);
@@ -68,6 +75,7 @@
   margin-bottom: 35px;
   z-index: 0;
 }
+
 .left-carrossel {
   width: 18vw;
   padding-left: 9px;
@@ -80,6 +88,7 @@
   font-size: 1.5vw;
   margin: 0;
 }
+
 .carrossel-btn {
   display: flex;
   align-items: center;
@@ -92,6 +101,7 @@
 #carrossel-btn1 {
   border-left: solid 3px var(--verde);
 }
+
 #carrossel-palavra1 {
   color: var(--verde);
 }
@@ -103,9 +113,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   background-color: white;
-  
+
 }
 
 .swiper-wrapper {
@@ -163,50 +173,150 @@
 }
 
 
-@media screen and (max-width: 450px){
-  /*sessao carrossel*/
+
+
+
+
+
+.left-carrossel p {
+  cursor: pointer;
+}
+
+/* Responsividade */
+/*Desktops de tela maior*/
+
+@media screen and (max-width: 1600px) {}
+
+/*laptops e desktops tela de menor*/
+@media screen and (max-width: 1200px) {}
+
+/* Tablets em modo paisagem e dispositivos híbridos */
+@media (max-width: 1024px) {
+  .header-siwpper h2 {
+    font-size: 2.7vw;
+  }
+
+  .left-carrossel p {
+    font-size: 1.8vw;
+  }
+
+  .card-carrossel {
+    width: 20vw;
+    height: 28vw;
+  }
+
+  .swiper-slide .card-carrossel p {
+    font-size: 1.8vw;
+  }
+
+  .swiper-slide .card-carrossel .btn-buscar {
+    width: 14vw;
+    height: 4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide .card-carrossel .btn-buscar a {
+    font-size: 1.8vw;
+  }
+}
+
+/* Tablets em modo retrato e smartphones grandes */
+@media (max-width: 768px) {
+
+  .btns-swipper {
+    gap: 4vw;
+  }
+
+
 
   .header-siwpper h2 {
     font-size: 4vw;
+  }
+
+
+  .left-carrossel .carrossel-btn p {
+    font-size: 2.7vw;
+  }
+
+  .card-carrossel {
+    width: 20vw;
+    height: 30vw;
+  }
+
+
+  .swiper-slide .card-carrossel p {
+    font-size: 2.3vw;
+  }
+
+  .swiper-slide .card-carrossel .btn-buscar {
+    width: 15vw;
+    height: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card-carrossel .btn-buscar a {
+    font-size: 2.4vw;
+  }
+
+}
+
+/* Smartphones médios e tablets pequenos */
+@media (max-width: 600px) {
+
+  .card-carrossel {
+    width: 20vw;
+    height: 30vw;
+}
+
+.swiper-slide .card-carrossel p {
+  font-size: 2vw;
+}
+
+.swiper-slide .card-carrossel .btn-buscar a {
+  font-size: 2vw;
+}
+}
+
+/* Smartphones pequenos */
+@media (max-width: 480px) {
+  /*sessao carrossel*/
+
+  .header-siwpper h2 {
+    font-size: 4.5vw;
   }
 
   .btns-swipper {
     gap: 7vw;
   }
 
+  .card-carrossel {
+    width: 20vw;
+    height: 33vw;
+  }
+
   .left-carrossel .carrossel-btn p {
     font-size: 2.7vw;
   }
 
   .swiper-slide .card-carrossel p {
-    font-size: 2vw;
+    font-size: 2.4vw;
   }
-}
 
-
-@media screen and (max-width: 770px){
-  .header-siwpper h2 {
-    font-size: 4vw;
+  .swiper-slide .card-carrossel .btn-buscar {
+    width: 11vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  
-  
-  .left-carrossel .carrossel-btn p {
+
+  .swiper-slide .card-carrossel .btn-buscar a {
     font-size: 2.7vw;
   }
-
-  .swiper-slide .card-carrossel p {
-    font-size: 2.3vw;
 }
 
-.swiper-slide .card-carrossel .btn-buscar { 
-  width: 12vw;
-  height: 4vw;
-}
-.card-carrossel .btn-buscar a {
-font-size: 2vw;
-}
-}
-
-.left-carrossel p {
-  cursor: pointer;
-}
+/* Smartphones muito pequenos */
+@media (max-width: 320px) {}

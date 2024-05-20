@@ -66,14 +66,23 @@
 
 
 
-@media screen and (max-width: 361px) {
-  .content-input-busca input {
-    padding: 3px 15px;
-  }
+/* Responsividade */
+/*Desktops de tela maior*/
 
+@media screen and (max-width: 1600px) {
+
+}
+
+/*laptops e desktops tela de menor*/
+@media screen and (max-width: 1200px) {
+
+}
+
+/* Tablets em modo paisagem e dispositivos híbridos */
+@media (max-width: 1024px) {
   .content-input-busca {
-    width: 55vw;
-    height: 6vw;
+    width: 49vw;
+    height: 4vw;
   }
 
   .content-input-busca .iconSearch {
@@ -82,77 +91,23 @@
     margin-right: 1vw;
   }
 
+  .left-banner input {
+    padding: 5px 15px;
+  }
+
   .left-banner input::placeholder,
   .left-banner input[type="text"] {
-    font-size: 2.5vw;
+    font-size: 1.8vw;
   }
 
   .content-input-busca .btn {
     width: 11vw;
-    font-size: 2.5vw;
-  }
-
-  .content-input-busca input {
-    padding: 5.5px 15px;
-  }
-
-}
-
-@media screen and (min-width: 362px) and (max-width: 419px) {
-  .content-input-busca {
-    width: 55vw;
-    height: 6vw;
-  }
-
-  .content-input-busca .iconSearch {
-    font-size: 3.5vw;
-    margin-left: 5px;
-    margin-right: 1vw;
-  }
-
-  .left-banner input::placeholder,
-  .left-banner input[type="text"] {
-    font-size: 2.5vw;
-  }
-
-  .content-input-busca .btn {
-    width: 11vw;
-    font-size: 2.5vw;
-  }
-
-  .content-input-busca input {
-    padding: 5.5px 15px;
+    font-size: 1.8vw;
   }
 }
 
-@media screen and (min-width: 420px) and (max-width: 569px) { /*essa regra funciona na tela de 820px, e a de 800px la embaico nao funciona para as regras de 800+*/
-  .content-input-busca {
-    width: 55vw;
-    height: 6vw;
-  }
-
-  .content-input-busca .iconSearch {
-    font-size: 3.5vw;
-    margin-left: 5px;
-    margin-right: 1vw;
-  }
-
-  .left-banner input::placeholder,
-  .left-banner input[type="text"] {
-    font-size: 2.7vw;
-  }
-
-  .content-input-busca .btn {
-    width: 16vw;
-    font-size: 2.7vw;
-  }
-
-  .content-input-busca input {
-    padding: 5px 13px;
-  }
-}
-
-@media screen and (min-width: 700px) and (max-width: 799px) {
+/* Tablets em modo retrato e smartphones grandes */
+@media (max-width: 768px) {
   .content-input-busca {
     width: 46vw;
     height: 5vw;
@@ -181,7 +136,8 @@
   }
 }
 
-@media screen and (min-width: 800px) and (max-width: 1025px) {
+/* Smartphones médios e tablets pequenos */
+@media (max-width: 600px) {
   .content-input-busca {
     width: 55vw;
     height: 6vw;
@@ -193,10 +149,6 @@
     margin-right: 1vw;
   }
 
-  .left-banner input {
-    padding: 5px 15px;
-  }
-
   .left-banner input::placeholder,
   .left-banner input[type="text"] {
     font-size: 2.7vw;
@@ -206,4 +158,70 @@
     width: 16vw;
     font-size: 2.7vw;
   }
+
+  .content-input-busca input {
+    padding: 5px 13px;
+  }
 }
+
+/* Smartphones pequenos */
+@media (max-width: 480px) {
+  .content-input-busca {
+    width: 55vw;
+    height: 6vw;
+  }
+
+  .content-input-busca .iconSearch {
+    font-size: 3.5vw;
+    margin-left: 5px;
+    margin-right: 1vw;
+  }
+
+  .left-banner input::placeholder,
+  .left-banner input[type="text"] {
+    font-size: 2.5vw;
+  }
+
+  .content-input-busca .btn {
+    width: 11vw;
+    font-size: 2.5vw;
+  }
+
+  .content-input-busca input {
+    padding: 5.5px 15px;
+  }
+}
+
+/* Smartphones muito pequenos */
+@media (max-width: 320px) {
+  .content-input-busca input {
+    padding: 3px 15px;
+  }
+
+  .content-input-busca {
+    width: 55vw;
+    height: 7vw;
+  }
+
+  .content-input-busca .iconSearch {
+    font-size: 3.5vw;
+    margin-left: 2px;
+    margin-right: 1vw;
+  }
+
+  .left-banner input::placeholder,
+  .left-banner input[type="text"] {
+    font-size: 2.5vw;
+  }
+
+  .content-input-busca .btn {
+    width: 12vw;
+    font-size: 2.5vw;
+  }
+
+  .content-input-busca input {
+    padding: 5.5px 15px;
+  }
+
+}
+
