@@ -101,7 +101,7 @@ const Config = () => {
                 />
                 <ImageCropper updatefoto={updatefoto} />
               </div>
-                  <p>owqwehoueohiun</p>
+              <p>owqwehoueohiun</p>
             </div>
             <div className="sessao-config">
               <div className="edit-infoPessoais">
@@ -128,18 +128,21 @@ const Config = () => {
                       <p>{user.nm_cliente}</p>
                     )}
 
+                    {user && user.nmr_telefoneCliente && (<>
+                      <p>número</p>
+                      {modalEditar ? (
+                        <input
+                          type="text"
+                          id="input-num"
+                          value={(changedUserData && changedUserData.numero) || user.nmr_telefoneCliente}
 
-                    {modalEditar ? (
-                      <input
-                        type="text"
-                        id="input-num"
-                        value={(changedUserData && changedUserData.numero) || user.nmr_telefoneCliente}
-
-                        onChange={(event) => handleFieldChange("numero", event)}
-                      />
-                    ) : (
-                      <p>{user.nmr_telefoneCliente}</p>
-                    )}
+                          onChange={(event) => handleFieldChange("numero", event)}
+                        />
+                      ) : (
+                        <p>{user.nmr_telefoneCliente}</p>
+                      )}
+                    </>)
+                    }
                   </div>
                   <div className="input-email-local">
                     <p>Email</p>

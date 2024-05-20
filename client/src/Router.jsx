@@ -46,7 +46,7 @@ const Router = () => {
             <Route exact path="/historicoCliente" element={<Historico />} />
             <Route exact path="/servicosPendentesCliente" element={<ServicosPendentesCliente />} />
             <Route exact path="/config" element={user ? <Config /> : <Navigate to="/login" />} />
-            <Route exact path="/ConfigProfissa" element={pro ? <ConfigProfissa/> :  <Navigate to="/loginProissional" /> }/>
+            <Route exact path="/ConfigProfissa" element={pro ? <ConfigProfissa/> :  <Navigate to="/loginProfissional" /> }/>
             <Route exact path="/chats" element={user || pro ? <Chats /> : <Navigate to="/login" />} />
             <Route exact path="/loginProfissional" element={pro ? <Navigate to="/homeProfissionais" /> : <LoginProfissional />} />
             <Route exact path="/validaEmailProfissional" element={<ValidaEmailProfissional /> } />

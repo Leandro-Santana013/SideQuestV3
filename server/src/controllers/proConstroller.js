@@ -168,7 +168,7 @@ exports.registerPro = async (req, res) => {
         return res
           .status(400)
           .json({
-            message: "Confirme seu email, verifique na sua caixa de entrada",
+            error: "Confirme seu email, verifique na sua caixa de entrada",
           });
       } else {
         const login = await controller_Pro.bindCookieBypkProfissonal({ params: { cd_emailProfissional: email }});
