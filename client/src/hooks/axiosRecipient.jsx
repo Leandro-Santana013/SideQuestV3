@@ -12,13 +12,11 @@ export const useRecipient = (chat, userType) => {
 
     if (userType == 'pro') {
         for (var i = 0; i < chat?.infoCliente?.length; i++) {
-            console.log(chat?.infoCliente, "looog1")
             recipientIds.push(chat?.infoCliente[i].id_cliente);
             recipientInfo.push(chat?.infoCliente[i]);
         }
     } else {
         for (var i = 0; i < chat?.infoProfissional?.length; i++) {
-            console.log(chat?.infoCliente, "looog2")
             recipientIds.push(chat?.infoProfissional[i].id_profissional);
             recipientInfo.push(chat?.infoProfissional[i]);
         }
@@ -36,7 +34,7 @@ export const useRecipient = (chat, userType) => {
                 setError(error);
             }
         };
-    
+        console.log(recipient, "reeeee")
         getUser();
     }, [chat]);
        

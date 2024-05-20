@@ -73,7 +73,7 @@ exports.findUserChats = async (req, res) => {
 };
 
 exports.findUserChatsPro = async (req, res) => {
-    const idProfissional = Number(req.params.id_profissional);
+    const idProfissional = req.params.id_profissional;
     console.log(idProfissional, "===========a");
     let infoCliente = [];
 
@@ -85,6 +85,7 @@ exports.findUserChatsPro = async (req, res) => {
         if (chats.length > 0) {
             for (const chat of chats) {
                 const secondMember = chat.members.find(member => member !== idProfissional);
+                console.log("SECOND", secondMember)
                 if (secondMember) {
                     const info = await controller_User.selectInfocliente({
                         params: { id_cliente: secondMember },

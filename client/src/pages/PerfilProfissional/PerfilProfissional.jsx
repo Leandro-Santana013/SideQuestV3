@@ -15,7 +15,7 @@ import {
 import { UserContext } from "../../context/UserContext";
 const PerfilProfissional = () => {
     const { id } = useParams();
-    const { potentialChats, createChat } = useContext(ChatContext);
+    const {createChat, onlineUsers } = useContext(ChatContext);
     const {user} = useContext(UserContext)
     const [profissional, setProfissional] = useState(null);
     const [typeForm, setTypeForm] = useState(1)
@@ -37,7 +37,7 @@ const PerfilProfissional = () => {
                 const response = await getRequest(`/user/perfil/profissionais/${id}`);
                 // Configurando os dados do profissional no estado local
                 setProfissional(response);
-                console.log(response)
+                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaad", response)
             } catch (error) {
                 console.error("Erro ao buscar informações do profissional:", error);
                 // Tratamento de erro adicional conforme necessário
@@ -65,6 +65,9 @@ const PerfilProfissional = () => {
                             <div className="cabecalho-perfil">
                                 <div className="perfil-nome">
                                     <img src={profissional && profissional.img_profissional ? profissional.img_profissional : iconeperfil} alt="icone de perfil" />
+                                    <span className={
+                                        onlineUsers?.some((user) => user?.userID == profissional[0].id_profissional && user.type == "pro") ?
+                                   "user-online" : ""}></span>
                                     <div className="nome-profissao">
                                         <h1>{profissional[0].nm_profissional}</h1>
                                         <h2>Eletricista</h2>
