@@ -49,6 +49,7 @@
 .sidebarCliente a {
     text-decoration: none;
     color: black;
+    gap: .5vw;
 }
 
 .option {

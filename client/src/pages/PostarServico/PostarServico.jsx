@@ -5,7 +5,12 @@ import axios from "axios";
 import JSZip from "jszip";
 import imgApproved from "../../assets/approved.png";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { FaCircleXmark } from "react-icons/fa6";
 
+import { FaAngleLeft } from "react-icons/fa6";
+import { FaAngleRight } from "react-icons/fa6";
+
+import { FaCheck } from "react-icons/fa6";
 
 import "./postarServico.css";
 import {
@@ -194,7 +199,7 @@ const PostarServico = () => {
       <div className="content-midia">
         <div className="main-content main-content">
           <div className="publicarHeader">
-            <h2 className="publicarTitulo">Publique um serviço</h2>
+            <h2 className="publicarTitulo">Divulgue o serviço a ser feito</h2>
             <div className="publicarPassos">
               <div className={`publicar123 ${form === 1 ? "form" : ""}`}>1</div>
               <div className={`publicar123 ${form === 2 ? "form" : ""}`}>2</div>
@@ -324,16 +329,17 @@ const PostarServico = () => {
                       </label>
 
                       {locationuser && (
-                        <div>
+                        <div className="option-endereco-principal">
+                          <label class="custom-checkbox">
+                            <input type="checkbox"
+                              id="loc"
+                              checked={isCheckedLocation}
+                              onChange={(e) => {
+                                setIsCheckedLocation(e.target.checked);
+                              }} />
+                            <span class="checkmark">{isCheckedLocation ? <FaCheck /> : ''}</span>
+                          </label>
                           <p>usar endereço principal</p>
-                          <input
-                            type="checkbox"
-                            id="loc"
-                            checked={isCheckedLocation}
-                            onChange={(e) => {
-                              setIsCheckedLocation(e.target.checked);
-                            }}
-                          />
                         </div>
                       )}
 
@@ -371,13 +377,14 @@ const PostarServico = () => {
                       {modalOpen && (
                         <div className="fade-main-image-container">
                           <div className="main-image-container">
+                            <button
+                              className="fechar-fotos"
+                              onClick={() => closeModal()}
+                            >
+                              <FaCircleXmark />
+                            </button>
                             <div className="header-modal">
-                              <button
-                                className="fechar-fotos"
-                                onClick={() => closeModal()}
-                              >
-                                
-                              </button>
+
                               <p>Fotos selecionadas</p>
                             </div>
                             <div className="main-image-buttons">
@@ -385,21 +392,22 @@ const PostarServico = () => {
                                 className="prev prev-next"
                                 onClick={handlePrevimg}
                               >
-                                &#10094;
+                                <FaAngleLeft />
+
                               </button>
                               <div className="img-main-image-buttons">
                                 <img
-                                src={selectedImages[currentImageIndex]}
-                                alt={`Selected ${currentImageIndex}`}
-                                className="main-image"
-                              />
+                                  src={selectedImages[currentImageIndex]}
+                                  alt={`Selected ${currentImageIndex}`}
+                                  className="main-image"
+                                />
                               </div>
-                              
+
                               <button
                                 className="next prev-next"
                                 onClick={handleNextimg}
                               >
-                                &#10095;
+                                <FaAngleRight />
                               </button>
                             </div>
                             <div className="images-modal">

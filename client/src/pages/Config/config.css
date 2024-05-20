@@ -7,7 +7,7 @@
 .cabecalho-editar {
     display: flex;
     padding: 20px;
-    background: linear-gradient(to right, var(--verde), var(--azul)) ;
+    background: linear-gradient(to right, var(--verde), var(--azul));
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
 }
@@ -61,12 +61,11 @@
 
 .edit-infoPessoais .input-pessoais {
     display: flex;
-    justify-content: space-around;
+    gap: 2vw;
     margin: 10px;
 }
 
 .edit-infoPessoais .input-pessoais .input-nome-num p {
-    color: var(--verde);
     font-weight: bold;
 }
 
@@ -77,7 +76,6 @@
 }
 
 .edit-infoPessoais .input-pessoais .input-email-local p {
-    color: var(--verde);
     font-weight: bold;
 }
 
@@ -199,9 +197,6 @@
 
     }
 }
-
-
-
 
 @media screen and (max-width: 500px) {
 

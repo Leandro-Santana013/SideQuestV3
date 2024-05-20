@@ -37,12 +37,11 @@
 
 .edit-infoPessoais .input-pessoais {
     display: flex;
-    justify-content: space-around;
+    gap: 2vw;
     margin: 10px;
 }
 
 .edit-infoPessoais .input-pessoais .input-nome-num p {
-    color: var(--verde);
     font-weight: bold;
 }
 
@@ -53,7 +52,6 @@
 }
 
 .edit-infoPessoais .input-pessoais .input-email-local p {
-    color: var(--verde);
     font-weight: bold;
 }
 

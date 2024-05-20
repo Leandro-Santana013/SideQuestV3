@@ -101,7 +101,7 @@ const Config = () => {
                 />
                 <ImageCropper updatefoto={updatefoto} />
               </div>
-                  <p>owqwehoueohiun</p>
+              <p>owqwehoueohiun</p>
             </div>
             <div className="sessao-config">
               <div className="edit-infoPessoais">
@@ -125,10 +125,10 @@ const Config = () => {
                         onChange={(event) => handleFieldChange("name", event)}
                       />
                     ) : (
-                      <p>{user.nm_cliente}</p>
+                      <span>{user.nm_cliente}</span>
                     )}
 
-
+                    <p>Número</p>
                     {modalEditar ? (
                       <input
                         type="text"
@@ -138,7 +138,7 @@ const Config = () => {
                         onChange={(event) => handleFieldChange("numero", event)}
                       />
                     ) : (
-                      <p>{user.nmr_telefoneCliente}</p>
+                      <span>{user.nmr_telefoneCliente}</span>
                     )}
                   </div>
                   <div className="input-email-local">
@@ -151,7 +151,7 @@ const Config = () => {
                         onChange={(event) => handleFieldChange("email", event)}
                       />
                     ) : (
-                      <p>{user.cd_emailCliente}</p>
+                      <span>{user.cd_emailCliente}</span>
                     )}
                   </div>
                 </div>
