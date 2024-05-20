@@ -10,6 +10,36 @@
     font-size: 1.5vw;
 }
 
+.chat-header{
+  gap: 1vw;
+}
+
+.chat-header .img-profissional {
+  width: 3.5vw;
+  height: 3.5vw;
+  border-radius: 50%;
+}
+
+
+.chat-header .user-online{
+  background-color: var(--verde);
+  margin-right: 20px;
+  border-radius: 10px;
+  padding: 5px;
+  color: white;
+}
+
+.chat-header .chat-header-img-name{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 15px;
+}
+
+.chat-main {
+  width: inherit;
+}
+
 .mensagens-chat-main {
     padding: 15px;
     width: 42vw;
@@ -60,7 +90,12 @@
     width: inherit;
 }
 
-
+.message-chat{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 
 
 .messageBox {
@@ -114,7 +149,15 @@
   }
   #sendButton:hover svg path {
     fill: #3c3c3c;
+  }
 
+  .img-balao  {
+    width: 10vw;
+    height: 10vw;
+  }
 
+  .chat-box h3{
+    font-size: 1.5vw;
+    font-weight: 400;
   }
   

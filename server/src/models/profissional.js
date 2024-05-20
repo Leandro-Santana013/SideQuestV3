@@ -47,6 +47,7 @@ const ModelProfissional = connectionDataBase.define('tb_profissional', {
         allowNull:true
     }
 
+
 },
 _padraoTableDBExistence('tb_profissional')
 )

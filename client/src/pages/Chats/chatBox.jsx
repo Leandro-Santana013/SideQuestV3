@@ -3,9 +3,10 @@ import { UserContext } from '../../context/UserContext';
 import { ChatContext } from '../../context/ChatContext';
 import { useRecipient } from '../../hooks/axiosRecipient';
 import { ProfessionalContext } from '../../context/ProfissionalContext';
+import balaoChat from '../../assets/balao-de-pensamento.png';
+import imgPerfil from "../../assets/icone-perfil.png";
 import moment from 'moment';
 import './chatBox.css';
-
 
 export const ChatBox = () => {
   const { user } = useContext(UserContext);
@@ -29,9 +30,10 @@ export const ChatBox = () => {
     }
   }, [messages]);
 
-    console.log(userChats, "lalal")
-    if(userChats?.chats?.length==0) return <p>Não possui nenhuma conversa</p>;
-
+    if(userChats?.chats?.length==0){ return (<div className='message-chat'>
+      <img src={balaoChat} className="img-balao"/>
+      <h3>Nenhuma conversa por aqui</h3></div>);
+    }
 
     if (!infoChat) {
       return <div className='container-nenhum-chat-selecionado'><p className='nenhum-chat-selecionado'>Clique em algum chat para iniciar a conversa!</p></div>;
@@ -46,9 +48,15 @@ export const ChatBox = () => {
   return (
     <>
       <div className="chat-header">
+        <div className="chat-header-img-name">
+        <img className="img-profissional" src={pro ? infoChat.img_cliente ? infoChat.img_cliente : imgPerfil : null || user? infoChat.img_profissional ? infoChat.img_profissional : imgPerfil :null} />
+
         <h3>{ user ? infoChat.nm_profissional : infoChat.nm_cliente }</h3>
-        <div className={isOnlineUser || isOnlinePro ? "user-online" : ""}></div>
-      </div>
+        </div>
+        {isOnlineUser || isOnlinePro && 
+        <div className="user-online">online</div>
+        }
+        </div>
       <div className="chat-main" ref={chatMainRef}>
         {messages &&
           messages.map((message, index) => (
