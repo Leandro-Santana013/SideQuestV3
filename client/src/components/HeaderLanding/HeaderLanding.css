@@ -78,17 +78,6 @@
 /*Responsividade*/
 
 
-@media  screen and (max-width: 440px) {
-  .hamburguer-resp {
-    width: 30px;
-  }
-
-  .hamburguer-resp::before, .hamburguer-resp::after {
-    width: 30px;
-  }
-}
-
-
 @media screen and (max-width: 1025px){
   
   .containerNavHome {
@@ -144,8 +133,16 @@
 }
 
 
-@media  screen and (min-width: 700px) and (max-width: 1025px) {
-  .nav-resp .respNavUl .respNavLi {
-    font-size: 2rem;
-}
+@media  screen and (max-width: 440px) {
+  .hamburguer-resp {
+    width: 30px;
+  }
+
+  .hamburguer-resp::before, .hamburguer-resp::after {
+    width: 30px;
+  }
+
+  .respNavUl {
+    clip-path: circle(100px at 90% -20%);
+  }
 }
