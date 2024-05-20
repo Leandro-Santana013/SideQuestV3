@@ -34,3 +34,262 @@ footer .inferior-footer hr {
 footer .inferior-footer p {
   color: #b1b1b1;
 }
+
+/* Desktops de tela maior */
+@media (max-width: 1600px) {
+ 
+
+footer .superior-footer .sidequest-bordao {
+  width: 26vw;
+}
+
+footer .superior-footer {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+footer .superior-footer .sidequest-bordao img {
+  width: 14vw;
+  height: 5vw;
+}
+
+footer .superior-footer .sidequest-bordao p {
+  font-size: 1.5vw;
+}
+
+footer .superior-footer h4 {
+  font-size: 1.8vw;
+}
+
+footer .superior-footer p {
+  font-size: 1.5vw;
+}
+
+footer .inferior-footer p {
+  font-size: 1.5vw;
+}
+
+}
+
+/* Laptops e desktops de tela menor */
+@media (max-width: 1200px) {
+  
+
+footer .superior-footer .sidequest-bordao {
+  width: 26vw;
+}
+
+footer .superior-footer {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+footer .superior-footer .sidequest-bordao img {
+  width: 11vw;
+  height: 4vw;
+}
+
+footer .superior-footer .sidequest-bordao p {
+  font-size: 1.2vw;
+}
+
+footer .superior-footer h4 {
+  font-size: 1.2rem;
+}
+
+footer .superior-footer p {
+  font-size: 1.2vw;
+}
+
+footer .inferior-footer p {
+  font-size: 1.2vw;
+}
+
+}
+
+/* Tablets em modo paisagem e dispositivos híbridos */
+@media (max-width: 1024px) {
+  
+
+footer .superior-footer .sidequest-bordao {
+  width: 26vw;
+}
+
+footer .superior-footer {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+footer .superior-footer .sidequest-bordao img {
+  width: 13vw;
+  height: 5vw;
+}
+
+footer .superior-footer .sidequest-bordao p {
+  font-size: 1.5vw;
+}
+
+footer .superior-footer h4 {
+  font-size: 1.8vw;
+}
+
+footer .superior-footer p {
+  font-size: 1.5vw;
+}
+
+footer .inferior-footer p {
+  font-size: 1.5vw;
+}
+
+}
+
+/* Tablets em modo retrato e smartphones grandes */
+@media (max-width: 768px) {
+  
+
+footer .superior-footer .sidequest-bordao {
+  width: 26vw;
+}
+
+footer .superior-footer {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+footer .superior-footer .sidequest-bordao img {
+  width: 19vw;
+  height: 7vw;
+}
+
+footer .superior-footer .sidequest-bordao p {
+  font-size: 2.8vw;
+}
+
+footer .superior-footer h4 {
+  font-size: 3vw;
+}
+
+footer .superior-footer p {
+  font-size: 2.7vw;
+}
+
+footer .inferior-footer p {
+  font-size: 2.7vw;
+}
+
+}
+
+/* Smartphones médios e tablets pequenos */
+@media (max-width: 600px) {
+  
+
+footer .superior-footer .sidequest-bordao {
+  width: 26vw;
+}
+
+footer .superior-footer {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+footer .superior-footer .sidequest-bordao img {
+  width: 19vw;
+  height: 7vw;
+}
+
+footer .superior-footer .sidequest-bordao p {
+  font-size: 2.8vw;
+}
+
+footer .superior-footer h4 {
+  font-size: 3.5vw;
+}
+
+footer .superior-footer p {
+  font-size: 2.7vw;
+}
+
+footer .inferior-footer p {
+  font-size: 2.8vw;
+}
+
+}
+
+/* Smartphones pequenos */
+@media (max-width: 480px) {
+  
+
+footer .superior-footer .sidequest-bordao {
+  width: 26vw;
+}
+
+footer .superior-footer {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+footer .superior-footer .sidequest-bordao img {
+  width: 18vw;
+  height: 7vw;
+}
+
+footer .superior-footer .sidequest-bordao p {
+  font-size: 2.8vw;
+}
+
+footer .superior-footer h4 {
+  font-size: 3.5vw;
+}
+
+footer .superior-footer p {
+  font-size: 2.8vw;
+}
+
+footer .inferior-footer p {
+  font-size: 2.8vw;
+}
+
+}
+
+/* Smartphones muito pequenos */
+@media (max-width: 320px) {
+  
+
+footer .superior-footer .sidequest-bordao {
+  width: 26vw;
+}
+
+footer .superior-footer {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+footer .superior-footer .sidequest-bordao img {
+  width: 18vw;
+  height: 7vw;
+}
+
+footer .superior-footer .sidequest-bordao p {
+  font-size: 2.8vw;
+}
+
+footer .superior-footer h4 {
+  font-size: 3vw;
+}
+
+footer .superior-footer p {
+  font-size: 2.8vw;
+}
+
+footer .inferior-footer p {
+  font-size: 2.7vw;
+}
+
+}
