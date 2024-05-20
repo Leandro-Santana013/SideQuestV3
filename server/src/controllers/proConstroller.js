@@ -287,7 +287,7 @@ exports.registerPro = async (req, res) => {
         const userInfo = await controller_Pro.selectInfoCliente({
       params: { id_cliente:  idCliente},  
     });
-      
+     
       res.status(200).json(userInfo)
     }catch(error){
       console.log(error);

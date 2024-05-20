@@ -28,8 +28,7 @@
 
 .chats-actives {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; 
     width: inherit;
     height: 34vw;
     flex-direction: column;
@@ -39,7 +38,7 @@
 
 .message-box {
     width: 19vw;
-    border-bottom: solid 3px var(--verde);
+    height: 5vw;
     padding: 5px;
 }
 
@@ -51,11 +50,14 @@
     border-radius: 15px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .chat-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 5px;
     width: inherit;
     height: 5vw;
