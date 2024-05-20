@@ -209,8 +209,8 @@
   }
 
   .hidden2.show1 {
-    width: 38vw;
-    height: 36vw;
+    width: 28vw;
+    height: 34vw;
   }
 
   .hidden1.show1 {
@@ -295,6 +295,7 @@
     width: 30vw;
     font-size: 2.3vw;
   }
+
 }
 
 /* Smartphones pequenos */
@@ -320,7 +321,7 @@
   }
 
   .hidden1.show1 p {
-    font-size: 3vw;
+    font-size: 2.7vw;
   }
 
   .hidden1.show1 a {
@@ -357,6 +358,6 @@
 
   .hidden1.show1 a {
     width: 30vw;
-    font-size: 2.5vw;
+    font-size: 2.3vw;
   }
 }
