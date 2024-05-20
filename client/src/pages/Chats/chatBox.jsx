@@ -1,26 +1,43 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { ChatContext } from '../../context/ChatContext';
 import { useRecipient } from '../../hooks/axiosRecipient';
 import { ProfessionalContext } from '../../context/ProfissionalContext';
 import moment from 'moment';
 import './chatBox.css';
-import { RiSendPlane2Fill } from 'react-icons/ri';
+
 
 export const ChatBox = () => {
   const { user } = useContext(UserContext);
   const { pro } = useContext(ProfessionalContext);
-  const { currentChat, messages, isMessagesLoading, sendTextMessage, senderMessageType, infoChat } = useContext(ChatContext);
+  const { onlineUsers, currentChat, messages, isMessagesLoading, sendTextMessage, senderMessageType, infoChat, userChats } = useContext(ChatContext);
   const { recipient, userType } = useRecipient(currentChat, user ? 'user' : 'pro');
   const [textMessage, setTextMessage] = useState('');
   const userId = user ? user.id_cliente : pro.id_profissional;
-  const handleMessageSend = () => {
-    sendTextMessage(textMessage, userId, currentChat._id, userType, setTextMessage);
+  const chatMainRef = useRef(null);
+
+  const handleMessageSend = (e) => {
+    e.preventDefault();  // Previne o comportamento padrão do formulário
+    if (textMessage.trim() !== '') {
+      sendTextMessage(textMessage, userId, currentChat._id, userType, setTextMessage);
+    }
   };
 
-  if (!recipient) {
-    return <div className='container-nenhum-chat-selecionado'><p className='nenhum-chat-selecionado'>Clique em algum chat para iniciar a conversa!</p></div>;
-  }
+  useEffect(() => {
+    if (chatMainRef.current) {
+      chatMainRef.current.scrollTop = chatMainRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+    console.log(userChats, "lalal")
+    if(userChats?.chats?.length==0) return <p>Não possui nenhuma conversa</p>;
+
+
+    if (!infoChat) {
+      return <div className='container-nenhum-chat-selecionado'><p className='nenhum-chat-selecionado'>Clique em algum chat para iniciar a conversa!</p></div>;
+    }
+    const isOnlinePro = onlineUsers?.some((user) => user?.userID == infoChat.id_profissional && user.type == "pro");
+  const isOnlineUser = onlineUsers?.some((user) => user?.userID ==infoChat.id_cliente && user.type == "user");
 
   if (isMessagesLoading) {
     return <p>Carregando mensagens...</p>;
@@ -29,17 +46,14 @@ export const ChatBox = () => {
   return (
     <>
       <div className="chat-header">
-        <h3>{ user? infoChat.nm_profissional : infoChat.nm_cliente}</h3>
+        <h3>{ user ? infoChat.nm_profissional : infoChat.nm_cliente }</h3>
+        <div className={isOnlineUser || isOnlinePro ? "user-online" : ""}></div>
       </div>
-      <div className="chat-main">
+      <div className="chat-main" ref={chatMainRef}>
         {messages &&
           messages.map((message, index) => (
-            <div className="mensagens-chat-main">
-              <div
-                key={index}
-                className={`${message.senderId == userId && message.senderType === senderMessageType ? 'msg-enviada' : 'msg-recebida'
-                  }`}
-              >
+            <div key={index} className="mensagens-chat-main">
+              <div className={`${message.senderId == userId? 'msg-enviada' : 'msg-recebida'}`}>
                 <span className='msg-mensagens-chat-main'>{message.text}</span>
                 <span className='time-mensagens-chat-main'>{moment(message.createdAt).calendar()}</span>
               </div>
@@ -47,10 +61,36 @@ export const ChatBox = () => {
           ))}
       </div>
       <div className="chat-sub">
-        <input placeholder='Digite sua mensagem' value={textMessage} onChange={(e) => setTextMessage(e.target.value)} />
-        <button className="send-button" onClick={handleMessageSend}>
-          <RiSendPlane2Fill />
-        </button>
+        <div className="messageBox">
+          <input 
+            required 
+            placeholder="Mensagem..." 
+            type="text" 
+            id="messageInput" 
+            value={textMessage} 
+            onChange={(e) => setTextMessage(e.target.value)} 
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleMessageSend(e);
+              }
+            }} 
+          />
+          <button id="sendButton" onClick={handleMessageSend}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
+              <path
+                fill="none"
+                d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+              ></path>
+              <path
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke-width="33.67"
+                stroke="#6c6c6c"
+                d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+              ></path>
+            </svg>
+          </button>
+        </div>
       </div>
     </>
   );

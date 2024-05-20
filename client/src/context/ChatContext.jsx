@@ -14,8 +14,8 @@ export const ChatContextProvider = ({ children, user, pro }) => {
     const [isUserLoading, setIsUserLoading] = useState(false);
     const [userChatsError, setUserChatsError] = useState(null);
     const [currentChat, setCurrentChat] = useState(null)
-    const [messages, SetMessages] = useState(null);
-    const [isMessagesLoading, setMessagesLoading] = useState(false);
+    const [messages, setMessages] = useState(null);
+    const [isMessagesLoading, setMessagesLoading] = useState(null);
     const [messagesError, setMessagesError] = useState(null)
 
     const [sendTextMessageError, setSendTextMessageError] = useState(null)
@@ -49,7 +49,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
 
            
         }
-    }, [socket])
+    }, [socket, ])
   
 
     useEffect(() => {   
@@ -61,12 +61,12 @@ export const ChatContextProvider = ({ children, user, pro }) => {
         if (socket === null) return;
        socket.on("getMessage", res => {
         if(currentChat?._id !== res.newMessage.user.chatId) return
-        SetMessages((prev) => [...prev, res.newMessage.user]);
+        setMessages((prev) => [...prev, res.newMessage.user]);
        })
        return () => {
         socket.off("getMessage")
     }
-    }, [socket, currentChat,newMessage])
+    }, [socket, currentChat,newMessage,])
 
 
     const updateChatRecipientState = useCallback((info) => {
@@ -85,7 +85,9 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 if (response.error) {
                     return setUserChatsError(response);
                 }
+            
                 setUserChats(response);
+                setMessagesLoading(false);
             }
         }
         getUserChats();
@@ -108,7 +110,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 if (Object.keys(pro).length === 0) {
                     console.log("profissional sem informaçoes");
                 } else {
-                    console.log("Swapping IDs");
+                              console.log("Swapping IDs");
                     [id_cliente, id_profissional] = [id_profissional, id_cliente];
                 }
             } else {
@@ -131,22 +133,23 @@ export const ChatContextProvider = ({ children, user, pro }) => {
 
 
     useEffect(() => {
+        setMessagesLoading(true);
 
         const getMessages = async () => {
-            setMessagesLoading(false)
             setMessagesError(false);
             try {
                 setMessagesLoading(true);
                 const response = await getRequest(`/message/${currentChat._id}`)
-                SetMessages(response);
+                setMessages(response);
                 setMessagesLoading(false);
             } catch (error) {
                 return setMessagesError(error);
             }
+                setMessagesLoading(null);
 
         }
         getMessages();
-    }, [currentChat, newMessage])
+    }, [currentChat,])
 
     const sendTextMessage = useCallback(async (textMessage, sender, currentChatId, senderType, setTextMessage) => {
         if (!textMessage) return console.log("Digite algo...");
@@ -162,10 +165,12 @@ export const ChatContextProvider = ({ children, user, pro }) => {
         }
         setNewMessage(response);
         setSenderMessageType(response.user.senderType)
-        SetMessages((prev) => [...prev, response]);
-        setTextMessage("");
+        setMessages((prev) => [...prev, response.user]);
 
+        setTextMessage("");
     }, []);
+
+    
 
     return (
         <ChatContext.Provider

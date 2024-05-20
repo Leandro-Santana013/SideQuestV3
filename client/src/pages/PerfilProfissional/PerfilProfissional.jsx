@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./perfilProfissional.css";
+import { Link } from "react-router-dom";
 import { SidebarProfissional, Header, SidebarCliente } from "../../components";
 import iconeperfil from "../../assets/icone-perfil.png";
 import { useParams } from "react-router-dom";
@@ -11,12 +12,13 @@ import agenda from "../../assets/agenda.png";
 import certificado from "../../assets/certificado.png";
 import { ChatContext } from "../../context/ChatContext";
 import {
-    postRequest, baseUrl, getRequest, putRequest,} from "../../utils/services";
+    postRequest, baseUrl, getRequest, putRequest,
+} from "../../utils/services";
 import { UserContext } from "../../context/UserContext";
 const PerfilProfissional = () => {
     const { id } = useParams();
-    const {createChat, onlineUsers } = useContext(ChatContext);
-    const {user} = useContext(UserContext)
+    const { createChat, onlineUsers } = useContext(ChatContext);
+    const { user } = useContext(UserContext)
     const [profissional, setProfissional] = useState(null);
     const [typeForm, setTypeForm] = useState(1)
 
@@ -51,6 +53,7 @@ const PerfilProfissional = () => {
         if (user !== null) {
 
             createChat(user.id_cliente, u);
+            window.location.href = '/chats';
         }
 
     };
@@ -67,7 +70,7 @@ const PerfilProfissional = () => {
                                     <img src={profissional && profissional.img_profissional ? profissional.img_profissional : iconeperfil} alt="icone de perfil" />
                                     <span className={
                                         onlineUsers?.some((user) => user?.userID == profissional[0].id_profissional && user.type == "pro") ?
-                                   "user-online" : ""}></span>
+                                            "user-online" : ""}></span>
                                     <div className="nome-profissao">
                                         <h1>{profissional[0].nm_profissional}</h1>
                                         <h2>Eletricista</h2>
@@ -75,8 +78,8 @@ const PerfilProfissional = () => {
                                 </div>
                                 <div className="menu-perfil">
                                     <ul>
-                                    <li onClick={() => handleForm(1)} style={{ color: typeForm === 1 ? "var(--verde)" : "inherit" }}>Sobre</li>
-                                        <li onClick={() => { handleForm(2) }}  style={{ color: typeForm === 2 ? "var(--verde)" : "inherit" }} >Mídia(4)</li>
+                                        <li onClick={() => handleForm(1)} style={{ color: typeForm === 1 ? "var(--verde)" : "inherit" }}>Sobre</li>
+                                        <li onClick={() => { handleForm(2) }} style={{ color: typeForm === 2 ? "var(--verde)" : "inherit" }} >Mídia(4)</li>
                                         <li onClick={() => { handleForm(3) }} style={{ color: typeForm === 3 ? "var(--verde)" : "inherit" }} >Avaliações</li>
                                     </ul>
                                 </div>
@@ -92,6 +95,7 @@ const PerfilProfissional = () => {
                                             <p>210 avaliações</p>
                                         </div>
                                     </div>
+                                    
                                     <div onClick={() => handleClick(id)}>chat</div>
                                     <div className="medalhas">
                                         <img src={medalha10k} alt="medalha 10" />
@@ -119,13 +123,13 @@ const PerfilProfissional = () => {
                                                 </div>
                                             </>
                                         )}
-                                          {
+                                    {
                                         typeForm === 2 && (
                                             <>
-                                               <p> INFO 2 MIDIAS</p>
+                                                <p> INFO 2 MIDIAS</p>
                                             </>
                                         )}
-                                         {
+                                    {
                                         typeForm === 3 && (
                                             <>
                                                 <p>array avaliações 3</p>

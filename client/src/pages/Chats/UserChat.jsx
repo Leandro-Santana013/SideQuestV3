@@ -16,15 +16,10 @@ export const UserChat = ({ chat }) => {
     }
 
     const handleChatClick = (chatItem, recipientItem) => {
-        console.log('Clicked chat item:', chatItem);
-        console.log('Clicked recipient item:', recipientItem);
         updateCurrentChat(chatItem, recipientItem);
-
         if (userType === 'user') {
-            console.log('Updating recipient state for professional ID:', recipientItem.id_profissional);
             updateChatRecipientState(recipientItem.id_profissional);
         } else {
-            console.log('Updating recipient state for client ID:', recipientItem.id_cliente);
             updateChatRecipientState(recipientItem.id_cliente);
         }
     };
@@ -44,8 +39,10 @@ export const UserChat = ({ chat }) => {
                     infoProfissional = chat.infoProfissional;
                 }
 
-                const isOnlinePro = onlineUsers?.some((user) => user?.userID === infoProfissional.id_profissional && user.type === "pro");
-                const isOnlineUser = onlineUsers?.some((user) => user?.userID === infoCliente.id_cliente && user.type === "user");
+                const isOnlinePro = onlineUsers?.some((onlineUser) => onlineUser.userID === infoProfissional.id_profissional && onlineUser.type === "pro");
+                const isOnlineUser = onlineUsers?.some((onlineUser) => onlineUser.userID === infoCliente.id_cliente && onlineUser.type === "user");
+
+                const isOnline = userType === 'user' ? isOnlinePro : isOnlineUser;
 
                 return (
                     <div className="message-box" key={index} onClick={() => handleChatClick(chatItem, recipientItem)}>
@@ -54,7 +51,7 @@ export const UserChat = ({ chat }) => {
                         <div className="text-chat-list">{chatItem.text}</div> {/* Assuming there's a text property in chat item */}
                         <div className="date-message">10/10/1010</div> {/* Use chatItem.date or something similar */}
                         <div className="chat-notification">3</div> {/* Use chatItem.notificationCount or something similar */}
-                        <div className={isOnlineUser || isOnlinePro ? "user-online" : ""}></div>
+                        <div className={isOnline ? "user-online" : "user-offline"}></div>
                     </div>
                 );
             })}

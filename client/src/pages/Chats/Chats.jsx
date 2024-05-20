@@ -10,7 +10,6 @@ export const Chats = () => {
   const { user } = useContext(UserContext)
   const { pro } = useContext(ProfessionalContext)
   const { userChats, isUserChatsLoading, userChatsError, updateCurrentChat, } = useContext(ChatContext)
-  console.log(userChats, "userhats")
   return (
     <>
       <Header />
