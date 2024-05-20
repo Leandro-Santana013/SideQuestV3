@@ -66,8 +66,8 @@ export const Infoinc = () => {
                   onChange={(event) => handleChange("sexo", event)}
                 >
                   <option value="-">Prefiro não dizer</option>
-                  <option value="M">Homem Macho</option>
-                  <option value="F">Mulher Feminina</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Feminino</option>
                 </select>
               </div>
               <div className="bottom-card-conclua-registro">

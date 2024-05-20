@@ -4,6 +4,8 @@ import { SidebarCliente, Header, TextInput } from "../../components";
 import axios from "axios";
 import JSZip from "jszip";
 import imgApproved from "../../assets/approved.png";
+import { FaRegTrashCan } from "react-icons/fa6";
+
 
 import "./postarServico.css";
 import {
@@ -106,13 +108,15 @@ const PostarServico = () => {
     setModalOpen(false);
   };
 
-  const handlePrevimg = () => {
+  const handlePrevimg = (e) => {
+    e.preventDefault()
     setCurrentImageIndex((prevIndex) =>
       prevIndex === 0 ? selectedImages.length - 1 : prevIndex - 1
     );
   };
 
-  const handleNextimg = () => {
+  const handleNextimg = (e) => {
+    e.preventDefault()
     setCurrentImageIndex((prevIndex) =>
       prevIndex === selectedImages.length - 1 ? 0 : prevIndex + 1
     );
@@ -220,7 +224,7 @@ const PostarServico = () => {
                 </div>
                 <div className="left-rightPostar">
                   <div className="leftPostar">
-                  {modalPostar && (
+                    {modalPostar && (
                       <>
                         <div className="fade">
                           <div className={`modal-postar-sucess`}>
@@ -232,7 +236,7 @@ const PostarServico = () => {
                                 className="close-modal-postar"
                                 onClick={() => {
                                   setModalPostar(null);
-                                  
+
                                   // Adicione esta linha para fechar o modal ao clicar em "Fechar"
                                 }}
                               >
@@ -365,59 +369,63 @@ const PostarServico = () => {
                       ))}
 
                       {modalOpen && (
-                        <div className="main-image-container">
-                          <div className="header-modal">
-                            <button
-                              className="fechar-fotos"
-                              onClick={() => closeModal()}
-                            >
-                              x
-                            </button>
-                          </div>
-                          <div className="main-image-buttons">
-                            <button
-                              className="prev prev-next"
-                              onClick={handlePrevimg}
-                            >
-                              &#10094;
-                            </button>
-                            <img
-                              src={selectedImages[currentImageIndex]}
-                              alt={`Selected ${currentImageIndex}`}
-                              className="main-image"
-                            />
-
-                            <button
-                              className="next prev-next"
-                              onClick={handleNextimg}
-                            >
-                              &#10095;
-                            </button>
-                          </div>
-                          <div className="images-modal">
-                            {selectedImages.slice(0, 5).map((image, index) => (
-                              <div
-                                key={index}
-                                className="selected-image selected-image-modal"
-                                onClick={() => openModal(index)}
+                        <div className="fade-main-image-container">
+                          <div className="main-image-container">
+                            <div className="header-modal">
+                              <button
+                                className="fechar-fotos"
+                                onClick={() => closeModal()}
                               >
-                                <div className="image-delete-button">
-                                  <div
-                                    className="delete-image invisible"
-                                    onClick={() => deleteImage(index)}
-                                  >
-                                    {" "}
-                                    Excluir{" "}
-                                  </div>
-                                  <img
-                                    src={image}
-                                    alt={`Selected ${index}`}
-                                    width="100"
-                                    height="100"
-                                  ></img>
-                                </div>
+                                
+                              </button>
+                              <p>Fotos selecionadas</p>
+                            </div>
+                            <div className="main-image-buttons">
+                              <button
+                                className="prev prev-next"
+                                onClick={handlePrevimg}
+                              >
+                                &#10094;
+                              </button>
+                              <div className="img-main-image-buttons">
+                                <img
+                                src={selectedImages[currentImageIndex]}
+                                alt={`Selected ${currentImageIndex}`}
+                                className="main-image"
+                              />
                               </div>
-                            ))}
+                              
+                              <button
+                                className="next prev-next"
+                                onClick={handleNextimg}
+                              >
+                                &#10095;
+                              </button>
+                            </div>
+                            <div className="images-modal">
+                              {selectedImages.slice(0, 5).map((image, index) => (
+                                <div
+                                  key={index}
+                                  className="selected-image selected-image-modal"
+                                  onClick={() => openModal(index)}
+                                >
+                                  <div className="image-delete-button">
+                                    <div
+                                      className="delete-image invisible"
+                                      onClick={() => deleteImage(index)}
+                                    >
+                                      <FaRegTrashCan />
+                                    </div>
+                                    <img
+                                      src={image}
+                                      alt={`Selected ${index}`}
+                                      width="100"
+                                      height="100"
+                                    ></img>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
                           </div>
                         </div>
                       )}
@@ -442,7 +450,7 @@ const PostarServico = () => {
                                 await zipImages(); // Espera a função zipImages() ser concluída antes de prosseguir
                               }
                               setSelectedImages([])
-                                  setServico({})
+                              setServico({})
                             }
                           }}
                         >

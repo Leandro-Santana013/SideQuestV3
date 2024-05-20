@@ -299,36 +299,47 @@
   align-items: center;
 }
 
+.fade-main-image-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
 .main-image-container {
   position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 49vw;
-  height: 30vw;
   border-radius: 1.3vw;
   padding: 1vw;
   align-items: center;
+  gap: 2vw;
   top: 50%;
   left: 50%;
-  background-color: #474747cf;
+  background-color: white;
   transform: translate(-50%, -50%);
+}
+
+.img-main-image-buttons {
+  padding: 2vw;
+  background-color: #eeeeee;
+  border-radius: 10px;
 }
 
 .fechar-fotos {
   cursor: pointer;
   font-size: 1.9vw;
-  background-color: transparent;
-  margin-top: 1vw;
-  color: rgb(223, 77, 77);
-  border: none;
 }
 
 .main-image {
   max-height: 25vw;
   max-width: 25vw;
-  border-radius: 20px;
 }
 
 .prev-next {
@@ -343,42 +354,36 @@
 
 .images-modal {
   display: flex;
+  padding: 10px;
   gap: 1vw;
   flex-direction: row;
+  background-color: #eeeeee;
 }
 
 .main-image-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 30vw;
   gap: 2vw;
 }
 
 .header-modal {
-  display: flex;
-  width: inherit;
-  height: 1vw;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.selected-image-modal:hover img {
-  transform: scale(1.2);
+ display: flex;
+ align-items: center;
+ gap: 1vw;
 }
 
 .delete-image {
   position: absolute;
-  width: 4vw;
-  height: 1.4vw;
   display: flex;
   align-items: center;
   justify-content: center;
   color: red;
-  background-color: hsl(0, 0%, 98%);
+  padding: .5vw;
+  background-color: black;
   cursor: pointer;
   font-size: 1w;
-  border-radius: 10px;
+  border-radius: 50vw;
 }
 
 .selected-image-modal:hover .delete-image {
@@ -475,17 +480,18 @@
   gap: 1vw;
 }
 
-.modal-postar-sucess h3{
-font-size: 2vw;
-font-weight: 600;
+.modal-postar-sucess h3 {
+  font-size: 2vw;
+  font-weight: 600;
 
 }
+
 .modal-postar-sucess img {
   width: 10vw;
   height: 10vw;
 }
 
-.modal-postar-sucess p{
+.modal-postar-sucess p {
   font-size: 1vw;
 
 
@@ -520,7 +526,7 @@ font-weight: 600;
   z-index: 100;
 }
 
-.message-error-postar-initial{
+.message-error-postar-initial {
   display: flex;
   align-items: center;
   justify-content: center;
