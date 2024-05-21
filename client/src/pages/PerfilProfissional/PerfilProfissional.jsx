@@ -39,7 +39,6 @@ const PerfilProfissional = () => {
                 const response = await getRequest(`/user/perfil/profissionais/${id}`);
                 // Configurando os dados do profissional no estado local
                 setProfissional(response);
-                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaad", response)
             } catch (error) {
                 console.error("Erro ao buscar informações do profissional:", error);
                 // Tratamento de erro adicional conforme necessário
