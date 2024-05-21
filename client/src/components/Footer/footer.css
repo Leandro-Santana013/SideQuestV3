@@ -129,19 +129,19 @@ footer .superior-footer .sidequest-bordao img {
 }
 
 footer .superior-footer .sidequest-bordao p {
-  font-size: 1.5vw;
-}
-
-footer .superior-footer h4 {
   font-size: 1.8vw;
 }
 
+footer .superior-footer h4 {
+  font-size: 2.1vw;
+}
+
 footer .superior-footer p {
-  font-size: 1.5vw;
+  font-size: 1.8vw;
 }
 
 footer .inferior-footer p {
-  font-size: 1.5vw;
+  font-size: 1.8vw;
 }
 
 }
