@@ -154,6 +154,46 @@ export const ProfessionalContextProvider = ({ children }) => {
     window.location.reload();
   }, []);
 
+  const [modal, setModal] = useState(0)
+  const [modalS, setModalShown] = useState(false);
+
+  useEffect(() => {
+    const modalAlreadyShown = localStorage.getItem("modalShown");
+
+    // Verifica se o modal já foi exibido, se o usuário está logado e se está na página inicial
+    if (!modalAlreadyShown && pro && window.location.pathname === '/homeProfissionais') {
+      // Verifica se é necessário exibir o modal com base nas informações do usuário
+      if (Object.keys(pro).length > 0) {
+        if (pro.sg_sexoProfissional == null && pro.qt_idadeProfissional == null) {
+          setModal(1);
+          setModalShown(true);
+          localStorage.setItem("modalShown", true);
+        }
+      }
+    }
+  }, [pro]);
+
+  const [infoConfirm, setInfoConfirm] = useState({})
+  /********************/
+
+
+  const concluirCad = useCallback(async (e) => {
+    console.log(infoConfirm)
+    const response = await postRequest("/user/concluirCad", infoConfirm)
+    if (response.error) {
+      setConclusioncadError(response.error);
+    } else {
+      setModal(modal + 1)
+      localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
+      localStorage.setItem("loc", JSON.stringify(response.user.localizacaoprincipal))
+      console.log(locationuser)
+    }
+  }, [infoConfirm])
+
+
+  
+  
+
 
   return (
     <ProfessionalContext.Provider
@@ -177,7 +217,12 @@ export const ProfessionalContextProvider = ({ children }) => {
         logoutPro,
         changedProData,
         setChangedProData,
-        functionUpdateInfoPro
+        functionUpdateInfoPro,
+        infoConfirm,
+        setInfoConfirm,
+        modal,
+        setModal,
+        concluirCad 
       }}
     >
       {children}
