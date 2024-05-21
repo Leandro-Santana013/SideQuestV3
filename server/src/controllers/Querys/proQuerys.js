@@ -171,5 +171,19 @@ findService: async (req, res) => {
         },
         raw: true,
       });
-    }
+    },
+
+    updateInfoPro: async (req, res) => {
+      const { id_profissional, nm_profissional, cd_emailProfissional, img_profissional } = req.params;
+      return ModelProfissional.update(
+        {
+          nm_cliente: nm_profissional,
+          cd_emailCliente: cd_emailProfissional,
+          img_cliente: img_profissional,
+        },
+        { where: { id_cliente: id_profissional } }
+      );
+    },
+
+
 };

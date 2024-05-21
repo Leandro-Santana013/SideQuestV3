@@ -1,10 +1,9 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   Header,
   SidebarProfissional,
   ImageCropper,
   TextInput,
-  
 } from "../../components";
 import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
@@ -12,18 +11,18 @@ import "./configProfissa.css";
 import imgPerfil from "../../assets/icone-perfil.png";
 
 import { ProfessionalContext } from "../../context/ProfissionalContext";
-/**/
+
 const configProfissa = () => {
   const {
     pro,
     logoutUser,
     changedProData,
     setChangedProData,
-    functionUpdateInfoUser,
-    showModal,
-    setShowModal, } = useContext(ProfessionalContext)
+    functionUpdateInfoPro,
+    modalShown,
+    setShowModal,
+  } = useContext(ProfessionalContext);
   const avatarUrl = useRef(imgPerfil);
-
 
   const updateUserData = (newData) => {
     const changes = {};
@@ -37,16 +36,18 @@ const configProfissa = () => {
     if (newData.numero !== pro.nmr_telefoneProfissional) {
       changes.numero = newData.numero;
     }
-    if (newData.foto !== imgPerfil && newData.foto !== pro.foto) {
+    if (newData.foto && newData.foto !== imgPerfil && newData.foto !== pro.foto) {
       changes.foto = newData.foto;
-      console.log("Tamanho da imagem:", newData.foto.length);
+      console.log("Tamanho da imagem:", newData.foto);
     }
-    setChangedProData(changes);
-    if (Object.keys(changes).length > 0) {
+    if (Object.keys(changes).length > 1) {
+      console.log("aaaaaaaaaaaaaa")
+      setChangedProData(changes);
       setShowModal(true); // Mostra o modal se houver alterações
     }
-    setChangedProData(changes);
   };
+
+
 
   const updatefoto = (ImgSrc) => {
     avatarUrl.current.src = ImgSrc; // Atualizando a imagem de perfil
@@ -58,9 +59,8 @@ const configProfissa = () => {
     updateUserData({
       ...changedProData,
       [field]: newValue,
-  });
+    });
   };
-  
 
   const deleteUpdate = () => {
     avatarUrl.current.src = pro.img_profissional ? pro.img_profissional : imgPerfil;
@@ -69,14 +69,11 @@ const configProfissa = () => {
     setModalEditar(false);
   };
 
-  /***************************************************/
-
   const [modalEditar, setModalEditar] = useState(false);
   const handleSave = () => {
-    functionUpdateInfoUser();
+    functionUpdateInfoPro();
     setModalEditar(false); // Define o estado modalEditar de volta para false
   };
-  /***************************************************/
 
   return (
     <>
@@ -90,7 +87,7 @@ const configProfissa = () => {
                 id="img"
                 htmlFor="comp"
                 ref={avatarUrl}
-                src={pro && pro.img_profissional ? pro.img_profissional : imgPerfil }
+                src={pro && pro.img_profissional ? pro.img_profissional : imgPerfil}
                 alt="Imagem de perfil"
                 className="img-config-perfil"
                 style={{
@@ -114,21 +111,19 @@ const configProfissa = () => {
                       <input
                         type="text"
                         id="input-nome"
-                        value={(changedUserData && changedUserData.name) || pro.nm_profissional}
-
+                        value={(changedProData && changedProData.name) || pro.nm_profissional}
                         onChange={(event) => handleFieldChange("name", event)}
                       />
                     ) : (
                       <p>{pro.nm_profissional}</p>
                     )}
 
-                    <p>número</p>
+                    <p>Número</p>
                     {modalEditar ? (
                       <input
                         type="text"
                         id="input-num"
-                        value={(changedUserData && changedUserData.numero) || pro.nmr_telefoneProfissional}
-
+                        value={(changedProData && changedProData.numero) || pro.nmr_telefoneProfissional}
                         onChange={(event) => handleFieldChange("numero", event)}
                       />
                     ) : (
@@ -141,8 +136,7 @@ const configProfissa = () => {
                       <input
                         type="text"
                         id="input-num"
-                        value={(changedUserData && changedUserData.email) || pro.cd_emailProfissional
-                        }
+                        value={(changedProData && changedProData.email) || pro.cd_emailProfissional}
                         onChange={(event) => handleFieldChange("email", event)}
                       />
                     ) : (
@@ -181,37 +175,33 @@ const configProfissa = () => {
               </div>
               <div className="edit-seguranca">
                 <h2>Segurança da conta</h2>
-                <p>senha</p>
+                <p>Senha</p>
                 <div className="alt-senha">
                   <input type="text" id="senha-alterar" />
                   <p>alterar senha</p>
                 </div>
                 <div className="sair-excluirBtn">
-                <Link id="sair" to="/Login" onClick={() => logoutUser()}>Logout</Link>
+                  <Link id="sair" to="/Login" onClick={() => logoutUser()}>Logout</Link>
                   <button id="excluir">Excluir</button>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      {showModal && (
+            {modalShown && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close">&times;</span>
+            <span className="close" onClick={() => setShowModal(false)}>&times;</span>
             <p>Seu perfil foi alterado. Deseja salvar as alterações?</p>
-            <button onClick={deleteUpdate.bind(this)}>Cancelar</button>
-
+            <button onClick={deleteUpdate}>Cancelar</button>
             <button onClick={handleSave}>Salvar</button>
           </div>
         </div>
       )}
+          </div>
+        </div>
+      </div>
+      
     </>
   );
 };
 
 export default configProfissa;
-
-{
-  /* <Link className="btn-logout" to="/Login" onClick={() => logoutUser()}>LOGOUT</Link> */
-}

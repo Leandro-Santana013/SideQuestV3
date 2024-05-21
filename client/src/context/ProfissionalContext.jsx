@@ -97,7 +97,7 @@ export const ProfessionalContextProvider = ({ children }) => {
           else {
             console.log(response.user);
             localStorage.setItem("pro", JSON.stringify(response.user));
-            
+            window.location.reload();
           }
         }
       } catch (error) {
@@ -126,16 +126,16 @@ export const ProfessionalContextProvider = ({ children }) => {
     fetchDataFromBackend()
   }, [])
   const [changedProData, setChangedProData] = useState({});
-  const [modalShown, setModalShown] = useState(null);
+  const [modalShown, setShowModal] = useState(null);
 
-  const functionUpdateInfoUser = useCallback(async () => {
+  const functionUpdateInfoPro = useCallback(async () => {
     console.log("funfou", changedProData);
 
-    const response = await postRequest("/user/updateInfoUser", changedUserData);
-    setUser(response.user)
+    const response = await postRequest("/professional/updateInfoPro", changedProData);
+    setPro(response.user)
     console.log(response.user);
 
-    localStorage.setItem("User", JSON.stringify(response.user));
+    localStorage.setItem("pro", JSON.stringify(response.user));
     setShowModal(null)
 
   }, [changedProData]);
@@ -144,7 +144,7 @@ export const ProfessionalContextProvider = ({ children }) => {
     localStorage.removeItem("pro");
     setPro(null);
     localStorage.removeItem("modalShown");
-    setModalShown(null);
+    setShowModal(null);
     window.location.reload();
   }, []);
 
@@ -164,13 +164,14 @@ export const ProfessionalContextProvider = ({ children }) => {
         loginInfo,
         loginPro,
         modalShown,
-        setModalShown,
+        setShowModal,
         loginError,
         loginLoading,
         Dadosiniciais,
         logoutPro,
         changedProData,
-        setChangedProData
+        setChangedProData,
+        functionUpdateInfoPro
       }}
     >
       {children}
