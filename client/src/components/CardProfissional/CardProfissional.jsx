@@ -16,6 +16,7 @@ export const CardProfissional = () => {
   const [modal, setModal] = useState(false);
   const [filtrosSelecionados, setFiltrosSelecionados] = useState([]);
   const [coresBotoes, setCoresBotoes] = useState({});
+  const [busca, setBusca] = useState("");
 
   const openModal = () => {
     setModal(true);
@@ -53,13 +54,12 @@ export const CardProfissional = () => {
       setDadosIniciais(response.data);
     } catch (error) {
       console.error("Erro ao buscar dados do backend:", error);
-      // Tratamento de erro adicional conforme necessário
     }
   };
 
   useEffect(() => {
     fetchDataFromBackend();
-  }, []);
+  }, [filtrados]);
 
   const filtrarCards = (filtro, botaoId) => {
     let novosFiltros = [...filtrosSelecionados];
@@ -82,6 +82,10 @@ export const CardProfissional = () => {
   const renderizarCards = () => {
     return dadosIniciais
       .filter(profissional => {
+        if (busca && !profissional.nm_profissional.toLowerCase().includes(busca.toLowerCase()) && !profissional.ds_biografia.toLowerCase().includes(busca.toLowerCase())) {
+          return false;
+        }
+
         if (filtrosSelecionados.includes('profissionaisFemininas') && profissional.sg_sexoProfissional !== 'F') {
           return false;
         }
@@ -100,8 +104,8 @@ export const CardProfissional = () => {
         }
       })
       .map(profissional => (
-        <Link to={`/perfilProfissional/${profissional.id_profissional}`}>
-          <div className="card-profissional" key={profissional.id_profissional}>
+        <Link to={`/perfilProfissional/${profissional.id_profissional}`} key={profissional.id_profissional}>
+          <div className="card-profissional">
             <div className="tamplate-img">
               <img src={imgPerfil} alt="Imagem de perfil" />
               <div className="perfil-avaliado">
@@ -127,7 +131,11 @@ export const CardProfissional = () => {
   return (
     <section className="area-servicos">
       <div className="input-filtros">
-        <TextInputBusca placeholder={"Encontre profissionais"} />
+        <TextInputBusca
+          placeholder={"Encontre profissionais"}
+          value={busca}
+          onChange={(value) => setBusca(value)}
+        />
         <div className="ifopenf">
           <div className="filtros" onClick={openModal} style={{ display: modal === true ? "none" : 'flex' }}>
             <p>Filtros</p>

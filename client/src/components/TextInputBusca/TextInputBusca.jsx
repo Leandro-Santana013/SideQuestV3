@@ -1,6 +1,7 @@
 import React from "react";
 import "./TextInputBuscaStyle.css";
 import { RiSearch2Line } from "react-icons/ri";
+
 export const TextInputBusca = ({ placeholder, value, onChange, ...rest }) => {
   const handleChange = (event) => {
     onChange(event.target.value);

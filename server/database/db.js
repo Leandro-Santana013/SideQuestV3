@@ -9,7 +9,7 @@ const connectionDataBase = new Sequelize(
     {
         host: "localhost",
         dialect: "mysql",
-        port: 3306,
+        port: 3307,
         // Definindo o tempo limite de  aquisição de conexão para 60 segundos (em milissegundos)
         pool: { 
             acquire:  600000000
@@ -126,45 +126,199 @@ const clientes = [
     ['Rafaela Souza', '12312345678', 'F', 26, '1616161616', 'rafaela@exemplo.com', 'senha234', 'Hj7Kl3Mn9z']
 ];
 
-// Função para inserir os profissionais no banco de dados
+const categorias = [
+    'Elétrica',
+    'Encanamento',
+    'Construção e Reforma',
+    'Limpeza',
+    'Jardinagem',
+    'Marcenaria',
+    'Carpintaria',
+    'Montagem de Móveis',
+    'Instalação de Eletrodomésticos',
+    'Conserto de Eletrodomésticos',
+    'Mudanças',
+    'Pintura',
+    'Alvenaria',
+    'Vidraçaria',
+    'Serralheria',
+    'Limpeza de Estofados',
+    'Serviços de Piscina',
+    'Serviços de Dedetização'
+];
+
+const enderecos = [
+    [1, 5356, 'Rua das Flores', '12345678', 'Centro', 123],
+    [2, 5383, 'Avenida dos Girassóis', '23456789', 'Jardim', 456],
+    [3, 5025, 'Rua das Palmeiras', '34567890', 'Vila', 789],
+    [4, 4962, 'Alameda das Acácias', '45678901', 'Campo', 1011],
+    [5, 5356, 'Travessa dos Lírios', '56789012', 'Sítio', 1213],
+    [6, 6, 'Rua da Mata', '11700000', 'Floresta', 1415],
+    [7, 7, 'Avenida das Flores', '11800000', 'Centro', 1617],
+    [8, 8, 'Rua dos Coqueiros', '11900000', 'Praia', 1819],
+    [9, 9, 'Avenida da Paz', '12000000', 'Centro', 2021],
+    [10, 10, 'Rua da Amizade', '12100000', 'Centro', 2223],
+    [11, 1, 'Avenida dos Sonhos', '11000000', 'Centro', 2425],
+    [12, 2, 'Rua das Estrelas', '11300000', 'Centro', 2627],
+    [13, 3, 'Avenida do Sol', '11400000', 'Praia', 2829],
+    [14, 4, 'Rua do Mar', '11500000', 'Jardim', 3031],
+    [15, 5, 'Avenida da Lua', '11600000', 'Centro', 3233]
+];
+
+const postagensServico = [
+    [1, 1, 1, 'Instalação de lâmpadas', 'Instalação de Lâmpadas'],
+    [2, 2, 2, 'Conserto de encanamento', 'Conserto de Encanamento'],
+    [3, 3, 3, 'Reforma de cozinha', 'Reforma de Cozinha'],
+    [4, 4, 4, 'Limpeza residencial', 'Limpeza Residencial'],
+    [5, 5, 5, 'Manutenção de jardim', 'Manutenção de Jardim'],
+    [6, 1, 6, 'Troca de tomadas', 'Troca de Tomadas'],
+    [7, 2, 7, 'Instalação de tubulação', 'Instalação de Tubulação'],
+    [8, 3, 8, 'Construção de edícula', 'Construção de Edícula'],
+    [9, 4, 9, 'Limpeza comercial', 'Limpeza Comercial'],
+    [10, 5, 10, 'Paisagismo residencial', 'Paisagismo Residencial'],
+    [11, 1, 11, 'Manutenção elétrica', 'Manutenção Elétrica'],
+    [12, 2, 12, 'Desentupimento de canos', 'Desentupimento de Canos'],
+    [13, 3, 13, 'Reforma de banheiro', 'Reforma de Banheiro'],
+    [14, 4, 14, 'Limpeza de carpetes', 'Limpeza de Carpetes'],
+    [15, 5, 15, 'Podas de árvores', 'Podas de Árvores'],
+    [1, 2, 2, 'Conserto de vazamento', 'Conserto de Vazamento'],
+    [2, 3, 3, 'Construção de deck', 'Construção de Deck'],
+    [3, 4, 4, 'Limpeza pós-obra', 'Limpeza Pós-Obra'],
+    [4, 5, 5, 'Corte de grama', 'Corte de Grama'],
+    [5, 1, 6, 'Instalação de chuveiro', 'Instalação de Chuveiro'],
+    [6, 2, 7, 'Conserto de torneira', 'Conserto de Torneira'],
+    [7, 3, 8, 'Pintura de fachada', 'Pintura de Fachada'],
+    [8, 4, 9, 'Limpeza de escritório', 'Limpeza de Escritório'],
+    [9, 5, 10, 'Manutenção de plantas', 'Manutenção de Plantas'],
+    [10, 1, 11, 'Troca de disjuntor', 'Troca de Disjuntor'],
+    [11, 2, 12, 'Reparo de esgoto', 'Reparo de Esgoto'],
+    [12, 3, 13, 'Instalação de banheira', 'Instalação de Banheira'],
+    [13, 4, 14, 'Limpeza de sofás', 'Limpeza de Sofás'],
+    [14, 5, 15, 'Adubação de jardim', 'Adubação de Jardim'],
+    [15, 2, 2, 'Reparo de esgoto', 'Reparo de Esgoto']
+];
+
+const confirmacoesServico = [
+    [1, 1, 100],
+    [2, 2, 150],
+    [3, 3, 200],
+    [4, 4, 120],
+    [5, 5, 80],
+    [6, 6, 90],
+    [7, 7, 200],
+    [8, 8, 300],
+    [9, 9, 150],
+    [10, 10, 100],
+    [11, 11, 180],
+    [12, 12, 220],
+    [13, 13, 250],
+    [14, 14, 130],
+    [15, 15, 170],
+    [16, 16, 110],
+    [17, 17, 160],
+    [18, 18, 210],
+    [19, 19, 130],
+    [20, 20, 90],
+    [21, 1, 100],
+    [22, 2, 210],
+    [23, 3, 320],
+    [24, 4, 160],
+    [25, 5, 110],
+    [26, 6, 190],
+    [27, 7, 230],
+    [28, 8, 260],
+    [29, 9, 140],
+    [30, 10, 180]
+];
+
+const terminosServico = [
+    [1, '2024-03-20'],
+    [2, '2024-03-21'],
+    [3, '2024-03-22'],
+    [4, '2024-03-23'],
+    [5, '2024-03-24'],
+    [6, '2024-03-25'],
+    [7, '2024-03-26'],
+    [8, '2024-03-27'],
+    [9, '2024-03-28'],
+    [10, '2024-03-29'],
+    [11, '2024-03-30'],
+    [12, '2024-03-31'],
+    [13, '2024-04-01'],
+    [14, '2024-04-02'],
+    [15, '2024-04-03'],
+    [16, '2024-04-04'],
+    [17, '2024-04-05'],
+    [18, '2024-04-06'],
+    [19, '2024-04-07'],
+    [20, '2024-04-08'],
+    [21, '2024-04-09'],
+    [22, '2024-04-10'],
+    [23, '2024-04-11'],
+    [24, '2024-04-12'],
+    [25, '2024-04-13'],
+    [26, '2024-04-14'],
+    [27, '2024-04-15'],
+    [28, '2024-04-16'],
+    [29, '2024-04-17'],
+    [30, '2024-04-18']
+];
+
+const avaliacoes = [
+    [1, 5, 'Excelente trabalho! Recomendo.'],
+    [2, 1, 'Profissional extremamente limitada.'],
+    [3, 3, 'Trabalho satisfatório, mas houve atrasos.'],
+    [4, 4, 'Excelente trabalho, profissional pontual e eficiente.'],
+    [5, 3, 'Bom serviço, porém houve atraso na entrega.'],
+    [6, 5, 'Serviço impecável, profissional muito habilidoso.'],
+    [7, 4, 'Profissional muito atencioso, serviço de qualidade.'],
+    [8, 5, 'Superou minhas expectativas, trabalho de alta qualidade.'],
+    [9, 3, 'Serviço satisfatório, mas houve alguns contratempos.'],
+    [10, 4, 'Profissional dedicado e competente, recomendo.'],
+    [11, 5, 'Excelente serviço, profissional muito experiente.'],
+    [12, 4, 'Trabalho bem feito, profissional muito comprometido.'],
+    [13, 3, 'Alguns detalhes poderiam ter sido melhorados.'],
+    [14, 4, 'Boa experiência, profissional eficiente.'],
+    [15, 5, 'Serviço de primeira, profissional muito prestativo.'],
+    [16, 4, 'Profissional competente, trabalho entregue dentro do prazo.'],
+    [17, 5, 'Melhor serviço que já contratei, profissional muito habilidoso.'],
+    [18, 3, 'Serviço razoável, esperava um pouco mais de qualidade.'],
+    [19, 4, 'Profissional educado e atencioso, serviço bem executado.'],
+    [20, 5, 'Sem dúvidas, contrataria novamente, serviço excelente.'],
+    [21, 4, 'Trabalho de qualidade, profissional muito responsável.'],
+    [22, 5, 'Profissional extremamente competente, serviço perfeito.'],
+    [23, 3, 'Algumas falhas, mas no geral foi satisfatório.'],
+    [24, 4, 'Bom serviço, profissional comprometido.'],
+    [25, 5, 'Serviço excepcional, profissional muito capacitado.'],
+    [26, 4, 'Trabalho bem feito, profissional dedicado.'],
+    [27, 5, 'Experiência incrível, profissional muito talentoso.'],
+    [28, 3, 'Serviço aceitável, esperava um pouco mais.'],
+    [29, 4, 'Profissional competente, recomendo.'],
+    [30, 5, 'Superou minhas expectativas, serviço de alta qualidade.']
+];
+
 // Função para inserir os profissionais no banco de dados
 async function inserirProfissionais() {
     try {
-        // Iterando sobre cada profissional
         for (const profissional of profissionais) {
-            // Hash da senha usando bcrypt
-            const hashedPassword = await bcrypt.hash(profissional[6], 8); // 10 é o número de rounds de hashing
-
-            // Substitua os valores das colunas pelos campos correspondentes no seu array de profissionais,
-            // incluindo o hash da senha no lugar da senha em texto plano
+            const hashedPassword = await bcrypt.hash(profissional[6], 8);
             const query = 'INSERT INTO tb_profissional (nm_profissional, cd_cpfProfissional, sg_sexoProfissional, qt_idadeProfissional, nmr_telefoneProfissional, cd_emailProfissional, cd_senhaProfissional, cd_tokenProfissional) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
             const valores = [...profissional.slice(0, 6), hashedPassword, profissional[7]];
-
-            // Execução da query
             await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT });
-
             console.log(`Profissional ${profissional[0]} inserido com sucesso.`);
         }
-
-        // Após a inserção dos profissionais, chama a função para inserir as informações dos profissionais
         await inseririnfoProfissionais();
     } catch (error) {
         console.error('Erro ao inserir os profissionais:', error);
     }
 }
 
-
 async function inseririnfoProfissionais() {
     try {
-        // Iterando sobre cada profissional
         for (const info of infoProfissional) {
-            // Substitua os valores das colunas pelos campos correspondentes no seu array de informações de profissionais
             const query = 'INSERT INTO tb_infoProfissional (id_profissional, ds_biografia, ds_curriculo, ds_historicoProfissional, ds_formacoes) VALUES (?, ?, ?, ?, ?)';
             const valores = [...info];
-
-            // Execução da query
             await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT });
-
             console.log(`Informações do Profissional ${info[0]} inseridas com sucesso.`);
         }
     } catch (error) {
@@ -172,23 +326,13 @@ async function inseririnfoProfissionais() {
     }
 }
 
-
-// Função para inserir os clientes no banco de dados
 async function inserirClientes() {
     try {
-        // Iterando sobre cada cliente
         for (const cliente of clientes) {
-            // Hash da senha usando bcrypt
-            const hashedPassword = await bcrypt.hash(cliente[6], 8); // 10 é o número de rounds de hashing
-
-            // Substitua os valores das colunas pelos campos correspondentes no seu array de clientes,
-            // incluindo o hash da senha no lugar da senha em texto plano
+            const hashedPassword = await bcrypt.hash(cliente[6], 8);
             const query = 'INSERT INTO tb_cliente (nm_cliente, cd_cpfCliente, sg_sexoCliente, qt_idadeCliente, nmr_telefoneCliente, cd_emailCliente, cd_senhaCliente, cd_tokenCliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
             const valores = [...cliente.slice(0, 6), hashedPassword, cliente[7]];
-
-            // Execução da query
             await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT });
-
             console.log(`Cliente ${cliente[0]} inserido com sucesso.`);
         }
     } catch (error) {
@@ -196,8 +340,99 @@ async function inserirClientes() {
     }
 }
 
-// Chamada da função para inserir os profissionais
-inserirProfissionais();
+async function inserirCategorias() {
+    try {
+        for (const categoria of categorias) {
+            const query = 'INSERT INTO tb_categoria (ds_categoria) VALUES (?)';
+            const valores = [categoria];
+            await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT });
+            console.log(`Categoria '${categoria}' inserida com sucesso.`);
+        }
+    } catch (error) {
+        console.error('Erro ao inserir as categorias:', error);
+    }
+}
 
-// Chamada da função para inserir os clientes
-inserirClientes();
+async function inserirEnderecos() {
+    try {
+        await inserirClientes();
+        for (const endereco of enderecos) {
+            const query = 'INSERT INTO tb_endereco (id_cliente, id_cidade, nm_logradouro, cd_cep, nm_bairro, nmr_casa) VALUES (?, ?, ?, ?, ?, ?)';
+            const valores = [...endereco];
+            await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT });
+            console.log(`Endereço do cliente ${endereco[0]} inserido com sucesso.`);
+        }
+    } catch (error) {
+        console.error('Erro ao inserir os endereços:', error);
+    }
+}
+
+async function inserirPostagensServico() {
+    try {
+        await inserirEnderecos();
+        for (const postagem of postagensServico) {
+            const query = 'INSERT INTO tb_postagemServico (id_cliente, id_categoria, id_endereco, ds_servico, ds_titulo) VALUES (?, ?, ?, ?, ?)';
+            const valores = [...postagem];
+            await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT });
+            console.log(`Postagem de serviço ${postagem[0]} inserida com sucesso.`);
+        }
+    } catch (error) {
+        console.error('Erro ao inserir as postagens de serviço:', error);
+    }
+}
+
+async function inserirConfirmacoesServico() {
+    try {
+        await inserirPostagensServico();
+        for (const confirmacao of confirmacoesServico) {
+            const query = 'INSERT INTO tb_confirmacaoServico (id_postagemServico, id_profissional, vlr_servico) VALUES (?, ?, ?)';
+            const valores = [...confirmacao];
+            await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT });
+            console.log(`Confirmação de serviço ${confirmacao[0]} inserida com sucesso.`);
+        }
+    } catch (error) {
+        console.error('Erro ao inserir as confirmações de serviço:', error);
+    }
+}
+
+async function inserirTerminosServico() {
+    try {
+        await inserirConfirmacoesServico();
+        for (const termino of terminosServico) {
+            const query = 'INSERT INTO tb_terminoServico (id_confirmacaoServico, dt_terminoServico) VALUES (?, ?)';
+            const valores = [...termino];
+            await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT });
+            console.log(`Término de serviço ${termino[0]} inserido com sucesso.`);
+        }
+    } catch (error) {
+        console.error('Erro ao inserir os términos de serviço:', error);
+    }
+}
+
+async function inserirAvaliacoes() {
+    try {
+        await inserirTerminosServico();
+        for (const avaliacao of avaliacoes) {
+            const query = 'INSERT INTO tb_avaliacao (id_terminoServico, nmr_avaliacao, ds_comentario) VALUES (?, ?, ?)';
+            const valores = [...avaliacao];
+            await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT });
+            console.log(`Avaliação ${avaliacao[0]} inserida com sucesso.`);
+        }
+    } catch (error) {
+        console.error('Erro ao inserir as avaliações:', error);
+    }
+}
+
+// Função principal para inserir todos os dados sequencialmente
+async function inserirTodosDados() {
+    await inserirProfissionais();
+    await inserirCategorias();
+    await inserirEnderecos();
+    await inserirPostagensServico();
+    await inserirConfirmacoesServico();
+    await inserirTerminosServico();
+    await inserirAvaliacoes();
+}
+
+// Chamando a função principal
+inserirTodosDados().catch(console.error);
