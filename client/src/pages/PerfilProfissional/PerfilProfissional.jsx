@@ -11,10 +11,9 @@ import estrelas from "../../assets/estrelinha.png";
 import agenda from "../../assets/agenda.png";
 import certificado from "../../assets/certificado.png";
 import { ChatContext } from "../../context/ChatContext";
-import {
-    postRequest, baseUrl, getRequest, putRequest,
-} from "../../utils/services";
+import { postRequest, baseUrl, getRequest, putRequest, } from "../../utils/services";
 import { UserContext } from "../../context/UserContext";
+
 const PerfilProfissional = () => {
     const { id } = useParams();
     const { createChat, onlineUsers } = useContext(ChatContext);
@@ -73,13 +72,18 @@ const PerfilProfissional = () => {
                                             "user-online" : ""}></span>
                                     <div className="nome-profissao">
                                         <h1>{profissional[0].nm_profissional}</h1>
-                                        <h2>Eletricista</h2>
+                                        <div className="profissoes-profissional">
+                                            <p>Profissões:</p>
+                                            <p>Eletricista</p>
+                                        </div>
+                                        <div className="iniciar-conversa" onClick={() => handleClick(id)}>Iniciar conversa</div>
                                     </div>
                                 </div>
                                 <div className="menu-perfil">
                                     <ul>
                                         <li onClick={() => handleForm(1)} style={{ color: typeForm === 1 ? "var(--verde)" : "inherit" }}>Sobre</li>
-                                        <li onClick={() => { handleForm(2) }} style={{ color: typeForm === 2 ? "var(--verde)" : "inherit" }} >Mídia(4)</li>
+                                        <li onClick={() => { handleForm(2) }} style={{ color: typeForm === 2 ? "var(--verde)" : "inherit" }} >Mídia(4)
+                                        </li>
                                         <li onClick={() => { handleForm(3) }} style={{ color: typeForm === 3 ? "var(--verde)" : "inherit" }} >Avaliações</li>
                                     </ul>
                                 </div>
@@ -94,13 +98,6 @@ const PerfilProfissional = () => {
                                             <img src={estrelas} alt="estrelas" />
                                             <p>210 avaliações</p>
                                         </div>
-                                    </div>
-                                    
-                                    <div onClick={() => handleClick(id)}>chat</div>
-                                    <div className="medalhas">
-                                        <img src={medalha10k} alt="medalha 10" />
-                                        <img src={medalhaouro} alt="medalha de ouro" />
-                                        <img src={medalhabronze} alt="medalha de bronze" />
                                     </div>
                                 </div>
                                 <div className="info-pessoais">

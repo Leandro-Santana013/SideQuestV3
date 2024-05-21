@@ -136,7 +136,6 @@ export const CardProfissional = () => {
           {modal && (
             <div className="modal">
               <div className="modal-content">
-                <span>Filtre por:</span>
                 <div className="container-card-filtros">
                   <button className="card-filtro" onClick={() => { filtrarCards('maisBemAvaliados', 'botao1'); }} style={{ backgroundColor: coresBotoes['botao1'] || 'var(--verde)' }}>
                     <p><strong>4+ estrelas</strong></p>

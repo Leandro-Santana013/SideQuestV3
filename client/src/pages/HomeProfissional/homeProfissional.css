@@ -57,14 +57,16 @@
     width: 82vw;
 }
 
-h1 {
+.encontre-prof-p-seu-problema {
     font-size: 1.3vw;
     width: 22vw;
     color: var(--verde);
     text-align: center;
     margin-bottom: 3vw;
 }
+
 /*Fazendo sessao input*/
+
 .input-filtros {
     display: flex;
     justify-content: space-between;

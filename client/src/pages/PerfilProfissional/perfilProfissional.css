@@ -1,17 +1,35 @@
 .perfil-profissional {
-    box-shadow: 0px 4px 4px 0px #00000055;
+    background-color: white;
+    border-radius: 10px;
     width: 60vw;
+    padding: 2vw;
 }
 
+.iniciar-conversa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5vw 1vw .5vw 1vw;
+    border-radius: 50vw;
+    background-color: var(--verde);
+    color: white;
+    transition: all .25s;
+}
 
-/*Fazendo o cabeçalho*/
+.iniciar-conversa:hover {
+    background-color: var(--azul);
+}
 
 .perfil-profissional .cabecalho-perfil .perfil-nome {
     display: flex;
-    gap: 20px;
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-top: 2vh;
+    align-items: center;
+    gap: 1vw;
+}
+
+.profissoes-profissional {
+    display: flex;
+    align-items: center;
+    gap: .5vw;
 }
 
 .perfil-profissional .cabecalho-perfil .perfil-nome img {
@@ -23,11 +41,6 @@
 
 .perfil-profissional .cabecalho-perfil .perfil-nome .nome-profissao h1 {
     font-size: 1.7rem;
-}
-
-.perfil-profissional .cabecalho-perfil .perfil-nome .nome-profissao h2 {
-    font-weight: lighter;
-    font-size: 1.35rem;
 }
 
 .perfil-profissional .cabecalho-perfil .menu-perfil {
@@ -96,10 +109,6 @@
     height: 2vh;
 }
 
-.descricao-profissional .avaliacao .medalhas img {
-    margin: 10px;
-}
-
 .descricao-profissional .info-pessoais {
     width: 40vw;
     gap: 10px;
@@ -134,9 +143,9 @@
     height: 5.5vh;
 }
 
-.perfil-profissional .user-online{
+.perfil-profissional .user-online {
     width: 1vw;
-    height:1vw;
+    height: 1vw;
     border-radius: 50%;
     background-color: var(--verde);
 }

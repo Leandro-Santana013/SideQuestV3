@@ -263,7 +263,7 @@ const PostarServico = () => {
                         height: "1.5vw",
                         padding: ".5vw 0 .5vw 0",
                       }}
-                      placeholder={"Busque por serviços"}
+                      placeholder="Exemplo: Pintura de parede"
                       onChange={(e) =>
                         updatepostarServico({
                           ...Servico,
