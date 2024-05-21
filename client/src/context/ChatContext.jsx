@@ -52,7 +52,6 @@ export const ChatContextProvider = ({ children, user, pro }) => {
         }
     }, [socket, ])
   
-console.log(currentChat?.members, "mw")
     useEffect(() => {   
         if (socket === null) return;
        socket.emit("sendMessage", {newMessage: newMessage, recipientOnChat})
@@ -81,6 +80,26 @@ console.log(currentChat?.members, "mw")
     }
     }, [socket, currentChat,newMessage,])
 
+    const [allUsers, setAllUsers] = useState([])
+    
+    useEffect(() => {
+        const getUsers = async () => {
+            try {
+                if(user){
+                const response = await getRequest('/user/allprofissionais');
+                setAllUsers(response)
+            } else{
+                const response = await getRequest('/professional/allUsers');
+                setAllUsers(response)
+
+            }
+                
+            }catch(error){
+                console.log(error)
+            }
+            }
+            getUsers()
+    }, [])
 
     const updateChatRecipientState = useCallback((info) => {
         setRecipientOnChat(info);
@@ -110,8 +129,6 @@ console.log(currentChat?.members, "mw")
     const updateCurrentChat = useCallback((chat, chatItem) => {
         setCurrentChat(chat)
         setInfoChat(chatItem)
-
-
     }, [])
 
     const createChat = useCallback(async (id_cliente, id_profissional) => {
@@ -202,6 +219,8 @@ console.log(currentChat?.members, "mw")
                 infoChat,
                 updateChatRecipientState,
                 onlineUsers,
+                allUsers,
+                notifications,
             }}
         >
             {children}

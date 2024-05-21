@@ -155,7 +155,6 @@ body {
 .beneficios>h1 {
   font-size: 1.8rem;
   color: #144474;
-  width: 100%;
 }
 
 .beneficios .beneficios-img {
@@ -457,43 +456,51 @@ body {
   /*Arrumando sessao banner*/
 
   .bannerProfissa .btn-txtBanner .title-banner {
-    font-size: 1.5rem;
+    font-size: 3.5vw;
     width: 45.5vw;
   }
 
   .bannerProfissa .btn-txtBanner button {
-    width: 23vw;
-    height: 7vw;
-    font-size: 0.9rem;
+    width: 20vw;
+    height: 5vw;
+    font-size: 2vw;
   }
 
   /*Arrumando sessao beneficios*/
+
+  .beneficios {
+    margin: 10px 0;
+  }
 
   .beneficios .beneficios-img {
     flex-direction: column;
   }
 
+  .beneficios .txt-beneficios .beneficios-cards img {
+    width: 12vw;
+}
+
   .beneficios>h1 {
-    font-size: 1.5rem;
+    font-size:  3.5vw;
   }
 
   .beneficios .beneficios-img img {
-    width: 60vw;
+    width: 45vw;
   }
 
   .beneficios .beneficios-img .txt-beneficios h2 {
-    font-size: 1.3rem;
+    font-size: 3vw;
   }
 
   .beneficios .beneficios-img .txt-beneficios p {
-    font-size: 0.9rem;
+    font-size: 2vw;
   }
 
   /*Arrumando sessao planos*/
 
 
   .planos>h2 {
-    font-size: 1.3rem;
+    font-size: 3vw;
   }
 
   .planos .cards-planos {
@@ -502,29 +509,45 @@ body {
     align-items: center;
   }
 
+/*Sessao cards*/
 
+.planos .cards-planos .card-plano {
+  width: 45vw;
+}
 
-  .planos .cards-planos .card-plano .card-superior .gratis p {
-    font-size: 1rem;
-  }
+.planos .cards-planos {
+  gap: 5vw;
+}
 
-  .planos .cards-planos .card-plano .card-superior #vantagens-txt {
-    font-size: 1rem;
-  }
+.card-plano h3 {
+  font-size: 2.7vw;
+}
 
-  .valor-do-plano {
-    font-size: 1rem;
-  }
+.card-plano p {
+  font-size: 2vw;
+}
 
-  .btn-card-plano-op {
-    width: 28vw;
-    height: 7vw;
-    font-size: 0.9rem;
-  }
+.planos .cards-planos .card-plano hr {
+  width: 42vw;
+}
 
-  .planos .cards-planos .card-plano .card-superior>p {
-    font-size: 1rem;
-  }
+.planos .cards-planos .card-plano button {
+  width: 42vw;
+  height: 6.5vw;
+}
+
+.card-plano .beneficios-plano img {
+  width: 4vw;
+  height: 4vw;
+}
+
+.card-plano #preco {
+  font-size: 3.5vw;
+}
+
+.card-plano #preco span {
+  font-size: 2.5vw;
+}
 }
 
 /* Tablets em modo retrato e smartphones grandes */
@@ -532,14 +555,14 @@ body {
   /*Arrumando sessao banner*/
 
   .bannerProfissa .btn-txtBanner .title-banner {
-    font-size: 1.5rem;
+    font-size: 4vw;
     width: 45.5vw;
   }
 
   .bannerProfissa .btn-txtBanner button {
     width: 23vw;
     height: 7vw;
-    font-size: 0.9rem;
+    font-size: 2.5vw;
   }
 
   /*Arrumando sessao beneficios*/
@@ -549,7 +572,7 @@ body {
   }
 
   .beneficios>h1 {
-    font-size: 1.5rem;
+    font-size: 4vw;
   }
 
   .beneficios .beneficios-img img {
@@ -557,53 +580,76 @@ body {
   }
 
   .beneficios .beneficios-img .txt-beneficios h2 {
-    font-size: 1.3rem;
+    font-size: 3.5vw;
   }
 
   .beneficios .beneficios-img .txt-beneficios p {
-    font-size: 0.9rem;
+    font-size: 2.5vw;
+  }
+
+  .beneficios .txt-beneficios .beneficios-cards {
+    gap: 3.5vw;
   }
 
   /*Arrumando sessao planos*/
 
 
   .planos>h2 {
-    font-size: 1.3rem;
+    font-size: 3.5vw;
   }
 
   .planos .cards-planos {
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: center;
+    gap: 5vw;
   }
 
-
-
-  .planos .cards-planos .card-plano .card-superior .gratis p {
-    font-size: 1rem;
+  .planos .cards-planos .card-plano {
+    width: 50vw;
   }
 
-  .planos .cards-planos .card-plano .card-superior #vantagens-txt {
-    font-size: 1rem;
+  .card-plano h3 {
+    font-size: 3.75vw;
   }
 
-  .valor-do-plano {
-    font-size: 1rem;
+  .card-plano p {
+    font-size: 2.7vw;
+  }
+
+  .card-plano #preco {
+    font-size: 5.5vw;
+  }
+
+  .planos .cards-planos .card-plano hr {
+    width: 45vw;
+  }
+
+  .card-plano #gray-hr {
+    margin-top: 5vw;
+  }
+
+  .planos .cards-planos .card-plano button {
+    width: 48vw;
+    height: 8vw;
+  }
+
+  .card-plano .beneficios-plano img {
+    width: 5vw;
+    height: 5vw;
   }
 
   .btn-card-plano-op {
     width: 28vw;
     height: 7vw;
-    font-size: 0.9rem;
+    font-size: 2.5vw;
   }
 
   .planos .cards-planos .card-plano .card-superior>p {
-    font-size: 1rem;
+    font-size: 2.5vw;
   }
 }
 
 /* Smartphones médios e tablets pequenos */
 @media (max-width: 600px) {
+
   /*Arrumando sessao banner*/
   .bannerProfissa .btn-txtBanner .title-banner {
     font-size: 5vw;
@@ -663,7 +709,7 @@ body {
 
   .planos .cards-planos .card-plano {
     width: 58vw;
-}
+  }
 
   .card-plano h3 {
     font-size: 3.75vw;
@@ -765,7 +811,7 @@ body {
 
   .planos .cards-planos .card-plano {
     width: 58vw;
-}
+  }
 
   .card-plano h3 {
     font-size: 3.75vw;
@@ -788,7 +834,7 @@ body {
   }
 
   .card-plano #preco {
-    font-size: 3.3vw;
+    font-size: 6.3vw;
   }
 
   .card-plano #preco span {
@@ -811,14 +857,14 @@ body {
   /*Arrumando sessao banner*/
 
   .bannerProfissa .btn-txtBanner .title-banner {
-    font-size: 1.5rem;
+    font-size: 4.5vw;
     width: 45.5vw;
   }
 
   .bannerProfissa .btn-txtBanner button {
     width: 23vw;
     height: 7vw;
-    font-size: 0.9rem;
+    font-size: 2.5vw;
   }
 
   /*Arrumando sessao beneficios*/
@@ -828,26 +874,34 @@ body {
   }
 
   .beneficios>h1 {
-    font-size: 1.5rem;
+    font-size: 4.5vw;
   }
 
   .beneficios .beneficios-img img {
-    width: 60vw;
+    width: 52vw;
+  }
+
+  .beneficios .txt-beneficios .beneficios-cards {
+    gap: 3vw;
+  }
+
+  .beneficios .txt-beneficios .beneficios-cards img {
+    width: 8vw;
   }
 
   .beneficios .beneficios-img .txt-beneficios h2 {
-    font-size: 1.3rem;
+    font-size: 4vw;
   }
 
   .beneficios .beneficios-img .txt-beneficios p {
-    font-size: 0.9rem;
+    font-size: 2.7vw;
   }
 
   /*Arrumando sessao planos*/
 
 
   .planos>h2 {
-    font-size: 1.3rem;
+    font-size: 4vw;
   }
 
   .planos .cards-planos {
@@ -856,18 +910,26 @@ body {
     align-items: center;
   }
 
-
-
-  .planos .cards-planos .card-plano .card-superior .gratis p {
-    font-size: 1rem;
+  .card-plano h3 {
+    font-size: 3.75vw;
   }
 
-  .planos .cards-planos .card-plano .card-superior #vantagens-txt {
-    font-size: 1rem;
+  .card-plano p {
+    font-size: 2.7vw;
   }
 
-  .valor-do-plano {
-    font-size: 1rem;
+  .card-plano #preco {
+    font-size: 5.5vw;
+  }
+
+  .planos .cards-planos .card-plano button {
+    width: 64vw;
+    height: 2vw;
+  }
+
+  .card-plano .beneficios-plano img {
+    width: 5vw;
+    height: 5vw;
   }
 
   .btn-card-plano-op {
