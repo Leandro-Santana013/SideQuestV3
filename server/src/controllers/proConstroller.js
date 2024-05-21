@@ -297,7 +297,7 @@ exports.registerPro = async (req, res) => {
 
   exports.updateInfoPro = async (req, res) => {
     const { id_profissional, name, email, numero, foto } = req.body;
-    console.log(id_profissional, name, email, numero, foto)
+    
     try {
       
     
@@ -307,10 +307,10 @@ exports.registerPro = async (req, res) => {
   
       const clientinfoupdated = await controller_Pro.updateInfoPro({
         params: {
-          id_cliente: id_profissional,
+          id_profissional: id_profissional,
           nm_cliente: name ? name : clientinfo.nm_profissional,
           cd_emailCliente: email ? email : clientinfo.cd_emailProfissional,
-          img_cliente: foto ? foto : clientinfo.img_profissional,
+          img_profissional: foto ? foto : clientinfo.img_profissional,
         },
       });
   

@@ -8,6 +8,10 @@
     text-decoration: underline;
     font-size: 3vw;
   }
+
+  h1 {
+    text-align: center;
+  }
 }
 
 
@@ -81,7 +85,7 @@
   @media (max-width: 1024px) {
 
     .beneficios h3 {
-      font-size: 2.3vw;
+      font-size: 2.7vw;
     }
 
     .show {
@@ -90,7 +94,7 @@
     }
   
     .show h2 {
-      font-size: 2vw;
+      font-size: 2.3vw;
     }
   
     .review,
@@ -100,11 +104,11 @@
     }
   
     .show1 h2 {
-      font-size: 3.5vw;
+      font-size: 2.3vw;
     }
   
     .show1 p {
-      font-size: 1.8vw;
+      font-size: 2vw;
     }
   
   }

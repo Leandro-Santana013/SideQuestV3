@@ -34,8 +34,7 @@
 
 .perfil-profissional .cabecalho-perfil .perfil-nome img {
     width: 8vw;
-    height: 16vh;
-    border: 4px solid var(--verde);
+    outline: 3px solid var(--verde);
     border-radius: 100%;
 }
 
@@ -58,55 +57,10 @@
     font-size: 1.3rem;
 }
 
-/*Fim cabeçalho e fazendo a parte da descricao*/
-
 .descricao-profissional {
     display: flex;
     align-items: center;
     gap: 20px;
-}
-
-.descricao-profissional .avaliacao {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 10px;
-    align-items: center;
-}
-
-.descricao-profissional .avaliacao button {
-    width: 7.5vw;
-    height: 5.5vh;
-    color: white;
-    background-color: var(--verde);
-    border: none;
-    font-weight: bold;
-}
-
-.descricao-profissional .num-avaliacao {
-    display: flex;
-    align-items: center;
-}
-
-.descricao-profissional .num-avaliacao .estrela {
-    display: flex;
-    flex-direction: column;
-}
-
-.descricao-profissional .num-avaliacao>p {
-    font-size: 2rem;
-    margin: 10px;
-    color: gray;
-    font-weight: bolder;
-}
-
-.descricao-profissional .num-avaliacao .estrela p {
-    margin: 0;
-}
-
-.descricao-profissional .num-avaliacao .estrela img {
-    width: 5vw;
-    height: 2vh;
 }
 
 .descricao-profissional .info-pessoais {
@@ -114,38 +68,14 @@
     gap: 10px;
 }
 
-.descricao-profissional .info-pessoais .registro-servicos {
+.descricao-profissional .info-pessoais .avaliacoes {
     display: flex;
-    gap: 20px;
-    align-items: center;
-    margin-bottom: 2.5vh;
-}
-
-.descricao-profissional .info-pessoais .registro-servicos .registro {
-    display: flex;
-    gap: 10px;
+    gap: .5vw;
     align-items: center;
 }
 
-.descricao-profissional .info-pessoais .registro-servicos .registro img {
-    width: 3vw;
-    height: 5.5vh;
-}
-
-.descricao-profissional .info-pessoais .registro-servicos .servicos {
+.servicos-realizados {
     display: flex;
-    gap: 10px;
     align-items: center;
-}
-
-.descricao-profissional .info-pessoais .registro-servicos .servicos img {
-    width: 3vw;
-    height: 5.5vh;
-}
-
-.perfil-profissional .user-online {
-    width: 1vw;
-    height: 1vw;
-    border-radius: 50%;
-    background-color: var(--verde);
+    gap: .5vw;
 }

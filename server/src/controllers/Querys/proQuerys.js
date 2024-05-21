@@ -179,9 +179,9 @@ findService: async (req, res) => {
         {
           nm_cliente: nm_profissional,
           cd_emailCliente: cd_emailProfissional,
-          img_cliente: img_profissional,
+          img_profissional: img_profissional,
         },
-        { where: { id_cliente: id_profissional } }
+        { where: { id_profissional: id_profissional } }
       );
     },
 

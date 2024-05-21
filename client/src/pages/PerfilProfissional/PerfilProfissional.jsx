@@ -14,6 +14,8 @@ import { ChatContext } from "../../context/ChatContext";
 import { postRequest, baseUrl, getRequest, putRequest, } from "../../utils/services";
 import { UserContext } from "../../context/UserContext";
 
+import { RiFilter2Fill, RiStarFill } from "react-icons/ri";
+
 const PerfilProfissional = () => {
     const { id } = useParams();
     const { createChat, onlineUsers } = useContext(ChatContext);
@@ -38,6 +40,7 @@ const PerfilProfissional = () => {
                 const response = await getRequest(`/user/perfil/profissionais/${id}`);
                 // Configurando os dados do profissional no estado local
                 setProfissional(response);
+                console.log('krl', response)
             } catch (error) {
                 console.error("Erro ao buscar informações do profissional:", error);
                 // Tratamento de erro adicional conforme necessário
@@ -81,41 +84,37 @@ const PerfilProfissional = () => {
                                 <div className="menu-perfil">
                                     <ul>
                                         <li onClick={() => handleForm(1)} style={{ color: typeForm === 1 ? "var(--verde)" : "inherit" }}>Sobre</li>
-                                        <li onClick={() => { handleForm(2) }} style={{ color: typeForm === 2 ? "var(--verde)" : "inherit" }} >Mídia(4)
-                                        </li>
+                                        <li onClick={() => { handleForm(2) }} style={{ color: typeForm === 2 ? "var(--verde)" : "inherit" }} >Mídia</li>
                                         <li onClick={() => { handleForm(3) }} style={{ color: typeForm === 3 ? "var(--verde)" : "inherit" }} >Avaliações</li>
                                     </ul>
                                 </div>
                                 <hr />
                             </div>
                             <div className="descricao-profissional">
-                                <div className="avaliacao">
-                                    {/* <button>Editar</button> */}
-                                    <div className="num-avaliacao">
-                                        <p>{profissional[0].media_avaliacoes}</p>
-                                        <div className="estrela">
-                                            <img src={estrelas} alt="estrelas" />
-                                            <p>210 avaliações</p>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div className="info-pessoais">
                                     {
                                         typeForm === 1 && (
                                             <>
+                                                <div className="avaliacoes">
+                                                    {/* <button>Editar</button> */}
+                                                    <h3>Avaliações:</h3>
+                                                    <p>{Number(profissional[0].media_avaliacoes).toFixed(1)}</p>
+                                                    <div className="stars">
+                                                        {[...Array(5)].map((_, index) => (
+                                                            <RiStarFill
+                                                                key={index}
+                                                                className={`ri-star-s-fill ${index < profissional[0].media_avaliacoes ? "ava" : ""}`}
+                                                            ></RiStarFill>
+                                                        ))}
+                                                    </div>
+                                                </div>
                                                 <div className="sobremim">
                                                     <h2>Sobre mim</h2>
                                                     <p>{profissional[0].ds_biografia}.</p>
                                                 </div>
-                                                <div className="registro-servicos">
-                                                    <div className="registro">
-                                                        <img src={agenda} alt="agenda" />
-                                                        <p>Registro em: Out/23</p>
-                                                    </div>
-                                                    <div className="servicos">
-                                                        <img src={certificado} alt="certificado" />
-                                                        <p>Serviços Realizados: {profissional[0].num_servicos_terminados}</p>
-                                                    </div>
+                                                <div className="servicos-realizados">
+                                                    <img src={certificado} alt="certificado" />
+                                                    <p>Serviços Realizados: {profissional[0].num_servicos_terminados}</p>
                                                 </div>
                                             </>
                                         )}

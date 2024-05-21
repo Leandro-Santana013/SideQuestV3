@@ -172,12 +172,6 @@
   text-decoration: none;
 }
 
-
-
-
-
-
-
 .left-carrossel p {
   cursor: pointer;
 }
@@ -193,11 +187,11 @@
 /* Tablets em modo paisagem e dispositivos híbridos */
 @media (max-width: 1024px) {
   .header-siwpper h2 {
-    font-size: 2.7vw;
+    font-size: 3vw;
   }
 
   .left-carrossel p {
-    font-size: 1.8vw;
+    font-size: 2vw;
   }
 
   .card-carrossel {
@@ -206,7 +200,7 @@
   }
 
   .swiper-slide .card-carrossel p {
-    font-size: 1.8vw;
+    font-size: 2vw;
   }
 
   .swiper-slide .card-carrossel .btn-buscar {
@@ -218,7 +212,7 @@
   }
 
   .swiper-slide .card-carrossel .btn-buscar a {
-    font-size: 1.8vw;
+    font-size: 2vw;
   }
 }
 
@@ -232,7 +226,7 @@
 
 
   .header-siwpper h2 {
-    font-size: 4vw;
+    font-size: 3.5vw;
   }
 
 

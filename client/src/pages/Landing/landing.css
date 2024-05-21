@@ -73,7 +73,7 @@ body {
 .left-banner .h1Landing {
   color: black;
   width: 40vw;
-  font-size: 3vw;
+  font-size: 3.5vw;
   text-align: left;
 }
 
@@ -98,7 +98,7 @@ body {
 @media screen and (max-width: 770px) {
   .left-banner .h1Landing {
     width: 48vw;
-    font-size: 4.5vw;
+    font-size: 4vw;
 }
 }
 
