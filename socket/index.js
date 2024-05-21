@@ -19,12 +19,11 @@ io.on("connection", (socket) => {
     });
 
     socket.on('sendMessage', (message) => {
-        console.log(message);
         const user = onlineUsers.find((user) => user.userID === message.recipientOnChat);
         if (user) {
             io.to(user.socketId).emit("getMessage", message);
             io.to(user.socketId).emit("getNotification", {
-                senderId: message.senderId,
+                senderId: message.newMessage.user.senderId,
                 isRead: false,
                 date: new Date(),
             });
