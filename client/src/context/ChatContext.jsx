@@ -24,7 +24,8 @@ export const ChatContextProvider = ({ children, user, pro }) => {
     const [socket, setSocket] = useState(null)
     const [onlineUsers, setOnlineUsers] = useState(null)
     const [recipientOnChat, setRecipientOnChat] = useState(null)
-
+    const [notifications, setNotifications] = useState([])
+    console.log(notifications, "notifications")
     useEffect(() => {
         const newSocket = io('http://localhost:3000')
         setSocket(newSocket)
@@ -51,7 +52,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
         }
     }, [socket, ])
   
-
+console.log(currentChat?.members, "mw")
     useEffect(() => {   
         if (socket === null) return;
        socket.emit("sendMessage", {newMessage: newMessage, recipientOnChat})
@@ -63,8 +64,20 @@ export const ChatContextProvider = ({ children, user, pro }) => {
         if(currentChat?._id !== res.newMessage.user.chatId) return
         setMessages((prev) => [...prev, res.newMessage.user]);
        })
+
+       socket.on("getNotification", res => {
+        const isChatOpen = currentChat?.members.some(id => id === res.senderId)
+
+        if(isChatOpen){
+            setNotifications(prev => [{...res, isRead: true}, ...prev])
+        }else{
+            setNotifications(prev => [res, ...prev])
+        }
+       })
+
        return () => {
-        socket.off("getMessage")
+        socket.off("getMessage");
+        socket.off("getNotifications");
     }
     }, [socket, currentChat,newMessage,])
 
@@ -86,18 +99,18 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                     return setUserChatsError(response);
                 }
             
-                setUserChats(response);
+                setUserChats(response)
                 setMessagesLoading(false);
             }
         }
         getUserChats();
-    }, [user, pro])
+    }, [user, pro,])
 
     const [infoChat, setInfoChat] = useState()
     const updateCurrentChat = useCallback((chat, chatItem) => {
         setCurrentChat(chat)
         setInfoChat(chatItem)
-        console.log("CHAAAA", chatItem, "aaaa", chat)
+
 
     }, [])
 

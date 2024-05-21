@@ -40,7 +40,6 @@ export const ChatBox = () => {
     }
     const isOnlinePro = onlineUsers?.some((user) => user?.userID == infoChat.id_profissional && user.type == "pro");
   const isOnlineUser = onlineUsers?.some((user) => user?.userID ==infoChat.id_cliente && user.type == "user");
-
   if (isMessagesLoading) {
     return <p>Carregando mensagens...</p>;
   }

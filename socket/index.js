@@ -23,9 +23,15 @@ io.on("connection", (socket) => {
         const user = onlineUsers.find((user) => user.userID === message.recipientOnChat);
         if (user) {
             io.to(user.socketId).emit("getMessage", message);
+            io.to(user.socketId).emit("getNotification", {
+                senderId: message.senderId,
+                isRead: false,
+                date: new Date(),
+            });
+            
         }
     });
-
+ 
     socket.on("disconnect", () => {
         onlineUsers = onlineUsers.filter((user) => user.socketId !== socket.id);
         io.emit("getOnlineUsers", onlineUsers);
