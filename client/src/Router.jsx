@@ -34,30 +34,39 @@ const Router = () => {
   return (
     <BrowserRouter>
       <ChatContextProvider user={user} pro={pro}>
-          <Routes>
-            <Route exact path="/" element={<Landing />} />
-            <Route exact path="/landingProfissional" element={<LandingProfissional />} />
-            <Route exact path="/login" element={user ? <Navigate to="/homeCliente" /> : <Login />} />
-            <Route exact path="/validaemail" element={<ValidaEmail />} />
-            <Route exact path="/homeCliente" element={user ? <HomeCliente /> : <Navigate to="/login" />} />
-            <Route exact path="/homeCliente/postarSevico" element={<PostarServico />} />
-            <Route exact path="/pagamentosCliente" element={<PagamentosCliente />} />
-            <Route exact path="/favoritosCliente" element={<Favoritos />} />
-            <Route exact path="/historicoCliente" element={<Historico />} />
-            <Route exact path="/servicosPendentesCliente" element={<ServicosPendentesCliente />} />
-            <Route exact path="/config" element={user ? <Config /> : <Navigate to="/login" />} />
-            <Route exact path="/ConfigProfissa" element={pro ? <ConfigProfissa/> :  <Navigate to="/loginProfissional" /> }/>
-            <Route exact path="/chats" element={user || pro ? <Chats /> : <Navigate to="/login" />} />
-            <Route exact path="/loginProfissional" element={pro ? <Navigate to="/homeProfissionais" /> : <LoginProfissional />} />
-            <Route exact path="/validaEmailProfissional" element={<ValidaEmailProfissional /> } />
-            <Route exact path="/homeProfissionais" element={pro ? <HomeProfissionais /> : <Navigate to="/loginProfissional" />} />
-            <Route exact path="/ServicosConcluidosProfissional" element={<ServicosConcluidosProfissional/>}/> 
-            <Route exact path="/ServicosAtivosProfissa" element={<ServicosAtivosProfissa/>}/> 
-            <Route exact path="/VisualizarServicoCliente" element={<VisualizarServicoCliente/>}/> 
-            <Route exact path="/VisualizarServicoProfissa/:id" element={<VisualizarServicoProfissa/>}/> 
-            <Route exact path="/ServicosAtivosCliente" element={<ServicosAtivosCliente/>}/> 
-            <Route exact path="/perfilProfissional/:id" element={<PerfilProfissional/>}/>
-          </Routes>
+        <Routes>
+          {/* rotas públicas */}
+          <Route exact path="/" element={<Landing />} />
+          <Route exact path="/landingProfissional" element={<LandingProfissional />} />
+
+          {/* rotas cliente */}
+          <Route exact path="/login" element={user ? <Navigate to="/homeCliente" /> : <Login />} />
+          <Route exact path="/validaemail" element={<ValidaEmail />} />
+          <Route exact path="/homeCliente" element={user ? <HomeCliente /> : <Navigate to="/login" />} />
+          <Route exact path="/homeCliente/postarSevico" element={<PostarServico />} />
+          <Route exact path="/favoritosCliente" element={<Favoritos />} />
+          <Route exact path="/historicoCliente" element={<Historico />} />
+          <Route exact path="/pagamentosCliente" element={<PagamentosCliente />} />
+          <Route exact path="/servicosPendentesCliente" element={<ServicosPendentesCliente />} />
+          <Route exact path="/config" element={user ? <Config /> : <Navigate to="/login" />} />
+
+          {/* rotas profissional */}
+          <Route exact path="/ConfigProfissa" element={pro ? <ConfigProfissa /> : <Navigate to="/loginProfissional" />} />
+          <Route exact path="/loginProfissional" element={pro ? <Navigate to="/homeProfissionais" /> : <LoginProfissional />} />
+          <Route exact path="/validaEmailProfissional" element={<ValidaEmailProfissional />} />
+          <Route exact path="/homeProfissionais" element={pro ? <HomeProfissionais /> : <Navigate to="/loginProfissional" />} />
+          <Route exact path="/perfilProfissional" element={pro ? <PerfilProfissional /> : <Navigate to="/loginProfissional" />} />
+          <Route exact path="/ServicosConcluidosProfissional" element={<ServicosConcluidosProfissional />} />
+          <Route exact path="/ServicosAtivosProfissa" element={<ServicosAtivosProfissa />} />
+          <Route exact path="/VisualizarServicoCliente" element={<VisualizarServicoCliente />} />
+          <Route exact path="/VisualizarServicoProfissa/:id" element={<VisualizarServicoProfissa />} />
+          <Route exact path="/ServicosAtivosCliente" element={<ServicosAtivosCliente />} />
+          <Route exact path="/perfilProfissional/:id" element={<PerfilProfissional />} />
+
+          {/* rotas cliente / profissional */}
+          <Route exact path="/chats" element={user || pro ? <Chats /> : <Navigate to="/login" />} />
+
+        </Routes>
       </ChatContextProvider>
     </BrowserRouter>
   );

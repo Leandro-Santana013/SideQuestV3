@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./sidebarProfissional.css";
 
 import { Link } from "react-router-dom";
-
+import PerfilProfissional from "../../pages/PerfilProfissional/PerfilProfissional";
 
 export const SidebarProfissional = () => {
   const [currentPage, setCurrentPage] = useState(window.location.pathname);
@@ -11,7 +11,7 @@ export const SidebarProfissional = () => {
     { id: 1, name: "home", href: "homeProfissionais" },
     { id: 2, name: "chats", href: "chats" },
     { id: 3, name: "dashboard", href: "dashboard" },
-    { id: 4, name: "favoritos", href: "favoritosProfissional" },
+    { id: 4, name: "perfil", href: "perfilProfissional" },
     { id: 5, name: "pagamentos", href: "pagamentosProfissional" },
     { id: 6, name: "propostas", href: "propostasProfissional" }
   ];
@@ -112,6 +112,8 @@ const getIcon = (page) => {
       return "fa-regular fa-comments";
     case "dashboard":
       return "fa-sharp fa-solid fa-chart-line";
+    case 'perfilProfissional':
+      return 'fa-solid fa-user-tie';
     case "favoritosProfissional":
       return "fa-regular fa-star";
     case "pagamentosProfissional":

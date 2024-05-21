@@ -8,6 +8,10 @@
     text-decoration: underline;
     font-size: 3vw;
   }
+
+  h1 {
+    text-align: center;
+  }
 }
 
 
