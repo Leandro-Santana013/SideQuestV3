@@ -3,6 +3,7 @@ import { postRequest, baseUrl, getRequest } from "../utils/services";
 export const ProfessionalContext = createContext();
 
 export const ProfessionalContextProvider = ({ children }) => {
+
   const [pro, setPro] = useState({});
 
   useEffect(() => {
@@ -90,14 +91,19 @@ export const ProfessionalContextProvider = ({ children }) => {
       try {
         const response = await postRequest("/professional/loginPro", loginInfo);
 
-        if (response.error) setloginError(response.error);
+        if (response.error)
+          setloginError(response.error);
         else {
           const user = localStorage.getItem("User");
-          if (user) localStorage.removeItem("User");
+          if (user) {
+            localStorage.removeItem("User");
+            localStorage.setItem("pro", JSON.stringify(response.user));
+            window.location.reload()
+          }
           else {
             console.log(response.user);
             localStorage.setItem("pro", JSON.stringify(response.user));
-            window.location.reload();
+            window.location.reload()
           }
         }
       } catch (error) {

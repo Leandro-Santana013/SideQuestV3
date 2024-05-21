@@ -3,7 +3,7 @@ import "./sidebarProfissional.css";
 
 import { Link } from "react-router-dom";
 
-  
+
 export const SidebarProfissional = () => {
   const [currentPage, setCurrentPage] = useState(window.location.pathname);
 
@@ -18,7 +18,7 @@ export const SidebarProfissional = () => {
 
 
   useEffect(() => {
-    
+
     for (let i = 0; i < pages.length; i++) {
       if (currentPage.includes(pages[i])) {
         // Atualizar o estado para destacar a página atual
@@ -28,7 +28,7 @@ export const SidebarProfissional = () => {
     }
   }, [currentPage, pages]);
 
-  const [isActive, setIsActive] = useState(false); 
+  const [isActive, setIsActive] = useState(false);
 
   const AcaoAoCLicar = () => {
     setIsActive(!isActive); // Alterna o valor de isActive
@@ -36,63 +36,61 @@ export const SidebarProfissional = () => {
 
   return (
     <>
-    <nav className="sidebarProfissional">
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      ></link>
-      <div className="options">
-        {pages.map((page, index) => (
-          <Link
-          key={index}
-          to={`/${page.href}`}
-          className={`option ${currentPage.includes(page.href) ? "active" : ""}`}
-        >
-          <div
-            className={`connected-bar  ${currentPage.includes(page.href) ? "active" : ""
-              }`}
-            style={{ backgroundColor: currentPage.includes(page.href) ? "#3cbc8c50" : "" }}
-          >
-            <i
-              className={`${getIcon(page)} ${currentPage.includes(page) ? "active" : ""
-                }`}
-              style={{ color: currentPage.includes(page.href) ? "#3cbc8c" : "" }}
-            ></i>
-            <p style={{ color: currentPage.includes(page.href) ? "#3cbc8c" : "" }}>
-              {getPageLabel(page)}
-            </p>
-          </div>
-        </Link>
-        ))}
-      </div>
-      <Link
+      <nav className="sidebarProfissional">
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        ></link>
+        <div className="options">
+          {pages.map((page, index) => (
+            <Link
+              key={index}
+              to={`/${page.href}`}
+              className={`option ${currentPage.includes(page.href) ? "active" : ""}`}
+            >
+              <div
+                className={`connected-bar  ${currentPage.includes(page.href) ? "active" : ""
+                  }`}
+                style={{ backgroundColor: currentPage.includes(page.href) ? "#3cbc8c50" : "" }}
+              >
+                <i
+                  className={`${getIcon(page)} ${currentPage.includes(page) ? "active" : ""
+                    }`}
+                  style={{ color: currentPage.includes(page.href) ? "#3cbc8c" : "" }}
+                ></i>
+                <p style={{ color: currentPage.includes(page.href) ? "#3cbc8c" : "" }}>
+                  {getPageLabel(page)}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <Link
           to="/configProfissa"
           className={`config ${currentPage.includes("config") ? "active" : ""}`}
         >
           <div
             className={`connected-bar ${currentPage.includes("config") ? "active" : ""
               }`}
-            style={{ backgroundColor: currentPage.includes("config") ? "#3cbc8c50" : "" }}
           >
             <i
               className={`fa-solid fa-gear ${currentPage.includes("config") ? "active" : ""
                 }`}
-              style={{ color: currentPage.includes("config") ? "#3cbc8c" : "" }}
             ></i>
-            <p style={{ color: currentPage.includes("config") ? "#3cbc8c" : "" }}>
+            <p>
               Configurações
             </p>
           </div>
 
         </Link>
-    </nav>
+      </nav>
 
-    <header className="sidebarProfissa-responsivo">
-        <nav className="navProfissa-responsivo"> 
+      <header className="sidebarProfissa-responsivo">
+        <nav className="navProfissa-responsivo">
           <ul className={`ulProfissa-responsivo ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}>
-          <li><Link to={"/homeProfissionais"}>Home</Link></li>
-              <li><Link to={"/chats"}>Chats</Link></li>
-              <li><Link to={"/ConfigProfissa"}>Configurações</Link></li>
+            <li><Link to={"/homeProfissionais"}>Home</Link></li>
+            <li><Link to={"/chats"}>Chats</Link></li>
+            <li><Link to={"/ConfigProfissa"}>Configurações</Link></li>
           </ul>
         </nav>
         <button className={`hamburguer-sidebarProfissa ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}>

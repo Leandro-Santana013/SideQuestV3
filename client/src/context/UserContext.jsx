@@ -1,10 +1,5 @@
 import { createContext, useCallback, useEffect, useState } from "react";
-import {
-  postRequest,
-  baseUrl,
-  getRequest,
-  putRequest,
-} from "../utils/services";
+import { postRequest, baseUrl, getRequest, putRequest, } from "../utils/services";
 import axios from "axios";
 import { file } from "jszip";
 import { Infoinc } from "../components/Infoinc/Infoinc";
@@ -70,6 +65,9 @@ export const UserContextProvider = ({ children }) => {
     senha: null,
   });
 
+  // para passar modalShow true depois do login pra aparecer o modal corretamente
+  const [localStorageSetado, selLocalStorageSetado] = useState(false)
+
   const loginUser = useCallback(
     async (e) => {
       e.preventDefault();
@@ -78,7 +76,8 @@ export const UserContextProvider = ({ children }) => {
       try {
         const response = await postRequest("/user/login", loginInfo);
 
-        if (response.error) setloginError(response.error);
+        if (response.error)
+          setloginError(response.error);
         else {
           const pro = localStorage.getItem("pro")
           if (pro) {
@@ -86,12 +85,14 @@ export const UserContextProvider = ({ children }) => {
             setlocationuser(response.user.localizacaoprincipal)
             localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
             localStorage.setItem("loc", JSON.stringify(response.user.localizacaoprincipal))
-            window.location.reload
+            window.location.reload()
+            selLocalStorageSetado(true)
           }
           else {
             localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
             localStorage.setItem("loc", JSON.stringify(response.user.localizacaoprincipal))
-            window.location.reload();
+            window.location.reload()
+            selLocalStorageSetado(true)
           }
         }
       } catch (error) {
@@ -113,14 +114,16 @@ export const UserContextProvider = ({ children }) => {
   //logout
 
   const [ConclussioncadError, setConclusioncadError] = useState(null)
-  const [modalShown, setModalShown] = useState(null);
+  const [modalShown, setModalShown] = useState(false);
 
   const logoutUser = useCallback(() => {
     localStorage.removeItem("User");
     setUser(null);
     localStorage.removeItem("modalShown");
-    setModalShown(null);
+    setModalShown(false);
     window.location.reload();
+
+    selLocalStorageSetado(false)
   }, []);
 
 
