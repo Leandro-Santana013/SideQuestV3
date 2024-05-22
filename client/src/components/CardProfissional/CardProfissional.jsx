@@ -88,7 +88,7 @@ export const CardProfissional = () => {
           }
         } else {
           // Tratar caso em que nm_profissional ou ds_biografia sejam null
-          return false;
+          return false; 
         }
         
 

@@ -9,7 +9,7 @@ const connectionDataBase = new Sequelize(
     {
         host: "localhost",
         dialect: "mysql",
-        port: 3306,
+        port: 3307,
         // Definindo o tempo limite de  aquisição de conexão para 60 segundos (em milissegundos)
         pool: { 
             acquire:  600000000
@@ -355,7 +355,6 @@ async function inserirCategorias() {
 
 async function inserirEnderecos() {
     try {
-        await inserirClientes();
         for (const endereco of enderecos) {
             const query = 'INSERT INTO tb_endereco (id_cliente, id_cidade, nm_logradouro, cd_cep, nm_bairro, nmr_casa) VALUES (?, ?, ?, ?, ?, ?)';
             const valores = [...endereco];
@@ -369,7 +368,6 @@ async function inserirEnderecos() {
 
 async function inserirPostagensServico() {
     try {
-        await inserirEnderecos();
         for (const postagem of postagensServico) {
             const query = 'INSERT INTO tb_postagemServico (id_cliente, id_categoria, id_endereco, ds_servico, ds_titulo) VALUES (?, ?, ?, ?, ?)';
             const valores = [...postagem];
@@ -383,7 +381,6 @@ async function inserirPostagensServico() {
 
 async function inserirConfirmacoesServico() {
     try {
-        await inserirPostagensServico();
         for (const confirmacao of confirmacoesServico) {
             const query = 'INSERT INTO tb_confirmacaoServico (id_postagemServico, id_profissional, vlr_servico) VALUES (?, ?, ?)';
             const valores = [...confirmacao];
@@ -397,7 +394,6 @@ async function inserirConfirmacoesServico() {
 
 async function inserirTerminosServico() {
     try {
-        await inserirConfirmacoesServico();
         for (const termino of terminosServico) {
             const query = 'INSERT INTO tb_terminoServico (id_confirmacaoServico, dt_terminoServico) VALUES (?, ?)';
             const valores = [...termino];
@@ -411,7 +407,6 @@ async function inserirTerminosServico() {
 
 async function inserirAvaliacoes() {
     try {
-        await inserirTerminosServico();
         for (const avaliacao of avaliacoes) {
             const query = 'INSERT INTO tb_avaliacao (id_terminoServico, nmr_avaliacao, ds_comentario) VALUES (?, ?, ?)';
             const valores = [...avaliacao];
@@ -427,6 +422,7 @@ async function inserirAvaliacoes() {
 async function inserirTodosDados() {
     await inserirProfissionais();
     await inserirCategorias();
+    await inserirClientes();
     await inserirEnderecos();
     await inserirPostagensServico();
     await inserirConfirmacoesServico();
