@@ -1,19 +1,38 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import Cookies from "js-cookie";
-import { IoMdClose } from "react-icons/io";
-import "./infoInc.css";
+import { getRequest } from "../../utils/services"; // Certifique-se de importar corretamente seus serviços
 import { ProfessionalContext } from "../../context/ProfissionalContext";
+import "./infoInc.css";
 
 export const InfoincPro = () => {
-  const { modal, setModal, setInfoConfirm, concluirCad, fetchDataConcluir, cepError } = useContext(ProfessionalContext);
-  const [infoDados, setinfoDados] = useState(false);
+  const {
+    modal,
+    setModal,
+    setInfoConfirm,
+    concluirCad,
+    fetchDataConcluir,
+    cepError,
+    categorias,
+    setCategorias,
+  } = useContext(ProfessionalContext);
+
+  useEffect(() => {
+    const carregarCategorias = async () => {
+      try {
+        const response = await getRequest("/user/selectCategoria");
+        console.log("Dados das categorias carregados:", response);
+        setCategorias(response);
+      } catch (error) {
+        console.error("Erro ao buscar categorias:", error);
+      }
+    };
+
+    carregarCategorias();
+  }, []);
 
   const handleCepChange = (e) => {
     const cep = e.target.value;
-    const cepToFetch = cep; // Armazena o valor atual do CEP em uma variável local
-    if (cep.length === 8)
-      fetchDataConcluir(cepToFetch); // Chama a função de busca de dados do CEP com o valor atual
+    const cepToFetch = cep;
+    if (cep.length === 8) fetchDataConcluir(cepToFetch);
   };
 
   const handleChange = (field, event) => {
@@ -25,16 +44,65 @@ export const InfoincPro = () => {
   };
 
   const setModalConcluaRegistro = (param) => {
-    if (param == 1) setModal(modal + 1);
-    else if (param == 2) setModal(modal - 1);
-    else if (param == 0) setModal(0);
+    if (param === 1) setModal(modal + 1);
+    else if (param === 2) setModal(modal - 1);
+    else if (param === 0) setModal(0);
+  };
+
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedCategoryNames, setSelectedCategoryNames] = useState([]);
+
+  const handleCategorySelect = (e) => {
+    const selectedCategoryName = e.target.value;
+    console.log("entrou");
+    console.log("Nome da categoria selecionada:", selectedCategoryName);
+    console.log("Categorias disponíveis:", categorias);
+
+    const selectedCategory = categorias.find(
+      (categoria) => categoria.ds_categoria === selectedCategoryName
+    );
+
+    if (selectedCategory) {
+      console.log("Categoria encontrada:", selectedCategory);
+      if (!selectedCategoryNames.includes(selectedCategoryName)) {
+        console.log("Categoria selecionada:", selectedCategory);
+        setSelectedCategories((prevSelectedCategories) => [
+          ...prevSelectedCategories,
+          selectedCategory,
+        ]);
+        setSelectedCategoryNames((prevSelectedCategoryNames) => [
+          ...prevSelectedCategoryNames,
+          selectedCategoryName,
+        ]);
+        setInfoConfirm((prevInfoConfirm) => ({
+          ...prevInfoConfirm,
+          categorias: [...prevInfoConfirm.categorias, selectedCategory],
+        }));
+      }
+    } else {
+      console.log(
+        "Categoria não encontrada para o nome:",
+        selectedCategoryName
+      );
+    }
+  };
+
+  const handleRemoveCategory = (categoryToRemove) => {
+    setSelectedCategories((prevSelectedCategories) =>
+      prevSelectedCategories.filter((category) => category !== categoryToRemove)
+    );
+    setSelectedCategoryNames((prevSelectedCategoryNames) =>
+      prevSelectedCategoryNames.filter(
+        (name) => name !== categoryToRemove.ds_categoria
+      )
+    );
   };
 
   return (
     <>
-      {modal != 0 && (
+      {modal !== 0 && (
         <div className="modal-card-conclua-registro">
-          {modal == 1 && (
+          {modal === 1 && (
             <div className="card-conclua-registro">
               <div className="top-card-conclua-registro">
                 <h1>Conclua o seu registro</h1>
@@ -59,12 +127,7 @@ export const InfoincPro = () => {
                   onChange={(event) => handleChange("data", event)}
                 />
                 <p>Sexo</p>
-                <select
-                  name=""
-                  id=""
-                  aria-placeholder=""
-                  onChange={(event) => handleChange("sexo", event)}
-                >
+                <select onChange={(event) => handleChange("sexo", event)}>
                   <option value="-">Prefiro não dizer</option>
                   <option value="M">Masculino</option>
                   <option value="F">Feminino</option>
@@ -81,7 +144,7 @@ export const InfoincPro = () => {
             </div>
           )}
 
-          {modal == 2 && (
+          {modal === 2 && (
             <div className="card-conclua-registro">
               <div className="top-card-conclua-registro">
                 <h1>Conclua o seu registro</h1>
@@ -93,44 +156,97 @@ export const InfoincPro = () => {
               <div className="inputs-card-conclua-registro">
                 <div className="grid-2x2-card-conclua-registro">
                   <div className="inputs-card-conclua-registro-cep">
-                  {cepError && (
-                    <p className="cepError-conluircad">CEP incorreto</p>
-                  )}
-                  <input
-                    className="padrao-input-card-conclua-registro"
-                    type="number"
-                    placeholder="Cep"
-                    style={{
-                      border: cepError && "2px solid red"
-                    }}
-                    onChange={(event) => {
-                      handleChange("cep", event);
-                      handleCepChange(event);
-                    }}
-                  />
-                  
+                    {cepError && (
+                      <p className="cepError-conluircad">CEP incorreto</p>
+                    )}
+                    <input
+                      className="padrao-input-card-conclua-registro"
+                      type="number"
+                      placeholder="Cep"
+                      style={{
+                        border: cepError && "2px solid red",
+                      }}
+                      onChange={(event) => {
+                        handleChange("cep", event);
+                        handleCepChange(event);
+                      }}
+                    />
                   </div>
                   <input
                     className="padrao-input-card-conclua-registro"
                     type="number"
                     placeholder="Nº"
-                    onChange={(event) => handleChange("numeroResidencia", event)}
+                    onChange={(event) =>
+                      handleChange("numeroResidencia", event)
+                    }
                   />
                   <input
                     className="padrao-input-card-conclua-registro"
                     type="text"
-                    placeholder="Comlemento"
+                    placeholder="Complemento"
                     onChange={(event) => handleChange("complemento", event)}
                   />
                 </div>
               </div>
               <div className="bottom-card-conclua-registro">
                 <p onClick={() => setModalConcluaRegistro(2)}>voltar</p>
-                <button onClick={concluirCad}>Finalizar</button>
+                <button onClick={() => setModalConcluaRegistro(1)}>
+                  proximo
+                </button>
               </div>
             </div>
           )}
-          {modal == 3 && (<></>)}
+
+          {modal === 3 && (
+            <>
+              <div className="card-conclua-registro">
+                <div className="top-card-conclua-registro">
+                  <h1>Conclua o seu registro</h1>
+                  <p>Escolha suas categorias que você deseja trabalhar</p>
+                </div>
+                {categorias.length > 0 ? (
+                  <select
+                    id="categoriaSelect"
+                    className="categorias"
+                    onChange={handleCategorySelect}
+                  >
+                    <option value="" disabled selected>
+                      Selecione uma categoria
+                    </option>
+                    {categorias.map((categoria) => (
+                      <option
+                        key={categoria.cd_categoria}
+                        value={categoria.ds_categoria}
+                      >
+                        {categoria.ds_categoria}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <p>Carregando categorias...</p>
+                )}
+                <p>insira uma descrição para sua bio!</p>
+                <input
+                  className="padrao-input-card-conclua-registro"
+                  type="number"
+                  placeholder="Descrição"
+                  onChange={(event) => {
+                    handleChange("descricao", event);
+                  }}
+                />
+              </div>
+              <div className="selected-categories">
+                {selectedCategories.map((category) => (
+                  <div key={category.cd_categoria} className="category-card">
+                    <p>{category.ds_categoria}</p>
+                    <button onClick={() => handleRemoveCategory(category)}>
+                      X
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       )}
     </>

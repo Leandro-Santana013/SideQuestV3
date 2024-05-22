@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { SidebarProfissional, Header, CardServico } from "../../components";
+import { SidebarProfissional, Header, CardServico, InfoincPro } from "../../components";
 import "./homeProfissional.css";
 import "../../assets/icone-perfil.png";
 import imgAproved from "../../assets/aproved.png";
@@ -22,6 +22,7 @@ const HomeProfissionais = () => {
     };
     return (
         <>
+            <InfoincPro></InfoincPro>
             <Header />
             <SidebarProfissional />
             <div className="content-midia">

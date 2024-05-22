@@ -237,7 +237,7 @@ exports.registerPro = async (req, res) => {
   }));
     
     res.status(200).json(servicosComDiferencaTempo)
-  }
+  } 
 
   exports.visuService = async (req, res) => {
     try {

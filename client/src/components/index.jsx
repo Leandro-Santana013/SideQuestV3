@@ -16,6 +16,7 @@ import { Loading } from './Loading/Loading';
 import { SidebarProfissional } from './SidebarProfissional/SidebarProfissional';
 import {ImageCropper} from './imgCroppper/ImageCropper' 
 import {HeaderLandingPro} from './HeaderLandingpro/HeaderLandingpro'
+import { InfoincPro } from './InfoincPro/InfoincPro'
 export {
     Animation,
     Benefits,
@@ -34,5 +35,6 @@ export {
     CardServico,    
     Loading,
     SidebarProfissional,
-    ImageCropper
+    ImageCropper,
+    InfoincPro
 }

@@ -230,7 +230,7 @@ const confirmacoesServico = [
     [29, 9, 140],
     [30, 10, 180]
 ];
-
+ 
 const terminosServico = [
     [1, '2024-03-20'],
     [2, '2024-03-21'],

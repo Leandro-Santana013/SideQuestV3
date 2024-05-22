@@ -173,7 +173,10 @@ export const ProfessionalContextProvider = ({ children }) => {
     }
   }, [pro]);
 
-  const [infoConfirm, setInfoConfirm] = useState({})
+  const [infoConfirm, setInfoConfirm] = useState({
+    categorias: [] // Inicializa categorias como um array vazio
+  });
+  
   /********************/
 
 
@@ -190,6 +193,9 @@ export const ProfessionalContextProvider = ({ children }) => {
     }
   }, [infoConfirm])
 
+  const [categorias, setCategorias] = useState([]);
+
+ 
 
   
   
@@ -222,7 +228,9 @@ export const ProfessionalContextProvider = ({ children }) => {
         setInfoConfirm,
         modal,
         setModal,
-        concluirCad 
+        concluirCad,
+        categorias,
+         setCategorias
       }}
     >
       {children}

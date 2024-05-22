@@ -121,6 +121,7 @@ export const UserContextProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem("modalShown");
     setModalShown(false);
+    localStorage.removeItem("loc");
     window.location.reload();
 
     selLocalStorageSetado(false)
@@ -346,19 +347,7 @@ export const UserContextProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const carregarCategorias = async () => {
-      try {
-        const response = await getRequest("/user/selectCategoria");
-        setCategorias(response); // Aqui estamos definindo o estado das categorias com a resposta do servidor
-      } catch (error) {
-        console.error("Erro ao buscar categorias:", error);
-      }
-    };
 
-    // Chama a função para buscar as categorias
-    carregarCategorias();
-  }, []);
 
   const updatepostarServico = useCallback((info) => {
     setServico(info);
