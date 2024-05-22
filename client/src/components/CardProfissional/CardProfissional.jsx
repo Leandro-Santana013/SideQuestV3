@@ -82,14 +82,12 @@ export const CardProfissional = () => {
   const renderizarCards = () => {
     return dadosIniciais
       .filter(profissional => {
-        if (profissional.nm_profissional && profissional.ds_biografia) {
-          if (!profissional.nm_profissional.toLowerCase().includes(busca.toLowerCase()) && !profissional.ds_biografia.toLowerCase().includes(busca.toLowerCase())) {
+        if (profissional.nm_profissional) {
+          if (!profissional.nm_profissional.toLowerCase().includes(busca.toLowerCase()) && !profissional.ds_biografia?.toLowerCase().includes(busca.toLowerCase())) {
             return false;
           }
-        } else {
-          // Tratar caso em que nm_profissional ou ds_biografia sejam null
-          return false; 
-        }
+        } else return false;
+        
         
 
         if (filtrosSelecionados.includes('profissionaisFemininas') && profissional.sg_sexoProfissional !== 'F') {
