@@ -15,6 +15,7 @@ import { postRequest, baseUrl, getRequest, putRequest, } from "../../utils/servi
 import { UserContext } from "../../context/UserContext";
 
 import { RiFilter2Fill, RiStarFill } from "react-icons/ri";
+import { FaAngleLeft } from "react-icons/fa6";
 
 const PerfilProfissional = () => {
     const { id } = useParams();
@@ -66,6 +67,11 @@ const PerfilProfissional = () => {
                 <div className="main-content">
                     {profissional && (
                         <div className="perfil-profissional">
+                            <Link to='/homeCliente'>
+                                <button className="btn-voltar-perfil-profissional">
+                                    <FaAngleLeft />
+                                </button>
+                            </Link>
                             <div className="cabecalho-perfil">
                                 <div className="perfil-nome">
                                     <img src={profissional && profissional.img_profissional ? profissional.img_profissional : iconeperfil} alt="icone de perfil" />
@@ -84,30 +90,17 @@ const PerfilProfissional = () => {
                                 <div className="menu-perfil">
                                     <ul>
                                         <li onClick={() => handleForm(1)} style={{ color: typeForm === 1 ? "var(--verde)" : "inherit" }}>Sobre</li>
-                                        <li onClick={() => { handleForm(2) }} style={{ color: typeForm === 2 ? "var(--verde)" : "inherit" }} >Mídia</li>
-                                        <li onClick={() => { handleForm(3) }} style={{ color: typeForm === 3 ? "var(--verde)" : "inherit" }} >Avaliações</li>
+                                        <li onClick={() => { handleForm(2) }} style={{ color: typeForm === 2 ? "var(--verde)" : "inherit" }} >Avaliações</li>
                                     </ul>
                                 </div>
-                                <hr />
+                                <div className="linha-separadora"></div>
                             </div>
                             <div className="descricao-profissional">
                                 <div className="info-pessoais">
                                     {
                                         typeForm === 1 && (
                                             <>
-                                                <div className="avaliacoes">
-                                                    {/* <button>Editar</button> */}
-                                                    <h3>Avaliações:</h3>
-                                                    <p>{Number(profissional[0].media_avaliacoes).toFixed(1)}</p>
-                                                    <div className="stars">
-                                                        {[...Array(5)].map((_, index) => (
-                                                            <RiStarFill
-                                                                key={index}
-                                                                className={`ri-star-s-fill ${index < profissional[0].media_avaliacoes ? "ava" : ""}`}
-                                                            ></RiStarFill>
-                                                        ))}
-                                                    </div>
-                                                </div>
+
                                                 <div className="sobremim">
                                                     <h2>Sobre mim</h2>
                                                     <p>{profissional[0].ds_biografia}.</p>
@@ -116,18 +109,45 @@ const PerfilProfissional = () => {
                                                     <img src={certificado} alt="certificado" />
                                                     <p>Serviços Realizados: {profissional[0].num_servicos_terminados}</p>
                                                 </div>
+                                                <div className="portifolio-profissional">
+                                                    <div className="titulo-portifolio-profissional">
+                                                        <h1>Portifólio do Profissional</h1>
+                                                    </div>
+                                                    <div className="servicos-portifolio-profissional">
+                                                        <h2>Aqui você pode visualizar todos os serviços realizado por esse profissional!</h2>
+                                                    </div>
+                                                </div>
                                             </>
                                         )}
                                     {
                                         typeForm === 2 && (
                                             <>
-                                                <p> INFO 2 MIDIAS</p>
-                                            </>
-                                        )}
-                                    {
-                                        typeForm === 3 && (
-                                            <>
-                                                <p>array avaliações 3</p>
+                                                <div className="avaliacoes">
+                                                    {/* <span>{profissional[0].num_avaliacoes}</span> */}
+                                                    <div className="avaliacoes-media-star">
+                                                        <p>{Number(profissional[0].media_avaliacoes).toFixed(1)}</p>
+                                                        <div className="stars">
+                                                            {[...Array(5)].map((_, index) => (
+                                                                <RiStarFill
+                                                                    key={index}
+                                                                    className={`ri-star-s-fill ${index < profissional[0].media_avaliacoes ? "ava" : ""}`}
+                                                                    style={{fontSize: '3vw'}}
+                                                                ></RiStarFill>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="avaliacao-avaliacoes">
+                                                        {profissional[2].map((avaliacao, index) => (
+                                                            <div key={index} className="avaliacao-card">
+                                                                <div className="texto-comentario-avaliacao-card"></div>
+                                                                <div className="left-avaliacao-card">
+                                                                    <img src={avaliacao.cliente_imagem ? avaliacao.cliente_imagem : iconeperfil} alt="Imagem de perfil do cliente" />
+                                                                    <span>{avaliacao.cliente_nome}</span>
+                                                                </div>
+                                                            </div>
+                                                        ))}                                                
+                                                </div>
                                             </>
                                         )}
                                 </div>
@@ -138,6 +158,25 @@ const PerfilProfissional = () => {
             </section>
         </>
     );
+
+//     avaliacao_comentario
+// : 
+// "Excelente serviço, profissional muito experiente."
+// avaliacao_id
+// : 
+// 11
+// avaliacao_numero
+// : 
+// 5
+// cliente_id
+// : 
+// 11
+// cliente_imagem
+// : 
+// null
+// cliente_nome
+// : 
+// "Gustavo Oliveira"
 }
 
 export default PerfilProfissional;

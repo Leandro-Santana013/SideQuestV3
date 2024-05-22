@@ -67,28 +67,21 @@
 
 
 /* Responsividade */
-/*Desktops de tela maior*/
-
-@media screen and (max-width: 1600px) {
-
-}
-
-/*laptops e desktops tela de menor*/
-@media screen and (max-width: 1200px) {
-
-}
 
 /* Tablets em modo paisagem e dispositivos híbridos */
 @media (max-width: 1024px) {
   .content-input-busca {
     width: 49vw;
     height: 4vw;
+    display: flex;
+    align-items: flex-end;
   }
 
   .content-input-busca .iconSearch {
     font-size: 3.5vw;
     margin-left: 5px;
     margin-right: 1vw;
+    align-self: center;
   }
 
   .left-banner input {
@@ -183,13 +176,14 @@
   }
 
   .content-input-busca .btn {
-    width: 11vw;
-    font-size: 2.5vw;
+    width: 13vw;
+    font-size: 2.7vw;
   }
 
   .content-input-busca input {
     padding: 5.5px 15px;
   }
+
 }
 
 /* Smartphones muito pequenos */

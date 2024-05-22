@@ -108,7 +108,7 @@ export const CardProfissional = () => {
         }
       })
       .map(profissional => (
-        <Link to={`/perfilProfissional/${profissional.id_profissional}`} key={profissional.id_profissional}>
+        <Link to={`/homeCliente/perfilProfissional/${profissional.id_profissional}`} key={profissional.id_profissional}>
           <div className="card-profissional">
             <div className="tamplate-img">
               <img src={imgPerfil} alt="Imagem de perfil" />
