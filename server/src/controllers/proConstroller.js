@@ -326,3 +326,13 @@ exports.registerPro = async (req, res) => {
       return res.status(500).json({ error: "Erro interno do servidor" });
     }
   };
+  exports.concluirCad = async (req, res) => {
+    const {
+      id_profissional
+    } = req.body
+    try{
+
+    }catch (error){
+      console.log(error);
+    }
+  } 

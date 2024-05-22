@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 import { postRequest, baseUrl, getRequest } from "../utils/services";
+import axios from "axios";  
 export const ProfessionalContext = createContext();
 
 export const ProfessionalContextProvider = ({ children }) => {
@@ -57,12 +58,6 @@ export const ProfessionalContextProvider = ({ children }) => {
         setRegisterLoading(false);
       }
     },
-    [
-      formDataCadastroPro,
-      setRegisterError,
-      setRegisterSucess,
-      setRegisterLoading,
-    ]
   );
 
   const logoutUser = useCallback(() => {
@@ -158,16 +153,15 @@ export const ProfessionalContextProvider = ({ children }) => {
   const [modalS, setModalShown] = useState(false);
 
   useEffect(() => {
-    const modalAlreadyShown = localStorage.getItem("modalShown");
+    
 
     // Verifica se o modal já foi exibido, se o usuário está logado e se está na página inicial
-    if (!modalAlreadyShown && pro && window.location.pathname === '/homeProfissionais') {
+    if (pro && window.location.pathname === '/homeProfissionais') {
       // Verifica se é necessário exibir o modal com base nas informações do usuário
       if (Object.keys(pro).length > 0) {
         if (pro.sg_sexoProfissional == null && pro.qt_idadeProfissional == null) {
           setModal(1);
           setModalShown(true);
-          localStorage.setItem("modalShown", true);
         }
       }
     }
@@ -179,21 +173,50 @@ export const ProfessionalContextProvider = ({ children }) => {
   
   /********************/
 
-
+  const [cepError, setCepError] = useState(false);
   const concluirCad = useCallback(async (e) => {
     console.log(infoConfirm)
-    const response = await postRequest("/user/concluirCad", infoConfirm)
+    const response = await postRequest("/professional/concluirCad", infoConfirm)
     if (response.error) {
       setConclusioncadError(response.error);
     } else {
       setModal(modal + 1)
-      localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
-      localStorage.setItem("loc", JSON.stringify(response.user.localizacaoprincipal))
+      localStorage.setItem("pro", JSON.stringify(response.user));
       console.log(locationuser)
     }
   }, [infoConfirm])
 
   const [categorias, setCategorias] = useState([]);
+
+  const fetchDataConcluir = async (cep) => {
+    try {
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      if (!response.data.erro) {
+        const { uf, localidade, logradouro, bairro } = response.data;
+        setCepError(false);
+        setInfoConfirm({
+          ...infoConfirm,
+          cep,
+          uf,
+          localidade,
+          logradouro,
+          bairro,
+        });
+      } else {
+        setCepError(true);
+        setInfoConfirm({
+          ...infoConfirm,
+          cep,
+          uf: null,
+          localidade: null,
+          logradouro: null,
+          bairro: null,
+        });
+      }
+    } catch (error) {
+      console.error("Erro ao buscar CEP:", error);
+    }
+  };
 
  
 
@@ -230,7 +253,8 @@ export const ProfessionalContextProvider = ({ children }) => {
         setModal,
         concluirCad,
         categorias,
-         setCategorias
+        setCategorias,
+        fetchDataConcluir
       }}
     >
       {children}

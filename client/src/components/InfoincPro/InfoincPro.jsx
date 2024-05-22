@@ -228,12 +228,13 @@ export const InfoincPro = () => {
                 <p>insira uma descrição para sua bio!</p>
                 <input
                   className="padrao-input-card-conclua-registro"
-                  type="number"
+                  
                   placeholder="Descrição"
                   onChange={(event) => {
                     handleChange("descricao", event);
                   }}
                 />
+                <button onClick={concluirCad}>Finalizar</button>
               </div>
               <div className="selected-categories">
                 {selectedCategories.map((category) => (
