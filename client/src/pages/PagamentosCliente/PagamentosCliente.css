@@ -135,6 +135,12 @@
     font-size: 1vw;
 }
 
+@media screen and (max-width: 1024px) { 
+.content-midia {
+    justify-content: center;
+} 
+}
+
 @media screen and (max-width: 376px) {
     .conteudo-pagamento h2 {
         font-size: 0.8rem;

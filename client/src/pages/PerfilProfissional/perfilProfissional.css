@@ -3,6 +3,30 @@
     border-radius: 10px;
     width: 60vw;
     padding: 2vw;
+
+    a {
+        width: 0;
+        display: block;
+        margin-bottom: 2vw;
+    }
+}
+
+.btn-voltar-perfil-profissional {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: var(--verde);
+    padding: 1.5vw;
+    font-size: 1vw;
+    border-radius: 100%;
+    color: white;
+    cursor: pointer;
+    transition: all .25s;
+}
+
+.btn-voltar-perfil-profissional:hover {
+    background-color: var(--azul);
 }
 
 .iniciar-conversa {
@@ -57,16 +81,60 @@
     font-size: 1.3rem;
 }
 
+.linha-separadora {
+    width: 60vw;
+    height: 5px;
+    background-color: #b1b1b1;
+    border-radius: 100vw;
+    margin: 20px 0;
+}
+
 .descricao-profissional {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
+    width: 100%;
 }
 
-.descricao-profissional .info-pessoais {
-    width: 40vw;
-    gap: 10px;
+.servicos-realizados {
+    display: flex;
+    align-items: center;
+    gap: .5vw;
 }
+
+.portifolio-profissional {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    .titulo-portifolio-profissional {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--verde);
+        color: white;
+        width: 60vw;
+        border-radius: 10px 10px 0 0;
+        font-size: 1vw;
+    }
+}
+
+.servicos-portifolio-profissional {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60vw;
+    height: 500px;
+
+    h2 {
+        color: grey;
+        margin: 25px 0;
+    }
+}
+
+/*Area das avaliacoes*/
 
 .descricao-profissional .info-pessoais .avaliacoes {
     display: flex;
@@ -74,7 +142,30 @@
     align-items: center;
 }
 
-.servicos-realizados {
+.avaliacoes-media-star {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 50px 0;
+
+    p {
+        margin: 0;
+        font-size: 1.5vw;
+        background-color: var(--verde);
+        color: white;
+        width: 100%;
+        border-radius: 100vw;
+        text-align: center;
+    }
+}
+
+.avaliacao-avaliacoes {}
+
+.avaliacao-card {}
+
+.texto-comentario-avaliacao-card {}
+
+.left-avaliacao-card {
     display: flex;
     align-items: center;
     gap: .5vw;

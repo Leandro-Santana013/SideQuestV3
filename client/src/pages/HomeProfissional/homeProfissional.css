@@ -290,3 +290,84 @@ align-items: flex-end;
     font-size: 1.1rem;
     border: 2px solid red;
 }
+
+/* Responsividade */
+
+/* Tablets em modo paisagem e dispositivos híbridos */
+@media (max-width: 1024px) {
+
+}
+
+/* Tablets em modo retrato e smartphones grandes */
+@media (max-width: 768px) {
+
+}
+
+/* Smartphones médios e tablets pequenos */
+@media (max-width: 600px) {
+
+}
+
+/* Smartphones pequenos */
+@media (max-width: 480px) {
+
+.menu-topo {
+    width: 100vw;
+}
+
+    .actions .info-action p {
+        font-size: 2.7vw;
+      } 
+    
+      .actions .info-action .action {
+        width: 30vw;
+        height: 20vw;
+      }
+
+      .actions .info-action .action p {
+        font-size: 2.7vw;
+        width: 50%;
+      }
+
+      .h1Home {
+        font-size: 4vw;
+        width: 100%;
+      }
+
+      .input-filtros input::placeholder {
+        font-size: 2.7vw;
+      }
+
+      .area-servicos {
+        width: 100vw;
+      }
+
+      .input-filtros {
+        align-items: center;
+        justify-content: space-around;
+        width: 100vw;
+      }
+
+      .filtros {
+        width: 25vw;
+        height: 7vw;
+      }
+
+      .filtros p {
+        font-size: 2.7vw;
+      }
+
+      .filtros .iconFilter {
+        font-size: 5vw;
+      }
+
+      .sem-profissionais {
+        p {
+            font-size: 2.7vw;
+        }
+    }
+
+/* Smartphones muito pequenos */
+@media (max-width: 320px) {
+
+}

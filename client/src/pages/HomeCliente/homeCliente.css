@@ -97,3 +97,37 @@ body{
   font-size: 1.5vw;
   color: var(--verde);
 }
+
+
+/* Responsividade */
+
+/* Tablets em modo paisagem e dispositivos híbridos */
+@media (max-width: 1024px) {
+
+}
+
+/* Tablets em modo retrato e smartphones grandes */
+@media (max-width: 768px) {
+
+}
+
+/* Smartphones médios e tablets pequenos */
+@media (max-width: 600px) {
+
+}
+
+/* Smartphones pequenos */
+@media (max-width: 480px) {
+  .actions .info-action p {
+    font-size: 2.7vw;
+  } 
+
+  .actions .info-action .action {
+    
+  }
+}
+
+/* Smartphones muito pequenos */
+@media (max-width: 320px) {
+
+}

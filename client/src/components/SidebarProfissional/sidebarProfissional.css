@@ -10,7 +10,6 @@
     align-items: center;
     width: 82vw;
     margin-top: 5vw;
-    
 }
 
 .connected-bar {
@@ -186,6 +185,11 @@
 }
 
 @media screen and (max-width: 1025px) {
+
+    .main-content {
+        margin-top: 9vw;
+    }
+
     .sidebarProfissa {
         display: none;
     }
