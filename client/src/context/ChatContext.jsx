@@ -91,7 +91,6 @@ export const ChatContextProvider = ({ children, user, pro }) => {
             } else{
                 const response = await getRequest('/professional/allUsers');
                 setAllUsers(response)
-
             }
                 
             }catch(error){
@@ -200,7 +199,36 @@ export const ChatContextProvider = ({ children, user, pro }) => {
         setTextMessage("");
     }, []);
 
-    
+    const markAllNotificationsAsRead = useCallback((notifications) => {
+        const mNotifications = notifications.map((n) => {
+            return {...n, isRead: true};
+        });
+
+        setNotifications(mNotifications)
+    },[]);
+
+    const markNotificationAsRead = useCallback((n, userChats, user, notifications) => {
+        const desiredChat = userChats.chats.find((chat) => {
+            const chatMembers = [user.id_cliente? user.id_cliente : user.id_profissional, n.senderId];
+            const isDesiredChat = chat?.members.every((member) => {
+                return chatMembers.includes(member);
+            });
+            console.log(isDesiredChat, "IsDesaired")
+            return isDesiredChat;
+        });
+
+
+        const mNotifications = notifications.map(el => {
+            if(n.senderId === el.senderId){
+                return {...n, isRead: true}
+            } else {
+                return el
+            }
+        });
+        updateCurrentChat(desiredChat._id)
+        console.log(desiredChat, 'desired')
+        setNotifications(mNotifications)
+    },[])
 
     return (
         <ChatContext.Provider
@@ -221,6 +249,8 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 onlineUsers,
                 allUsers,
                 notifications,
+                markAllNotificationsAsRead,
+                markNotificationAsRead,
             }}
         >
             {children}
