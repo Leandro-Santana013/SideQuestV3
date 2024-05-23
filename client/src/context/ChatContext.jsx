@@ -208,27 +208,70 @@ export const ChatContextProvider = ({ children, user, pro }) => {
     },[]);
 
     const markNotificationAsRead = useCallback((n, userChats, user, notifications) => {
+
+        let chatMembers
         const desiredChat = userChats.chats.find((chat) => {
-            const chatMembers = [user.id_cliente? user.id_cliente : user.id_profissional, n.senderId];
-            const isDesiredChat = chat?.members.every((member) => {
-                return chatMembers.includes(member);
+            chatMembers = [user.id_cliente ? user.id_cliente : user.id_profissional, n.senderId];
+            const isDesiredChat = chat.members.some((member) => {
+                return chatMembers.includes(member.toString()); // Convertendo para string para garantir a comparação correta
             });
-            console.log(isDesiredChat, "IsDesaired")
             return isDesiredChat;
         });
 
+        console.log(chatMembers, "chatMembers")
+        let infoProfissional, infoCliente
+        // Se o chat desejado foi encontrado
+        if (desiredChat) {
+            // Extraia as informações do cliente
+            console.log("bisteca", userChats.infoProfissional)
+            if(user.id_cliente){
+            infoProfissional =userChats.infoProfissional.find((profissional) => {
+                // Convertendo todos os IDs para strings para garantir a comparação correta
+                const memberIds = chatMembers.map(member => member.toString());
+                return memberIds.includes(profissional.id_profissional.toString());
+            })
+        } 
 
+        if(pro.id_profissional){
+            infoCliente =userChats.infoCliente.find((cliente) => {
+                // Convertendo todos os IDs para strings para garantir a comparação correta
+                const memberIds = chatMembers.map(member => member.toString());
+                return memberIds.includes(cliente.id_cliente.toString());
+            })
+        }
+        } else {
+            console.log("Chat desejado não encontrado.");
+        }
+
+        // Atualize as notificações
         const mNotifications = notifications.map(el => {
-            if(n.senderId === el.senderId){
-                return {...n, isRead: true}
+            if (n.senderId === el.senderId) {
+                return { ...n, isRead: true };
             } else {
-                return el
+                return el;
             }
         });
-        updateCurrentChat(desiredChat._id)
-        console.log(desiredChat, 'desired')
+        updateCurrentChat(desiredChat, user.id_cliente? infoProfissional : infoCliente)
         setNotifications(mNotifications)
     },[])
+
+    const markThisNotificationAsRead = useCallback((thisUserNotification, notifications) => {
+    const mNotifications = notifications.map((el) => {
+        let notification;
+
+        thisUserNotification.forEach((n) => {
+            if(n.senderId === el.senderId){
+                notification = {...n, isRead: true};
+            } else {
+                notification = el;
+            }
+        })
+
+        return notification
+
+    })
+    setNotifications(mNotifications);
+}, [])
 
     return (
         <ChatContext.Provider
@@ -251,6 +294,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 notifications,
                 markAllNotificationsAsRead,
                 markNotificationAsRead,
+                markThisNotificationAsRead,
             }}
         >
             {children}

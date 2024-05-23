@@ -6,12 +6,13 @@ import { UserContext } from "../../context/UserContext";
 import imgPerfil from "../../assets/icone-perfil.png";
 import moment from 'moment';
 import "./userChats.css";
+import { unreadNotificationsFunc } from "../../utils/unreadNotifications";
 
 export const UserChat = ({ chat }) => { 
     const { pro } = useContext(ProfessionalContext);
     const { user } = useContext(UserContext);
     const { recipient, error, recipientInfo, userType } = useRecipient(chat, user ? 'user' : 'pro');
-    const { onlineUsers, updateChatRecipientState, updateCurrentChat,} = useContext(ChatContext);
+    const { onlineUsers, updateChatRecipientState, updateCurrentChat, notifications, markThisNotificationAsRead} = useContext(ChatContext);
 
     if (error) {
         return <div>Error: {error.message}</div>;
@@ -26,10 +27,18 @@ export const UserChat = ({ chat }) => {
         }
     };
 
+
+
     return (
         <>
             {recipient && recipient.length > 0 && recipient.map((recipientItem, index) => {
                 let chatItem, infoCliente, infoProfissional;
+        
+                const unreadNotifications = unreadNotificationsFunc(notifications)
+    const thisUserNotification = unreadNotifications.filter(
+        n => n.senderId == user? recipientItem?.id_profissional : recipientItem?.id_cliente 
+    )
+  
 
                 if (userType === 'user') {
                     chatItem = chat.chats[index];
@@ -46,7 +55,12 @@ export const UserChat = ({ chat }) => {
                 
                 const isOnline = userType === 'user' ? isOnlinePro : isOnlineUser;
                 return (
-                    <div className="message-box" key={index} onClick={() => handleChatClick(chatItem, recipientItem)}>
+                    <div className="message-box" key={index} onClick={() => {
+                        handleChatClick(chatItem, recipientItem);
+                        if(thisUserNotification?.length !== 0){
+                            markThisNotificationAsRead(thisUserNotification, notifications)
+                        };
+                      }}>
                         <div className="foto-name">
                         <img className="foto-perfil" src={userType === 'pro' ? infoCliente.img_cliente ?  infoCliente.img_cliente: imgPerfil : null || user ? infoProfissional.nm_img_profissional? infoProfissional.nm_img_profissional : imgPerfil : null} />
                         <div className="name-message">
@@ -56,7 +70,7 @@ export const UserChat = ({ chat }) => {
                         </div>
                         <div className="text-chat-list">{chatItem.text}</div> {/* Assuming there's a text property in chat item */}
                         <div className="date-message">{moment(chatItem.updatedAt).calendar()}</div> {/* Use chatItem.date or something similar */}
-                
+                <div className={thisUserNotification?.length > 0 ? "this-user-notifications" : ""}>{thisUserNotification?.length > 0 ? thisUserNotification?.length : ""}</div>
                     </div>
                 );
             })}

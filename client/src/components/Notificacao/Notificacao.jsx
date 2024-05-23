@@ -53,7 +53,7 @@ let sender
         {modifiedNotifications?.length === 0 ? <span className="notification">Sem notificações por em quanto...</span>: null}
         {modifiedNotifications && modifiedNotifications.map((n, index) => {
             return ( 
-                <div className= {n.isRead ? 'notification' : 'notification not-read'} key={index} onClick={() => markNotificationAsRead(n, userChats, user? user : pro, notifications)}>
+                    <div className= {n.isRead ? 'notification' : 'notification not-read'} key={index} onClick={() => {markNotificationAsRead(n, userChats, user? user : pro, notifications); setIsOpen(false)}}>
                     <span>{`${n.senderName} te enviou uma nova menssagem`}</span>
                     <span className="notification-time ">{moment(n.date).calendar()}</span>
                 </div>

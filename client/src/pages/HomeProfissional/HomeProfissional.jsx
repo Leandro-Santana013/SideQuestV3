@@ -22,7 +22,7 @@ const HomeProfissionais = () => {
     };
     return (
         <>
-            <InfoincPro></InfoincPro>
+             <InfoincPro/> 
             <Header />
             <SidebarProfissional />
             <div className="content-midia">

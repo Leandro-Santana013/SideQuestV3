@@ -39,7 +39,7 @@ export const ChatBox = () => {
       return <div className='container-nenhum-chat-selecionado'><p className='nenhum-chat-selecionado'>Clique em algum chat para iniciar a conversa!</p></div>;
     }
     const isOnlinePro = onlineUsers?.some((user) => user?.userID == infoChat.id_profissional && user.type == "pro");
-  const isOnlineUser = onlineUsers?.some((user) => user?.userID ==infoChat.id_cliente && user.type == "user");
+    const isOnlineUser = onlineUsers?.some((user) => user?.userID ==infoChat.id_cliente && user.type == "user");
   if (isMessagesLoading) {
     return <p>Carregando mensagens...</p>;
   }
