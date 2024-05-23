@@ -25,7 +25,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
     const [onlineUsers, setOnlineUsers] = useState(null)
     const [recipientOnChat, setRecipientOnChat] = useState(null)
     const [notifications, setNotifications] = useState([])
-    console.log(notifications, "notifications")
+
     useEffect(() => {
         const newSocket = io('http://localhost:3000')
         setSocket(newSocket)
@@ -66,7 +66,6 @@ export const ChatContextProvider = ({ children, user, pro }) => {
 
        socket.on("getNotification", res => {
         const isChatOpen = currentChat?.members.some(id => id === res.senderId)
-
         if(isChatOpen){
             setNotifications(prev => [{...res, isRead: true}, ...prev])
         }else{
@@ -78,7 +77,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
         socket.off("getMessage");
         socket.off("getNotifications");
     }
-    }, [socket, currentChat,newMessage,])
+    }, [socket, currentChat, newMessage, notifications])
 
     const [allUsers, setAllUsers] = useState([])
     
@@ -98,7 +97,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
             }
             }
             getUsers()
-    }, [])
+    }, [notifications])
 
     const updateChatRecipientState = useCallback((info) => {
         setRecipientOnChat(info);
@@ -126,20 +125,17 @@ export const ChatContextProvider = ({ children, user, pro }) => {
 
     const [infoChat, setInfoChat] = useState()
     const updateCurrentChat = useCallback((chat, chatItem) => {
+        console.log(chat, "current")
         setCurrentChat(chat)
         setInfoChat(chatItem)
     }, [])
 
     const createChat = useCallback(async (id_cliente, id_profissional) => {
-        console.log(id_cliente, id_profissional)
         try {
             // Swap IDs if 'pro' is not null
             if (pro !== null) {
-                console.log("Professional");
                 if (Object.keys(pro).length === 0) {
-                    console.log("profissional sem informaçoes");
                 } else {
-                              console.log("Swapping IDs");
                     [id_cliente, id_profissional] = [id_profissional, id_cliente];
                 }
             } else {
@@ -217,13 +213,10 @@ export const ChatContextProvider = ({ children, user, pro }) => {
             });
             return isDesiredChat;
         });
-
-        console.log(chatMembers, "chatMembers")
         let infoProfissional, infoCliente
         // Se o chat desejado foi encontrado
         if (desiredChat) {
             // Extraia as informações do cliente
-            console.log("bisteca", userChats.infoProfissional)
             if(user.id_cliente){
             infoProfissional =userChats.infoProfissional.find((profissional) => {
                 // Convertendo todos os IDs para strings para garantir a comparação correta
@@ -232,7 +225,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
             })
         } 
 
-        if(pro.id_profissional){
+        if(user.id_profissional){
             infoCliente =userChats.infoCliente.find((cliente) => {
                 // Convertendo todos os IDs para strings para garantir a comparação correta
                 const memberIds = chatMembers.map(member => member.toString());
@@ -251,6 +244,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
                 return el;
             }
         });
+
         updateCurrentChat(desiredChat, user.id_cliente? infoProfissional : infoCliente)
         setNotifications(mNotifications)
     },[])

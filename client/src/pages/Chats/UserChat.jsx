@@ -7,7 +7,7 @@ import imgPerfil from "../../assets/icone-perfil.png";
 import moment from 'moment';
 import "./userChats.css";
 import { unreadNotificationsFunc } from "../../utils/unreadNotifications";
-
+import { useLatestMessage } from "../../hooks/useLatestMessage";
 export const UserChat = ({ chat }) => { 
     const { pro } = useContext(ProfessionalContext);
     const { user } = useContext(UserContext);
@@ -27,7 +27,28 @@ export const UserChat = ({ chat }) => {
         }
     };
 
+    let chatItem1
 
+    {recipient && recipient.length > 0 && recipient.map((index) => {
+        if (userType === 'user') {
+            chatItem1 = chat.chats[index];
+        } else if (userType === 'pro') {
+            chatItem1 = chat.chats[index];
+        }})
+
+    }
+
+const {latestMessage} = useLatestMessage(chatItem1);
+
+const truncateText = (text) => {
+ let shortText = text.substring(0, 20)
+
+ if( text.length > 20){
+    shortText = shortText + '...'
+ }
+
+ return shortText;
+}
 
     return (
         <>
@@ -49,33 +70,37 @@ export const UserChat = ({ chat }) => {
                     infoCliente = chat.infoCliente[index];
                     infoProfissional = chat.infoProfissional;
                 }
-            
+                
+                
                 const isOnlinePro = onlineUsers?.some((onlineUser) => onlineUser.userID === infoProfissional.id_profissional && onlineUser.type === "pro");
                 const isOnlineUser = onlineUsers?.some((onlineUser) => onlineUser.userID === infoCliente.id_cliente && onlineUser.type === "user");
                 
                 const isOnline = userType === 'user' ? isOnlinePro : isOnlineUser;
                 return (
+                    
                     <div className="message-box" key={index} onClick={() => {
                         handleChatClick(chatItem, recipientItem);
                         if(thisUserNotification?.length !== 0){
                             markThisNotificationAsRead(thisUserNotification, notifications)
                         };
                       }}>
+    
                         <div className="foto-name">
                         <img className="foto-perfil" src={userType === 'pro' ? infoCliente.img_cliente ?  infoCliente.img_cliente: imgPerfil : null || user ? infoProfissional.nm_img_profissional? infoProfissional.nm_img_profissional : imgPerfil : null} />
+                        <div className={isOnline ? "user-online" : "user-offline"}></div>   
                         <div className="name-message">
                         <div className="chatName">{userType === 'pro' ? infoCliente.nm_cliente : infoProfissional.nm_profissional}</div>
-                        <p className="last-message">oi</p>
+                        <p className="last-message">{latestMessage?.text && (
+                            <span>{truncateText(latestMessage?.text)}</span>
+                        )}</p>
                         </div>
                         </div>
                         <div className="text-chat-list">{chatItem.text}</div> {/* Assuming there's a text property in chat item */}
-                        <div className="date-message">{moment(chatItem.updatedAt).calendar()}</div> {/* Use chatItem.date or something similar */}
+                        <div className="date-message">{moment(latestMessage?.createdAt).calendar()}</div> {/* Use chatItem.date or something similar */}
                 <div className={thisUserNotification?.length > 0 ? "this-user-notifications" : ""}>{thisUserNotification?.length > 0 ? thisUserNotification?.length : ""}</div>
                     </div>
                 );
             })}
         </>
     );
-
-    //<div className={isOnline ? "user-online" : "user-offline"}></div>
 };
