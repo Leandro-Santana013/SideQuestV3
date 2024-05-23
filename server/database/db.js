@@ -199,36 +199,36 @@ const postagensServico = [
 ];
 
 const confirmacoesServico = [
-    [1, 1, 100],
-    [2, 2, 150],
-    [3, 3, 200],
-    [4, 4, 120],
-    [5, 5, 80],
-    [6, 6, 90],
-    [7, 7, 200],
-    [8, 8, 300],
-    [9, 9, 150],
-    [10, 10, 100],
-    [11, 11, 180],
-    [12, 12, 220],
-    [13, 13, 250],
-    [14, 14, 130],
-    [15, 15, 170],
-    [16, 16, 110],
-    [17, 17, 160],
-    [18, 18, 210],
-    [19, 19, 130],
-    [20, 20, 90],
-    [21, 1, 100],
-    [22, 2, 210],
-    [23, 3, 320],
-    [24, 4, 160],
-    [25, 5, 110],
-    [26, 6, 190],
-    [27, 7, 230],
-    [28, 8, 260],
-    [29, 9, 140],
-    [30, 10, 180]
+    [1, 1],
+    [2, 2],
+    [3, 3],
+    [4, 4],
+    [5, 5],
+    [6, 6],
+    [7, 7],
+    [8, 8],
+    [9, 9],
+    [10, 10],
+    [11, 11],
+    [12, 12],
+    [13, 13],
+    [14, 14],
+    [15, 15],
+    [16, 16],
+    [17, 17],
+    [18, 18],
+    [19, 19],
+    [20, 20],
+    [21, 1],
+    [22, 2],
+    [23, 3],
+    [24, 4],
+    [25, 5],
+    [26, 6],
+    [27, 7],
+    [28, 8],
+    [29, 9],
+    [30, 10]
 ];
  
 const terminosServico = [
@@ -382,7 +382,7 @@ async function inserirPostagensServico() {
 async function inserirConfirmacoesServico() {
     try {
         for (const confirmacao of confirmacoesServico) {
-            const query = 'INSERT INTO tb_confirmacaoServico (id_postagemServico, id_profissional, vlr_servico) VALUES (?, ?, ?)';
+            const query = 'INSERT INTO tb_confirmacaoServico (id_postagemServico, id_profissional) VALUES (?, ?)';
             const valores = [...confirmacao];
             await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT });
             console.log(`Confirmação de serviço ${confirmacao[0]} inserida com sucesso.`);

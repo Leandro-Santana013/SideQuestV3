@@ -1,18 +1,20 @@
 const {
   ModelProfissional,
   ModelPostagemServico,
-  ModelCliente
+  ModelCliente,
+  ModelCategoria,
+  ModelProfissionalCategoria,
+  ModelEnderecoProfissional
 } = require("../../models/index");
 const { Model, Op, Sequelize } = require("sequelize");
 const { raw } = require("mysql2");
 
-module.exports = {
+  module.exports = {
   bindCookieBypkProfissonal: async (req, res) => {
     const { cd_emailProfissional } = req.params;
     return ModelProfissional.findOne({
       where: {
         cd_emailProfissional: cd_emailProfissional,
-        
       },
       
     });
@@ -183,6 +185,57 @@ findService: async (req, res) => {
         },
         { where: { id_profissional: id_profissional } }
       );
+    },
+
+    updatePro: async (req, res) => {
+      const { id_profissional, nmr_telefoneProfissional, sg_sexoProfissional, qt_idadeProfissional } = req.params;
+      return ModelProfissional.update(
+        {
+          nmr_telefoneProfissional:nmr_telefoneProfissional,
+          sg_sexoProfissional:sg_sexoProfissional,
+          qt_idadeProfissional: qt_idadeProfissional
+        }, 
+        { where: { id_profissional: id_profissional } }
+      );
+    },
+    selectCat: async (req, res) => {
+      const {ds_categoria} = req.params
+      return ModelCategoria.findAll({
+        attributes: ["id_categoria"],
+        where:{ds_categoria: ds_categoria}
+      })
+    },
+    createcatPro: async (req, res) => {
+      const {id_profissional, ds_categoria} = req.params
+      return ModelProfissionalCategoria.create({
+        id_profissional:id_profissional,
+        ds_categoria:ds_categoria
+      })
+    },
+    createadresspro: async (req, res) => {
+      const {
+        id_profissional,
+        nm_logradouro,
+        cd_cep,
+        id_cidade,
+        nm_bairro,
+        nmr_casa,
+        end_principal
+      } = req.params;
+      try {
+        return ModelEnderecoProfissional.create({
+          id_profissional: id_profissional,
+          id_cidade: id_cidade,
+          nm_logradouro: nm_logradouro,
+          cd_cep: cd_cep,
+          nm_bairro: nm_bairro,
+          nmr_casa: nmr_casa,
+          end_principal: end_principal
+        });
+      } catch (error) {
+        console.error("Erro ao criar ou encontrar endereço:", error);
+        throw error;
+      }
     },
 
 

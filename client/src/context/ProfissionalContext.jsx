@@ -175,7 +175,8 @@ export const ProfessionalContextProvider = ({ children }) => {
 
   const [cepError, setCepError] = useState(false);
   const concluirCad = useCallback(async (e) => {
-    console.log(infoConfirm)
+    
+    if(pro) infoConfirm.id_profissional = pro.id_profissional
     const response = await postRequest("/professional/concluirCad", infoConfirm)
     if (response.error) {
       setConclusioncadError(response.error);
@@ -254,7 +255,8 @@ export const ProfessionalContextProvider = ({ children }) => {
         concluirCad,
         categorias,
         setCategorias,
-        fetchDataConcluir
+        fetchDataConcluir,
+        cepError
       }}
     >
       {children}
