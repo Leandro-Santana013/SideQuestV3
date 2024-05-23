@@ -245,7 +245,13 @@ const calcularDiferencaTempo = (dataPostagem) => {
 };
 
 exports.cardservico = async (req, res) => {
-  const populationService = await controller_Pro.findServices();
+  const { id_profissional } = req.params
+  console.log(id_profissional)
+  const populationService = await controller_Pro.findServices({
+    params:{
+      id_profissional: id_profissional
+    }
+});
   const servicosComDiferencaTempo = populationService.map((servico) => ({
     ...servico,
     diferencaTempo: calcularDiferencaTempo(servico.tm_postagem),
@@ -367,6 +373,8 @@ exports.concluirCad = async (req, res) => {
     telefone,
     uf,)
   try {
+
+
     const pro = await controller_Pro.infoprofissional({
       params: { id_profissional: id_profissional },
     });
@@ -394,41 +402,55 @@ exports.concluirCad = async (req, res) => {
       }
     }) 
 
+    console.log("first updated", updatedPro)
+
     for (const categoria of categorias) {
       const { ds_categoria } = categoria;
 
       const cat = await controller_Pro.selectCat({
         params: {ds_categoria:ds_categoria}
       })
-      console.log("cat", cat)
+      console.log("cat", cat )
       
       if(cat){
         const insertCatPro = await controller_Pro.createcatPro({
-          params: {id_profissional: id_profissional,  cat }
+          params: {id_profissional: id_profissional, id_categoria: cat[0].id_categoria}
         })
-      }
+        console.log(insertCatPro)
+      } else console.log("erro")
+       
     }
-    const createAdressPro = await controller_Pro.createcatPro({
 
-    })
-    const cdCidade = await controller_User.selectCidadeAdress({
+
+    const cdCidade = await controller_Pro.selectCidadeAdress({
       params: { nm_cidade: localidade, sg_estado: uf },
     });
 
+    console.log(cdCidade, "cd cidade")
 
-    const enderecoInstance = await controller_User.CreateadressService({
+
+    const enderecoInstance = await controller_Pro.createadresspro({
       params: {
-        id_cliente: idCliente,
+        id_profissional: id_profissional,
         id_cidade: cdCidade.id_cidade,
         nm_logradouro: logradouro,
         cd_cep: cep,
         nm_bairro: bairro,
-        nmr_casa: nmrResidencia,
+        nmr_casa: numeroResidencia,
+        txt_complemento: complemento,	
+        end_principal: true
       },
     });
 
 
 
+    console.log("888", enderecoInstance)
+
+    const Professional = await controller_Pro.infoprofissional({
+      params: { id_profissional: id_profissional },
+    });
+    console.log(Professional)
+    return res.status(200).json(Professional);
   } catch (error) {
     console.log(error);
   }

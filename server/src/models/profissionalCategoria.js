@@ -3,6 +3,12 @@ const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 const { connectionDataBase } = require('../../database/db') // Importe a instância de conexão com o banco de dados
 
 const ModelProfissionalCategoria = connectionDataBase.define('tb_profissional_categoria', {
+    id_categoriaEscolhida: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false,
+    },
     id_profissional: {
         type: DataTypes.INTEGER.UNSIGNED,
         primaryKey: true,

@@ -115,7 +115,7 @@ export const ProfessionalContextProvider = ({ children }) => {
     const fetchDataFromBackend = async () => {
 
       try {
-        const response = await getRequest("/professional/servicoscard");
+        const response = await getRequest("/professional/servicoscard", pro.id_profissional);
         console.log(response);
         setDadosIniciais(response);
 
@@ -181,6 +181,7 @@ export const ProfessionalContextProvider = ({ children }) => {
     if (response.error) {
       setConclusioncadError(response.error);
     } else {
+      console.log(response.user)
       setModal(modal + 1)
       localStorage.setItem("pro", JSON.stringify(response.user));
       console.log(locationuser)

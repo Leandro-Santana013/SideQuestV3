@@ -4,7 +4,8 @@ const {
   ModelCliente,
   ModelCategoria,
   ModelProfissionalCategoria,
-  ModelEnderecoProfissional
+  ModelEnderecoProfissional,
+  ModelCidade
 } = require("../../models/index");
 const { Model, Op, Sequelize } = require("sequelize");
 const { raw } = require("mysql2");
@@ -202,14 +203,16 @@ findService: async (req, res) => {
       const {ds_categoria} = req.params
       return ModelCategoria.findAll({
         attributes: ["id_categoria"],
-        where:{ds_categoria: ds_categoria}
+        where:{ds_categoria: ds_categoria},
+        raw:true
       })
     },
     createcatPro: async (req, res) => {
-      const {id_profissional, ds_categoria} = req.params
+      const {id_profissional, id_categoria} = req.params
       return ModelProfissionalCategoria.create({
         id_profissional:id_profissional,
-        ds_categoria:ds_categoria
+        id_categoria: id_categoria,
+      raw: true
       })
     },
     createadresspro: async (req, res) => {
@@ -220,7 +223,8 @@ findService: async (req, res) => {
         id_cidade,
         nm_bairro,
         nmr_casa,
-        end_principal
+        end_principal,
+        txt_complemento,
       } = req.params;
       try {
         return ModelEnderecoProfissional.create({
@@ -230,12 +234,25 @@ findService: async (req, res) => {
           cd_cep: cd_cep,
           nm_bairro: nm_bairro,
           nmr_casa: nmr_casa,
-          end_principal: end_principal
+          end_principal: end_principal,
+          txt_complemento: txt_complemento
         });
       } catch (error) {
         console.error("Erro ao criar ou encontrar endereço:", error);
         throw error;
       }
+    },
+
+    selectCidadeAdress: async (req, res) => {
+      const { nm_cidade, sg_estado } = req.params;
+      return ModelCidade.findOne({
+        attributes: ["id_cidade"],
+        where: {
+          nm_cidade: nm_cidade,
+          sg_estado: sg_estado,
+        },
+        raw: true,
+      });
     },
 
 

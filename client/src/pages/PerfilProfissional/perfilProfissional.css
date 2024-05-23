@@ -221,4 +221,8 @@
     span {
         color: white;
     }
+
+    img {
+        width: 3vw;
+    }
 }
