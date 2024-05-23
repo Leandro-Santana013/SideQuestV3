@@ -76,10 +76,10 @@ const PerfilProfissional = () => {
                                 <div className="perfil-nome">
                                     <img src={profissional && profissional.img_profissional ? profissional.img_profissional : iconeperfil} alt="icone de perfil" />
                                     <span className={
-                                        onlineUsers?.some((user) => user?.userID == profissional[0].id_profissional && user.type == "pro") ?
+                                        onlineUsers?.some((user) => user?.userID == profissional[0][0].id_profissional && user.type == "pro") ?
                                             "user-online" : ""}></span>
                                     <div className="nome-profissao">
-                                        <h1>{profissional[0].nm_profissional}</h1>
+                                        <h1>{profissional[0][0].nm_profissional}</h1>
                                         <div className="profissoes-profissional">
                                             <p>Profissões:</p>
                                             <p>Eletricista</p>
@@ -103,11 +103,11 @@ const PerfilProfissional = () => {
 
                                                 <div className="sobremim-profissional">
                                                     <h2>Sobre mim</h2>
-                                                    <p>{profissional[0].ds_biografia}</p>
+                                                    <p>{profissional[0][0].ds_biografia}</p>
                                                 </div>
                                                 <div className="servicos-realizados">
                                                     <img src={certificado} alt="certificado" />
-                                                    <p>Serviços Realizados: {profissional[0].num_servicos_terminados}</p>
+                                                    <p>Serviços Realizados: {profissional[0][0].num_servicos_terminados}</p>
                                                 </div>
                                                 <div className="portifolio-profissional">
                                                     <div className="titulo-portifolio-profissional">
@@ -129,12 +129,12 @@ const PerfilProfissional = () => {
                                                             {[...Array(5)].map((_, index) => (
                                                                 <RiStarFill
                                                                     key={index}
-                                                                    className={`ri-star-s-fill ${index < profissional[0].media_avaliacoes ? "ava" : ""}`}
+                                                                    className={`ri-star-s-fill ${index < profissional[0][0].media_avaliacoes ? "ava" : ""}`}
                                                                     style={{ fontSize: '3vw' }}
                                                                 ></RiStarFill>
                                                             ))}
                                                         </div>
-                                                        <p>{Number(profissional[0].media_avaliacoes).toFixed(1)}</p>
+                                                        <p>{Number(profissional[0][0].media_avaliacoes).toFixed(1)}</p>
                                                     </div>
                                                 </div>
                                                 <div className="avaliacao-avaliacoes">

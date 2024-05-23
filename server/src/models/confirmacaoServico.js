@@ -27,11 +27,6 @@ const ModelConfirmacaoServico = connectionDataBase.define('tb_confirmacaoServico
             key:'id_profissional' 
         }
     },
-
-    vlr_servico: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
 },
 _padraoTableDBExistence('tb_confirmacaoServico')
 
