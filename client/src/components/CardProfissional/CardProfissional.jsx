@@ -87,8 +87,8 @@ export const CardProfissional = () => {
             return false;
           }
         } else return false;
-        
-        
+
+
 
         if (filtrosSelecionados.includes('profissionaisFemininas') && profissional.sg_sexoProfissional !== 'F') {
           return false;
@@ -108,27 +108,36 @@ export const CardProfissional = () => {
         }
       })
       .map(profissional => (
-        <Link to={`/homeCliente/perfilProfissional/${profissional.id_profissional}`} key={profissional.id_profissional}>
-          <div className="card-profissional">
-            <div className="tamplate-img">
-              <img src={imgPerfil} alt="Imagem de perfil" />
-              <div className="perfil-avaliado">
-                <h2>{profissional.nm_profissional}</h2>
-                <div className="stars">
-                  {[...Array(5)].map((_, index) => (
-                    <RiStarFill
-                      key={index}
-                      className={`ri-star-s-fill ${index < profissional.media_avaliacoes ? "ava" : ""}`}
-                    ></RiStarFill>
-                  ))}
-                </div>
+
+        <div className="card-profissional">
+          <div className="tamplate-img">
+            <img src={imgPerfil} alt="Imagem de perfil" />
+            <div className="perfil-avaliado">
+              <h2>{profissional.nm_profissional}</h2>
+              <div className="stars">
+                {[...Array(5)].map((_, index) => (
+                  <RiStarFill
+                    key={index}
+                    className={`ri-star-s-fill ${index < profissional.media_avaliacoes ? "ava" : ""}`}
+                  ></RiStarFill>
+                ))}
               </div>
             </div>
-            <div className="desc-cliente">
-              <p className="desc">{profissional.ds_biografia ? profissional.ds_biografia : "Não possui descrição"}</p>
-            </div>
           </div>
-        </Link>
+          <div className="profissoes-card-profissional">
+            <p>Eletricista</p>
+            <p>Hidráulica</p>
+          </div>
+          <div className="desc-cliente">
+            <p className="desc">{profissional.ds_biografia ? profissional.ds_biografia : "Não possui descrição"}</p>
+          </div>
+          <div className="bottom-card-profissional"> 
+            <Link to={`/homeCliente/perfilProfissional/${profissional.id_profissional}`} key={profissional.id_profissional}>
+              <button className="btn-ver-mais">Ver mais</button>
+            </Link>
+          </div>
+        </div>
+
       ));
   };
 
