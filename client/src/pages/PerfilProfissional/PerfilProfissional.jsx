@@ -88,7 +88,7 @@ const PerfilProfissional = () => {
                                     </div>
                                 </div>
                                 <div className="menu-perfil">
-                                    <ul>
+                                    <ul style={{cursor: 'pointer'}}>
                                         <li onClick={() => handleForm(1)} style={{ color: typeForm === 1 ? "var(--verde)" : "inherit" }}>Sobre</li>
                                         <li onClick={() => { handleForm(2) }} style={{ color: typeForm === 2 ? "var(--verde)" : "inherit" }} >Avaliações</li>
                                     </ul>
@@ -101,9 +101,9 @@ const PerfilProfissional = () => {
                                         typeForm === 1 && (
                                             <>
 
-                                                <div className="sobremim">
+                                                <div className="sobremim-profissional">
                                                     <h2>Sobre mim</h2>
-                                                    <p>{profissional[0].ds_biografia}.</p>
+                                                    <p>{profissional[0].ds_biografia}</p>
                                                 </div>
                                                 <div className="servicos-realizados">
                                                     <img src={certificado} alt="certificado" />
@@ -125,28 +125,31 @@ const PerfilProfissional = () => {
                                                 <div className="avaliacoes">
                                                     {/* <span>{profissional[0].num_avaliacoes}</span> */}
                                                     <div className="avaliacoes-media-star">
-                                                        <p>{Number(profissional[0].media_avaliacoes).toFixed(1)}</p>
                                                         <div className="stars">
                                                             {[...Array(5)].map((_, index) => (
                                                                 <RiStarFill
                                                                     key={index}
                                                                     className={`ri-star-s-fill ${index < profissional[0].media_avaliacoes ? "ava" : ""}`}
-                                                                    style={{fontSize: '3vw'}}
+                                                                    style={{ fontSize: '3vw' }}
                                                                 ></RiStarFill>
                                                             ))}
                                                         </div>
+                                                        <p>{Number(profissional[0].media_avaliacoes).toFixed(1)}</p>
                                                     </div>
                                                 </div>
                                                 <div className="avaliacao-avaliacoes">
-                                                        {profissional[2].map((avaliacao, index) => (
-                                                            <div key={index} className="avaliacao-card">
-                                                                <div className="texto-comentario-avaliacao-card"></div>
-                                                                <div className="left-avaliacao-card">
-                                                                    <img src={avaliacao.cliente_imagem ? avaliacao.cliente_imagem : iconeperfil} alt="Imagem de perfil do cliente" />
-                                                                    <span>{avaliacao.cliente_nome}</span>
-                                                                </div>
+                                                    {profissional[2].map((avaliacao, index) => (
+                                                        <div key={index} className="avaliacao-card">
+                                                            <p>{avaliacao.cliente_nome} avaliou com <span>{avaliacao.avaliacao_numero} estrelas</span></p>
+                                                            <div className="texto-comentario-avaliacao-card">
+                                                                <p>{avaliacao.avaliacao_comentario}</p>
                                                             </div>
-                                                        ))}                                                
+                                                            <div className="bottom-avaliacao-card">
+                                                                <img src={avaliacao.cliente_imagem ? avaliacao.cliente_imagem : iconeperfil} alt="Imagem de perfil do cliente" />
+                                                                <span>{avaliacao.cliente_nome}</span>
+                                                            </div>
+                                                        </div>
+                                                    ))}
                                                 </div>
                                             </>
                                         )}
@@ -159,24 +162,24 @@ const PerfilProfissional = () => {
         </>
     );
 
-//     avaliacao_comentario
-// : 
-// "Excelente serviço, profissional muito experiente."
-// avaliacao_id
-// : 
-// 11
-// avaliacao_numero
-// : 
-// 5
-// cliente_id
-// : 
-// 11
-// cliente_imagem
-// : 
-// null
-// cliente_nome
-// : 
-// "Gustavo Oliveira"
+    //     avaliacao_comentario
+    // : 
+    // "Excelente serviço, profissional muito experiente."
+    // avaliacao_id
+    // : 
+    // 11
+    // avaliacao_numero
+    // : 
+    // 5
+    // cliente_id
+    // : 
+    // 11
+    // cliente_imagem
+    // : 
+    // null
+    // cliente_nome
+    // : 
+    // "Gustavo Oliveira"
 }
 
 export default PerfilProfissional;
