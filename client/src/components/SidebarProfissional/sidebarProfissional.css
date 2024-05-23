@@ -186,6 +186,11 @@
 
 @media screen and (max-width: 1025px) {
 
+
+    
+.sidebarProfissional {
+    display: none;
+}
     .main-content {
         margin-top: 9vw;
     }

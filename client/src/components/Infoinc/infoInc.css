@@ -161,6 +161,17 @@
             width: 30vw;
             height: 4vw;
         }
+
+        .grid-2x2-card-conclua-registro {
+            gap: 2vw;
+            .padrao-input-card-conclua-registro {
+                width: 34vw;
+                padding: 10px;
+            }
+            .padrao-input-card-conclua-registro::placeholder {
+                font-size: 2vw;
+            }
+    }
     }
 
     .bottom-card-conclua-registro {
@@ -209,6 +220,17 @@
             width: 40vw;
             padding: 18px;
         }
+
+        .grid-2x2-card-conclua-registro {
+            gap: 2vw;
+            .padrao-input-card-conclua-registro {
+                width: 34vw;
+                padding: 10px;
+            }
+            .padrao-input-card-conclua-registro::placeholder {
+                font-size: 3.5vw;
+            }
+    }
     }
 
     .bottom-card-conclua-registro {
@@ -257,6 +279,16 @@
             width: 40vw;
             padding: 18px;
         }
+        .grid-2x2-card-conclua-registro {
+            gap: 2vw;
+            .padrao-input-card-conclua-registro {
+                width: 34vw;
+                padding: 10px;
+            }
+            .padrao-input-card-conclua-registro::placeholder {
+                font-size: 2.7vw;
+            }
+        }
     }
 
     .bottom-card-conclua-registro {
@@ -282,6 +314,8 @@
     .inputs-card-conclua-registro {
         font-size: 3.5vw;
     }
+
+
 }
 
 /* Smartphones pequenos */
@@ -317,7 +351,18 @@
         .select{
             font-size: 2.5vw;
         }
+
+        .grid-2x2-card-conclua-registro {
+            gap: 2vw;
+            .padrao-input-card-conclua-registro {
+                width: 34vw;
+                padding: 10px;
+            }
+            .padrao-input-card-conclua-registro::placeholder {
+                font-size: 3.5vw;
+            }
     }
+}
 
     .bottom-card-conclua-registro {
         p {

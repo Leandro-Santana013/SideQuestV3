@@ -295,17 +295,220 @@ align-items: flex-end;
 
 /* Tablets em modo paisagem e dispositivos híbridos */
 @media (max-width: 1024px) {
+    .menu-topo {
+        width: 100vw;
+    }
+    
+        .actions .info-action p {
+            font-size: 1.7vw;
+          } 
+        
+          .actions .info-action .action {
+            width: 30vw;
+            height: 20vw;
+            display: flex;
+            justify-content: center;
+          }
+    
+          .actions .info-action .action p {
+            font-size: 1.7vw;
+            width: 50%;
+          }
 
+          .actions .info-action .action img {
+            width: 12vw;
+            height: 11.5vw;
+          }
+    
+          .h1Home {
+            font-size: 3vw;
+            width: 70%;
+          }
+    
+          .input-filtros input::placeholder {
+            font-size: 1.7vw;
+          }
+    
+          .input-filtros input {
+            font-size: 1.7vw;
+            height: 3.5vw;
+          }
+
+          .content-input-busca .btn {
+            font-size: 1.7vw;
+          }
+          .area-servicos {
+            width: 100vw;
+          }
+    
+          .input-filtros {
+            align-items: center;
+            justify-content: space-around;
+            width: 100vw;
+          }
+    
+          .filtros {
+            width: 11vw;
+            height: 5.5vw;
+          }
+    
+          .filtros p {
+            font-size: 1.7vw;
+          }
+    
+          .filtros .iconFilter {
+            font-size: 3vw;
+          }
+    
+          .sem-profissionais {
+            p {
+                font-size: 2vw;
+            }
+        }
 }
 
 /* Tablets em modo retrato e smartphones grandes */
 @media (max-width: 768px) {
+    .menu-topo {
+        width: 100vw;
+    }
+    
+        .actions .info-action p {
+            font-size: 2vw;
+          } 
+        
+          .actions .info-action .action {
+            width: 27vw;
+            height: 20vw;
+          }
+    
+          .actions .info-action .action p {
+            font-size: 2vw;
+            width: 50%;
+          }
 
+          .actions .info-action .action img {
+            width: 10vw;
+            height: 10vw;
+          }
+    
+          .h1Home {
+            font-size: 3.8vw;
+            width: 100%;
+          }
+    
+          .input-filtros input::placeholder {
+            font-size: 2vw;
+          }
+    
+          .input-filtros input {
+            font-size: 2vw;
+            height: 3vw;
+          }
+
+          .content-input-busca .btn {
+            font-size: 2vw;
+          }
+          .area-servicos {
+            width: 100vw;
+          }
+    
+          .input-filtros {
+            align-items: center;
+            justify-content: space-around;
+            width: 100vw;
+          }
+    
+          .filtros {
+            width: 15vw;
+            height: vw;
+          }
+    
+          .filtros p {
+            font-size: 2vw;
+          }
+    
+          .filtros .iconFilter {
+            font-size: 3vw;
+          }
+    
+          .sem-profissionais {
+            p {
+                font-size: 2vw;
+            }
+        }
 }
 
 /* Smartphones médios e tablets pequenos */
 @media (max-width: 600px) {
+    .menu-topo {
+        width: 100vw;
+    }
+    
+        .actions .info-action p {
+            font-size: 2.3vw;
+          } 
+        
+          .actions .info-action .action {
+            width: 27vw;
+            height: 20vw;
+          }
+    
+          .actions .info-action .action p {
+            font-size: 2.3vw;
+            width: 50%;
+          }
 
+          .actions .info-action .action img {
+            width: 10vw;
+            height: 10vw;
+          }
+    
+          .h1Home {
+            font-size: 3.5vw;
+            width: 100%;
+          }
+    
+          .input-filtros input::placeholder {
+            font-size: 2.3vw;
+          }
+    
+          .input-filtros input {
+            font-size: 2.3vw;
+            height: 4vw;
+          }
+
+          .content-input-busca .btn {
+            font-size: 2.3vw;
+          }
+          .area-servicos {
+            width: 100vw;
+          }
+    
+          .input-filtros {
+            align-items: center;
+            justify-content: space-around;
+            width: 100vw;
+          }
+    
+          .filtros {
+            width: 20vw;
+            height: 7vw;
+          }
+    
+          .filtros p {
+            font-size: 2.3vw;
+          }
+    
+          .filtros .iconFilter {
+            font-size: 4vw;
+          }
+    
+          .sem-profissionais {
+            p {
+                font-size: 2.3vw;
+            }
+        }
 }
 
 /* Smartphones pequenos */
@@ -348,6 +551,10 @@ align-items: flex-end;
         width: 100vw;
       }
 
+      .input-filtros input { 
+       height: auto; 
+      }
+
       .filtros {
         width: 25vw;
         height: 7vw;
@@ -366,6 +573,7 @@ align-items: flex-end;
             font-size: 2.7vw;
         }
     }
+}
 
 /* Smartphones muito pequenos */
 @media (max-width: 320px) {
