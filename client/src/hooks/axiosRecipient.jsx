@@ -3,7 +3,6 @@ import axios from "axios";
 import { baseUrl, getRequest } from "../utils/services";
 
 export const useRecipient = (chat, userType) => {
-    console.log(chat, "type", userType)
     const [recipient, setRecipient] = useState(null);
     const [error, setError] = useState(null);
     let recipientIds = []
@@ -28,13 +27,11 @@ export const useRecipient = (chat, userType) => {
                     const endpoint = userType === 'pro' ? `/professional/find/${id}` : `/user/find/${id}`;
                     return await getRequest(endpoint);
                 }));
-                console.log("RESPONSESSS",  responses)
                 setRecipient(responses);
             } catch (error) {
                 setError(error);
             }
         };
-        console.log(recipient, "reeeee")
         getUser();
     }, [chat]);
        

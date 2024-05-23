@@ -189,7 +189,7 @@ export const InfoincPro = () => {
                 </div>
               </div>
               <div className="bottom-card-conclua-registro">
-                <p onClick={() => setModalConcluaRegistro(2)}>voltar</p>
+                <p onClick={() => setModalConcluaRegistro(2)}>Voltar</p>
                 <button onClick={() => setModalConcluaRegistro(1)}>
                   proximo
                 </button>

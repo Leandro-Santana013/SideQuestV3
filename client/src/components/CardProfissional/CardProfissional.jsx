@@ -162,10 +162,10 @@ export const CardProfissional = () => {
                     <p><strong>4+ estrelas</strong></p>
                   </button>
                   <button className="card-filtro" onClick={() => { filtrarCards('maisServicosPrestados', 'botao2') }} style={{ backgroundColor: coresBotoes['botao2'] || 'var(--verde)' }}>
-                    <p><strong>Mais serviços prestados</strong></p>
+                    <p><strong>+ serviços prestados</strong></p>
                   </button>
                   <button className="card-filtro" onClick={() => { filtrarCards('profissionaisFemininas', 'botao3'); }} style={{ backgroundColor: coresBotoes['botao3'] || 'var(--verde)' }}>
-                    <p><strong>Somente profissionais femininas</strong></p>
+                    <p><strong>Profissionais femininas</strong></p>
                   </button>
                 </div>
                 <button className="btn-close-modal" onClick={() => { closeModal(); aplicarFiltros(); }}>Fechar</button>
