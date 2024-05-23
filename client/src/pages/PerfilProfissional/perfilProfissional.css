@@ -38,6 +38,7 @@
     background-color: var(--verde);
     color: white;
     transition: all .25s;
+    cursor: pointer;
 }
 
 .iniciar-conversa:hover {
@@ -87,6 +88,16 @@
     background-color: #b1b1b1;
     border-radius: 100vw;
     margin: 20px 0;
+}
+
+.sobremim-profissional {
+    h2 {
+        font-size: 25px;
+    }
+
+    p {
+        font-size: 20px;
+    }
 }
 
 .descricao-profissional {
@@ -140,6 +151,7 @@
     display: flex;
     gap: .5vw;
     align-items: center;
+    justify-content: center;
 }
 
 .avaliacoes-media-star {
@@ -159,14 +171,54 @@
     }
 }
 
-.avaliacao-avaliacoes {}
+.avaliacao-avaliacoes {
+    background-color: #eee;
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1vw;
+    border-radius: 10px;
+}
 
-.avaliacao-card {}
+.avaliacao-card {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 10px 0 10px; 
+    width: 300px;
 
-.texto-comentario-avaliacao-card {}
+    p {
+        color: gray;
+    }
 
-.left-avaliacao-card {
+    span {
+        color: var(--verde);
+    }
+}
+
+.texto-comentario-avaliacao-card {
+
+    p {
+        color: black;
+    }
+}
+
+.bottom-avaliacao-card {
     display: flex;
     align-items: center;
-    gap: .5vw;
+    justify-content: center;
+    background-color: var(--azul);
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+    font-size: 20px;
+    width: 100%;
+    gap: 1vw;
+
+    span {
+        color: white;
+    }
 }
