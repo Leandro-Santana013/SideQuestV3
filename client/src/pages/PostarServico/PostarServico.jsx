@@ -44,9 +44,7 @@ const PostarServico = () => {
     setSelectedImages,
   } = useContext(UserContext);
 
-  useEffect(() => {
-    console.log(form);
-  }, [form]);
+
 
   const handleCepChange = (e) => {
     const cep = e.target.value;

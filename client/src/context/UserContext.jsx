@@ -208,7 +208,9 @@ export const UserContextProvider = ({ children }) => {
       setModalPostar(false);
 
       try {
-        console.log(Servico)
+        if (user) {
+        Servico.idCliente = user.id_cliente;
+      }
         // Enviar o formulário com o estado formData atualizado
         const response = await postRequest("/user/postarServico", Servico);
         console.log("serviço 1")
@@ -226,12 +228,13 @@ export const UserContextProvider = ({ children }) => {
           setModalPostar(true);
           setSelectedImages([])
           setServico({})
+          setForm(1)
         }
       } catch (error) {
         console.error("Erro ao postar:", error);
       }
     },
-    [Servico]
+    [Servico, user]
   );
 
   const PostarServicoWithLoc = useCallback(
@@ -239,10 +242,11 @@ export const UserContextProvider = ({ children }) => {
       e.preventDefault();
 
       setModalPostar(false);
-
-
-      console.log(dataServico)
+      
       try {
+        if (user) {
+          dataServico.idCliente = user.id_cliente;
+        }
 
         // Enviar o formulário com o estado formData atualizado
         const response = await postRequest("/user/postarServicoLoc", dataServico);
@@ -274,12 +278,6 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     console.log(user);
-
-    setServico((prevServico) => ({
-      ...prevServico,
-      idCliente: user ? user.id_cliente : null,
-      email: user ? user.cd_emailCliente : null,
-    }));
 
     setInfoConfirm((prevServico) => ({
       ...prevServico,
