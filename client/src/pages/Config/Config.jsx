@@ -10,6 +10,7 @@ import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 
 import imgPerfil from "../../assets/icone-perfil.png";
+import { FaPen } from "react-icons/fa6";
 
 const Config = () => {
   const avatarUrl = useRef(imgPerfil);
@@ -94,8 +95,6 @@ const Config = () => {
                   className="img-config-perfil"
                   style={{
                     objectFit: "contain",
-                    width: "120px",
-                    height: "120px",
                     borderRadius: "50%",
                   }}
                 />

@@ -45,11 +45,7 @@
     display: none;
 }
 
-.container-pen-edit {
-    
-}
-
 .icon-label-input-img-cropper {
-    color: var(--verde);
+    color: white;
     font-size: 1.5vw;
 }
