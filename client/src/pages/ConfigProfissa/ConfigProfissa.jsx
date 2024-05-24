@@ -187,19 +187,19 @@ const configProfissa = () => {
               </div>
             </div>
             {modalShown && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={() => setShowModal(false)}>&times;</span>
-            <p>Seu perfil foi alterado. Deseja salvar as alterações?</p>
-            <button onClick={deleteUpdate}>Cancelar</button>
-            <button onClick={handleSave}>Salvar</button>
-          </div>
-        </div>
-      )}
+              <div className="modal">
+                <div className="modal-content">
+                  <span className="close" onClick={() => setShowModal(false)}>&times;</span>
+                  <p>Seu perfil foi alterado. Deseja salvar as alterações?</p>
+                  <button onClick={deleteUpdate}>Cancelar</button>
+                  <button onClick={handleSave}>Salvar</button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
-      
+
     </>
   );
 };

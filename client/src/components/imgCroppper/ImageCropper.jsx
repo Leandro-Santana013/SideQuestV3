@@ -63,9 +63,9 @@ export const ImageCropper = ({ updatefoto }) => {
 
   return (
     <>
-      <input id="fotoAvatar" className="input-img-cropper" type="file" accept="image/*" onChange={onSelectFile}></input>
-      <div className="container-pen-edit">
-        <label htmlFor="fotoAvatar" className="label-input-img-cropper">
+      <input id="fotoAvatar" className="input-img-cropper" type="file" accept="image/*" ></input>
+      <div className="container-pen-edit" style={{ position: 'absolute' }}>
+        <label htmlFor="fotoAvatar" className="label-input-img-cropper" style={{ display: 'flex' }}>
           <FaPen className="icon-label-input-img-cropper" style={{ cursor: 'pointer' }} />
         </label>
       </div>

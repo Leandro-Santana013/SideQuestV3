@@ -12,12 +12,42 @@
     border-top-left-radius: 20px;
 }
 
+.area-img-perfil-edit:hover .img-config-perfil {
+    filter: brightness(70%);
+}
+
+.area-img-perfil-edit:hover .container-pen-edit {
+    opacity: 1;
+}
+
 .area-img-perfil-edit {
-    background-color: white;
     display: flex;
-    align-items: end;
-    padding: 10px;
-    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-pen-edit {
+    opacity: 0;
+    transition: all .25s;
+}
+
+.container-pen-edit:hover .img-config-perfil {
+    filter: brightness(70%);
+    transition: filter 0.25s;
+}
+
+.area-img-perfil-edit:hover .container-pen-edit {
+    opacity: 1;
+}
+
+.img-config-perfil {
+    width: 5vw;
+    height: 5vw;
+}
+
+.img-config-perfil:hover {
+    filter: brightness(70%);
+    transition: filter 0.25s;
 }
 
 .sessao-config {
