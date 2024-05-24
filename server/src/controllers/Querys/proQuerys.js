@@ -5,7 +5,8 @@ const {
   ModelCategoria,
   ModelProfissionalCategoria,
   ModelEnderecoProfissional,
-  ModelCidade
+  ModelConfirmacaoServico,
+  ModelCidade,
 } = require("../../models/index");
 const { Model, Op, Sequelize } = require("sequelize");
 const { raw } = require("mysql2");
@@ -100,31 +101,44 @@ const { raw } = require("mysql2");
 
   findServices: async (req, res) => {
     try {
-        return ModelPostagemServico.findAll({
-            where: {
-                id_postagemServico: {
-                    [Op.notIn]: Sequelize.literal(
-                        `(SELECT id_postagemServico FROM tb_confirmacaoServico)`
-                    )
-                }
-            },
+        const { id_profissional } = req.params;
+        const services = await ModelPostagemServico.findAll({
             include: [{
                 model: ModelCliente,
                 required: true,
-                raw: true,
                 attributes: [
                     ["nm_cliente", "nm_cliente"],
                     ["img_cliente", "img_cliente"]
                 ]
-            }],
+            },
+            {
+              model: ModelCategoria,
+              required: true,
+              attributes: [
+                  ["ds_categoria", "ds_categoria"]
+              ]
+          }],
+            where: {
+                id_postagemServico: {
+                    [Op.notIn]: Sequelize.literal(
+                        '(SELECT id_postagemServico FROM tb_confirmacaoServico)'
+                    )
+                },
+                id_categoria: {
+                    [Op.in]: Sequelize.literal(
+                      `(SELECT id_categoria FROM tb_profissional_categoria WHERE id_profissional = ${id_profissional})`
+                    )
+                }
+            },
             order: [[Sequelize.literal('id_postagemServico'), 'DESC']],
             raw: true
         });
-        
+        return services;
     } catch (err) {
         console.error(`Erro: ${err}`);
     }
 },
+
 
 
 findService: async (req, res) => {

@@ -6,11 +6,14 @@ import { TextInputBusca } from "../index";
 import { RiFilter2Fill } from "react-icons/ri";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
-
 import { ProfessionalContext } from "../../context/ProfissionalContext";
+
 export const CardServico = () => {
   const { Dadosiniciais } = useContext(ProfessionalContext);
+
+  // Verificar se Dadosiniciais é um array, se não, definir como array vazio
+  const servicos = Array.isArray(Dadosiniciais) ? Dadosiniciais : [];
+
   return (
     <>
       <div className="input-filtros">
@@ -21,45 +24,44 @@ export const CardServico = () => {
         </div>
       </div>
 
-      {Dadosiniciais.map((servicos) => (
-        <div className="card-servicoProfissa">
-          <Link to={`/VisualizarServicoProfissa/${servicos.id_postagemServico}`}>
-          <div className="icon-sucesso">
-            <img src={imgSucesso} alt="Ícone de sucesso" />
-          </div>
-          <div className="desc-servico-usuario">
-            <h2>{servicos.ds_titulo}</h2>
-            <p>{servicos.ds_servico}</p>
-            <div className="info-usuario">
-              <p>Publicação: 2 Horas atrás</p>
-
-              <div className="avaliacao">
-                <img
-                  style={{ borderRadius: "50%" }}
-                  src={
-                    servicos["tb_cliente.img_cliente"]
-                      ? servicos["tb_cliente.img_cliente"]
-                      : ImgPerfil
-                  }
-                  alt="Ícone de perfil"
-                  id="perfil"
-                />
-                <p>{servicos["tb_cliente.nm_cliente"]}</p>
-                <i className="fa-regular fa-star"></i>
-                <p>4.9</p>
+      {servicos.length > 0 ? (
+        servicos.map((servico) => (
+          <div className="card-servicoProfissa" key={servico.id_postagemServico}>
+            <Link to={`/VisualizarServicoProfissa/${servico.id_postagemServico}`}>
+              <div className="icon-sucesso">
+                <img src={imgSucesso} alt="Ícone de sucesso" />
               </div>
-            </div>
+              <div className="desc-servico-usuario">
+                <h2>{servico.ds_titulo}</h2>
+                <p>{servico.ds_servico}</p>
+                <div className="info-usuario">
+                  <p>Publicação: 2 Horas atrás</p>
+                  <div className="avaliacao">
+                    <img
+                      style={{ borderRadius: "50%" }}
+                      src={servico["tb_cliente.img_cliente"] ? servico["tb_cliente.img_cliente"] : ImgPerfil}
+                      alt="Ícone de perfil"
+                      id="perfil"
+                    />
+                    <p>{servico["tb_cliente.nm_cliente"]}</p>
+                    <i className="fa-regular fa-star"></i>
+                    <p>4.9</p>
+                  </div>
+                </div>
+              </div>
+              <div className="btn-distancia">
+                <button>Ver mais</button>
+                <div className="distancia">
+                  <i className="ri-map-pin-2-line"></i>
+                  <p>3km</p>
+                </div>
+              </div>
+            </Link>
           </div>
-          <div className="btn-distancia">
-            <button>Ver mais</button>
-            <div className="distancia">
-              <i className="ri-map-pin-2-line"></i>
-              <p>3km</p>
-            </div>
-          </div>
-          </Link>
-        </div>
-      ))}
+        ))
+      ) : (
+        <p>Nenhum serviço encontrado.</p>
+      )}
     </>
   );
 };

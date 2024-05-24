@@ -5,11 +5,11 @@ const bcrypt = require('bcrypt');
 const connectionDataBase = new Sequelize(
     name, // Nome do banco de dados
     usu, // Nome de usuário
-    password, // Senhaa
+    password, // Senha
     {
         host: "localhost",
         dialect: "mysql",
-        port: 3307,
+        port: 3306,
         // Definindo o tempo limite de  aquisição de conexão para 60 segundos (em milissegundos)
         pool: { 
             acquire:  600000000

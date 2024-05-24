@@ -115,9 +115,10 @@ export const ProfessionalContextProvider = ({ children }) => {
     const fetchDataFromBackend = async () => {
 
       try {
-        const response = await getRequest("/professional/servicoscard", pro.id_profissional);
-        console.log(response);
-        setDadosIniciais(response);
+          
+        const response = await postRequest("/professional/servicoscard",{ id_profissional: pro.id_profissional });
+        console.log(response.user);
+        setDadosIniciais(response.user);
 
       } catch (error) {
         console.error("Erro ao buscar dados do backend:", error);
@@ -125,7 +126,7 @@ export const ProfessionalContextProvider = ({ children }) => {
     };
 
     fetchDataFromBackend()
-  }, [])
+  }, [pro])
   const [changedProData, setChangedProData] = useState({});
   const [modalShown, setShowModal] = useState(null);
 
@@ -188,6 +189,7 @@ export const ProfessionalContextProvider = ({ children }) => {
     }
   }, [infoConfirm])
 
+
   const [categorias, setCategorias] = useState([]);
 
   const fetchDataConcluir = async (cep) => {
@@ -219,10 +221,6 @@ export const ProfessionalContextProvider = ({ children }) => {
       console.error("Erro ao buscar CEP:", error);
     }
   };
-
- 
-
-  
   
 
 

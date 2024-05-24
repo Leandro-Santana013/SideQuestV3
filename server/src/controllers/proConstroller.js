@@ -245,20 +245,28 @@ const calcularDiferencaTempo = (dataPostagem) => {
 };
 
 exports.cardservico = async (req, res) => {
-  const { id_profissional } = req.params
-  console.log(id_profissional)
+  const { id_profissional } = req.body
+  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa", id_profissional, req.body)
   const populationService = await controller_Pro.findServices({
-    params:{
-      id_profissional: id_profissional
+    params: {
+        id_profissional: id_profissional
     }
 });
-  const servicosComDiferencaTempo = populationService.map((servico) => ({
-    ...servico,
-    diferencaTempo: calcularDiferencaTempo(servico.tm_postagem),
-  }));
 
-  res.status(200).json(servicosComDiferencaTempo);
-};
+console.log(populationService)
+
+if (Array.isArray(populationService) && populationService.length > 0) {
+        const servicosComDiferencaTempo = populationService.map((servico) => ({
+            ...servico,
+            diferencaTempo: calcularDiferencaTempo(servico.tm_postagem),
+        }));
+
+        
+        res.status(200).json(servicosComDiferencaTempo);
+    } else {
+      res.status(200).json({}); // Retorna um array vazio se não houver serviços
+    }
+}
 
 exports.visuService = async (req, res) => {
   try {
