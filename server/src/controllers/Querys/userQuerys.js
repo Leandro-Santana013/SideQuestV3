@@ -11,7 +11,7 @@ const {
   ModelTerminoServico,
   ModelAvaliacao,
   ModelInfoProfissional,
-  ClienteProfissionalFavorito,
+  ModelProfissionalCategoria,
   ModelProfissionalProfileImg
 } = require("../../models/index");
 
@@ -179,9 +179,10 @@ module.exports = {
   },
 
   //6
+
   selectProfissional: async (req, res) => {
     try {
-      const profissionais = await ModelProfissional.findAll({
+      return ModelProfissional.findAll({
         attributes: [
           "id_profissional",
           "sg_sexoProfissional",
@@ -226,7 +227,7 @@ module.exports = {
               0
             ),
             "media_avaliacoes",
-          ],
+          ], 
         ],
         include: [
           {
@@ -249,16 +250,28 @@ module.exports = {
               },
             ],
           },
+          {
+            model: ModelProfissionalCategoria,
+            attributes: ['id_categoria'],
+            include: [
+              {
+                model: ModelCategoria,
+                attributes: ['ds_categoria'],
+              },
+            ],
+          },
         ],
-        group: ["tb_profissional.id_profissional"],
+        group: ["tb_profissional.id_profissional", "tb_profissional_categoria.tb_categorium.id_categoria", "tb_profissional_categoria.id_categoriaEscolhida"],
       });
-
-      return profissionais;
     } catch (error) {
       console.error("Erro ao buscar profissionais:", error);
-      throw error;
+      res.status(500).send("Erro ao buscar profissionais");
     }
   },
+  
+
+
+
 
   updateInfoCli: async (req, res) => {
     const { id_cliente, nm_cliente, cd_emailCliente, img_cliente } = req.params;

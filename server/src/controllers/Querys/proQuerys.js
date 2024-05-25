@@ -7,6 +7,7 @@ const {
   ModelEnderecoProfissional,
   ModelConfirmacaoServico,
   ModelCidade,
+  ModelInfoProfissional
 } = require("../../models/index");
 const { Model, Op, Sequelize } = require("sequelize");
 const { raw } = require("mysql2");
@@ -212,6 +213,15 @@ findService: async (req, res) => {
         }, 
         { where: { id_profissional: id_profissional } }
       );
+    },
+
+    //não terminado
+    createinfopro: async (req, res) => {
+      const {id_profissional, ds_biografia} = req.params
+       return ModelInfoProfissional.create({
+        id_profissional:id_profissional,
+        ds_biografia:ds_biografia
+       })
     },
     selectCat: async (req, res) => {
       const {ds_categoria} = req.params

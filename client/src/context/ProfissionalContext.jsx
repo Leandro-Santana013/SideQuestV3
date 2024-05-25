@@ -178,6 +178,8 @@ export const ProfessionalContextProvider = ({ children }) => {
   const concluirCad = useCallback(async (e) => {
     
     if(pro) infoConfirm.id_profissional = pro.id_profissional
+
+    console.log("äaaaaaaaaaaaaaaaaaaaaa", infoConfirm)  
     const response = await postRequest("/professional/concluirCad", infoConfirm)
     if (response.error) {
       setConclusioncadError(response.error);

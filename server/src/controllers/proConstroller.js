@@ -379,8 +379,11 @@ exports.concluirCad = async (req, res) => {
     numeroResidencia,
     sexo,
     telefone,
-    uf,)
+    uf,
+    descricao
+  )
   try {
+    console.log("äaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", descricao)
 
 
     const pro = await controller_Pro.infoprofissional({
@@ -409,6 +412,10 @@ exports.concluirCad = async (req, res) => {
         qt_idadeProfissional: age
       }
     }) 
+
+    const infopro = await controller_Pro.createinfopro({
+      params: {id_profissional: id_profissional, ds_biografia:descricao}
+    })
 
     console.log("first updated", updatedPro)
 

@@ -16,7 +16,7 @@ const connectionDataBase = new Sequelize(
         }
     }
 ); 
-
+ 
 module.exports = { connectionDataBase }
 
 const fs = require('fs');
