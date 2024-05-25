@@ -28,12 +28,6 @@ export const SidebarProfissional = () => {
     }
   }, [currentPage, pages]);
 
-  const [isActive, setIsActive] = useState(false);
-
-  const AcaoAoCLicar = () => {
-    setIsActive(!isActive); // Alterna o valor de isActive
-  };
-
   return (
     <>
       <nav className="sidebarProfissional">
@@ -84,18 +78,6 @@ export const SidebarProfissional = () => {
 
         </Link>
       </nav>
-
-      <header className="sidebarProfissa-responsivo">
-        <nav className="navProfissa-responsivo">
-          <ul className={`ulProfissa-responsivo ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}>
-            <li><Link to={"/homeProfissionais"}>Home</Link></li>
-            <li><Link to={"/chats"}>Chats</Link></li>
-            <li><Link to={"/ConfigProfissa"}>Configurações</Link></li>
-          </ul>
-        </nav>
-        <button className={`hamburguer-sidebarProfissa ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}>
-        </button>
-      </header>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SidebarCliente, Header } from '../../components';
+import { SidebarCliente, Header, MenuBottomCliente} from '../../components';
 import imgPerfil from "../../assets/icone-perfil.png";
 import "./Favoritos.css";
 import "../../assets/remixicons/remixicon.css";
@@ -9,6 +9,7 @@ const ProfissionaisFavoritos = () => {
         <>
             <Header />
             <SidebarCliente />
+            <MenuBottomCliente />
             <div className="content-midia">
                 <div className="conteudo-favoritos">
                     <div className="prof-fav-pesq">

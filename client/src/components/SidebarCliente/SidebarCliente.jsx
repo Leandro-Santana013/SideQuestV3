@@ -27,12 +27,6 @@ export const SidebarCliente = () => {
     }
   }, [currentPage, pages]);
 
-  const [isActive, setIsActive] = useState(false); //isActive começa como falso, setIsActive muda o valor de isactive ao mudar os estado
-
-  const AcaoAoCLicar = () => {
-    setIsActive(!isActive); // Alterna o valor de isActive
-  };
-
   return (
     <>
       <nav className="sidebarCliente">
@@ -76,21 +70,6 @@ export const SidebarCliente = () => {
         </Link>
         {/* <Perfilcli /> */}
       </nav>
-
-
-      <header className="sidebarCliente-responsivo">
-        <nav className="navCliente-responsivo">
-          <ul className={`ulCliente-responsivo ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}>
-            <li><Link to={"/homeCliente"}>Home</Link></li>
-            <li><Link to={"/chats"}>Chats</Link></li>
-            <li><Link to={"/favoritosCliente"}>Favoritos</Link></li>
-            <li><Link to={"/historicoCliente"}>Historico</Link></li>
-            <li><Link to={"/config"}>Configurações</Link></li>
-          </ul>
-        </nav>
-        <button className={`hamburguer-sidebarcliente ${isActive ? "active" : ""}`} onClick={AcaoAoCLicar}>
-        </button>
-      </header>
     </>
   );
 };

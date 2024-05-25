@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { SidebarCliente, Header, TextInput } from "../../components";
+import { SidebarCliente, Header, TextInput, MenuBottomCliente } from "../../components";
 import axios from "axios";
 import JSZip from "jszip";
 import imgApproved from "../../assets/approved.png";
@@ -194,6 +194,7 @@ const PostarServico = () => {
     <>
       <Header />
       <SidebarCliente />
+      <MenuBottomCliente />
       <div className="content-midia">
         <div className="main-content main-content">
           <div className="publicarHeader">

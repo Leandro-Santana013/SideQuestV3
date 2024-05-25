@@ -1,12 +1,13 @@
 import React from 'react';
 import "./Historico.css";
-import { SidebarCliente, Header } from '../../components';
+import { SidebarCliente, Header, MenuBottomCliente } from '../../components';
 
 function Historico() {
     return (
         <>
             <Header />
             <SidebarCliente />
+            <MenuBottomCliente />
             <div className="content-midia">
                 <div className="conteudo-historico">
                     <div className="hist-pesq">

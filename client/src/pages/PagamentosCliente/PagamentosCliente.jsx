@@ -1,4 +1,4 @@
-import { SidebarCliente, Header } from "../../components/"
+import { SidebarCliente, Header, MenuBottomCliente} from "../../components/"
 import "./PagamentosCliente.css"
 import imgPerfil from "../../assets/icone-perfil.png"
 
@@ -7,6 +7,7 @@ const PagamentosCliente = () => {
         <>
             <Header />
             <SidebarCliente />
+            <MenuBottomCliente />
             <div className="content-midia">
                 <div className="conteudo-pagamento">
                     <div className="pag-pesq">

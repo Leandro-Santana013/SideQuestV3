@@ -4,6 +4,7 @@ import {
   SidebarCliente,
   ImageCropper,
   TextInput,
+  MenuBottomCliente
 } from "../../components";
 import "./config.css";
 import { UserContext } from "../../context/UserContext";
@@ -80,6 +81,7 @@ const Config = () => {
     <>
       <Header />
       <SidebarCliente />
+      <MenuBottomCliente />
       <div className="content-midia">
         <div className="main-content">
           <div className="conteudo-config-perfil">

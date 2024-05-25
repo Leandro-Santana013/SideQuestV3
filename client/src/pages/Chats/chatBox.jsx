@@ -30,16 +30,17 @@ export const ChatBox = () => {
     }
   }, [messages]);
 
-    if(userChats?.chats?.length==0){ return (<div className='message-chat'>
-      <img src={balaoChat} className="img-balao"/>
+  if (userChats?.chats?.length == 0) {
+    return (<div className='message-chat'>
+      <img src={balaoChat} className="img-balao" />
       <h3>Nenhuma conversa por aqui</h3></div>);
-    }
+  }
 
-    if (!infoChat) {
-      return <div className='container-nenhum-chat-selecionado'><p className='nenhum-chat-selecionado'>Clique em algum chat para iniciar a conversa!</p></div>;
-    }
-    const isOnlinePro = onlineUsers?.some((user) => user?.userID == infoChat.id_profissional && user.type == "pro");
-    const isOnlineUser = onlineUsers?.some((user) => user?.userID ==infoChat.id_cliente && user.type == "user");
+  if (!infoChat) {
+    return <div className='container-nenhum-chat-selecionado'><p className='nenhum-chat-selecionado'>Clique em algum chat para iniciar a conversa!</p></div>;
+  }
+  const isOnlinePro = onlineUsers?.some((user) => user?.userID == infoChat.id_profissional && user.type == "pro");
+  const isOnlineUser = onlineUsers?.some((user) => user?.userID == infoChat.id_cliente && user.type == "user");
   if (isMessagesLoading) {
     return <p>Carregando mensagens...</p>;
   }
@@ -48,19 +49,19 @@ export const ChatBox = () => {
     <>
       <div className="chat-header">
         <div className="chat-header-img-name">
-        <img className="img-profissional" src={pro ? infoChat.img_cliente ? infoChat.img_cliente : imgPerfil : null || user? infoChat.img_profissional ? infoChat.img_profissional : imgPerfil :null} />
+          <img className="img-profissional" src={pro ? infoChat.img_cliente ? infoChat.img_cliente : imgPerfil : null || user ? infoChat.img_profissional ? infoChat.img_profissional : imgPerfil : null} />
 
-        <h3>{ user ? infoChat.nm_profissional : infoChat.nm_cliente }</h3>
+          <h3>{user ? infoChat.nm_profissional : infoChat.nm_cliente}</h3>
         </div>
-        {isOnlineUser || isOnlinePro && 
-        <div className="user-online">online</div>
+        {isOnlineUser || isOnlinePro &&
+          <div className="user-online">online</div>
         }
-        </div>
+      </div>
       <div className="chat-main" ref={chatMainRef}>
         {messages &&
           messages.map((message, index) => (
             <div key={index} className="mensagens-chat-main">
-              <div className={`${message.senderId == userId? 'msg-enviada' : 'msg-recebida'}`}>
+              <div className={`${message.senderId == userId ? 'msg-enviada' : 'msg-recebida'}`}>
                 <span className='msg-mensagens-chat-main'>{message.text}</span>
                 <span className='time-mensagens-chat-main'>{moment(message.createdAt).calendar()}</span>
               </div>
@@ -69,18 +70,18 @@ export const ChatBox = () => {
       </div>
       <div className="chat-sub">
         <div className="messageBox">
-          <input 
-            required 
-            placeholder="Mensagem..." 
-            type="text" 
-            id="messageInput" 
-            value={textMessage} 
-            onChange={(e) => setTextMessage(e.target.value)} 
+          <input
+            required
+            placeholder="Mensagem..."
+            type="text"
+            id="messageInput"
+            value={textMessage}
+            onChange={(e) => setTextMessage(e.target.value)}
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
                 handleMessageSend(e);
               }
-            }} 
+            }}
           />
           <button id="sendButton" onClick={handleMessageSend}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">

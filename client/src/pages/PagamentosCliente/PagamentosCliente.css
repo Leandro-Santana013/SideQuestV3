@@ -135,9 +135,10 @@
     font-size: 1vw;
 }
 
-@media screen and (max-width: 1024px) { 
+@media screen and (max-width: 1025px) { 
 .content-midia {
     justify-content: center;
+    margin-bottom: 50px;
 } 
 }
 

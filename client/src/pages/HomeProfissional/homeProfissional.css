@@ -294,7 +294,7 @@ align-items: flex-end;
 /* Responsividade */
 
 /* Tablets em modo paisagem e dispositivos híbridos */
-@media (max-width: 1024px) {
+@media (max-width: 1025px) {
     .menu-topo {
         width: 100vw;
     }
@@ -339,6 +339,7 @@ align-items: flex-end;
           }
           .area-servicos {
             width: 100vw;
+            padding: 0;
           }
     
           .input-filtros {
