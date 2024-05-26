@@ -94,12 +94,6 @@ const Config = () => {
                   src={user.img_cliente ? user.img_cliente : imgPerfil}
                   alt="Imagem de perfil"
                   className="img-config-perfil"
-                  style={{
-                    objectFit: "contain",
-                    width: "120px",
-                    height: "120px",
-                    borderRadius: "50%",
-                  }}
                 />
                 <ImageCropper updatefoto={updatefoto} />
               </div>
@@ -183,12 +177,11 @@ const Config = () => {
                       <h4 className="postarH4">CEP</h4>
                       <div>
                         <TextInput
+                          className="componente-content-input-config-cep"
                           type="text"
                           name="cep"
                           autocomplete="off"
                           size={{
-                            width: "14vw",
-                            height: "1.5vw",
                             // border: cepError
                             //   ? "2px solid red"
                             //   : "2px solid #eee",
@@ -207,9 +200,9 @@ const Config = () => {
                     <div>
                       <h4 className="postarH4">Estado - Cidade</h4>
                       <TextInput
+                        className="componente-content-input-config-cidade"
                         type="text"
                         name="estado_cidade"
-                        size={{ width: "30vw", height: "1.5vw" }}
                         placeholder={""}
                         // value={Servico.uf_localidade}
                         disabled
@@ -220,10 +213,10 @@ const Config = () => {
                     <div>
                       <h4 className="postarH4">Bairro</h4>
                       <TextInput
+                        className="componente-content-input-config-bairro"
                         type="text"
                         name="bairro"
                         autocomplete="off"
-                        size={{ width: "24vw", height: "1.5vw" }}
                         placeholder={""}
                       // value={Servico.bairro}
                       // onChange={(e) => {
@@ -235,10 +228,10 @@ const Config = () => {
                       <div>
                         <h4 className="postarH4">Nome da rua</h4>
                         <TextInput
+                          className="componente-content-input-config-rua"
                           type="text"
                           name="nmRua"
                           autocomplete="off"
-                          size={{ width: "20vw", height: "1.5vw" }}
                           placeholder={""}
                         // value={Servico.logradouro}
                         // onChange={(e) => {
@@ -253,10 +246,10 @@ const Config = () => {
                       <h4 className="postarH4">Número da residência</h4>
 
                       <TextInput
+                        className="componente-content-input-config-residencia"
                         type="number"
                         name="nmrResidencia"
                         autocomplete="off"
-                        size={{ width: "8vw", height: "1.5vw" }}
                         placeholder={""}
                       // onChange={(e) => {
                       //   updatepostarServico({ ...Servico, nmrResidencia: e.target.value });
@@ -266,10 +259,10 @@ const Config = () => {
                     <div>
                       <h4 className="postarH4">Complemento</h4>
                       <TextInput
+                        className="componente-content-input-config-complemento"
                         type="text"
                         name="complemento"
                         autocomplete="off"
-                        size={{ width: "20vw", height: "1.5vw" }}
                         placeholder={""}
                       // onChange={(e) => {
                       //   updatepostarServico({ ...Servico, complemento: e.target.value });

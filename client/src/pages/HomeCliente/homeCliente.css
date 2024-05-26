@@ -108,7 +108,7 @@ body{
   }
   
       .actions .info-action p {
-          font-size: 1.7vw;
+          font-size: 1.9vw;
         } 
       
         .actions .info-action .action {
@@ -119,7 +119,7 @@ body{
         }
   
         .actions .info-action .action p {
-          font-size: 1.7vw;
+          font-size: 1.9vw;
           width: 50%;
         }
 
@@ -134,16 +134,16 @@ body{
         }
   
         .input-filtros input::placeholder {
-          font-size: 1.7vw;
+          font-size: 1.9vw;
         }
   
         .input-filtros input {
-          font-size: 1.7vw;
+          font-size: 1.9vw;
           height: 3.5vw;
         }
 
         .content-input-busca .btn {
-          font-size: 1.7vw;
+          font-size: 1.9vw;
         }
         .area-servicos {
           width: 100vw;
@@ -161,7 +161,7 @@ body{
         }
   
         .filtros p {
-          font-size: 1.7vw;
+          font-size: 1.9vw;
         }
   
         .filtros .iconFilter {

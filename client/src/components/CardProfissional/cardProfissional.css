@@ -181,100 +181,206 @@ h2 {
 
 /* Tablets em modo paisagem e dispositivos híbridos */
 @media (max-width: 1024px) {
-
-}
-
-/* Tablets em modo retrato e smartphones grandes */
-@media (max-width: 768px) {
-
-}
-
-/* Smartphones médios e tablets pequenos */
-@media (max-width: 600px) {
-    .modal {
-        width: 32vw;
-        height: 30vw;
-    }
-
-    .container-card-filtros{
-        flex-direction: column;
-    }
-
-    .card-filtro {
-        font-size: 2.3vw;
-        height: 5vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .btn-close-modal {
-        font-size: 2.3vw;
-    }
-}
-
-/* Smartphones pequenos */
-@media (max-width: 480px) {
-    .modal {
-        width: 32vw;
-        height: 42vw;
-    }
-
-    .container-card-filtros{
-        flex-direction: column;
-    }
-
-    .card-filtro {
-        font-size: 2.7vw;
-        height: 8vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .btn-close-modal {
-        font-size: 2.7vw;
-    }
-
-/*arrumando card */
-
+        
+    /*arrumando card */
+    
     .card-profissional {
-        width: 38vw;
-        height: 35vw;
+        width: 35vw;
+        height: auto;
     }
-
+    
     .perfil-avaliado h2 {
-        font-size: 4vw;
+        font-size: 2.5vw;
     }
-
+    
     .tamplate-img img {
-        width: 7vw;
-        height: 7vw;
+        width: 6.7vw;
+        height: 6.7vw;
     }
-
+    
     .ri-star-s-fill {
-        font-size: 3vw;
+        font-size: 2.75vw;
     }
-
+    
     .profissoes-card-profissional {
         p{
-            font-size: 2.7vw;
-            padding: 4px;
+            font-size: 1.7vw;
+            padding: 8px;
         }
     }
-
+    
     .desc {
-        font-size: 2.7vw;
+        font-size: 1.7vw;
     }
-
+    
     .btn-ver-mais {
-        width: 15vw;
+        width: 11.5vw;
         height: 5vw;
-        font-size: 2.7vw;
+        font-size: 1.7vw;
     }
-}
-
-/* Smartphones muito pequenos */
-@media (max-width: 320px) {
-
-}
+    }
+    
+    /* Tablets em modo retrato e smartphones grandes */
+    @media (max-width: 768px) {
+        
+    /*arrumando card */
+    
+    .card-profissional {
+        width: 35vw;
+        height: auto;
+        padding: 15px;
+    }
+    
+    .perfil-avaliado h2 {
+        font-size: 3.4vw;
+    }
+    
+    .tamplate-img img {
+        width: 7.7vw;
+        height: 7.7vw;
+    }
+    
+    .ri-star-s-fill {
+        font-size: 3.55vw;
+    }
+    
+    .profissoes-card-profissional {
+        p{
+            font-size: 2vw;
+        }
+    }
+    
+    .desc {
+        font-size: 2vw;
+    }
+    
+    .btn-ver-mais {
+        width: 12.5vw;
+        font-size: 2vw;
+    }
+    }
+    
+    /* Smartphones médios e tablets pequenos */
+    @media (max-width: 600px) {
+        .modal {
+            width: 26vw;
+            height: 35vw;
+        }
+    
+        .container-card-filtros{
+            flex-direction: column;
+        }
+    
+        .card-filtro {
+            font-size: 2.7vw;
+            height: 8vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .btn-close-modal {
+            font-size: 2.7vw;
+        }
+    
+    /*arrumando card */
+    
+        .card-profissional {
+            width: 32vw;
+            height: auto;
+            padding: 15px;
+        }
+    
+        .perfil-avaliado h2 {
+            font-size: 3vw;
+        }
+    
+        .ri-star-s-fill {
+            font-size: 3.55vw;
+        }
+    
+        .profissoes-card-profissional {
+            p{
+                font-size: 2.3vw;
+                padding: 6px;
+            }
+        }
+    
+        .desc {
+            font-size: 2.3vw;
+        }
+    
+        .btn-ver-mais {
+            width: 14vw;
+            height: 5.5vw;
+            font-size: 2.3vw;
+        }
+    }
+    
+    /* Smartphones pequenos */
+    @media (max-width: 480px) {
+        .modal {
+            width: 32vw;
+            height: 42vw;
+        }
+    
+        .container-card-filtros{
+            flex-direction: column;
+        }
+    
+        .card-filtro {
+            font-size: 2.7vw;
+            height: 8vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .btn-close-modal {
+            font-size: 2.7vw;
+        }
+    
+    /*arrumando card */
+    
+        .card-profissional {
+            width: 38vw;
+            height: auto;
+            padding: 10px;
+        }
+    
+        .perfil-avaliado h2 {
+            font-size: 3.5vw;
+        }
+    
+        .tamplate-img img {
+            width: 7vw;
+            height: 7vw;
+        }
+    
+        .ri-star-s-fill {
+            font-size: 3vw;
+        }
+    
+        .profissoes-card-profissional {
+            p{
+                font-size: 2.7vw;
+                padding: 4px;
+            }
+        }
+    
+        .desc {
+            font-size: 2.7vw;
+        }
+    
+        .btn-ver-mais {
+            width: 16vw;
+            height: 6vw;
+            font-size: 2.7vw;
+        }
+    }
+    
+    /* Smartphones muito pequenos */
+    @media (max-width: 320px) {
+    
+    }
+    

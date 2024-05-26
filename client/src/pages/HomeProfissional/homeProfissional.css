@@ -300,7 +300,7 @@ align-items: flex-end;
     }
     
         .actions .info-action p {
-            font-size: 1.7vw;
+            font-size: 1.9vw;
           } 
         
           .actions .info-action .action {
@@ -311,7 +311,7 @@ align-items: flex-end;
           }
     
           .actions .info-action .action p {
-            font-size: 1.7vw;
+            font-size: 1.9vw;
             width: 50%;
           }
 
@@ -326,16 +326,16 @@ align-items: flex-end;
           }
     
           .input-filtros input::placeholder {
-            font-size: 1.7vw;
+            font-size: 1.9vw;
           }
     
           .input-filtros input {
-            font-size: 1.7vw;
+            font-size: 1.9vw;
             height: 3.5vw;
           }
 
           .content-input-busca .btn {
-            font-size: 1.7vw;
+            font-size: 1.9vw;
           }
           .area-servicos {
             width: 100vw;
@@ -354,7 +354,7 @@ align-items: flex-end;
           }
     
           .filtros p {
-            font-size: 1.7vw;
+            font-size: 1.9vw;
           }
     
           .filtros .iconFilter {

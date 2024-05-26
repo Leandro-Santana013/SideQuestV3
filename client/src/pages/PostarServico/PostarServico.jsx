@@ -257,11 +257,6 @@ const PostarServico = () => {
                       className="componente-content-input input-busque-por-servicos"
                       name="titulo"
                       type="text"
-                      size={{
-                        width: "35vw",
-                        height: "1.5vw",
-                        padding: ".5vw 0 .5vw 0",
-                      }}
                       placeholder="Exemplo: Pintura de parede"
                       onChange={(e) =>
                         updatepostarServico({
@@ -300,9 +295,9 @@ const PostarServico = () => {
                       Descreva o serviço detalhadamente
                     </h3>
                     <TextInput
+                    className="componente-content-input  input-desc-servico"
                       name="dsServico"
                       type="text"
-                      size={{ width: "35vw", height: "10vw" }}
                       placeholder={
                         "Exemplo: Eu preciso de um pintor para pintar uma parede externa de 4 metros de altura e 6 metros de largura. A parede é feita de tijolos e precisa ser limpa e preparada antes da pintura. Eu gostaria que a parede fosse pintada com tinta acrílica branca. Já comprei toda a tinta necessária, caso precise de mais tinta posso comprar."
                       }
@@ -521,12 +516,11 @@ const PostarServico = () => {
                         <h4 className="postarH4">CEP</h4>
                         <div>
                           <TextInput
+                          className="componente-content-input input-cep"
                             type="text"
                             name="cep"
                             autocomplete="off"
                             size={{
-                              width: "14vw",
-                              height: "1.5vw",
                               border: cepError
                                 ? "2px solid red"
                                 : "2px solid #eee",
@@ -547,9 +541,9 @@ const PostarServico = () => {
                       <div>
                         <h4 className="postarH4">Estado - Cidade</h4>
                         <TextInput
+                        className="componente-content-input input-estado"
                           type="text"
                           name="estado_cidade"
-                          size={{ width: "30vw", height: "1.5vw" }}
                           placeholder={""}
                           value={Servico.uf_localidade}
                           disabled
@@ -560,10 +554,10 @@ const PostarServico = () => {
                       <div>
                         <h4 className="postarH4">Bairro</h4>
                         <TextInput
+                         className="componente-content-input input-bairro"
                           type="text"
                           name="bairro"
                           autocomplete="off"
-                          size={{ width: "24vw", height: "1.5vw" }}
                           placeholder={""}
                           value={Servico.bairro}
                           onChange={(e) => {
@@ -578,10 +572,10 @@ const PostarServico = () => {
                         <div>
                           <h4 className="postarH4">Nome da rua</h4>
                           <TextInput
+                          className="componente-content-input input-rua"
                             type="text"
                             name="nmRua"
                             autocomplete="off"
-                            size={{ width: "20vw", height: "1.5vw" }}
                             placeholder={""}
                             value={Servico.logradouro}
                             onChange={(e) => {
@@ -599,10 +593,10 @@ const PostarServico = () => {
                         <h4 className="postarH4">Número da residência</h4>
 
                         <TextInput
+                        className="componente-content-input input-residencia"
                           type="number"
                           name="nmrResidencia"
                           autocomplete="off"
-                          size={{ width: "8vw", height: "1.5vw" }}
                           placeholder={""}
                           onChange={(e) => {
                             updatepostarServico({
@@ -615,10 +609,10 @@ const PostarServico = () => {
                       <div>
                         <h4 className="postarH4">Complemento</h4>
                         <TextInput
+                        className="componente-content-input input-complemento"
                           type="text"
                           name="complemento"
                           autocomplete="off"
-                          size={{ width: "20vw", height: "1.5vw" }}
                           placeholder={""}
                           onChange={(e) => {
                             updatepostarServico({

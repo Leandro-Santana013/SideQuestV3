@@ -4,7 +4,12 @@
     position: relative;
 }
 
-
+.img-config-perfil {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    border-radius: 50%;
+}
 
 .cabecalho-editar button {
     width: 7.5vw;
@@ -23,6 +28,7 @@
     display: flex;
     flex-direction: column;
 }
+
 
 .edit-infoPessoais {
     background-color: white;
@@ -232,3 +238,552 @@
 }
 
 
+/* Responsividade */
+
+/* Tablets em modo paisagem e dispositivos híbridos */
+@media (max-width: 1025px) {
+  
+    .conteudo-config-perfil {
+        width: 70vw;
+    }
+
+    .img-config-perfil {
+        width: 11vw;
+        height: 11vw;
+    }
+
+    .sessao-config {
+        align-items: center;
+    }
+
+    .edit-infoPessoais {
+        width: 57vw;
+        padding: 10px;
+    }
+
+    .header-edit-info-pessoais h2 {
+        font-size: 2.75vw;
+    }
+
+    .edit-infoPessoais h3 {
+        font-size: 1.9vw;
+    }
+
+    .header-edit-info-pessoais button {
+        font-size: 1.9vw;
+        width: 14vw;
+        height: 4vw;
+        margin-right: 10vw;
+    } 
+
+    .edit-infoPessoais .input-pessoais .input-nome-num p {
+        font-size: 1.9vw;
+    }
+
+    .edit-infoPessoais .input-pessoais .input-nome-num span {
+        font-size: 1.9vw;
+    }
+
+    .edit-infoPessoais .input-pessoais .input-email-local p {
+        font-size: 1.9vw;
+    }
+
+    .edit-infoPessoais .input-pessoais .input-email-local span {
+        font-size: 1.9vw;
+    }
+
+    .edit-info-endereco-principal {
+        width: 57vw;
+        padding: 10px;
+    }
+
+    .edit-info-endereco-principal .leftPostar.leftPostar-de-config h2{
+        font-size: 2.75vw;
+    } 
+
+    .leftPostar.leftPostar-de-config .container .componente-content-input {
+        width: 20vw;
+    }
+
+    .componente-content-input-config-cep {
+        width: 15vw;
+        height: 2.5vw;
+        font-size: 1.9vw;
+    } 
+    
+    .componente-content-input-config-cidade {
+        width: 27vw;
+         height: 2.5vw;
+         font-size: 1.9vw;
+    }
+    
+    .componente-content-input-config-bairro {
+        width: 20vw; 
+        height: 2.5vw;
+        font-size: 1.9vw;
+    }
+    
+    .componente-content-input-config-rua {
+        width: 20vw;
+        height: 2.5vw;
+        font-size: 1.9vw;
+    }
+    
+    .componente-content-input-config-residencia {
+        width: 8vw;
+        height: 2.5vw;
+        font-size: 1.9vw;
+    }
+    
+    .componente-content-input-config-complemento {
+        width: 17vw;
+        height: 2.5vw;
+        font-size: 1.9vw;
+    }
+
+    .componente-content-input-config-complemento {
+        width: 17vw;
+        height: 2.5vw;
+        font-size: 1.9vw;
+    }
+
+    .edit-seguranca {
+        width: 57vw;
+        padding: 10px;     
+    }
+
+    .edit-seguranca h2 {
+        font-size: 2.75vw;
+    }
+
+    .edit-seguranca p {
+        font-size: 1.9vw;
+    }
+
+    .edit-seguranca .alt-senha input {
+        width: 17vw;
+        height: 2.5vw;
+        padding: 0px;
+    }
+
+    .edit-seguranca .sair-excluirBtn #sair {
+        font-size: 1.9vw;
+        width: 15vw;
+        height: 3vw;
+    }
+
+    .edit-seguranca .sair-excluirBtn #excluir {
+        font-size: 1.9vw;
+        width: 15vw;
+        height: 3vw;
+    }
+}
+
+/* Tablets em modo retrato e smartphones grandes */
+@media (max-width: 768px) {
+   
+    .conteudo-config-perfil {
+        width: 75vw;
+    }
+
+    .img-config-perfil {
+        width: 14vw;
+        height: 14vw;
+    }
+
+    .sessao-config {
+        align-items: center;
+    }
+
+    .edit-infoPessoais {
+        width: 60vw;
+        padding: 15px;
+    }
+
+    .header-edit-info-pessoais h2 {
+        font-size: 3vw;
+    }
+
+    .edit-infoPessoais h3 {
+        font-size: 2vw;
+    }
+
+    .header-edit-info-pessoais button {
+        font-size: 2vw;
+        width: 14vw;
+        height: 4vw;
+        margin-right: 10vw;
+    } 
+
+    .edit-infoPessoais .input-pessoais .input-nome-num p {
+        font-size: 2vw;
+    }
+
+    .edit-infoPessoais .input-pessoais .input-nome-num span {
+        font-size: 2vw;
+    }
+
+    .edit-infoPessoais .input-pessoais .input-email-local p {
+        font-size: 2vw;
+    }
+
+    .edit-infoPessoais .input-pessoais .input-email-local span {
+        font-size: 2vw;
+    }
+
+    .edit-info-endereco-principal {
+        width: 60vw;
+        padding: 10px;
+    }
+
+    .edit-info-endereco-principal .leftPostar.leftPostar-de-config h2{
+        font-size: 3vw;
+    } 
+
+    .leftPostar.leftPostar-de-config .container .componente-content-input {
+        width: 20vw;
+    }
+
+    .componente-content-input-config-cep {
+        width: 18vw;
+        height: 3vw;
+        font-size: 2vw;
+    } 
+    
+    .componente-content-input-config-cidade {
+        width: 30vw;
+         height: 3vw;
+         font-size: 2vw;
+    }
+    
+    .componente-content-input-config-bairro {
+        width: 23vw; 
+        height: 3vw;
+        font-size: 2vw;
+    }
+    
+    .componente-content-input-config-rua {
+        width: 22vw;
+        height: 3vw;
+        font-size: 2vw;
+    }
+    
+    .componente-content-input-config-residencia {
+        width: 10vw;
+        height: 3vw;
+        font-size: 2vw;
+    }
+    
+    .componente-content-input-config-complemento {
+        width: 20vw;
+        height: 3vw;
+        font-size: 2vw;
+    }
+
+    .componente-content-input-config-complemento {
+        width: 20vw;
+        height: 3vw;
+        font-size: 2vw;
+    }
+
+    .edit-seguranca {
+        width: 60vw;
+        padding: 15px;       
+    }
+
+    .edit-seguranca h2 {
+        font-size: 3vw;
+    }
+
+    .edit-seguranca p {
+        font-size: 2vw;
+    }
+
+    .edit-seguranca .alt-senha input {
+        width: 20vw;
+        height: 3vw;
+        padding: 0px;
+    }
+
+    .edit-seguranca .sair-excluirBtn #sair {
+        font-size: 2vw;
+        width: 17vw;
+        height: 4vw;
+    }
+
+    .edit-seguranca .sair-excluirBtn #excluir {
+        font-size: 2vw;
+        width: 17vw;
+        height: 4vw;
+    }
+}
+
+/* Smartphones médios e tablets pequenos */
+@media (max-width: 600px) {
+    
+    .conteudo-config-perfil {
+        width: 75vw;
+    }
+
+    .img-config-perfil {
+        width: 14vw;
+        height: 14vw;
+    }
+
+    .sessao-config {
+        align-items: center;
+    }
+
+    .edit-infoPessoais {
+        width: 60vw;
+        padding: 15px;
+    }
+
+    .header-edit-info-pessoais h2 {
+        font-size: 3vw;
+    }
+
+    .edit-infoPessoais h3 {
+        font-size: 2.75vw;
+    }
+
+    .header-edit-info-pessoais button {
+        font-size: 2.3vw;
+        width: 20vw;
+        height: 4.25vw;
+        margin-right: 5vw;
+    } 
+
+    .edit-infoPessoais .input-pessoais .input-nome-num p {
+        font-size: 2.3vw;
+    }
+
+    .edit-infoPessoais .input-pessoais .input-nome-num span {
+        font-size: 2.3vw;
+    }
+
+    .edit-infoPessoais .input-pessoais .input-email-local p {
+        font-size: 2.3vw;
+    }
+
+    .edit-infoPessoais .input-pessoais .input-email-local span {
+        font-size: 2.3vw;
+    }
+
+    .edit-info-endereco-principal {
+        width: 60vw;
+        padding: 10px;
+    }
+
+    .edit-info-endereco-principal .leftPostar.leftPostar-de-config h2{
+        font-size: 3vw;
+    } 
+
+    .leftPostar.leftPostar-de-config .container .componente-content-input {
+        width: 20vw;
+    }
+
+    .componente-content-input-config-cep {
+        width: 20vw;
+        height: 3vw;
+        font-size: 2.3vw;
+    } 
+    
+    .componente-content-input-config-cidade {
+        width: 33vw;
+         height: 3vw;
+         font-size: 2.3vw;
+    }
+    
+    .componente-content-input-config-bairro {
+        width: 27vw; 
+        height: 3vw;
+        font-size: 2.3vw;
+    }
+    
+    .componente-content-input-config-rua {
+        width: 25vw;
+        height: 3vw;
+        font-size: 2.3vw;
+    }
+    
+    .componente-content-input-config-residencia {
+        width: 10vw;
+        height: 3vw;
+        font-size: 2.3vw;
+    }
+    
+    .componente-content-input-config-complemento {
+        width: 20vw;
+        height: 2.5vw;
+        font-size: 2.3vw;
+    }
+
+    .edit-seguranca {
+        width: 60vw;
+        padding: 15px;       
+    }
+
+    .edit-seguranca h2 {
+        font-size: 3vw;
+    }
+
+    .edit-seguranca p {
+        font-size: 2.3vw;
+    }
+
+    .edit-seguranca .alt-senha input {
+        width: 20vw;
+        height: 3vw;
+        padding: 0px;
+    }
+
+    .edit-seguranca .sair-excluirBtn #sair {
+        font-size: 2.3vw;
+        width: 17vw;
+        height: 4vw;
+    }
+
+    .edit-seguranca .sair-excluirBtn #excluir {
+        font-size: 2.3vw;
+        width: 17vw;
+        height: 4vw;
+    }
+}
+
+/* Smartphones pequenos */
+@media (max-width: 480px) {
+
+    .conteudo-config-perfil {
+        width: 75vw;
+    }
+
+    .img-config-perfil {
+        width: 17vw;
+        height: 17vw;
+    }
+
+    .sessao-config {
+        align-items: center;
+    }
+
+    .edit-infoPessoais {
+        width: 60vw;
+        padding: 15px;
+    }
+
+    .header-edit-info-pessoais h2 {
+        font-size: 3.5vw;
+    }
+
+    .edit-infoPessoais h3 {
+        font-size: 3vw;
+    }
+
+    .header-edit-info-pessoais button {
+        font-size: 2.7vw;
+        width: 25vw;
+        height: 5vw;
+    } 
+
+    .edit-infoPessoais .input-pessoais .input-nome-num p {
+        font-size: 2.7vw;
+    }
+
+    .edit-infoPessoais .input-pessoais .input-nome-num span {
+        font-size: 2.7vw;
+    }
+
+    .edit-infoPessoais .input-pessoais .input-email-local p {
+        font-size: 2.7vw;
+    }
+
+    .edit-infoPessoais .input-pessoais .input-email-local span {
+        font-size: 2.7vw;
+    }
+
+    .edit-info-endereco-principal {
+        width: 60vw;
+        padding: 15px;
+    }
+
+    .edit-info-endereco-principal .leftPostar.leftPostar-de-config h2{
+        font-size: 3.5vw;
+    } 
+
+    .leftPostar.leftPostar-de-config .container .componente-content-input {
+        width: 20vw;
+    }
+
+    .componente-content-input-config-cep {
+        width: 20vw;
+        height: 2vw;
+        font-size: 2.7vw;
+    } 
+    
+    .componente-content-input-config-cidade {
+        width: 33vw;
+         height: 2vw;
+         font-size: 2.7vw;
+    }
+    
+    .componente-content-input-config-bairro {
+        width: 27vw; 
+        height: 2vw;
+        font-size: 2.7vw;
+    }
+    
+    .componente-content-input-config-rua {
+        width: 25vw;
+        height: 2vw;
+        font-size: 2.7vw;
+    }
+    
+    .componente-content-input-config-residencia {
+        width: 10vw;
+        height: 2vw;
+        font-size: 2.7vw;
+    }
+    
+    .componente-content-input-config-complemento {
+        width: 20vw;
+        height: 1.5vw;
+        font-size: 2.7vw;
+    }
+
+    .edit-seguranca {
+        width: 60vw;
+        padding: 15px;       
+    }
+
+    .edit-seguranca h2 {
+        font-size: 3.5vw;
+    }
+
+    .edit-seguranca p {
+        font-size: 2.7vw;
+    }
+
+    .edit-seguranca .alt-senha input {
+        width: 20vw;
+        height: 3vw;
+        padding: 0px;
+    }
+
+    .edit-seguranca .sair-excluirBtn #sair {
+        font-size: 2.7vw;
+        width: 25vw;
+        height: 5vw;
+    }
+
+    .edit-seguranca .sair-excluirBtn #excluir {
+        font-size: 2.7vw;
+        width: 25vw;
+        height: 5vw;
+    }
+}
+
+/* Smartphones muito pequenos */
+@media (max-width: 320px) {
+
+}

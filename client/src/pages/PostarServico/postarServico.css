@@ -162,7 +162,7 @@
 }
 
 /* Estilo da caixinha quando o checkbox está marcado */
-.custom-checkbox input:checked + .checkmark {
+.custom-checkbox input:checked+.checkmark {
   background-color: var(--verde);
   color: white;
 }
@@ -601,3 +601,430 @@
   color: #f00;
 }
 
+.componente-content-input.input-busque-por-servicos {
+  width: 35vw;
+  height: 1.5vw;
+  padding: .5vw 0 .5vw 0;
+}
+
+.componente-content-input.input-desc-servico {
+  width: 35vw;
+  height: 10vw;
+}
+
+.componente-content-input.input-cep {
+  width: 14vw;
+  height: 1.5vw;
+}
+
+.componente-content-input.input-estado {
+  width: 30vw;
+  height: 1.5vw;
+}
+
+.componente-content-input.input-bairro {
+  width: 24vw;
+  height: 1.5vw;
+}
+
+.componente-content-input.input-rua {
+  width: 20vw;
+  height: 1.5vw;
+}
+
+.componente-content-input.input-residencia {
+  width: 8vw;
+  height: 1.5vw;
+}
+
+.componente-content-input.input-complemento {
+  width: 20vw;
+  height: 1.5vw;
+}
+
+/* Responsividade */
+
+/* Tablets em modo paisagem e dispositivos híbridos */
+@media (max-width: 1024px) {
+  .publicarTitulo {
+    font-size: 2.75vw;
+  }
+
+  .publicar123 {
+    width: 5vw;
+    height: 5vw;
+    font-size: 1.9vw;
+  }
+
+  .tituloServico {
+    font-size: 1.9vw;
+  }
+
+  .publicarPassos {
+    gap: 4vw;
+  }
+
+  .componente-content-input::placeholder {
+    font-size: 1.9vw;
+  }
+
+
+  .btnProximo {
+    width: 16vw;
+    height: 5vw;
+    font-size: 1.9vw;
+  }
+
+  .anexoLabel {
+    width: 14vw;
+    height: 4vw;
+    font-size: 1.9vw;
+  }
+
+  .componente-content-input.input-busque-por-servicos {
+    height: 3vw;
+    width: 41vw;
+    font-size: 1.9vw;
+  }
+
+  .componente-content-input.input-busque-por-servicos::placeholder {
+    font-size: 1.9vw;
+  }
+
+  .componente-content-input.input-desc-servico {
+    font-size: 1.9vw;
+    height: 15vw;
+  }
+
+  .categorias {
+    font-size: 1.9vw;
+    height: 3.75vw;
+  }
+
+  .headerVoltar .btnVoltar {
+    width: 5vw;
+    height: 5vw;
+  }
+
+  .headerVoltar .btnVoltar .iconeVoltar {
+    font-size: 4vw;
+  }
+
+  .postarServico1 {
+    width: 88vw;
+  }
+
+  .componente-content-input.input-cep {
+    width: 18vw;
+    height: 2.75vw;
+    font-size: 1.9vw;
+  }
+
+  .componente-content-input.input-estado {
+    height: 2.75vw;
+    font-size: 1.9vw;
+    width: 40vw;
+  }
+
+  .componente-content-input.input-bairro {
+    width: 24vw;
+    height: 2.75vw;
+    font-size: 1.9vw;
+  }
+
+  .componente-content-input.input-rua {
+    width: 25vw;
+    height: 2.75vw;
+    font-size: 1.9vw;
+  }
+
+  .componente-content-input.input-residencia {
+    width: 22vw;
+    height: 2.75vw;
+    font-size: 1.9vw;
+  }
+
+  .componente-content-input.input-complemento {
+    width: 28vw;
+    height: 2.75vw;
+    font-size: 1.9vw;
+  }
+
+  .postarH4 {
+    font-size: 1.9vw;
+  }
+}
+
+/* Tablets em modo retrato e smartphones grandes */
+@media (max-width: 768px) {
+  .publicarTitulo {
+    font-size: 3vw;
+  }
+
+  .publicar123 {
+    width: 4vw;
+    height: 4vw;
+    font-size: 2vw;
+  }
+
+  .tituloServico {
+    font-size: 2vw;
+  }
+
+  .publicarPassos {
+    gap: 3.5vw;
+  }
+
+  .componente-content-input::placeholder {
+    font-size: 2vw;
+  }
+
+  .btnProximo {
+    font-size: 2vw;
+  }
+
+  .anexoLabel {
+    font-size: 2vw;
+  }
+
+  .componente-content-input.input-busque-por-servicos {
+    font-size: 2vw;
+  }
+
+  .componente-content-input.input-busque-por-servicos::placeholder {
+    font-size: 2vw;
+  }
+
+  .componente-content-input.input-desc-servico {
+    font-size: 2vw;
+  }
+
+  .categorias {
+    font-size: 2vw;
+  }
+
+  .headerVoltar .btnVoltar {
+    width: 4vw;
+    height: 4vw;
+  }
+
+  .headerVoltar .btnVoltar .iconeVoltar {
+    font-size: 3vw;
+  }
+
+  .postarServico1 {
+    width: 88vw;
+  }
+
+  .componente-content-input.input-cep {
+    font-size: 2vw;
+  }
+
+  .componente-content-input.input-estado {
+    font-size: 2vw;
+    width: 40vw;
+  }
+
+  .componente-content-input.input-bairro {
+    font-size: 2vw;
+  }
+
+  .componente-content-input.input-rua {
+    font-size: 2vw;
+  }
+
+  .componente-content-input.input-residencia {
+    font-size: 2vw;
+  }
+
+  .componente-content-input.input-complemento {
+    font-size: 2vw;
+  }
+
+  .postarH4 {
+    font-size: 2vw;
+  }
+}
+
+/* Smartphones médios e tablets pequenos */
+@media (max-width: 600px) {
+  .publicarTitulo {
+    font-size: 3vw;
+  }
+
+  .publicar123 {
+    width: 5vw;
+    height: 5vw;
+    font-size: 2.3vw;
+  }
+
+  .tituloServico {
+    font-size: 2.75vw;
+  }
+
+  .publicarPassos {
+    gap: 3.5vw;
+  }
+
+  .componente-content-input::placeholder {
+    font-size: 2.3vw;
+  }
+
+
+  .btnProximo {
+    font-size: 2.3vw;
+  }
+
+  .anexoLabel {
+    font-size: 2.3vw;
+  }
+
+  .componente-content-input.input-busque-por-servicos {
+    font-size: 2.3vw;
+  }
+
+  .componente-content-input.input-busque-por-servicos::placeholder {
+    font-size: 2.3vw;
+  }
+
+  .componente-content-input.input-desc-servico {
+    font-size: 2.3vw;
+  }
+
+  .categorias {
+    font-size: 2.3vw;
+  }
+
+  .headerVoltar .btnVoltar {
+    width: 5vw;
+    height: 5vw;
+  }
+
+  .headerVoltar .btnVoltar .iconeVoltar {
+    font-size: 4vw;
+  }
+
+  .componente-content-input.input-cep {
+    font-size: 2.3vw;
+  }
+
+  .componente-content-input.input-estado {
+    font-size: 2.3vw;
+  }
+
+  .componente-content-input.input-bairro {
+    font-size: 2.3vw;
+  }
+
+  .componente-content-input.input-rua {
+    font-size: 2.3vw;
+  }
+
+  .componente-content-input.input-residencia {
+    font-size: 2.3vw;
+  }
+
+  .componente-content-input.input-complemento {
+    font-size: 2.3vw;
+  }
+
+  .postarH4 {
+    font-size: 2.3vw;
+  }
+}
+
+/* Smartphones pequenos */
+@media (max-width: 480px) {
+  .publicarTitulo {
+    font-size: 3.5vw;
+  }
+
+  .publicar123 {
+    width: 5vw;
+    height: 5vw;
+    font-size: 2.7vw;
+  }
+
+  .tituloServico {
+    font-size: 3.25vw;
+  }
+
+  .componente-content-input::placeholder {
+    font-size: 2.7vw;
+  }
+
+
+  .btnProximo {
+    font-size: 2.7vw;
+  }
+
+  .anexoLabel {
+    width: 18vw;
+    height: 5vw;
+    font-size: 2.7vw;
+  }
+
+  .componente-content-input.input-busque-por-servicos {
+    font-size: 2.7vw;
+  }
+
+  .componente-content-input.input-busque-por-servicos::placeholder {
+    font-size: 2.7vw;
+  }
+
+  .componente-content-input.input-desc-servico {
+    font-size: 2.7vw;
+  }
+
+  .categorias {
+    font-size: 2.7vw;
+  }
+
+  .headerVoltar .btnVoltar {
+    width: 5vw;
+    height: 5vw;
+  }
+
+  .headerVoltar .btnVoltar .iconeVoltar {
+    font-size: 4vw;
+  }
+
+
+  .componente-content-input.input-cep {
+    font-size: 2.7vw;
+  }
+
+  .componente-content-input.input-estado {
+    font-size: 2.7vw;
+  }
+
+  .componente-content-input.input-bairro {
+    font-size: 2.7vw;
+  }
+
+  .componente-content-input.input-rua {
+    width: 20vw;
+    font-size: 2.7vw;
+  }
+
+  .componente-content-input.input-residencia {
+    width: 12vw;
+    height: 2.75vw;
+    font-size: 2.7vw;
+  }
+
+  .componente-content-input.input-complemento {
+    width: 20vw;
+    height: 2.75vw;
+    font-size: 2.7vw;
+  }
+
+  .postarH4 {
+    font-size: 2.7vw;
+  }
+}
+
+/* Smartphones muito pequenos */
+@media (max-width: 320px) {
+
+}
