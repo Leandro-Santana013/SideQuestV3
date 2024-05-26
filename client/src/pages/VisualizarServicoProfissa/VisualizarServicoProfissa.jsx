@@ -30,7 +30,7 @@ const VisualizarServicoProfissa = () => {
                 const response = await getRequest(`/professional/servico/${id}`);
                 // Configurando os dados do profissional no estado local
                 setServico(response);
-                console.log(response)
+                console.log("hhhhhhhhhhh", response)
             } catch (error) {
                 console.error("Erro ao buscar informações do profissional:", error);
                 // Tratamento de erro adicional conforme necessário
@@ -47,6 +47,11 @@ const VisualizarServicoProfissa = () => {
 
     };
 
+    const handleClickaceitar = async(id) => {
+        if(pro && pro.id_profissional && servico ){
+            const response = await postRequest(`/professional/servico/aceitar`, {id_profissional: id, id_servico: servico.id_postagemServico });
+        }
+    }
     return (
         <>
             <Header />
@@ -67,7 +72,7 @@ const VisualizarServicoProfissa = () => {
                                 <hr />
                                 <div className="card-inferior-servico">
                                     <div className="proposta-servico">
-                                        <button>Aceitar</button>
+                                        <button onClick={() => handleClickaceitar(pro.id_profissional)}>Aceitar</button>
                                         <button onClick={() => handleClick(id_cliente)}>Chat</button>
                                         <div className="perfil-avaliacao">
                                             <div className="avaliacao-icon-nome">

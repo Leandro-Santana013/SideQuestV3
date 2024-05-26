@@ -110,16 +110,17 @@ export const ProfessionalContextProvider = ({ children }) => {
   );
 
   const [Dadosiniciais, setDadosIniciais] = useState([]);
-
+  const [Dadosprivate, setDadosprivate] = useState([]);
   useEffect(() => {
     const fetchDataFromBackend = async () => {
 
       try {
           
         const response = await postRequest("/professional/servicoscard",{ id_profissional: pro.id_profissional });
+        const responseprivate = await postRequest("/professional/servicoscardprivate",{ id_profissional: pro.id_profissional });
         console.log(response.user);
         setDadosIniciais(response.user);
-
+setDadosprivate(responseprivate.user)
       } catch (error) {
         console.error("Erro ao buscar dados do backend:", error);
       }
@@ -127,6 +128,7 @@ export const ProfessionalContextProvider = ({ children }) => {
 
     fetchDataFromBackend()
   }, [pro])
+
   const [changedProData, setChangedProData] = useState({});
   const [modalShown, setShowModal] = useState(null);
 
@@ -257,7 +259,8 @@ export const ProfessionalContextProvider = ({ children }) => {
         categorias,
         setCategorias,
         fetchDataConcluir,
-        cepError
+        cepError,
+        Dadosprivate
       }}
     >
       {children}

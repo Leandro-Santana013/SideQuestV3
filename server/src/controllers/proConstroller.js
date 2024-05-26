@@ -196,7 +196,6 @@ exports.registerPro = async (req, res) => {
   (exports.validaEmailPro = async (req, res) => {
     try {
       const { token } = req.params;
-      console.log("penis pinto", globaltoken, globalemail);
       if (globalemail) {
         controller_Pro.updateTokenByEmail({
           params: {
@@ -246,7 +245,6 @@ const calcularDiferencaTempo = (dataPostagem) => {
 
 exports.cardservico = async (req, res) => {
   const { id_profissional } = req.body
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa", id_profissional, req.body)
   const populationService = await controller_Pro.findServices({
     params: {
         id_profissional: id_profissional
@@ -254,6 +252,31 @@ exports.cardservico = async (req, res) => {
 });
 
 console.log(populationService)
+
+if (Array.isArray(populationService) && populationService.length > 0) {
+        const servicosComDiferencaTempo = populationService.map((servico) => ({
+            ...servico,
+            diferencaTempo: calcularDiferencaTempo(servico.tm_postagem),
+        }));
+
+        
+        res.status(200).json(servicosComDiferencaTempo);
+    } else {
+      res.status(200).json({}); // Retorna um array vazio se não houver serviços
+    }
+}
+
+exports.cardservicosprivado = async (req, res) => {
+  const { id_profissional } = req.body
+
+  const populationService = await controller_Pro.findServicesPrivate({
+    params: {
+        id_profissional: id_profissional
+    }
+});
+
+
+
 
 if (Array.isArray(populationService) && populationService.length > 0) {
         const servicosComDiferencaTempo = populationService.map((servico) => ({
@@ -383,7 +406,7 @@ exports.concluirCad = async (req, res) => {
     descricao
   )
   try {
-    console.log("äaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", descricao)
+   
 
 
     const pro = await controller_Pro.infoprofissional({
@@ -459,7 +482,7 @@ exports.concluirCad = async (req, res) => {
 
 
 
-    console.log("888", enderecoInstance)
+
 
     const Professional = await controller_Pro.infoprofissional({
       params: { id_profissional: id_profissional },
@@ -470,3 +493,12 @@ exports.concluirCad = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.aceitarServico =  async (req, res) =>{
+const { id_profissional, id_servico } = req.body
+console.log(req.body)
+const servicoaceito = await controller_Pro.insertconfirmarServico({
+  params: { id_profissional: id_profissional, id_postagemServico:id_servico },
+});
+res.status(200).json(servicoaceito  )
+}

@@ -5,11 +5,12 @@ import "./Favoritos.css";
 import "../../assets/remixicons/remixicon.css";
 import { getRequest } from '../../utils/services';
 import { UserContext } from '../../context/UserContext';
-import { Link } from 'react-router-dom';
+import { Link,  useNavigate  } from 'react-router-dom';
 import balaoChat from '../../assets/balao-de-pensamento.png';
 import { ChatContext } from '../../context/ChatContext';
 import { RiChat3Line, RiMegaphoneLine } from "react-icons/ri";
 const ProfissionaisFavoritos = () => {
+    const navigate = useNavigate();
     const { user } = useContext(UserContext)
     const {createChat} = useContext(ChatContext)
     const [favs, setFavs] = useState([]);
@@ -30,6 +31,7 @@ const ProfissionaisFavoritos = () => {
 
 
 
+
     const ClickCreateChat = (u) => {
         if (user !== null) {
             createChat(user.id_cliente, u);
@@ -37,6 +39,10 @@ const ProfissionaisFavoritos = () => {
         }
 
     };
+
+    const handlePostarServico = (id_profissional) => {
+        navigate(`/homeCliente/postarSevico`, { state: { id_profissional } });
+    };  
 
     return (
         <>
@@ -56,22 +62,24 @@ const ProfissionaisFavoritos = () => {
                     <div className="area-profs">
 
                         <div className="prof-favoritos">
-                            {favs && favs.length > 0 ? (
+                        {favs && favs.length > 0 ? (
                                 favs.map((profissional) => (
-                                    <>
-                                    <Link to={`/homeCliente/perfilProfissional/${profissional.id_profissional}`}>
                                     <div className="card-prof-fav" key={profissional.id_profissional}>
-                                        <div className="info-prof-fav">
-                                            <img src={profissional.img_profissional || imgPerfil} alt="imagem de perfil" />
-                                            <p>{profissional.nm_profissional}</p>
-                                        </div>
+                                        <Link to={`/homeCliente/perfilProfissional/${profissional.id_profissional}`}>
+                                            <div className="info-prof-fav">
+                                                <img src={profissional.img_profissional || imgPerfil} alt="imagem de perfil" />
+                                                <p>{profissional.nm_profissional}</p>
+                                            </div>
+                                        </Link>
                                         <div className="actions-prof-fav">
-                                            <i onClick={() => ClickCreateChat(profissional.id_profissional)}><RiChat3Line></RiChat3Line></i>
-                                            <i><RiMegaphoneLine/></i>
+                                            <i onClick={() => ClickCreateChat(profissional.id_profissional)}>
+                                                <RiChat3Line />
+                                            </i>
+                                            <i onClick={() => handlePostarServico(profissional.id_profissional)}>
+                                                <RiMegaphoneLine />
+                                            </i>
                                         </div>
                                     </div>
-                                    </Link>
-                                    </>
                                 ))
                             ) : (
                                 <p>Nenhum favorito encontrado.</p>
