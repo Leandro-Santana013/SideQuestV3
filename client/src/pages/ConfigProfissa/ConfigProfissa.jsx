@@ -1,10 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import {
-  Header,
-  SidebarProfissional,
-  ImageCropper,
-  TextInput,
-} from "../../components";
+import { Header, SidebarProfissional, ImageCropper, TextInput, MenuBottomProfissional} from "../../components";
 import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 import "./configProfissa.css";
@@ -79,6 +74,7 @@ const configProfissa = () => {
     <>
       <Header />
       <SidebarProfissional />
+      <MenuBottomProfissional />
       <div className="content-midia">
         <div className="main-content">
           <div className="conteudo-config-perfil">

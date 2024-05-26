@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import {  Header, TextInput, MenuBottomCliente, SidebarProfissional } from "../../components";
+import {  Header, TextInput, MenuBottomCliente, SidebarProfissional, MenuBottomProfissional } from "../../components";
 import { ProfessionalContext} from "../../context/ProfissionalContext";
 import { Link,  useNavigate  } from 'react-router-dom';
 import ImgPerfil from "../../assets/icone-perfil.png";
@@ -12,7 +12,7 @@ const servicoPrivado = () => {
     <>
     <Header />
     <SidebarProfissional />
-    <MenuBottomCliente />
+    <MenuBottomProfissional />
     <div className="content-midia">
         <div className="main-content">
     {Dadosprivate.length > 0 ? (

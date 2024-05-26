@@ -1,20 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./perfilProfissional.css";
 import { Link } from "react-router-dom";
-import { SidebarProfissional, Header, SidebarCliente } from "../../components";
+import { SidebarProfissional, Header, MenuBottomProfissional} from "../../components";
 import iconeperfil from "../../assets/icone-perfil.png";
 import { useParams } from "react-router-dom";
-import medalhaouro from "../../assets/medalhaouro.png"
-import medalha10k from "../../assets/medalha10k.png";
-import medalhabronze from "../../assets/medalha10k.png";
-import estrelas from "../../assets/estrelinha.png";
-import agenda from "../../assets/agenda.png";
 import certificado from "../../assets/certificado.png";
 import { ChatContext } from "../../context/ChatContext";
 import { postRequest, favRequest, baseUrl, getRequest, putRequest, } from "../../utils/services";
 import { UserContext } from "../../context/UserContext";
 
-import { RiFilter2Fill, RiStarFill } from "react-icons/ri";
+import { RiStarFill } from "react-icons/ri";
 import { FaAngleLeft } from "react-icons/fa6";
 
 const PerfilProfissional = () => {
@@ -74,7 +69,8 @@ const PerfilProfissional = () => {
     return (
         <>
             <Header />
-            <SidebarCliente />
+            <SidebarProfissional />
+            <MenuBottomProfissional />
             <section className="content-midia">
                 <div className="main-content">
                     {profissional && (

@@ -18,9 +18,11 @@ import {ImageCropper} from './imgCroppper/ImageCropper'
 import {HeaderLandingPro} from './HeaderLandingpro/HeaderLandingpro'
 import { InfoincPro } from './InfoincPro/InfoincPro'
 import { MenuBottomCliente } from './MenuBottomCliente/MenuBottomCliente';
+import { MenuBottomProfissional } from './MenuBottomProfissional/MenuBottomProfissional';
 
 export {
     MenuBottomCliente,
+    MenuBottomProfissional,
     Animation,
     Benefits,
     CardProfissional,

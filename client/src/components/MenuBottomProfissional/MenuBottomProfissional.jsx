@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import "./MenuBottomCliente.css";
 import { Link } from "react-router-dom";
-import "./MenuBottomCliente.css"
 
-export const MenuBottomCliente = () => {
+
+export const MenuBottomProfissional = () => {
     const [currentPage, setCurrentPage] = useState(window.location.pathname);
 
     const pages = [
-        { id: 1, name: "Home", href: "homeCliente" },
-        { id: 2, name: "Chats", href: "chats" },
-        { id: 3, name: "Favoritos", href: "favoritosCliente" },
-        { id: 4, name: "Histórico", href: "historicoCliente" },
-        { id: 5, name: "Pagamentos", href: "pagamentosCliente" },
-        { id: 6, name: "Configurações", href: "config" }
+        { id: 1, name: "home", href: "homeProfissionais" },
+        { id: 2, name: "chats", href: "chats" },
+        { id: 3, name: "dashboard", href: "dashboard" },
+        { id: 4, name: "perfil", href: "perfilProfissional" },
+        { id: 5, name: "pagamentos", href: "pagamentosProfissional" },
+        { id: 6, name: "propostas", href: "propostasProfissional" },
+        { id: 7, name: "Configurações", href: "ConfigProfissa" }
     ];
 
     useEffect(() => {
@@ -45,21 +45,25 @@ export const MenuBottomCliente = () => {
             </div>
         </div>
     );
-};
+};  
 
 const getIcon = (page) => {
     switch (page.href) {
-        case "homeCliente":
+        case "homeProfissionais":
             return "fa-solid fa-house";
         case "chats":
             return "fa-regular fa-comments";
-        case "favoritosCliente":
+        case "dashboard":
+            return "fa-sharp fa-solid fa-chart-line";
+        case 'perfilProfissional':
+            return 'fa-solid fa-user-tie';
+        case "favoritosProfissional":
             return "fa-regular fa-star";
-        case "historicoCliente":
-            return "fa-solid fa-clock-rotate-left";
-        case "pagamentosCliente":
-            return "fa-solid fa-hand-holding-dollar";
-        case "config":
+        case "pagamentosProfissional":
+            return "fa-solid fa-coins";
+        case "propostasProfissional":
+            return "fa-solid fa-handshake";
+        case "ConfigProfissa":
             return "fa-solid fa-gear";
         default:
             return "";
