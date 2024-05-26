@@ -83,22 +83,24 @@ const configProfissa = () => {
         <div className="main-content">
           <div className="conteudo-config-perfil">
             <div className="cabecalho-editar">
-              <img
-                id="img"
-                htmlFor="comp"
-                ref={avatarUrl}
-                src={pro && pro.img_profissional ? pro.img_profissional : imgPerfil}
-                alt="Imagem de perfil"
-                className="img-config-perfil"
-                style={{
-                  objectFit: "contain",
-                  width: "120px",
-                  height: "120px",
-                  borderRadius: "50%",
-                }}
-              />
-              <ImageCropper updatefoto={updatefoto} />
-              <button onClick={() => setModalEditar(true)}>Editar</button>
+              <div className="area-img-perfil-edit">
+                <img
+                  id="img"
+                  htmlFor="comp"
+                  ref={avatarUrl}
+                  src={pro && pro.img_profissional ? pro.img_profissional : imgPerfil}
+                  alt="Imagem de perfil"
+                  className="img-config-perfil"
+                  style={{
+                    objectFit: "contain",
+                    width: "120px",
+                    height: "120px",
+                    borderRadius: "50%",
+                  }}
+                />
+                <ImageCropper updatefoto={updatefoto} />
+              </div>
+              {/* <button onClick={() => setModalEditar(true)}>Editar</button> */}
             </div>
             <div className="sessao-config">
               <div className="edit-infoPessoais">

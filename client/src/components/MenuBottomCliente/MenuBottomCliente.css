@@ -1,34 +1,74 @@
-.options-menu-bottom {
+.menu-bottom-cliente {
     display: none;
 }
 
 @media screen and (max-width: 1025px) {
-    .options-menu-bottom {
-        display: inline-flex;
-        position: fixed;
-        bottom: 0;
+    .menu-bottom-cliente {
+        display: flex;
+        height: 65px;
         width: 100%;
+        bottom: 0;
+        position: fixed;
         justify-content: center;
         z-index: 10;
-        background-color: white;
-        border-radius: 30px 30px 0 0;
-        gap: 2vw;
+        background-color: #ffffff;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         padding: 10px 0;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
-    
+
+    .menu-bottom-cliente:hover {
+        background-color: #f8f8f8;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .options-menu-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
     .connected-bar-menu-bottom {
         display: flex;
+        flex-direction: column;
         align-items: center;
+        width: 11vw;
         justify-content: center;
-        padding: 1vw;
-        width: 3.5vw;
-        height: 3.5vw;
-        border-radius: 100%;
-        gap: 0.5vw;
+        padding: .5rem;
+        border-radius: 10px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        color: #333;
     }
 
-    i {
-        font-size: 3vw !important;
+    .connected-bar-menu-bottom.active {
+        background-color: #e0f7fa;
+        transform: translateY(-5px);
+        color: var(--verde);
+    }
+
+    .connected-bar-menu-bottom i {
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+    }
+
+    .connected-bar-menu-bottom p {
+        margin: 0;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+    }
+
+    .connected-bar-menu-bottom.active i,
+    .connected-bar-menu-bottom.active p {
+        color: var(--verde);
+    }
+
+    .option {
+        text-decoration: none;
+    }
+
+    .option.active {
+        color: var(--verde);
     }
 }
