@@ -12,7 +12,8 @@ const {
   ModelAvaliacao,
   ModelInfoProfissional,
   ModelProfissionalCategoria,
-  ModelProfissionalProfileImg
+  ModelProfissionalProfileImg,
+  ClienteProfissionalFavorito
 } = require("../../models/index");
 
 module.exports = {
@@ -532,10 +533,51 @@ module.exports = {
         'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao',
       ] // agrupando pelo id do cliente
     });
+  },
+
+  buscarfav: async (req, res) => {
+    const {id_cliente, id_profissional, param} = req.params
+
+    if (param == false) {
+      // Buscar sem criar ou destruir
+      return ClienteProfissionalFavorito.findOne({
+          where: {
+              id_cliente: id_cliente,
+              id_profissional: id_profissional
+          }
+      });
+     
   }
+    const [alreadyFav, createdFav] = await ClienteProfissionalFavorito.findOrCreate({
+      where: {
+        id_cliente: id_cliente, 
+        id_profissional: id_profissional
+      }
+    })
 
+    if (!createdFav) {
+      await ClienteProfissionalFavorito.destroy({
+        where: {
+          id_cliente: id_cliente,
+          id_profissional: id_profissional
+        }
+      }); 
+    }
+    return createdFav ? createdFav.situacao = true : createdFav.situacao = null
+  },
 
-
+  getfavs: async (req, res) => {
+    const {id_cliente} = req.params;
+     return ModelProfissional.findAll({
+      include: [{
+        model: ModelCliente,
+        where: { id_cliente: id_cliente }, // A condição vai na tabela associada (Cliente)
+        through: {
+          attributes: [] // Não incluir atributos da tabela intermediária
+        }
+      }]
+    });
+  }
 
 }
 

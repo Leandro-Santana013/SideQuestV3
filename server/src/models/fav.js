@@ -3,9 +3,14 @@ const { connectionDataBase } = require('../../database/db')
 const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 
 const ClienteProfissionalFavorito =  connectionDataBase.define('tb_cliente_profissional_favorito', {
+  id_favorito: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true
+  },
     id_cliente: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
       allowNull: false,
       references:{
         model:'tb_profissional',

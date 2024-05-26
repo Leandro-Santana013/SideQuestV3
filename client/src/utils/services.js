@@ -73,6 +73,38 @@
         }
     }
 
+    export const favRequest = async (url, body) => {
+        try {
+            const response = await axios.post(baseUrl + url, body);
+        
+            
+            let user;
+            
+
+            // Verificar se a resposta contém a chave "message" (sucesso)
+            if (response.data && !response.data.error || response.data == null) {
+                console.log(response)
+                user = response.data
+            } else {
+                // Se não houver uma chave "message", trata-se de um erro
+                throw new Error('Erro ao processar a solicitação.');
+            }
+
+            return { user}; // Retorna um objeto com a chave "data" contendo a mensagem de sucesso
+        } catch (error) {
+            if (error.response && error.response.status >= 400 && error.response.status <=499) {
+                const errorMessage = error.response.data.error;
+               
+                console.log(`Erro ${errorMessage}`);
+                return { error: errorMessage}; // Retorna um objeto com a chave "error" contendo a mensagem de erro
+            } else {
+                // Tratar outros tipos de erros
+                console.error(error);
+                throw error; // rejeitar a promise para que o erro seja tratado no código que chamou essa função
+            }
+        }
+    };
+
 
     // export const postRequest = async (url, body) => {
     //     try {

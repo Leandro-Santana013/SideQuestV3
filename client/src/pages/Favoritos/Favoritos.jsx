@@ -1,10 +1,43 @@
-import React from 'react';
-import { SidebarCliente, Header, MenuBottomCliente} from '../../components';
+import React, { useContext, useEffect, useState } from 'react';
+import { SidebarCliente, Header, MenuBottomCliente } from '../../components';
 import imgPerfil from "../../assets/icone-perfil.png";
 import "./Favoritos.css";
 import "../../assets/remixicons/remixicon.css";
-
+import { getRequest } from '../../utils/services';
+import { UserContext } from '../../context/UserContext';
+import { Link } from 'react-router-dom';
+import balaoChat from '../../assets/balao-de-pensamento.png';
+import { ChatContext } from '../../context/ChatContext';
+import { RiChat3Line, RiMegaphoneLine } from "react-icons/ri";
 const ProfissionaisFavoritos = () => {
+    const { user } = useContext(UserContext)
+    const {createChat} = useContext(ChatContext)
+    const [favs, setFavs] = useState([]);
+    useEffect(() => {
+        const getFavs = async () => {
+            if (user && user.id_cliente) {
+                try {
+                    const response = await getRequest(`/user/getFavs/${user.id_cliente}`);
+                    setFavs(response);
+                    console.log("brasil", response)
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+        }
+        getFavs()
+    }, [user])
+
+
+
+    const ClickCreateChat = (u) => {
+        if (user !== null) {
+            createChat(user.id_cliente, u);
+            window.location.href = '/chats';
+        }
+
+    };
+
     return (
         <>
             <Header />
@@ -21,83 +54,28 @@ const ProfissionaisFavoritos = () => {
                     </div>
 
                     <div className="area-profs">
+
                         <div className="prof-favoritos">
-                            <div className="card-prof-fav">
-                                <div className="info-prof-fav">
-                                    <img src={imgPerfil} alt="imagem de perfil" />
-                                    <p>João Kleber</p>
-                                </div>
-                                <div className="actions-prof-fav">
-                                    <i className="ri-star-fill"></i>
-                                    <i className="ri-wechat-line"></i>
-                                    <i className="ri-megaphone-fill"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="prof-favoritos">
-                            <div className="card-prof-fav">
-                                <div className="info-prof-fav">
-                                    <img src={imgPerfil} alt="imagem de perfil" />
-                                    <p>João Kleber</p>
-                                </div>
-                                <div className="actions-prof-fav">
-                                    <i className="ri-star-fill"></i>
-                                    <i className="ri-wechat-line"></i>
-                                    <i className="ri-megaphone-fill"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="prof-favoritos">
-                            <div className="card-prof-fav">
-                                <div className="info-prof-fav">
-                                    <img src={imgPerfil} alt="imagem de perfil" />
-                                    <p>João Kleber</p>
-                                </div>
-                                <div className="actions-prof-fav">
-                                    <i className="ri-star-fill"></i>
-                                    <i className="ri-wechat-line"></i>
-                                    <i className="ri-megaphone-fill"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="prof-favoritos">
-                            <div className="card-prof-fav">
-                                <div className="info-prof-fav">
-                                    <img src={imgPerfil} alt="imagem de perfil" />
-                                    <p>João Kleber</p>
-                                </div>
-                                <div className="actions-prof-fav">
-                                    <i className="ri-star-fill"></i>
-                                    <i className="ri-wechat-line"></i>
-                                    <i className="ri-megaphone-fill"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="prof-favoritos">
-                            <div className="card-prof-fav">
-                                <div className="info-prof-fav">
-                                    <img src={imgPerfil} alt="imagem de perfil" />
-                                    <p>João Kleber</p>
-                                </div>
-                                <div className="actions-prof-fav">
-                                    <i className="ri-star-fill"></i>
-                                    <i className="ri-wechat-line"></i>
-                                    <i className="ri-megaphone-fill"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="prof-favoritos">
-                            <div className="card-prof-fav">
-                                <div className="info-prof-fav">
-                                    <img src={imgPerfil} alt="imagem de perfil" />
-                                    <p>João Kleber</p>
-                                </div>
-                                <div className="actions-prof-fav">
-                                    <i className="ri-star-fill"></i>
-                                    <i className="ri-wechat-line"></i>
-                                    <i className="ri-megaphone-fill"></i>
-                                </div>
-                            </div>
+                            {favs && favs.length > 0 ? (
+                                favs.map((profissional) => (
+                                    <>
+                                    <Link to={`/homeCliente/perfilProfissional/${profissional.id_profissional}`}>
+                                    <div className="card-prof-fav" key={profissional.id_profissional}>
+                                        <div className="info-prof-fav">
+                                            <img src={profissional.img_profissional || imgPerfil} alt="imagem de perfil" />
+                                            <p>{profissional.nm_profissional}</p>
+                                        </div>
+                                        <div className="actions-prof-fav">
+                                            <i onClick={() => ClickCreateChat(profissional.id_profissional)}><RiChat3Line></RiChat3Line></i>
+                                            <i><RiMegaphoneLine/></i>
+                                        </div>
+                                    </div>
+                                    </Link>
+                                    </>
+                                ))
+                            ) : (
+                                <p>Nenhum favorito encontrado.</p>
+                            )}
                         </div>
                     </div>
                 </div>

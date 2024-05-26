@@ -577,3 +577,25 @@ exports.perfilpro = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+exports.fav = async (req, res) => {
+  const {id_cliente, id_profissional, param } = req.body
+console.log("aaaaaaaaaaaaa", id_cliente, id_profissional, param)
+ const Pair = await controller_User.buscarfav({
+    params:{id_profissional: id_profissional, id_cliente: id_cliente, param: param}
+  });
+  res.status(200).json(Pair);
+
+  
+};
+
+exports.getFavoritos = async (req, res) => {
+  const id_cliente = Number(req.params.id_cliente);
+  console.log("çç''cç''cçç''cçç''cçc''cççç''cç''", req.params)
+  console.log(id_cliente, "id_clienteeee")
+  const favoritos = await controller_User.getfavs({
+    params:{id_cliente: id_cliente}
+  });
+
+  res.status(200).json(favoritos);
+}
