@@ -1,20 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./perfilProfissional.css";
 import { Link } from "react-router-dom";
-import { SidebarProfissional, Header, SidebarCliente } from "../../components";
+import { SidebarProfissional, Header, MenuBottomProfissional} from "../../components";
 import iconeperfil from "../../assets/icone-perfil.png";
 import { useParams } from "react-router-dom";
-import medalhaouro from "../../assets/medalhaouro.png"
-import medalha10k from "../../assets/medalha10k.png";
-import medalhabronze from "../../assets/medalha10k.png";
-import estrelas from "../../assets/estrelinha.png";
-import agenda from "../../assets/agenda.png";
 import certificado from "../../assets/certificado.png";
 import { ChatContext } from "../../context/ChatContext";
-import { postRequest, baseUrl, getRequest, putRequest, } from "../../utils/services";
+import { postRequest, favRequest, baseUrl, getRequest, putRequest, } from "../../utils/services";
 import { UserContext } from "../../context/UserContext";
 
-import { RiFilter2Fill, RiStarFill } from "react-icons/ri";
+import { RiStarFill } from "react-icons/ri";
 import { FaAngleLeft } from "react-icons/fa6";
 
 const PerfilProfissional = () => {
@@ -23,6 +18,7 @@ const PerfilProfissional = () => {
     const { user } = useContext(UserContext)
     const [profissional, setProfissional] = useState(null);
     const [typeForm, setTypeForm] = useState(1)
+    const [favoritado, setFavoritado] = useState(null)
 
     const handleForm = (n) => {
         setTypeForm(n)
@@ -35,13 +31,18 @@ const PerfilProfissional = () => {
 
     useEffect(() => {
 
-        const fetchData = async () => {
+        const fetchData = async() => {
             try {
+                
                 // Fazendo a solicitação para buscar informações do profissional com base no ID
                 const response = await getRequest(`/user/perfil/profissionais/${id}`);
-                // Configurando os dados do profissional no estado local
                 setProfissional(response);
-                console.log('krl', response)
+                if(user && user.id_cliente){
+                const fav = await favRequest(`/user/profissional/favoritado`, {id_cliente: user.id_cliente, id_profissional:Number(id), param: false})
+                // Configurando os dados do profissional no estado local
+                console.log("aaaaaaaaaaaaaaaaaaa", fav)
+                setFavoritado(fav.user ? fav.user : null)
+                }
             } catch (error) {
                 console.error("Erro ao buscar informações do profissional:", error);
                 // Tratamento de erro adicional conforme necessário
@@ -49,7 +50,7 @@ const PerfilProfissional = () => {
         };
 
         fetchData();
-    }, [id]);
+    }, [id, user]);
 
     const handleClick = (u) => {
         if (user !== null) {
@@ -59,10 +60,17 @@ const PerfilProfissional = () => {
         }
 
     };
+
+    const favPro = async() =>{
+        const fav = await favRequest(`/user/profissional/favoritado`,  {id_cliente: user.id_cliente, id_profissional:id, param: true})
+        console.log("bbbbbbbb", fav.user)
+        setFavoritado(fav.user ? fav.user : null)
+    }
     return (
         <>
             <Header />
-            <SidebarCliente />
+            <SidebarProfissional />
+            <MenuBottomProfissional />
             <section className="content-midia">
                 <div className="main-content">
                     {profissional && (
@@ -80,6 +88,7 @@ const PerfilProfissional = () => {
                                             "user-online" : ""}></span>
                                     <div className="nome-profissao">
                                         <h1>{profissional[0][0].nm_profissional}</h1>
+                                      <div className={favoritado ? "icone-favoritado" : "icone-favoritar"} onClick={favPro}><RiStarFill/></div>
                                         <div className="profissoes-profissional">
                                             <p>Profissões:</p>
                                             <p>Eletricista</p>

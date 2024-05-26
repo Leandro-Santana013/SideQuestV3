@@ -26,13 +26,12 @@
     justify-content: space-around;
     flex-direction: column;
     height: 80vh;
-    width: 12vw;
     padding: 20px 20px 0 20px;
     position: fixed;
     margin-left: 1vw;
     font-size: 1vw;
     bottom: 0;
-    border-radius: 20px;
+    border-radius: 20px 20px 0 0;
     background-color: white;
     align-items: center;
 

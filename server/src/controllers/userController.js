@@ -229,8 +229,8 @@ exports.postarServico = async (req, res) => {
       nmrResidencia,
       categoria,
       idCliente,
-      email,
       imagens,
+      id_profissional
     } = req.body;
 
     console.log(
@@ -244,7 +244,7 @@ exports.postarServico = async (req, res) => {
       nmrResidencia,
       categoria,
       idCliente,
-      email
+      id_profissional
     );
     const datanow = Date.now();
 
@@ -314,6 +314,7 @@ exports.postarServico = async (req, res) => {
           ds_titulo: titulo,
           img_servico: imageBuffer ? imageBuffer : null,
           tm_postagem: datanow,
+          pr_escolhido: id_profissional ? id_profissional : null
         },
       });
     } catch (error) {
@@ -359,7 +360,7 @@ exports.postarServicoLoc = async (req, res) => {
         .status(400)
         .json({ error: "categoria não selecionada", formstatus: 1 });
 
-   console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", datanow)
+
 
     try {
       const servicoInstance = await controller_User.CreateServico({
@@ -370,7 +371,8 @@ exports.postarServicoLoc = async (req, res) => {
           ds_servico: servico.dsServico,
           ds_titulo: servico.titulo,
           img_servico: servico.imagens,
-          tm_postagem:  datanow
+          tm_postagem:  datanow,
+          pr_escolhido: servico.id_profissional ? servico.id_profissional : null
         },
       });
     } catch (error) {
@@ -554,7 +556,7 @@ exports.findAllProfissionais = async (req, res) => {
 
 exports.perfilpro = async (req, res) => {
   const {id_profissional} = req.params
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", id_profissional)
+
   try {
     const pt1 = await controller_User.queryPart1({
       params:{id_profissional: id_profissional}
@@ -577,3 +579,24 @@ exports.perfilpro = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+exports.fav = async (req, res) => {
+  const {id_cliente, id_profissional, param } = req.body
+
+ const Pair = await controller_User.buscarfav({
+    params:{id_profissional: id_profissional, id_cliente: id_cliente, param: param}
+  });
+  res.status(200).json(Pair);
+};
+
+
+exports.getFavoritos = async (req, res) => {
+  const id_cliente = Number(req.params.id_cliente);
+
+
+  const favoritos = await controller_User.getfavs({
+    params:{id_cliente: id_cliente}
+  });
+
+  res.status(200).json(favoritos);
+}

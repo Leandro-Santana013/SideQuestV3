@@ -125,8 +125,9 @@ export const CardProfissional = () => {
             </div>
           </div>
           <div className="profissoes-card-profissional">
-            <p>Eletricista</p>
-            <p>Hidráulica</p>
+          {profissional.tb_profissional_categoria.map(categoria => (
+              <p key={categoria.id_categoria}>{categoria.tb_categorium.ds_categoria}</p>
+            ))}
           </div>
           <div className="desc-cliente">
             <p className="desc">{profissional.ds_biografia ? profissional.ds_biografia : "Não possui descrição"}</p>

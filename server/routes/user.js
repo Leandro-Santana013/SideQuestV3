@@ -15,4 +15,6 @@ router.post('/updateInfoUser', userControllers.updateInfoUser)
 router.post('/concluirCad', userControllers.concluirCad)
 router.get('/allProfissionais', userControllers.findAllProfissionais)
 router.get('/perfil/profissionais/:id_profissional', userControllers.perfilpro)
+router.post('/profissional/favoritado', userControllers.fav)
+router.get('/getFavs/:id_cliente', userControllers.getFavoritos)
 module.exports = router; 

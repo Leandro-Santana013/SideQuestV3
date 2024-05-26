@@ -11,8 +11,9 @@ const {
   ModelTerminoServico,
   ModelAvaliacao,
   ModelInfoProfissional,
-  ClienteProfissionalFavorito,
-  ModelProfissionalProfileImg
+  ModelProfissionalCategoria,
+  ModelProfissionalProfileImg,
+  ClienteProfissionalFavorito
 } = require("../../models/index");
 
 module.exports = {
@@ -165,7 +166,8 @@ module.exports = {
       id_categoria,
       id_endereco,
       img_servico,
-      tm_postagem
+      tm_postagem,
+      pr_escolhido
     } = req.params;
     return ModelPostagemServico.create({
       id_cliente: id_cliente,
@@ -174,14 +176,16 @@ module.exports = {
       ds_servico: ds_servico,
       ds_titulo: ds_titulo,
       img_servico: img_servico,
-      tm_postagem: tm_postagem
+      tm_postagem: tm_postagem,
+      pr_escolhido: pr_escolhido,
     });
   },
 
   //6
+
   selectProfissional: async (req, res) => {
     try {
-      const profissionais = await ModelProfissional.findAll({
+      return ModelProfissional.findAll({
         attributes: [
           "id_profissional",
           "sg_sexoProfissional",
@@ -226,7 +230,7 @@ module.exports = {
               0
             ),
             "media_avaliacoes",
-          ],
+          ], 
         ],
         include: [
           {
@@ -249,16 +253,28 @@ module.exports = {
               },
             ],
           },
+          {
+            model: ModelProfissionalCategoria,
+            attributes: ['id_categoria'],
+            include: [
+              {
+                model: ModelCategoria,
+                attributes: ['ds_categoria'],
+              },
+            ],
+          },
         ],
-        group: ["tb_profissional.id_profissional"],
+        group: ["tb_profissional.id_profissional", "tb_profissional_categoria.tb_categorium.id_categoria", "tb_profissional_categoria.id_categoriaEscolhida"],
       });
-
-      return profissionais;
     } catch (error) {
       console.error("Erro ao buscar profissionais:", error);
-      throw error;
+      res.status(500).send("Erro ao buscar profissionais");
     }
   },
+  
+
+
+
 
   updateInfoCli: async (req, res) => {
     const { id_cliente, nm_cliente, cd_emailCliente, img_cliente } = req.params;
@@ -519,10 +535,51 @@ module.exports = {
         'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao',
       ] // agrupando pelo id do cliente
     });
+  },
+
+  buscarfav: async (req, res) => {
+    const {id_cliente, id_profissional, param} = req.params
+
+    if (param == false) {
+      // Buscar sem criar ou destruir
+      return ClienteProfissionalFavorito.findOne({
+          where: {
+              id_cliente: id_cliente,
+              id_profissional: id_profissional
+          }
+      });
+     
   }
+    const [alreadyFav, createdFav] = await ClienteProfissionalFavorito.findOrCreate({
+      where: {
+        id_cliente: id_cliente, 
+        id_profissional: id_profissional
+      }
+    })
 
+    if (!createdFav) {
+      await ClienteProfissionalFavorito.destroy({
+        where: {
+          id_cliente: id_cliente,
+          id_profissional: id_profissional
+        }
+      }); 
+    }
+    return createdFav ? createdFav.situacao = true : createdFav.situacao = null
+  },
 
-
+  getfavs: async (req, res) => {
+    const {id_cliente} = req.params;
+     return ModelProfissional.findAll({
+      include: [{
+        model: ModelCliente,
+        where: { id_cliente: id_cliente }, // A condição vai na tabela associada (Cliente)
+        through: {
+          attributes: [] // Não incluir atributos da tabela intermediária
+        }
+      }]
+    });
+  }
 
 }
 

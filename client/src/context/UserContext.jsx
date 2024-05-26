@@ -364,6 +364,8 @@ export const UserContextProvider = ({ children }) => {
     setServico(info);
   }, []);
 
+ 
+
   return (
     <UserContext.Provider
       value={{
@@ -409,7 +411,8 @@ export const UserContextProvider = ({ children }) => {
         setIsCheckedLocation,
         PostarServicoWithLoc,
         selectedImages,
-        setSelectedImages
+        setSelectedImages,
+        
       }}
     >
       {children}

@@ -11,10 +11,11 @@ import imgTarefaConcluida from "../../assets/tarefa-concluida1.png"
 import { Link } from "react-router-dom";
 
 import { RiFilter2Fill } from "react-icons/ri";
+import { MenuBottomProfissional } from "../../components/MenuBottomProfissional/MenuBottomProfissional";
 
 const HomeProfissionais = () => {
 
-    
+
     const [text, setText] = useState("");
     const handleChange = (newValue) => {
         console.log("Novo valor:", newValue);
@@ -22,9 +23,10 @@ const HomeProfissionais = () => {
     };
     return (
         <>
-             <InfoincPro/> 
+            <InfoincPro />
             <Header />
             <SidebarProfissional />
+            <MenuBottomProfissional />
             <div className="content-midia">
 
                 <div className="main-content">
@@ -60,9 +62,9 @@ const HomeProfissionais = () => {
                         </div>
                         <h1 className="encontre-prof-p-seu-problema">Encontre os melhores profissionais para o seu problema</h1>
                         <section className="area-servicos">
-                    
-                                <CardServico />
-                    
+
+                            <CardServico />
+
                         </section>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation, } from "react-router-dom";
 import { SidebarCliente, Header, TextInput, MenuBottomCliente } from "../../components";
 import axios from "axios";
 import JSZip from "jszip";
@@ -44,8 +44,17 @@ const PostarServico = () => {
     setSelectedImages,
   } = useContext(UserContext);
 
-
-
+  const { state } = useLocation();
+  const { id_profissional } = state || {};
+  useEffect(() => {
+    if (id_profissional) {
+      console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa", id_profissional)
+        updatepostarServico({
+            ...Servico,
+            id_profissional
+        });
+    }
+}, [id_profissional]);
   const handleCepChange = (e) => {
     const cep = e.target.value;
     setServico({ ...Servico, cep }); // Atualiza o estado do CEP
