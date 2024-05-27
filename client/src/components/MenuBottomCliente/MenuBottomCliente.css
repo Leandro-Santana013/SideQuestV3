@@ -2,14 +2,20 @@
     display: none;
 }
 
+.btn-expandir-menu-bottom {
+    display: none;
+}
+
 @media screen and (max-width: 1025px) {
     .menu-bottom-cliente {
         display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         height: 65px;
         width: 100%;
         bottom: 0;
         position: fixed;
-        justify-content: center;
         z-index: 10;
         background-color: #ffffff;
         border-top-left-radius: 20px;
@@ -27,7 +33,6 @@
     .options-menu-bottom {
         display: flex;
         align-items: center;
-        justify-content: space-between;
     }
 
     .connected-bar-menu-bottom {
@@ -70,5 +75,35 @@
 
     .option.active {
         color: var(--verde);
+    }
+}
+
+@media screen and (max-width: 815px) {
+    .options-menu-bottom {
+        flex-direction: column;
+        padding-top: 30px;
+    }
+
+    .btn-expandir-menu-bottom {
+        display: flex; 
+    }
+
+    .menu-bottom-cliente {
+        height: auto;
+        justify-content: space-between;
+        display: flex;
+    }
+
+    .options-menu-bottom {
+        width: 350px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .connected-bar-menu-bottom {
+        width: 90px;
+        height: 45px;
     }
 }

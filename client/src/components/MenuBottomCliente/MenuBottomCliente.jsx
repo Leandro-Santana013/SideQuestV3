@@ -5,6 +5,14 @@ import "./MenuBottomCliente.css"
 
 export const MenuBottomCliente = () => {
     const [currentPage, setCurrentPage] = useState(window.location.pathname);
+    const [translateMenu, setTranslateMenu] = useState('translateY(150px)')
+
+    const expandirMenu = () => {
+        if (translateMenu == 'translateY(0px)')
+            setTranslateMenu('translateY(150px)')
+        else
+        setTranslateMenu('translateY(0px)')
+    }
 
     const pages = [
         { id: 1, name: "Home", href: "homeCliente" },
@@ -24,11 +32,12 @@ export const MenuBottomCliente = () => {
     }, [pages]);
 
     return (
-        <div className="menu-bottom-cliente">
+        <div className="menu-bottom-cliente" style={{ transform: translateMenu, transition: 'all .25s' }}>
             <link
                 rel="stylesheet"
                 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             />
+            <button className="btn-expandir-menu-bottom" onClick={() => expandirMenu()}>Expandir</button>
             <div className="options-menu-bottom">
                 {pages.map((page) => (
                     <Link
