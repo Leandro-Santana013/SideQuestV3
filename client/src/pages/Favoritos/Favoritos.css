@@ -48,19 +48,18 @@
     flex-direction: column;
     align-items: center;
     width: 70vw;
+    height: 35vw;
     gap: 1vh;
-    padding: 5px;
+
     
 }
 
 .card-prof-fav {
     display: flex;
     align-items: center;
-    width: 60vw;
-    padding: 5px;
+    width: inherit;
     justify-content: space-between;
-    border: solid 1px black;
-    border-radius: 50px;
+    border-bottom: solid 1px rgb(148, 138, 138);
 }
 
 .info-prof-fav {

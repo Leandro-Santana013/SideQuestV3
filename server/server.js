@@ -7,8 +7,6 @@ const messageRoutes = require ('./routes/messageRoutes');
 const {connectMongo} = require("./database/mongodb.js")
 
 
-
-
 app.use('/user', userRoutes);  // Em seguida, use o roteador de pages.js para o caminho raiz
 app.use('/chat', chatRoutes);
 app.use('/professional', proRoutes);

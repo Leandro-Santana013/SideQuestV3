@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./perfilProfissional.css";
-import { Link } from "react-router-dom";
-import { SidebarProfissional, Header, MenuBottomProfissional} from "../../components";
+import { Link, useNavigate } from "react-router-dom";
+import { SidebarProfissional, Header, MenuBottomProfissional, SidebarCliente, MenuBottomCliente} from "../../components";
 import iconeperfil from "../../assets/icone-perfil.png";
 import { useParams } from "react-router-dom";
 import certificado from "../../assets/certificado.png";
 import { ChatContext } from "../../context/ChatContext";
-import { postRequest, favRequest, baseUrl, getRequest, putRequest, } from "../../utils/services";
+import { postRequest, favRequest,  putRequest, getRequest } from "../../utils/services";
 import { UserContext } from "../../context/UserContext";
 
 import { RiStarFill } from "react-icons/ri";
@@ -14,6 +14,7 @@ import { FaAngleLeft } from "react-icons/fa6";
 
 const PerfilProfissional = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const { createChat, onlineUsers } = useContext(ChatContext);
     const { user } = useContext(UserContext)
     const [profissional, setProfissional] = useState(null);
@@ -66,11 +67,16 @@ const PerfilProfissional = () => {
         console.log("bbbbbbbb", fav.user)
         setFavoritado(fav.user ? fav.user : null)
     }
+
+    const handlePostarServico = (id_profissional) => {
+        navigate(`/homeCliente/postarSevico`, { state: { id_profissional } });
+    };  
+
     return (
         <>
             <Header />
-            <SidebarProfissional />
-            <MenuBottomProfissional />
+            <SidebarCliente />
+            <MenuBottomCliente />
             <section className="content-midia">
                 <div className="main-content">
                     {profissional && (
@@ -94,6 +100,8 @@ const PerfilProfissional = () => {
                                             <p>Eletricista</p>
                                         </div>
                                         <div className="iniciar-conversa" onClick={() => handleClick(id)}>Iniciar conversa</div>
+                                        <div className="iniciar-conversa" onClick={() => handlePostarServico(profissional[0][0].id_profissional)}>Enviar servico</div>
+                                        
                                     </div>
                                 </div>
                                 <div className="menu-perfil">
