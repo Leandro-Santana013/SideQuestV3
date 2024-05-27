@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 import { postRequest, baseUrl, getRequest } from "../utils/services";
 import axios from "axios";  
-export const ProfessionalContext = createContext();
+export const  ProfessionalContext = createContext();
 
 export const ProfessionalContextProvider = ({ children }) => {
 
