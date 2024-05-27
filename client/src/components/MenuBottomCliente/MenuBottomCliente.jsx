@@ -1,18 +1,34 @@
 import React, { useEffect, useState } from "react";
 import "./MenuBottomCliente.css";
 import { Link } from "react-router-dom";
-import "./MenuBottomCliente.css"
+import { IoMenu } from "react-icons/io5";
 
 export const MenuBottomCliente = () => {
     const [currentPage, setCurrentPage] = useState(window.location.pathname);
-    const [translateMenu, setTranslateMenu] = useState('translateY(150px)')
+    const [translateMenu, setTranslateMenu] = useState(
+        localStorage.getItem('menuExpanded') === 'true' ? 'translateY(0px)' : 'translateY(160px)'
+    );
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 815);
+
+    const handleResize = () => {
+        setIsMobile(window.innerWidth <= 815);
+        if (window.innerWidth <= 330) {
+            setTranslateMenu(localStorage.getItem('menuExpanded') === 'true' ? 'translateY(0px)' : 'translateY(220px)');
+        } else {
+            setTranslateMenu(localStorage.getItem('menuExpanded') === 'true' ? 'translateY(0px)' : 'translateY(150px)');
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const expandirMenu = () => {
-        if (translateMenu == 'translateY(0px)')
-            setTranslateMenu('translateY(150px)')
-        else
-        setTranslateMenu('translateY(0px)')
-    }
+        const newTranslateMenu = translateMenu === 'translateY(0px)' ? (window.innerWidth <= 330 ? 'translateY(220px)' : 'translateY(150px)') : 'translateY(0px)';
+        setTranslateMenu(newTranslateMenu);
+        localStorage.setItem('menuExpanded', newTranslateMenu === 'translateY(0px)');
+    };
 
     const pages = [
         { id: 1, name: "Home", href: "homeCliente" },
@@ -32,12 +48,12 @@ export const MenuBottomCliente = () => {
     }, [pages]);
 
     return (
-        <div className="menu-bottom-cliente" style={{ transform: translateMenu, transition: 'all .25s' }}>
+        <div className={`menu-bottom-cliente ${isMobile ? 'mobile' : ''}`} style={{ transform: isMobile ? translateMenu : 'none', transition: 'all .25s' }}>
             <link
                 rel="stylesheet"
                 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             />
-            <button className="btn-expandir-menu-bottom" onClick={() => expandirMenu()}>Expandir</button>
+            <button className="btn-expandir-menu-bottom" onClick={() => expandirMenu()}><IoMenu /></button>
             <div className="options-menu-bottom">
                 {pages.map((page) => (
                     <Link

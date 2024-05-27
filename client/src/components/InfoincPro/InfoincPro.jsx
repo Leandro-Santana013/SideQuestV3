@@ -228,12 +228,12 @@ export const InfoincPro = () => {
                 <p>insira uma descrição para sua bio!</p>
                 <input
                   className="padrao-input-card-conclua-registro"
-                  
                   placeholder="Descrição"
                   onChange={(event) => {
                     handleChange("descricao", event);
                   }}
                 />
+                <p onClick={() => setModalConcluaRegistro(2)}>Voltar</p>
                 <button onClick={concluirCad}>Finalizar</button>
               </div>
               <div className="selected-categories">
@@ -245,6 +245,7 @@ export const InfoincPro = () => {
                     </button>
                   </div>
                 ))}
+
               </div>
             </>
           )}
