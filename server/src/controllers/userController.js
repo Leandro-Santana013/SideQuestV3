@@ -355,14 +355,15 @@ exports.postarServicoLoc = async (req, res) => {
       params: { ds_categoria: servico.categoria },
     });
 
-    if (categoriaInstance === 0)
+    if (categoriaInstance === 0){
       return res
         .status(400)
         .json({ error: "categoria não selecionada", formstatus: 1 });
-
+    }
 
 
     try {
+      console.log("aaaaaaaaaaaaaaaaaaaaaaaa")
       const servicoInstance = await controller_User.CreateServico({
         params: {
           id_cliente: idCliente,
@@ -395,7 +396,7 @@ exports.profissionalCard = async (req, res) => {
   const { Filtros } = req.body;
 
   const populationProfissional = await controller_User.selectProfissional();
-  console.log(populationProfissional);
+  
   res.status(200).json(populationProfissional);
 };
 
@@ -599,4 +600,14 @@ exports.getFavoritos = async (req, res) => {
   });
 
   res.status(200).json(favoritos);
+}
+exports.numService = async (req, res) => {
+  const id_cliente = Number(req.params.id_cliente);
+
+
+  const n = await controller_User.nservice({
+    params:{id_cliente: id_cliente}
+  });
+
+  res.status(200).json(n);
 }

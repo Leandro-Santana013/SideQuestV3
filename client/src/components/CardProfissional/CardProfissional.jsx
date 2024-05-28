@@ -9,6 +9,7 @@ import { TextInputBusca } from "../index";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { RiFilter2Fill, RiStarFill } from "react-icons/ri";
+import { getRequest } from "../../utils/services";
 
 export const CardProfissional = () => {
   const [dadosIniciais, setDadosIniciais] = useState([]);
@@ -48,10 +49,8 @@ export const CardProfissional = () => {
 
   const fetchDataFromBackend = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/user/profissionaisCard", { params: filtrados }
-      );
-      setDadosIniciais(response.data);
+      const response = await getRequest("/user/profissionaisCard");
+      setDadosIniciais(response)
     } catch (error) {
       console.error("Erro ao buscar dados do backend:", error);
     }

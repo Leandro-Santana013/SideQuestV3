@@ -579,7 +579,36 @@ module.exports = {
         }
       }]
     });
-  }
+  },
+  nservice: async (req, res) => {
+    try {
+      const { id_cliente } = req.params;
+      const services = await ModelPostagemServico.count({
+        where: { id_cliente: id_cliente },
+      include: [
+        {
+          model: ModelConfirmacaoServico,
+          required: true,
+          include: [
+            {
+              model: ModelTerminoServico,
+              required: false,  // Usamos 'false' para um outer join
+            },
+            // {
+            //   model: ModelProfissional,
+            //   required: true,  // Usamos 'false' para um outer join
+            // },
+          ],
+        },
+      ],
+      
+    });
+
+      return services;
+    } catch (err) {
+      console.error(`Erro: ${err}`);
+    }
+  },
 
 }
 

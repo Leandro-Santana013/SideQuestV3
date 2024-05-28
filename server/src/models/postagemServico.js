@@ -54,7 +54,7 @@ const ModelPostagemServico = connectionDataBase.define(
     },
     pr_escolhido: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     }
   },
   _padraoTableDBExistence("tb_postagemServico")

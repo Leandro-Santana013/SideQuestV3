@@ -1,20 +1,34 @@
-import React,{useState} from "react";
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import "./homeCliente.css";
 import { SidebarCliente, CardProfissional, Header, Infoinc, MenuBottomCliente } from "../../components";
 import imgAproved from "../../assets/aproved.png";
 import imgReload from "../../assets/reload.png";
 import imgCalendario from "../../assets/calendario1.png";
+import { postRequest, favRequest, baseUrl, getRequest, putRequest, } from "../../utils/services";
 
 import { RiFilter2Fill } from "react-icons/ri";
+import { UserContext } from '../../context/UserContext';
 
 const HomeCliente = () => {
-  const [text, setText] = useState("");
-  const [modal, setmodal] = useState(false)
-  const handleChange = (newValue) => {
-    console.log("Novo valor:", newValue);
-    setText(newValue);
-  };
+  const { user } = useContext(UserContext);
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    const getFavs = async () => {
+      if (user && user.id_cliente) {
+        try {
+          const response = await getRequest(`/user/nservice/${user.id_cliente}`);
+          setN(response)
+       
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+    getFavs();
+  }, [user]);
+
   return (
     <>
       <Infoinc />
@@ -23,20 +37,17 @@ const HomeCliente = () => {
       <MenuBottomCliente />
 
       <div className="content-midia">
-        
         <div className="main-content">
           <div className="menu-topo">
             <div className="actions">
               <div className="info-action">
                 <p>Adicionar Serviço</p>
-                <a href="/homeCliente/postarSevico">
-                <Link to={"/homeCliente/postarSevico"}>
-                <div className="action">
-                  <p>Publique um serviço e receba orçamentos</p>
-                  <img src={imgAproved} alt="" />
-                </div>
+                <Link to="/homeCliente/postarSevico">
+                  <div className="action">
+                    <p>Publique um serviço e receba orçamentos</p>
+                    <img src={imgAproved} alt="" />
+                  </div>
                 </Link>
-                </a>
               </div>
             </div>
 
@@ -44,7 +55,7 @@ const HomeCliente = () => {
               <div className="info-action">
                 <p>Serviços Ativos</p>
                 <div className="action">
-                  <p>Você possui 3 serviços ativos</p>
+                  <p>Você possui {n ? n : "0"} serviços ativos</p>
                   <img src={imgReload} alt="" />
                 </div>
               </div>
@@ -54,7 +65,7 @@ const HomeCliente = () => {
               <div className="info-action">
                 <p>Serviços Pendentes</p>
                 <div className="action">
-                  <p>Vizualize os serviços pendentes</p>
+                  <p>Visualize os serviços pendentes</p>
                   <img src={imgCalendario} alt="" />
                 </div>
               </div>

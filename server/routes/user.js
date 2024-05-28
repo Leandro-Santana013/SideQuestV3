@@ -17,4 +17,5 @@ router.get('/allProfissionais', userControllers.findAllProfissionais)
 router.get('/perfil/profissionais/:id_profissional', userControllers.perfilpro)
 router.post('/profissional/favoritado', userControllers.fav)
 router.get('/getFavs/:id_cliente', userControllers.getFavoritos)
+router.get('/nservice/:id_cliente', userControllers.numService)
 module.exports = router; 

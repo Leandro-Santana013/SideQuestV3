@@ -251,7 +251,7 @@ exports.cardservico = async (req, res) => {
     }
 });
 
-console.log(populationService)
+console.log("aaaaaaaaaaaaaaaaaaaaaaa", populationService)
 
 if (Array.isArray(populationService) && populationService.length > 0) {
         const servicosComDiferencaTempo = populationService.map((servico) => ({
@@ -487,7 +487,7 @@ exports.concluirCad = async (req, res) => {
     const Professional = await controller_Pro.infoprofissional({
       params: { id_profissional: id_profissional },
     });
-    console.log(Professional)
+   
     return res.status(200).json(Professional);
   } catch (error) {
     console.log(error);

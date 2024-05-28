@@ -55,9 +55,9 @@ ModelCliente.belongsToMany(ModelProfissional, { through: ClienteProfissionalFavo
 ModelProfissional.belongsToMany(ModelCliente, { through: ClienteProfissionalFavorito, foreignKey: 'id_profissional' });
 
 
-//as informaçôes de profissionais tem um profissional e um profissional tem uma informação de profissional
-ModelProfissional.hasOne(ModelInfoProfissional, { foreignKey: 'id_infoProfissional' });
-ModelInfoProfissional.belongsTo(ModelProfissional, { foreignKey: 'id_infoProfissional' });
+//as informaçôes de profissionais tem um profissional e um profissional tem uma informação de  profissional
+ModelProfissional.hasOne(ModelInfoProfissional, { foreignKey: 'id_profissional' });
+ModelInfoProfissional.belongsTo(ModelProfissional, { foreignKey: 'id_profissional' });
 
 ModelProfissional.hasMany(ModelConfirmacaoServico, { foreignKey: 'id_profissional' });
 ModelConfirmacaoServico.belongsTo(ModelProfissional, { foreignKey: 'id_profissional' });
