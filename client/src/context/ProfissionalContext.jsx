@@ -247,6 +247,7 @@ setDadosprivate(responseprivate.user)
         loginError,
         loginLoading,
         Dadosiniciais,
+        setDadosIniciais,
         logoutPro,
         changedProData,
         setChangedProData,
