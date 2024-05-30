@@ -1,145 +1,144 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto+Mono:wght@600&display=swap');
 
 :root {
-    --verde: #3cbc8c;
-    --azul: #144474;
-    --verde-claro: #E8FFF7;
+  --verde: #3cbc8c;
+  --azul: #144474;
+  --verde-claro: #E8FFF7;
 }
 
 .conteudo-favoritos {
-    margin-right: 5vw;
-    display: flex;
-    flex-direction: column;
-    width: 70vw;
-    margin-top: 15vh;
+  margin-right: 5vw;
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  margin-top: 15vh;
 }
 
 .prof-fav-pesq {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .input-procurar {
-    display: flex;
-    width: 15vw;
-    border: solid 2px black;
-    padding: 5px;
-    justify-content: space-between;
-    border-radius: 20px;
+  display: flex;
+  width: 15vw;
+  border: solid 2px black;
+  padding: 5px;
+  justify-content: space-between;
+  border-radius: 20px;
 }
 
 .input-procurar input {
-    border: none;
-    width: 100%;
+  border: none;
+  width: 100%;
 }
 
 .input-procurar input:focus {
-    outline: none;
+  outline: none;
 }
 
 .area-profs {
-    box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
-    border-radius: 20px;
+  box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
+  border-radius: 20px;
 }
 
 .prof-favoritos {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 70vw;
-    height: 35vw;
-    gap: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70vw;
+  height: 35vw;
+  gap: 1vh;
 
-    
+
 }
 
 .card-prof-fav {
-    display: flex;
-    align-items: center;
-    width: inherit;
-    justify-content: space-between;
-    border-bottom: solid 1px rgb(148, 138, 138);
+  display: flex;
+  align-items: center;
+  width: inherit;
+  justify-content: space-between;
+  border-bottom: solid 1px rgb(148, 138, 138);
 }
 
 .info-prof-fav {
-    display: flex;
-    align-items: center;
-    gap: 1vw;
+  display: flex;
+  align-items: center;
+  gap: 1vw;
 }
 
 .info-prof-fav img {
-    width: 3.5vw;
+  width: 3.5vw;
 }
 
 .actions-prof-fav {
-    margin-right: 10px;
-    display: flex;
-    gap: 1.5vw;
+  margin-right: 10px;
+  display: flex;
+  gap: 1.5vw;
 }
 
 .actions-prof-fav i {
-    font-size: 2vw;
-    color: var(--verde);
-    transition: .25s ease-in-out;
+  font-size: 2vw;
+  color: var(--verde);
+  transition: .25s ease-in-out;
 }
 
 .actions-prof-fav i:hover {
-    font-size: 2vw;
-    color: var(--azul);
+  font-size: 2vw;
+  color: var(--azul);
 }
-
 
 @media screen and (max-width: 500px) {
 
-    .conteudo-favoritos {
-      margin-right: 3.5vw;
-    }
-  
-    .prof-fav-pesq h2 {
-      font-size: 3.5vw;
-    }
-  
-    .input-procurar {
-      height: 2vh;
-      width: 23vw;
-    }
-  
-    .input-procurar input {
-      font-size: 0.6rem;
-    }
-  
-    .card-prof-fav {
-      width: 52vw;
-      height: 3vh;
-      padding: 4px;
-    }
-  
-    .card-prof-fav p {
-      font-size: 0.7rem;
-    }
-  
-    .card-prof-fav .info-prof-fav img {
-      width: 7.5vw;
-    }
-  
+  .conteudo-favoritos {
+    margin-right: 3.5vw;
   }
-  
 
-  @media screen and (max-width: 950px) {
-    .card-prof-fav .info-prof-fav img {
-      width: 7.5vw;
+  .prof-fav-pesq h2 {
+    font-size: 3.5vw;
   }
-  
+
+  .input-procurar {
+    height: 2vh;
+    width: 23vw;
+  }
+
+  .input-procurar input {
+    font-size: 0.6rem;
+  }
+
+  .card-prof-fav {
+    width: 52vw;
+    height: 3vh;
+    padding: 4px;
+  }
+
+  .card-prof-fav p {
+    font-size: 0.7rem;
+  }
+
+  .card-prof-fav .info-prof-fav img {
+    width: 7.5vw;
+  }
+
+}
+
+
+@media screen and (max-width: 950px) {
+  .card-prof-fav .info-prof-fav img {
+    width: 7.5vw;
+  }
+
   .input-procurar {
     width: 22vw;
     padding: 5px;
     margin: 6px;
   }
-  }
+}
 
 
-  .actions-prof-fav .icone-chat {
-    width: 2vw;
-    height: 2vw;
-  }
+.actions-prof-fav .icone-chat {
+  width: 2vw;
+  height: 2vw;
+}

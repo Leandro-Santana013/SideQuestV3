@@ -139,6 +139,33 @@
     }
 }
 
+.selected-categories {
+    display: flex;
+    width: 15vw;
+    flex-direction: column;
+    height: 85px;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+.category-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+        margin: 5px;
+    }
+
+    svg {
+        display: flex;
+        border: none;
+        font-size: 30px;
+        color: red;
+    }
+}
+
 /* Responsividade */
 
 /* Tablets em modo paisagem e dispositivos híbridos */
@@ -165,14 +192,16 @@
 
         .grid-2x2-card-conclua-registro {
             gap: 2vw;
+
             .padrao-input-card-conclua-registro {
                 width: 34vw;
                 padding: 10px;
             }
+
             .padrao-input-card-conclua-registro::placeholder {
                 font-size: 2vw;
             }
-    }
+        }
     }
 
     .bottom-card-conclua-registro {
@@ -226,14 +255,16 @@
 
         .grid-2x2-card-conclua-registro {
             gap: 2vw;
+
             .padrao-input-card-conclua-registro {
                 width: 34vw;
                 padding: 15px;
             }
+
             .padrao-input-card-conclua-registro::placeholder {
                 font-size: 2.5vw;
             }
-    }
+        }
     }
 
     .bottom-card-conclua-registro {
@@ -287,10 +318,12 @@
 
         .grid-2x2-card-conclua-registro {
             gap: 2vw;
+
             .padrao-input-card-conclua-registro {
                 width: 34vw;
                 padding: 10px;
             }
+
             .padrao-input-card-conclua-registro::placeholder {
                 font: 2.7vw;
             }
@@ -360,10 +393,12 @@
 
         .grid-2x2-card-conclua-registro {
             gap: 2vw;
+
             .padrao-input-card-conclua-registro {
                 width: 34vw;
                 padding: 8px;
             }
+
             .padrao-input-card-conclua-registro::placeholder {
                 font-size: 3.5vw;
             }

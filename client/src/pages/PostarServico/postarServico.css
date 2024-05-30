@@ -115,13 +115,12 @@
 }
 
 .categorias {
-  width: fit-content;
-  height: 3vw;
   border-radius: 8px;
   background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px;
   gap: 1vw;
   font-size: 1vw;
   border: none;
