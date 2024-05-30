@@ -15,6 +15,7 @@ const {
   ModelProfissionalProfileImg,
   ClienteProfissionalFavorito
 } = require("../../models/index");
+const { Service } = require("../userController");
 
 module.exports = {
   bindCookieBypkCliente: async (req, res) => {
@@ -584,6 +585,38 @@ module.exports = {
     try {
       const { id_cliente } = req.params;
       const services = await ModelPostagemServico.count({
+        where: {
+          id_cliente: id_cliente
+      },
+      include: [
+          {
+              model: ModelConfirmacaoServico,
+              required: true,
+              include: [
+                  {
+                      model: ModelTerminoServico,
+                      required: false,
+                      where: {
+                          id_terminoServico: {
+                              [Op.is]: null
+                          }
+                      }
+                  }
+              ]
+          }
+      ]
+      
+    });
+console.log(services, "0000000")
+      return services;
+    } catch (err) {
+      console.error(`Erro: ${err}`);
+    }
+  },
+  Service: async (req, res) => {
+    try {
+      const { id_cliente } = req.params;
+      const services = await ModelPostagemServico.findAll({
         where: { id_cliente: id_cliente },
       include: [
         {
@@ -594,10 +627,10 @@ module.exports = {
               model: ModelTerminoServico,
               required: false,  // Usamos 'false' para um outer join
             },
-            // {
-            //   model: ModelProfissional,
-            //   required: true,  // Usamos 'false' para um outer join
-            // },
+            {
+              model: ModelProfissional,
+              required: true,  // Usamos 'false' para um outer join
+            },
           ],
         },
       ],

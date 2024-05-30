@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./servicosAtivosCliente.css"
 import { SidebarCliente, Header } from "../../components";
 import sucessoIcon from "../../assets/sucesso1.png";
 import iconeperfil from "../../assets/icone-perfil.png";
 import alertaIcon from "../../assets/alerta.png";
-
+import { UserContext } from '../../context/UserContext';
 const ServicosAtivosCliente = () => {
     return (
     <>

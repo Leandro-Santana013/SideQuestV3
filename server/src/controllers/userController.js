@@ -611,3 +611,16 @@ exports.numService = async (req, res) => {
 
   res.status(200).json(n);
 }
+
+
+exports.Service = async (req, res) => {
+  const {id_cliente} = req.body;
+  console.log(id_cliente, "aaaaaaaaaaaaaaaaaa")
+
+  const n = await controller_User.Service({
+    params:{id_cliente: id_cliente}
+  });
+  console.log(n,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+
+  res.status(200).json(n);
+}

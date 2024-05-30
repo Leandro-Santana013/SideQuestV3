@@ -3,7 +3,7 @@ import { postRequest, baseUrl, getRequest, putRequest, } from "../utils/services
 import axios from "axios";
 import { file } from "jszip";
 import { Infoinc } from "../components/Infoinc/Infoinc";
-
+import JSZip from "jszip";
 export const UserContext = createContext();
 export const UserContextProvider = ({ children }) => {
   //objeto de usuario
@@ -202,6 +202,56 @@ export const UserContextProvider = ({ children }) => {
 
   const [isCheckedLocation, setIsCheckedLocation] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
+
+useEffect(() => {
+  const zipImages = async () => {
+    const zip = new JSZip();
+
+    console.log("ssfdsfs", selectedImages);
+    // Adicione as imagens ao arquivo ZIP
+    selectedImages.forEach((image, index) => {
+      zip.file(`image_${index}.png`, image.split("base64,")[1], {
+        base64: true,
+      });
+    });
+
+    try {
+      // Gerar o arquivo ZIP
+      const content = await zip.generateAsync({ type: "blob" });
+      const blobSize = content.size;
+
+      // Criar um FileReader
+      const reader = new FileReader();
+
+      // Quando o FileReader carregar, converter para base64 e criar o objeto File
+      reader.onload = () => {
+        console.log(`Tamanho do arquivo ZIP: ${blobSize} bytes`);
+        const base64String = reader.result.split(",")[1];
+        const zipFile = {
+          name: "images.zip",
+          type: "application/zip",
+          content: base64String,
+        };
+
+        // Converta zipFile para JSON
+        const jsonZipFile = JSON.stringify(zipFile);
+
+        // Atualizar o serviço com as imagens
+        updatepostarServico({
+          ...Servico,
+          imagens: jsonZipFile,
+        });
+      };
+
+      // Ler o conteúdo do arquivo como um ArrayBuffer
+      reader.readAsDataURL(content);
+    } catch (error) {
+      console.error("Erro ao gerar o arquivo ZIP:", error);
+    }
+  };
+  zipImages()
+}, [selectedImages])
+
   const PostarServico = useCallback(
     async (e) => {
       e.preventDefault();
@@ -211,6 +261,7 @@ export const UserContextProvider = ({ children }) => {
         if (user) {
         Servico.idCliente = user.id_cliente;
       }
+    
         // Enviar o formulário com o estado formData atualizado
         const response = await postRequest("/user/postarServico", Servico);
         console.log("serviço 1")
@@ -226,9 +277,7 @@ export const UserContextProvider = ({ children }) => {
         } else {
           console.log("bbbbbbbbbbbbbbbbbbbbbb")
           setModalPostar(true);
-          setSelectedImages([])
-          setServico({})
-          setForm(1)
+          
         }
       } catch (error) {
         console.error("Erro ao postar:", error);
@@ -247,6 +296,7 @@ export const UserContextProvider = ({ children }) => {
         if (user) {
           dataServico.idCliente = user.id_cliente;
         }
+     
 
         // Enviar o formulário com o estado formData atualizado
         const response = await postRequest("/user/postarServicoLoc", dataServico);
@@ -266,7 +316,10 @@ export const UserContextProvider = ({ children }) => {
         } else {
           console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
           setModalPostar(true);
-
+          setSelectedImages([])
+          setServico({})
+          setDataServico({})
+          setForm(1)
         }
       } catch (error) {
         console.error("Erro ao postar:", error);
@@ -363,8 +416,16 @@ export const UserContextProvider = ({ children }) => {
   const updatepostarServico = useCallback((info) => {
     setServico(info);
   }, []);
+  const [service, setserviceEdn] = useState(null)
 
- 
+ useEffect(() => {
+  const calls = async() => {
+  const response = await postRequest("/user/serviceend",  {id_cliente: user.id_cliente});
+  setserviceEdn(response.user)
+  console.log(response.user, "aaaaaaaaaa")
+  }
+  calls()
+ }, [user])
 
   return (
     <UserContext.Provider
@@ -412,7 +473,7 @@ export const UserContextProvider = ({ children }) => {
         PostarServicoWithLoc,
         selectedImages,
         setSelectedImages,
-        
+       
       }}
     >
       {children}

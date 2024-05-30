@@ -54,10 +54,12 @@ const HomeCliente = () => {
             <div className="actions">
               <div className="info-action">
                 <p>Serviços Ativos</p>
+                <Link to="/ServicosAtivosCliente">
                 <div className="action">
                   <p>Você possui {n ? n : "0"} serviços ativos</p>
                   <img src={imgReload} alt="" />
                 </div>
+                </Link>
               </div>
             </div>
 

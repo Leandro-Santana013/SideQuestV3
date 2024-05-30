@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, Link, useLocation, } from "react-router-dom";
 import { SidebarCliente, Header, TextInput, MenuBottomCliente } from "../../components";
 import axios from "axios";
-import JSZip from "jszip";
+
 import imgApproved from "../../assets/approved.png";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaCircleXmark } from "react-icons/fa6";
@@ -42,6 +42,7 @@ const PostarServico = () => {
     PostarServicoWithLoc,
     selectedImages,
     setSelectedImages,
+    zipImages
   } = useContext(UserContext);
 
   const { state } = useLocation();
@@ -153,51 +154,7 @@ const PostarServico = () => {
     }
   }, [selectedImages, currentImageIndex]);
 
-  const zipImages = async () => {
-    const zip = new JSZip();
-
-    console.log("ssfdsfs", selectedImages);
-    // Adicione as imagens ao arquivo ZIP
-    selectedImages.forEach((image, index) => {
-      zip.file(`image_${index}.png`, image.split("base64,")[1], {
-        base64: true,
-      });
-    });
-
-    try {
-      // Gerar o arquivo ZIP
-      const content = await zip.generateAsync({ type: "blob" });
-      const blobSize = content.size;
-
-      // Criar um FileReader
-      const reader = new FileReader();
-
-      // Quando o FileReader carregar, converter para base64 e criar o objeto File
-      reader.onload = () => {
-        console.log(`Tamanho do arquivo ZIP: ${blobSize} bytes`);
-        const base64String = reader.result.split(",")[1];
-        const zipFile = {
-          name: "images.zip",
-          type: "application/zip",
-          content: base64String,
-        };
-
-        // Converta zipFile para JSON
-        const jsonZipFile = JSON.stringify(zipFile);
-
-        // Atualizar o serviço com as imagens
-        updatepostarServico({
-          ...Servico,
-          imagens: jsonZipFile,
-        });
-      };
-
-      // Ler o conteúdo do arquivo como um ArrayBuffer
-      reader.readAsDataURL(content);
-    } catch (error) {
-      console.error("Erro ao gerar o arquivo ZIP:", error);
-    }
-  };
+ 
 
   return (
     <>
@@ -452,16 +409,14 @@ const PostarServico = () => {
                           onClick={async () => {
                             if (!isCheckedLocation) {
                               if (selectedImages.length > 0) {
-                                await zipImages(); // Espera a função zipImages() ser concluída antes de prosseguir
+                               console.log("111111111111111111"); // Espera a função zipImages() ser concluída antes de prosseguir
                               }
                               handleNext();
                             } else {
                               if (selectedImages.length > 0) {
                                 console.log("3242134", selectedImages);
-                                await zipImages(); // Espera a função zipImages() ser concluída antes de prosseguir
+                              
                               }
-                              setSelectedImages([])
-                              setServico({})
                             }
                           }}
                         >
