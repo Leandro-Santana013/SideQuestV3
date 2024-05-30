@@ -1,5 +1,3 @@
-// Path: src/components/CardServico/CardServico.js
-
 import React, { useEffect, useContext, useState } from "react";
 import "./cardServico.css";
 import ImgPerfil from "../../assets/icone-perfil.png";
@@ -13,7 +11,9 @@ import base64js from "base64-js";
 
 export const CardServico = () => {
   const { Dadosiniciais, setDadosIniciais } = useContext(ProfessionalContext);
-  const [servico, setServicos] = useState(Dadosiniciais)
+  console.log(Dadosiniciais, "inicial")
+  const [servico, setServicos] = useState(Dadosiniciais);
+
   useEffect(() => {
     if (Array.isArray(Dadosiniciais)) {
       const unzipData = async () => {
@@ -51,7 +51,15 @@ export const CardServico = () => {
     }
   }, [Dadosiniciais]);
 
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.slice(0, maxLength) + '...' + ' Ver mais';
+    }
+    return text;
+  };
+
   const servicos = Array.isArray(servico) ? servico : [];
+  console.log(servicos, "servicos");
 
   return (
     <>
@@ -62,31 +70,35 @@ export const CardServico = () => {
           <RiFilter2Fill className="iconFilter" />
         </div>
       </div>
-      {servicos.length > 0 ? (
-        servicos.map((servico) => (
-          <div className="card" key={servico.id_postagemServico}>
-            <div className="card-header">
-              <img src={servico.img_servico ? servico.img_servico : imgSucesso} alt="Imagem do serviço" />
+      <div className="cards-servicos">
+        {servicos.length > 0 ? (
+          servicos.map((servico) => (
+            <div className="card-servico-profissional" key={servico.id_postagemServico}>
+              <Link to={`/VisualizarServicoProfissa/${servico.id_postagemServico}`}>
+                <div className="card-servico-profissional-header">
+                  {servico.img_servico ? <img src={servico.img_servico} alt="Imagem do serviço" /> : ''}
+                </div>
+                <div className="card-servico-profissional-body">
+                  <h2>{servico.ds_titulo}</h2>
+                  <p>
+                    {truncateText(servico.ds_servico, 66)}
+                  </p>
+                  <div className="user-info">
+                    <img src={servico["tb_cliente.img_cliente"] ? servico["tb_cliente.img_cliente"] : ImgPerfil} alt="Avatar do Usuário" className="avatar" />
+                    <span>{servico["tb_cliente.nm_cliente"]}</span>
+                    <p>{servico.diferencaTempo}</p>
+                  </div>
+                </div>
+                <div className="card-servico-profissional-footer">
+                  <button className="btn">Ver Mais</button>
+                </div>
+              </Link>
             </div>
-            <div className="card-body">
-              <h2>{servico.ds_titulo}</h2>
-              <p>
-                A parede em questão tem aproximadamente 4 metros de largura e 2,7 metros de altura.
-                Ela... <a href="#">Ver mais detalhes</a>
-              </p>
-            </div>
-            <div className="card-footer">
-              <div className="user-info">
-                <img src={servico["tb_cliente.img_cliente"] ? servico["tb_cliente.img_cliente"] : ImgPerfil} alt="Avatar do Usuário" className="avatar" />
-                <span>{servico["tb_cliente.nm_cliente"]}</span>
-              </div>
-              <button className="btn">Ver Mais</button>
-            </div>
-          </div>
-        ))
-      ) : (
-        <p>Nenhum serviço encontrado.</p>
-      )}
+          ))
+        ) : (
+          <p>Nenhum serviço encontrado.</p>
+        )}
+      </div>
     </>
   );
 };

@@ -60,7 +60,6 @@ body{
   display: flex;
   justify-content: space-between;
   width: 55vw;
-  min-height: 10vw;
 }
 
 .input-filtros input {
