@@ -88,8 +88,9 @@ const ProfissionaisFavoritos = () => {
                                                 <RiMegaphoneLine />
                                             </i>
                                         </div>
-                                    </div>
+                                    </div> 
                                 ))
+                            
                             ) : (
                                 <p className='none-fav'>Nenhum favorito encontrado.</p>
                             )}

@@ -3,6 +3,8 @@ import { getRequest } from "../../utils/services"; // Certifique-se de importar 
 import { ProfessionalContext } from "../../context/ProfissionalContext";
 import "./infoInc.css";
 
+import { IoCloseCircle } from "react-icons/io5";
+
 export const InfoincPro = () => {
   const {
     modal,
@@ -191,7 +193,7 @@ export const InfoincPro = () => {
               <div className="bottom-card-conclua-registro">
                 <p onClick={() => setModalConcluaRegistro(2)}>Voltar</p>
                 <button onClick={() => setModalConcluaRegistro(1)}>
-                  proximo
+                  Próximo
                 </button>
               </div>
             </div>
@@ -202,26 +204,40 @@ export const InfoincPro = () => {
               <div className="card-conclua-registro">
                 <div className="top-card-conclua-registro">
                   <h1>Conclua o seu registro</h1>
-                  <p>Escolha suas categorias que você deseja trabalhar</p>
+                  <p>Escolha as categorias de serviço em que você trabalha</p>
                 </div>
                 {categorias.length > 0 ? (
-                  <select
-                    id="categoriaSelect"
-                    className="categorias"
-                    onChange={handleCategorySelect}
-                  >
-                    <option value="" disabled selected>
-                      Selecione uma categoria
-                    </option>
-                    {categorias.map((categoria) => (
-                      <option
-                        key={categoria.cd_categoria}
-                        value={categoria.ds_categoria}
-                      >
-                        {categoria.ds_categoria}
+                  <>
+                    <select
+                      id="categoriaSelect"
+                      className="categorias"
+                      onChange={handleCategorySelect}
+                    >
+                      <option value="" disabled selected>
+                        Selecione uma categoria
                       </option>
-                    ))}
-                  </select>
+                      {categorias.map((categoria) => (
+                        <option
+                          key={categoria.cd_categoria}
+                          value={categoria.ds_categoria}
+                        >
+                          {categoria.ds_categoria}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="selected-categories">
+                      {selectedCategories.length === 0 ? (
+                        <div>Nenhuma categoria selecionada</div>
+                      ) : (
+                        selectedCategories.map((category) => (
+                          <div key={category.cd_categoria} className="category-card">
+                            <p>{category.ds_categoria}</p>
+                            <IoCloseCircle onClick={() => handleRemoveCategory(category)} />
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </>
                 ) : (
                   <p>Carregando categorias...</p>
                 )}
@@ -233,19 +249,10 @@ export const InfoincPro = () => {
                     handleChange("descricao", event);
                   }}
                 />
-                <p onClick={() => setModalConcluaRegistro(2)}>Voltar</p>
-                <button onClick={concluirCad}>Finalizar</button>
-              </div>
-              <div className="selected-categories">
-                {selectedCategories.map((category) => (
-                  <div key={category.cd_categoria} className="category-card">
-                    <p>{category.ds_categoria}</p>
-                    <button onClick={() => handleRemoveCategory(category)}>
-                      X
-                    </button>
-                  </div>
-                ))}
-
+                <div className="bottom-card-conclua-registro">
+                  <p onClick={() => setModalConcluaRegistro(2)}>Voltar</p>
+                  <button onClick={concluirCad}>Finalizar</button>
+                </div>
               </div>
             </>
           )}
