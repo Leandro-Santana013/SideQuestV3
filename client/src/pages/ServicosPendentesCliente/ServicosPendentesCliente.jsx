@@ -1,72 +1,106 @@
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "./servicosPendentesCliente.css";
-import { SidebarCliente, Header } from "../../components";
+import { SidebarCliente, Header, MenuBottomCliente } from "../../components";
 import imgSucesso from "../../assets/sucesso1.png";
+import ImgPerfil from "../../assets/icone-perfil.png";
+import { UserContext } from "../../context/UserContext";
+import JSZip from "jszip";
 
 const ServicosPendentesCliente = () => {
-    return (
-        <>
-        <Header />
-        <SidebarCliente />
-  <div className="content-midia">
-    <div className="sessao-cards">
-      <h1>Serviços Pendentes</h1>
-      <div className="card-servicoProfissa">
-        <div className="icon-sucesso">
-          <img src="../img/sucesso1.png" alt="Ícone de sucesso" />
-        </div>
-        <div className="desc-servico-usuario">
-          <h2>Pintura de Parede 4m²</h2>
-          <p>
-            A parede em questão tem aproximadamente 4 metros de largura e 2,7 metros de altura. Ela é atualmente de um tom neutro, mas quero transformá-la em um ponto de destaque na sala...
-            <strong>Ver mais detalhes</strong>
-          </p>
-        </div>
-        <div className="double-button">
-          <button id="valor">R$450</button>
-          <a href="/visualizarServicoCliente"><button id="ver-mais">Ver mais</button></a>
-        </div>
-      </div>
+  const { ServicePend } = useContext(UserContext);
+  console.log(ServicePend, "inicial")
+  const [servico, setServicos] = useState(ServicePend);
 
-      <div className="card-servicoProfissa">
-        <div className="icon-sucesso">
-          <img src="../img/sucesso1.png" alt="Ícone de sucesso" />
-        </div>
-        <div className="desc-servico-usuario">
-          <h2>Pintura de Parede 4m²</h2>
-          <p>
-            A parede em questão tem aproximadamente 4 metros de largura e 2,7 metros de altura. Ela é atualmente de um tom neutro, mas quero transformá-la em um ponto de destaque na sala...
-            <strong>Ver mais detalhes</strong>
-          </p>
-        </div>
-        <div className="double-button">
-          <button id="valor">R$450</button>
-          <a href="/visualizarServicoCliente"><button id="ver-mais">Ver mais</button></a>
-        </div>
-      </div>
+  useEffect(() => {
+    if (Array.isArray(ServicePend)) {
+      const unzipData = async () => {
+        const unzippedData = await Promise.all(
+          ServicePend.map(async (item) => {
+            if (item.img_servico) {
+              try {
+                const imgServicoObj = JSON.parse(item.img_servico);
+                if (imgServicoObj.content) {
+                  const zip = new JSZip();
+                  const arrayBuffer = base64js.toByteArray(imgServicoObj.content).buffer;
+                  const unzipped = await zip.loadAsync(arrayBuffer);
+                  const files = {};
+                  for (let filename in unzipped.files) {
+                    const fileData = await unzipped.files[filename].async("base64");
+                    files[filename] = `data:image/png;base64,${fileData}`;  // Assumindo que a imagem é png
+                  }
+                  return { ...item, img_servico: files[Object.keys(files)[0]] }; // Pega a primeira imagem descompactada
+                } else {
+                  console.error("content property not found in img_servico");
+                  return item;
+                }
+              } catch (error) {
+                console.error("Error parsing or unzipping img_servico:", error);
+                return item;
+              }
+            }
+            return item;
+          })
+        );
+        setServicos(unzippedData);
+      };
 
-      <div className="card-servicoProfissa">
-        <div className="icon-sucesso">
-          <img src="../img/sucesso1.png" alt="Ícone de sucesso" />
-        </div>
-        <div className="desc-servico-usuario">
-          <h2>Pintura de Parede 4m²</h2>
-          <p>
-            A parede em questão tem aproximadamente 4 metros de largura e 2,7 metros de altura. Ela é atualmente de um tom neutro, mas quero transformá-la em um ponto de destaque na sala...
-            <strong>Ver mais detalhes</strong>
-          </p>
-        </div>
-        <div className="double-button">
-          <button id="valor">R$450</button>
-          <a href="/visualizarServicoCliente"><button id="ver-mais">Ver mais</button></a>
-        </div>
-      </div>
+      unzipData();
+    }
+  }, [ServicePend]);
 
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.slice(0, maxLength) + '...' + ' Ver mais';
+    }
+    return text;
+  };
+
+  const servicos = Array.isArray(servico) ? servico : [];
+  console.log(servicos, "servicos");
+
+  return (
+    <>
+        
+      <Header />
+      <SidebarCliente />
+      <MenuBottomCliente />
+
+      <div className="content-midia">
+        <div className="main-content">
       
-    </div>
-  </div>
-  </>
-    );
+      <div className="cards-servicos">
+        {servicos.length > 0 ? (
+          servicos.map((servico) => (
+            <div className="card-servico-profissional" key={servico.id_postagemServico}>
+           
+                <div className="card-servico-profissional-header">
+                  {servico.img_servico ? <img src={servico.img_servico} alt="Imagem do serviço" /> : ''}
+                </div>
+                <div className="card-servico-profissional-body">
+                  <h2>{servico.ds_titulo}</h2>
+                  <p>
+                    {truncateText(servico.ds_servico, 66)}
+                  </p>
+                  <div className="user-info">
+                    <img src={servico["tb_cliente.img_cliente"] ? servico["tb_cliente.img_cliente"] : ImgPerfil} alt="Avatar do Usuário" className="avatar" />
+                    <span>{servico["tb_cliente.nm_cliente"]}</span>
+                    <p>{servico.diferencaTempo}</p>
+                  </div>
+                </div>
+                <div className="card-servico-profissional-footer">
+                  <button className="btn">Ver Mais</button>
+                </div>
+            </div>
+          ))
+        ) : (
+          <p>Nenhum serviço encontrado.</p>
+        )}
+      </div>
+      </div>
+      </div>
+    </>
+  );
 };
+
 
 export default ServicosPendentesCliente;

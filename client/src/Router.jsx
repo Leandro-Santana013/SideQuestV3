@@ -62,8 +62,8 @@ const Router = () => {
           <Route exact path="/VisualizarServicoCliente" element={<VisualizarServicoCliente />} />
           <Route exact path="/VisualizarServicoProfissa/:id" element={<VisualizarServicoProfissa />} />
           <Route exact path="/ServicosAtivosCliente" element={<ServicosAtivosCliente />} />
-          <Route exact path="homeCliente/perfilProfissional/:id" element={<PerfilProfissional />} />
-          <Route exact path="propostasProfissional" element={<PrivateServices />} />
+          <Route exact path="/homeCliente/perfilProfissional/:id" element={<PerfilProfissional />} />
+          <Route exact path="/propostasProfissional" element={<PrivateServices />} />
           {/* rotas cliente / profissional */}
           <Route exact path="/chats" element={user || pro ? <Chats /> : <Navigate to="/login" />} />
 

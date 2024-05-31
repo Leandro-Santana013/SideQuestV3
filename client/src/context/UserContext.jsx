@@ -416,13 +416,18 @@ useEffect(() => {
   const updatepostarServico = useCallback((info) => {
     setServico(info);
   }, []);
-  const [service, setserviceEdn] = useState(null)
-
+  const [ServiceEnd, setserviceEdn] = useState(null)
+  const [ServicePend, setservicePedn] = useState(null)
+  
  useEffect(() => {
   const calls = async() => {
+    if(user && user.id_cliente){
   const response = await postRequest("/user/serviceend",  {id_cliente: user.id_cliente});
+  const responsePend = await postRequest("/user/servicePend",  {id_cliente: user.id_cliente});
   setserviceEdn(response.user)
-  console.log(response.user, "aaaaaaaaaa")
+  setservicePedn(responsePend.user)
+  
+    }
   }
   calls()
  }, [user])
@@ -473,7 +478,9 @@ useEffect(() => {
         PostarServicoWithLoc,
         selectedImages,
         setSelectedImages,
-       
+        ServiceEnd,
+        ServicePend
+        
       }}
     >
       {children}

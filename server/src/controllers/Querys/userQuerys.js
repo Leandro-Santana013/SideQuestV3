@@ -13,7 +13,7 @@ const {
   ModelInfoProfissional,
   ModelProfissionalCategoria,
   ModelProfissionalProfileImg,
-  ClienteProfissionalFavorito
+  ClienteProfissionalFavorito,
 } = require("../../models/index");
 const { Service } = require("../userController");
 
@@ -168,7 +168,7 @@ module.exports = {
       id_endereco,
       img_servico,
       tm_postagem,
-      pr_escolhido
+      pr_escolhido,
     } = req.params;
     return ModelPostagemServico.create({
       id_cliente: id_cliente,
@@ -231,7 +231,7 @@ module.exports = {
               0
             ),
             "media_avaliacoes",
-          ], 
+          ],
         ],
         include: [
           {
@@ -256,26 +256,26 @@ module.exports = {
           },
           {
             model: ModelProfissionalCategoria,
-            attributes: ['id_categoria'],
+            attributes: ["id_categoria"],
             include: [
               {
                 model: ModelCategoria,
-                attributes: ['ds_categoria'],
+                attributes: ["ds_categoria"],
               },
             ],
           },
         ],
-        group: ["tb_profissional.id_profissional", "tb_profissional_categoria.tb_categorium.id_categoria", "tb_profissional_categoria.id_categoriaEscolhida"],
+        group: [
+          "tb_profissional.id_profissional",
+          "tb_profissional_categoria.tb_categorium.id_categoria",
+          "tb_profissional_categoria.id_categoriaEscolhida",
+        ],
       });
     } catch (error) {
       console.error("Erro ao buscar profissionais:", error);
       res.status(500).send("Erro ao buscar profissionais");
     }
   },
-  
-
-
-
 
   updateInfoCli: async (req, res) => {
     const { id_cliente, nm_cliente, cd_emailCliente, img_cliente } = req.params;
@@ -289,9 +289,9 @@ module.exports = {
     );
   },
 
-
   updateInfoCliente: async (req, res) => {
-    const { id_cliente, qt_idadeCliente, sg_sexoCliente, nmr_telefoneCliente } = req.params;
+    const { id_cliente, qt_idadeCliente, sg_sexoCliente, nmr_telefoneCliente } =
+      req.params;
     return ModelCliente.update(
       {
         qt_idadeCliente: qt_idadeCliente,
@@ -301,8 +301,6 @@ module.exports = {
       { where: { id_cliente: id_cliente } }
     );
   },
-
-
 
   selectallprofissionais: async (req, res) => {
     return ModelProfissional.findAll({
@@ -328,7 +326,7 @@ module.exports = {
       id_cidade,
       nm_bairro,
       nmr_casa,
-      end_principal
+      end_principal,
     } = req.params;
     try {
       return ModelEndereco.create({
@@ -338,7 +336,7 @@ module.exports = {
         cd_cep: cd_cep,
         nm_bairro: nm_bairro,
         nmr_casa: nmr_casa,
-        end_principal: end_principal
+        end_principal: end_principal,
       });
     } catch (error) {
       console.error("Erro ao criar ou encontrar endereço:", error);
@@ -351,14 +349,14 @@ module.exports = {
     return ModelEndereco.findOne({
       where: {
         id_cliente: id_cliente,
-        end_principal: end_principal
+        end_principal: end_principal,
       },
-      raw: true
-    })
+      raw: true,
+    });
   },
 
   queryPart1: async (req, res) => {
-    const { id_profissional } = req.params
+    const { id_profissional } = req.params;
     return ModelProfissional.findAll({
       where: { id_profissional: id_profissional },
       include: [
@@ -383,7 +381,7 @@ module.exports = {
             {
               model: ModelTerminoServico,
               attributes: [],
-              
+
               include: [
                 {
                   model: ModelAvaliacao,
@@ -403,26 +401,26 @@ module.exports = {
                               include: [
                                 {
                                   model: ModelCliente,
-                                  attributes: []
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
+                                  attributes: [],
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
       attributes: [
-        'id_profissional',
-        'sg_sexoProfissional',
-        'img_profissional',
-        'nm_profissional',
+        "id_profissional",
+        "sg_sexoProfissional",
+        "img_profissional",
+        "nm_profissional",
         [Sequelize.col("tb_infoProfissional.ds_biografia"), "ds_biografia"],
         
         [
@@ -466,29 +464,36 @@ module.exports = {
           "media_avaliacoes",
         ],
       ],
-      group: ['tb_profissional.id_profissional',  'tb_profissional_categoria.id_categoriaEscolhida'] // Inclua todas as colunas não agregadas na cláusula GROUP BY
+      group: ["tb_profissional.id_profissional"], // Inclua todas as colunas não agregadas na cláusula GROUP BY
     });
   },
   queryPart2: async (req, res) => {
-    const { id_profissional } = req.params
+    const { id_profissional } = req.params;
     return ModelProfissional.findAll({
       where: { id_profissional: id_profissional },
       include: [
         {
           model: ModelProfissionalProfileImg,
           attributes: [],
-          required:false
+          required: false,
         },
       ],
-      attributes: [  
-        [Sequelize.fn('COALESCE', Sequelize.col("tb_profissionalProfileImgs.img_profile"), null), "img_profile"],
-    ],
-    group: ["tb_profissionalProfileImgs.img_profile"]
-    })
+      attributes: [
+        [
+          Sequelize.fn(
+            "COALESCE",
+            Sequelize.col("tb_profissionalProfileImgs.img_profile"),
+            null
+          ),
+          "img_profile",
+        ],
+      ],
+      group: ["tb_profissionalProfileImgs.img_profile"],
+    });
   },
 
   queryPart3: async (req, res) => {
-    const { id_profissional } = req.params
+    const { id_profissional } = req.params;
     return ModelProfissional.findAll({
       where: { id_profissional: id_profissional },
       include: [
@@ -518,78 +523,113 @@ module.exports = {
                               include: [
                                 {
                                   model: ModelCliente,
-                                  attributes: []
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
+                                  attributes: [],
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
       attributes: [
         // Adicionando atributos do cliente
-        [Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.id_cliente"), "cliente_id"],
-        [Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.nm_cliente"), "cliente_nome"],
-        [Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.img_cliente"), "cliente_imagem"],
+        [
+          Sequelize.col(
+            "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.id_cliente"
+          ),
+          "cliente_id",
+        ],
+        [
+          Sequelize.col(
+            "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.nm_cliente"
+          ),
+          "cliente_nome",
+        ],
+        [
+          Sequelize.col(
+            "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.img_cliente"
+          ),
+          "cliente_imagem",
+        ],
         // Adicionando atributos da avaliação
-        [Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao"), "avaliacao_id"],
-        [Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.nmr_avaliacao"), "avaliacao_numero"],
-        [Sequelize.col("tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.ds_comentario"), "avaliacao_comentario"],
+        [
+          Sequelize.col(
+            "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao"
+          ),
+          "avaliacao_id",
+        ],
+        [
+          Sequelize.col(
+            "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
+          ),
+          "avaliacao_numero",
+        ],
+        [
+          Sequelize.col(
+            "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.ds_comentario"
+          ),
+          "avaliacao_comentario",
+        ],
       ],
-      group: ['tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.id_cliente',
-        'tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao',
-      ] // agrupando pelo id do cliente
+      group: [
+        "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.id_cliente",
+        "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao",
+      ], // agrupando pelo id do cliente
     });
   },
 
   buscarfav: async (req, res) => {
-    const {id_cliente, id_profissional, param} = req.params
+    const { id_cliente, id_profissional, param } = req.params;
 
     if (param == false) {
       // Buscar sem criar ou destruir
       return ClienteProfissionalFavorito.findOne({
-          where: {
-              id_cliente: id_cliente,
-              id_profissional: id_profissional
-          }
+        where: {
+          id_cliente: id_cliente,
+          id_profissional: id_profissional,
+        },
       });
-     
-  }
-    const [alreadyFav, createdFav] = await ClienteProfissionalFavorito.findOrCreate({
-      where: {
-        id_cliente: id_cliente, 
-        id_profissional: id_profissional
-      }
-    })
+    }
+    const [alreadyFav, createdFav] =
+      await ClienteProfissionalFavorito.findOrCreate({
+        where: {
+          id_cliente: id_cliente,
+          id_profissional: id_profissional,
+        },
+      });
 
     if (!createdFav) {
       await ClienteProfissionalFavorito.destroy({
         where: {
           id_cliente: id_cliente,
-          id_profissional: id_profissional
-        }
-      }); 
+          id_profissional: id_profissional,
+        },
+      });
     }
-    return createdFav ? createdFav.situacao = true : createdFav.situacao = null
+    return createdFav
+      ? (createdFav.situacao = true)
+      : (createdFav.situacao = null);
   },
 
   getfavs: async (req, res) => {
-    const {id_cliente} = req.params;
-     return ModelProfissional.findAll({
-      include: [{
-        model: ModelCliente,
-        where: { id_cliente: id_cliente }, // A condição vai na tabela associada (Cliente)
-        through: {
-          attributes: [] // Não incluir atributos da tabela intermediária
-        }
-      }]
+    const { id_cliente } = req.params;
+    return ModelProfissional.findAll({
+      include: [
+        {
+          model: ModelCliente,
+          where: { id_cliente: id_cliente }, // A condição vai na tabela associada (Cliente)
+          through: {
+            attributes: [], // Não incluir atributos da tabela intermediária
+          },
+        },
+      ],
     });
   },
   nservice: async (req, res) => {
@@ -597,62 +637,146 @@ module.exports = {
       const { id_cliente } = req.params;
       const services = await ModelPostagemServico.count({
         where: {
-          id_cliente: id_cliente
-      },
-      include: [
+          id_cliente: id_cliente,
+        },
+        include: [
           {
-              model: ModelConfirmacaoServico,
-              required: true,
-              include: [
-                  {
-                      model: ModelTerminoServico,
-                      required: false,
-                      where: {
-                          id_terminoServico: {
-                              [Op.is]: null
-                          }
-                      }
-                  }
-              ]
-          }
-      ]
-      
-    });
-console.log(services, "0000000")
+            model: ModelConfirmacaoServico,
+            required: true,
+            include: [
+              {
+                model: ModelTerminoServico,
+                required: false,
+                where: {
+                  id_terminoServico: {
+                    [Op.is]: null,
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      });
+
       return services;
     } catch (err) {
       console.error(`Erro: ${err}`);
     }
   },
+
   Service: async (req, res) => {
     try {
       const { id_cliente } = req.params;
       const services = await ModelPostagemServico.findAll({
         where: { id_cliente: id_cliente },
-      include: [
-        {
-          model: ModelConfirmacaoServico,
-          required: true,
-          include: [
-            {
-              model: ModelTerminoServico,
-              required: false,  // Usamos 'false' para um outer join
-            },
-            {
-              model: ModelProfissional,
-              required: true,  // Usamos 'false' para um outer join
-            },
+        raw: true,
+        include: [
+          {
+            model: ModelConfirmacaoServico,
+            required: true,
+            attributes: [],
+            include: [
+              {
+                model: ModelTerminoServico,
+                required: false,
+                where: {
+                  id_terminoServico: {
+                    [Op.is]: null, // Utilize null diretamente sem Op.is
+                  },
+                },
+                attributes: [],
+                include: [
+                  {
+                    model: ModelAvaliacao,
+                    attributes: [],
+                  },
+                ],
+              },
+              {
+                model: ModelProfissional,
+                required: true,
+                attributes: [],
+              },
+            ],
+          },
+        ],
+        attributes: [
+          [
+            Sequelize.col(
+              'ds_servico'
+            ),
+            'ds_servico',
           ],
-        },
-      ],
-      
-    });
-
+          [
+            Sequelize.col(
+              'tb_confirmacaoServico.dt_inicioServico'
+            ),
+            'dt_inicioServico',
+          ],
+          [
+            Sequelize.fn(
+              'COALESCE',
+              Sequelize.fn(
+                'AVG',
+                Sequelize.col('tb_confirmacaoServico.tb_terminoServico.tb_avaliacao.nmr_avaliacao')
+              ),
+              0
+            ),
+            'media_avaliacoes',
+          ],
+          [
+            Sequelize.col(
+              'tb_confirmacaoServico.tb_profissional.id_profissional'
+            ),
+            'id_profissional',
+          ],
+          [
+            Sequelize.col(
+              'tb_confirmacaoServico.tb_profissional.nm_profissional'
+            ),
+            'nm_profissional',
+          ],
+          [
+            Sequelize.col(
+              'tb_confirmacaoServico.tb_profissional.img_profissional'
+            ),
+            'img_profissional',
+          ],
+        ],
+        group: [
+          "tb_postagemServico.id_postagemServico",
+          "tb_confirmacaoServico.id_confirmacaoServico",
+          "tb_confirmacaoServico.tb_profissional.id_profissional",  
+        ], //
+      });
+    
+      return services;
+    } catch (err) {
+      console.error(`Erro de listagem: ${err}`);
+    }
+  },
+  ServicePend: async (req, res) => {
+    try {
+      const { id_cliente } = req.params;
+      const services = await ModelPostagemServico.findAll({
+        where: { id_cliente: id_cliente },
+        raw:true,
+        include: [
+          {
+            model: ModelConfirmacaoServico,
+            required: false,
+            where: {
+              id_confirmacaoServico: {
+                [Op.is]: null, // Utilize null diretamente sem Op.is
+              },
+            }
+          },
+        ],
+      });
+      console.log("servicos pendentes",services)
       return services;
     } catch (err) {
       console.error(`Erro: ${err}`);
     }
   },
-
-}
-
+};

@@ -1,10 +1,9 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 import { postRequest, baseUrl, getRequest } from "../utils/services";
-import axios from "axios";  
-export const  ProfessionalContext = createContext();
+import axios from "axios";
+export const ProfessionalContext = createContext();
 
 export const ProfessionalContextProvider = ({ children }) => {
-
   const [pro, setPro] = useState({});
 
   useEffect(() => {
@@ -31,34 +30,32 @@ export const ProfessionalContextProvider = ({ children }) => {
   }, []);
 
   // funcão de registro
-  const registerPro = useCallback(
-    async (e) => {
-      e.preventDefault();
-      setRegisterLoading(true);
-      setRegisterError(null);
+  const registerPro = useCallback(async (e) => {
+    e.preventDefault();
+    setRegisterLoading(true);
+    setRegisterError(null);
 
-      try {
-        const response = await postRequest(
-          "/professional/registerPro",
-          formDataCadastroPro
-        );
+    try {
+      const response = await postRequest(
+        "/professional/registerPro",
+        formDataCadastroPro
+      );
 
-        // Se a resposta for uma mensagem de erro
-        if (response.error) {
-          setRegisterError(response.error); // Define o estado de erro com a mensagem de erro recebida
-          setRegisterSucess(null); // Limpa o estado de sucesso
-        } else {
-          setRegisterSucess(response.message); // Define o estado de sucesso com a mensagem de sucesso recebida
-          setRegisterError(null); // Limpa o estado de erro
-        }
-
-        setRegisterLoading(false);
-      } catch (error) {
-        setRegisterError("Erro ao cadastrar. Por favor, tente novamente."); // Define o estado de erro com uma mensagem genérica de erro
-        setRegisterLoading(false);
+      // Se a resposta for uma mensagem de erro
+      if (response.error) {
+        setRegisterError(response.error); // Define o estado de erro com a mensagem de erro recebida
+        setRegisterSucess(null); // Limpa o estado de sucesso
+      } else {
+        setRegisterSucess(response.message); // Define o estado de sucesso com a mensagem de sucesso recebida
+        setRegisterError(null); // Limpa o estado de erro
       }
-    },
-  );
+
+      setRegisterLoading(false);
+    } catch (error) {
+      setRegisterError("Erro ao cadastrar. Por favor, tente novamente."); // Define o estado de erro com uma mensagem genérica de erro
+      setRegisterLoading(false);
+    }
+  });
 
   const logoutUser = useCallback(() => {
     localStorage.removeItem("pro");
@@ -86,19 +83,17 @@ export const ProfessionalContextProvider = ({ children }) => {
       try {
         const response = await postRequest("/professional/loginPro", loginInfo);
 
-        if (response.error)
-          setloginError(response.error);
+        if (response.error) setloginError(response.error);
         else {
           const user = localStorage.getItem("User");
           if (user) {
             localStorage.removeItem("User");
             localStorage.setItem("pro", JSON.stringify(response.user));
-            window.location.reload()
-          }
-          else {
+            window.location.reload();
+          } else {
             console.log(response.user);
             localStorage.setItem("pro", JSON.stringify(response.user));
-            window.location.reload()
+            window.location.reload();
           }
         }
       } catch (error) {
@@ -113,21 +108,26 @@ export const ProfessionalContextProvider = ({ children }) => {
   const [Dadosprivate, setDadosprivate] = useState([]);
   useEffect(() => {
     const fetchDataFromBackend = async () => {
-
       try {
-          
-        const response = await postRequest("/professional/servicoscard",{ id_profissional: pro.id_profissional });
-        const responseprivate = await postRequest("/professional/servicoscardprivate",{ id_profissional: pro.id_profissional });
-        console.log(response.user);
-        setDadosIniciais(response.user);
-setDadosprivate(responseprivate.user)
+        if (pro && pro.id_profissional) {
+          const response = await postRequest("/professional/servicoscard", {
+            id_profissional: pro.id_profissional,
+          });
+          const responseprivate = await postRequest(
+            "/professional/servicoscardprivate",
+            { id_profissional: pro.id_profissional }
+          );
+          console.log(response.user);
+          setDadosIniciais(response.user);
+          setDadosprivate(responseprivate.user);
+        }
       } catch (error) {
         console.error("Erro ao buscar dados do backend:", error);
       }
     };
 
-    fetchDataFromBackend()
-  }, [pro])
+    fetchDataFromBackend();
+  }, [pro]);
 
   const [changedProData, setChangedProData] = useState({});
   const [modalShown, setShowModal] = useState(null);
@@ -135,13 +135,15 @@ setDadosprivate(responseprivate.user)
   const functionUpdateInfoPro = useCallback(async () => {
     console.log("funfou", changedProData);
 
-    const response = await postRequest("/professional/updateInfoPro", changedProData);
-    setPro(response.user)
+    const response = await postRequest(
+      "/professional/updateInfoPro",
+      changedProData
+    );
+    setPro(response.user);
     console.log(response.user);
 
     localStorage.setItem("pro", JSON.stringify(response.user));
-    setShowModal(null)
-
+    setShowModal(null);
   }, [changedProData]);
 
   const logoutPro = useCallback(() => {
@@ -152,17 +154,18 @@ setDadosprivate(responseprivate.user)
     window.location.reload();
   }, []);
 
-  const [modal, setModal] = useState(0)
+  const [modal, setModal] = useState(0);
   const [modalS, setModalShown] = useState(false);
 
   useEffect(() => {
-    
-
     // Verifica se o modal já foi exibido, se o usuário está logado e se está na página inicial
-    if (pro && window.location.pathname === '/homeProfissionais') {
+    if (pro && window.location.pathname === "/homeProfissionais") {
       // Verifica se é necessário exibir o modal com base nas informações do usuário
       if (Object.keys(pro).length > 0) {
-        if (pro.sg_sexoProfissional == null && pro.qt_idadeProfissional == null) {
+        if (
+          pro.sg_sexoProfissional == null &&
+          pro.qt_idadeProfissional == null
+        ) {
           setModal(1);
           setModalShown(true);
         }
@@ -171,28 +174,32 @@ setDadosprivate(responseprivate.user)
   }, [pro]);
 
   const [infoConfirm, setInfoConfirm] = useState({
-    categorias: [] // Inicializa categorias como um array vazio
+    categorias: [], // Inicializa categorias como um array vazio
   });
-  
+
   /********************/
 
   const [cepError, setCepError] = useState(false);
-  const concluirCad = useCallback(async (e) => {
-    
-    if(pro) infoConfirm.id_profissional = pro.id_profissional
+  const concluirCad = useCallback(
+    async (e) => {
+      if (pro) infoConfirm.id_profissional = pro.id_profissional;
 
-    console.log("äaaaaaaaaaaaaaaaaaaaaa", infoConfirm)  
-    const response = await postRequest("/professional/concluirCad", infoConfirm)
-    if (response.error) {
-      setConclusioncadError(response.error);
-    } else {
-      console.log(response.user)
-      setModal(modal + 1)
-      localStorage.setItem("pro", JSON.stringify(response.user));
-      console.log(locationuser)
-    }
-  }, [infoConfirm])
-
+      console.log("äaaaaaaaaaaaaaaaaaaaaa", infoConfirm);
+      const response = await postRequest(
+        "/professional/concluirCad",
+        infoConfirm
+      );
+      if (response.error) {
+        setConclusioncadError(response.error);
+      } else {
+        console.log(response.user);
+        setModal(modal + 1);
+        localStorage.setItem("pro", JSON.stringify(response.user));
+        console.log(locationuser);
+      }
+    },
+    [infoConfirm]
+  );
 
   const [categorias, setCategorias] = useState([]);
 
@@ -225,8 +232,6 @@ setDadosprivate(responseprivate.user)
       console.error("Erro ao buscar CEP:", error);
     }
   };
-  
-
 
   return (
     <ProfessionalContext.Provider
@@ -261,7 +266,7 @@ setDadosprivate(responseprivate.user)
         setCategorias,
         fetchDataConcluir,
         cepError,
-        Dadosprivate
+        Dadosprivate,
       }}
     >
       {children}

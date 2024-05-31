@@ -125,7 +125,7 @@ exports.register = async (req, res) => {
     }
     sendmail();
     const secret = createToken(user.id_cliente);
-    console.log("sucess");
+
     console.log(user.id_cliente, name, email, cpfNumerico, secret);
     return res
       .status(200)
@@ -146,7 +146,7 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     var { email, senha } = req.body;
-    console.log(email, senha);
+
 
     const user = await controller_User.findEmailCliente({
       params: { cd_emailCliente: email },
@@ -166,8 +166,6 @@ exports.login = async (req, res) => {
       params: { cd_emailCliente: email },
     });
 
-    console.log("valor do token " + tokenconfirmed);
-
     if (!tokenconfirmed) {
       return res.status(400).json({
         error: "Confirme seu email, verifique na sua caixa de entrada",
@@ -180,7 +178,6 @@ exports.login = async (req, res) => {
       delete clienteuser.cd_cpfCliente;
       delete clienteuser.cd_senhaCliente;
 
-      console.log(clienteuser);
       const localizacaoprincipal = await controller_User.selectLocalcli({
         params: {id_cliente: clienteuser.id_cliente, end_principal:true }
       })
@@ -196,7 +193,7 @@ exports.login = async (req, res) => {
 exports.validaEmail = async (req, res) => {
   try {
     const { token } = req.params;
-    console.log(token);
+    
     if (globalemail) {
       controller_User.updateTokenByEmail({
         params: { cd_tokenCliente: globaltoken, cd_emailCliente: globalemail },
@@ -205,7 +202,7 @@ exports.validaEmail = async (req, res) => {
         .status(200)
         .json({ message: "E-mail confirmado com sucesso!" });
     } else {
-      console.error("Token inválido");
+    
       return res
         .status(200)
         .json({ message: "Acesso não autorizado token invalido" });
@@ -233,19 +230,6 @@ exports.postarServico = async (req, res) => {
       id_profissional
     } = req.body;
 
-    console.log(
-      titulo,
-      dsServico,
-      cep,
-      uf_localidade,
-      logradouro,
-      bairro,
-      complemento,
-      nmrResidencia,
-      categoria,
-      idCliente,
-      id_profissional
-    );
     const datanow = Date.now();
 
 
@@ -270,13 +254,12 @@ exports.postarServico = async (req, res) => {
     let imageBuffer;
     if (imagens) {
       imageBuffer = Buffer.from(imagens, "base64");
-      console.log(imageBuffer);
     }
 
     var partes = uf_localidade.split(" - ");
     var estado = partes[0];
     var cidade = partes[1];
-    console.log(estado, cidade);
+
 
     const categoriaInstance = await controller_User.selectCategoriaescolhida({
       params: { ds_categoria: categoria },
@@ -287,7 +270,7 @@ exports.postarServico = async (req, res) => {
         .status(400)
         .json({ error: "categoria não selecionada", formstatus: 1 });
 
-    console.log(categoriaInstance);
+
 
     const cdCidade = await controller_User.selectCidadeAdress({
       params: { nm_cidade: cidade, sg_estado: estado },
@@ -335,11 +318,7 @@ exports.postarServicoLoc = async (req, res) => {
       servico
     } = req.body;
 
-    console.log(
-      idCliente,
-      location,
-      servico,
-    );
+  
     const datanow = new Date();
    
     
@@ -363,7 +342,7 @@ exports.postarServicoLoc = async (req, res) => {
 
 
     try {
-      console.log("aaaaaaaaaaaaaaaaaaaaaaaa")
+      
       const servicoInstance = await controller_User.CreateServico({
         params: {
           id_cliente: idCliente,
@@ -388,7 +367,7 @@ exports.postarServicoLoc = async (req, res) => {
 
 exports.selectCategoria = async (req, res) => {
   const categoria = await controller_User.selectCategorias();
-  console.log(categoria);
+ 
   res.status(200).json(categoria);
 };
 
@@ -435,7 +414,7 @@ exports.updateInfoUser = async (req, res) => {
     });
     delete client.cd_cpfCliente;
     delete client.cd_senhaCliente;
-    console.log(client)
+
 
     return res.status(200).json(client);
   } catch (error) {
@@ -512,7 +491,6 @@ exports.concluirCad = async (req, res) => {
         end_principal: true,
       },
     });
-    console.log(enderecoInstance)
 
     const clienteuser = await controller_User.selectInfocliente({
       params: { id_cliente: id_cliente }
@@ -537,7 +515,7 @@ exports.findPro = async (req, res) => {
     const proInfo = await controller_User.selectInfoProfissional({
       params: { id_profissional: idProfissional },
     });
-console.log(proInfo)
+
     res.status(200).json(proInfo);
   } catch (error) {
     console.log(error);
@@ -620,12 +598,24 @@ exports.numService = async (req, res) => {
 
 exports.Service = async (req, res) => {
   const {id_cliente} = req.body;
-  console.log(id_cliente, "aaaaaaaaaaaaaaaaaa")
+
 
   const n = await controller_User.Service({
     params:{id_cliente: id_cliente}
   });
-  console.log(n,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+
+
+  res.status(200).json(n);
+}
+
+exports.ServicePend = async (req, res) => {
+  const {id_cliente} = req.body;
+
+
+  const n = await controller_User.ServicePend({
+    params:{id_cliente: id_cliente}
+  });
+  
 
   res.status(200).json(n);
 }

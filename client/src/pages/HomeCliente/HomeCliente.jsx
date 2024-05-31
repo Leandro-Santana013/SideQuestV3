@@ -6,7 +6,6 @@ import imgAproved from "../../assets/aproved.png";
 import imgReload from "../../assets/reload.png";
 import imgCalendario from "../../assets/calendario1.png";
 import { postRequest, favRequest, baseUrl, getRequest, putRequest, } from "../../utils/services";
-
 import { RiFilter2Fill } from "react-icons/ri";
 import { UserContext } from '../../context/UserContext';
 
@@ -20,6 +19,7 @@ const HomeCliente = () => {
         try {
           const response = await getRequest(`/user/nservice/${user.id_cliente}`);
           setN(response)
+          console.log(response,"n serviços")
        
         } catch (error) {
           console.log(error);
@@ -66,10 +66,12 @@ const HomeCliente = () => {
             <div className="actions">
               <div className="info-action">
                 <p>Serviços Pendentes</p>
+                <Link to="/servicosPendentesCliente">
                 <div className="action">
                   <p>Visualize os serviços pendentes</p>
                   <img src={imgCalendario} alt="" />
                 </div>
+                </Link>
               </div>
             </div>
           </div>

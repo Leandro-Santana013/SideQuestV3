@@ -310,7 +310,7 @@ exports.visuService = async (req, res) => {
     // Adicione a diferença de tempo ao objeto
     populationService.diferencaTempo = diferencaTempo;
 
-    console.log(populationService);
+
 
     // Envie a resposta com os serviços modificados
     res.status(200).json(populationService);
@@ -497,8 +497,20 @@ exports.concluirCad = async (req, res) => {
 exports.aceitarServico =  async (req, res) =>{
 const { id_profissional, id_servico } = req.body
 console.log(req.body)
+
+const getFormattedDate = () => {
+  const date = new Date();
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${year}-${month}-${day}`;
+};
+
+const formattedDate = getFormattedDate();
+
+ console.log(formattedDate)
 const servicoaceito = await controller_Pro.insertconfirmarServico({
-  params: { id_profissional: id_profissional, id_postagemServico:id_servico },
+  params: { id_profissional: id_profissional, id_postagemServico:id_servico, dt_inicioServico: formattedDate},
 });
 res.status(200).json(servicoaceito  )
 }
