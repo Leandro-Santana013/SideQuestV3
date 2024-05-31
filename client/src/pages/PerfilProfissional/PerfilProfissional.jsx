@@ -81,12 +81,12 @@ const PerfilProfissional = () => {
                 <div className="main-content">
                     {profissional && (
                         <div className="perfil-profissional">
+                            <div className="cabecalho-perfil">
                             <Link to='/homeCliente'>
                                 <button className="btn-voltar-perfil-profissional">
                                     <FaAngleLeft />
                                 </button>
                             </Link>
-                            <div className="cabecalho-perfil">
                                 <div className="perfil-nome">
                                     <img src={profissional && profissional.img_profissional ? profissional.img_profissional : iconeperfil} alt="icone de perfil" />
                                     <span className={
@@ -99,8 +99,7 @@ const PerfilProfissional = () => {
                                             <p>Profissões:</p>
                                             <p>Eletricista</p>
                                         </div>
-                                        <div className="iniciar-conversa" onClick={() => handleClick(id)}>Iniciar conversa</div>
-                                        <div className="iniciar-conversa" onClick={() => handlePostarServico(profissional[0][0].id_profissional)}>Enviar servico</div>
+                                       
                                         
                                     </div>
                                 </div>
@@ -113,6 +112,8 @@ const PerfilProfissional = () => {
                                 <div className="linha-separadora"></div>
                             </div>
                             <div className="descricao-profissional">
+                            <div className="iniciar-conversa" onClick={() => handleClick(id)}>Iniciar conversa</div>
+                                        <div className="iniciar-conversa" onClick={() => handlePostarServico(profissional[0][0].id_profissional)}>Enviar servico</div>
                                 <div className="info-pessoais">
                                     {
                                         typeForm === 1 && (
