@@ -18,8 +18,12 @@ const PerfilProfissional = () => {
     const { createChat, onlineUsers } = useContext(ChatContext);
     const { user } = useContext(UserContext)
     const [profissional, setProfissional] = useState(null);
+    const [imagens, setimagens] = useState(null);
+    const [comentario, setComentarios] = useState(null)
     const [typeForm, setTypeForm] = useState(1)
     const [favoritado, setFavoritado] = useState(null)
+
+  
 
     const handleForm = (n) => {
         setTypeForm(n)
@@ -37,7 +41,9 @@ const PerfilProfissional = () => {
                 
                 // Fazendo a solicitação para buscar informações do profissional com base no ID
                 const response = await getRequest(`/user/perfil/profissionais/${id}`);
-                setProfissional(response);
+                setProfissional(response.pro);
+                setimagens(response.imagens)
+                setComentarios(response.comentarios)
                 if(user && user.id_cliente){
                 const fav = await favRequest(`/user/profissional/favoritado`, {id_cliente: user.id_cliente, id_profissional:Number(id), param: false})
                 // Configurando os dados do profissional no estado local
@@ -52,6 +58,10 @@ const PerfilProfissional = () => {
 
         fetchData();
     }, [id, user]);
+
+    useEffect(()=> {
+        console.log(profissional, "profissional setado")
+    }, [profissional])
 
     const handleClick = (u) => {
         if (user !== null) {
@@ -72,6 +82,8 @@ const PerfilProfissional = () => {
         navigate(`/homeCliente/postarSevico`, { state: { id_profissional } });
     };  
 
+    console.log(profissional, "profissional")
+
     return (
         <>
             <Header />
@@ -90,14 +102,13 @@ const PerfilProfissional = () => {
                                 <div className="perfil-nome">
                                     <img src={profissional && profissional.img_profissional ? profissional.img_profissional : iconeperfil} alt="icone de perfil" />
                                     <span className={
-                                        onlineUsers?.some((user) => user?.userID == profissional[0][0].id_profissional && user.type == "pro") ?
+                                        onlineUsers?.some((user) => user?.userID == profissional.id_profissional && user.type == "pro") ?
                                             "user-online" : ""}></span>
                                     <div className="nome-profissao">
-                                        <h1>{profissional[0][0].nm_profissional}</h1>
-                                      <div className={favoritado ? "icone-favoritado" : "icone-favoritar"} onClick={favPro}><RiStarFill/></div>
+                                        <h1>{profissional.nm_profissional}</h1>
                                         <div className="profissoes-profissional">
                                             <p>Profissões:</p>
-                                            <p>Eletricista</p>
+                                            
                                         </div>
                                        
                                         
@@ -105,6 +116,8 @@ const PerfilProfissional = () => {
                                 </div>
                                 <div className="menu-perfil">
                                     <ul style={{cursor: 'pointer'}}>
+
+                                    <div className={favoritado ? "icone-favoritado" : "icone-favoritar"} onClick={favPro}><RiStarFill/></div>
                                         <li onClick={() => handleForm(1)} style={{ color: typeForm === 1 ? "var(--verde)" : "inherit" }}>Sobre</li>
                                         <li onClick={() => { handleForm(2) }} style={{ color: typeForm === 2 ? "var(--verde)" : "inherit" }} >Avaliações</li>
                                     </ul>
@@ -113,7 +126,7 @@ const PerfilProfissional = () => {
                             </div>
                             <div className="descricao-profissional">
                             <div className="iniciar-conversa" onClick={() => handleClick(id)}>Iniciar conversa</div>
-                                        <div className="iniciar-conversa" onClick={() => handlePostarServico(profissional[0][0].id_profissional)}>Enviar servico</div>
+                                        <div className="iniciar-conversa" onClick={() => handlePostarServico(profissional.id_profissional)}>Enviar servico</div>
                                 <div className="info-pessoais">
                                     {
                                         typeForm === 1 && (
@@ -121,11 +134,11 @@ const PerfilProfissional = () => {
 
                                                 <div className="sobremim-profissional">
                                                     <h2>Sobre mim</h2>
-                                                    <p>{profissional[0][0].ds_biografia}</p>
+                                                    <p>{profissional.ds_biografia}</p>
                                                 </div>
                                                 <div className="servicos-realizados">
                                                     <img src={certificado} alt="certificado" />
-                                                    <p>Serviços Realizados: {profissional[0][0].num_servicos_terminados}</p>
+                                                    <p>Serviços Realizados: {profissional.num_servicos_terminados}</p>
                                                 </div>
                                                 <div className="portifolio-profissional">
                                                     <div className="titulo-portifolio-profissional">
@@ -147,16 +160,16 @@ const PerfilProfissional = () => {
                                                             {[...Array(5)].map((_, index) => (
                                                                 <RiStarFill
                                                                     key={index}
-                                                                    className={`ri-star-s-fill ${index < profissional[0][0].media_avaliacoes ? "ava" : ""}`}
+                                                                    className={`ri-star-s-fill ${index < profissional.media_avaliacoes ? "ava" : ""}`}
                                                                     style={{ fontSize: '3vw' }}
                                                                 ></RiStarFill>
                                                             ))}
                                                         </div>
-                                                        <p>{Number(profissional[0][0].media_avaliacoes).toFixed(1)}</p>
+                                                        <p>{Number(profissional.media_avaliacoes).toFixed(1)}</p>
                                                     </div>
                                                 </div>
                                                 <div className="avaliacao-avaliacoes">
-                                                    {profissional[2].map((avaliacao, index) => (
+                                                    {/* {profissional.map((avaliacao, index) => (
                                                         <div key={index} className="avaliacao-card">
                                                             <p>{avaliacao.cliente_nome} avaliou com <span>{avaliacao.avaliacao_numero} estrelas</span></p>
                                                             <div className="texto-comentario-avaliacao-card">
@@ -167,7 +180,7 @@ const PerfilProfissional = () => {
                                                                 <span>{avaliacao.cliente_nome}</span>
                                                             </div>
                                                         </div>
-                                                    ))}
+                                                    ))} */}
                                                 </div>
                                             </>
                                         )}

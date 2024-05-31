@@ -367,6 +367,16 @@ module.exports = {
           attributes: [],
         },
         {
+          model: ModelProfissionalCategoria,
+          attributes: ['id_categoria'],
+          include: [
+            {
+             model: ModelCategoria,
+             attributes: ['ds_categoria'],
+            }
+          ]
+        },
+        {
           model: ModelConfirmacaoServico,
           attributes: [],
           include: [
@@ -414,6 +424,7 @@ module.exports = {
         'img_profissional',
         'nm_profissional',
         [Sequelize.col("tb_infoProfissional.ds_biografia"), "ds_biografia"],
+        
         [
           Sequelize.fn(
             "COUNT",
@@ -455,7 +466,7 @@ module.exports = {
           "media_avaliacoes",
         ],
       ],
-      group: ['tb_profissional.id_profissional'] // Inclua todas as colunas não agregadas na cláusula GROUP BY
+      group: ['tb_profissional.id_profissional',  'tb_profissional_categoria.id_categoriaEscolhida'] // Inclua todas as colunas não agregadas na cláusula GROUP BY
     });
   },
   queryPart2: async (req, res) => {

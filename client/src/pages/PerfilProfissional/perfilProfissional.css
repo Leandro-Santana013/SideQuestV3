@@ -54,7 +54,7 @@
 }
 
 .perfil-profissional .cabecalho-perfil .perfil-nome img {
-    width: 8vw;
+    width: 5vw;
     outline: 3px solid var(--verde);
     border-radius: 100%;
 }

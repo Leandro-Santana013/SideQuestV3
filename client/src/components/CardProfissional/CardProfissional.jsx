@@ -50,6 +50,7 @@ export const CardProfissional = () => {
   const fetchDataFromBackend = async () => {
     try {
       const response = await getRequest("/user/profissionaisCard");
+      console.log("resss", response)
       setDadosIniciais(response)
     } catch (error) {
       console.error("Erro ao buscar dados do backend:", error);

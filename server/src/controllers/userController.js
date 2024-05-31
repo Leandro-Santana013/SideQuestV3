@@ -562,19 +562,24 @@ exports.perfilpro = async (req, res) => {
     const pt1 = await controller_User.queryPart1({
       params:{id_profissional: id_profissional}
     });
-    console.log("parte 1",  pt1)
+    const pro = pt1[0]
+    
 
     const pt2 = await controller_User.queryPart2({
       params:{id_profissional: id_profissional}
     });
+
+    const images = pt2[0]
+
     const pt3 = await controller_User.queryPart3({
       params:{id_profissional: id_profissional}
     });
-    const result = [pt1, pt2, pt3];
+  
+    const comentarios = pt3[0]
 
 
-    console.log(result)
-    res.status(200).json(result);
+
+    res.status(200).json({pro, images, comentarios});
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
