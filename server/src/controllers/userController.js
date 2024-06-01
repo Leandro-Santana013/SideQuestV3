@@ -174,13 +174,17 @@ exports.login = async (req, res) => {
       const clienteuser = await controller_User.bindCookieBypkCliente({
         params: { cd_emailCliente: email },
       });
-      const secret = createToken(clienteuser.clienteuser);
+      //  
       delete clienteuser.cd_cpfCliente;
       delete clienteuser.cd_senhaCliente;
 
       const localizacaoprincipal = await controller_User.selectLocalcli({
         params: {id_cliente: clienteuser.id_cliente, end_principal:true }
       })
+      const cdCidadeestate = await controller_User.selectCidadeAdress({
+        params: { id_cidade: localizacaoprincipal.id_cidade },
+      });
+      localizacaoprincipal.uf_localidade = `${cdCidadeestate.sg_estado} - ${cdCidadeestate.nm_cidade}`
       
       return res.status(200).json({clienteuser, localizacaoprincipal});
     }
@@ -473,6 +477,7 @@ exports.concluirCad = async (req, res) => {
         qt_idadeCliente: age,
         sg_sexoCliente: sexo,
         nmr_telefoneCliente: telefone,
+        txt_complemento:complemento
       },
     });
 
@@ -499,6 +504,11 @@ exports.concluirCad = async (req, res) => {
     const localizacaoprincipal = await controller_User.selectLocalcli({
       params: { id_cliente: id_cliente, end_principal: true },
     });
+
+    const cdCidadeestate = await controller_User.selectCidadeAdress({
+      params: { id_cidade: localizacaoprincipal.id_cidade },
+    });
+    localizacaoprincipal.uf_localidade = `${cdCidadeestate.sg_estado} - ${cdCidadeestate.sg_estado}`
 
 
     res.status(200).json({clienteuser, localizacaoprincipal});

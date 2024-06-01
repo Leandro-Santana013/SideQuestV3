@@ -5,6 +5,7 @@ import imgSucesso from "../../assets/sucesso1.png";
 import ImgPerfil from "../../assets/icone-perfil.png";
 import { UserContext } from "../../context/UserContext";
 import JSZip from "jszip";
+import base64js from "base64-js";
 
 const ServicosPendentesCliente = () => {
   const { ServicePend } = useContext(UserContext);

@@ -32,7 +32,7 @@ const ModelConfirmacaoServico = connectionDataBase.define('tb_confirmacaoServico
         allowNull:false 
     }
 },
-_padraoTableDBExistence('tb_confirmacaoServico')
+_padraoTableDBExistence('tb_confirmacaoServico') 
 )
 
 module.exports = {

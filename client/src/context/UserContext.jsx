@@ -296,8 +296,6 @@ useEffect(() => {
         if (user) {
           dataServico.idCliente = user.id_cliente;
         }
-     
-
         // Enviar o formulário com o estado formData atualizado
         const response = await postRequest("/user/postarServicoLoc", dataServico);
         console.log("serviço com loc")
@@ -314,7 +312,6 @@ useEffect(() => {
             setmessageErrorPostar(null);
           }, 4000);
         } else {
-          console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
           setModalPostar(true);
           setSelectedImages([])
           setServico({})
@@ -347,8 +344,28 @@ useEffect(() => {
     }))
   }, [user, Servico, locationuser]);
 
-  const fetchData = async (cep) => {
+  const [mudandoloc, setmudandoloc] = useState(null)
+const [cepConfig, setCepConfig] = useState(null)
+  const fetchData = async (cep, p2) => {
     try {
+      console.log(cep, p2)
+      if(p2){
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      if (!response.data.erro) {
+        const { uf, localidade, logradouro, bairro } = response.data;
+        setCepConfig(false);
+        setmudandoloc({
+          ...mudandoloc,
+          cep,
+          uf_localidade: `${uf} - ${localidade}`,
+          logradouro,
+          bairro,
+        });
+      } else {
+        setCepConfig(true);
+      }
+    }
+
       const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
       if (!response.data.erro) {
         const { uf, localidade, logradouro, bairro } = response.data;
@@ -413,6 +430,7 @@ useEffect(() => {
   }, []);
 
 
+
   const updatepostarServico = useCallback((info) => {
     setServico(info);
   }, []);
@@ -455,6 +473,7 @@ useEffect(() => {
         categorias,
         fetchData,
         cepError,
+        setCepError,
         setModalPostar,
         modalPostar,
         errorPostar,
@@ -479,8 +498,11 @@ useEffect(() => {
         selectedImages,
         setSelectedImages,
         ServiceEnd,
-        ServicePend
-        
+        ServicePend,
+        mudandoloc,
+        setmudandoloc,
+        cepConfig,
+        setCepConfig
       }}
     >
       {children}

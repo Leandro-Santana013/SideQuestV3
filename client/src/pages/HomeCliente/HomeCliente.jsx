@@ -13,6 +13,8 @@ const HomeCliente = () => {
   const { user } = useContext(UserContext);
   const [n, setN] = useState(0);
 
+  
+
   useEffect(() => {
     const getFavs = async () => {
       if (user && user.id_cliente) {

@@ -111,7 +111,16 @@ module.exports = {
     });
   },
   selectCidadeAdress: async (req, res) => {
-    const { nm_cidade, sg_estado } = req.params;
+    const { nm_cidade, sg_estado, id_cidade} = req.params;
+    if (id_cidade){
+      return ModelCidade.findOne({
+        attributes: ["nm_cidade", "sg_estado"],
+        where: {
+         id_cidade:id_cidade
+        },
+        raw: true,
+      });
+    }
     return ModelCidade.findOne({
       attributes: ["id_cidade"],
       where: {
@@ -290,13 +299,14 @@ module.exports = {
   },
 
   updateInfoCliente: async (req, res) => {
-    const { id_cliente, qt_idadeCliente, sg_sexoCliente, nmr_telefoneCliente } =
+    const { id_cliente, qt_idadeCliente, sg_sexoCliente, nmr_telefoneCliente, txt_complemento } =
       req.params;
     return ModelCliente.update(
       {
         qt_idadeCliente: qt_idadeCliente,
         sg_sexoCliente: sg_sexoCliente,
         nmr_telefoneCliente: nmr_telefoneCliente,
+        txt_complemento:txt_complemento
       },
       { where: { id_cliente: id_cliente } }
     );
@@ -366,13 +376,13 @@ module.exports = {
         },
         {
           model: ModelProfissionalCategoria,
-          attributes: ['id_categoria'],
+          attributes: ["id_categoria"],
           include: [
             {
-             model: ModelCategoria,
-             attributes: ['ds_categoria'],
-            }
-          ]
+              model: ModelCategoria,
+              attributes: ["ds_categoria"],
+            },
+          ],
         },
         {
           model: ModelConfirmacaoServico,
@@ -422,7 +432,7 @@ module.exports = {
         'img_profissional',
         'nm_profissional',
         [Sequelize.col("tb_infoProfissional.ds_biografia"), "ds_biografia"],
-        
+
         [
           Sequelize.fn(
             "COUNT",
@@ -701,55 +711,50 @@ module.exports = {
           },
         ],
         attributes: [
+          [Sequelize.col("ds_servico"), "ds_servico"],
           [
-            Sequelize.col(
-              'ds_servico'
-            ),
-            'ds_servico',
-          ],
-          [
-            Sequelize.col(
-              'tb_confirmacaoServico.dt_inicioServico'
-            ),
-            'dt_inicioServico',
+            Sequelize.col("tb_confirmacaoServico.dt_inicioServico"),
+            "dt_inicioServico",
           ],
           [
             Sequelize.fn(
-              'COALESCE',
+              "COALESCE",
               Sequelize.fn(
-                'AVG',
-                Sequelize.col('tb_confirmacaoServico.tb_terminoServico.tb_avaliacao.nmr_avaliacao')
+                "AVG",
+                Sequelize.col(
+                  "tb_confirmacaoServico.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
+                )
               ),
               0
             ),
-            'media_avaliacoes',
+            "media_avaliacoes",
           ],
           [
             Sequelize.col(
-              'tb_confirmacaoServico.tb_profissional.id_profissional'
+              "tb_confirmacaoServico.tb_profissional.id_profissional"
             ),
-            'id_profissional',
+            "id_profissional",
           ],
           [
             Sequelize.col(
-              'tb_confirmacaoServico.tb_profissional.nm_profissional'
+              "tb_confirmacaoServico.tb_profissional.nm_profissional"
             ),
-            'nm_profissional',
+            "nm_profissional",
           ],
           [
             Sequelize.col(
-              'tb_confirmacaoServico.tb_profissional.img_profissional'
+              "tb_confirmacaoServico.tb_profissional.img_profissional"
             ),
-            'img_profissional',
+            "img_profissional",
           ],
         ],
         group: [
           "tb_postagemServico.id_postagemServico",
           "tb_confirmacaoServico.id_confirmacaoServico",
-          "tb_confirmacaoServico.tb_profissional.id_profissional",  
+          "tb_confirmacaoServico.tb_profissional.id_profissional",
         ], //
       });
-    
+
       return services;
     } catch (err) {
       console.error(`Erro de listagem: ${err}`);
@@ -760,7 +765,7 @@ module.exports = {
       const { id_cliente } = req.params;
       const services = await ModelPostagemServico.findAll({
         where: { id_cliente: id_cliente },
-        raw:true,
+        raw: true,
         include: [
           {
             model: ModelConfirmacaoServico,
@@ -769,11 +774,11 @@ module.exports = {
               id_confirmacaoServico: {
                 [Op.is]: null, // Utilize null diretamente sem Op.is
               },
-            }
+            },
           },
         ],
       });
-      console.log("servicos pendentes",services)
+      console.log("servicos pendentes", services);
       return services;
     } catch (err) {
       console.error(`Erro: ${err}`);
