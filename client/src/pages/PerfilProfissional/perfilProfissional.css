@@ -1,240 +1,189 @@
 
-
-.perfil-profissional {
-    background-color: white;
-    border-radius: 10px;
-    width: 60vw;
-    padding: 2vw;
-
-    a {
-        width: 0;
-        display: block;
-        margin-bottom: 2vw;
-    }
+.profile-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: transparent;
+    padding: 20px;
 }
 
-.btn-voltar-perfil-profissional {
+.profile-header {
     display: flex;
-    width: 2.5vw;
-    height: 2.5vw;
-    justify-content: center;
     align-items: center;
-    background: transparent;
-    border: var(--verde) solid 3px;
+    justify-content: space-between;
+    background-color: #fff;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 45px;
+}
+
+.profile-picture {
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    margin: 1vw 0 0 1vw;
-    cursor: pointer;
 }
-.iniciar-conversa {
+
+.profile-info {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.profile-info h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.profile-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 18px;
+}
+
+.location-icon {
+    display: inline-block;
+    font-size: 30px;
+    vertical-align: middle;
+}
+
+.actions-buttons-profile{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.action-button-profile{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: .5vw 1vw .5vw 1vw;
-    border-radius: 50vw;
     background-color: var(--verde);
-    color: white;
-    transition: all .25s;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 120px;
+    height: 30px;
+    padding: 5px 10px;
     cursor: pointer;
 }
 
-.iniciar-conversa:hover {
-    background-color: var(--azul);
+.profile-section {
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    flex-grow: 1; 
 }
 
-.perfil-profissional .cabecalho-perfil .perfil-nome {
-    display: flex;
-    align-items: center;
-    gap: 1vw;
-}
-
-.profissoes-profissional {
-    display: flex;
-    align-items: center;
-    gap: .5vw;
-}
-
-.perfil-profissional .cabecalho-perfil .perfil-nome img {
-    width: 5vw;
-    outline: 3px solid var(--verde);
-    border-radius: 100%;
-}
-
-.perfil-profissional .cabecalho-perfil .perfil-nome .nome-profissao h1 {
-    font-size: 1.7rem;
-}
-
-.perfil-profissional .cabecalho-perfil .menu-perfil {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.perfil-profissional .cabecalho-perfil .menu-perfil ul {
-    display: flex;
-    list-style: none;
-}
-
-.perfil-profissional .cabecalho-perfil .menu-perfil li {
-    margin-right: 20px;
-    font-size: 1.3rem;
-}
-
-.linha-separadora {
-    width: 60vw;
-    height: 5px;
-    background-color: #b1b1b1;
-    border-radius: 100vw;
-    margin: 20px 0;
-}
-
-.sobremim-profissional {
-    h2 {
-        font-size: 25px;
-    }
-
-    p {
-        font-size: 20px;
-    }
-}
-
-.descricao-profissional {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+.row-section {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
 }
 
-.servicos-realizados {
+.section-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: .5vw;
+    padding-bottom: 10px;
 }
 
-.portifolio-profissional {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-
-    .titulo-portifolio-profissional {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--verde);
-        color: white;
-        width: 60vw;
-        border-radius: 10px 10px 0 0;
-        font-size: 1vw;
-    }
+.section-header h2 {
+    margin: 0;
+    font-size: 1.3em;
 }
 
-.servicos-portifolio-profissional {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 60vw;
-    height: 500px;
-
-    h2 {
-        color: grey;
-        margin: 25px 0;
-    }
+.section-content {
+    padding: 10px 0;
 }
 
-/*Area das avaliacoes*/
 
-.descricao-profissional .info-pessoais .avaliacoes {
+.tags {
     display: flex;
-    gap: .5vw;
-    align-items: center;
-    justify-content: center;
-}
-
-.avaliacoes-media-star {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 0 50px 0;
-
-    p {
-        margin: 0;
-        font-size: 1.5vw;
-        background-color: var(--verde);
-        color: white;
-        width: 100%;
-        border-radius: 100vw;
-        text-align: center;
-    }
-}
-
-.avaliacao-avaliacoes {
-    width: 60vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     flex-wrap: wrap;
-    padding: 1vw;
-    border-radius: 10px;
 }
 
-.avaliacao-card {
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border: 1px solid #eee;
-    border-radius: 10px;
+.tag {
+    background-color: #e0e7ff;
+    color: #333;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 5px;
+}
+
+.gallery-section{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 35vw;
+    height: 20vw;
+}
+
+.gallery{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+}
+
+.gallery .images {
+    width: 150px;
+    height: 100px;
+    background-color: #ddd;
+    border-radius: 2px;
+    margin-right: 10px;
+}
+.feedback-section {
+    max-height: 27vw;
+    overflow: hidden; /* Oculta o conteúdo que excede a altura */
+}
+
+.feedback-list {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 10px 10px 0 10px; 
-    width: 300px;
-
-    p {
-        color: gray;
-    }
-
-    span {
-        color: var(--verde);
-    }
+    max-height: 100%; /* Ajusta para altura máxima baseada no conteúdo */
+    overflow-y: auto; /* Adiciona barra de rolagem vertical quando necessário */
 }
 
-.texto-comentario-avaliacao-card {
-
-    p {
-        color: black;
-    }
+.feedback-box {
+    display: flex;
+    flex-direction: column;
+    background-color: #cdcdcd47;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.bottom-avaliacao-card {
+.feedback-author {
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-top: solid 3px gray;
-    background-color: #eee;
-    padding: 10px;
-    border-radius: 0 0 10px 10px;
-    font-size: 20px;
-    width: 100%;
-    gap: 1vw;
-
-    span {
-        color: black;
-    }
-
-    img {
-        width: 3vw;
-    }
-
-    img {
-        width: 3vw;
-    }
 }
 
-.icone-favoritar {
-    color: gray;
-    font-size: 1.5vw;
+.author-name {
+    font-size: 14px;
+    margin: 0;
 }
 
-.icone-favoritado{
-    color: var(--verde);
-    font-size: 1.5vw;
+.feedback-text {
+    color: #666;
+    font-size: 15px;
+    word-break: break-word;
+}
 
+.feedback-name-score {
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback-profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.feedback-score {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
 }

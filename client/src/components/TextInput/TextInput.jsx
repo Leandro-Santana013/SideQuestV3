@@ -9,7 +9,7 @@ export const TextInput = ({ placeholder, type, name, value, size, onChange, padd
 
   return (
     <div className="container">
-        <textarea className="componente-content-input"
+        <input className="componente-content-input"
           type={type}
           placeholder={placeholder}
           value={value}

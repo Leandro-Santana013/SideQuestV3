@@ -356,7 +356,7 @@ module.exports = {
   },
 
   queryPart1: async (req, res) => {
-    const { id_profissional } = req.params;
+    const { id_profissional } = req.params
     return ModelProfissional.findAll({
       where: { id_profissional: id_profissional },
       include: [
@@ -381,7 +381,7 @@ module.exports = {
             {
               model: ModelTerminoServico,
               attributes: [],
-
+              
               include: [
                 {
                   model: ModelAvaliacao,
@@ -401,26 +401,26 @@ module.exports = {
                               include: [
                                 {
                                   model: ModelCliente,
-                                  attributes: [],
-                                },
-                              ],
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
+                                  attributes: []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       ],
       attributes: [
-        "id_profissional",
-        "sg_sexoProfissional",
-        "img_profissional",
-        "nm_profissional",
+        'id_profissional',
+        'sg_sexoProfissional',
+        'img_profissional',
+        'nm_profissional',
         [Sequelize.col("tb_infoProfissional.ds_biografia"), "ds_biografia"],
         
         [
@@ -464,7 +464,7 @@ module.exports = {
           "media_avaliacoes",
         ],
       ],
-      group: ["tb_profissional.id_profissional"], // Inclua todas as colunas não agregadas na cláusula GROUP BY
+      group: ['tb_profissional.id_profissional',  'tb_profissional_categoria.id_categoriaEscolhida'] // Inclua todas as colunas não agregadas na cláusula GROUP BY
     });
   },
   queryPart2: async (req, res) => {
