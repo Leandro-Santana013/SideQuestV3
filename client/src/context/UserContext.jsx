@@ -176,7 +176,7 @@ export const UserContextProvider = ({ children }) => {
 
 
   const concluirCad = useCallback(async (e) => {
-    console.log(infoConfirm)
+    console.log(infoConfirm)  
     const response = await postRequest("/user/concluirCad", infoConfirm)
     if (response.error) {
       setConclusioncadError(response.error);
