@@ -181,10 +181,12 @@ exports.login = async (req, res) => {
       const localizacaoprincipal = await controller_User.selectLocalcli({
         params: {id_cliente: clienteuser.id_cliente, end_principal:true }
       })
+      if(localizacaoprincipal){
       const cdCidadeestate = await controller_User.selectCidadeAdress({
         params: { id_cidade: localizacaoprincipal.id_cidade },
       });
       localizacaoprincipal.uf_localidade = `${cdCidadeestate.sg_estado} - ${cdCidadeestate.nm_cidade}`
+    }
       
       return res.status(200).json({clienteuser, localizacaoprincipal});
     }
@@ -477,7 +479,6 @@ exports.concluirCad = async (req, res) => {
         qt_idadeCliente: age,
         sg_sexoCliente: sexo,
         nmr_telefoneCliente: telefone,
-        txt_complemento:complemento
       },
     });
 
@@ -494,6 +495,7 @@ exports.concluirCad = async (req, res) => {
         nm_bairro: bairro,
         nmr_casa: numeroResidencia,
         end_principal: true,
+        txt_complemento:complemento
       },
     });
 
@@ -508,7 +510,7 @@ exports.concluirCad = async (req, res) => {
     const cdCidadeestate = await controller_User.selectCidadeAdress({
       params: { id_cidade: localizacaoprincipal.id_cidade },
     });
-    localizacaoprincipal.uf_localidade = `${cdCidadeestate.sg_estado} - ${cdCidadeestate.sg_estado}`
+    localizacaoprincipal.uf_localidade = `${cdCidadeestate.sg_estado} - ${cdCidadeestate.nm_cidade}`
 
 
     res.status(200).json({clienteuser, localizacaoprincipal});

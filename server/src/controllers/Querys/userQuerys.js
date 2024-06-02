@@ -299,14 +299,14 @@ module.exports = {
   },
 
   updateInfoCliente: async (req, res) => {
-    const { id_cliente, qt_idadeCliente, sg_sexoCliente, nmr_telefoneCliente, txt_complemento } =
+    const { id_cliente, qt_idadeCliente, sg_sexoCliente, nmr_telefoneCliente } =
       req.params;
     return ModelCliente.update(
       {
         qt_idadeCliente: qt_idadeCliente,
         sg_sexoCliente: sg_sexoCliente,
         nmr_telefoneCliente: nmr_telefoneCliente,
-        txt_complemento:txt_complemento
+        
       },
       { where: { id_cliente: id_cliente } }
     );
@@ -337,6 +337,7 @@ module.exports = {
       nm_bairro,
       nmr_casa,
       end_principal,
+      txt_complemento
     } = req.params;
     try {
       return ModelEndereco.create({
@@ -347,6 +348,7 @@ module.exports = {
         nm_bairro: nm_bairro,
         nmr_casa: nmr_casa,
         end_principal: end_principal,
+        txt_complemento:txt_complemento
       });
     } catch (error) {
       console.error("Erro ao criar ou encontrar endereço:", error);
