@@ -1,7 +1,96 @@
-.notificacao .not-read{
-    color: brown;
+.notificacao {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
 }
 
-.notification{
-    color: aqua;
+.notifications-icon {
+    font-size: 24px;
+    color: #fff;
+}
+
+.notifications-count {
+    position: absolute;
+    top: -10px;
+    right:30px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.notification-box {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    width: 300px;
+    max-height: 400px; 
+    overflow-y: auto;
+    background-color: #1c1e21;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 8px 0 0px 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* Estilo para a barra de rolagem */
+.notification-box::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 100px; 
+
+}
+
+.notification-box::-webkit-scrollbar-track {
+    background: #1c1e21;
+}
+
+.notification-box::-webkit-scrollbar-thumb {
+    background: #333; 
+}
+
+.notification-box::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.notifications-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.notifications-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.marcar-lida {
+    font-size: 12px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.notification {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.notification.not-read {
+    background-color: #2d2f33;
+}
+
+.notification span {
+    display: block;
+}
+
+.notification-time {
+    font-size: 12px;
+    color: #888;
 }

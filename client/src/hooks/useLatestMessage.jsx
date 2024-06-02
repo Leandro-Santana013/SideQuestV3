@@ -14,7 +14,7 @@ export const useLatestMessage = (chat) =>{
             }
 
             const lastMessage = response[response?.length - 1];
-
+            console.log(lastMessage, 'laaaaa')
             setLatestMessage(lastMessage)
         };
         getMessages()
