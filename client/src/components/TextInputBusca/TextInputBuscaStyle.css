@@ -72,7 +72,7 @@
 @media (max-width: 1024px) {
   .content-input-busca {
     width: 49vw;
-    height: 4vw;
+    height: 4.5vw;
     display: flex;
     align-items: flex-end;
   }
@@ -90,19 +90,19 @@
 
   .left-banner input::placeholder,
   .left-banner input[type="text"] {
-    font-size: 1.8vw;
+    font-size: 2.3vw;
   }
 
   .content-input-busca .btn {
     width: 11vw;
-    font-size: 1.8vw;
+    font-size: 2.3vw;
   }
 }
 
 /* Tablets em modo retrato e smartphones grandes */
 @media (max-width: 768px) {
   .content-input-busca {
-    width: 46vw;
+    width: 53vw;
     height: 5vw;
   }
 
@@ -144,12 +144,12 @@
 
   .left-banner input::placeholder,
   .left-banner input[type="text"] {
-    font-size: 2.7vw;
+    font-size: 3vw;
   }
 
   .content-input-busca .btn {
     width: 16vw;
-    font-size: 2.7vw;
+    font-size: 3vw;
   }
 
   .content-input-busca input {
@@ -160,7 +160,7 @@
 /* Smartphones pequenos */
 @media (max-width: 480px) {
   .content-input-busca {
-    width: 55vw;
+    width: 60vw;
     height: 6vw;
   }
 
@@ -172,16 +172,16 @@
 
   .left-banner input::placeholder,
   .left-banner input[type="text"] {
-    font-size: 2.5vw;
+    font-size: 3.3vw;
   }
 
   .content-input-busca .btn {
     width: 13vw;
-    font-size: 2.7vw;
+    font-size: 3.3vw;
   }
 
   .content-input-busca input {
-    padding: 5.5px 15px;
+    padding: 3.5px 15px;
   }
 
 }

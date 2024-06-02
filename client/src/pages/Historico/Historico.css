@@ -108,41 +108,11 @@
     font-size: 1vw;
 }
 
+/* Responsividade */
 
-@media screen and (max-width: 800px) {
-    .containerHeader {
-        height: 5vw;
-    }
-
-    .notificacao i {
-        font-size: 3.5vw;
-    }
-
-    .containerHeader .img-logo {
-        width: 11vw;
-    }
-
-    .conteudo-historico h2 {
-        font-size: 1.2rem;
-    }
-
-    .historicos p {
-        font-size: 0.75rem;
-    }
-    .card-historico {
-        border-radius: 21px;
-    }
-
-    .card-historico .categoria {
-        width: 70px;
-        height: 35px;
-    }
-
-}
-
-@media screen and (max-width: 500px) {
-
-    .containerHeader {
+/* Tablets em modo paisagem e dispositivos híbridos */
+@media (max-width: 1024px) {
+        .containerHeader {
         height: 11vw;
     }
 
@@ -151,24 +121,24 @@
     }
 
     .containerHeader .img-logo {
-        width: 14vw;
+        width: 16vw;
     }
 
     .input-procurar {
-        width: 22vw;
+        width: 35vw;
     }
 
     .input-procurar input::placeholder, 
     .input-procurar input[type="text"] {
-        font-size: 0.7rem;
+        font-size: 2.3vw;
     }
 
     .conteudo-historico h2 {
-        font-size: 0.8rem;
+        font-size: 3.5vw;
     }
 
     .historicos p {
-        font-size: 0.6rem;
+        font-size: 2.3vw;
     }
 
     .card-historico {
@@ -176,7 +146,63 @@
     }
 
     .card-historico .categoria {
-        width: 50px;
-        height: 35px;
+        width: 12vw;
+        height: 6vw;
     }
-}
+  }
+  
+  /* Smartphones médios e tablets pequenos */
+  @media (max-width: 600px) {
+    .input-procurar {
+        width: 35vw;
+    }
+
+    .input-procurar input::placeholder, 
+    .input-procurar input[type="text"] {
+        font-size: 2.8vw;
+    }
+
+    .conteudo-historico h2 {
+        font-size: 3.5vw;
+    }
+
+    .historicos p {
+        font-size: 2.8vw;
+    }
+
+    .card-historico {
+        border-radius: 21px;
+    }
+
+    .card-historico .categoria {
+        width: 22vw;
+        height: 8vw;
+    }
+  }
+  
+  /* Smartphones pequenos */
+  @media (max-width: 480px) {
+    .input-procurar input::placeholder, 
+    .input-procurar input[type="text"] {
+        font-size: 2.7vw;
+    }
+
+    .conteudo-historico h2 {
+        font-size: 3.5vw;
+    }
+
+    .historicos p {
+        font-size: 2.7vw;
+    }
+
+    .card-historico .categoria {
+        width: 26vw;
+        height: 10vw;
+    }
+  }
+  
+  /* Smartphones muito pequenos */
+  @media (max-width: 320px) {
+  
+  }
+  
