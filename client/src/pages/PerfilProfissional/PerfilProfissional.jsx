@@ -120,7 +120,7 @@ const PerfilProfissional = () => {
                                     <div className="section-content">
                                         <p><strong>Sobre:</strong> </p>
                                         <p>{profissional.ds_biografia}</p>
-                                    </div>
+                                    </div>  
                                 </div>
                                 <div className="profile-section areas-section">
                                     <div className="section-header">

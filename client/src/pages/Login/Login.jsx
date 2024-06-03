@@ -3,10 +3,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 import Cookies from "js-cookie";
-
 import { useIsSignUpActive } from "../../components/HeaderLanding/singUpState";
 import { UserContext } from "../../context/UserContext";
 import { Loading } from "../../components";
+import PasswordStrength from "../../components/PasswordStrength/PasswordStrength";
 
 export const Login = () => {
   const {
@@ -28,6 +28,7 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const [cpf, setCpf] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSignUpClick = () => {
     setIsSignUpActive(true);
@@ -45,6 +46,17 @@ export const Login = () => {
     cpfValue = cpfValue.replace(/(\d{3})(\d{1,2})$/, "$1-$2"); // Adiciona o traço
     setCpf(cpfValue); // Atualiza o estado com o CPF formatado
   };
+
+
+  const [ showPasswordStrength, setShowPasswordStrength] = useState(false)
+  const handlePasswordFocus = () => {
+    setShowPasswordStrength(true);
+  };
+
+  const handlePasswordBlur = () => {
+    setShowPasswordStrength(true);
+  };
+
 
   return (
     <>
@@ -67,7 +79,7 @@ export const Login = () => {
                   {registerSucess}
                 </div>
               )}
-              
+
               <input
                 placeholder="Digite seu nome"
                 type="text"
@@ -96,14 +108,24 @@ export const Login = () => {
                   updateCadastro({ ...formDataCadastro, cpf: e.target.value });
                 }}
               />
+              <div style={{display: "flex", flexDirection: 'column', alignItems: 'flex-start', width: '100%'}}>
               <input
+              className="input-senha"
                 placeholder="Digite uma senha"
                 type="password"
                 name="senha"
-                onChange={(e) =>
-                  updateCadastro({ ...formDataCadastro, senha: e.target.value })
-                }
+                onFocus={handlePasswordFocus}
+                onBlur={handlePasswordBlur}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  updateCadastro({ ...formDataCadastro, senha: e.target.value });
+                }}
               />
+              {showPasswordStrength && (
+              <PasswordStrength password={password} />
+              )}
+              </div>
               <input
                 placeholder="Confirme sua senha"
                 type="password"
