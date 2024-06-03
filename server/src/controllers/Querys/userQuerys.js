@@ -16,7 +16,7 @@ const {
   ClienteProfissionalFavorito,
   ModelEnderecoProfissional
 } = require("../../models/index");
-const { Service } = require("../userController");
+const { Service, Servicehistory } = require("../userController");
 
 module.exports = {
   bindCookieBypkCliente: async (req, res) => {
@@ -820,6 +820,92 @@ module.exports = {
       return services;
     } catch (err) {
       console.error(`Erro: ${err}`);
+    }
+  },
+  Servicehistory: async (req, res) => {
+    try {
+      const { id_cliente } = req.params;
+      const services = await ModelPostagemServico.findAll({
+        where: { id_cliente: id_cliente },
+        raw: true,
+        include: [
+          {
+            model: ModelConfirmacaoServico,
+            required: true,
+            attributes: [],
+            include: [
+              {
+                model: ModelTerminoServico,
+                required: true,
+                attributes: [],
+                include: [
+                  {
+                    model: ModelAvaliacao,
+                    attributes: [],
+                  },
+                ],
+              },
+              {
+                model: ModelProfissional,
+                required: true,
+                attributes: [],
+              },
+            ],
+          },
+        ],
+        attributes: [
+          [Sequelize.col("ds_servico"), "ds_servico"],
+          [
+            Sequelize.col("tb_confirmacaoServico.dt_inicioServico"),
+            "dt_inicioServico",
+          ],
+          [
+            Sequelize.col("tb_confirmacaoServico.tb_terminoServico.dt_terminoServico"),
+            "dt_terminoServico",
+          ],
+
+          [
+            Sequelize.fn(
+              "COALESCE",
+              Sequelize.fn(
+                "AVG",
+                Sequelize.col(
+                  "tb_confirmacaoServico.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
+                )
+              ),
+              0
+            ),
+            "media_avaliacoes",
+          ],
+          [
+            Sequelize.col(
+              "tb_confirmacaoServico.tb_profissional.id_profissional"
+            ),
+            "id_profissional",
+          ],
+          [
+            Sequelize.col(
+              "tb_confirmacaoServico.tb_profissional.nm_profissional"
+            ),
+            "nm_profissional",
+          ],
+          [
+            Sequelize.col(
+              "tb_confirmacaoServico.tb_profissional.img_profissional"
+            ),
+            "img_profissional",
+          ],
+        ],
+        group: [
+          "tb_postagemServico.id_postagemServico",
+          "tb_confirmacaoServico.id_confirmacaoServico",
+          "tb_confirmacaoServico.tb_profissional.id_profissional",
+        ], //
+      });
+
+      return services;
+    } catch (err) {
+      console.error(`Erro de listagem: ${err}`);
     }
   },
   apagarInfocliente: async (req, res) => {

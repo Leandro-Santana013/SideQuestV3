@@ -447,6 +447,7 @@ export const UserContextProvider = ({ children }) => {
   }, []);
   const [ServiceEnd, setserviceEdn] = useState(null);
   const [ServicePend, setservicePedn] = useState(null);
+  const [Servicehistorico, setservicehistorico] = useState(null);
   const [num, setnum] = useState(null)
 
   useEffect(() => {
@@ -458,10 +459,16 @@ export const UserContextProvider = ({ children }) => {
         const responsePend = await postRequest("/user/servicePend", {
           id_cliente: user.id_cliente,
         });
+       
+
+        const responsehistorico = await postRequest("/user/serviceHistorico", {
+          id_cliente: user.id_cliente,
+        });
+        setservicehistorico(responsehistorico.user)
         const responseNum = await getRequest(`/user/nservice/${user.id_cliente}`);
           setnum(responseNum)
-        setserviceEdn(response.user);
-        setservicePedn(responsePend.user);
+        setserviceEdn(response);
+        setservicePedn(responsePend);
       }
     };
     calls();
@@ -567,6 +574,7 @@ export const UserContextProvider = ({ children }) => {
         setSelectedImages,
         ServiceEnd,
         ServicePend,
+        Servicehistorico,
         mudandoloc,
         setmudandoloc,
         cepConfig,

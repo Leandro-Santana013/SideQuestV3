@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./Historico.css";
+import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 import { SidebarCliente, Header, MenuBottomCliente } from '../../components';
 
 function Historico() {
+    const { Servicehistorico } = useContext(UserContext);
     const historicos = [
         {
             tipoServico: "Pintura de parede",
@@ -55,25 +58,29 @@ function Historico() {
                         <div className="coluna">Fim</div>
                         <div className="coluna">Categoria</div>
                     </div>
-                    {historicos.map((historico, index) => (
+                    {Servicehistorico.length > 0 ? (
+                    Servicehistorico.map((historico, index) => (
                         <div className="card-historico" key={index}>
                             <div className="coluna">
                                 <div className="info-prof">
-                                    <p className="desc-tipo-servico">{historico.tipoServico}</p>
-                                    <p className="desc-nome-prof">Profissional: {historico.nomeProf}</p>
+                                    <p className="desc-tipo-servico">{historico.ds_servico}</p>
+                                    <p className="desc-nome-prof">Profissional: {historico.nm_profissional}</p>
                                 </div>
                             </div>
                             <div className="coluna">
-                                <p>{historico.inicio}</p>
+                                <p>{historico.dt_inicioServico}</p>
                             </div>
                             <div className="coluna">
-                                <p>{historico.fim}</p>
+                                <p>{historico.dt_terminoServico}</p>
                             </div>
                             <div className="coluna">
                                 <p className="categoria">{historico.categoria}</p>
                             </div>
                         </div>
-                    ))}
+                    ))
+                ) : (
+                    <p className="mensagem-vazia">Nenhum historico encontrado.</p>
+                )}
                 </div>
             </div>
             </div>
