@@ -646,17 +646,17 @@
 /* Tablets em modo paisagem e dispositivos híbridos */
 @media (max-width: 1024px) {
   .publicarTitulo {
-    font-size: 2.75vw;
+    font-size: 3vw;
   }
 
   .publicar123 {
     width: 5vw;
     height: 5vw;
-    font-size: 1.9vw;
+    font-size: 2.3vw;
   }
 
   .tituloServico {
-    font-size: 1.9vw;
+    font-size: 2.75vw;
   }
 
   .publicarPassos {
@@ -664,34 +664,34 @@
   }
 
   .componente-content-input::placeholder {
-    font-size: 1.9vw;
+    font-size: 2.3vw;
   }
 
 
   .btnProximo {
     width: 16vw;
     height: 5vw;
-    font-size: 1.9vw;
+    font-size: 2.3vw;
   }
 
   .anexoLabel {
     width: 14vw;
     height: 4vw;
-    font-size: 1.9vw;
+    font-size: 2.3vw;
   }
 
   .componente-content-input.input-busque-por-servicos {
     height: 3vw;
     width: 41vw;
-    font-size: 1.9vw;
+    font-size: 2.3vw;
   }
 
   .componente-content-input.input-busque-por-servicos::placeholder {
-    font-size: 1.9vw;
+    font-size: 2.3vw;
   }
 
   .componente-content-input.input-desc-servico {
-    font-size: 1.9vw;
+    font-size: 2.3vw;
     height: 15vw;
   }
 
@@ -716,48 +716,48 @@
   .componente-content-input.input-cep {
     width: 18vw;
     height: 2.75vw;
-    font-size: 1.9vw;
+    font-size: 2.3vw;
   }
 
   .componente-content-input.input-estado {
     height: 2.75vw;
-    font-size: 1.9vw;
+    font-size: 2.3vw;
     width: 40vw;
   }
 
   .componente-content-input.input-bairro {
     width: 24vw;
     height: 2.75vw;
-    font-size: 1.9vw;
+    font-size: 2.3vw;
   }
 
   .componente-content-input.input-rua {
     width: 25vw;
     height: 2.75vw;
-    font-size: 1.9vw;
+    font-size: 2.3vw;
   }
 
   .componente-content-input.input-residencia {
     width: 22vw;
     height: 2.75vw;
-    font-size: 1.9vw;
+    font-size: 2.3vw;
   }
 
   .componente-content-input.input-complemento {
     width: 28vw;
     height: 2.75vw;
-    font-size: 1.9vw;
+    font-size: 2.3vw;
   }
 
   .postarH4 {
-    font-size: 1.9vw;
+    font-size: 2.3vw;
   }
 }
 
 /* Tablets em modo retrato e smartphones grandes */
 @media (max-width: 768px) {
   .publicarTitulo {
-    font-size: 3vw;
+    font-size: 3.5vw;
   }
 
   .publicar123 {
@@ -767,7 +767,7 @@
   }
 
   .tituloServico {
-    font-size: 2vw;
+    font-size: 3vw;
   }
 
   .publicarPassos {
@@ -775,31 +775,32 @@
   }
 
   .componente-content-input::placeholder {
-    font-size: 2vw;
+    font-size: 2.7vw;
   }
 
   .btnProximo {
-    font-size: 2vw;
+    font-size: 2.7vw;
   }
 
   .anexoLabel {
-    font-size: 2vw;
+    font-size: 2.7vw;
   }
 
   .componente-content-input.input-busque-por-servicos {
-    font-size: 2vw;
+    font-size: 2.7vw;
   }
 
   .componente-content-input.input-busque-por-servicos::placeholder {
-    font-size: 2vw;
+    font-size: 2.7vw;
   }
 
   .componente-content-input.input-desc-servico {
-    font-size: 2vw;
+    font-size: 2.7vw;
   }
 
   .categorias {
-    font-size: 2vw;
+    font-size: 2.7vw;
+    height: 7vw;
   }
 
   .headerVoltar .btnVoltar {
@@ -816,167 +817,194 @@
   }
 
   .componente-content-input.input-cep {
-    font-size: 2vw;
+    font-size: 2.7vw;
   }
 
   .componente-content-input.input-estado {
-    font-size: 2vw;
+    font-size: 2.7vw;
     width: 40vw;
   }
 
   .componente-content-input.input-bairro {
-    font-size: 2vw;
+    font-size: 2.7vw;
   }
 
   .componente-content-input.input-rua {
-    font-size: 2vw;
+    font-size: 2.7vw;
   }
 
   .componente-content-input.input-residencia {
-    font-size: 2vw;
+    font-size: 2.7vw;
   }
 
   .componente-content-input.input-complemento {
-    font-size: 2vw;
+    font-size: 2.7vw;
   }
 
   .postarH4 {
-    font-size: 2vw;
+    font-size: 2.7vw;
   }
 }
 
 /* Smartphones médios e tablets pequenos */
 @media (max-width: 600px) {
   .publicarTitulo {
-    font-size: 3vw;
+    font-size: 4vw;
   }
 
   .publicar123 {
-    width: 5vw;
-    height: 5vw;
-    font-size: 2.3vw;
+    width: 6.5vw;
+    height: 6.5vw;
+    font-size: 4vw;
   }
 
   .tituloServico {
-    font-size: 2.75vw;
+    font-size: 3.5vw;
   }
 
   .publicarPassos {
     gap: 3.5vw;
+    margin-right: 5vw;
   }
 
   .componente-content-input::placeholder {
-    font-size: 2.3vw;
+    font-size: 3vw;
   }
 
 
   .btnProximo {
-    font-size: 2.3vw;
+    font-size: 3vw;
+    height: 7vw;
+    width: 18vw;
   }
 
   .anexoLabel {
-    font-size: 2.3vw;
+    font-size: 3vw;
+    height: 6vw;
+    width: 18vw;
   }
 
   .componente-content-input.input-busque-por-servicos {
-    font-size: 2.3vw;
+    font-size: 3vw;
   }
 
   .componente-content-input.input-busque-por-servicos::placeholder {
-    font-size: 2.3vw;
+    font-size: 3vw;
   }
 
   .componente-content-input.input-desc-servico {
-    font-size: 2.3vw;
+    font-size: 3vw;
+    height: 20vw;
+    width: 35vw;
   }
 
   .categorias {
-    font-size: 2.3vw;
+    font-size: 3vw;
+    height: 7vw;
+  }
+
+  .categorias option {
+    height: 7vw;
+    width: 5vw;
+    font-size: 3.3vw;
   }
 
   .headerVoltar .btnVoltar {
-    width: 5vw;
-    height: 5vw;
+    width: 6.5vw;
+    height: 6.5vw;
   }
 
   .headerVoltar .btnVoltar .iconeVoltar {
-    font-size: 4vw;
+    font-size: 5.5vw;
   }
 
   .componente-content-input.input-cep {
-    font-size: 2.3vw;
+    font-size: 3vw;
+    height: 4vw;
   }
 
   .componente-content-input.input-estado {
-    font-size: 2.3vw;
+    font-size: 3vw;
+    height: 4vw;
   }
 
   .componente-content-input.input-bairro {
-    font-size: 2.3vw;
+    font-size: 3vw;
+    height: 4vw;
   }
 
   .componente-content-input.input-rua {
-    font-size: 2.3vw;
+    font-size: 3vw;
+    height: 4vw;
   }
 
   .componente-content-input.input-residencia {
-    font-size: 2.3vw;
+    font-size: 3vw;
+    height: 4vw;
   }
 
   .componente-content-input.input-complemento {
-    font-size: 2.3vw;
+    font-size: 3vw;
+    height: 4vw;
   }
 
   .postarH4 {
-    font-size: 2.3vw;
+    font-size: 3vw;
   }
 }
 
 /* Smartphones pequenos */
 @media (max-width: 480px) {
   .publicarTitulo {
-    font-size: 3.5vw;
+    font-size: 4vw;
   }
-
+  .publicarPassos {
+    margin-right: 11vw;
+  }
   .publicar123 {
     width: 5vw;
     height: 5vw;
-    font-size: 2.7vw;
+    font-size: 3.3vw;
   }
 
   .tituloServico {
-    font-size: 3.25vw;
+    font-size: 3.5vw;
   }
 
   .componente-content-input::placeholder {
-    font-size: 2.7vw;
+    font-size: 3.3vw;
   }
 
 
   .btnProximo {
-    font-size: 2.7vw;
+    font-size: 3.3vw;
+    width: 20vw;
+    height: 6vw;
   }
 
   .anexoLabel {
-    width: 18vw;
-    height: 5vw;
-    font-size: 2.7vw;
+    width: 20vw;
+    height: 6vw;
+    font-size: 3.3vw;
   }
 
   .componente-content-input.input-busque-por-servicos {
-    font-size: 2.7vw;
+    font-size: 3.3vw;
+    height: 4vw;
   }
 
   .componente-content-input.input-busque-por-servicos::placeholder {
-    font-size: 2.7vw;
+    font-size: 3.3vw;
+    height: 4vw;
   }
 
   .componente-content-input.input-desc-servico {
-    font-size: 2.7vw;
+    font-size: 3.3vw; 
   }
 
   .categorias {
-    font-size: 2.7vw;
+    font-size: 3.3vw;
+    height: 10vw;
   }
 
   .headerVoltar .btnVoltar {
@@ -990,36 +1018,42 @@
 
 
   .componente-content-input.input-cep {
-    font-size: 2.7vw;
+    font-size: 3.3vw;
+    height: 4vw;
   }
 
   .componente-content-input.input-estado {
-    font-size: 2.7vw;
+    font-size: 3.3vw;
+    height: 4vw;
   }
 
   .componente-content-input.input-bairro {
-    font-size: 2.7vw;
+    font-size: 3.3vw;
+    height: 4vw;
   }
 
   .componente-content-input.input-rua {
     width: 20vw;
-    font-size: 2.7vw;
+    font-size: 3.3vw;
+    height: 4vw;
   }
 
   .componente-content-input.input-residencia {
     width: 12vw;
     height: 2.75vw;
-    font-size: 2.7vw;
+    font-size: 3.3vw;
+    height: 4vw;
   }
 
   .componente-content-input.input-complemento {
     width: 20vw;
     height: 2.75vw;
-    font-size: 2.7vw;
+    font-size: 3.3vw;
+    height: 4vw;
   }
 
   .postarH4 {
-    font-size: 2.7vw;
+    font-size: 3.3vw;
   }
 }
 

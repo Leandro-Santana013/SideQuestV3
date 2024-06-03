@@ -84,21 +84,456 @@ body {
   text-decoration: underline;
 }
 
-@media screen and (max-width: 420px){
 
-  /*Sessao banner*/
+/* Responsividade */
 
+/* Tablets em modo paisagem e dispositivos híbridos */
+@media (max-width: 1024px) {
+ 
   .left-banner .h1Landing {
-    width: 41vw;
-    font-size: 4vw;
+    font-size: 3.75vw;
   }
+ 
+  .animation2 {
+    margin: 12vw 0;
+  }
+  
+  .conteudo-animation2 {
+    margin: 3vw;
+    margin-right: 5vw;
+  }
+
+  .hidden2.show1 {
+    width: 28vw;
+    height: 34vw;
+  }
+
+  .hidden1.show1 {
+    width: 32vw;
+    margin-right: 3vw;
+    margin-left: 1vw;
+  }
+
+  .hidden1.show1 h2 {
+    font-size: 3vw;
+  }
+
+  .hidden1.show1 p {
+    font-size:  2.3vw;
+  }
+
+  .hidden1.show1 a {
+    width: 26vw;
+    font-size: 2.3vw;
+  }
+
+  /*sessao benefits*/
+
+  
+  .beneficios h3 {
+    font-size: 2.7vw;
+  }
+
+  .show {
+    width: 20vw;
+    align-items: center;
+  }
+
+  .show h2 {
+    font-size: 2.3vw;
+  }
+
+  .review,
+  .high-five {
+    width: 14vw;
+    height: 14vw;
+  }
+
+  .show1 h2 {
+    font-size: 2.3vw;
+  }
+
+  .show1 p {
+    font-size: 2.3vw;
+  }
+/*carrosselSwiper*/
+
+.header-siwpper h2 {
+  font-size: 3vw;
 }
 
+.left-carrossel p {
+  font-size: 2.3vw;
+}
 
-@media screen and (max-width: 770px) {
+.card-carrossel {
+  width: 20vw;
+  height: 28vw;
+}
+
+.swiper-slide .card-carrossel p {
+  font-size: 2.3vw;
+}
+
+.swiper-slide .card-carrossel .btn-buscar {
+  width: 14vw;
+  height: 4vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide .card-carrossel .btn-buscar a {
+  font-size: 2.3vw;
+}
+}
+
+/* Tablets em modo retrato e smartphones grandes */
+@media (max-width: 768px) {
   .left-banner .h1Landing {
     width: 48vw;
     font-size: 4vw;
 }
+  .conteudo-animation2 {
+    margin: 3vw;
+    margin-right: 5vw;
+  }
+
+  .hidden2.show1 {
+    width: 26vw;
+    height: 33vw;
+  }
+
+  .hidden1.show1 {
+    width: 37vw;
+    margin-right: 3vw;
+    margin-left: 1vw;
+  }
+
+  .hidden1.show1 h2 {
+    font-size: 3.5vw;
+  }
+
+  .hidden1.show1 p {
+    font-size: 2.7vw;
+  }
+
+  .hidden1.show1 a {
+    width: 30vw;
+    font-size: 2.7vw;
+  }
+  /*sessao benefits*/
+
+  .show {
+    width: 20vw;
+    align-items: center;
+  }
+
+  .show h2 {
+    font-size: 2.7vw;
+  }
+
+  .review,
+  .high-five {
+    width: 14vw;
+    height: 14vw;
+  }
+
+  .show1 h2 {
+    font-size: 3.5vw;
+  }
+
+  .show1 p {
+    font-size: 2.7vw;
+  }
+
+  .show1 a {
+    opacity: 1;
+    transform: translateY(0%);
+    transition-delay: 1100ms;
+    padding: 2vw;
+    font-size: 2.7vw;
+  }
+
+  /*carrosselswiper*/
+
+  
+  .btns-swipper {
+    gap: 4vw;
+  }
+
+
+
+  .header-siwpper h2 {
+    font-size: 3.5vw;
+  }
+
+
+  .left-carrossel .carrossel-btn p {
+    font-size: 2.7vw;
+  }
+
+  .card-carrossel {
+    width: 20vw;
+    height: 30vw;
+  }
+
+
+  .swiper-slide .card-carrossel p {
+    font-size: 2.3vw;
+  }
+
+  .swiper-slide .card-carrossel .btn-buscar {
+    width: 15vw;
+    height: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card-carrossel .btn-buscar a {
+    font-size: 2.7vw;
+  }
+
 }
 
+/* Smartphones médios e tablets pequenos */
+@media (max-width: 600px) {
+  .left-banner .h1Landing {
+    font-size: 4.5vw;
+  }
+  .conteudo-animation2 {
+    margin: 3vw;
+    margin-right: 1vw;
+  }
+
+  .hidden2.show1 {
+    width: 26vw;
+    height: 36vw;
+  }
+
+  .hidden1.show1 {
+    width: 42vw;
+    margin-right: 3vw;
+    margin-left: 1vw;
+  }
+
+  .hidden1.show1 h2 {
+    font-size: 4vw;
+  }
+
+  .hidden1.show1 p {
+    font-size: 3vw;
+  }
+
+  .hidden1.show1 a {
+    width: 35vw;
+    font-size: 3vw;
+  }
+
+  /*sessao benefits*/
+  
+
+  .beneficios h3 {
+    font-size: 3.5vw;
+  }
+  
+  .show {
+    width: 20vw;
+    align-items: center;
+  }
+
+  .show h2 {
+    font-size: 3vw;
+  }
+
+  .review,
+  .high-five {
+    width: 14vw;
+    height: 14vw;
+  }
+
+  .show1 h2 {
+    font-size: 4vw;
+  }
+
+  .show1 p {
+    font-size: 3vw;
+  }
+
+  .show1 a {
+    opacity: 1;
+    transform: translateY(0%);
+    transition-delay: 1100ms;
+    padding: 2vw;
+    font-size: 3vw;
+  }
+  
+  /*carrosselswiper*/
+
+
+  .left-carrossel .carrossel-btn p {
+    font-size: 3vw;
+  }
+  .card-carrossel {
+    width: 20vw;
+    height: 36vw;
+}
+
+.swiper-slide .card-carrossel p {
+  font-size: 3vw;
+}
+
+.swiper-slide .card-carrossel .btn-buscar a {
+  font-size: 3vw;
+}
+
+}
+
+/* Smartphones pequenos */
+@media (max-width: 480px) {
+  .left-banner .h1Landing {
+    width: 56vw;
+    font-size: 5vw;
+  }
+
+  .conteudo-animation2 {
+    margin: 5vw;
+    margin-right: 5vw;
+  }
+
+  .hidden2.show1 {
+    width: 25vw;
+    height: 36vw;
+  }
+
+  .hidden1.show1 {
+    width: 47vw;
+    margin-right: 3vw;
+    margin-left: 1vw;
+  }
+
+  .hidden1.show1 h2 {
+    font-size: 4vw;
+  }
+
+  .hidden1.show1 p {
+    font-size: 3.3vw;
+  }
+
+  .hidden1.show1 a {
+    width: 38vw;
+    font-size: 3.3vw;
+  }
+  /*sessao benefits*/
+
+  .beneficios h3 {
+    font-size: 3.75vw;
+  }
+
+  .show {
+    width: 20vw;
+    align-items: center;
+  }
+
+  .show h2 {
+    font-size: 3vw;
+  }
+
+  .review {
+    width: 20vw;
+    height: 18vw;
+  }
+
+  .high-five {
+    width: 16vw;
+    height: 15vw;
+  }
+
+  .show1 h2 {
+    font-size: 3.75vw;
+  }
+
+  .show1 p {
+    font-size: 1.8vw;
+  }
+
+
+  /*carrosselswiper*/
+
+  .header-siwpper h2 {
+    font-size: 4vw;
+    
+  }
+  .btns-swipper {
+    gap: 7vw;
+  }
+
+  .card-carrossel {
+    width: 20vw;
+    height: 40vw;
+  }
+
+  .left-carrossel .carrossel-btn p {
+    font-size: 2.7vw;
+  }
+
+  .swiper-slide .card-carrossel p {
+    font-size: 3.3vw;
+  }
+
+  .swiper-slide .card-carrossel .btn-buscar {
+    width: 11vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide .card-carrossel .btn-buscar a {
+    font-size: 3.3vw;
+  }
+
+  .left-carrossel .carrossel-btn p {
+    font-size: 3.3vw;
+  }
+}
+
+
+/*Smartphones pequenos*/
+
+@media screen and (max-width: 360px){
+  
+}
+
+/* Smartphones extremamente pequenos */
+@media (max-width: 320px) {
+  .conteudo-animation2 {
+    margin: 3vw;
+    margin-right: 3vw;
+  }
+
+  .hidden2.show1 {
+    width: 30vw;
+    height: 32vw;
+  }
+
+  .hidden1.show1 {
+    width: 30vw;
+    margin-right: 3vw;
+    margin-left: 1vw;
+  }
+
+  .hidden1.show1 h2 {
+    font-size: 4vw;
+  }
+
+  .hidden1.show1 p {
+    font-size: 2.8vw;
+  }
+
+  .hidden1.show1 a {
+    width: 30vw;
+    font-size: 2.3vw;
+  }
+  /*sessao benefits*/
+}

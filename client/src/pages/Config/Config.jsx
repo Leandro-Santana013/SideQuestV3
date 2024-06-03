@@ -372,9 +372,7 @@ const Config = () => {
                   <p>alterar senha</p>
                 </div>
                 <div className="sair-excluirBtn">
-                  <Link id="sair" to="/Login" onClick={() => logoutUser()}>
-                    LOGOUT
-                  </Link>
+                  <Link id="sair" to="/Login" onClick={() => logoutUser()}>Logout</Link>
                   <button id="excluir">Excluir</button>
                 </div>
               </div>

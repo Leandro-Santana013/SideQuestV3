@@ -6,6 +6,7 @@
   position: fixed;
   flex-grow: 1;
   height: 5vw;
+  z-index: 1000;
 }
 
 .containerHeader .img-logo {
