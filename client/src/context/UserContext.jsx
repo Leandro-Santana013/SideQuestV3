@@ -176,7 +176,7 @@ export const UserContextProvider = ({ children }) => {
 
 
   const concluirCad = useCallback(async (e) => {
-    console.log(infoConfirm)
+    console.log(infoConfirm)  
     const response = await postRequest("/user/concluirCad", infoConfirm)
     if (response.error) {
       setConclusioncadError(response.error);
@@ -296,8 +296,6 @@ useEffect(() => {
         if (user) {
           dataServico.idCliente = user.id_cliente;
         }
-     
-
         // Enviar o formulário com o estado formData atualizado
         const response = await postRequest("/user/postarServicoLoc", dataServico);
         console.log("serviço com loc")
@@ -314,7 +312,6 @@ useEffect(() => {
             setmessageErrorPostar(null);
           }, 4000);
         } else {
-          console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
           setModalPostar(true);
           setSelectedImages([])
           setServico({})
@@ -347,8 +344,28 @@ useEffect(() => {
     }))
   }, [user, Servico, locationuser]);
 
-  const fetchData = async (cep) => {
+  const [mudandoloc, setmudandoloc] = useState(null)
+const [cepConfig, setCepConfig] = useState(null)
+  const fetchData = async (cep, p2) => {
     try {
+      console.log(cep, p2)
+      if(p2){
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      if (!response.data.erro) {
+        const { uf, localidade, logradouro, bairro } = response.data;
+        setCepConfig(false);
+        setmudandoloc({
+          ...mudandoloc,
+          cep,
+          uf_localidade: `${uf} - ${localidade}`,
+          logradouro,
+          bairro,
+        });
+      } else {
+        setCepConfig(true);
+      }
+    }
+
       const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
       if (!response.data.erro) {
         const { uf, localidade, logradouro, bairro } = response.data;
@@ -413,16 +430,22 @@ useEffect(() => {
   }, []);
 
 
+
   const updatepostarServico = useCallback((info) => {
     setServico(info);
   }, []);
-  const [service, setserviceEdn] = useState(null)
-
+  const [ServiceEnd, setserviceEdn] = useState(null)
+  const [ServicePend, setservicePedn] = useState(null)
+  
  useEffect(() => {
   const calls = async() => {
+    if(user && user.id_cliente){
   const response = await postRequest("/user/serviceend",  {id_cliente: user.id_cliente});
+  const responsePend = await postRequest("/user/servicePend",  {id_cliente: user.id_cliente});
   setserviceEdn(response.user)
-  console.log(response.user, "aaaaaaaaaa")
+  setservicePedn(responsePend.user)
+  
+    }
   }
   calls()
  }, [user])
@@ -450,6 +473,7 @@ useEffect(() => {
         categorias,
         fetchData,
         cepError,
+        setCepError,
         setModalPostar,
         modalPostar,
         errorPostar,
@@ -473,7 +497,12 @@ useEffect(() => {
         PostarServicoWithLoc,
         selectedImages,
         setSelectedImages,
-       
+        ServiceEnd,
+        ServicePend,
+        mudandoloc,
+        setmudandoloc,
+        cepConfig,
+        setCepConfig
       }}
     >
       {children}

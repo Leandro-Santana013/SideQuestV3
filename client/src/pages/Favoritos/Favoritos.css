@@ -6,7 +6,7 @@
   --verde-claro: #E8FFF7;
 }
 
-.conteudo-favoritos {
+.content-favoritos {
   margin-right: 5vw;
   display: flex;
   flex-direction: column;
@@ -14,131 +14,103 @@
   margin-top: 15vh;
 }
 
-.prof-fav-pesq {
+.content-favoritos {
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.header-favoritos {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-favoritos h2 {
+  font-size: 24px;
+  color: #333;
 }
 
 .input-procurar {
   display: flex;
-  width: 15vw;
-  border: solid 2px black;
-  padding: 5px;
-  justify-content: space-between;
-  border-radius: 20px;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  padding: 5px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .input-procurar input {
   border: none;
-  width: 100%;
-}
-
-.input-procurar input:focus {
   outline: none;
+  padding: 8px;
+  font-size: 16px;
 }
 
-.area-profs {
-  box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
-  border-radius: 20px;
+.input-procurar i {
+  font-size: 20px;
+  color: #333;
+  margin-left: 10px;
 }
 
-.prof-favoritos {
+.lista-favoritos {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 70vw;
-  height: 35vw;
-  gap: 1vh;
-
-
+  gap: 20px;
 }
 
-.card-prof-fav {
+.card-favorito {
   display: flex;
-  align-items: center;
-  width: inherit;
   justify-content: space-between;
-  border-bottom: solid 1px rgb(148, 138, 138);
+  align-items: center;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.info-prof-fav {
+.info-favorito {
   display: flex;
   align-items: center;
-  gap: 1vw;
+  text-decoration: none;
+  color: #333;
 }
 
-.info-prof-fav img {
-  width: 3.5vw;
-}
-
-.actions-prof-fav {
+.img-perfil {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   margin-right: 10px;
+}
+
+.acoes-favorito {
   display: flex;
-  gap: 1.5vw;
+  gap: 10px;
 }
 
-.actions-prof-fav i {
-  font-size: 2vw;
+.btn-favoritar,
+.btn-chat,
+.btn-servico {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 25px;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.btn-favoritar {
+color: var(--verde);
+}
+
+.btn-favoritar:hover,
+.btn-chat:hover,
+.btn-servico:hover {
   color: var(--verde);
-  transition: .25s ease-in-out;
 }
 
-.actions-prof-fav i:hover {
-  font-size: 2vw;
-  color: var(--azul);
-}
-
-@media screen and (max-width: 500px) {
-
-  .conteudo-favoritos {
-    margin-right: 3.5vw;
-  }
-
-  .prof-fav-pesq h2 {
-    font-size: 3.5vw;
-  }
-
-  .input-procurar {
-    height: 2vh;
-    width: 23vw;
-  }
-
-  .input-procurar input {
-    font-size: 0.6rem;
-  }
-
-  .card-prof-fav {
-    width: 52vw;
-    height: 3vh;
-    padding: 4px;
-  }
-
-  .card-prof-fav p {
-    font-size: 0.7rem;
-  }
-
-  .card-prof-fav .info-prof-fav img {
-    width: 7.5vw;
-  }
-
-}
-
-
-@media screen and (max-width: 950px) {
-  .card-prof-fav .info-prof-fav img {
-    width: 7.5vw;
-  }
-
-  .input-procurar {
-    width: 22vw;
-    padding: 5px;
-    margin: 6px;
-  }
-}
-
-
-.actions-prof-fav .icone-chat {
-  width: 2vw;
-  height: 2vw;
+.mensagem-vazia {
+  font-size: 18px;
+  color: #777;
+  text-align: center;
 }

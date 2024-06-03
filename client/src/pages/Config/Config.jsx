@@ -1,10 +1,11 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState, useCallback } from "react";
+
 import {
   Header,
   SidebarCliente,
   ImageCropper,
   TextInput,
-  MenuBottomCliente
+  MenuBottomCliente,
 } from "../../components";
 import "./config.css";
 import { UserContext } from "../../context/UserContext";
@@ -22,27 +23,55 @@ const Config = () => {
     functionUpdateInfoUser,
     showModal,
     setShowModal,
+    locationuser,
+    fetchData,
+    cepConfig,
+    setCepConfig,
+    mudandoloc,
+    setmudandoloc,
   } = useContext(UserContext);
 
-  const updateUserData = (newData) => {
+  const handleCepChange = async (e) => {
+    const cep = e.target.value;
+    const cepToFetch = cep; // Armazena o valor atual do CEP em uma variável local
+    if (cep.length === 8) await fetchData(cepToFetch, true); // Chama a função de busca de dados do CEP com o valor atual
+  };
+
+  let valuecep = false;
+  useEffect(() => {
+    valuecep = cepConfig;
+  }, [cepConfig]);
+
+  const updateUserData = async (newData) => {
     const changes = {};
     changes.id_cliente = user.id_cliente;
-    if (newData.name !== user.name) {
-      changes.name = newData.name;
-    }
-    if (newData.email !== user.email) {
-      changes.email = newData.email;
-    }
-    if (newData.numero !== user.numero) {
-      changes.numero = newData.numero;
-    }
-    if (newData.foto !== imgPerfil && newData.foto !== user.foto) {
-      changes.foto = newData.foto;
-      console.log("Tamanho da imagem:", newData.foto.length);
-    }
+    if (newData.name !== user.name) changes.name = newData.name;
+    if (newData.email !== user.email) changes.email = newData.email;
+    if (newData.numero !== user.numero) changes.numero = newData.numero;
+    if (newData.foto !== imgPerfil && newData.foto !== user.foto) changes.foto = newData.foto;
+    if (newData.cd_cep !== locationuser.cd_cep && newData.cep !== null) changes.cd_cep = newData.cd_cep;
+    if (newData.uf_localidade !== locationuser.uf_localidade) changes.uf_localidade = newData.uf_localidade;
+    if (newData.nm_bairro !== locationuser.nm_bairro) changes.nm_bairro = newData.nm_bairro;
+    if (newData.nm_logradouro !== locationuser.nm_logradouro) changes.nm_logradouro = newData.nm_logradouro;
+    if (newData.nmr_casa !== locationuser.nmr_casa) changes.nmr_casa = newData.nmr_casa;
+    if (newData.complemento !== locationuser.complemento) changes.complemento = newData.complemento;
     setChangedUserData(changes);
     if (Object.keys(changes).length > 0) {
-      setShowModal(true); // Mostra o modal se houver alterações
+      if (changes.cd_cep) {
+        console.log(changes.cd_cep, changes.cd_cep.length);
+        if (changes.cd_cep.length === 8) {
+          console.log(valuecep);
+          if (!valuecep) {
+            console.log(user);
+            setShowModal(true);
+          }
+        }
+      }else if(changes.cd_cep !== undefined){
+        return
+      }else{
+        setShowModal(true);
+      }
+        
     }
     setChangedUserData(changes);
   };
@@ -60,18 +89,28 @@ const Config = () => {
     });
   };
 
-
   const deleteUpdate = () => {
     avatarUrl.current.src = user.img_cliente ? user.img_cliente : imgPerfil;
     setChangedUserData(null);
     setShowModal(false);
     setModalEditar(false);
+    setCepConfig(false);
+    setparabens(false);
+    setmudandoloc(null);
   };
-
+  const [parabens, setparabens] = useState(null);
+  useEffect(() => {
+    console.log(cepConfig, "estado do cep");
+  }, [cepConfig]);
   /***************************************************/
 
   const [modalEditar, setModalEditar] = useState(false);
+
   const handleSave = () => {
+    if (cepConfig) {
+      setparabens(true);
+      return;
+    }
     functionUpdateInfoUser();
     setModalEditar(false); // Define o estado modalEditar de volta para false
   };
@@ -84,6 +123,14 @@ const Config = () => {
       <MenuBottomCliente />
       <div className="content-midia">
         <div className="main-content">
+          <>
+            {parabens && (
+              <>
+                <h1>Salva direito animal</h1>
+              </>
+            )}
+          </>
+
           <div className="conteudo-config-perfil">
             <div className="cabecalho-editar">
               <div className="area-img-perfil-edit">
@@ -115,29 +162,34 @@ const Config = () => {
                       <input
                         type="text"
                         id="input-nome"
-                        value={(changedUserData && changedUserData.name) || user.nm_cliente}
-
+                        value={
+                          (changedUserData.name !== undefined ? changedUserData.name : user.nm_cliente) || null
+                        }
                         onChange={(event) => handleFieldChange("name", event)}
                       />
                     ) : (
                       <span>{user.nm_cliente}</span>
                     )}
 
-                    {user && user.nmr_telefoneCliente && (<>
-                      <p>número</p>
-                      {modalEditar ? (
-                        <input
-                          type="text"
-                          id="input-num"
-                          value={(changedUserData && changedUserData.numero) || user.nmr_telefoneCliente}
-
-                          onChange={(event) => handleFieldChange("numero", event)}
-                        />
-                      ) : (
-                        <p>{user.nmr_telefoneCliente}</p>
-                      )}
-                    </>)
-                    }
+                    {user && user.nmr_telefoneCliente && (
+                      <>
+                        <p>número</p>
+                        {modalEditar ? (
+                          <input
+                            type="text"
+                            id="input-num"
+                            value={
+                              (changedUserData.numero !== undefined ? changedUserData.numero : user.nmr_telefoneCliente) || null
+                            }
+                            onChange={(event) =>
+                              handleFieldChange("numero", event)
+                            }
+                          />
+                        ) : (
+                          <p>{user.nmr_telefoneCliente}</p>
+                        )}
+                      </>
+                    )}
                   </div>
                   <div className="input-email-local">
                     <p>Email</p>
@@ -145,7 +197,9 @@ const Config = () => {
                       <input
                         type="text"
                         id="input-num"
-                        value={(changedUserData && changedUserData.email) || user.cd_emailCliente}
+                        value={
+                          (changedUserData.email !== undefined ? changedUserData.email : user.cd_emailCliente) || null
+                        }
                         onChange={(event) => handleFieldChange("email", event)}
                       />
                     ) : (
@@ -157,20 +211,20 @@ const Config = () => {
               <div className="edit-info-endereco-principal">
                 <div className="leftPostar leftPostar-de-config">
                   {/* {modalPostar && (
-                      <>
-                        <div className="fade">
-                          <div className={`modal-postar-sucess`}>
-                            <h3>Serviço postado</h3>
-                            <img src={imgApproved} />
-                            <p>Profissionas poderão vizualizar seu problema</p>
-                            <Link to={"/homeCliente"}>
-                              <button className="close-modal-postar" onClick={() => {
-                                setModalPostar(null); // Adicione esta linha para fechar o modal ao clicar em "Fechar"
-                              }}> Fechar</button></Link>
+                        <>
+                          <div className="fade">
+                            <div className={`modal-postar-sucess`}>
+                              <h3>Serviço postado</h3>
+                              <img src={imgApproved} />
+                              <p>Profissionas poderão vizualizar seu problema</p>
+                              <Link to={"/homeCliente"}>
+                                <button className="close-modal-postar" onClick={() => {
+                                  setModalPostar(null); // Adicione esta linha para fechar o modal ao clicar em "Fechar"
+                                }}> Fechar</button></Link>
+                            </div>
                           </div>
-                        </div>
-                      </>
-                    )} */}
+                        </>
+                      )} */}
                   <h2>Endereço Principal</h2>
                   <div className="cep-estado">
                     <div>
@@ -180,21 +234,31 @@ const Config = () => {
                           className="componente-content-input-config-cep"
                           type="text"
                           name="cep"
-                          autocomplete="off"
+                          value={
+                            (changedUserData?.cd_cep !== undefined
+                              ? changedUserData.cd_cep
+                              : locationuser?.cd_cep) || null
+                          }
                           size={{
-                            // border: cepError
-                            //   ? "2px solid red"
-                            //   : "2px solid #eee",
-
+                            border: cepConfig
+                              ? "2px solid red"
+                              : "2px solid #eee",
                           }}
-                        // onChange={(e) => {
-                        //   handleCepChange(e); // Chama a função handleCepChange existente
-                        //   updatepostarServico({ ...Servico, cep: e.target.value }); // Atualiza o estado do serviço com o novo valor do CEP
-                        // }}
+                          onChange={async (event) => {
+                            const newCep = event.target.value;
+                        
+                            // Remove temporariamente a função handleCepChange para depuração
+                            handleFieldChange("cd_cep", { target: { value: newCep } });
+                        
+                            // Adicione novamente a função handleCepChange para testes
+                            try {
+                              await handleCepChange(event);
+                            } catch (error) {
+                              console.log(error);
+                            }
+                          }}
                         />
-                        {/* {cepError && (
-                            <p className="cepError">CEP incorreto</p>
-                          )} */}
+                        {cepConfig && <p className="cepError">CEP incorreto</p>}
                       </div>
                     </div>
                     <div>
@@ -204,7 +268,13 @@ const Config = () => {
                         type="text"
                         name="estado_cidade"
                         placeholder={""}
-                        // value={Servico.uf_localidade}
+                        value={
+                          mudandoloc?.uf_localidade ||
+                          locationuser?.uf_localidade
+                        }
+                        onChange={(event) =>
+                          handleFieldChange("uf_localidade", event)
+                        }
                         disabled
                       />
                     </div>
@@ -218,10 +288,16 @@ const Config = () => {
                         name="bairro"
                         autocomplete="off"
                         placeholder={""}
-                      // value={Servico.bairro}
-                      // onChange={(e) => {
-                      //   updatepostarServico({ ...Servico, bairro: e.target.value });
-                      // }}
+                        value={
+                          (changedUserData?.nm_bairro !== undefined
+                            ? changedUserData.nm_bairro
+                            : mudandoloc?.bairro
+                            ? mudandoloc?.bairro
+                            : locationuser?.nm_bairro) || null
+                        }
+                        onChange={(event) =>
+                          handleFieldChange("nm_bairro", event)
+                        }
                       />
                     </div>
                     <div>
@@ -232,11 +308,17 @@ const Config = () => {
                           type="text"
                           name="nmRua"
                           autocomplete="off"
-                          placeholder={""}
-                        // value={Servico.logradouro}
-                        // onChange={(e) => {
-                        //   updatepostarServico({ ...Servico, logradouro: e.target.value });
-                        // }}
+                          placeholder={"nm_logradouro"}
+                          value={
+                            (changedUserData?.nm_logradouro !== undefined
+                              ? changedUserData.nm_logradouro
+                              : mudandoloc?.logradouro
+                              ? mudandoloc?.logradouro
+                              : locationuser?.nm_logradouro) || null
+                          }
+                          onChange={(event) =>
+                            handleFieldChange("nm_logradouro", event)
+                          }
                         />
                       </div>
                     </div>
@@ -251,9 +333,14 @@ const Config = () => {
                         name="nmrResidencia"
                         autocomplete="off"
                         placeholder={""}
-                      // onChange={(e) => {
-                      //   updatepostarServico({ ...Servico, nmrResidencia: e.target.value });
-                      // }}
+                        value={
+                          (changedUserData?.nmr_casa !== undefined
+                            ? changedUserData.nmr_casa
+                            : locationuser?.nmr_casa) || null
+                        }
+                        onChange={(event) =>
+                          handleFieldChange("nmr_casa", event)
+                        }
                       />
                     </div>
                     <div>
@@ -263,30 +350,19 @@ const Config = () => {
                         type="text"
                         name="complemento"
                         autocomplete="off"
+                        value={
+                          (changedUserData?.complemento !== undefined
+                            ? changedUserData.complemento
+                            : locationuser?.txt_complemento) || null
+                        }
                         placeholder={""}
-                      // onChange={(e) => {
-                      //   updatepostarServico({ ...Servico, complemento: e.target.value });
-                      // }}
+                        onChange={(event) =>
+                          handleFieldChange("complemento", event)
+                        }
                       />
                     </div>
                   </div>
                 </div>
-
-                {/* {modalOpen && (
-  <div className="modal-confirmacao">
-    <div>
-    <h2>Confirmação</h2>
-    <p>Deseja realmente publicar o serviço?</p>
-    <div>
-      <div className="buttons-modal">
-      <button onClick={() => closeModal()}>Cancelar</button>
-      <button onClick={handleSubmit()}>Confirmar</button>
-    </div>
-    </div>
-  </div>
-  </div>
-  )} */}
-
               </div>
               <div className="edit-seguranca">
                 <h2>Segurança da conta</h2>
@@ -301,7 +377,6 @@ const Config = () => {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -310,8 +385,15 @@ const Config = () => {
           <div className="modal-salvar-alteracoes">
             <p>Seu perfil foi alterado. Deseja salvar as alterações?</p>
             <div className="botoes-modal-salvar-alteracoes">
-              <button className="btn-confirmar-alteracoes" onClick={handleSave}>Salvar</button>
-              <button className="btn-cancelar-alteracoes" onClick={deleteUpdate.bind(this)}>Cancelar</button>
+              <button className="btn-confirmar-alteracoes" onClick={handleSave}>
+                Salvar
+              </button>
+              <button
+                className="btn-cancelar-alteracoes"
+                onClick={deleteUpdate.bind(this)}
+              >
+                Cancelar
+              </button>
             </div>
           </div>
         </div>

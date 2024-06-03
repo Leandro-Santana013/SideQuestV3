@@ -197,38 +197,37 @@ const postagensServico = [
     [14, 5, 15, 'Adubação de jardim', 'Adubação de Jardim'],
     [15, 2, 2, 'Reparo de esgoto', 'Reparo de Esgoto']
 ];
-
 const confirmacoesServico = [
-    [1, 1],
-    [2, 2],
-    [3, 3],
-    [4, 4],
-    [5, 5],
-    [6, 6],
-    [7, 7],
-    [8, 8],
-    [9, 9],
-    [10, 10],
-    [11, 11],
-    [12, 12],
-    [13, 13],
-    [14, 14],
-    [15, 15],
-    [16, 16],
-    [17, 17],
-    [18, 18],
-    [19, 19],
-    [20, 20],
-    [21, 1],
-    [22, 2],
-    [23, 3],
-    [24, 4],
-    [25, 5],
-    [26, 6],
-    [27, 7],
-    [28, 8],
-    [29, 9],
-    [30, 10]
+    [1, 1, "1994-01-01"],
+    [2, 2, "1848-02-02"],
+    [3, 3, "1931-03-03"],
+    [4, 4, "1968-04-04"],
+    [5, 5, "1961-05-05"],
+    [6, 6, "1944-06-06"],
+    [7, 7, "2005-07-07"],
+    [8, 8, "1945-08-08"],
+    [9, 9, "1948-09-09"],
+    [10, 10, "1911-10-10"],
+    [11, 11, "1918-11-11"],
+    [12, 12, "1963-12-12"],
+    [13, 13, "1914-06-28"],
+    [14, 14, "1789-07-14"],
+    [15, 15, "1947-08-15"],
+    [16, 16, "1969-07-16"],
+    [17, 17, "1989-10-17"],
+    [18, 18, "1906-04-18"],
+    [19, 19, "1536-05-19"],
+    [20, 20, "1969-07-20"],
+    [21, 1, "1936-09-21"],
+    [22, 2, "1963-11-22"],
+    [23, 3, "2001-03-23"],
+    [24, 4, "1929-10-24"],
+    [25, 5, "1991-12-25"],
+    [26, 6, "1986-04-26"],
+    [27, 7, "1945-01-27"],
+    [28, 8, "1914-06-28"],
+    [29, 9, "1929-10-29"],
+    [30, 10, "1945-04-30"]
 ];
  
 const terminosServico = [
@@ -382,7 +381,7 @@ async function inserirPostagensServico() {
 async function inserirConfirmacoesServico() {
     try {
         for (const confirmacao of confirmacoesServico) {
-            const query = 'INSERT INTO tb_confirmacaoServico (id_postagemServico, id_profissional) VALUES (?, ?)';
+            const query = 'INSERT INTO tb_confirmacaoServico (id_postagemServico, id_profissional, dt_inicioServico) VALUES (?, ?, ?)';
             const valores = [...confirmacao];
             await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT });
             console.log(`Confirmação de serviço ${confirmacao[0]} inserida com sucesso.`);

@@ -19,4 +19,5 @@ router.post('/profissional/favoritado', userControllers.fav)
 router.get('/getFavs/:id_cliente', userControllers.getFavoritos)
 router.get('/nservice/:id_cliente', userControllers.numService)
 router.post('/serviceend', userControllers.Service)
+router.post('/servicePend', userControllers.ServicePend)
 module.exports = router; 

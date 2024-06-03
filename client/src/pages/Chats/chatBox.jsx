@@ -77,6 +77,7 @@ export const ChatBox = () => {
             id="messageInput"
             value={textMessage}
             onChange={(e) => setTextMessage(e.target.value)}
+            autocomplete="off"
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
                 handleMessageSend(e);

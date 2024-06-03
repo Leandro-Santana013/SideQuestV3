@@ -77,7 +77,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
         socket.off("getMessage");
         socket.off("getNotifications");
     }
-    }, [socket, currentChat, newMessage, notifications])
+    }, [socket, currentChat, newMessage,])
 
     const [allUsers, setAllUsers] = useState([])
     
@@ -238,7 +238,7 @@ export const ChatContextProvider = ({ children, user, pro }) => {
 
         // Atualize as notificações
         const mNotifications = notifications.map(el => {
-            if (n.senderId === el.senderId) {
+            if (n.senderId == el.senderId) {
                 return { ...n, isRead: true };
             } else {
                 return el;

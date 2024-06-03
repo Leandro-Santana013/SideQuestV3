@@ -29,16 +29,16 @@ export const UserChat = ({ chat }) => {
 
     let chatItem1
 
-    {
-        recipient && recipient.length > 0 && recipient.map((index) => {
+        recipient && recipient.length > 0 && recipient.map((recipient, index) => {
             if (userType === 'user') {
                 chatItem1 = chat.chats[index];
+        
             } else if (userType === 'pro') {
                 chatItem1 = chat.chats[index];
             }
         })
 
-    }
+    
 
     const { latestMessage } = useLatestMessage(chatItem1);
 

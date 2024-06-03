@@ -27,9 +27,12 @@ const ModelConfirmacaoServico = connectionDataBase.define('tb_confirmacaoServico
             key:'id_profissional' 
         }
     },
+    dt_inicioServico: {
+        type: DataTypes.DATE,
+        allowNull:false 
+    }
 },
-_padraoTableDBExistence('tb_confirmacaoServico')
-
+_padraoTableDBExistence('tb_confirmacaoServico') 
 )
 
 module.exports = {

@@ -30,7 +30,6 @@ const HomeProfissionais = () => {
             <div className="content-midia">
 
                 <div className="main-content">
-                    <div className="menu-profissionais">
                         <div className="menu-topo">
                             <div className="actions">
                                 <div className="info-action">
@@ -66,7 +65,6 @@ const HomeProfissionais = () => {
                         </section>
                     </div>
                 </div>
-            </div>
         </>
     );
 }

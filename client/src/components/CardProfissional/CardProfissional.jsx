@@ -50,6 +50,7 @@ export const CardProfissional = () => {
   const fetchDataFromBackend = async () => {
     try {
       const response = await getRequest("/user/profissionaisCard");
+      console.log("resss", response)
       setDadosIniciais(response)
     } catch (error) {
       console.error("Erro ao buscar dados do backend:", error);
@@ -107,8 +108,8 @@ export const CardProfissional = () => {
         }
       })
       .map(profissional => (
-
         <div className="card-profissional">
+          <Link to={`/homeCliente/perfilProfissional/${profissional.id_profissional}`} key={profissional.id_profissional}>
           <div className="tamplate-img">
             <img src={imgPerfil} alt="Imagem de perfil" />
             <div className="perfil-avaliado">
@@ -124,18 +125,29 @@ export const CardProfissional = () => {
             </div>
           </div>
           <div className="profissoes-card-profissional">
-          {profissional.tb_profissional_categoria.map(categoria => (
-              <p key={categoria.id_categoria}>{categoria.tb_categorium.ds_categoria}</p>
-            ))}
+            {profissional.tb_profissional_categoria.map((categoria, index) => (
+    index < 3 ?
+    <p key={categoria.id_categoria} className="tooltip">
+      {categoria.tb_categorium.ds_categoria}
+      <span className="tooltiptext">{categoria.tb_categorium.ds_categoria}</span>
+    </p>
+    :
+    index === 3 ?
+    <p key={categoria.id_categoria} className="tooltip">
+      +{profissional.tb_profissional_categoria.length - 3}
+      <span className="tooltiptext">+{profissional.tb_profissional_categoria.length - 3}</span>
+    </p>
+    :
+    null
+  ))}
           </div>
           <div className="desc-cliente">
             <p className="desc">{profissional.ds_biografia ? profissional.ds_biografia : "Não possui descrição"}</p>
           </div>
           <div className="bottom-card-profissional"> 
-            <Link to={`/homeCliente/perfilProfissional/${profissional.id_profissional}`} key={profissional.id_profissional}>
               <button className="btn-ver-mais">Ver mais</button>
-            </Link>
           </div>
+          </Link>
         </div>
 
       ));

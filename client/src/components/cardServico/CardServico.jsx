@@ -70,12 +70,14 @@ export const CardServico = () => {
           <RiFilter2Fill className="iconFilter" />
         </div>
       </div>
-      <div className="cards-servicos">
+      <div className="cards-container">
+
         {servicos.length > 0 ? (
           servicos.map((servico) => (
             <div className="card-servico-profissional" key={servico.id_postagemServico}>
               <Link to={`/VisualizarServicoProfissa/${servico.id_postagemServico}`}>
                 <div className="card-servico-profissional-header">
+                <p className="card-time">{servico.diferencaTempo}</p>
                   {servico.img_servico ? <img src={servico.img_servico} alt="Imagem do serviço" /> : ''}
                 </div>
                 <div className="card-servico-profissional-body">
@@ -84,9 +86,10 @@ export const CardServico = () => {
                     {truncateText(servico.ds_servico, 66)}
                   </p>
                   <div className="user-info">
+                    <div className="user">
                     <img src={servico["tb_cliente.img_cliente"] ? servico["tb_cliente.img_cliente"] : ImgPerfil} alt="Avatar do Usuário" className="avatar" />
                     <span>{servico["tb_cliente.nm_cliente"]}</span>
-                    <p>{servico.diferencaTempo}</p>
+                    </div>
                   </div>
                 </div>
                 <div className="card-servico-profissional-footer">

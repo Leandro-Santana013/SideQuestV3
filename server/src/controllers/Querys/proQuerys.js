@@ -322,10 +322,11 @@ module.exports = {
     }
   },
   insertconfirmarServico: async (req, res) => {
-    const { id_profissional, id_postagemServico } = req.params;
+    const { id_profissional, id_postagemServico, dt_inicioServico } = req.params;
     return ModelConfirmacaoServico.create({
       id_profissional: id_profissional,
       id_postagemServico: id_postagemServico,
+      dt_inicioServico: dt_inicioServico
     });
   },
 };

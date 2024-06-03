@@ -19,9 +19,12 @@ cursor: pointer;
 
 .message-box .user-online{
     background-color: var(--verde);
-    width: 1vw;
-    height: 1vw;
+    width: 13px;
+    height: 13px;
+    top: 0;
+    right: 5px;
     border-radius: 50%;
+    position: absolute;
 }
 
 .message-box .foto-name {
