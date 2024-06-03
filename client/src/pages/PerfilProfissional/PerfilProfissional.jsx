@@ -104,7 +104,7 @@ const PerfilProfissional = () => {
                                     <h1>{profissional.nm_profissional} <span className={
                                     onlineUsers?.some((user) => user?.userID == profissional.id_profissional && user.type == "pro") ?
                                         "online-indicator" : ""}>online</span></h1>
-                                    <p><i className="location-icon"><MdOutlineLocationOn /></i> São Vicente, SP</p> 
+                                    {profissional.sg_estado && profissional.nm_cidade  && <p><i className="location-icon"><MdOutlineLocationOn /></i>{profissional.nm_cidade}, {profissional.sg_estado}</p> }
                                 </div>
                                 <div className="actions-buttons-profile">
                                     <div className="action-button-profile" onClick={() => handleClick(id)}>Iniciar conversa</div>

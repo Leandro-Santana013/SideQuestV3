@@ -37,6 +37,10 @@ ModelEnderecoProfissional.belongsTo(ModelProfissional, { foreignKey: 'id_profiss
 //uma cidade tem muitos enderços e um enderço tem um tem apenas uma cidade
 ModelCidade.hasMany(ModelEndereco, { foreignKey: 'id_cidade' });
 ModelEndereco.belongsTo(ModelCidade, { foreignKey: 'id_cidade' });
+
+ModelCidade.hasMany(ModelEnderecoProfissional, { foreignKey: 'id_cidade' });
+ModelEnderecoProfissional.belongsTo(ModelCidade, { foreignKey: 'id_cidade' });
+
 // um profissional pode ter muitas categorias escolhidas
 ModelProfissional.hasMany(ModelProfissionalCategoria, { foreignKey: 'id_profissional' });
 ModelProfissionalCategoria.belongsTo(ModelProfissional, { foreignKey: 'id_profissional' });

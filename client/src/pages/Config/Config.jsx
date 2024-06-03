@@ -29,6 +29,18 @@ const Config = () => {
     setCepConfig,
     mudandoloc,
     setmudandoloc,
+    comparePassword,
+    setpass,
+    passSucess,
+    passErrorCompare,
+    levelSecPass,
+    alterpass,
+    setpassSucess,
+    setpassErrorCompare,
+    setLevelSecPass,
+    setAlterPass,
+    num,
+    deleteuser,
   } = useContext(UserContext);
 
   const handleCepChange = async (e) => {
@@ -55,6 +67,7 @@ const Config = () => {
     if (newData.nm_logradouro !== locationuser.nm_logradouro) changes.nm_logradouro = newData.nm_logradouro;
     if (newData.nmr_casa !== locationuser.nmr_casa) changes.nmr_casa = newData.nmr_casa;
     if (newData.complemento !== locationuser.complemento) changes.complemento = newData.complemento;
+
     setChangedUserData(changes);
     if (Object.keys(changes).length > 0) {
       if (changes.cd_cep) {
@@ -66,12 +79,11 @@ const Config = () => {
             setShowModal(true);
           }
         }
-      }else if(changes.cd_cep !== undefined){
-        return
-      }else{
+      } else if (changes.cd_cep !== undefined) {
+        return;
+      } else {
         setShowModal(true);
       }
-        
     }
     setChangedUserData(changes);
   };
@@ -83,6 +95,14 @@ const Config = () => {
 
   const handleFieldChange = (field, event) => {
     const newValue = event.target.value;
+
+    if (field == "password") {
+      setpass((senha) => ({
+        ...senha,
+        [field]: newValue,
+      }));
+      return;
+    }
     updateUserData({
       ...changedUserData,
       [field]: newValue,
@@ -105,6 +125,7 @@ const Config = () => {
   /***************************************************/
 
   const [modalEditar, setModalEditar] = useState(false);
+  const [certeza, setCerteza] = useState(null)
 
   const handleSave = () => {
     if (cepConfig) {
@@ -114,6 +135,8 @@ const Config = () => {
     functionUpdateInfoUser();
     setModalEditar(false); // Define o estado modalEditar de volta para false
   };
+
+  const [modal, setmodal] = useState(null);
   /***************************************************/
 
   return (
@@ -163,7 +186,9 @@ const Config = () => {
                         type="text"
                         id="input-nome"
                         value={
-                          (changedUserData.name !== undefined ? changedUserData.name : user.nm_cliente) || null
+                          (changedUserData.name !== undefined
+                            ? changedUserData.name
+                            : user.nm_cliente) || null
                         }
                         onChange={(event) => handleFieldChange("name", event)}
                       />
@@ -179,7 +204,9 @@ const Config = () => {
                             type="text"
                             id="input-num"
                             value={
-                              (changedUserData.numero !== undefined ? changedUserData.numero : user.nmr_telefoneCliente) || null
+                              (changedUserData.numero !== undefined
+                                ? changedUserData.numero
+                                : user.nmr_telefoneCliente) || null
                             }
                             onChange={(event) =>
                               handleFieldChange("numero", event)
@@ -198,7 +225,9 @@ const Config = () => {
                         type="text"
                         id="input-num"
                         value={
-                          (changedUserData.email !== undefined ? changedUserData.email : user.cd_emailCliente) || null
+                          (changedUserData.email !== undefined
+                            ? changedUserData.email
+                            : user.cd_emailCliente) || null
                         }
                         onChange={(event) => handleFieldChange("email", event)}
                       />
@@ -210,21 +239,6 @@ const Config = () => {
               </div>
               <div className="edit-info-endereco-principal">
                 <div className="leftPostar leftPostar-de-config">
-                  {/* {modalPostar && (
-                        <>
-                          <div className="fade">
-                            <div className={`modal-postar-sucess`}>
-                              <h3>Serviço postado</h3>
-                              <img src={imgApproved} />
-                              <p>Profissionas poderão vizualizar seu problema</p>
-                              <Link to={"/homeCliente"}>
-                                <button className="close-modal-postar" onClick={() => {
-                                  setModalPostar(null); // Adicione esta linha para fechar o modal ao clicar em "Fechar"
-                                }}> Fechar</button></Link>
-                            </div>
-                          </div>
-                        </>
-                      )} */}
                   <h2>Endereço Principal</h2>
                   <div className="cep-estado">
                     <div>
@@ -246,10 +260,12 @@ const Config = () => {
                           }}
                           onChange={async (event) => {
                             const newCep = event.target.value;
-                        
+
                             // Remove temporariamente a função handleCepChange para depuração
-                            handleFieldChange("cd_cep", { target: { value: newCep } });
-                        
+                            handleFieldChange("cd_cep", {
+                              target: { value: newCep },
+                            });
+
                             // Adicione novamente a função handleCepChange para testes
                             try {
                               await handleCepChange(event);
@@ -366,14 +382,90 @@ const Config = () => {
               </div>
               <div className="edit-seguranca">
                 <h2>Segurança da conta</h2>
-                <p>senha</p>
-                <div className="alt-senha">
-                  <input type="text" id="senha-alterar" />
-                  <p>alterar senha</p>
-                </div>
+                {!modal && (
+                  <button
+                    onClick={() => {
+                      setmodal(true);
+                    }}
+                  >
+                    alterar senha
+                  </button>
+                )}
+                {modal && (
+                  <>
+                    {!passSucess ? (
+                      <>
+                        <div className="alt-senha">
+                          <h2>digite sua senha atual</h2>
+                          <input
+                            type="password"
+                            id="senha-alterar"
+                            onChange={(event) => {
+                              handleFieldChange("password", event);
+                            }}
+                          />
+                          <button
+                            onClick={() => {
+                              comparePassword();
+                            }}
+                          >
+                            enviar
+                          </button>
+                          {passErrorCompare && <p>Senha Incorreta</p>}
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <h2>digite sua nova senha</h2>
+                        <input
+                          type="password"
+                          id="senha-alterar"
+                          onChange={(event) => {
+                            handleFieldChange("password", event);
+                          }}
+                        />
+                        <button
+                          onClick={() => {
+                            comparePassword(true);
+                          }}
+                        >
+                          Salvar nova Senha
+                        </button>
+                        {levelSecPass && !alterpass ? (
+                          <p>{levelSecPass}</p>
+                        ) : (
+                          <>
+                            <p>{alterpass}</p>
+                          </>
+                        )}
+                      </>
+                    )}
+
+                    <button
+                      onClick={() => {
+                        setmodal(null);
+                        setpassSucess(null);
+                        setpassErrorCompare(null);
+                        setLevelSecPass(null);
+                        setAlterPass(null);
+                      }}
+                    >
+                      {alterpass ? "fechar" : "cancelar"}
+                    </button>
+                  </>
+                )}
                 <div className="sair-excluirBtn">
-                  <Link id="sair" to="/Login" onClick={() => logoutUser()}>Logout</Link>
-                  <button id="excluir">Excluir</button>
+                  <Link id="sair" to="/Login" onClick={() => logoutUser()}>
+                    LOGOUT
+                  </Link>
+                  <button id="excluir" onClick={() => {
+                    setCerteza(true)
+                  }}>Excluir</button>
+                  {certeza && <><h2>todos os seus Dados serão excluidos
+                     e nunca mais poderam ser acessados, {num > 0 ? `você possui ${num} serviços ativos` : ""}
+                    tem certeza?
+                    
+                    <button onClick={() =>{deleteuser(); logoutUser()}}>confirmar</button> <button onClick={() => {setCerteza(null)}}>cancelar</button></h2></>}
                 </div>
               </div>
             </div>

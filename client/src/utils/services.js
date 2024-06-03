@@ -30,7 +30,7 @@
         } catch (error) {
             let formstatus = null
             if (error.response && error.response.status >= 400 && error.response.status <=499) {
-                const errorMessage = error.response.data.error;
+                const errorMessage = error.response.data.error ? error.response.data.error : error.response.data ? error.response.data : true;
                 if(error.response.data.formstatus){
                 formstatus = error.response.data.formstatus
                 }
@@ -105,23 +105,7 @@
         }
     };
 
+export const delRequest = async (url) => {
+            const response = await axios.delete(baseUrl + url);
+    };
 
-    // export const postRequest = async (url, body) => {
-    //     try {
-    //         const response = await axios.post(baseUrl + url, body, {
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             }
-    //         });
-        
-    //         const data = await response.data; // Alterado de response.json() para response.data
-
-    //         if (!response.ok) {
-    //             return { error: data.message || 'Erro desconhecido' }; // Retornar objeto de erro
-    //         } else {
-    //             return { success: data.message || 'Operação realizada com sucesso' }; // Retornar objeto de sucesso
-    //         }
-    //     } catch (error) {
-    //         throw new Error(error.response?.data?.message || error.message);
-    //     }
-    // };

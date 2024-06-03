@@ -20,4 +20,6 @@ router.get('/getFavs/:id_cliente', userControllers.getFavoritos)
 router.get('/nservice/:id_cliente', userControllers.numService)
 router.post('/serviceend', userControllers.Service)
 router.post('/servicePend', userControllers.ServicePend)
+router.post('/resetPass', userControllers.resetPass)
+router.delete('/deleteAllintances/:id_cliente', userControllers.delete)
 module.exports = router; 

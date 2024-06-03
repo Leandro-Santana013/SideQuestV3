@@ -1,5 +1,11 @@
 import { createContext, useCallback, useEffect, useState } from "react";
-import { postRequest, baseUrl, getRequest, putRequest, } from "../utils/services";
+import {
+  postRequest,
+  baseUrl,
+  getRequest,
+  putRequest,
+  delRequest
+} from "../utils/services";
 import axios from "axios";
 import { file } from "jszip";
 import { Infoinc } from "../components/Infoinc/Infoinc";
@@ -8,7 +14,7 @@ export const UserContext = createContext();
 export const UserContextProvider = ({ children }) => {
   //objeto de usuario
   const [user, setUser] = useState({});
-  const [locationuser, setlocationuser] = useState(null)
+  const [locationuser, setlocationuser] = useState(null);
 
   //objeto de registro
   const [formDataCadastro, setFormDataCadastro] = useState({
@@ -66,7 +72,7 @@ export const UserContextProvider = ({ children }) => {
   });
 
   // para passar modalShow true depois do login pra aparecer o modal corretamente
-  const [localStorageSetado, selLocalStorageSetado] = useState(false)
+  const [localStorageSetado, selLocalStorageSetado] = useState(false);
 
   const loginUser = useCallback(
     async (e) => {
@@ -76,23 +82,37 @@ export const UserContextProvider = ({ children }) => {
       try {
         const response = await postRequest("/user/login", loginInfo);
 
-        if (response.error)
-          setloginError(response.error);
+        if (response.error) setloginError(response.error);
         else {
-          const pro = localStorage.getItem("pro")
+          const pro = localStorage.getItem("pro");
           if (pro) {
             localStorage.removeItem("pro");
-            setlocationuser(response.user.localizacaoprincipal)
-            localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
-            localStorage.setItem("loc", JSON.stringify(response.user.localizacaoprincipal))
-            window.location.reload()
-            selLocalStorageSetado(true)
+            setlocationuser(response.user.localizacaoprincipal);
+            localStorage.setItem(
+              "User",
+              JSON.stringify(response.user.clienteuser)
+            );
+            if(response.user.localizacaoprincipal){
+            localStorage.setItem(
+              "loc",
+              JSON.stringify(response.user.localizacaoprincipal)
+            );
           }
-          else {
-            localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
-            localStorage.setItem("loc", JSON.stringify(response.user.localizacaoprincipal))
-            window.location.reload()
-            selLocalStorageSetado(true)
+            window.location.reload();
+            selLocalStorageSetado(true);
+          } else {
+            localStorage.setItem(
+              "User",
+              JSON.stringify(response.user.clienteuser)
+            );
+            if(response.user.localizacaoprincipal){
+            localStorage.setItem(
+              "loc",
+              JSON.stringify(response.user.localizacaoprincipal)
+            );
+          }
+            window.location.reload();
+            selLocalStorageSetado(true);
           }
         }
       } catch (error) {
@@ -113,7 +133,7 @@ export const UserContextProvider = ({ children }) => {
 
   //logout
 
-  const [ConclussioncadError, setConclusioncadError] = useState(null)
+  const [ConclussioncadError, setConclusioncadError] = useState(null);
   const [modalShown, setModalShown] = useState(false);
 
   const logoutUser = useCallback(() => {
@@ -124,11 +144,8 @@ export const UserContextProvider = ({ children }) => {
     localStorage.removeItem("loc");
     window.location.reload();
 
-    selLocalStorageSetado(false)
+    selLocalStorageSetado(false);
   }, []);
-
-
-
 
   const updateLogininfo = useCallback((info) => {
     setloginInfo(info);
@@ -136,29 +153,22 @@ export const UserContextProvider = ({ children }) => {
 
   /********************/
 
-
   const [changedUserData, setChangedUserData] = useState({});
   const [showModal, setShowModal] = useState(false);
 
-  const functionUpdateInfoUser = useCallback(async () => {
-    console.log("funfou", changedUserData);
+ 
 
-    const response = await postRequest("/user/updateInfoUser", changedUserData);
-    setUser(response.user)
-    console.log(response.user);
-
-    localStorage.setItem("User", JSON.stringify(response.user));
-    setShowModal(null)
-
-  }, [changedUserData]);
-
-  const [modal, setModal] = useState(0)
+  const [modal, setModal] = useState(0);
 
   useEffect(() => {
     const modalAlreadyShown = localStorage.getItem("modalShown");
 
     // Verifica se o modal já foi exibido, se o usuário está logado e se está na página inicial
-    if (!modalAlreadyShown && user && window.location.pathname === '/homeCliente') {
+    if (
+      !modalAlreadyShown &&
+      user &&
+      window.location.pathname === "/homeCliente"
+    ) {
       // Verifica se é necessário exibir o modal com base nas informações do usuário
       if (Object.keys(user).length > 0) {
         if (user.qt_idadeCliente == null && user.qt_idadeCliente == null) {
@@ -170,24 +180,27 @@ export const UserContextProvider = ({ children }) => {
     }
   }, [user]);
 
-
-  const [infoConfirm, setInfoConfirm] = useState({})
+  const [infoConfirm, setInfoConfirm] = useState({});
   /********************/
 
-
-  const concluirCad = useCallback(async (e) => {
-    console.log(infoConfirm)  
-    const response = await postRequest("/user/concluirCad", infoConfirm)
-    if (response.error) {
-      setConclusioncadError(response.error);
-    } else {
-      setModal(modal + 1)
-      localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
-      localStorage.setItem("loc", JSON.stringify(response.user.localizacaoprincipal))
-      console.log(locationuser)
-    }
-  }, [infoConfirm])
-
+  const concluirCad = useCallback(
+    async (e) => {
+      console.log(infoConfirm);
+      const response = await postRequest("/user/concluirCad", infoConfirm);
+      if (response.error) {
+        setConclusioncadError(response.error);
+      } else {
+        setModal(modal + 1);
+        localStorage.setItem("User", JSON.stringify(response.user.clienteuser));
+        localStorage.setItem(
+          "loc",
+          JSON.stringify(response.user.localizacaoprincipal)
+        );
+        console.log(locationuser);
+      }
+    },
+    [infoConfirm]
+  );
 
   const [cepError, setCepError] = useState(false);
   const [categorias, setCategorias] = useState([]);
@@ -197,60 +210,59 @@ export const UserContextProvider = ({ children }) => {
   const [messageErrorPostar, setmessageErrorPostar] = useState(null);
 
   const [Servico, setServico] = useState({});
-  const [dataServico, setDataServico] = useState({})
-
+  const [dataServico, setDataServico] = useState({});
 
   const [isCheckedLocation, setIsCheckedLocation] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
 
-useEffect(() => {
-  const zipImages = async () => {
-    const zip = new JSZip();
+  useEffect(() => {
+    const zipImages = async () => {
+      const zip = new JSZip();
 
-    console.log("ssfdsfs", selectedImages);
-    // Adicione as imagens ao arquivo ZIP
-    selectedImages.forEach((image, index) => {
-      zip.file(`image_${index}.png`, image.split("base64,")[1], {
-        base64: true,
+      console.log("ssfdsfs", selectedImages);
+      // Adicione as imagens ao arquivo ZIP
+      selectedImages.forEach((image, index) => {
+        zip.file(`image_${index}.png`, image.split("base64,")[1], {
+          base64: true,
+        });
       });
-    });
 
-    try {
-      // Gerar o arquivo ZIP
-      const content = await zip.generateAsync({ type: "blob" });
-      const blobSize = content.size;
+      try {
+        // Gerar o arquivo ZIP
+        const content = await zip.generateAsync({ type: "blob" });
+        const blobSize = content.size;
 
-      // Criar um FileReader
-      const reader = new FileReader();
+        // Criar um FileReader
+        const reader = new FileReader();
 
-      // Quando o FileReader carregar, converter para base64 e criar o objeto File
-      reader.onload = () => {
-        console.log(`Tamanho do arquivo ZIP: ${blobSize} bytes`);
-        const base64String = reader.result.split(",")[1];
-        const zipFile = {
-          name: "images.zip",
-          type: "application/zip",
-          content: base64String,
+        // Quando o FileReader carregar, converter para base64 e criar o objeto File
+        reader.onload = () => {
+          console.log(`Tamanho do arquivo ZIP: ${blobSize} bytes`);
+          const base64String = reader.result.split(",")[1];
+          const zipFile = {
+            name: "images.zip",
+            type: "application/zip",
+            content: base64String,
+          };
+
+          // Converta zipFile para JSON
+          const jsonZipFile = JSON.stringify(zipFile);
+
+          // Atualizar o serviço com as imagens
+          updatepostarServico({
+            ...Servico,
+            imagens: jsonZipFile,
+          });
         };
 
-        // Converta zipFile para JSON
-        const jsonZipFile = JSON.stringify(zipFile);
-
-        // Atualizar o serviço com as imagens
-        updatepostarServico({
-          ...Servico,
-          imagens: jsonZipFile,
-        });
-      };
-
-      // Ler o conteúdo do arquivo como um ArrayBuffer
-      reader.readAsDataURL(content);
-    } catch (error) {
-      console.error("Erro ao gerar o arquivo ZIP:", error);
-    }
-  };
-  zipImages()
-}, [selectedImages])
+        // Ler o conteúdo do arquivo como um ArrayBuffer
+        reader.readAsDataURL(content);
+      } catch (error) {
+        console.error("Erro ao gerar o arquivo ZIP:", error);
+      }
+    };
+    zipImages();
+  }, [selectedImages]);
 
   const PostarServico = useCallback(
     async (e) => {
@@ -259,12 +271,12 @@ useEffect(() => {
 
       try {
         if (user) {
-        Servico.idCliente = user.id_cliente;
-      }
-    
+          Servico.idCliente = user.id_cliente;
+        }
+
         // Enviar o formulário com o estado formData atualizado
         const response = await postRequest("/user/postarServico", Servico);
-        console.log("serviço 1")
+        console.log("serviço 1");
         if (response.error) {
           setmessageErrorPostar(response.error);
           setErrorPostar(true);
@@ -275,9 +287,7 @@ useEffect(() => {
             setmessageErrorPostar(null);
           }, 4000);
         } else {
-          console.log("bbbbbbbbbbbbbbbbbbbbbb")
           setModalPostar(true);
-          
         }
       } catch (error) {
         console.error("Erro ao postar:", error);
@@ -291,21 +301,23 @@ useEffect(() => {
       e.preventDefault();
 
       setModalPostar(false);
-      
+
       try {
         if (user) {
           dataServico.idCliente = user.id_cliente;
         }
         // Enviar o formulário com o estado formData atualizado
-        const response = await postRequest("/user/postarServicoLoc", dataServico);
-        console.log("serviço com loc")
-        console.log(dataServico)
+        const response = await postRequest(
+          "/user/postarServicoLoc",
+          dataServico
+        );
+        console.log("serviço com loc");
+        console.log(dataServico);
 
         if (response.error) {
           setmessageErrorPostar(response.error);
           setErrorPostar(true);
           setForm(response.formstatus);
-
 
           setTimeout(() => {
             setErrorPostar(null);
@@ -313,14 +325,13 @@ useEffect(() => {
           }, 4000);
         } else {
           setModalPostar(true);
-          setSelectedImages([])
-          setServico({})
-          setDataServico({})
-          setForm(1)
+          setSelectedImages([]);
+          setServico({});
+          setDataServico({});
+          setForm(1);
         }
       } catch (error) {
         console.error("Erro ao postar:", error);
-
       }
     },
     [dataServico]
@@ -340,31 +351,33 @@ useEffect(() => {
       ...setDataServico,
       idCliente: user ? user.id_cliente : null,
       location: locationuser ? locationuser.id_endereco : null,
-      servico: Servico
-    }))
+      servico: Servico,
+    }));
   }, [user, Servico, locationuser]);
 
-  const [mudandoloc, setmudandoloc] = useState(null)
-const [cepConfig, setCepConfig] = useState(null)
+  const [mudandoloc, setmudandoloc] = useState(null);
+  const [cepConfig, setCepConfig] = useState(null);
   const fetchData = async (cep, p2) => {
     try {
-      console.log(cep, p2)
-      if(p2){
-      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
-      if (!response.data.erro) {
-        const { uf, localidade, logradouro, bairro } = response.data;
-        setCepConfig(false);
-        setmudandoloc({
-          ...mudandoloc,
-          cep,
-          uf_localidade: `${uf} - ${localidade}`,
-          logradouro,
-          bairro,
-        });
-      } else {
-        setCepConfig(true);
+      console.log(cep, p2);
+      if (p2) {
+        const response = await axios.get(
+          `https://viacep.com.br/ws/${cep}/json/`
+        );
+        if (!response.data.erro) {
+          const { uf, localidade, logradouro, bairro } = response.data;
+          setCepConfig(false);
+          setmudandoloc({
+            ...mudandoloc,
+            cep,
+            uf_localidade: `${uf} - ${localidade}`,
+            logradouro,
+            bairro,
+          });
+        } else {
+          setCepConfig(true);
+        }
       }
-    }
 
       const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
       if (!response.data.erro) {
@@ -429,26 +442,81 @@ const [cepConfig, setCepConfig] = useState(null)
     carregarCategorias();
   }, []);
 
-
-
   const updatepostarServico = useCallback((info) => {
     setServico(info);
   }, []);
-  const [ServiceEnd, setserviceEdn] = useState(null)
-  const [ServicePend, setservicePedn] = useState(null)
-  
- useEffect(() => {
-  const calls = async() => {
-    if(user && user.id_cliente){
-  const response = await postRequest("/user/serviceend",  {id_cliente: user.id_cliente});
-  const responsePend = await postRequest("/user/servicePend",  {id_cliente: user.id_cliente});
-  setserviceEdn(response.user)
-  setservicePedn(responsePend.user)
-  
+  const [ServiceEnd, setserviceEdn] = useState(null);
+  const [ServicePend, setservicePedn] = useState(null);
+  const [num, setnum] = useState(null)
+
+  useEffect(() => {
+    const calls = async () => {
+      if (user && user.id_cliente) {
+        const response = await postRequest("/user/serviceend", {
+          id_cliente: user.id_cliente,
+        });
+        const responsePend = await postRequest("/user/servicePend", {
+          id_cliente: user.id_cliente,
+        });
+        const responseNum = await getRequest(`/user/nservice/${user.id_cliente}`);
+          setnum(responseNum)
+        setserviceEdn(response.user);
+        setservicePedn(responsePend.user);
+      }
+    };
+    calls();
+  }, [user]);
+
+  const functionUpdateInfoUser = useCallback(async () => {
+    const response = await postRequest("/user/updateInfoUser", changedUserData);
+    setUser(response.user.clienteuser);
+    localStorage.setItem("User",JSON.stringify(response.user.clienteuser));
+    if(response.user.localizacaoprincipal){
+      setlocationuser(response.user.localizacaoprincipal);
+      localStorage.setItem("loc", JSON.stringify(response.user.localizacaoprincipal));
     }
-  }
-  calls()
- }, [user])
+    setShowModal(null);
+  }, [changedUserData]);
+
+  const deleteuser = useCallback(async () => {
+
+    const response = await delRequest(`/user/deleteAllintances/${user?.id_cliente}`,);
+
+    selLocalStorageSetado(false);
+  }, [user]);
+
+  const [pass, setpass] = useState(null);
+  const [levelSecPass, setLevelSecPass] = useState(null)
+  const [passSucess, setpassSucess] = useState(null);
+  const [passErrorCompare, setpassErrorCompare] = useState(null);
+  const [alterpass, setAlterPass] = useState(null)
+
+  const comparePassword = useCallback(async (save) => {
+   
+    if (user) pass.id = user.id_cliente;
+
+    if (save){
+      pass.saveControll = true
+      console.log(pass)
+      const response = await postRequest("/user/resetPass", pass);
+      if(response.error){ 
+        setLevelSecPass(response.error)
+      }else {
+        setAlterPass(response.message)
+      }
+      return
+    }
+
+    const response = await postRequest("/user/resetPass", pass);
+    if (response.error){ 
+      setpassErrorCompare(true)
+      setpassSucess(null)
+    }
+    else{
+       setpassSucess(true)
+       setpassErrorCompare(false)
+    }
+  }, [pass, user]);
 
   return (
     <UserContext.Provider
@@ -502,7 +570,19 @@ const [cepConfig, setCepConfig] = useState(null)
         mudandoloc,
         setmudandoloc,
         cepConfig,
-        setCepConfig
+        setCepConfig,
+        comparePassword,
+        setpass,
+        passSucess,
+        setpassSucess,
+        passErrorCompare,
+        setpassErrorCompare,
+        alterpass,
+        levelSecPass,
+        setLevelSecPass,
+        setAlterPass,
+        deleteuser,
+        num
       }}
     >
       {children}

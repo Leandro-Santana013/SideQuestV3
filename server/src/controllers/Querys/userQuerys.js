@@ -14,6 +14,7 @@ const {
   ModelProfissionalCategoria,
   ModelProfissionalProfileImg,
   ClienteProfissionalFavorito,
+  ModelEnderecoProfissional
 } = require("../../models/index");
 const { Service } = require("../userController");
 
@@ -79,6 +80,14 @@ module.exports = {
     return ModelCliente.update(
       { cd_tokenCliente: cd_tokenCliente },
       { where: { cd_emailCliente: cd_emailCliente } }
+    );
+  },
+
+  updateSenha: async (req, res) => {
+    const { id_cliente, cd_senhaCliente } = req.params;
+    return ModelCliente.update(
+      { cd_senhaCliente: cd_senhaCliente },
+      { where: { id_cliente: id_cliente } }
     );
   },
 
@@ -287,14 +296,30 @@ module.exports = {
   },
 
   updateInfoCli: async (req, res) => {
-    const { id_cliente, nm_cliente, cd_emailCliente, img_cliente } = req.params;
+    const { id_cliente, nm_cliente, cd_emailCliente, img_cliente, nmr_telefoneCliente } = req.params;
     return ModelCliente.update(
       {
         nm_cliente: nm_cliente,
         cd_emailCliente: cd_emailCliente,
         img_cliente: img_cliente,
+        nmr_telefoneCliente:nmr_telefoneCliente
       },
       { where: { id_cliente: id_cliente } }
+    );
+  },
+
+  updateAdressCli: async (req, res) => {
+    const { id_cliente, id_cidade, cd_cep, nm_bairro, nm_logradouro, nmr_casa, txt_complemento } = req.params;
+    return ModelEndereco.update(
+      {
+        id_cidade: id_cidade,
+        cd_cep: cd_cep,
+        nm_bairro: nm_bairro,
+        nm_logradouro: nm_logradouro,
+        nmr_casa: nmr_casa,
+        txt_complemento: txt_complemento,
+      },
+      { where: { id_cliente: id_cliente, end_principal: true } }
     );
   },
 
@@ -377,6 +402,16 @@ module.exports = {
           attributes: [],
         },
         {
+          model: ModelEnderecoProfissional,
+          attributes: [],
+          include: [
+            {
+             model: ModelCidade,
+             attributes: []
+            }
+          ]
+        },
+        {
           model: ModelProfissionalCategoria,
           attributes: ["id_categoria"],
           include: [
@@ -434,7 +469,8 @@ module.exports = {
         'img_profissional',
         'nm_profissional',
         [Sequelize.col("tb_infoProfissional.ds_biografia"), "ds_biografia"],
-
+        [Sequelize.col("tb_enderecoProfissionals.tb_cidade.sg_estado"), "sg_estado"],
+        [Sequelize.col("tb_enderecoProfissionals.tb_cidade.nm_cidade"), "nm_cidade"],
         [
           Sequelize.fn(
             "COUNT",
@@ -476,7 +512,7 @@ module.exports = {
           "media_avaliacoes",
         ],
       ],
-      group: ['tb_profissional.id_profissional',  'tb_profissional_categoria.id_categoriaEscolhida'] // Inclua todas as colunas não agregadas na cláusula GROUP BY
+      group: ['tb_profissional.id_profissional',  'tb_profissional_categoria.id_categoriaEscolhida','tb_enderecoProfissionals.tb_cidade.sg_estado', 'tb_enderecoProfissionals.tb_cidade.nm_cidade'] // Inclua todas as colunas não agregadas na cláusula GROUP BY
     });
   },
   queryPart2: async (req, res) => {
@@ -786,4 +822,75 @@ module.exports = {
       console.error(`Erro: ${err}`);
     }
   },
+  apagarInfocliente: async (req, res) => {
+    const { id_cliente } = req.params;
+    return ModelCliente.destroy({
+      where: {
+        id_cliente: id_cliente,
+      },
+      raw: true,
+    });
+  },
+
+
+  apagarService: async (req, res) => {
+      const { id_cliente } = req.params;
+      const services = await ModelPostagemServico.destroy({
+        where: { id_cliente: id_cliente },
+        raw: true,
+        include: [
+          {
+            model: ModelConfirmacaoServico,
+            required: true,
+            attributes: [],
+            include: [
+              {
+                model: ModelTerminoServico,
+                required: false,
+                where: {
+                  id_terminoServico: {
+                    [Op.is]: null, // Utilize null diretamente sem Op.is
+                  },
+                },
+              },
+            ],
+          },
+        ],
+  })
+},
+  apagarServicePend: async (req, res) => {
+      const { id_cliente } = req.params;
+      await ModelPostagemServico.destroy({
+        where: { id_cliente: id_cliente },
+        raw: true,
+        include: [
+          {
+            model: ModelConfirmacaoServico,
+            required: false,
+            where: {
+              id_confirmacaoServico: {
+                [Op.is]: null, // Utilize null diretamente sem Op.is
+              },
+            },
+          },
+        ],
+      });
+  },
+  apagarLocalcli: async (req, res) => {
+    const { id_cliente} = req.params;
+   await ModelEndereco.destroy({
+      where: {
+        id_cliente: id_cliente,
+      },
+    });
+  },
+
+ apagarfavoritoscliente:async(req, res)=>{
+  const { id_cliente} = req.params;
+    await ClienteProfissionalFavorito.destroy({
+    where: {
+      id_cliente: id_cliente,
+    },
+  });
+}
 };
