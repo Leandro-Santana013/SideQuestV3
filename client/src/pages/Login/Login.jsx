@@ -54,7 +54,7 @@ export const Login = () => {
   };
 
   const handlePasswordBlur = () => {
-    setShowPasswordStrength(true);
+    setShowPasswordStrength(false );
   };
 
 
@@ -108,7 +108,7 @@ export const Login = () => {
                   updateCadastro({ ...formDataCadastro, cpf: e.target.value });
                 }}
               />
-              <div style={{display: "flex", flexDirection: 'column', alignItems: 'flex-start', width: '100%'}}>
+
               <input
               className="input-senha"
                 placeholder="Digite uma senha"
@@ -123,9 +123,12 @@ export const Login = () => {
                 }}
               />
               {showPasswordStrength && (
+                <div className="modal-password" >
               <PasswordStrength password={password} />
-              )}
               </div>
+              )}
+          
+
               <input
                 placeholder="Confirme sua senha"
                 type="password"

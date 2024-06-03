@@ -260,7 +260,7 @@ const PostarServico = () => {
                     <h3 className="tituloServico">
                       Descreva o serviço detalhadamente
                     </h3>
-                    <TextInput
+                    <textarea 
                     className="componente-content-input  input-desc-servico"
                       name="dsServico"
                       type="text"

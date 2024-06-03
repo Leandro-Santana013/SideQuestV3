@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./passwordStrength.css"; // Importar o CSS
-
+import { HiOutlineCheckCircle } from "react-icons/hi";
 const PasswordStrength = ({ password }) => {
   const [requirements, setRequirements] = useState({
     length: false,
@@ -29,22 +29,21 @@ const PasswordStrength = ({ password }) => {
 
   return (
     <div className="password-strength-container">
-      <h4>Requerimentos de senha</h4>
       <ul className="password-strength">
         <li className={requirements.length ? "valid" : "invalid"}>
-          <span className="icon">{requirements.length ? "✔" : "✘"}</span> 
+          <span className="icon"><HiOutlineCheckCircle /></span> 
           6 caracteres
         </li>
         <li className={requirements.uppercase ? "valid" : "invalid"}>
-          <span className="icon">{requirements.uppercase ? "✔" : "✘"}</span> 
+          <span className="icon"><HiOutlineCheckCircle /></span> 
           1 caractere maiúsculo
         </li>
         <li className={requirements.specialChar ? "valid" : "invalid"}>
-          <span className="icon">{requirements.specialChar ? "✔" : "✘"}</span> 
+          <span className="icon"><HiOutlineCheckCircle /></span> 
           1 caractere especial
         </li>
         <li className={requirements.number ? "valid" : "invalid"}>
-          <span className="icon">{requirements.number ? "✔" : "✘"}</span> 
+          <span className="icon"><HiOutlineCheckCircle /></span> 
           1 numero
         </li>
       </ul>

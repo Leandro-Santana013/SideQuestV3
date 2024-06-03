@@ -8,7 +8,6 @@
   width: 32vw;
   height: 5vw;
   font-size: 1.4vw;
-  margin-left: 5px;
   outline: none;
   font-size: 1vw;
   font-family: 'Inter';
@@ -18,6 +17,7 @@
   padding: .5vw .5vw .5vw 0;
   border: solid 2px #eee;
   border-radius: 5px;
+  padding-left: 6px;
 }
 
 .componente-content-input:focus {
