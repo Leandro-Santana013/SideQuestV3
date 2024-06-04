@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { getRequest } from "../../utils/services"; // Certifique-se de importar corretamente seus serviços
 import { ProfessionalContext } from "../../context/ProfissionalContext";
-import "./infoInc.css";
+import "./infoIncPro.css";
 
 import { IoCloseCircle } from "react-icons/io5";
 
@@ -16,7 +16,7 @@ export const InfoincPro = () => {
     categorias,
     setCategorias,
   } = useContext(ProfessionalContext);
-
+ 
   useEffect(() => {
     const carregarCategorias = async () => {
       try {

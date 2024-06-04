@@ -565,6 +565,7 @@ export const UserContextProvider = ({ children }) => {
         infoConfirm,
         setInfoConfirm,
         concluirCad,
+        ConclussioncadError,
         fetchDataConcluir,
         locationuser,
         isCheckedLocation,

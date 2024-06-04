@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./chats.css";
-import { SidebarCliente, CardProfissional, Header, Infoinc, TextInput, SidebarProfissional, MenuBottomCliente, MenuBottomProfissional } from "../../components";
+import { SidebarCliente, CardProfissional, Header, TextInput, SidebarProfissional, MenuBottomCliente, MenuBottomProfissional } from "../../components";
 import { ChatContext } from "../../context/ChatContext"
 import { UserChat } from "./UserChat";
 import { UserContext } from "../../context/UserContext"

@@ -547,7 +547,7 @@ exports.concluirCad = async (req, res) => {
     !logradouro ||
     !bairro
   )
-    res.status(400).json({ error: "preencha todas as informações" });
+    return res.status(400).json({ error: "preencha todas as informações" });
   try {
     const birthDate = new Date(data);
     const today = new Date();

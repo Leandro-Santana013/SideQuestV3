@@ -61,12 +61,12 @@ const Config = () => {
     if (newData.email !== user.email) changes.email = newData.email;
     if (newData.numero !== user.numero) changes.numero = newData.numero;
     if (newData.foto !== imgPerfil && newData.foto !== user.foto) changes.foto = newData.foto;
-    if (newData.cd_cep !== locationuser.cd_cep && newData.cep !== null) changes.cd_cep = newData.cd_cep;
-    if (newData.uf_localidade !== locationuser.uf_localidade) changes.uf_localidade = newData.uf_localidade;
-    if (newData.nm_bairro !== locationuser.nm_bairro) changes.nm_bairro = newData.nm_bairro;
-    if (newData.nm_logradouro !== locationuser.nm_logradouro) changes.nm_logradouro = newData.nm_logradouro;
-    if (newData.nmr_casa !== locationuser.nmr_casa) changes.nmr_casa = newData.nmr_casa;
-    if (newData.complemento !== locationuser.complemento) changes.complemento = newData.complemento;
+    if (newData.cd_cep !== locationuser?.cd_cep && newData.cep !== null) changes.cd_cep = newData.cd_cep;
+    if (newData.uf_localidade !== locationuser?.uf_localidade) changes.uf_localidade = newData.uf_localidade;
+    if (newData.nm_bairro !== locationuser?.nm_bairro) changes.nm_bairro = newData.nm_bairro;
+    if (newData.nm_logradouro !== locationuser?.nm_logradouro) changes.nm_logradouro = newData.nm_logradouro;
+    if (newData.nmr_casa !== locationuser?.nmr_casa) changes.nmr_casa = newData.nmr_casa;
+    if (newData.complemento !== locationuser?.complemento) changes.complemento = newData.complemento;
 
     setChangedUserData(changes);
     if (Object.keys(changes).length > 0) {
@@ -186,7 +186,7 @@ const Config = () => {
                         type="text"
                         id="input-nome"
                         value={
-                          (changedUserData.name !== undefined
+                          (changedUserData?.name !== undefined
                             ? changedUserData.name
                             : user.nm_cliente) || null
                         }
@@ -204,7 +204,7 @@ const Config = () => {
                             type="text"
                             id="input-num"
                             value={
-                              (changedUserData.numero !== undefined
+                              (changedUserData?.numero !== undefined
                                 ? changedUserData.numero
                                 : user.nmr_telefoneCliente) || null
                             }
@@ -225,7 +225,7 @@ const Config = () => {
                         type="text"
                         id="input-num"
                         value={
-                          (changedUserData.email !== undefined
+                          (changedUserData?.email !== undefined
                             ? changedUserData.email
                             : user.cd_emailCliente) || null
                         }

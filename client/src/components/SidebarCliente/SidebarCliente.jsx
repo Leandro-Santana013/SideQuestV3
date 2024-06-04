@@ -15,7 +15,6 @@ export const SidebarCliente = () => {
     { id: 5, name: "pagamentos", href: "pagamentosCliente" },
   ];
 
-
   useEffect(() => {
 
     for (let i = 0; i < pages.length; i++) {
