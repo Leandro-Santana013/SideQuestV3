@@ -44,8 +44,8 @@
 }
 
 .tamplate-img img {
-    width: 4vw !important;
-    height: 4vw !important;
+    width: 4vw;
+    height: 4vw;
     border: solid 2px grey;
     border-radius: 50%;
 }
@@ -213,3 +213,181 @@ h2 {
 }
 
 /* 
+
+
+/* Responsividade */
+
+/* Tablets em modo paisagem e dispositivos híbridos */
+@media (max-width: 1024px) {
+    .cards-container {
+        width: auto;
+    }
+
+    .card-profissional {
+        width: 36vw;
+        height: auto;
+    }
+
+    .tamplate-img {
+        height: auto;
+        margin-top: 1vw;
+        margin-bottom: 1vw;
+    }
+
+    .tamplate-img img {
+        width: 7vw;
+        height: 7vw;
+    }
+
+    .desc-cliente {
+        margin-top: 1vw;
+        margin-bottom: 1vw;
+        height: auto;
+    }
+
+    .perfil-avaliado h2 {
+        font-size: 3vw;
+    }
+
+    .ava {
+        font-size: 3vw;
+    }
+
+    .ri-star-s-fill {
+        font-size: 3vw;
+    }
+
+    .desc {
+        font-size: 2.3vw;
+    }
+
+    .profissoes-card-profissional {
+        height: auto;
+    }
+
+    .bottom-card-profissional {
+        margin: 2vw;
+    }
+
+    .btn-ver-mais {
+        font-size: 2.3vw;
+        padding: 1vw 2.5vw;
+    }
+}
+
+/* Tablets em modo retrato e smartphones grandes */
+@media (max-width: 768px) {
+    .card-profissional {
+        width: 40vw;
+        height: auto;
+    }
+
+    .tamplate-img {
+        height: auto;
+        margin-top: 2vw;
+        margin-bottom: 2vw;
+    }
+
+    .tamplate-img img {
+        width: 9vw;
+        height: 9vw;
+    }
+
+    .desc-cliente {
+        margin-top: 2vw;
+        margin-bottom: 2vw;
+        height: auto;
+    }
+
+    .perfil-avaliado h2 {
+        font-size: 3.5vw;
+    }
+
+    .ava {
+        font-size: 3.5vw;
+    }
+
+    .ri-star-s-fill {
+        font-size: 3.5vw;
+    }
+
+    .desc {
+        font-size: 2.7vw;
+    }
+
+    .profissoes-card-profissional {
+        height: auto;
+    }
+
+    .bottom-card-profissional {
+        margin: 3vw;
+    }
+
+    .btn-ver-mais {
+        font-size: 2.7vw;
+        padding: 1vw 3.5vw;
+    }
+}
+
+/* Smartphones médios e tablets pequenos */
+@media (max-width: 600px) {
+
+    .perfil-avaliado h2 {
+        font-size: 4vw;
+    }
+
+    .desc {
+        font-size: 3vw;
+    }
+
+    .ri-star-s-fill {
+        font-size: 3vw;
+    }
+
+    .btn-ver-mais {
+        font-size: 3vw;
+        padding: 1.5vw 4vw;
+    }
+}
+
+/* Smartphones pequenos */
+@media (max-width: 480px) {
+
+    .tamplate-img {
+        margin-top: 1vw;
+        margin-bottom: 1vw;
+    }
+
+    .tamplate-img img {
+        width: 10vw;
+        height: 10vw;
+    }
+
+    .perfil-avaliado h2 {
+        font-size: 4vw;
+    }
+
+    .ava {
+        font-size: 4vw;
+    }
+
+    .ri-star-s-fill {
+        font-size: 4vw;
+    }
+
+    .desc {
+        font-size: 3.3vw;
+    }
+
+    .bottom-card-profissional {
+        margin: 2vw;
+    }
+
+    .btn-ver-mais {
+        font-size: 3.3vw;
+        padding: 2vw 8vw;
+    }
+}
+
+/* Smartphones muito pequenos */
+@media (max-width: 320px) {}

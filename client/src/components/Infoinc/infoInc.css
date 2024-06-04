@@ -143,44 +143,53 @@
 
 /* Tablets em modo paisagem e dispositivos híbridos */
 @media (max-width: 1024px) {
-    .modal-card-conclua-registro  .card-conclua-registro {
+    .modal-card-conclua-registro .card-conclua-registro {
         width: 50vw;
     }
+
     .inputs-card-conclua-registro {
-        .nmr-telefone { 
+        .nmr-telefone {
             width: 30vw;
             padding: 10px;
+            font-size: 2.3vw;
         }
 
         .data {
             width: 30vw;
             padding: 10px;
+            font-size: 2.3vw;
         }
 
         select {
             width: 30vw;
             height: 4vw;
+            font-size: 2.3vw;
         }
 
         .grid-2x2-card-conclua-registro {
             gap: 2vw;
+
             .padrao-input-card-conclua-registro {
                 width: 34vw;
                 padding: 10px;
+                font-size: 2.3vw;
             }
+
             .padrao-input-card-conclua-registro::placeholder {
-                font-size: 2vw;
+                font-size: 2.3vw;
             }
-    }
+        }
     }
 
     .bottom-card-conclua-registro {
         gap: 2vw;
+
         p {
-            font-size: 2vw;
+            font-size: 2.3vw;
         }
+
         button {
-            font-size: 2vw;
+            font-size: 2.3vw;
             width: 25vw;
             padding: 10px;
         }
@@ -191,100 +200,52 @@
     }
 
     .top-card-conclua-registro p {
-        font-size: 2vw;
+        font-size: 2.3vw;
     }
 
     .inputs-card-conclua-registro {
-        font-size: 2vw;
+        font-size: 2.3vw;
     }
 }
 
 /* Tablets em modo retrato e smartphones grandes */
 @media (max-width: 768px) {
-    .modal-card-conclua-registro  .card-conclua-registro {
+    .modal-card-conclua-registro .card-conclua-registro {
         width: 55vw;
+        padding: 7.5px;
     }
 
     .inputs-card-conclua-registro {
-        .nmr-telefone { 
+        width: 30vw;
+
+        .nmr-telefone {
             width: 40vw;
             padding: 16.5px;
+            font-size: 2.7vw;
         }
 
         .data {
             width: 40vw;
             padding: 16.5px;
+            font-size: 2.7vw;
         }
 
         select {
             width: 40vw;
             padding: 18px;
+            font-size: 2.7vw;
+            height: auto;
         }
 
         .grid-2x2-card-conclua-registro {
             gap: 2vw;
+
             .padrao-input-card-conclua-registro {
                 width: 34vw;
-                padding: 10px;
+                padding: 15px;
+                font-size: 2.7vw;
             }
-            .padrao-input-card-conclua-registro::placeholder {
-                font-size: 3.5vw;
-            }
-    }
-    }
 
-    .bottom-card-conclua-registro {
-        gap: 2vw;
-        p {
-            font-size: 2.5vw;
-        }
-        button {
-            font-size: 2.5vw;
-            width: 25vw;
-            padding: 10px;
-        }
-    }
-
-    .top-card-conclua-registro h1 {
-        font-size: 4vw;
-    }
-
-    .top-card-conclua-registro p {
-        font-size: 2.5vw;
-    }
-
-    .inputs-card-conclua-registro {
-        font-size: 3vw;
-    }
-}
-
-/* Smartphones médios e tablets pequenos */
-@media (max-width: 600px) {
-    .modal-card-conclua-registro  .card-conclua-registro {
-        width: 60vw;
-    }
-
-    .inputs-card-conclua-registro {
-        .nmr-telefone { 
-            width: 40vw;
-            padding: 16.5px;
-        }
-
-        .data {
-            width: 40vw;
-            padding: 16.5px;
-        }
-
-        select {
-            width: 40vw;
-            padding: 18px;
-        }
-        .grid-2x2-card-conclua-registro {
-            gap: 2vw;
-            .padrao-input-card-conclua-registro {
-                width: 34vw;
-                padding: 10px;
-            }
             .padrao-input-card-conclua-registro::placeholder {
                 font-size: 2.7vw;
             }
@@ -293,11 +254,13 @@
 
     .bottom-card-conclua-registro {
         gap: 2vw;
+
         p {
-            font-size: 2.8vw;
+            font-size: 2.7vw;
         }
+
         button {
-            font-size: 2.8vw;
+            font-size: 2.7vw;
             width: 25vw;
             padding: 10px;
         }
@@ -312,83 +275,157 @@
     }
 
     .inputs-card-conclua-registro {
-        font-size: 3.5vw;
+        font-size: 3vw;
     }
-
-
 }
 
-/* Smartphones pequenos */
-@media (max-width: 480px) {
-   .modal-card-conclua-registro  .card-conclua-registro {
+/* Smartphones médios e tablets pequenos */
+@media (max-width: 600px) {
+    .modal-card-conclua-registro .card-conclua-registro {
         width: 60vw;
     }
 
     .inputs-card-conclua-registro {
-        .nmr-telefone { 
+        .nmr-telefone {
             width: 40vw;
-            padding: 6.5px;
-        }
-
-        .nmr-telefone::placeholder {
-            font-size: 3.5vw;
+            padding: 16.5px;
+            font-size: 3vw;
         }
 
         .data {
             width: 40vw;
-            padding: 6.5px;
-        }
-
-        .data::placeholder {
-            font-size: 3.5vw;
+            padding: 16.5px;
+            font-size: 3vw;
         }
 
         select {
-            width: 47vw;
-            height: 15vw;
-        }
-
-        .select{
-            font-size: 2.5vw;
+            width: 40vw;
+            height: 9vw;
+            padding: 18px;
+            font-size: 3vw;
         }
 
         .grid-2x2-card-conclua-registro {
             gap: 2vw;
+
             .padrao-input-card-conclua-registro {
                 width: 34vw;
-                padding: 10px;
+                padding: 12px;
+                font-size: 3vw;
             }
+
             .padrao-input-card-conclua-registro::placeholder {
-                font-size: 3.5vw;
+                font-size: 3vw;
             }
+        }
+    }
+
+    .bottom-card-conclua-registro {
+        gap: 2vw;
+
+        p {
+            font-size: 3vw;
+        }
+
+        button {
+            font-size: 3vw;
+            width: 25vw;
+            padding: 10px;
+        }
+    }
+
+    .top-card-conclua-registro h1 {
+        font-size: 4.5vw;
+    }
+
+    .top-card-conclua-registro p {
+        font-size: 3vw;
+    }
+
+    .inputs-card-conclua-registro {
+        font-size: 3.5vw;
+        width: 35vw;
     }
 }
 
-    .bottom-card-conclua-registro {
-        p {
-            font-size: 3.5vw;
+/* Smartphones pequenos */
+@media (max-width: 480px) {
+    .modal-card-conclua-registro .card-conclua-registro {
+        width: 60vw;
+        padding: 10px;
+    }
+
+    .inputs-card-conclua-registro {
+        .nmr-telefone {
+            width: 40vw;
+            padding: 10.5px;
+            font-size: 3.3vw;
         }
+
+        .nmr-telefone::placeholder {
+            font-size: 3.3vw;
+        }
+
+        .data {
+            width: 40vw;
+            padding: 10.5px;
+            font-size: 3.3vw;
+        }
+
+        .data::placeholder {
+            font-size: 3.3vw;
+        }
+
+        select {
+            width: 47vw;
+            height: auto;
+            font-size: 3.3vw;
+        }
+
+        .select {
+            font-size: 3.3vw;
+        }
+
+        .grid-2x2-card-conclua-registro {
+            gap: 2vw;
+
+            .padrao-input-card-conclua-registro {
+                width: 34vw;
+                padding: 12px;
+            }
+
+            .padrao-input-card-conclua-registro::placeholder {
+                font-size: 3.3vw;
+            }
+        }
+
+    }
+
+    .bottom-card-conclua-registro {
+
+        p {
+            font-size: 3.3vw;
+        }
+
         button {
-            font-size: 3.5vw;
+            font-size: 3.3vw;
             width: 25vw;
             padding: 8px;
         }
     }
 
     .top-card-conclua-registro h1 {
-        font-size: 5vw;
+        font-size: 4.5vw;
     }
 
     .top-card-conclua-registro p {
-        font-size: 3.5vw;
+        font-size: 3.3vw;
     }
 
     .inputs-card-conclua-registro {
-        font-size: 3.5vw;
+        font-size: 3.3vw;
     }
 }
 
 /* Smartphones muito pequenos */
-@media (max-width: 320px) {
-  
-}
+@media (max-width: 320px) {}

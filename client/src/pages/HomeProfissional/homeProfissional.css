@@ -195,6 +195,29 @@
                 font-size: 2.3vw;
             }
         }
+
+        .container-card-filtros {
+          flex-direction: column;
+        }
+
+        .card-filtro p {
+          margin: 0;
+        }
+
+        .modal  {
+          width: 30vw;
+        }
+
+        .card-filtro {
+          font-size: 2.3vw;
+          width: 26vw;
+          height: 6vw;
+        }
+    
+        .btn-close-modal {
+          font-size: 2.3vw;
+        }
+
 }
 
 /* Tablets em modo retrato e smartphones grandes */
@@ -266,6 +289,16 @@
             p {
                 font-size: 2.7vw;
             }
+        }
+
+        .card-filtro {
+          font-size: 2.7vw;
+          width: 19vw;
+          height: 8vw;
+        }
+    
+        .btn-close-modal {
+          font-size: 2.7vw;
         }
 }
 
@@ -339,6 +372,16 @@
               font-size: 3vw;
           }
       }
+
+      .card-filtro {
+      font-size: 3vw;
+      width: 21vw;
+      height: 8.5vw;
+    }
+    
+    .btn-close-modal {
+      font-size: 3vw;
+    }
     }
 
 
@@ -360,7 +403,7 @@
   
       .actions .info-action .action p {
         font-size: 2.7vw;
-        width: 50%;
+        width: 55%;
       }
   
       .h1Home {
@@ -403,6 +446,16 @@
         p {
             font-size: 3.3vw;
         }
+    }
+
+    .card-filtro {
+      font-size: 3.3vw;
+      width: 23vw;
+      height: 13vw;
+    }
+
+    .btn-close-modal {
+      font-size: 3.3vw;
     }
   }
 
