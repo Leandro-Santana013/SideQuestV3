@@ -1,4 +1,3 @@
-
 .profile-container {
     width: 80%;
     margin: 20px auto;
@@ -148,6 +147,7 @@ color: #fff;
     flex-direction: column;
     width: 35vw;
     height: 25vw;
+    overflow-y: auto;
 }
 
 .gallery-section .section-header{
@@ -155,19 +155,22 @@ color: #fff;
     gap: 3px;
 }
 
-.gallery{
+
+.gallery {
     display: flex;
     flex-wrap: wrap;
-    gap: 1vw;
-}
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .images {
+    width: 100%;
+    max-width: calc(33.333% - 20px); 
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover;
+  }
 
-.gallery .images {
-    width: 150px;
-    height: 100px;
-    background-color: #ddd;
-    border-radius: 2px;
-    margin-right: 10px;
-}
 .feedback-section {
     height: 25vw;
     overflow-y: auto;

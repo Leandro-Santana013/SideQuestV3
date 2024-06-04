@@ -31,7 +31,7 @@ const PerfilProfissionalcli = () => {
   const { user } = useContext(UserContext);
   const [profissional, setProfissional] = useState(null);
   const [imagens, setimagens] = useState(null);
-  const [comentario, setComentarios] = useState(null);
+  const [comentarios, setComentarios] = useState(null);
   const [typeForm, setTypeForm] = useState(1);
   const [favoritado, setFavoritado] = useState(null);
 
@@ -50,7 +50,9 @@ const PerfilProfissionalcli = () => {
         const response = await getRequest(`/user/perfil/profissionais/${id}`);
         setProfissional(response.pro);
         setimagens(response.images);
+        if(response.comentarios[0].avaliacao_id !== null){
         setComentarios(response.comentarios);
+        }
         if (user && user.id_cliente) {
           const fav = await favRequest(`/user/profissional/favoritado`, {
             id_cliente: user.id_cliente,
@@ -95,7 +97,7 @@ const PerfilProfissionalcli = () => {
   };
 
   console.log(profissional, "profissional");
-
+  console.log(comentarios, 'comentarios')
   return (
     <>
       <Header />
@@ -136,7 +138,11 @@ const PerfilProfissionalcli = () => {
                           : ""
                       }
                     >
-                      online
+                      {onlineUsers?.some(
+                          (user) =>
+                            user?.userID == profissional.id_profissional &&
+                            user.type == "pro"
+                        ) ? 'online' : ''}
                     </span>
                   </h1>
                   {profissional.sg_estado && profissional.nm_cidade && (
@@ -214,7 +220,7 @@ const PerfilProfissionalcli = () => {
                           />
                         ))
                       ) : (
-                        <p>Sem imagens</p>
+                        <p>Nenhuma imagem foi encontrada</p>
                       )}
                     </div>
                   </div>
@@ -222,118 +228,44 @@ const PerfilProfissionalcli = () => {
                 <div class="profile-section feedback-section">
                   <div class="section-header">
                     <h2>Avaliações</h2>
-                    <p>4.5/5 (396 opniões)</p>
+                    <p>{Number(profissional.media_avaliacoes).toFixed(1)}/5 ({comentarios?.length} avaliações)</p>
                   </div>
                   <div class="section-content">
                     <div class="feedback-list">
-                      <div class="feedback-box">
-                        <div className="feedback-author">
-                          <img
-                            src={
-                              profissional && profissional.img_profissional
-                                ? profissional.img_profissional
-                                : iconeperfil
-                            }
-                            alt="Foto de perfil do autor do comentário"
-                            className="feedback-profile-picture"
-                          />
-                          <div className="feedback-name-score">
-                            <p class="author-name">Joao manuel</p>
-                            <span className="feedback-score">
-                              <RiStarFill />
-                              <RiStarFill />
-                              <RiStarFill />
-                              <RiStarFill />
-                              <RiStarFill />
-                            </span>
-                          </div>
-                        </div>
-                        <p class="feedback-text">
-                          Excelente serviço e muito profissional!
-                        </p>
-                      </div>
-                      <div class="feedback-box">
-                        <div className="feedback-author">
-                          <img
-                            src={
-                              profissional && profissional.img_profissional
-                                ? profissional.img_profissional
-                                : iconeperfil
-                            }
-                            alt="Foto de perfil do autor do comentário"
-                            className="feedback-profile-picture"
-                          />
-                          <div className="feedback-name-score">
-                            <p class="author-name">Joao manuel</p>
-                            <span className="feedback-score">
-                              <RiStarFill />
-                              <RiStarFill />
-                              <RiStarFill />
-                              <RiStarFill />
-                              <RiStarFill />
-                            </span>
-                          </div>
-                        </div>
-                        <p class="feedback-text">
-                          Excelente serviço e muito profissional!
-                        </p>
-                      </div>
-                      <div class="feedback-box">
-                        <div className="feedback-author">
-                          <img
-                            src={
-                              profissional && profissional.img_profissional
-                                ? profissional.img_profissional
-                                : iconeperfil
-                            }
-                            alt="Foto de perfil do autor do comentário"
-                            className="feedback-profile-picture"
-                          />
-                          <div className="feedback-name-score">
-                            <p class="author-name">Joao manuel</p>
-                            <span className="feedback-score">
-                              <RiStarFill />
-                              <RiStarFill />
-                              <RiStarFill />
-                              <RiStarFill />
-                              <RiStarFill />
-                            </span>
-                          </div>
-                        </div>
-                        <p class="feedback-text">
-                          Excelente serviço e muito profissional!
-                        </p>
-                      </div>
-                    </div>
-                    <div class="feedback-box">
+                    {comentarios? comentarios.map((comentario, index) =>(
+                    <div class="feedback-box" key={comentario.avaliacao_id}>
                       <div className="feedback-author">
                         <img
                           src={
-                            profissional && profissional.img_profissional
-                              ? profissional.img_profissional
+                            comentario.cliente_imagem
+                              ? comentario.cliente_imagem
                               : iconeperfil
                           }
                           alt="Foto de perfil do autor do comentário"
                           className="feedback-profile-picture"
                         />
                         <div className="feedback-name-score">
-                          <p class="author-name">Joao manuel</p>
+                          <p class="author-name">{comentario.cliente_nome}</p>
                           <span className="feedback-score">
-                            <RiStarFill />
-                            <RiStarFill />
-                            <RiStarFill />
-                            <RiStarFill />
-                            <RiStarFill />
+                          {[...Array(5)].map((_, index) => (
+                  <RiStarFill
+                    key={index}
+                    className={`ri-star-s-fill ${index < comentario.avaliacao_numero
+                      ? "ava" : ""}`}
+                  ></RiStarFill>
+                ))}
                           </span>
                         </div>
                       </div>
                       <p class="feedback-text">
-                        Excelente serviço e muito profissional!
+                       {comentario.avaliacao_comentario}
                       </p>
                     </div>
+                    )) : (<p>O profissional ainda não recebeu nenhuma avaliação</p>)}
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           )}
         </div>

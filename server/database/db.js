@@ -195,7 +195,8 @@ const postagensServico = [
     [12, 3, 13, 'Instalação de banheira', 'Instalação de Banheira'],
     [13, 4, 14, 'Limpeza de sofás', 'Limpeza de Sofás'],
     [14, 5, 15, 'Adubação de jardim', 'Adubação de Jardim'],
-    [15, 2, 2, 'Reparo de esgoto', 'Reparo de Esgoto']
+    [15, 2, 2, 'Reparo de esgoto', 'Reparo de Esgoto'],
+    [31, 11, 11, 'Reforma de banheiro', 'Estou disponível para realizar reformas de banheiro. Entre em contato para mais informações.']
 ];
 const confirmacoesServico = [
     [1, 1, "1994-01-01"],
@@ -227,7 +228,8 @@ const confirmacoesServico = [
     [27, 7, "1945-01-27"],
     [28, 8, "1914-06-28"],
     [29, 9, "1929-10-29"],
-    [30, 10, "1945-04-30"]
+    [30, 10, "1945-04-30"],
+    [31, 7, '2024-06-04']
 ];
  
 const terminosServico = [
@@ -260,7 +262,8 @@ const terminosServico = [
     [27, '2024-04-15'],
     [28, '2024-04-16'],
     [29, '2024-04-17'],
-    [30, '2024-04-18']
+    [30, '2024-04-18'],
+    [31, '2024-06-20']
 ];
 
 const avaliacoes = [
@@ -293,7 +296,8 @@ const avaliacoes = [
     [27, 5, 'Experiência incrível, profissional muito talentoso.'],
     [28, 3, 'Serviço aceitável, esperava um pouco mais.'],
     [29, 4, 'Profissional competente, recomendo.'],
-    [30, 5, 'Superou minhas expectativas, serviço de alta qualidade.']
+    [30, 5, 'Superou minhas expectativas, serviço de alta qualidade.'],
+    [31, 5, 'O profissional foi extremamente dedicado e o resultado final ficou incrível. Recomendo fortemente!']
 ];
 
 // Função para inserir os profissionais no banco de dados

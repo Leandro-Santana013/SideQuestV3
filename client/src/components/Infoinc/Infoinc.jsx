@@ -2,7 +2,7 @@
   import axios from "axios";
   import Cookies from "js-cookie";
   import { IoMdClose } from "react-icons/io";
-  import "./infoinc.css";
+  import "./infoInc.css";
   import { UserContext } from "../../context/UserContext";
 
   export const Infoinc = () => {

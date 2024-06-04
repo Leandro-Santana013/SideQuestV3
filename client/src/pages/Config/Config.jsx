@@ -43,6 +43,8 @@ const Config = () => {
     deleteuser,
   } = useContext(UserContext);
 
+  
+
   const handleCepChange = async (e) => {
     const cep = e.target.value;
     const cepToFetch = cep; // Armazena o valor atual do CEP em uma variável local
@@ -240,6 +242,8 @@ const Config = () => {
               <div className="edit-info-endereco-principal">
                 <div className="leftPostar leftPostar-de-config">
                   <h2>Endereço Principal</h2>
+                  {locationuser? (
+                    <>
                   <div className="cep-estado">
                     <div>
                       <h4 className="postarH4">CEP</h4>
@@ -378,6 +382,13 @@ const Config = () => {
                       />
                     </div>
                   </div>
+                  </>
+                  ) :
+                  (<div>
+                    <p>Nenhuma localização vinculada</p>
+                    <button >insira localização principal</button>
+                  </div>
+                )}
                 </div>
               </div>
               <div className="edit-seguranca">
