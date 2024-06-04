@@ -3,7 +3,7 @@ const { _padraoTableDBExistence } = require('../../config/configTablesDB')
 const { connectionDataBase } = require('../../database/db') // Importe a instância de conexão com o banco de dados
 
 const ModelProfissionalProfileImg = connectionDataBase.define('tb_profissionalProfileImg', {
-    id_confirmacaoServico: {
+    id_profileImg: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,

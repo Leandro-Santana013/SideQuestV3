@@ -58,7 +58,7 @@ function Historico() {
                         <div className="coluna">Fim</div>
                         <div className="coluna">Categoria</div>
                     </div>
-                    {Servicehistorico.length > 0 ? (
+                    {Servicehistorico?.length > 0 ? (
                     Servicehistorico.map((historico, index) => (
                         <div className="card-historico" key={index}>
                             <div className="coluna">

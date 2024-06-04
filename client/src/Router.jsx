@@ -24,7 +24,8 @@ import VisualizarServicoCliente from "./pages/VisualizarServicoCliente/Visualiza
 import VisualizarServicoProfissa from "./pages/VisualizarServicoProfissa/VisualizarServicoProfissa";
 import ServicosAtivosCliente from "./pages/ServicosAtivosCliente/ServicosAtivosCliente";
 import ConfigProfissa from "./pages/ConfigProfissa/ConfigProfissa";
-import PerfilProfissional from "./pages/PerfilProfissional/PerfilProfissional";
+import PerfilProfissionalcli from "./pages/PerfilProfissionalCliente/PerfilProfissional";
+import PerfilProfissional from "./pages/PerfilProfissional/PerfilPro";
 import PrivateServices from "./pages/servicosPrivados/servicoPrivado"
 import { Chats } from "./pages/Chats/Chats";
 
@@ -62,7 +63,7 @@ const Router = () => {
           <Route exact path="/VisualizarServicoCliente" element={<VisualizarServicoCliente />} />
           <Route exact path="/VisualizarServicoProfissa/:id" element={<VisualizarServicoProfissa />} />
           <Route exact path="/ServicosAtivosCliente" element={<ServicosAtivosCliente />} />
-          <Route exact path="/homeCliente/perfilProfissional/:id" element={<PerfilProfissional />} />
+          <Route exact path="/homeCliente/perfilProfissional/:id" element={<PerfilProfissionalcli />} />
           <Route exact path="/propostasProfissional" element={<PrivateServices />} />
           {/* rotas cliente / profissional */}
           <Route exact path="/chats" element={user || pro ? <Chats /> : <Navigate to="/login" />} />

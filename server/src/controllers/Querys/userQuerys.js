@@ -14,7 +14,7 @@ const {
   ModelProfissionalCategoria,
   ModelProfissionalProfileImg,
   ClienteProfissionalFavorito,
-  ModelEnderecoProfissional
+  ModelEnderecoProfissional,
 } = require("../../models/index");
 const { Service, Servicehistory } = require("../userController");
 
@@ -120,12 +120,12 @@ module.exports = {
     });
   },
   selectCidadeAdress: async (req, res) => {
-    const { nm_cidade, sg_estado, id_cidade} = req.params;
-    if (id_cidade){
+    const { nm_cidade, sg_estado, id_cidade } = req.params;
+    if (id_cidade) {
       return ModelCidade.findOne({
         attributes: ["nm_cidade", "sg_estado"],
         where: {
-         id_cidade:id_cidade
+          id_cidade: id_cidade,
         },
         raw: true,
       });
@@ -296,20 +296,34 @@ module.exports = {
   },
 
   updateInfoCli: async (req, res) => {
-    const { id_cliente, nm_cliente, cd_emailCliente, img_cliente, nmr_telefoneCliente } = req.params;
+    const {
+      id_cliente,
+      nm_cliente,
+      cd_emailCliente,
+      img_cliente,
+      nmr_telefoneCliente,
+    } = req.params;
     return ModelCliente.update(
       {
         nm_cliente: nm_cliente,
         cd_emailCliente: cd_emailCliente,
         img_cliente: img_cliente,
-        nmr_telefoneCliente:nmr_telefoneCliente
+        nmr_telefoneCliente: nmr_telefoneCliente,
       },
       { where: { id_cliente: id_cliente } }
     );
   },
 
   updateAdressCli: async (req, res) => {
-    const { id_cliente, id_cidade, cd_cep, nm_bairro, nm_logradouro, nmr_casa, txt_complemento } = req.params;
+    const {
+      id_cliente,
+      id_cidade,
+      cd_cep,
+      nm_bairro,
+      nm_logradouro,
+      nmr_casa,
+      txt_complemento,
+    } = req.params;
     return ModelEndereco.update(
       {
         id_cidade: id_cidade,
@@ -331,7 +345,6 @@ module.exports = {
         qt_idadeCliente: qt_idadeCliente,
         sg_sexoCliente: sg_sexoCliente,
         nmr_telefoneCliente: nmr_telefoneCliente,
-        
       },
       { where: { id_cliente: id_cliente } }
     );
@@ -362,7 +375,7 @@ module.exports = {
       nm_bairro,
       nmr_casa,
       end_principal,
-      txt_complemento
+      txt_complemento,
     } = req.params;
     try {
       return ModelEndereco.create({
@@ -373,7 +386,7 @@ module.exports = {
         nm_bairro: nm_bairro,
         nmr_casa: nmr_casa,
         end_principal: end_principal,
-        txt_complemento:txt_complemento
+        txt_complemento: txt_complemento,
       });
     } catch (error) {
       console.error("Erro ao criar ou encontrar endereço:", error);
@@ -393,7 +406,7 @@ module.exports = {
   },
 
   queryPart1: async (req, res) => {
-    const { id_profissional } = req.params
+    const { id_profissional } = req.params;
     return ModelProfissional.findAll({
       where: { id_profissional: id_profissional },
       include: [
@@ -406,10 +419,10 @@ module.exports = {
           attributes: [],
           include: [
             {
-             model: ModelCidade,
-             attributes: []
-            }
-          ]
+              model: ModelCidade,
+              attributes: [],
+            },
+          ],
         },
         {
           model: ModelProfissionalCategoria,
@@ -428,7 +441,7 @@ module.exports = {
             {
               model: ModelTerminoServico,
               attributes: [],
-              
+
               include: [
                 {
                   model: ModelAvaliacao,
@@ -448,29 +461,35 @@ module.exports = {
                               include: [
                                 {
                                   model: ModelCliente,
-                                  attributes: []
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
+                                  attributes: [],
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
       attributes: [
-        'id_profissional',
-        'sg_sexoProfissional',
-        'img_profissional',
-        'nm_profissional',
+        "id_profissional",
+        "sg_sexoProfissional",
+        "img_profissional",
+        "nm_profissional",
         [Sequelize.col("tb_infoProfissional.ds_biografia"), "ds_biografia"],
-        [Sequelize.col("tb_enderecoProfissionals.tb_cidade.sg_estado"), "sg_estado"],
-        [Sequelize.col("tb_enderecoProfissionals.tb_cidade.nm_cidade"), "nm_cidade"],
+        [
+          Sequelize.col("tb_enderecoProfissionals.tb_cidade.sg_estado"),
+          "sg_estado",
+        ],
+        [
+          Sequelize.col("tb_enderecoProfissionals.tb_cidade.nm_cidade"),
+          "nm_cidade",
+        ],
         [
           Sequelize.fn(
             "COUNT",
@@ -512,31 +531,27 @@ module.exports = {
           "media_avaliacoes",
         ],
       ],
-      group: ['tb_profissional.id_profissional',  'tb_profissional_categoria.id_categoriaEscolhida','tb_enderecoProfissionals.tb_cidade.sg_estado', 'tb_enderecoProfissionals.tb_cidade.nm_cidade'] // Inclua todas as colunas não agregadas na cláusula GROUP BY
+      group: [
+        "tb_profissional.id_profissional",
+        "tb_profissional_categoria.id_categoriaEscolhida",
+        "tb_enderecoProfissionals.tb_cidade.sg_estado",
+        "tb_enderecoProfissionals.tb_cidade.nm_cidade",
+      ], // Inclua todas as colunas não agregadas na cláusula GROUP BY
     });
   },
   queryPart2: async (req, res) => {
     const { id_profissional } = req.params;
     return ModelProfissional.findAll({
       where: { id_profissional: id_profissional },
+      attributes:[],
       include: [
         {
           model: ModelProfissionalProfileImg,
-          attributes: [],
+          attributes: ["img_profile"],
           required: false,
         },
       ],
-      attributes: [
-        [
-          Sequelize.fn(
-            "COALESCE",
-            Sequelize.col("tb_profissionalProfileImgs.img_profile"),
-            null
-          ),
-          "img_profile",
-        ],
-      ],
-      group: ["tb_profissionalProfileImgs.img_profile"],
+      group: ["tb_profissionalProfileImgs.id_profileImg"],
     });
   },
 
@@ -918,65 +933,64 @@ module.exports = {
     });
   },
 
-
   apagarService: async (req, res) => {
-      const { id_cliente } = req.params;
-      const services = await ModelPostagemServico.destroy({
-        where: { id_cliente: id_cliente },
-        raw: true,
-        include: [
-          {
-            model: ModelConfirmacaoServico,
-            required: true,
-            attributes: [],
-            include: [
-              {
-                model: ModelTerminoServico,
-                required: false,
-                where: {
-                  id_terminoServico: {
-                    [Op.is]: null, // Utilize null diretamente sem Op.is
-                  },
+    const { id_cliente } = req.params;
+    const services = await ModelPostagemServico.destroy({
+      where: { id_cliente: id_cliente },
+      raw: true,
+      include: [
+        {
+          model: ModelConfirmacaoServico,
+          required: true,
+          attributes: [],
+          include: [
+            {
+              model: ModelTerminoServico,
+              required: false,
+              where: {
+                id_terminoServico: {
+                  [Op.is]: null, // Utilize null diretamente sem Op.is
                 },
               },
-            ],
-          },
-        ],
-  })
-},
+            },
+          ],
+        },
+      ],
+    });
+  },
   apagarServicePend: async (req, res) => {
-      const { id_cliente } = req.params;
-      await ModelPostagemServico.destroy({
-        where: { id_cliente: id_cliente },
-        raw: true,
-        include: [
-          {
-            model: ModelConfirmacaoServico,
-            required: false,
-            where: {
-              id_confirmacaoServico: {
-                [Op.is]: null, // Utilize null diretamente sem Op.is
-              },
+    const { id_cliente } = req.params;
+    await ModelPostagemServico.destroy({
+      where: { id_cliente: id_cliente },
+      raw: true,
+      include: [
+        {
+          model: ModelConfirmacaoServico,
+          required: false,
+          where: {
+            id_confirmacaoServico: {
+              [Op.is]: null, // Utilize null diretamente sem Op.is
             },
           },
-        ],
-      });
+        },
+      ],
+    });
   },
   apagarLocalcli: async (req, res) => {
-    const { id_cliente} = req.params;
-   await ModelEndereco.destroy({
+    const { id_cliente } = req.params;
+    await ModelEndereco.destroy({
       where: {
         id_cliente: id_cliente,
       },
     });
   },
 
- apagarfavoritoscliente:async(req, res)=>{
-  const { id_cliente} = req.params;
+  apagarfavoritoscliente: async (req, res) => {
+    const { id_cliente } = req.params;
     await ClienteProfissionalFavorito.destroy({
-    where: {
-      id_cliente: id_cliente,
-    },
-  });
-}
+      where: {
+        id_cliente: id_cliente,
+      },
+    });
+  },
 };

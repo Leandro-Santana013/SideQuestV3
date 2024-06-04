@@ -11,8 +11,11 @@ router.post('/servicoscardprivate', proControllers.cardservicosprivado)
 router.get('/servico/:id_servico', proControllers.visuService)
 router.get('/allUsers', proControllers.findAllUsers)
 router.get('/find/:idCliente', proControllers.findUser)
+router.get('/perfil/:id_profissional', proControllers.perfilpro)
 router.post('/updateInfoPro', proControllers.updateInfoPro)
 router.post('/servico/aceitar', proControllers.aceitarServico)
+router.post("/setimgGaleria", proControllers.setarImg)
+router.post('/serviceend', proControllers.service)
 
 
 module.exports = router; 

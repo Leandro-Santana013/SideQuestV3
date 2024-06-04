@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 const tokenConfirmacao = require("../../tools/createToken");
 const smtpconfig = require("../../config/smtp");
 const controller_Pro = require("./Querys/proQuerys");
+const controller_User = require("./Querys/userQuerys")
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
@@ -513,4 +514,59 @@ const servicoaceito = await controller_Pro.insertconfirmarServico({
   params: { id_profissional: id_profissional, id_postagemServico:id_servico, dt_inicioServico: formattedDate},
 });
 res.status(200).json(servicoaceito  )
+}
+
+exports.perfilpro = async (req, res) => {
+  const { id_profissional } = req.params;
+
+  try {
+    const pt1 = await controller_User.queryPart1({
+      params: { id_profissional: id_profissional },
+    });
+    const pro = pt1[0];
+
+    const pt2 = await controller_User.queryPart2({
+      params: { id_profissional: id_profissional },
+    });
+
+    const images = pt2[0].tb_profissionalProfileImgs;
+
+    const pt3 = await controller_User.queryPart3({
+      params: { id_profissional: id_profissional },
+    });
+
+    const comentarios = pt3[0];
+    
+
+    res.status(200).json({ pro, images, comentarios });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
+
+exports.setarImg = async (req, res) => {
+  const { id_profissional, img_galeria } = req.body;
+console.log(req.body)
+  try {
+
+     const setandoImage = await controller_Pro.setarImg({
+      params: { id_profissional: id_profissional, Img_profile: img_galeria },
+    });
+
+    const pt2 = await controller_User.queryPart2({
+      params: { id_profissional: id_profissional },
+    });
+    const images = pt2[0].tb_profissionalProfileImgs;
+
+
+    res.status(200).json(images);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
+
+exports.service = async(req, res) => {
+  // a terminar
 }

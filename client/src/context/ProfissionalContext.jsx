@@ -106,6 +106,9 @@ export const ProfessionalContextProvider = ({ children }) => {
 
   const [Dadosiniciais, setDadosIniciais] = useState([]);
   const [Dadosprivate, setDadosprivate] = useState([]);
+  const [profissional, setProfissional] = useState(null);
+  const [imagens, setimagens] = useState(null);
+  const [comentario, setComentarios] = useState(null)
   useEffect(() => {
     const fetchDataFromBackend = async () => {
       try {
@@ -117,7 +120,15 @@ export const ProfessionalContextProvider = ({ children }) => {
             "/professional/servicoscardprivate",
             { id_profissional: pro.id_profissional }
           );
-          console.log(response.user);
+          const perfilpro = await getRequest(`/professional/perfil/${pro.id_profissional}`);
+
+          // const ServiceEnd = await  postRequest("/professional/serviceEnd", {
+          //   id_profissional: pro?.id_profissional
+          // })
+          
+          setProfissional(perfilpro.pro);
+          setimagens(perfilpro.images)
+          setComentarios(perfilpro.comentarios)
           setDadosIniciais(response.user);
           setDadosprivate(responseprivate.user);
         }
@@ -182,9 +193,8 @@ export const ProfessionalContextProvider = ({ children }) => {
   const [cepError, setCepError] = useState(false);
   const concluirCad = useCallback(
     async (e) => {
-      if (pro) infoConfirm.id_profissional = pro.id_profissional;
+      if (pro && pro.id_profissional) infoConfirm.id_profissional = pro.id_profissional;
 
-      console.log("äaaaaaaaaaaaaaaaaaaaaa", infoConfirm);
       const response = await postRequest(
         "/professional/concluirCad",
         infoConfirm
@@ -232,6 +242,28 @@ export const ProfessionalContextProvider = ({ children }) => {
       console.error("Erro ao buscar CEP:", error);
     }
   };
+  
+  const [ imageInstace, setImagesInstance ] = useState(null)
+  const [imagemSelecionada, setImagemSelecionada] = useState(null);
+  const saveimg = useCallback(
+    async (e) => {
+      if (pro) imageInstace.id_profissional = pro?.id_profissional;
+
+      console.log(imageInstace)
+
+      const response = await postRequest(
+        "/professional/setimgGaleria",
+        imageInstace
+      );
+      if (response.error) {
+        
+      } else {
+        setimagens(response.user)
+        setImagemSelecionada(null)
+      }
+    },
+    [imageInstace]
+  );
 
   return (
     <ProfessionalContext.Provider
@@ -267,6 +299,13 @@ export const ProfessionalContextProvider = ({ children }) => {
         fetchDataConcluir,
         cepError,
         Dadosprivate,
+        saveimg,
+        setImagesInstance,
+        imagemSelecionada, 
+        setImagemSelecionada,
+        profissional,
+        imagens,
+        comentario
       }}
     >
       {children}

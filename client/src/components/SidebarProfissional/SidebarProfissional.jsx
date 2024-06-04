@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./sidebarProfissional.css";
 
 import { Link } from "react-router-dom";
-import PerfilProfissional from "../../pages/PerfilProfissional/PerfilProfissional";
+import PerfilProfissional from "../../pages/PerfilProfissionalCliente/PerfilProfissional";
 
 export const SidebarProfissional = () => {
   const [currentPage, setCurrentPage] = useState(window.location.pathname);

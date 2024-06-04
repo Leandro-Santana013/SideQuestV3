@@ -647,7 +647,7 @@ exports.perfilpro = async (req, res) => {
       params: { id_profissional: id_profissional },
     });
 
-    const images = pt2[0];
+    const images = pt2[0].tb_profissionalProfileImgs;
 
     const pt3 = await controller_User.queryPart3({
       params: { id_profissional: id_profissional },

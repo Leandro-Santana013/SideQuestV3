@@ -89,15 +89,23 @@ export const InfoincPro = () => {
     }
   };
 
-  const handleRemoveCategory = (categoryToRemove) => {
+  const handleCategoryRemove = (categoryName) => {
     setSelectedCategories((prevSelectedCategories) =>
-      prevSelectedCategories.filter((category) => category !== categoryToRemove)
+      prevSelectedCategories.filter(
+        (category) => category.ds_categoria !== categoryName
+      )
     );
     setSelectedCategoryNames((prevSelectedCategoryNames) =>
       prevSelectedCategoryNames.filter(
-        (name) => name !== categoryToRemove.ds_categoria
+        (name) => name !== categoryName
       )
     );
+    setInfoConfirm((prevInfoConfirm) => ({
+      ...prevInfoConfirm,
+      categorias: prevInfoConfirm.categorias.filter(
+        (category) => category.ds_categoria !== categoryName
+      ),
+    }));
   };
 
   return (
@@ -232,7 +240,7 @@ export const InfoincPro = () => {
                         selectedCategories.map((category) => (
                           <div key={category.cd_categoria} className="category-card">
                             <p>{category.ds_categoria}</p>
-                            <IoCloseCircle onClick={() => handleRemoveCategory(category)} />
+                            <IoCloseCircle onClick={() => handleCategoryRemove(category.ds_categoria)} />
                           </div>
                         ))
                       )}

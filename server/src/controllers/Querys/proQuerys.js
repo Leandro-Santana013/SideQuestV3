@@ -8,9 +8,11 @@ const {
   ModelConfirmacaoServico,
   ModelCidade,
   ModelInfoProfissional,
+  ModelProfissionalProfileImg
 } = require("../../models/index");
 const { Model, Op, Sequelize } = require("sequelize");
 const { raw } = require("mysql2");
+const { setarImg } = require("../proConstroller");
 
 module.exports = {
   bindCookieBypkProfissonal: async (req, res) => {
@@ -328,5 +330,69 @@ module.exports = {
       id_postagemServico: id_postagemServico,
       dt_inicioServico: dt_inicioServico
     });
+  },
+
+  setarImg: async(req, res) => {
+    const {id_profissional, Img_profile} = req.params
+    return ModelProfissionalProfileImg.create({
+      id_profissional: id_profissional,
+      Img_profile:Img_profile
+    })
+  },
+//em andamento
+  Service: async (req, res) => {
+    try {
+      const { id_profissional } = req.params;
+      const services = await ModelPostagemServico.findAll({
+        raw: true,
+        include: [
+          {
+            model: ModelConfirmacaoServico,
+            required: true,
+            attributes: [],
+            include: [
+              {
+                model: ModelTerminoServico,
+                required: false,
+                where: {
+                  id_terminoServico: {
+                    [Op.is]: null, // Utilize null diretamente sem Op.is
+                  },
+                },
+                attributes: [],
+                include: [
+                  {
+                    model: ModelAvaliacao,
+                    attributes: [],
+                  },
+                ],
+              },
+              {
+                model: ModelProfissional,
+                required: true,
+                attributes: [],
+                where: {id_profissional: id_profissional}
+              },
+            ],
+          },
+        ],
+        attributes: [
+          [Sequelize.col("ds_servico"), "ds_servico"],
+          [
+            Sequelize.col("tb_confirmacaoServico.dt_inicioServico"),
+            "dt_inicioServico",
+          ],
+        ],
+        group: [
+          "tb_postagemServico.id_postagemServico",
+          "tb_confirmacaoServico.id_confirmacaoServico",
+          "tb_confirmacaoServico.tb_profissional.id_profissional",
+        ], //
+      });
+
+      return services;
+    } catch (err) {
+      console.error(`Erro de listagem: ${err}`);
+    }
   },
 };
