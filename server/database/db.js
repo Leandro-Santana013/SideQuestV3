@@ -9,14 +9,14 @@ const connectionDataBase = new Sequelize(
     {
         host: "localhost",
         dialect: "mysql",
-        port: 3306,
+        port: 3307,
         // Definindo o tempo limite de  aquisição de conexão para 60 segundos (em milissegundos)
         pool: { 
             acquire:  600000000
         }
     }
 ); 
- 
+
 module.exports = { connectionDataBase }
 
 const fs = require('fs');
@@ -123,7 +123,8 @@ const clientes = [
     ['Carolina Fernandes', '98798798799', 'F', 29, '1313131313', 'carolina@exemplo.com', 'senha987', 'Rt6Yh2Nj5m'],
     ['Gabriel Silva', '12345678900', 'M', 27, '1414141414', 'gabriel@exemplo.com', 'senha654', 'Wq3As7Df9g'],
     ['Beatriz Santos', '98765432101', 'F', 32, '1515151515', 'beatriz@exemplo.com', 'senha321', 'Tk8Yh5Fg2b'],
-    ['Rafaela Souza', '12312345678', 'F', 26, '1616161616', 'rafaela@exemplo.com', 'senha234', 'Hj7Kl3Mn9z']
+    ['Rafaela Souza', '12312345678', 'F', 26, '1616161616', 'rafaela@exemplo.com', 'senha234', 'Hj7Kl3Mn9z'],
+    ['Nome de Exemplo', '99999999999', 'M', 25, '1717171717', 'sidequest@exemplo.com', 'sidequest123', 'Hj7Kl3Mn9a']
 ];
 
 const categorias = [
@@ -343,6 +344,21 @@ async function inserirClientes() {
     }
 }
 
+async function removerSexoIdadeNomeExemplo() {
+    try {
+        const query = 'UPDATE tb_cliente SET sg_sexoCliente = NULL, qt_idadeCliente = NULL WHERE nm_cliente = ?';
+        const valores = ['Nome de Exemplo'];
+        const [results, metadata] = await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.UPDATE });
+        if (metadata.affectedRows > 0) {
+            console.log('Sexo e idade do cliente "Nome de Exemplo" removidos com sucesso.');
+        } else {
+            console.log('Cliente "Nome de Exemplo" não encontrado.');
+        }
+    } catch (error) {
+        console.error('Erro ao atualizar o cliente "Nome de Exemplo":', error);
+    }
+}
+
 async function inserirCategorias() {
     try {
         for (const categoria of categorias) {
@@ -426,6 +442,7 @@ async function inserirTodosDados() {
     await inserirProfissionais();
     await inserirCategorias();
     await inserirClientes();
+    await removerSexoIdadeNomeExemplo();
     await inserirEnderecos();
     await inserirPostagensServico();
     await inserirConfirmacoesServico();
