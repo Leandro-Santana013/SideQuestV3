@@ -169,6 +169,7 @@ const Config = () => {
                 />
                 <ImageCropper updatefoto={updatefoto} />
               </div>
+                <p>{user.nm_cliente}</p>
             </div>
             <div className="sessao-config">
               <div className="edit-infoPessoais">

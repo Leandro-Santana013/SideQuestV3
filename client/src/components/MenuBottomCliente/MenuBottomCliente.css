@@ -136,12 +136,12 @@
         width: 80px;
         height: 40px;
     }
-    
+
     .connected-bar-menu-bottom i {
         font-size: 1.2rem;
         transition: color 0.3s ease;
     }
-    
+
     .connected-bar-menu-bottom p {
         font-size: 0.7rem;
     }

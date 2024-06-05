@@ -4,6 +4,7 @@ import { ProfessionalContext } from "../../context/ProfissionalContext";
 import "./infoIncPro.css";
 
 import { IoCloseCircle } from "react-icons/io5";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 
 export const InfoincPro = () => {
   const {
@@ -259,8 +260,18 @@ export const InfoincPro = () => {
                 />
                 <div className="bottom-card-conclua-registro">
                   <p onClick={() => setModalConcluaRegistro(2)}>Voltar</p>
-                  <button onClick={concluirCad}>Finalizar</button>
+                  <button onClick={() => { concluirCad() }}>Finalizar</button>
                 </div>
+              </div>
+            </>
+          )}
+          {modal == 4 && (
+            <>
+              <div className="card-conclua-registro">
+                <RiVerifiedBadgeFill style={{ color: 'var(--verde)', fontSize: '5vw' }} />
+                <h1>Cadastro completo!</h1>
+                <p style={{ color: 'gray', textAlign: "center", }}>Obrigado por fornecer mais informações sobre você. Esta atitude ajuda muito a nossa comunidade.</p>
+                <button style={{ display: "flex", alignItems: 'center', justifyContent: 'center !important' }} onClick={() => setModal(0)}>Fechar</button>
               </div>
             </>
           )}

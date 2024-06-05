@@ -7,15 +7,9 @@
 }
 
 .content-favoritos {
-  margin-right: 5vw;
   display: flex;
   flex-direction: column;
   width: 70vw;
-  margin-top: 15vh;
-}
-
-.content-favoritos {
-  padding: 20px;
   background-color: #f4f4f4;
 }
 
@@ -67,6 +61,10 @@
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  p {
+    font-size: 20px;
+  }
 }
 
 .info-favorito {
@@ -76,9 +74,9 @@
   color: #333;
 }
 
-.img-perfil {
-  width: 50px;
-  height: 50px;
+.img-perfil-favoritos {
+  width: 5vw;
+ 
   border-radius: 50%;
   margin-right: 10px;
 }
@@ -100,7 +98,7 @@
 }
 
 .btn-favoritar {
-color: var(--verde);
+  color: var(--verde);
 }
 
 .btn-favoritar:hover,

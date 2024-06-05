@@ -6,10 +6,16 @@
 
 .cabecalho-editar {
     display: flex;
+    gap: 1vw;
     padding: 20px;
     background: linear-gradient(to right, var(--verde), var(--azul));
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
+}
+
+.cabecalho-editar>p {
+    color: white;
+    font-size: 2vw;
 }
 
 .area-img-perfil-edit:hover .img-config-perfil {

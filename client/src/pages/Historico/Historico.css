@@ -7,11 +7,11 @@
 }
 
 .conteudo-historico {
-    margin-right: 5vw;
+   
     display: flex;
     flex-direction: column;
     width: 70vw;
-    margin-top: 15vh;
+   
 }
 
 

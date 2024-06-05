@@ -1,46 +1,66 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-  import React, { useEffect, useState } from 'react';
-  import axios from 'axios';
-  import { useParams } from 'react-router-dom';
+import { MdError } from "react-icons/md";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 
-  const validaemailprofissional = () => {
+const validaemailprofissional = () => {
 
-    const { token } = useParams();
-    const [message, setMessage] = useState(null);  
+  const { token } = useParams();
+  const [message, setMessage] = useState(null);
 
-    useEffect(() => {
-      const sendData = async () => {
-        try {
-          // Supondo que você tenha algum estado ou propriedade com os dados a serem enviados
-          const dataToSend = {
-            token: token, // Inclui o token na requisição
-          };
+  useEffect(() => {
+    const sendData = async () => {
+      try {
+        // Supondo que você tenha algum estado ou propriedade com os dados a serem enviados
+        const dataToSend = {
+          token: token, // Inclui o token na requisição
+        };
 
-          // Faça uma solicitação para o servidor usando o Axios
-          const response = await axios.post('http://localhost:5000/professional/validaemailprofissional', dataToSend);
+        // Faça uma solicitação para o servidor usando o Axios
+        const response = await axios.post('http://localhost:5000/professional/validaemailprofissional', dataToSend);
 
-          // Verifique se a resposta foi bem-sucedida (isso pode variar dependendo do seu servidor)
-          if (response.status === 200) {
-            setMessage(response.data.message);
-          
-          } else {
-            console.error('Erro ao fazer login:', response.statusText);
-          }
-        } catch (error) {
-          console.error('Erro inesperado ao fazer login:', error);
+        // Verifique se a resposta foi bem-sucedida (isso pode variar dependendo do seu servidor)
+        if (response.status === 200) {
+          setMessage(response.data.message);
+
+        } else {
+          console.error('Erro ao fazer login:', response.statusText);
         }
-      };
+      } catch (error) {
+        console.error('Erro inesperado ao fazer login:', error);
+      }
+    };
 
-      // Chame a função ao montar o componente
-      sendData();
-    }, [token]);
+    // Chame a função ao montar o componente
+    sendData();
+  }, [token]);
 
-    return (
-      <div>
-      {message && <h3 className="message">{message}</h3>} 
-      <button><a></a></button>
-      </div>
-    );
-  };
+  return (
+    <div className='container-mensagem-valida-email'>
+      {
+        (message == "Acesso não autorizado token invalido" || message == "Erro interno do servidor") && (
+          <div className='card-mensagem-valida-email'>
+            <MdError className='icone-de-erro'/>
+            <h3 className="message">{message}</h3>
+            <p>Não foi possível confirmar o seu e-mail. Você já pode fechar essa página ou tentar cadastrar-se novamente clicando <Link><span>aqui</span>.</Link></p>
+          </div>
+        )
+      } 
 
-  export default validaemailprofissional
+      {
+        message == "E-mail confirmado com sucesso!" && (
+          <div className='card-mensagem-valida-email'>
+              <RiVerifiedBadgeFill  className='icone-de-sucesso'/>
+              <h3 className="message">{message}</h3>
+              <p>Sucesso! Você já pode fechar essa página ou realizar o seu login em nossa plataforma clicando <Link to={"/loginProfissional"}><span>aqui</span>.</Link></p>
+          </div>
+        )
+      }
+    </div>
+  );
+};
+
+export default validaemailprofissional

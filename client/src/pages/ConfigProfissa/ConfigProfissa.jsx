@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Header, SidebarProfissional, ImageCropper, TextInput, MenuBottomProfissional} from "../../components";
+import { Header, SidebarProfissional, ImageCropper, TextInput, MenuBottomProfissional } from "../../components";
 import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 import "./configProfissa.css";
@@ -96,6 +96,7 @@ const configProfissa = () => {
                 />
                 <ImageCropper updatefoto={updatefoto} />
               </div>
+              <p>{pro.nm_profissional}</p>
               {/* <button onClick={() => setModalEditar(true)}>Editar</button> */}
             </div>
             <div className="sessao-config">
@@ -184,20 +185,27 @@ const configProfissa = () => {
                 </div>
               </div>
             </div>
-            {modalShown && (
-              <div className="modal">
-                <div className="modal-content">
-                  <span className="close" onClick={() => setShowModal(false)}>&times;</span>
-                  <p>Seu perfil foi alterado. Deseja salvar as alterações?</p>
-                  <button onClick={deleteUpdate}>Cancelar</button>
-                  <button onClick={handleSave}>Salvar</button>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
-
+      {modalShown && (
+        <div className="centralizador-modal-salvar-alteracoes">
+          <div className="modal-salvar-alteracoes">
+            <p>Seu perfil foi alterado. Deseja salvar as alterações?</p>
+            <div className="botoes-modal-salvar-alteracoes">
+              <button className="btn-confirmar-alteracoes" onClick={handleSave}>
+                Salvar
+              </button>
+              <button
+                className="btn-cancelar-alteracoes"
+                onClick={deleteUpdate.bind(this)}
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

@@ -16,9 +16,17 @@
 .connected-bar {
     display: flex;
     align-items: center;
-    width: 10vw;
+    width: 180px;
     border-radius: 15px;
     gap: 0.5vw;
+
+    p {
+        font-size: 20px;
+    }
+
+    i {
+        font-size: 20px;
+    }
 }
 
 .sidebarCliente {
@@ -59,7 +67,7 @@
 }
 
 .option i {
-    font-size: 1.2vw;
+    font-size: 20px;
 }
 
 .config {
@@ -67,8 +75,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 10vw;
-    height: 2vw;
+    height: 45px;
     background: linear-gradient(90deg, #3CBC8C 0%, #144574 100%);
     color: white !important;
 }
@@ -262,4 +269,54 @@
         width: 30px;
         height: 3px;
     }
+}
+
+/*responsividade vertical*/
+
+@media screen and (max-height: 650px) {
+
+    .connected-bar {
+        display: flex;
+        align-items: center;
+        width: 160px;
+        border-radius: 15px;
+        gap: 0.5vw;
+    
+        p {
+            font-size: 18px;
+        }
+
+        i {
+            font-size: 18px;
+        }
+    }
+
+    .option i {
+        font-size: 18px;
+    }
+
+}
+
+@media screen and (max-height: 550px) {
+
+    .connected-bar {
+        display: flex;
+        align-items: center;
+        width: 130px;
+        border-radius: 15px;
+        gap: 0.5vw;
+    
+        p {
+            font-size: 15px;
+        }
+
+        i {
+            font-size: 15px;
+        }
+    }
+
+    .option i {
+        font-size: 15px;
+    }
+
 }

@@ -69,43 +69,45 @@ const ProfissionaisFavoritos = () => {
             <SidebarCliente />
             <MenuBottomCliente />
             <div className="content-midia">
-                <div className="content-favoritos">
-                    <div className="header-favoritos">
-                        <h2>Profissionais Favoritos</h2>
-                        <div className="input-procurar">
-                            <input
-                                type="text"
-                                placeholder="Procurar"
-                                value={searchTerm}
-                                onChange={e => setSearchTerm(e.target.value)}
-                            />
-                            <i><RiSearch2Line /></i>
+                <div className='main-content'>
+                    <div className="content-favoritos">
+                        <div className="header-favoritos">
+                            <h2>Profissionais Favoritos</h2>
+                            <div className="input-procurar">
+                                <input
+                                    type="text"
+                                    placeholder="Procurar"
+                                    value={searchTerm}
+                                    onChange={e => setSearchTerm(e.target.value)}
+                                />
+                                <i><RiSearch2Line /></i>
+                            </div>
                         </div>
-                    </div>
-                    <div className="lista-favoritos">
-                        {filteredFavs.length > 0 ? (
-                            filteredFavs.map((profissional) => (
-                                <div className="card-favorito" key={profissional.id_profissional}>
-                                    <Link to={`/homeCliente/perfilProfissional/${profissional.id_profissional}`} className="info-favorito">
-                                        <img src={profissional.img_profissional || imgPerfil} alt="Imagem de perfil" className="img-perfil" />
-                                        <p>{profissional.nm_profissional}</p>
-                                    </Link>
-                                    <div className="acoes-favorito">
-                                        <button onClick={() => handleFavoritar(profissional.id_profissional)} className="btn-favoritar">
-                                            <FaStar className={favoritado ? "icone-favoritado" : "icone-favoritar"} />
-                                        </button>
-                                        <button onClick={() => handleClickCreateChat(profissional.id_profissional)} className="btn-chat">
-                                            <RiChat3Line />
-                                        </button>
-                                        <button onClick={() => handlePostarServico(profissional.id_profissional)} className="btn-servico">
-                                            <RiMegaphoneLine />
-                                        </button>
+                        <div className="lista-favoritos">
+                            {filteredFavs.length > 0 ? (
+                                filteredFavs.map((profissional) => (
+                                    <div className="card-favorito" key={profissional.id_profissional}>
+                                        <Link to={`/homeCliente/perfilProfissional/${profissional.id_profissional}`} className="info-favorito">
+                                            <img src={profissional.img_profissional || imgPerfil} alt="Imagem de perfil" className="img-perfil-favoritos" />
+                                            <p>{profissional.nm_profissional}</p>
+                                        </Link>
+                                        <div className="acoes-favorito">
+                                            <button onClick={() => handleFavoritar(profissional.id_profissional)} className="btn-favoritar">
+                                                <FaStar className={favoritado ? "icone-favoritado" : "icone-favoritar"} />
+                                            </button>
+                                            <button onClick={() => handleClickCreateChat(profissional.id_profissional)} className="btn-chat">
+                                                <RiChat3Line />
+                                            </button>
+                                            <button onClick={() => handlePostarServico(profissional.id_profissional)} className="btn-servico">
+                                                <RiMegaphoneLine />
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            ))
-                        ) : (
-                            <p className="mensagem-vazia">Nenhum favorito encontrado.</p>
-                        )}
+                                ))
+                            ) : (
+                                <p className="mensagem-vazia">Nenhum favorito encontrado.</p>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
