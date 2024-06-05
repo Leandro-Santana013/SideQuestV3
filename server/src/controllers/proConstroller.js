@@ -568,5 +568,19 @@ console.log(req.body)
 };
 
 exports.service = async(req, res) => {
-  // a terminar
+  const {id_profissional} = req.body
+  const n = await controller_Pro.Service({
+    params: { id_profissional: id_profissional },
+  });
+
+  res.status(200).json(n)
 }
+exports.numService = async (req, res) => {
+  const id_profissional = Number(req.params.id_profissional);
+
+  const n = await controller_Pro.nservice({
+    params: { id_profissional: id_profissional },
+  });
+
+  res.status(200).json(n);
+};

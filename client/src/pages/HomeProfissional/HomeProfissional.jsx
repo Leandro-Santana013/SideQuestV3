@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { SidebarProfissional, Header, CardServico, InfoincPro } from "../../components";
+import { SidebarProfissional, Header, CardServico, InfoincPro,MenuBottomProfissional } from "../../components";
 import "./homeProfissional.css";
 import "../../assets/icone-perfil.png";
 import imgAproved from "../../assets/aproved.png";
@@ -9,18 +9,12 @@ import ImgPerfil from "../../assets/icone-perfil.png";
 import imgSucesso from "../../assets/sucesso1.png";
 import imgTarefaConcluida from "../../assets/tarefa-concluida1.png"
 import { Link } from "react-router-dom";
-
+import { ProfessionalContext} from "../../context/ProfissionalContext";
 import { RiFilter2Fill } from "react-icons/ri";
-import { MenuBottomProfissional } from "../../components/MenuBottomProfissional/MenuBottomProfissional";
+
 
 const HomeProfissionais = () => {
-
-
-    const [text, setText] = useState("");
-    const handleChange = (newValue) => {
-        console.log("Novo valor:", newValue);
-        setText(newValue);
-    };
+    const { num } = useContext(ProfessionalContext)
     return (
         <>
             <InfoincPro />
@@ -43,10 +37,12 @@ const HomeProfissionais = () => {
                             <div className="actions">
                                 <div className="info-action">
                                     <p>Serviços Ativos</p>
+                                    <Link to="/ServicosAtivosProfissa">
                                     <div className="action">
-                                        <p>Você possui 3 serviços ativos</p>
+                                        <p>Você possui {num > 0 ? num : "0"} serviços ativos</p>
                                         <img src={imgReload} alt="" />
                                     </div>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="actions">

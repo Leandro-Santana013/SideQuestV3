@@ -103,12 +103,13 @@ export const ProfessionalContextProvider = ({ children }) => {
     },
     [loginInfo]
   );
-
-  const [Dadosiniciais, setDadosIniciais] = useState([]);
-  const [Dadosprivate, setDadosprivate] = useState([]);
   const [profissional, setProfissional] = useState(null);
   const [imagens, setimagens] = useState(null);
-  const [comentario, setComentarios] = useState(null)
+  const [comentario, setComentarios] = useState(null);
+  const [Dadosiniciais, setDadosIniciais] = useState([]);
+  const [Dadosprivate, setDadosprivate] = useState([]);
+  const [ServicosEnd, setServicosEnd] = useState([]);
+  const [num, setnum] = useState([])
   useEffect(() => {
     const fetchDataFromBackend = async () => {
       try {
@@ -120,15 +121,22 @@ export const ProfessionalContextProvider = ({ children }) => {
             "/professional/servicoscardprivate",
             { id_profissional: pro.id_profissional }
           );
-          const perfilpro = await getRequest(`/professional/perfil/${pro.id_profissional}`);
+          const perfilpro = await getRequest(
+            `/professional/perfil/${pro.id_profissional}`
+          );
 
-          // const ServiceEnd = await  postRequest("/professional/serviceEnd", {
-          //   id_profissional: pro?.id_profissional
-          // })
-          
+          const ServiceEnd = await postRequest("/professional/serviceEnd", {
+            id_profissional: pro?.id_profissional,
+          });
+
+          const responseNum = await getRequest(`/professional/nservice/${pro?.id_profissional}`);
+          setnum(responseNum)
+          console.log(ServiceEnd.user, "servicos em andamento")
+          setServicosEnd(ServiceEnd.user);
+
           setProfissional(perfilpro.pro);
-          setimagens(perfilpro.images)
-          setComentarios(perfilpro.comentarios)
+          setimagens(perfilpro.images);
+          setComentarios(perfilpro.comentarios);
           setDadosIniciais(response.user);
           setDadosprivate(responseprivate.user);
         }
@@ -193,7 +201,8 @@ export const ProfessionalContextProvider = ({ children }) => {
   const [cepError, setCepError] = useState(false);
   const concluirCad = useCallback(
     async (e) => {
-      if (pro && pro.id_profissional) infoConfirm.id_profissional = pro.id_profissional;
+      if (pro && pro.id_profissional)
+        infoConfirm.id_profissional = pro.id_profissional;
 
       const response = await postRequest(
         "/professional/concluirCad",
@@ -242,24 +251,23 @@ export const ProfessionalContextProvider = ({ children }) => {
       console.error("Erro ao buscar CEP:", error);
     }
   };
-  
-  const [ imageInstace, setImagesInstance ] = useState(null)
+
+  const [imageInstace, setImagesInstance] = useState(null);
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
   const saveimg = useCallback(
     async (e) => {
       if (pro) imageInstace.id_profissional = pro?.id_profissional;
 
-      console.log(imageInstace)
+      console.log(imageInstace);
 
       const response = await postRequest(
         "/professional/setimgGaleria",
         imageInstace
       );
       if (response.error) {
-        
       } else {
-        setimagens(response.user)
-        setImagemSelecionada(null)
+        setimagens(response.user);
+        setImagemSelecionada(null);
       }
     },
     [imageInstace]
@@ -301,11 +309,13 @@ export const ProfessionalContextProvider = ({ children }) => {
         Dadosprivate,
         saveimg,
         setImagesInstance,
-        imagemSelecionada, 
+        imagemSelecionada,
+        ServicosEnd,
+        num,
         setImagemSelecionada,
         profissional,
         imagens,
-        comentario
+        comentario,
       }}
     >
       {children}

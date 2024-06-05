@@ -8,7 +8,9 @@ const {
   ModelConfirmacaoServico,
   ModelCidade,
   ModelInfoProfissional,
-  ModelProfissionalProfileImg
+  ModelProfissionalProfileImg,
+  ModelTerminoServico,
+  ModelAvaliacao
 } = require("../../models/index");
 const { Model, Op, Sequelize } = require("sequelize");
 const { raw } = require("mysql2");
@@ -324,22 +326,110 @@ module.exports = {
     }
   },
   insertconfirmarServico: async (req, res) => {
-    const { id_profissional, id_postagemServico, dt_inicioServico } = req.params;
+    const { id_profissional, id_postagemServico, dt_inicioServico } =
+      req.params;
     return ModelConfirmacaoServico.create({
       id_profissional: id_profissional,
       id_postagemServico: id_postagemServico,
-      dt_inicioServico: dt_inicioServico
+      dt_inicioServico: dt_inicioServico,
     });
   },
 
-  setarImg: async(req, res) => {
-    const {id_profissional, Img_profile} = req.params
+  setarImg: async (req, res) => {
+    const { id_profissional, Img_profile } = req.params;
     return ModelProfissionalProfileImg.create({
       id_profissional: id_profissional,
-      Img_profile:Img_profile
-    })
+      Img_profile: Img_profile,
+    });
   },
-//em andamento
+
+  Servicehistory: async (req, res) => {
+    try {
+      const { id_cliente } = req.params;
+      const services = await ModelPostagemServico.findAll({
+        where: { id_cliente: id_cliente },
+        raw: true,
+        include: [
+          {
+            model: ModelConfirmacaoServico,
+            required: true,
+            attributes: [],
+            include: [
+              {
+                model: ModelTerminoServico,
+                required: true,
+                attributes: [],
+                include: [
+                  {
+                    model: ModelAvaliacao,
+                    attributes: [],
+                  },
+                ],
+              },
+              {
+                model: ModelProfissional,
+                required: true,
+                attributes: [],
+              },
+            ],
+          },
+        ],
+        attributes: [
+          [Sequelize.col("ds_servico"), "ds_servico"],
+          [
+            Sequelize.col("tb_confirmacaoServico.dt_inicioServico"),
+            "dt_inicioServico",
+          ],
+          [
+            Sequelize.col("tb_confirmacaoServico.tb_terminoServico.dt_terminoServico"),
+            "dt_terminoServico",
+          ],
+
+          [
+            Sequelize.fn(
+              "COALESCE",
+              Sequelize.fn(
+                "AVG",
+                Sequelize.col(
+                  "tb_confirmacaoServico.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
+                )
+              ),
+              0
+            ),
+            "media_avaliacoes",
+          ],
+          [
+            Sequelize.col(
+              "tb_confirmacaoServico.tb_profissional.id_profissional"
+            ),
+            "id_profissional",
+          ],
+          [
+            Sequelize.col(
+              "tb_confirmacaoServico.tb_profissional.nm_profissional"
+            ),
+            "nm_profissional",
+          ],
+          [
+            Sequelize.col(
+              "tb_confirmacaoServico.tb_profissional.img_profissional"
+            ),
+            "img_profissional",
+          ],
+        ],
+        group: [
+          "tb_postagemServico.id_postagemServico",
+          "tb_confirmacaoServico.id_confirmacaoServico",
+          "tb_confirmacaoServico.tb_profissional.id_profissional",
+        ], //
+      });
+
+      return services;
+    } catch (err) {
+      console.error(`Erro de listagem: ${err}`);
+    }
+  }, 
+  
   Service: async (req, res) => {
     try {
       const { id_profissional } = req.params;
@@ -371,13 +461,18 @@ module.exports = {
                 model: ModelProfissional,
                 required: true,
                 attributes: [],
-                where: {id_profissional: id_profissional}
+                where: { id_profissional: id_profissional },
               },
             ],
+          },
+          {
+            model: ModelCliente,
+            required: true,
           },
         ],
         attributes: [
           [Sequelize.col("ds_servico"), "ds_servico"],
+          [Sequelize.col("ds_titulo"), "ds_titulo"],
           [
             Sequelize.col("tb_confirmacaoServico.dt_inicioServico"),
             "dt_inicioServico",
@@ -387,6 +482,7 @@ module.exports = {
           "tb_postagemServico.id_postagemServico",
           "tb_confirmacaoServico.id_confirmacaoServico",
           "tb_confirmacaoServico.tb_profissional.id_profissional",
+          "tb_cliente.id_cliente"
         ], //
       });
 
@@ -395,4 +491,37 @@ module.exports = {
       console.error(`Erro de listagem: ${err}`);
     }
   },
+
+  nservice: async (req, res) => {
+    try {
+      const { id_profissional } = req.params;
+      const services = await ModelPostagemServico.count({
+        include: [
+          {
+            model: ModelConfirmacaoServico,
+            required: true,
+            where: {
+              id_profissional: id_profissional,
+            },
+            include: [
+              {
+                model: ModelTerminoServico,
+                required: false,
+                where: {
+                  id_terminoServico: {
+                    [Op.is]: null,
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      });
+
+      return services;
+    } catch (err) {
+      console.error(`Erro: ${err}`);
+    }
+  },
+  
 };

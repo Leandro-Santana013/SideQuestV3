@@ -15,7 +15,8 @@ router.get('/perfil/:id_profissional', proControllers.perfilpro)
 router.post('/updateInfoPro', proControllers.updateInfoPro)
 router.post('/servico/aceitar', proControllers.aceitarServico)
 router.post("/setimgGaleria", proControllers.setarImg)
-router.post('/serviceend', proControllers.service)
+router.post('/serviceEnd', proControllers.service)
+router.get('/nservice/:id_profissional', proControllers.numService)
 
 
 module.exports = router; 
