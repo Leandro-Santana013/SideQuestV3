@@ -295,13 +295,13 @@ if (Array.isArray(populationService) && populationService.length > 0) {
 exports.visuService = async (req, res) => {
   try {
     const { id_servico } = req.params;
-    console.log(id_servico);
+    console.log(id_servico, "time tamplate");
 
     // Busque o serviço usando o controlador
     const populationService = await controller_Pro.findService({
       params: { id_postagemServico: id_servico },
     });
-    console.log(populationService);
+  console.log(populationService, "notpost")
 
     // Calcule a diferença de tempo
     const diferencaTempo = calcularDiferencaTempo(

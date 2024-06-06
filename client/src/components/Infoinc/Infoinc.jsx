@@ -146,7 +146,7 @@ export const Infoinc = () => {
                 <RiVerifiedBadgeFill style={{ color: 'var(--verde)', fontSize: '5vw' }} />
                 <h1>Cadastro completo!</h1>
                 <p style={{ color: 'gray', textAlign: "center", }}>Obrigado por fornecer mais informações sobre você. Esta atitude ajuda muito a nossa comunidade.</p>
-                <button style={{ display: "flex", alignItems: 'center', justifyContent: 'center !important' }} onClick={() => setModal(0)}>Fechar</button>
+                <button style={{ display: "flex", alignItems: 'center', justifyContent: 'center !important' }} onClick={() => {setModal(0); window.location.reload}}>Fechar</button>
               </div>
             </>
           )}

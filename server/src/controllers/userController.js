@@ -761,34 +761,52 @@ exports.delete = async (req, res) => {
   const clienteuser = await controller_User.selectInfocliente({
     params: { id_cliente: id_cliente},
   });
+  const localizacaoprincipal = await controller_User.selectLocalcli({
+    params: { id_cliente: id_cliente },
+  });
   const serviceend = await controller_User.Service({
     params: { id_cliente: id_cliente },
   });
   const ServicePend = await controller_User.ServicePend({
     params: { id_cliente: id_cliente },
   });
-  const localizacaoprincipal = await controller_User.selectLocalcli({
-    params: { id_cliente: id_cliente, end_principal: true },
-  });
+
   const favoritos = await controller_User.getfavs({
     params: { id_cliente: id_cliente },
   });
 
-  if(serviceend) await controller_User.apagarService({
-    params: { id_cliente: id_cliente },
-  });
-  if(ServicePend) await controller_User.apagarServicePend({
-    params: { id_cliente: id_cliente },
-  });
+
+ 
+    if(serviceend.length > 0){
+      console.log(serviceend, "aaaaaaaaaaaaaaaaaa")
+       await controller_User.apagarService({
+      params: { id_cliente: id_cliente },
+    });
+  }
+  if(ServicePend.length > 0){
+    await controller_User.apagarServicePend({
+      params: { id_cliente: id_cliente },
+    });
+   
+  } 
+  if(favoritos.length > 0){
+   console.log(favoritos)
+     await controller_User.apagarfavoritoscliente({
+    params:{ id_cliente: id_cliente}
+  })
+}
   if(localizacaoprincipal) controller_User.apagarLocalcli({
     params: { id_cliente: id_cliente},
   })
-  if(favoritos) await controller_User.apagarfavoritoscliente({
-    params:{ id_cliente: id_cliente}
-  })
-  if(clienteuser) await controller_User.apagarInfocliente({
+
+  if(clienteuser){ 
+    console.log("a1", clienteuser)
+    await controller_User.apagarInfocliente({
     params: { id_cliente: id_cliente},
   });
-  
+return res.status(200).json()
+}
 
+    
+  
 };

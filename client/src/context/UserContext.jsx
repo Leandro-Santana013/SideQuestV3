@@ -216,10 +216,9 @@ export const UserContextProvider = ({ children }) => {
   const [selectedImages, setSelectedImages] = useState([]);
 
   useEffect(() => {
+    if (selectedImages.length > 0){
     const zipImages = async () => {
       const zip = new JSZip();
-
-      console.log("ssfdsfs", selectedImages);
       // Adicione as imagens ao arquivo ZIP
       selectedImages.forEach((image, index) => {
         zip.file(`image_${index}.png`, image.split("base64,")[1], {
@@ -262,6 +261,7 @@ export const UserContextProvider = ({ children }) => {
       }
     };
     zipImages();
+  }
   }, [selectedImages]);
 
   const PostarServico = useCallback(

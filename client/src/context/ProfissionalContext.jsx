@@ -128,7 +128,7 @@ export const ProfessionalContextProvider = ({ children }) => {
           const ServiceEnd = await postRequest("/professional/serviceEnd", {
             id_profissional: pro?.id_profissional,
           });
-
+          console.log(ServiceEnd, "serviços em andamentos")
           const responseNum = await getRequest(`/professional/nservice/${pro?.id_profissional}`);
           setnum(responseNum)
           console.log(ServiceEnd.user, "servicos em andamento")

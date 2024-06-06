@@ -37,8 +37,8 @@ function ServicosAtivos() {
                     <div className="info-usuario">
                       <p>Início:{servicos.dt_inicioServico}</p>
                       <div className="avaliacao">
-                        <img src={iconeperfil} alt="icone perfil" id="perfil" />
-                        <p>{servicos["tb_cliente.nm_cliente"]}</p>
+                        <img src={servicos.img_cliente ? servicos.img_cliente : iconeperfil} alt="icone perfil" id="perfil" />
+                        <p>{servicos.nm_cliente}</p>
                         <i className="fa-regular fa-star"></i>
                         <p>4.9</p>
                       </div>

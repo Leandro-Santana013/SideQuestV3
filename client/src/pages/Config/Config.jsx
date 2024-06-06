@@ -477,7 +477,7 @@ const Config = () => {
                      e nunca mais poderam ser acessados, {num > 0 ? `você possui ${num} serviços ativos` : ""}
                     tem certeza?
                     
-                    <button onClick={() =>{deleteuser(); logoutUser()}}>confirmar</button> <button onClick={() => {setCerteza(null)}}>cancelar</button></h2></>}
+                    <button onClick={async() =>{ await deleteuser(); logoutUser()}}>confirmar</button> <button onClick={() => {setCerteza(null)}}>cancelar</button></h2></>}
                 </div>
               </div>
             </div>

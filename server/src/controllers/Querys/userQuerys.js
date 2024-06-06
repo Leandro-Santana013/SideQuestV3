@@ -395,11 +395,10 @@ module.exports = {
   },
 
   selectLocalcli: async (req, res) => {
-    const { id_cliente, end_principal } = req.params;
+    const { id_cliente } = req.params;
     return ModelEndereco.findOne({
       where: {
         id_cliente: id_cliente,
-        end_principal: end_principal,
       },
       raw: true,
     });
@@ -935,27 +934,17 @@ module.exports = {
 
   apagarService: async (req, res) => {
     const { id_cliente } = req.params;
-    const services = await ModelPostagemServico.destroy({
-      where: { id_cliente: id_cliente },
-      raw: true,
+    await ModelConfirmacaoServico.destroy({
       include: [
         {
-          model: ModelConfirmacaoServico,
-          required: true,
-          attributes: [],
-          include: [
-            {
-              model: ModelTerminoServico,
-              required: false,
-              where: {
-                id_terminoServico: {
-                  [Op.is]: null, // Utilize null diretamente sem Op.is
-                },
-              },
-            },
-          ],
-        },
-      ],
+          model: ModelPostagemServico,
+          where: {
+            id_cliente: id_cliente,
+          },
+          attributes: []
+        }
+      ]
+      
     });
   },
   apagarServicePend: async (req, res) => {
