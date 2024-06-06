@@ -4,8 +4,11 @@
   justify-content: space-between;
   align-items: center;
   position: fixed;
+  padding: 10px 0;
   flex-grow: 1;
-  height: 5vw;
+  z-index: 2;
+  background-color: #f4f4f4;
+  border-bottom: solid 2px var(--verde);
 }
 
 .containerHeader .img-logo {

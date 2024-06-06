@@ -9,8 +9,7 @@
     display: flex;
     align-items: center;
     width: 82vw;
-    margin-top: 5vw;
-
+    margin-top: 95px;
 }
 
 .connected-bar {
@@ -75,9 +74,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 5px;
     height: 45px;
     background: linear-gradient(90deg, #3CBC8C 0%, #144574 100%);
     color: white !important;
+
+    p {
+        font-size: 20px;
+    }
+
+    i {
+        font-size: 20px;
+    }
 }
 
 /* =carde do perfil final da tela*/
@@ -291,6 +299,16 @@
         }
     }
 
+    .config {
+        p {
+            font-size: 18px;
+        }
+    
+        i {
+            font-size: 18px;
+        }
+    }
+
     .option i {
         font-size: 18px;
     }
@@ -310,6 +328,16 @@
             font-size: 15px;
         }
 
+        i {
+            font-size: 15px;
+        }
+    }
+
+    .config {
+        p {
+            font-size: 15px;
+        }
+    
         i {
             font-size: 15px;
         }

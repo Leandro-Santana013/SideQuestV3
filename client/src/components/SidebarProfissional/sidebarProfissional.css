@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     width: 82vw;
-    margin-top: 5vw;
+    margin-top: 95px;
 }
 
 .connected-bar {
@@ -188,9 +188,6 @@
 .sidebarProfissional {
     display: none;
 }
-    .main-content {
-        margin-top: 9vw;
-    }
 
     .sidebarProfissa {
         display: none;

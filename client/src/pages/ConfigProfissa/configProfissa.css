@@ -5,8 +5,8 @@
 }
 
 cabecalho-editar .img-config-perfil {
-    width: 130px;
-    height: 130px;
+    width: 13px;
+    height: 13px;
     object-fit: contain;
     border-radius: 50%;
 }
@@ -23,7 +23,7 @@ cabecalho-editar .img-config-perfil {
 
 .sessao-config {
     background-color: #EEEEEE;
-    padding: 53px;
+    padding: 20px;
     gap: 5vh;
     display: flex;
     flex-direction: column;
@@ -244,12 +244,7 @@ cabecalho-editar .img-config-perfil {
 @media (max-width: 1025px) {
 
     .conteudo-config-perfil {
-        width: 70vw;
-    }
-
-    .img-config-perfil {
-        width: 11vw;
-        height: 11vw;
+        width: 95vw;
     }
 
     .sessao-config {
@@ -257,7 +252,7 @@ cabecalho-editar .img-config-perfil {
     }
 
     .edit-infoPessoais {
-        width: 57vw;
+        width: 90vw;
         padding: 10px;
     }
 
@@ -267,16 +262,6 @@ cabecalho-editar .img-config-perfil {
 
     .edit-infoPessoais h3 {
         font-size: 2.5vw;
-    }
-
-    .header-edit-info-pessoais button {
-        font-size: 2.3vw;
-        width: 18vw;
-        height: 5vw;
-        margin-right: 10vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
     .edit-infoPessoais .input-pessoais .input-nome-num p {
@@ -306,7 +291,7 @@ cabecalho-editar .img-config-perfil {
     }
 
     .edit-info-endereco-principal {
-        width: 57vw;
+        width: 90vw;
         padding: 10px;
     }
 
@@ -361,7 +346,7 @@ cabecalho-editar .img-config-perfil {
     }
 
     .edit-seguranca {
-        width: 57vw;
+        width: 90vw;
         padding: 10px;
     }
 
@@ -396,22 +381,12 @@ cabecalho-editar .img-config-perfil {
 /* Tablets em modo retrato e smartphones grandes */
 @media (max-width: 768px) {
 
-    .conteudo-config-perfil {
-        width: 75vw;
-    }
-
-    .img-config-perfil {
-        width: 14vw;
-        height: 14vw;
-    }
-
     .sessao-config {
         align-items: center;
     }
 
-    .edit-infoPessoais {
-        width: 60vw;
-        padding: 15px;
+    .img-config-perfil {
+        width: 85px;
     }
 
     .header-edit-info-pessoais h2 {
@@ -420,13 +395,6 @@ cabecalho-editar .img-config-perfil {
 
     .edit-infoPessoais h3 {
         font-size: 3vw;
-    }
-
-    .header-edit-info-pessoais button {
-        font-size: 2.7vw;
-        width: 17vw;
-        height: 5vw;
-        margin-right: 9vw;
     }
 
     .edit-infoPessoais .input-pessoais .input-nome-num p {
@@ -453,11 +421,6 @@ cabecalho-editar .img-config-perfil {
     .edit-infoPessoais .input-pessoais .input-email-local input {
         font-size: 2.7vw;
         width: 20vw;
-    }
-
-    .edit-info-endereco-principal {
-        width: 60vw;
-        padding: 10px;
     }
 
     .edit-info-endereco-principal .leftPostar.leftPostar-de-config h2 {
@@ -510,11 +473,6 @@ cabecalho-editar .img-config-perfil {
         font-size: 2.7vw;
     }
 
-    .edit-seguranca {
-        width: 60vw;
-        padding: 15px;
-    }
-
     .edit-seguranca h2 {
         font-size: 3.5vw;
     }
@@ -546,37 +504,24 @@ cabecalho-editar .img-config-perfil {
 /* Smartphones médios e tablets pequenos */
 @media (max-width: 600px) {
 
-    .conteudo-config-perfil {
-        width: 75vw;
-    }
-
-    .img-config-perfil {
-        width: 14vw;
-        height: 14vw;
+    .cabecalho-editar {
+        padding: 10px;
     }
 
     .sessao-config {
         align-items: center;
     }
 
-    .edit-infoPessoais {
-        width: 60vw;
-        padding: 15px;
+    .img-config-perfil {
+        width: 75px;
     }
 
-    .header-edit-info-pessoais h2 {
+     h2 {
         font-size: 4vw;
     }
 
     .edit-infoPessoais h3 {
         font-size: 3.5vw;
-    }
-
-    .header-edit-info-pessoais button {
-        font-size: 3vw;
-        width: 22vw;
-        height: 5.25vw;
-        margin-right: 6vw;
     }
 
     .edit-infoPessoais .input-pessoais .input-nome-num p {
@@ -605,11 +550,6 @@ cabecalho-editar .img-config-perfil {
         height: 2vw;
         font-size: 3vw;
         width: 23vw;
-    }
-
-    .edit-info-endereco-principal {
-        width: 60vw;
-        padding: 10px;
     }
 
     .edit-info-endereco-principal .leftPostar.leftPostar-de-config h2 {
@@ -656,11 +596,6 @@ cabecalho-editar .img-config-perfil {
         font-size: 3vw;
     }
 
-    .edit-seguranca {
-        width: 60vw;
-        padding: 15px;
-    }
-
     .edit-seguranca h2 {
         font-size: 4vw;
     }
@@ -691,26 +626,20 @@ cabecalho-editar .img-config-perfil {
 /* Smartphones pequenos */
 @media (max-width: 480px) {
 
+    .cabecalho-editar {
+        padding: 0 10px;
+    }
+
+    .img-config-perfil {
+        width: 65px;
+    }
+
     .sessao-config {
         padding: 30px;
     }
 
-    .conteudo-config-perfil {
-        width: 75vw;
-    }
-
-    .img-config-perfil {
-        width: 17vw;
-        height: 17vw;
-    }
-
     .sessao-config {
         align-items: center;
-    }
-
-    .edit-infoPessoais {
-        width: 60vw;
-        padding: 15px;
     }
 
     .header-edit-info-pessoais h2 {
@@ -719,12 +648,6 @@ cabecalho-editar .img-config-perfil {
 
     .edit-infoPessoais h3 {
         font-size: 3.5vw;
-    }
-
-    .header-edit-info-pessoais button {
-        font-size: 3.3vw;
-        width: 25vw;
-        height: 5vw;
     }
 
     .edit-infoPessoais .input-pessoais .input-nome-num p {
@@ -750,11 +673,6 @@ cabecalho-editar .img-config-perfil {
 
     .edit-infoPessoais .input-pessoais .input-email-local input {
         height: 2vw;
-    }
-
-    .edit-info-endereco-principal {
-        width: 60vw;
-        padding: 15px;
     }
 
     .edit-info-endereco-principal .leftPostar.leftPostar-de-config h2 {
@@ -799,11 +717,6 @@ cabecalho-editar .img-config-perfil {
         width: 20vw;
         height: 3vw;
         font-size: 3.3vw;
-    }
-
-    .edit-seguranca {
-        width: 60vw;
-        padding: 15px;
     }
 
     .edit-seguranca h2 {

@@ -89,8 +89,6 @@ const configProfissa = () => {
                   className="img-config-perfil"
                   style={{
                     objectFit: "contain",
-                    width: "120px",
-                    height: "120px",
                     borderRadius: "50%",
                   }}
                 />

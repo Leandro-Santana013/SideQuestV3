@@ -6,8 +6,9 @@
 
 .cabecalho-editar {
     display: flex;
+    align-items: center;
     gap: 1vw;
-    padding: 20px;
+    padding: 15px;
     background: linear-gradient(to right, var(--verde), var(--azul));
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
@@ -15,7 +16,7 @@
 
 .cabecalho-editar>p {
     color: white;
-    font-size: 2vw;
+    font-size: 30px;
 }
 
 .area-img-perfil-edit:hover .img-config-perfil {
@@ -47,10 +48,9 @@
 }
 
 .img-config-perfil {
-    width: 130px;
-    height: 130px;
     object-fit: contain;
     border-radius: 50%;
+    width: 100px;
 }
 
 .img-config-perfil:hover {
@@ -60,7 +60,7 @@
 
 .sessao-config {
     background-color: #EEEEEE;
-    padding: 53px;
+    padding: 20px;
     gap: 5vh;
     display: flex;
     flex-direction: column;
@@ -102,8 +102,8 @@
     justify-content: space-between;
 
     button {
-        padding: .5vw 2vw .5vw 2vw;
-        font-size: 1vw;
+        padding: 12px 25px;
+        font-size: 20px;
         color: white;
         border: none;
         background-color: var(--verde);
@@ -244,12 +244,13 @@
     position: fixed;
     bottom: calc(50px/10);
     width: 100%;
+    z-index: 10;
 }
 
 .modal-salvar-alteracoes {
     display: flex;
     border-radius: 15px;
-    width: 27vw;
+    margin: 0 20px;
     padding: 10px;
     align-items: center;
     justify-content: center;
@@ -258,6 +259,9 @@
 
     p {
         color: white;
+        width: 250px;
+        text-align: center;
+        font-size: 18px;
     }
 
     .botoes-modal-salvar-alteracoes {
@@ -267,7 +271,8 @@
         .btn-confirmar-alteracoes {
             border: none;
             background-color: var(--verde);
-            padding: .5vw 1vw .5vw 1vw;
+            padding: 10px 0;
+            width: 120px;
             border-radius: 50px;
             color: white;
         }
@@ -275,7 +280,8 @@
         .btn-cancelar-alteracoes {
             border: none;
             background-color: red;
-            padding: .5vw 1vw .5vw 1vw;
+            padding: 10px 0;
+            width: 120px;
             border-radius: 50px;
             color: white;
         }
@@ -291,12 +297,7 @@
 @media (max-width: 1025px) {
 
     .conteudo-config-perfil {
-        width: 70vw;
-    }
-
-    .img-config-perfil {
-        width: 11vw;
-        height: 11vw;
+        width: 95vw;
     }
 
     .sessao-config {
@@ -304,7 +305,7 @@
     }
 
     .edit-infoPessoais {
-        width: 57vw;
+        width: 90vw;
         padding: 10px;
     }
 
@@ -314,16 +315,6 @@
 
     .edit-infoPessoais h3 {
         font-size: 2.5vw;
-    }
-
-    .header-edit-info-pessoais button {
-        font-size: 2.3vw;
-        width: 18vw;
-        height: 5vw;
-        margin-right: 10vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
     .edit-infoPessoais .input-pessoais .input-nome-num p {
@@ -353,7 +344,7 @@
     }
 
     .edit-info-endereco-principal {
-        width: 57vw;
+        width: 90vw;
         padding: 10px;
     }
 
@@ -408,7 +399,7 @@
     }
 
     .edit-seguranca {
-        width: 57vw;
+        width: 90vw;
         padding: 10px;
     }
 
@@ -443,22 +434,8 @@
 /* Tablets em modo retrato e smartphones grandes */
 @media (max-width: 768px) {
 
-    .conteudo-config-perfil {
-        width: 75vw;
-    }
-
-    .img-config-perfil {
-        width: 14vw;
-        height: 14vw;
-    }
-
     .sessao-config {
         align-items: center;
-    }
-
-    .edit-infoPessoais {
-        width: 60vw;
-        padding: 15px;
     }
 
     .header-edit-info-pessoais h2 {
@@ -467,13 +444,6 @@
 
     .edit-infoPessoais h3 {
         font-size: 3vw;
-    }
-
-    .header-edit-info-pessoais button {
-        font-size: 2.7vw;
-        width: 17vw;
-        height: 5vw;
-        margin-right: 9vw;
     }
 
     .edit-infoPessoais .input-pessoais .input-nome-num p {
@@ -500,11 +470,6 @@
     .edit-infoPessoais .input-pessoais .input-email-local input {
         font-size: 2.7vw;
         width: 20vw;
-    }
-
-    .edit-info-endereco-principal {
-        width: 60vw;
-        padding: 10px;
     }
 
     .edit-info-endereco-principal .leftPostar.leftPostar-de-config h2 {
@@ -557,10 +522,7 @@
         font-size: 2.7vw;
     }
 
-    .edit-seguranca {
-        width: 60vw;
-        padding: 15px;
-    }
+
 
     .edit-seguranca h2 {
         font-size: 3.5vw;
@@ -593,22 +555,13 @@
 /* Smartphones médios e tablets pequenos */
 @media (max-width: 600px) {
 
-    .conteudo-config-perfil {
-        width: 75vw;
-    }
-
-    .img-config-perfil {
-        width: 14vw;
-        height: 14vw;
+    .header-edit-info-pessoais button {
+        padding: 10px 20px;
+        font-size: 18px;
     }
 
     .sessao-config {
         align-items: center;
-    }
-
-    .edit-infoPessoais {
-        width: 60vw;
-        padding: 15px;
     }
 
     .header-edit-info-pessoais h2 {
@@ -617,13 +570,6 @@
 
     .edit-infoPessoais h3 {
         font-size: 3.5vw;
-    }
-
-    .header-edit-info-pessoais button {
-        font-size: 3vw;
-        width: 22vw;
-        height: 5.25vw;
-        margin-right: 6vw;
     }
 
     .edit-infoPessoais .input-pessoais .input-nome-num p {
@@ -654,10 +600,7 @@
         width: 23vw;
     }
 
-    .edit-info-endereco-principal {
-        width: 60vw;
-        padding: 10px;
-    }
+
 
     .edit-info-endereco-principal .leftPostar.leftPostar-de-config h2 {
         font-size: 4vw;
@@ -703,11 +646,6 @@
         font-size: 3vw;
     }
 
-    .edit-seguranca {
-        width: 60vw;
-        padding: 15px;
-    }
-
     .edit-seguranca h2 {
         font-size: 4vw;
     }
@@ -738,26 +676,17 @@
 /* Smartphones pequenos */
 @media (max-width: 480px) {
 
+    .header-edit-info-pessoais button {
+        padding: 8px 18px;
+        font-size: 15px;
+    }
+
     .sessao-config {
         padding: 30px;
     }
 
-    .conteudo-config-perfil {
-        width: 75vw;
-    }
-
-    .img-config-perfil {
-        width: 17vw;
-        height: 17vw;
-    }
-
     .sessao-config {
         align-items: center;
-    }
-
-    .edit-infoPessoais {
-        width: 60vw;
-        padding: 15px;
     }
 
     .header-edit-info-pessoais h2 {
@@ -766,12 +695,6 @@
 
     .edit-infoPessoais h3 {
         font-size: 3.5vw;
-    }
-
-    .header-edit-info-pessoais button {
-        font-size: 3.3vw;
-        width: 25vw;
-        height: 5vw;
     }
 
     .edit-infoPessoais .input-pessoais .input-nome-num p {
@@ -797,11 +720,6 @@
 
     .edit-infoPessoais .input-pessoais .input-email-local input {
         height: 2vw;
-    }
-
-    .edit-info-endereco-principal {
-        width: 60vw;
-        padding: 15px;
     }
 
     .edit-info-endereco-principal .leftPostar.leftPostar-de-config h2 {
@@ -848,11 +766,6 @@
         font-size: 3.3vw;
     }
 
-    .edit-seguranca {
-        width: 60vw;
-        padding: 15px;
-    }
-
     .edit-seguranca h2 {
         font-size: 4vw;
     }
@@ -882,5 +795,10 @@
 
 /* Smartphones muito pequenos */
 @media (max-width: 320px) {
-    
+
+    .header-edit-info-pessoais button {
+        padding: 5px 15px;
+        font-size: 12px;
+    }
+
 }
