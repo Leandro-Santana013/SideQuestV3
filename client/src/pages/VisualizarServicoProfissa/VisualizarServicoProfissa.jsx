@@ -1,42 +1,40 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./VisualizarServicoProfissa.css";
 import { SidebarProfissional, Header } from "../../components/index";
-import bandeira from "../../assets/bandeira.png";
-import iconeperfil from "../../assets/icone-perfil.png";
-import endereco from "../../assets/endereco.png";
-import btnplay from "../../assets/botao-play.png";
-import avaliacao from "../../assets/estrelinha.png";
 import { useParams } from "react-router-dom";
 import { ChatContext } from "../../context/ChatContext";
-import { ProfessionalContext, ProfessionalContextProvider } from "../../context/ProfissionalContext";
-import {
-    postRequest, baseUrl, getRequest, putRequest,
-} from "../../utils/services";
-
-
+import { ProfessionalContext } from "../../context/ProfissionalContext";
+import iconePerfil from "../../assets/icone-perfil.png";
+import { postRequest, getRequest } from "../../utils/services";
+import { RiStarFill } from "react-icons/ri";
+import JSZip from "jszip";
+import base64js from "base64-js";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import { Navigation } from "swiper/modules";
+import { MdOutlineLocationOn } from "react-icons/md";
+SwiperCore.use([Navigation]);
 const VisualizarServicoProfissa = () => {
     const { id } = useParams();
     const { pro } = useContext(ProfessionalContext);
-    const { createChat } = useContext(ChatContext)
-    const [servico, setServico] = useState(null)
-    const { id_cliente } = servico || {}
-
+    const { createChat } = useContext(ChatContext);
+    const [servico, setServico] = useState(null);
+    const [imagesServico, setImagesServico] = useState([]);
 
     useEffect(() => {
-
         const fetchData = async () => {
             try {
-                // Fazendo a solicitação para buscar informações do profissional com base no ID
                 const response = await getRequest(`/professional/servico/${id}`);
-                // Configurando os dados do profissional no estado local
                 setServico(response);
-                console.log("hhhhhhhhhhh", response)
+                console.log("Serviço:", response);
             } catch (error) {
-                console.error("Erro ao buscar informações do profissional:", error);
-                // Tratamento de erro adicional conforme necessário
+                console.error("Erro ao buscar informações do serviço:", error);
             }
         };
-
         fetchData();
     }, [id]);
 
@@ -44,49 +42,86 @@ const VisualizarServicoProfissa = () => {
         if (pro !== null) {
             createChat(pro.id_profissional, u);
         }
-
     };
 
-    const handleClickaceitar = async(id) => {
-        if(pro && pro.id_profissional && servico ){
-            const response = await postRequest(`/professional/servico/aceitar`, {id_profissional: id, id_servico: servico.id_postagemServico });
+    const handleClickaceitar = async (id) => {
+        if (pro && pro.id_profissional && servico) {
+            await postRequest(`/professional/servico/aceitar`, { id_profissional: id, id_servico: servico.id_postagemServico });
         }
-    }
+    };
+
+    useEffect(() => {
+        const unzipData = async () => {
+            if (servico?.img_servico) {
+                try {
+                    const imgServicoObj = JSON.parse(servico.img_servico);
+                    if (imgServicoObj.content) {
+                        const zip = new JSZip();
+                        const arrayBuffer = base64js.toByteArray(imgServicoObj.content).buffer;
+                        const unzipped = await zip.loadAsync(arrayBuffer);
+
+                        const imagesArray = [];
+                        for (const filename in unzipped.files) {
+                            const fileData = await unzipped.files[filename].async("base64");
+                            imagesArray.push(`data:image/png;base64,${fileData}`);
+                        }
+
+                        setImagesServico(imagesArray);
+                    } else {
+                        console.error("A propriedade 'content' não foi encontrada em img_servico");
+                    }
+                } catch (error) {
+                    console.error("Erro ao descompactar as imagens:", error);
+                }
+            }
+        };
+
+        unzipData();
+    }, [servico]);
+
+    console.log(servico, 'servicos')
+
     return (
         <>
             <Header />
-            < SidebarProfissional />
+            <SidebarProfissional />
             <div className="content-midia">
                 <div className="main-content">
                     <div className="card-visualizar">
                         {servico && (
                             <>
-                                <div className="card-superior-servico">
-
+                                <div className="card-header-servico">
                                     <div className="titulo-servico">
                                         <h2>{servico.ds_titulo}</h2>
                                         <h3>Pintura</h3>
                                     </div>
-                                    <button>R1450</button>
+                                    <div className="action-buttons-header-servico">
+                                        <button onClick={() => handleClickaceitar(pro.id_profissional)}>Aceitar</button>
+                                        <button onClick={() => handleClick(servico.id_cliente)}>Chat</button>
+                                    </div>
                                 </div>
                                 <hr />
-                                <div className="card-inferior-servico">
+                                <div className="card-main-servico">
                                     <div className="proposta-servico">
-                                        <button onClick={() => handleClickaceitar(pro.id_profissional)}>Aceitar</button>
-                                        <button onClick={() => handleClick(id_cliente)}>Chat</button>
                                         <div className="perfil-avaliacao">
                                             <div className="avaliacao-icon-nome">
-                                                <img src={servico.img_cliente ? servico.img_cliente : iconeperfil} alt="icon-perfil" />
+                                                <img src={servico['tb_cliente.img_cliente'] ? servico.img_cliente : iconePerfil} alt="icon-perfil" />
                                                 <div className="nome-avaliacao">
-                                                    <p>Joao Silva</p>
+                                <p>{servico['tb_cliente.nm_cliente']}</p>
                                                     <div className="avaliacao">
                                                         <p>4.9</p>
-                                                        <img src={avaliacao} alt="avaliacao" />
+                                                        <span className="feedback-score">
+                                                            <RiStarFill />
+                                                            <RiStarFill />
+                                                            <RiStarFill />
+                                                            <RiStarFill />
+                                                            <RiStarFill />
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="distancia">
-                                                <img src={endereco} alt="endereco" />
+                                                <MdOutlineLocationOn/>
                                                 <p>4km</p>
                                             </div>
                                         </div>
@@ -96,19 +131,21 @@ const VisualizarServicoProfissa = () => {
                                             <h3>Descrição</h3>
                                             <p>{servico.ds_servico}</p>
                                         </div>
-                                        <div className="data-servico">
-                                            <div className="inicio">
-                                                <img src={btnplay} alt="botão início" />
-                                                <p>Início</p>
-                                            </div>
-                                            <div className="fim">
-                                                <img src={bandeira} alt="fim" />
-                                                <p>Fim</p>
-                                            </div>
-                                            <p>Postado há: {servico.diferencaTempo}</p>
+                                        <h3>Imagens anexadas a postagem</h3>
+                                        <div className="images-servico">
+                                            {imagesServico.length > 0 ? (
+                                                <Swiper spaceBetween={10} slidesPerView={3}>
+                                                    {imagesServico.map((image, index) => (
+                                                        <SwiperSlide key={index}>
+                                                            <img src={image} alt={`Imagem do serviço ${index + 1}`} className="imagem-servico" />
+                                                        </SwiperSlide>
+                                                    ))}
+                                                </Swiper>
+                                            ) : (
+                                                <p>Nenhuma imagem anexada ao serviço</p>
+                                            )}
                                         </div>
                                     </div>
-
                                 </div>
                             </>
                         )}
@@ -117,6 +154,6 @@ const VisualizarServicoProfissa = () => {
             </div>
         </>
     );
-}
+};
 
 export default VisualizarServicoProfissa;
