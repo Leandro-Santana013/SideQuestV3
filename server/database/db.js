@@ -1,66 +1,57 @@
-const { password, name, usu } = require("../config/connectInfo.js")
-const { Sequelize, QueryTypes } = require("sequelize")
+const { password, name, usu } = require("../config/connectInfo.js");
+const { Sequelize, QueryTypes } = require("sequelize");
 const bcrypt = require('bcrypt');
-
-const connectionDataBase = new Sequelize(
-    name, // Nome do banco de dados
-    usu, // Nome de usuário
-    password, // Senha
-    {
-        host: "localhost",
-        dialect: "mysql",
-        port: 3307,
-        // Definindo o tempo limite de  aquisição de conexão para 60 segundos (em milissegundos)
-        pool: { 
-            acquire:  600000000
-        }
-    }
-); 
-
-module.exports = { connectionDataBase }
-
 const fs = require('fs');
 const path = require('path');
-const mysql = require('mysql2');
- 
+
 // Construa o caminho completo para o arquivo JSON
 const filePath = path.join(__dirname, 'estados-cidades.json');
 const flagFilePath = path.join(__dirname, 'script-rodado.txt');
 
+// Conexão com o banco de dados
+const connectionDataBase = new Sequelize(
+    name,
+    usu,
+    password,
+    {
+        host: "localhost",
+        dialect: "mysql",
+        port: 3307,
+        pool: {
+            acquire: 60000 // 60 seconds
+        }
+    }
+);
+
+module.exports = { connectionDataBase };
+
 // Verificação do arquivo de flag
 if (fs.existsSync(flagFilePath)) {
-  console.log('Script já foi executado anteriormente. Saindo');
-  return;
+    console.log('Script já foi executado anteriormente. Saindo');
+    return;
 }
 
 fs.writeFileSync(flagFilePath, '');
 
 // Leitura do arquivo JSON
 const { estados } = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-console.log(estados); // Adicione esta linha para verificar o conteúdo
-
-// Conexão com o MySQL
-const conexao = connectionDataBase;
+console.log(estados);
 
 // Iteração sobre cada estado e cidade no JSON e realização do insert
 estados.forEach(estado => {
     estado.cidades.forEach(cidade => {
-        // Substitua os valores das colunas pelos campos correspondentes no seu JSON
         const query = 'INSERT INTO tb_cidade (sg_estado, nm_cidade) VALUES (?, ?)';
         const valores = [estado.sigla, cidade];
-
-        // Execução da query
-        conexao.query(query, { replacements: valores, type: QueryTypes.INSERT })
+        connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT })
             .then(result => {
-                console.log(`{Cidade ${cidade} do estado ${estado.sigla} inserida com sucesso.}`);
+                console.log(`Cidade ${cidade} do estado ${estado.sigla} inserida com sucesso.`);
             })
             .catch(err => {
-                console.error(`Erro ao inserir cidade ${cidade} do estado ${estado.sigla}: ${err.messag}`);
+                console.error(`Erro ao inserir cidade ${cidade} do estado ${estado.sigla}: ${err.message}`);
             });
     });
 });
 
-// Array com os dados dos profissionais
 const profissionais = [
     ['João Silva', '12345678901', 'M', 30, '999999999', 'joao@exemplo.com', 'senha123', '2hGf9JkL3p'],
     ['Maria Souza', '98765432109', 'F', 25, '888888888', 'maria@exemplo.com', 'senha456', '5sRt8YbN6w'],
@@ -81,7 +72,8 @@ const profissionais = [
     ['Larissa Silva', '09876543218', 'F', 28, '890123456', 'larissa@exemplo.com', 'senha012', '7hGt9YbN1m'],
     ['Matheus Santos', '98765432189', 'M', 36, '901234567', 'matheus@exemplo.com', 'senha345', '2mNj4KlO6b'],
     ['Beatriz Lima', '87654321098', 'F', 30, '012345678', 'beatriz@exemplo.com', 'senha678', '4lPo7KjI3u'],
-    ['Vinicius Oliveira', '76543210987', 'M', 37, '101010103', 'vinicius@exemplo.com', 'senha901', '5vCn8MbL2s']
+    ['Vinicius Oliveira', '76543210987', 'M', 37, '101010103', 'vinicius@exemplo.com', 'senha901', '5vCn8MbL2s'],
+    ['Nome de Profissional', '99999999998', 'M', 25, '222222224', 'sidequest@profissional.com', 'sidequest123', 'Hj7Kl3Mn9c']
 ];
 
 const infoProfissional = [
@@ -107,7 +99,6 @@ const infoProfissional = [
     [20, 'Especializada em limpeza de estofados, ofereço serviços de higienização e revitalização de móveis.', 'Certificado em Limpeza de Estofados pela Associação de Limpeza Profissional.', 'Utilizo técnicas e produtos específicos para garantir a remoção de manchas e odores indesejados.', 'Curso de Higienização de Estofados, Treinamento em Remoção de Manchas e Odores.']
 ];
 
-// Array com os dados dos clientes
 const clientes = [
     ['Ana Costa', '12345678901', 'F', 35, '111111111', 'ana.costa@exemplo.com', 'senha123', 'Rt5YnHjK2p'],
     ['Pedro Fernandes', '98765432109', 'M', 28, '222222222', 'pedro.fernandes@exemplo.com', 'senha456', 'Lm9Zx8Cv3b'],
@@ -124,7 +115,7 @@ const clientes = [
     ['Gabriel Silva', '12345678900', 'M', 27, '1414141414', 'gabriel@exemplo.com', 'senha654', 'Wq3As7Df9g'],
     ['Beatriz Santos', '98765432101', 'F', 32, '1515151515', 'beatriz@exemplo.com', 'senha321', 'Tk8Yh5Fg2b'],
     ['Rafaela Souza', '12312345678', 'F', 26, '1616161616', 'rafaela@exemplo.com', 'senha234', 'Hj7Kl3Mn9z'],
-    ['Nome de Exemplo', '99999999999', 'M', 25, '1717171717', 'sidequest@exemplo.com', 'sidequest123', 'Hj7Kl3Mn9a']
+    ['Nome de Cliente', '99999999999', 'M', 25, '1717171717', 'sidequest@cliente.com', 'sidequest123', 'Hj7Kl3Mn9a']
 ];
 
 const categorias = [
@@ -146,6 +137,10 @@ const categorias = [
     'Limpeza de Estofados',
     'Serviços de Piscina',
     'Serviços de Dedetização'
+];
+
+const profissionaisCategorias = [
+    
 ];
 
 const enderecos = [
@@ -199,6 +194,7 @@ const postagensServico = [
     [15, 2, 2, 'Reparo de esgoto', 'Reparo de Esgoto'],
     [31, 11, 11, 'Reforma de banheiro', 'Estou disponível para realizar reformas de banheiro. Entre em contato para mais informações.']
 ];
+
 const confirmacoesServico = [
     [1, 1, "1994-01-01"],
     [2, 2, "1848-02-02"],
@@ -232,7 +228,7 @@ const confirmacoesServico = [
     [30, 10, "1945-04-30"],
     [31, 7, '2024-06-04']
 ];
- 
+
 const terminosServico = [
     [1, '2024-03-20'],
     [2, '2024-03-21'],
@@ -346,16 +342,26 @@ async function inserirClientes() {
 
 async function removerSexoIdadeNomeExemplo() {
     try {
-        const query = 'UPDATE tb_cliente SET sg_sexoCliente = NULL, qt_idadeCliente = NULL WHERE nm_cliente = ?';
-        const valores = ['Nome de Exemplo'];
-        const [results, metadata] = await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.UPDATE });
-        if (metadata.affectedRows > 0) {
-            console.log('Sexo e idade do cliente "Nome de Exemplo" removidos com sucesso.');
+        const queryCliente = 'UPDATE tb_cliente SET sg_sexoCliente = NULL, qt_idadeCliente = NULL WHERE nm_cliente = ?';
+        const queryProfissional = 'UPDATE tb_profissional SET sg_sexoProfissional = NULL, qt_idadeProfissional = NULL WHERE nm_profissional = ?';
+        const valoresCliente = ['Nome de Cliente'];
+        const valoresProfissional = ['Nome de Profissional'];
+
+        const [resultsCliente, metadataCliente] = await connectionDataBase.query(queryCliente, { replacements: valoresCliente, type: QueryTypes.UPDATE });
+        if (metadataCliente.affectedRows > 0) {
+            console.log('Sexo e idade do cliente "Nome de Cliente" removidos com sucesso.');
         } else {
-            console.log('Cliente "Nome de Exemplo" não encontrado.');
+            console.log('Cliente "Nome de Cliente" não encontrado.');
+        }
+
+        const [resultsProfissional, metadataProfissional] = await connectionDataBase.query(queryProfissional, { replacements: valoresProfissional, type: QueryTypes.UPDATE });
+        if (metadataProfissional.affectedRows > 0) {
+            console.log('Sexo e idade do profissional "Nome de Profissional" removidos com sucesso.');
+        } else {
+            console.log('Profissional "Nome de Profissional" não encontrado.');
         }
     } catch (error) {
-        console.error('Erro ao atualizar o cliente "Nome de Exemplo":', error);
+        console.error('Erro ao atualizar o cliente ou profissional "Nome de Exemplo":', error);
     }
 }
 
@@ -369,6 +375,19 @@ async function inserirCategorias() {
         }
     } catch (error) {
         console.error('Erro ao inserir as categorias:', error);
+    }
+}
+
+async function inserirProfissionaisCategorias() {
+    try {
+        for (const [idCategoriaEscolhida, idProfissional, idCategoria] of profissionaisCategorias) {
+            const query = 'INSERT INTO tb_profissional_categoria (id_categoriaEscolhida, id_profissional, id_categoria) VALUES (?, ?, ?)';
+            const valores = [idCategoriaEscolhida, idProfissional, idCategoria];
+            await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT });
+            console.log(`Profissional ${idProfissional} com categoria ${idCategoria} inserido com sucesso.`);
+        }
+    } catch (error) {
+        console.error('Erro ao inserir os profissionais com categorias:', error);
     }
 }
 
@@ -441,6 +460,7 @@ async function inserirAvaliacoes() {
 async function inserirTodosDados() {
     await inserirProfissionais();
     await inserirCategorias();
+    await inserirProfissionaisCategorias();
     await inserirClientes();
     await removerSexoIdadeNomeExemplo();
     await inserirEnderecos();

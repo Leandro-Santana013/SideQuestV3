@@ -5,7 +5,7 @@
     margin-top: 5vw;
 }
 
-.card-visualizar .card-superior-servico {
+.card-visualizar .card-header-servico {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -13,118 +13,88 @@
     align-items: flex-end;
 }
 
-.card-visualizar .card-superior-servico button {
-    width: 8vw;
-    height: 3vw;
-    border-radius: 20px;
-    border: none;
-    font-weight: bold;
-    background-color: var(--verde);
-    color: white;
+.card-visualizar .card-header-servico .action-buttons-header-servico{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.card-visualizar .card-inferior-servico {
+.card-visualizar .card-header-servico button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--verde);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 120px;
+    height: 30px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.card-visualizar .card-main-servico {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     padding: 25px;
 }
 
-.card-inferior-servico .proposta-servico {
-    gap: 2vw;
+.card-main-servico .descricao {
+width: 30vw;
+}
+
+.card-main-servico .descricao h3 {
+    font-size: 18px;
+    text-align: justify;
+}
+
+.card-main-servico .perfil-avaliacao{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.card-inferior-servico .proposta-servico button {
-    width: 8vw;
-    height: 3vw;
-    border-radius: 20px;
-    border: none;
-    font-weight: bold;
-    background-color: var(--verde);
-    color: white;
+.card-main-servico .avaliacao-icon-nome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.proposta-servico .perfil-avaliacao .avaliacao-icon-nome {
+.card-main-servico .avaliacao-icon-nome .nome-avaliacao{
     display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 1vw;
+    justify-content: center;
+}
+
+.card-main-servico .avaliacao-icon-nome .nome-avaliacao .avaliacao {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+
 }
 
 .avaliacao-icon-nome img {
-    width: 3.5vw;
-    height: 3.5vw;
+    width: 80px;
+    height: 80px;
+    margin-right: 8px;
 }
 
-.nome-avaliacao {
+.images-servico {
     display: flex;
-    flex-direction: column;
+    width: 30vw;
+    gap: 10px;
+    overflow-x: auto;
 }
 
-.nome-avaliacao>p {
-    margin: 0;
+.images-servico .imagem-servico{
+    width: 10vw;
+    height: 10vw;
 }
 
-.avaliacao {
-    display: flex;
-    gap: 1vw;
-    align-items: center;
-}
-
-.avaliacao>img {
-    width: 7vw;
-    height: 2vw;
-}
-
-.avaliacao p {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.distancia {
-    display: flex;
-    gap: 2vw;
-    align-items: flex-end;
-}
-
-.distancia img {
-    width: 2.5vw;
-    height: 3.5vw;
-}
-
-.distancia p {
-    margin-top: 0;
-}
-
-
-.desc-servico {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.data-servico {
-    display: flex;
-    justify-content: space-around;
-}
-
-.data-servico .inicio {
+.card-main-servico .distancia{
     display: flex;
     align-items: center;
-    gap: 2vw;
-}
-.data-servico .inicio img {
-    width: 3.5vw;
-    height: 3.5vw;
-}
-
-.data-servico .fim {
-    display: flex;
-    align-items: center;
-    gap: 2vw;
-}
-.data-servico .fim img {
-    width: 2.5vw;
-    height: 2.5vw;
+    justify-content: center;
 }
