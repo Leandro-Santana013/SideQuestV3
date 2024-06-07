@@ -12,13 +12,13 @@
 }
 
 .containerHeader .img-logo {
-  width: 8vw;
+  width: 7vw;
   height: auto;
   margin-left: 1vw;
 }
 
 .notificacao i {
-  font-size: 2vw;
+  font-size: 1.75vw;
   color: #3cbc8c;
   transition: 0.25s ease-in-out;
   margin-right: 3vw;
@@ -28,3 +28,53 @@
 .notificacao i:hover {
   color: #144474;
 }
+
+
+/* Responsividade */
+
+/* Tablets em modo paisagem e dispositivos híbridos */
+@media (max-width: 1024px) {
+  .containerHeader .img-logo {
+    width: 13vw;
+  }
+
+  .notificacao i {
+    font-size: 4vw;
+  }
+}
+
+/* Tablets em modo retrato e smartphones grandes */
+@media (max-width: 768px) {
+  .containerHeader .img-logo {
+    width: 15vw;
+  }
+
+  .notificacao i {
+    font-size: 4.5vw;
+  }
+}
+
+/* Smartphones médios e tablets pequenos */
+@media (max-width: 600px) {
+  .containerHeader .img-logo {
+    width: 18vw;
+  }
+
+  .notificacao i {
+    font-size: 5.5vw;
+  }
+}
+
+/* Smartphones pequenos */
+@media (max-width: 480px) {
+  .containerHeader .img-logo {
+    width: 21vw;
+  }
+
+  .notificacao i {
+    font-size: 6.5vw;
+  }
+}
+
+/* Smartphones muito pequenos */
+@media (max-width: 320px) {}
