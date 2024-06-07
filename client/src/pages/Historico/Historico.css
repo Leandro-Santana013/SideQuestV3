@@ -113,14 +113,6 @@
 /* Tablets em modo paisagem e dispositivos híbridos */
 @media (max-width: 1024px) {
 
-    .notificacao i {
-        font-size: 35px;
-    }
-
-    .containerHeader .img-logo {
-        width: 120px;
-    }
-
     .input-procurar {
         width: 35vw;
     }
