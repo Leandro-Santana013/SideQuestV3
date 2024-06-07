@@ -126,7 +126,7 @@ export const ProfessionalContextProvider = ({ children }) => {
             `/professional/perfil/${pro.id_profissional}`
           );
           const historico = await getRequest(
-            `/professional/history/${pro.id_profissional}`
+            `/professional/history/${pro?.id_profissional}`
           );
           
           const ServiceEnd = await postRequest("/professional/serviceEnd", {

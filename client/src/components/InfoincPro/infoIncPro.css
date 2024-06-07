@@ -244,6 +244,11 @@
         font-size: 2.3vw;
     }
 
+    .top-card-conclua-registro span{
+        font-size: 2.3vw;
+        margin: 1vw;
+    }
+
     .inputs-card-conclua-registro {
         font-size: 2.3vw;
     }
@@ -315,6 +320,11 @@
         font-size: 2.7vw;
     }
 
+    .top-card-conclua-registro span{
+        font-size: 2.7vw;
+        margin: 2vw;
+    }
+
     .inputs-card-conclua-registro {
         font-size: 3vw;
     }
@@ -381,6 +391,10 @@
 
     .top-card-conclua-registro p {
         font-size: 3vw;
+    }
+    .top-card-conclua-registro span{
+        font-size: 3vw;
+        margin: 2vw;
     }
 
     .inputs-card-conclua-registro {
@@ -461,6 +475,11 @@
 
     .top-card-conclua-registro p {
         font-size: 3.3vw;
+    }
+
+    .top-card-conclua-registro span{
+        font-size: 3.3vw;
+        margin: 2vw;
     }
 
     .inputs-card-conclua-registro {

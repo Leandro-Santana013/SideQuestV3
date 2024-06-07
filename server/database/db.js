@@ -51,7 +51,7 @@ estados.forEach(estado => {
             });
     });
 });
-
+ 
 const profissionais = [
     ['João Silva', '12345678901', 'M', 30, '999999999', 'joao@exemplo.com', 'senha123', '2hGf9JkL3p'],
     ['Maria Souza', '98765432109', 'F', 25, '888888888', 'maria@exemplo.com', 'senha456', '5sRt8YbN6w'],
@@ -140,7 +140,48 @@ const categorias = [
 ];
 
 const profissionaisCategorias = [
-    
+    [1, 1], // João Silva - Elétrica
+    [1, 6], // João Silva - Marcenaria
+    [2, 2], // Maria Souza - Encanamento
+    [2, 4], // Maria Souza - Limpeza
+    [3, 3], // Pedro Santos - Construção e Reforma
+    [3, 5], // Pedro Santos - Jardinagem
+    [4, 4], // Ana Oliveira - Limpeza
+    [4, 13], // Ana Oliveira - Alvenaria
+    [5, 5], // Carlos Lima - Jardinagem
+    [5, 3], // Carlos Lima - Construção e Reforma
+    [6, 12], // Fernanda Oliveira - Pintura
+    [6, 7], // Fernanda Oliveira - Carpintaria
+    [7, 14], // Roberto Silva - Vidraçaria
+    [7, 8], // Roberto Silva - Montagem de Móveis
+    [8, 8], // Camila Santos - Montagem de Móveis
+    [8, 6], // Camila Santos - Marcenaria
+    [9, 17], // Lucas Lima - Serviços de Dedetização
+    [9, 10], // Lucas Lima - Conserto de Eletrodomésticos
+    [10, 11], // Mariana Souza - Mudanças
+    [10, 14], // Mariana Souza - Vidraçaria
+    [11, 7], // Rafael Oliveira - Carpintaria
+    [11, 1], // Rafael Oliveira - Elétrica
+    [12, 8], // Patricia Fernandes - Montagem de Móveis
+    [12, 3], // Patricia Fernandes - Construção e Reforma
+    [13, 12], // Gustavo Silva - Pintura
+    [13, 5], // Gustavo Silva - Jardinagem
+    [14, 14], // Aline Santos - Vidraçaria
+    [14, 15], // Aline Santos - Serralheria
+    [15, 15], // Daniel Lima - Serralheria
+    [15, 16], // Daniel Lima - Limpeza de Estofados
+    [16, 6], // Fernando Oliveira - Marcenaria
+    [16, 12], // Fernando Oliveira - Pintura
+    [17, 9], // Larissa Silva - Instalação de Eletrodomésticos
+    [17, 17], // Larissa Silva - Serviços de Dedetização
+    [18, 10], // Matheus Santos - Conserto de Eletrodomésticos
+    [18, 9], // Matheus Santos - Instalação de Eletrodomésticos
+    [19, 13], // Beatriz Lima - Alvenaria
+    [19, 4], // Beatriz Lima - Limpeza
+    [20, 16], // Vinicius Oliveira - Limpeza de Estofados
+    [20, 13], // Vinicius Oliveira - Alvenaria
+    [21, 4], // Nome de Profissional - Limpeza
+    [21, 1]  // Nome de Profissional - Elétrica
 ];
 
 const enderecos = [
