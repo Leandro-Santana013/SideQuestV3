@@ -16,7 +16,7 @@ const connectionDataBase = new Sequelize(
     {
         host: "localhost",
         dialect: "mysql",
-        port: 3306,
+        port: 3307,
         pool: {
             acquire: 60000 // 60 seconds
         }
@@ -51,7 +51,7 @@ estados.forEach(estado => {
             });
     });
 });
-
+ 
 const profissionais = [
     ['João Silva', '12345678901', 'M', 30, '999999999', 'joao@exemplo.com', 'senha123', '2hGf9JkL3p'],
     ['Maria Souza', '98765432109', 'F', 25, '888888888', 'maria@exemplo.com', 'senha456', '5sRt8YbN6w'],
