@@ -197,7 +197,7 @@
 }
 
 .postarH4 {
-  font-size: 1vw;
+  font-size: 20px;
   color: #474747;
   font-weight: 200;
 }
@@ -951,7 +951,7 @@
   }
 
   .postarH4 {
-    font-size: 3vw;
+    font-size: 5vw;
   }
 }
 
@@ -1053,10 +1053,7 @@
     font-size: 3.3vw;
     height: 4vw;
   }
-
-  .postarH4 {
-    font-size: 3.3vw;
-  }
+  
 }
 
 /* Smartphones muito pequenos */

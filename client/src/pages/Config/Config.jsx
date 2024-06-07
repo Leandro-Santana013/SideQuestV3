@@ -216,7 +216,7 @@ const Config = () => {
                             }
                           />
                         ) : (
-                          <p>{user.nmr_telefoneCliente}</p>
+                          <span>{user.nmr_telefoneCliente}</span>
                         )}
                       </>
                     )}

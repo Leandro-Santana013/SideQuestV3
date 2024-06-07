@@ -101,7 +101,7 @@ const configProfissa = () => {
               <div className="edit-infoPessoais">
                 <h2>Informações Pessoais</h2>
                 <h3>Essas informações não estão públicas</h3>
-                <div className="input-pessoais">
+                <div className="">
                   <div className="input-nome-num">
                     <p>Nome</p>
                     {modalEditar ? (
@@ -124,7 +124,7 @@ const configProfissa = () => {
                         onChange={(event) => handleFieldChange("numero", event)}
                       />
                     ) : (
-                      <p>{pro.nmr_telefoneProfissional}</p>
+                      <span>{pro.nmr_telefoneProfissional}</span>
                     )}
                   </div>
                   <div className="input-email-local">
