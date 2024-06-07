@@ -164,11 +164,27 @@ module.exports = {
             required: true,
             raw: true,
             attributes: [
-              ["nm_cliente", "nm_cliente"],
-              ["img_cliente", "img_cliente"],
             ],
           },
+          {
+            model: ModelCategoria,
+            required: true,
+            raw: true,
+            attributes: []
+          }
         ],
+        attributes: [
+          
+          "ds_servico",
+          "id_postagemServico",
+          "ds_titulo",
+          "img_servico",
+          "tm_postagem",
+          "pr_escolhido",
+          [Sequelize.col("tb_cliente.nm_cliente"), "nm_cliente"],
+          [Sequelize.col("tb_cliente.img_cliente"), "img_cliente"],
+          [Sequelize.col("tb_categorium.ds_categoria"), "ds_categoria"],
+      ],
         raw: true,
       });
     } catch (err) {
@@ -521,6 +537,79 @@ module.exports = {
       return services;
     } catch (err) {
       console.error(`Erro: ${err}`);
+    }
+  },
+  Servicehistory: async (req, res) => {
+    try {
+      const { id_profissional } = req.params;
+      const services = await ModelPostagemServico.findAll({
+        raw: true,
+        include: [
+          {
+            model: ModelCliente,
+            required: true,
+            attributes: []
+          },
+          {
+            model: ModelConfirmacaoServico,
+            required: true,
+            attributes: [],
+            where: { id_profissional: id_profissional },
+            include: [
+              {
+                model: ModelTerminoServico,
+                required: true,
+                attributes: [],
+                include: [
+                  {
+                    model: ModelAvaliacao,
+                    attributes: [],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+        attributes: [
+          "id_confirmacaoServico"
+          [Sequelize.col("ds_servico"), "ds_servico"],
+          [
+            Sequelize.col("tb_confirmacaoServico.dt_inicioServico"),
+            "dt_inicioServico",
+          ],
+          [
+            Sequelize.col("tb_confirmacaoServico.tb_terminoServico.dt_terminoServico"),
+            "dt_terminoServico",
+          ],
+          [
+            Sequelize.col(
+              "tb_cliente.id_cliente"
+            ),
+            "id_cliente",
+          ],
+          [
+            Sequelize.col(
+              "tb_cliente.nm_cliente"
+            ),
+            "nm_cliente",
+          ],
+          [
+            Sequelize.col(
+              "tb_cliente.img_cliente"
+            ),
+            "img_cliente",
+          ],
+        ],
+        group: [
+          "tb_postagemServico.id_postagemServico",
+          "tb_confirmacaoServico.id_confirmacaoServico",
+          "tb_cliente.id_cliente",
+        ], //
+      });
+
+      return services;
+    } catch (err) {
+      console.error(`Erro de listagem: ${err}`);
     }
   },
   

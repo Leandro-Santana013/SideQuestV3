@@ -24,10 +24,7 @@ const ServicosAtivosCliente = () => {
                 </div>
                 <div className="desc-servico-usuario">
                   <h2>{serv.ds_titulo}</h2>
-                  <p>
-                    A parede em questão tem aproximadamente 4 metros de largura
-                    e 2,7 metros de altura. Ela é atualmente de um tom neutro,
-                    mas quero transformá-la em um ponto de destaque na sala...
+                  <p>{serv.ds_servico}
                     <strong>Ver mais detalhes</strong>
                   </p>
                   <div className="info-usuario">

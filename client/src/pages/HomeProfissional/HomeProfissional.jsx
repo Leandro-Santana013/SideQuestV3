@@ -28,10 +28,12 @@ const HomeProfissionais = () => {
                             <div className="actions">
                                 <div className="info-action">
                                     <p>Serviços Concluidos</p>
+                                    <Link to="/historicoCliente">
                                     <div className="action">
                                         <p>Veja os seus serviços já concluidos</p>
                                         <img src={imgTarefaConcluida} alt="Tarefas concluidas" />
                                     </div>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="actions">

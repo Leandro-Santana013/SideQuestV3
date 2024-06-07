@@ -517,7 +517,7 @@ res.status(200).json(servicoaceito  )
 }
 
 exports.perfilpro = async (req, res) => {
-  const { id_profissional } = req.params;
+  const id_profissional = Number(req.params.id_profissional);
 
   try {
     const pt1 = await controller_User.queryPart1({
@@ -584,3 +584,11 @@ exports.numService = async (req, res) => {
 
   res.status(200).json(n);
 };
+
+exports.history = async (req, res) => {
+  const id_profissional = Number(req.params.id_profissional);
+
+  const n = await controller_Pro.Servicehistory({
+    params: { id_cliente: id_cliente },
+  });
+}

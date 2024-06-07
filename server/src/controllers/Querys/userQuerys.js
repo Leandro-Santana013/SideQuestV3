@@ -764,6 +764,7 @@ module.exports = {
         ],
         attributes: [
           [Sequelize.col("ds_servico"), "ds_servico"],
+          [Sequelize.col("ds_titulo"), "ds_titulo"],
           [
             Sequelize.col("tb_confirmacaoServico.dt_inicioServico"),
             "dt_inicioServico",

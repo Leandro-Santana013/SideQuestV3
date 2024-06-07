@@ -16,7 +16,7 @@ const connectionDataBase = new Sequelize(
     {
         host: "localhost",
         dialect: "mysql",
-        port: 3307,
+        port: 3306,
         pool: {
             acquire: 60000 // 60 seconds
         }

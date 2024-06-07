@@ -109,6 +109,7 @@ export const ProfessionalContextProvider = ({ children }) => {
   const [Dadosiniciais, setDadosIniciais] = useState([]);
   const [Dadosprivate, setDadosprivate] = useState([]);
   const [ServicosEnd, setServicosEnd] = useState([]);
+  const [ServicosHistory, setServicosHistory] = useState([]);
   const [num, setnum] = useState([])
   useEffect(() => {
     const fetchDataFromBackend = async () => {
@@ -124,16 +125,18 @@ export const ProfessionalContextProvider = ({ children }) => {
           const perfilpro = await getRequest(
             `/professional/perfil/${pro.id_profissional}`
           );
-
+          const historico = await getRequest(
+            `/professional/history/${pro.id_profissional}`
+          );
+          
           const ServiceEnd = await postRequest("/professional/serviceEnd", {
             id_profissional: pro?.id_profissional,
           });
-          console.log(ServiceEnd, "serviços em andamentos")
           const responseNum = await getRequest(`/professional/nservice/${pro?.id_profissional}`);
-          setnum(responseNum)
-          console.log(ServiceEnd.user, "servicos em andamento")
-          setServicosEnd(ServiceEnd.user);
 
+          setServicosHistory(historico)
+          setnum(responseNum)
+          setServicosEnd(ServiceEnd.user);
           setProfissional(perfilpro.pro);
           setimagens(perfilpro.images);
           setComentarios(perfilpro.comentarios);
@@ -316,6 +319,7 @@ export const ProfessionalContextProvider = ({ children }) => {
         profissional,
         imagens,
         comentario,
+        ServicosHistory
       }}
     >
       {children}
