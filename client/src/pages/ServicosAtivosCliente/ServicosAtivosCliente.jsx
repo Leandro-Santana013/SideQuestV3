@@ -37,7 +37,7 @@ const ServicosAtivosCliente = () => {
                     </div>
                   </div>
                   <div className="chat-cancelar">
-                    <button id="finalizar">Finalizar</button>
+                  {serv.set_finalizar &&  <button id="finalizar">Finalizar</button>}
                     <button id="chat">Chat</button>
                     <button id="cancelar">Cancelar</button>
                   </div>

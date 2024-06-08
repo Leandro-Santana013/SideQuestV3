@@ -597,7 +597,11 @@ exports.history = async (req, res) => {
 }
 
 exports.servicebool = async(req, res) => {
-  const {id_servico} = req.body
+  const {id_servico, id_profissional} = req.body
+  const up = await controller_Pro.updateService({
+    params: { id_confirmacaoServico: id_servico },
+  });
+
   const n = await controller_Pro.Service({
     params: { id_profissional: id_profissional },
   });

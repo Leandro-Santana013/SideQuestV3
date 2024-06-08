@@ -44,7 +44,7 @@ function ServicosAtivos() {
                       </div>
                     </div>
                     <div className="chat-cancelar">
-                    <button id="finalizar" onClick={async() => {submitforCLient(servicos.id_confirmacaoServico)}}>Finalizar</button>
+                  {servicos.set_finalizar ? (<><label id="finalizar">aguardando</label></>) :<button id="finalizar" onClick={async() => {submitforCLient(servicos.id_confirmacaoServico)}}>Finalizar</button>}
                       <button id="chat">Chat</button>
                       <button id="cancelar">Cancelar</button>
                     </div>

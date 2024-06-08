@@ -496,6 +496,10 @@ module.exports = {
             Sequelize.col("tb_confirmacaoServico.dt_inicioServico"),
             "dt_inicioServico",
           ],
+          [
+            Sequelize.col("tb_confirmacaoServico.set_finalizar"),
+            "set_finalizar",
+          ],
           [Sequelize.col("tb_confirmacaoServico.id_confirmacaoServico"), "id_confirmacaoServico"]
         ],
         group: [
@@ -616,5 +620,17 @@ module.exports = {
       console.error(`Erro de listagem: ${err}`);
     }
   },
+
+  updateService: async (req, res) => {
+    try{
+    const {id_confirmacaoServico} = req.params
+    return await ModelConfirmacaoServico.update(
+      {set_finalizar: true},
+      {where: {id_confirmacaoServico: id_confirmacaoServico}}
+    )
+    }catch(erro){
+      console.log(erro)
+    }
+  }
   
 };
