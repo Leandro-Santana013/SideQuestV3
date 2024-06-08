@@ -174,7 +174,23 @@
     border-radius: 15px;
     gap: 1vw;
     display: flex;
+    align-items: start;
     flex-direction: column;
+}
+
+.btn-alterar-senha {
+    border: none;
+    width: 153px;
+    padding: 15px 0;
+    font-size: 15px;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--verde);
+    transition: all .25s;
+}
+
+.btn-alterar-senha:hover {   
+    background-color: var(--azul);
 }
 
 .edit-seguranca p {
@@ -197,17 +213,21 @@
 
 .edit-seguranca .sair-excluirBtn {
     display: flex;
-    gap: 2vw;
+    gap: 10px;
 }
 
 .edit-seguranca .sair-excluirBtn #sair {
-    width: 10vw;
-    height: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: gray;
+    width: 150px;
+    padding: 12px 0;
+    font-size: 15px;
+    border-radius: 5px;
     background-color: white;
     border: 1px solid gray;
-    border-radius: 5px;
-    transition: .5s;
+    transition: .25s;
     font-weight: bold;
 }
 
@@ -218,8 +238,9 @@
 }
 
 .edit-seguranca .sair-excluirBtn #excluir {
-    width: 10vw;
-    height: 3vw;
+    width: 150px;
+    padding: 12px 0;
+    font-size: 15px;
     color: red;
     background-color: white;
     border: 1px solid red;
@@ -647,19 +668,19 @@
     }
 
     .edit-infoPessoais .input-pessoais .input-nome-num p {
-        font-size: 5vw;
-    }
-
-    .edit-infoPessoais .input-pessoais .input-nome-num span {
         font-size: 4vw;
     }
 
+    .edit-infoPessoais .input-pessoais .input-nome-num span {
+        font-size: 3.5vw;
+    }
+
     .edit-infoPessoais .input-pessoais .input-email-local p {
-        font-size: 5vw;
+        font-size: 4vw;
     }
 
     .edit-infoPessoais .input-pessoais .input-email-local span {
-        font-size: 3vw;
+        font-size: 3.5vw;
     }
 
     .edit-infoPessoais .input-pessoais .input-nome-num input {
@@ -673,8 +694,6 @@
         font-size: 3vw;
         width: 23vw;
     }
-
-
 
     .edit-info-endereco-principal .leftPostar.leftPostar-de-config h2 {
         font-size: 4vw;
@@ -691,33 +710,33 @@
     }
 
     .componente-content-input-config-cidade {
-        width: 33vw;
-        height: 3vw;
-        font-size: 3vw;
+        width: 60vw;
+        height: 5vw;
+        font-size: 5vw;
     }
 
-     {
-        width: 27vw;
-        height: 3vw;
-        font-size: 3vw;
+    .componente-content-input-config-bairro {
+        width: 75vw;
+        height: 5vw;
+        font-size: 5vw;
     }
 
     .componente-content-input-config-rua {
-        width: 25vw;
-        height: 3vw;
-        font-size: 3vw;
+        width: 85vw;
+        height: 5vw;
+        font-size: 5vw;
     }
 
     .componente-content-input-config-residencia {
-        width: 10vw;
-        height: 3vw;
-        font-size: 3vw;
+        width: 20vw;
+        height: 5vw;
+        font-size: 5vw;
     }
 
     .componente-content-input-config-complemento {
-        width: 20vw;
-        height: 2.5vw;
-        font-size: 3vw;
+        width: 40vw;
+        height: 5vw;
+        font-size: 5vw;
     }
 
     .edit-seguranca h2 {
@@ -744,6 +763,10 @@
         font-size: 3vw;
         width: 20vw;
         height: 5vw;
+    }
+
+    .cep-estado, .bairro-rua, .num-complemento {
+        flex-direction: column;
     }
 }
 
@@ -776,15 +799,19 @@
     }
 
     .edit-infoPessoais .input-pessoais .input-nome-num p {
-        font-size: 3.3vw;
+        font-size: 5vw;
     }
 
     .edit-infoPessoais .input-pessoais .input-nome-num span {
-        font-size: 3.3vw;
+        font-size: 4.5vw;
     }
 
     .edit-infoPessoais .input-pessoais .input-email-local p {
-        font-size: 3.3vw;
+        font-size: 5vw;
+    }
+
+    .edit-infoPessoais .input-pessoais .input-email-local span {
+        font-size: 4.5vw;
     }
 
     .edit-infoPessoais .input-pessoais .input-nome-num input {

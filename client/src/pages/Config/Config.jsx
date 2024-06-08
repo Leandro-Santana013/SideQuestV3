@@ -43,7 +43,7 @@ const Config = () => {
     deleteuser,
   } = useContext(UserContext);
 
-  
+
 
   const handleCepChange = async (e) => {
     const cep = e.target.value;
@@ -169,7 +169,7 @@ const Config = () => {
                 />
                 <ImageCropper updatefoto={updatefoto} />
               </div>
-                <p>{user.nm_cliente}</p>
+              <p>{user.nm_cliente}</p>
             </div>
             <div className="sessao-config">
               <div className="edit-infoPessoais">
@@ -243,164 +243,164 @@ const Config = () => {
               <div className="edit-info-endereco-principal">
                 <div className="leftPostar leftPostar-de-config">
                   <h2>Endereço Principal</h2>
-                  {locationuser? (
+                  {locationuser ? (
                     <>
-                  <div className="cep-estado">
-                    <div>
-                      <h4 className="postarH4">CEP</h4>
-                      <div>
-                        <TextInput
-                          className="componente-content-input-config-cep"
-                          type="text"
-                          name="cep"
-                          value={
-                            (changedUserData?.cd_cep !== undefined
-                              ? changedUserData.cd_cep
-                              : locationuser?.cd_cep) || null
-                          }
-                          size={{
-                            border: cepConfig
-                              ? "2px solid red"
-                              : "2px solid #eee",
-                          }}
-                          onChange={async (event) => {
-                            const newCep = event.target.value;
+                      <div className="cep-estado">
+                        <div>
+                          <h4 className="postarH4">CEP</h4>
+                          <div>
+                            <TextInput
+                              className="componente-content-input-config-cep"
+                              type="text"
+                              name="cep"
+                              value={
+                                (changedUserData?.cd_cep !== undefined
+                                  ? changedUserData.cd_cep
+                                  : locationuser?.cd_cep) || null
+                              }
+                              size={{
+                                border: cepConfig
+                                  ? "2px solid red"
+                                  : "2px solid #eee",
+                              }}
+                              onChange={async (event) => {
+                                const newCep = event.target.value;
 
-                            // Remove temporariamente a função handleCepChange para depuração
-                            handleFieldChange("cd_cep", {
-                              target: { value: newCep },
-                            });
+                                // Remove temporariamente a função handleCepChange para depuração
+                                handleFieldChange("cd_cep", {
+                                  target: { value: newCep },
+                                });
 
-                            // Adicione novamente a função handleCepChange para testes
-                            try {
-                              await handleCepChange(event);
-                            } catch (error) {
-                              console.log(error);
+                                // Adicione novamente a função handleCepChange para testes
+                                try {
+                                  await handleCepChange(event);
+                                } catch (error) {
+                                  console.log(error);
+                                }
+                              }}
+                            />
+                            {cepConfig && <p className="cepError">CEP incorreto</p>}
+                          </div>
+                        </div>
+                        <div>
+                          <h4 className="postarH4">Estado - Cidade</h4>
+                          <TextInput
+                            className="componente-content-input-config-cidade"
+                            type="text"
+                            name="estado_cidade"
+                            placeholder={""}
+                            value={
+                              mudandoloc?.uf_localidade ||
+                              locationuser?.uf_localidade
                             }
-                          }}
-                        />
-                        {cepConfig && <p className="cepError">CEP incorreto</p>}
+                            onChange={(event) =>
+                              handleFieldChange("uf_localidade", event)
+                            }
+                            disabled
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div>
-                      <h4 className="postarH4">Estado - Cidade</h4>
-                      <TextInput
-                        className="componente-content-input-config-cidade"
-                        type="text"
-                        name="estado_cidade"
-                        placeholder={""}
-                        value={
-                          mudandoloc?.uf_localidade ||
-                          locationuser?.uf_localidade
-                        }
-                        onChange={(event) =>
-                          handleFieldChange("uf_localidade", event)
-                        }
-                        disabled
-                      />
-                    </div>
-                  </div>
-                  <div className="bairro-rua">
-                    <div>
-                      <h4 className="postarH4">Bairro</h4>
-                      <TextInput
-                        className="componente-content-input-config-bairro"
-                        type="text"
-                        name="bairro"
-                        autocomplete="off"
-                        placeholder={""}
-                        value={
-                          (changedUserData?.nm_bairro !== undefined
-                            ? changedUserData.nm_bairro
-                            : mudandoloc?.bairro
-                            ? mudandoloc?.bairro
-                            : locationuser?.nm_bairro) || null
-                        }
-                        onChange={(event) =>
-                          handleFieldChange("nm_bairro", event)
-                        }
-                      />
-                    </div>
-                    <div>
-                      <div>
-                        <h4 className="postarH4">Nome da rua</h4>
-                        <TextInput
-                          className="componente-content-input-config-rua"
-                          type="text"
-                          name="nmRua"
-                          autocomplete="off"
-                          placeholder={"nm_logradouro"}
-                          value={
-                            (changedUserData?.nm_logradouro !== undefined
-                              ? changedUserData.nm_logradouro
-                              : mudandoloc?.logradouro
-                              ? mudandoloc?.logradouro
-                              : locationuser?.nm_logradouro) || null
-                          }
-                          onChange={(event) =>
-                            handleFieldChange("nm_logradouro", event)
-                          }
-                        />
+                      <div className="bairro-rua">
+                        <div>
+                          <h4 className="postarH4">Bairro</h4>
+                          <TextInput
+                            className="componente-content-input-config-bairro"
+                            type="text"
+                            name="bairro"
+                            autocomplete="off"
+                            placeholder={""}
+                            value={
+                              (changedUserData?.nm_bairro !== undefined
+                                ? changedUserData.nm_bairro
+                                : mudandoloc?.bairro
+                                  ? mudandoloc?.bairro
+                                  : locationuser?.nm_bairro) || null
+                            }
+                            onChange={(event) =>
+                              handleFieldChange("nm_bairro", event)
+                            }
+                          />
+                        </div>
+                        <div>
+                          <div>
+                            <h4 className="postarH4">Nome da rua</h4>
+                            <TextInput
+                              className="componente-content-input-config-rua"
+                              type="text"
+                              name="nmRua"
+                              autocomplete="off"
+                              placeholder={"nm_logradouro"}
+                              value={
+                                (changedUserData?.nm_logradouro !== undefined
+                                  ? changedUserData.nm_logradouro
+                                  : mudandoloc?.logradouro
+                                    ? mudandoloc?.logradouro
+                                    : locationuser?.nm_logradouro) || null
+                              }
+                              onChange={(event) =>
+                                handleFieldChange("nm_logradouro", event)
+                              }
+                            />
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="num-complemento">
-                    <div>
-                      <h4 className="postarH4">Número da residência</h4>
+                      <div className="num-complemento">
+                        <div>
+                          <h4 className="postarH4">Número da residência</h4>
 
-                      <TextInput
-                        className="componente-content-input-config-residencia"
-                        type="number"
-                        name="nmrResidencia"
-                        autocomplete="off"
-                        placeholder={""}
-                        value={
-                          (changedUserData?.nmr_casa !== undefined
-                            ? changedUserData.nmr_casa
-                            : locationuser?.nmr_casa) || null
-                        }
-                        onChange={(event) =>
-                          handleFieldChange("nmr_casa", event)
-                        }
-                      />
-                    </div>
-                    <div>
-                      <h4 className="postarH4">Complemento</h4>
-                      <TextInput
-                        className="componente-content-input-config-complemento"
-                        type="text"
-                        name="complemento"
-                        autocomplete="off"
-                        value={
-                          (changedUserData?.complemento !== undefined
-                            ? changedUserData.complemento
-                            : locationuser?.txt_complemento) || null
-                        }
-                        placeholder={""}
-                        onChange={(event) =>
-                          handleFieldChange("complemento", event)
-                        }
-                      />
-                    </div>
-                  </div>
-                  </>
+                          <TextInput
+                            className="componente-content-input-config-residencia"
+                            type="number"
+                            name="nmrResidencia"
+                            autocomplete="off"
+                            placeholder={""}
+                            value={
+                              (changedUserData?.nmr_casa !== undefined
+                                ? changedUserData.nmr_casa
+                                : locationuser?.nmr_casa) || null
+                            }
+                            onChange={(event) =>
+                              handleFieldChange("nmr_casa", event)
+                            }
+                          />
+                        </div>
+                        <div>
+                          <h4 className="postarH4">Complemento</h4>
+                          <TextInput
+                            className="componente-content-input-config-complemento"
+                            type="text"
+                            name="complemento"
+                            autocomplete="off"
+                            value={
+                              (changedUserData?.complemento !== undefined
+                                ? changedUserData.complemento
+                                : locationuser?.txt_complemento) || null
+                            }
+                            placeholder={""}
+                            onChange={(event) =>
+                              handleFieldChange("complemento", event)
+                            }
+                          />
+                        </div>
+                      </div>
+                    </>
                   ) :
-                  (<div>
-                    <p>Nenhuma localização vinculada</p>
-                    <button >insira localização principal</button>
-                  </div>
-                )}
+                    (<div>
+                      <p>Nenhuma localização vinculada</p>
+                      <button >insira localização principal</button>
+                    </div>
+                    )}
                 </div>
               </div>
               <div className="edit-seguranca">
                 <h2>Segurança da conta</h2>
                 {!modal && (
-                  <button
+                  <button className="btn-alterar-senha"
                     onClick={() => {
                       setmodal(true);
                     }}
                   >
-                    alterar senha
+                    Alterar senha
                   </button>
                 )}
                 {modal && (
@@ -424,6 +424,17 @@ const Config = () => {
                             enviar
                           </button>
                           {passErrorCompare && <p>Senha Incorreta</p>}
+                          <button
+                            onClick={() => {
+                              setmodal(null);
+                              setpassSucess(null);
+                              setpassErrorCompare(null);
+                              setLevelSecPass(null);
+                              setAlterPass(null);
+                            }}
+                          >
+                            {alterpass ? "fechar" : "cancelar"}
+                          </button>
                         </div>
                       </>
                     ) : (
@@ -452,32 +463,19 @@ const Config = () => {
                         )}
                       </>
                     )}
-
-                    <button
-                      onClick={() => {
-                        setmodal(null);
-                        setpassSucess(null);
-                        setpassErrorCompare(null);
-                        setLevelSecPass(null);
-                        setAlterPass(null);
-                      }}
-                    >
-                      {alterpass ? "fechar" : "cancelar"}
-                    </button>
                   </>
                 )}
                 <div className="sair-excluirBtn">
                   <Link id="sair" to="/Login" onClick={() => logoutUser()}>
-                    LOGOUT
+                    Sair
                   </Link>
                   <button id="excluir" onClick={() => {
                     setCerteza(true)
                   }}>Excluir</button>
                   {certeza && <><h2>todos os seus Dados serão excluidos
-                     e nunca mais poderam ser acessados, {num > 0 ? `você possui ${num} serviços ativos` : ""}
+                    e nunca mais poderam ser acessados, {num > 0 ? `você possui ${num} serviços ativos` : ""}
                     tem certeza?
-                    
-                    <button onClick={async() =>{ await deleteuser(); logoutUser()}}>confirmar</button> <button onClick={() => {setCerteza(null)}}>cancelar</button></h2></>}
+                    <button onClick={async () => { await deleteuser(); logoutUser() }}>confirmar</button> <button onClick={() => { setCerteza(null) }}>cancelar</button></h2></>}
                 </div>
               </div>
             </div>
