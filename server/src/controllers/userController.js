@@ -700,6 +700,7 @@ exports.Service = async (req, res) => {
   const n = await controller_User.Service({
     params: { id_cliente: id_cliente },
   });
+  console.log(n, "type serv")
 
   res.status(200).json(n);
 };

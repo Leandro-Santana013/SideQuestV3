@@ -8,7 +8,7 @@ import { UserContext } from "../../context/UserContext";
 
 const ServicosAtivosCliente = () => {
   const { ServiceEnd } = useContext(UserContext);
-  console.log(ServiceEnd);
+  console.log(ServiceEnd, "bbbb");
   return (
     <>
       <Header />

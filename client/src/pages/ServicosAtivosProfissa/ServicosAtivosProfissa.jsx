@@ -12,7 +12,7 @@ import iconeperfil from "../../assets/icone-perfil.png";
 import alertaIcon from "../../assets/alerta.png";
 
 function ServicosAtivos() {
-  const { pro, ServicosEnd } = useContext(ProfessionalContext);
+  const { pro, ServicosEnd, submitforCLient } = useContext(ProfessionalContext);
   return (
     <>
       <Header />
@@ -44,6 +44,7 @@ function ServicosAtivos() {
                       </div>
                     </div>
                     <div className="chat-cancelar">
+                    <button id="finalizar" onClick={async() => {submitforCLient(servicos.id_confirmacaoServico)}}>Finalizar</button>
                       <button id="chat">Chat</button>
                       <button id="cancelar">Cancelar</button>
                     </div>

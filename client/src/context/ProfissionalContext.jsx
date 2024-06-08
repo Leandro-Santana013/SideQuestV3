@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useCallback } from "react";
-import { postRequest, baseUrl, getRequest } from "../utils/services";
+import { postRequest, baseUrl, getRequest, putRequest } from "../utils/services";
 import axios from "axios";
 export const ProfessionalContext = createContext();
 
@@ -276,6 +276,16 @@ export const ProfessionalContextProvider = ({ children }) => {
     [imageInstace]
   );
 
+  const submitforCLient = useCallback(async (id)=>{
+    console.log(id)
+    const response  = await postRequest(`/professional/setconcluir`, {id_servico: id})
+    if(response.error){
+
+    }else{
+
+    }
+  })
+
   return (
     <ProfessionalContext.Provider
       value={{
@@ -319,7 +329,8 @@ export const ProfessionalContextProvider = ({ children }) => {
         profissional,
         imagens,
         comentario,
-        ServicosHistory
+        ServicosHistory,
+        submitforCLient
       }}
     >
       {children}

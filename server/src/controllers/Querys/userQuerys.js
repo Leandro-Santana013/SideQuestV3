@@ -770,6 +770,10 @@ module.exports = {
             "dt_inicioServico",
           ],
           [
+            Sequelize.col("tb_confirmacaoServico.id_confirmacaoServico"),
+            "id_confirmacaoServico",
+          ],
+          [
             Sequelize.fn(
               "COALESCE",
               Sequelize.fn(

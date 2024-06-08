@@ -30,8 +30,13 @@ const ModelConfirmacaoServico = connectionDataBase.define('tb_confirmacaoServico
     dt_inicioServico: {
         type: DataTypes.DATE,
         allowNull:false 
+    },
+    set_finalizar: {
+        type: DataTypes.BOOLEAN,
+        allowNull:true
     }
 },
+
 _padraoTableDBExistence('tb_confirmacaoServico') 
 )
 
