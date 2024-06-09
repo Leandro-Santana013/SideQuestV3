@@ -408,7 +408,7 @@ const Config = () => {
                     {!passSucess ? (
                       <>
                         <div className="alt-senha">
-                          <h2>digite sua senha atual</h2>
+                          <p>digite sua senha atual</p>
                           <input
                             type="password"
                             id="senha-alterar"
@@ -416,25 +416,32 @@ const Config = () => {
                               handleFieldChange("password", event);
                             }}
                           />
-                          <button
-                            onClick={() => {
-                              comparePassword();
-                            }}
-                          >
-                            enviar
-                          </button>
-                          {passErrorCompare && <p>Senha Incorreta</p>}
-                          <button
-                            onClick={() => {
-                              setmodal(null);
-                              setpassSucess(null);
-                              setpassErrorCompare(null);
-                              setLevelSecPass(null);
-                              setAlterPass(null);
-                            }}
-                          >
-                            {alterpass ? "fechar" : "cancelar"}
-                          </button>
+                          <div style={{height: '15px'}}>
+                            {passErrorCompare && <p style={{color: 'red', fontWeight: 'normal', margin: '0', padding: '0'}}>Senha Incorreta</p>}
+                          </div>
+                          
+                          <div className="enviar-cancelar-alt-senha">
+                            <button className="btn-enviar-senha"
+                              onClick={() => {
+                                comparePassword();
+                              }}
+                            >
+                              enviar
+                            </button>
+
+                            <button className="btn-cancelar-senha"
+                              onClick={() => {
+                                setmodal(null);
+                                setpassSucess(null);
+                                setpassErrorCompare(null);
+                                setLevelSecPass(null);
+                                setAlterPass(null);
+                              }}
+                            >
+                              {alterpass ? "fechar" : "cancelar"}
+                            </button>
+
+                          </div>
                         </div>
                       </>
                     ) : (

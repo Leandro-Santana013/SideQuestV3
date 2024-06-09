@@ -153,7 +153,7 @@
 .edit-infoPessoais .input-pessoais .input-nome-num input {
     padding: 6.5px;
     border-radius: 5px;
-    width: 300px;
+    width: 200px;
 }
 
 .edit-infoPessoais .input-pessoais .input-email-local p {
@@ -189,7 +189,7 @@
     transition: all .25s;
 }
 
-.btn-alterar-senha:hover {   
+.btn-alterar-senha:hover {
     background-color: var(--azul);
 }
 
@@ -200,8 +200,8 @@
 
 .edit-seguranca .alt-senha {
     display: flex;
+    flex-direction: column;
     gap: 1vw;
-    align-items: center;
 }
 
 .edit-seguranca .alt-senha input {
@@ -324,6 +324,29 @@
     }
 }
 
+.enviar-cancelar-alt-senha {
+    display: flex;
+    gap: 10px;
+
+    .btn-enviar-senha {
+        border: none;
+        background-color: var(--azul);
+        color: white;
+        padding: 10px 0;
+        width: 80px;
+        border-radius: 5px;
+    }
+
+    .btn-cancelar-senha {
+        border: none;
+        background-color: red;
+        color: white;
+        padding: 10px 0;
+        width: 80px;
+        border-radius: 5px;
+    }
+}
+
 /* Responsividade */
 
 /* Tablets em modo paisagem e dispositivos híbridos */
@@ -388,6 +411,7 @@
 
     .sessao-config {
         align-items: center;
+        margin-bottom: 50px;
     }
 
     .edit-infoPessoais {
@@ -503,18 +527,6 @@
         padding: 0px;
         font-size: 2.7vw;
     }
-
-    .edit-seguranca .sair-excluirBtn #sair {
-        font-size: 2.3vw;
-        width: 18vw;
-        height: 4vw;
-    }
-
-    .edit-seguranca .sair-excluirBtn #excluir {
-        font-size: 2.3vw;
-        width: 18vw;
-        height: 4vw;
-    }
 }
 
 /* Tablets em modo retrato e smartphones grandes */
@@ -629,17 +641,6 @@
         font-size: 2.7vw;
     }
 
-    .edit-seguranca .sair-excluirBtn #sair {
-        font-size: 2.7vw;
-        width: 17vw;
-        height: 4vw;
-    }
-
-    .edit-seguranca .sair-excluirBtn #excluir {
-        font-size: 2.7vw;
-        width: 17vw;
-        height: 4vw;
-    }
 }
 
 /* Smartphones médios e tablets pequenos */
@@ -753,20 +754,41 @@
         padding: 0px;
     }
 
+    .cep-estado,
+    .bairro-rua,
+    .num-complemento {
+        flex-direction: column;
+    }
+
+    .btn-alterar-senha {
+        width: 120px;
+        padding: 10px 0;
+        font-size: 13px;
+    }
+
     .edit-seguranca .sair-excluirBtn #sair {
-        font-size: 3vw;
-        width: 20vw;
-        height: 5vw;
+        width: 118px;
+        padding: 10px 0;
+        font-size: 13px;
     }
 
     .edit-seguranca .sair-excluirBtn #excluir {
-        font-size: 3vw;
-        width: 20vw;
-        height: 5vw;
+        width: 118px;
+        padding: 10px 0;
+        font-size: 13px;
     }
 
-    .cep-estado, .bairro-rua, .num-complemento {
-        flex-direction: column;
+    .enviar-cancelar-alt-senha {
+
+        .btn-enviar-senha {
+            padding: 8px 0;
+            width: 65px;
+        }
+
+        .btn-cancelar-senha {
+            padding: 8px 0;
+            width: 65px;
+        }
     }
 }
 
@@ -845,16 +867,23 @@
         padding: 0px;
     }
 
+    .btn-alterar-senha {
+        width: 102px;
+        padding: 10px 0;
+        font-size: 10px;
+    }
+
     .edit-seguranca .sair-excluirBtn #sair {
-        font-size: 3.3vw;
-        width: 25vw;
-        height: 5vw;
+        width: 100px;
+        padding: 10px 0;
+        font-size: 10px;
+        font-size: 15px;
     }
 
     .edit-seguranca .sair-excluirBtn #excluir {
-        font-size: 3.3vw;
-        width: 25vw;
-        height: 5vw;
+        width: 100px;
+        padding: 10px 0;
+        font-size: 15px;
     }
 }
 
