@@ -467,7 +467,9 @@ export const UserContextProvider = ({ children }) => {
         setservicehistorico(responsehistorico.user)
         const responseNum = await getRequest(`/user/nservice/${user.id_cliente}`);
           setnum(responseNum)
-        setserviceEdn(response.user);
+        setserviceEdn(response.user); 
+
+        console.log(response.user, "type")
         setservicePedn(responsePend.user);
       }
     };

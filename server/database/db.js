@@ -18,7 +18,7 @@ const connectionDataBase = new Sequelize(
         dialect: "mysql",
         port: 3306,
         pool: {
-            acquire: 60000 // 60 seconds
+            acquire: 60000 // 60 seconds 
         }
     }
 );
@@ -379,6 +379,7 @@ async function inserirClientes() {
     } catch (error) {
         console.error('Erro ao inserir os clientes:', error);
     }
+    
 }
 
 async function removerSexoIdadeNomeExemplo() {

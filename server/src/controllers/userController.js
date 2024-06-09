@@ -700,6 +700,7 @@ exports.Service = async (req, res) => {
   const n = await controller_User.Service({
     params: { id_cliente: id_cliente },
   });
+  console.log(n, "type serv")
 
   res.status(200).json(n);
 };
@@ -806,7 +807,31 @@ exports.delete = async (req, res) => {
   });
 return res.status(200).json()
 }
+exports.concluirServico = async (req, res) => {
+  const {id_confirmacaoServico, nmr_avaliacao, ds_servico} = req.body
+  const getFormattedDate = () => {
+    const date = new Date();
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${year}-${month}-${day}`;
+  };
+  
+  const formattedDate = getFormattedDate();
 
-    
+  const inserindtermino = await controller_User.createTermino({
+    params: {id_confirmacaoServico: id_confirmacaoServico, dt_terminoServico:formattedDate }
+  })
+
+  const insertavaliacao = await controller_User.createAvaliacao({
+    params:{
+      id_confirmacaoServico: id_confirmacaoServico,
+      nmr_avaliacao:nmr_avaliacao,
+      ds_servico:ds_servico
+    }
+  })
+}
+
+return res.status(200).json()
   
 };

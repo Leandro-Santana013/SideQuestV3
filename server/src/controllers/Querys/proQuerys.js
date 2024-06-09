@@ -484,15 +484,23 @@ module.exports = {
           {
             model: ModelCliente,
             required: true,
+            attributes: []
           },
         ],
         attributes: [
           [Sequelize.col("ds_servico"), "ds_servico"],
           [Sequelize.col("ds_titulo"), "ds_titulo"],
+          [Sequelize.col("tb_cliente.nm_cliente"), "nm_cliente"],
+          [Sequelize.col("tb_cliente.img_cliente"), "img_cliente"],
           [
             Sequelize.col("tb_confirmacaoServico.dt_inicioServico"),
             "dt_inicioServico",
           ],
+          [
+            Sequelize.col("tb_confirmacaoServico.set_finalizar"),
+            "set_finalizar",
+          ],
+          [Sequelize.col("tb_confirmacaoServico.id_confirmacaoServico"), "id_confirmacaoServico"]
         ],
         group: [
           "tb_postagemServico.id_postagemServico",
@@ -612,5 +620,17 @@ module.exports = {
       console.error(`Erro de listagem: ${err}`);
     }
   },
+
+  updateService: async (req, res) => {
+    try{
+    const {id_confirmacaoServico} = req.params
+    return await ModelConfirmacaoServico.update(
+      {set_finalizar: true},
+      {where: {id_confirmacaoServico: id_confirmacaoServico}}
+    )
+    }catch(erro){
+      console.log(erro)
+    }
+  }
   
 };

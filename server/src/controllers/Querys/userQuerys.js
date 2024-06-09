@@ -770,6 +770,10 @@ module.exports = {
             "dt_inicioServico",
           ],
           [
+            Sequelize.col("tb_confirmacaoServico.id_confirmacaoServico"),
+            "id_confirmacaoServico",
+          ],
+          [
             Sequelize.fn(
               "COALESCE",
               Sequelize.fn(
@@ -787,6 +791,10 @@ module.exports = {
               "tb_confirmacaoServico.tb_profissional.id_profissional"
             ),
             "id_profissional",
+          ],
+          [
+            Sequelize.col("tb_confirmacaoServico.set_finalizar"),
+            "set_finalizar",
           ],
           [
             Sequelize.col(
@@ -983,4 +991,21 @@ module.exports = {
       },
     });
   },
+
+  createTermino: async(req, res) => {
+    const {id_confirmacaoServico, dt_terminoServico} = req.params
+    return await ModelTerminoServico.create({
+      id_confirmacaoServico:id_confirmacaoServico,
+      dt_terminoServico: dt_terminoServico
+    })
+  },
+
+  createAvaliacao: async(req, res) => {
+const { id_confirmacaoServico, nmr_avaliacao, ds_comentario } = req.params
+return await ModelAvaliacao.create({
+  id_confirmacaoServico:id_confirmacaoServico,
+  nmr_avaliacao:nmr_avaliacao,
+  ds_comentario:ds_comentario
+})
+  }
 };

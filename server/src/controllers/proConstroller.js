@@ -595,3 +595,16 @@ exports.history = async (req, res) => {
 
   return res.status(200).json(n)
 }
+
+exports.servicebool = async(req, res) => {
+  const {id_servico, id_profissional} = req.body
+  const up = await controller_Pro.updateService({
+    params: { id_confirmacaoServico: id_servico },
+  });
+
+  const n = await controller_Pro.Service({
+    params: { id_profissional: id_profissional },
+  });
+
+  res.status(200).json(n)
+}

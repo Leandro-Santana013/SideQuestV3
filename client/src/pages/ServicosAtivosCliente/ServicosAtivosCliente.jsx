@@ -8,7 +8,7 @@ import { UserContext } from "../../context/UserContext";
 
 const ServicosAtivosCliente = () => {
   const { ServiceEnd } = useContext(UserContext);
-  console.log(ServiceEnd);
+  console.log(ServiceEnd, "bbbb");
   return (
     <>
       <Header />
@@ -37,7 +37,7 @@ const ServicosAtivosCliente = () => {
                     </div>
                   </div>
                   <div className="chat-cancelar">
-                    <button id="finalizar">Finalizar</button>
+                  {serv.set_finalizar &&  <button id="finalizar">Finalizar</button>}
                     <button id="chat">Chat</button>
                     <button id="cancelar">Cancelar</button>
                   </div>
