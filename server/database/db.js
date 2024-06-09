@@ -422,9 +422,9 @@ async function inserirCategorias() {
 
 async function inserirProfissionaisCategorias() {
     try {
-        for (const [idCategoriaEscolhida, idProfissional, idCategoria] of profissionaisCategorias) {
-            const query = 'INSERT INTO tb_profissional_categoria (id_categoriaEscolhida, id_profissional, id_categoria) VALUES (?, ?, ?)';
-            const valores = [idCategoriaEscolhida, idProfissional, idCategoria];
+        for (const [idProfissional, idCategoria] of profissionaisCategorias) {
+            const query = 'INSERT INTO tb_profissional_categoria (id_profissional, id_categoria) VALUES (?, ?)';
+            const valores = [idProfissional, idCategoria];
             await connectionDataBase.query(query, { replacements: valores, type: QueryTypes.INSERT });
             console.log(`Profissional ${idProfissional} com categoria ${idCategoria} inserido com sucesso.`);
         }
