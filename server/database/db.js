@@ -233,7 +233,12 @@ const postagensServico = [
     [13, 4, 14, 'Limpeza de sofás', 'Limpeza de Sofás'],
     [14, 5, 15, 'Adubação de jardim', 'Adubação de Jardim'],
     [15, 2, 2, 'Reparo de esgoto', 'Reparo de Esgoto'],
-    
+    [1, 1, 1, 'Instalação de painel solar', 'Instalação de Painel Solar'],
+    [2, 1, 2, 'Reparo de fiação elétrica', 'Reparo de Fiação Elétrica'],
+    [3, 1, 3, 'Instalação de sistema de segurança', 'Instalação de Sistema de Segurança'],
+    [4, 2, 4, 'Instalação de aquecedor de água', 'Instalação de Aquecedor de Água'],
+    [5, 2, 5, 'Manutenção de encanamento', 'Manutenção de Encanamento'],
+    [6, 2, 6, 'Reparo de vazamentos', 'Reparo de Vazamentos']
 ];
 
 const confirmacoesServico = [
@@ -267,7 +272,6 @@ const confirmacoesServico = [
     [28, 8, "1914-06-28"],
     [29, 9, "1929-10-29"],
     [30, 10, "1945-04-30"],
-    
 ];
 
 const terminosServico = [
@@ -301,7 +305,6 @@ const terminosServico = [
     [28, '2024-04-16'],
     [29, '2024-04-17'],
     [30, '2024-04-18'],
-  
 ];
 
 const avaliacoes = [
@@ -335,7 +338,6 @@ const avaliacoes = [
     [28, 3, 'Serviço aceitável, esperava um pouco mais.'],
     [29, 4, 'Profissional competente, recomendo.'],
     [30, 5, 'Superou minhas expectativas, serviço de alta qualidade.'],
-  
 ];
 
 // Função para inserir os profissionais no banco de dados
