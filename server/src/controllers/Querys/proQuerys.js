@@ -10,7 +10,7 @@ const {
   ModelInfoProfissional,
   ModelProfissionalProfileImg,
   ModelTerminoServico,
-  ModelAvaliacao
+  ModelAvaliacao,
 } = require("../../models/index");
 const { Model, Op, Sequelize } = require("sequelize");
 const { raw } = require("mysql2");
@@ -163,18 +163,16 @@ module.exports = {
             model: ModelCliente,
             required: true,
             raw: true,
-            attributes: [
-            ],
+            attributes: [],
           },
           {
             model: ModelCategoria,
             required: true,
             raw: true,
-            attributes: []
-          }
+            attributes: [],
+          },
         ],
         attributes: [
-          
           "ds_servico",
           "id_postagemServico",
           "ds_titulo",
@@ -184,7 +182,7 @@ module.exports = {
           [Sequelize.col("tb_cliente.nm_cliente"), "nm_cliente"],
           [Sequelize.col("tb_cliente.img_cliente"), "img_cliente"],
           [Sequelize.col("tb_categorium.ds_categoria"), "ds_categoria"],
-      ],
+        ],
         raw: true,
       });
     } catch (err) {
@@ -397,7 +395,9 @@ module.exports = {
             "dt_inicioServico",
           ],
           [
-            Sequelize.col("tb_confirmacaoServico.tb_terminoServico.dt_terminoServico"),
+            Sequelize.col(
+              "tb_confirmacaoServico.tb_terminoServico.dt_terminoServico"
+            ),
             "dt_terminoServico",
           ],
 
@@ -444,69 +444,55 @@ module.exports = {
     } catch (err) {
       console.error(`Erro de listagem: ${err}`);
     }
-  }, 
-  
+  },
+
   Service: async (req, res) => {
     try {
       const { id_profissional } = req.params;
-      const services = await ModelPostagemServico.findAll({
+      const services = await ModelConfirmacaoServico.findAll({
         raw: true,
+        where: { id_profissional: id_profissional,
+          id_confirmacaoServico: {
+            [Op.notIn]: Sequelize.literal(
+              "(SELECT id_confirmacaoServico FROM tb_terminoServico)"
+            ),
+          },
+        },
         include: [
           {
-            model: ModelConfirmacaoServico,
+            model: ModelPostagemServico,
             required: true,
             attributes: [],
             include: [
               {
-                model: ModelTerminoServico,
-                required: false,
-                where: {
-                  id_terminoServico: {
-                    [Op.is]: null, // Utilize null diretamente sem Op.is
-                  },
-                },
-                attributes: [],
-                include: [
-                  {
-                    model: ModelAvaliacao,
-                    attributes: [],
-                  },
-                ],
-              },
-              {
-                model: ModelProfissional,
+                model: ModelCliente,
                 required: true,
                 attributes: [],
-                where: { id_profissional: id_profissional },
               },
             ],
           },
           {
-            model: ModelCliente,
+            model: ModelProfissional,
             required: true,
-            attributes: []
+            attributes: [],
+            where: { id_profissional: id_profissional },
           },
         ],
         attributes: [
-          [Sequelize.col("ds_servico"), "ds_servico"],
-          [Sequelize.col("ds_titulo"), "ds_titulo"],
-          [Sequelize.col("tb_cliente.nm_cliente"), "nm_cliente"],
-          [Sequelize.col("tb_cliente.img_cliente"), "img_cliente"],
-          [
-            Sequelize.col("tb_confirmacaoServico.dt_inicioServico"),
-            "dt_inicioServico",
-          ],
-          [
-            Sequelize.col("tb_confirmacaoServico.set_finalizar"),
-            "set_finalizar",
-          ],
-          [Sequelize.col("tb_confirmacaoServico.id_confirmacaoServico"), "id_confirmacaoServico"]
+          [Sequelize.col("tb_postagemServico.ds_servico"), "ds_servico"],
+          [Sequelize.col("tb_postagemServico.ds_servico"), "ds_servico"],
+          [Sequelize.col("tb_postagemServico.ds_titulo"), "ds_titulo"],
+          [Sequelize.col("tb_postagemServico.tb_cliente.nm_cliente"), "nm_cliente"],
+          [Sequelize.col("tb_postagemServico.tb_cliente.img_cliente"), "img_cliente"],
+          [Sequelize.col("dt_inicioServico"), "dt_inicioServico"],
+          [Sequelize.col("set_finalizar"), "set_finalizar"],
+          [Sequelize.col("id_confirmacaoServico"), "id_confirmacaoServico"],
         ],
         group: [
-          "tb_postagemServico.id_postagemServico",
           "tb_confirmacaoServico.id_confirmacaoServico",
-          "tb_confirmacaoServico.tb_profissional.id_profissional",
-          "tb_cliente.id_cliente"
+          "tb_postagemServico.id_postagemServico",
+          "tb_profissional.id_profissional",
+          "tb_postagemServico.tb_cliente.id_cliente",
         ], //
       });
 
@@ -516,6 +502,7 @@ module.exports = {
     }
   },
 
+    
   nservice: async (req, res) => {
     try {
       const { id_profissional } = req.params;
@@ -526,6 +513,11 @@ module.exports = {
             required: true,
             where: {
               id_profissional: id_profissional,
+                id_confirmacaoServico: {
+                  [Op.notIn]: Sequelize.literal(
+                    "(SELECT id_confirmacaoServico FROM tb_terminoServico)"
+                  ),
+                },
             },
             include: [
               {
@@ -556,6 +548,11 @@ module.exports = {
           {
             model: ModelCliente,
             required: true,
+            attributes: [],
+          },
+          {
+            model: ModelCategoria,
+            required: true,
             attributes: []
           },
           {
@@ -579,58 +576,44 @@ module.exports = {
           },
         ],
         attributes: [
-          "id_confirmacaoServico"
+          "tb_confirmacaoServicos.id_confirmacaoServico",
           [Sequelize.col("ds_servico"), "ds_servico"],
+          [Sequelize.col("tb_categorium.ds_categoria"), "categoria"],
           [
-            Sequelize.col("tb_confirmacaoServico.dt_inicioServico"),
+            Sequelize.col("tb_confirmacaoServicos.dt_inicioServico"),
             "dt_inicioServico",
           ],
           [
-            Sequelize.col("tb_confirmacaoServico.tb_terminoServico.dt_terminoServico"),
+            Sequelize.col(
+              "tb_confirmacaoServicos.tb_terminoServico.dt_terminoServico"
+            ),
             "dt_terminoServico",
           ],
-          [
-            Sequelize.col(
-              "tb_cliente.id_cliente"
-            ),
-            "id_cliente",
-          ],
-          [
-            Sequelize.col(
-              "tb_cliente.nm_cliente"
-            ),
-            "nm_cliente",
-          ],
-          [
-            Sequelize.col(
-              "tb_cliente.img_cliente"
-            ),
-            "img_cliente",
-          ],
+          [Sequelize.col("tb_cliente.id_cliente"), "id_cliente"],
+          [Sequelize.col("tb_cliente.nm_cliente"), "nm_cliente"],
+          [Sequelize.col("tb_cliente.img_cliente"), "img_cliente"],
         ],
         group: [
-          "tb_postagemServico.id_postagemServico",
-          "tb_confirmacaoServico.id_confirmacaoServico",
+          "tb_confirmacaoServicos.id_confirmacaoServico",
           "tb_cliente.id_cliente",
         ], //
       });
 
       return services;
     } catch (err) {
-      console.error(`Erro de listagem: ${err}`);
+      console.error(`Erro de aaa listagem: ${err}`);
     }
   },
 
   updateService: async (req, res) => {
-    try{
-    const {id_confirmacaoServico} = req.params
-    return await ModelConfirmacaoServico.update(
-      {set_finalizar: true},
-      {where: {id_confirmacaoServico: id_confirmacaoServico}}
-    )
-    }catch(erro){
-      console.log(erro)
+    try {
+      const { id_confirmacaoServico } = req.params;
+      return await ModelConfirmacaoServico.update(
+        { set_finalizar: true },
+        { where: { id_confirmacaoServico: id_confirmacaoServico } }
+      );
+    } catch (erro) {
+      console.log(erro);
     }
-  }
-  
+  },
 };

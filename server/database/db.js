@@ -97,7 +97,7 @@ const infoProfissional = [
     [18, 'Especializado em conserto de eletrodomésticos, ofereço serviços de reparo com qualidade e agilidade.', 'Experiência de 9 anos na área de assistência técnica.', 'Atendi clientes residenciais e comerciais, solucionando problemas em diversos tipos de aparelhos.', 'Curso de Reparo de Eletrodomésticos, Workshop de Manutenção de Equipamentos Eletrônicos.'],
     [19, 'Atuo como pedreiro há 10 anos, realizando serviços de alvenaria e acabamento em obras residenciais e comerciais.', 'Formado em Construção Civil pela Escola Técnica Estadual.', 'Participei de projetos de grande porte, contribuindo para a construção de edifícios e casas.', 'Curso Avançado de Alvenaria, Treinamento em Acabamento e Revestimento.'],
     [20, 'Especializada em limpeza de estofados, ofereço serviços de higienização e revitalização de móveis.', 'Certificado em Limpeza de Estofados pela Associação de Limpeza Profissional.', 'Utilizo técnicas e produtos específicos para garantir a remoção de manchas e odores indesejados.', 'Curso de Higienização de Estofados, Treinamento em Remoção de Manchas e Odores.']
-];
+]; 
 
 const clientes = [
     ['Ana Costa', '12345678901', 'F', 35, '111111111', 'ana.costa@exemplo.com', 'senha123', 'Rt5YnHjK2p'],

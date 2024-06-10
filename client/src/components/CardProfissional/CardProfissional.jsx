@@ -111,7 +111,7 @@ export const CardProfissional = () => {
         <div className="card-profissional">
           <Link to={`/homeCliente/perfilProfissional/${profissional.id_profissional}`} key={profissional.id_profissional}>
           <div className="tamplate-img">
-            <img src={imgPerfil} alt="Imagem de perfil" />
+            <img src={profissional.img_profissional ? profissional.img_profissional : imgPerfil} alt="Imagem de perfil" />
             <div className="perfil-avaliado">
               <h2>{profissional.nm_profissional}</h2>
               <div className="stars">

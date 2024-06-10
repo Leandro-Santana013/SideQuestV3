@@ -592,7 +592,7 @@ exports.history = async (req, res) => {
   const id_profissional = Number(req.params.id_profissional);
 
   const n = await controller_Pro.Servicehistory({
-    params: { id_cliente: id_profissional },
+    params: {  id_profissional: id_profissional },
   });
 
 

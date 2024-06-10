@@ -9,7 +9,9 @@ import { RiSearch2Line } from "react-icons/ri";
 function Historico() {
   const { Servicehistorico, user } = useContext(UserContext);
   const {pro, ServicosHistory} = useContext(ProfessionalContext);
-
+useEffect(()=> {
+console.log(ServicosHistory, Servicehistorico)
+}, [ServicosHistory, Servicehistorico ])
   return (
     <>
       {user && (
@@ -76,7 +78,7 @@ function Historico() {
                             {historico.ds_servico}
                           </p>
                           <p className="desc-nome-prof">
-                            Profissional: {historico.nm_cliente}
+                            cliente: {historico.nm_cliente}
                           </p>
                         </div>
                       </div>

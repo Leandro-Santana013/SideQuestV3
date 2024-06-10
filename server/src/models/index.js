@@ -50,9 +50,12 @@ ModelCategoria.hasMany(ModelProfissionalCategoria, { foreignKey: 'id_categoria' 
 ModelProfissionalCategoria.belongsTo(ModelCategoria, { foreignKey: 'id_categoria' });
 
 
-// uma confirmação de serviço tem uma postagem e uma postagem tem uma confirmação  
-ModelPostagemServico.hasOne(ModelConfirmacaoServico, { foreignKey: 'id_confirmacaoServico' });
-ModelConfirmacaoServico.belongsTo(ModelPostagemServico, { foreignKey: 'id_confirmacaoServico' });
+// Em ModelConfirmacaoServico.js
+ModelConfirmacaoServico.belongsTo(ModelPostagemServico, { foreignKey: 'id_postagemServico' });
+
+// Em ModelPostagemServico.js
+ModelPostagemServico.hasMany(ModelConfirmacaoServico, { foreignKey: 'id_postagemServico' });
+
 
 
 ModelCliente.belongsToMany(ModelProfissional, { through: ClienteProfissionalFavorito, foreignKey: 'id_cliente' });

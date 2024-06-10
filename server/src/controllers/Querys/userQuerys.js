@@ -209,6 +209,7 @@ module.exports = {
           "id_profissional",
           "sg_sexoProfissional",
           "nm_profissional",
+          "img_profissional",
           [Sequelize.col("tb_infoProfissional.ds_biografia"), "ds_biografia"],
           [
             Sequelize.fn(
@@ -542,7 +543,7 @@ module.exports = {
     const { id_profissional } = req.params;
     return ModelProfissional.findAll({
       where: { id_profissional: id_profissional },
-      attributes:[],
+      attributes: [],
       include: [
         {
           model: ModelProfissionalProfileImg,
@@ -705,6 +706,13 @@ module.exports = {
           {
             model: ModelConfirmacaoServico,
             required: true,
+            where: {
+              id_confirmacaoServico: {
+                [Op.notIn]: Sequelize.literal(
+                  "(SELECT id_confirmacaoServico FROM tb_terminoServico)"
+                ),
+              },
+            },
             include: [
               {
                 model: ModelTerminoServico,
@@ -737,6 +745,13 @@ module.exports = {
             model: ModelConfirmacaoServico,
             required: true,
             attributes: [],
+            where: {
+              id_confirmacaoServico: {
+                [Op.notIn]: Sequelize.literal(
+                  "(SELECT id_confirmacaoServico FROM tb_terminoServico)"
+                ),
+              },
+            },
             include: [
               {
                 model: ModelTerminoServico,
@@ -766,11 +781,11 @@ module.exports = {
           [Sequelize.col("ds_servico"), "ds_servico"],
           [Sequelize.col("ds_titulo"), "ds_titulo"],
           [
-            Sequelize.col("tb_confirmacaoServico.dt_inicioServico"),
+            Sequelize.col("tb_confirmacaoServicos.dt_inicioServico"),
             "dt_inicioServico",
           ],
           [
-            Sequelize.col("tb_confirmacaoServico.id_confirmacaoServico"),
+            Sequelize.col("tb_confirmacaoServicos.id_confirmacaoServico"),
             "id_confirmacaoServico",
           ],
           [
@@ -779,7 +794,7 @@ module.exports = {
               Sequelize.fn(
                 "AVG",
                 Sequelize.col(
-                  "tb_confirmacaoServico.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
+                  "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
                 )
               ),
               0
@@ -788,34 +803,34 @@ module.exports = {
           ],
           [
             Sequelize.col(
-              "tb_confirmacaoServico.tb_profissional.id_profissional"
+              "tb_confirmacaoServicos.tb_profissional.id_profissional"
             ),
             "id_profissional",
           ],
           [
-            Sequelize.col("tb_confirmacaoServico.set_finalizar"),
+            Sequelize.col("tb_confirmacaoServicos.set_finalizar"),
             "set_finalizar",
           ],
           [
             Sequelize.col(
-              "tb_confirmacaoServico.tb_profissional.nm_profissional"
+              "tb_confirmacaoServicos.tb_profissional.nm_profissional"
             ),
             "nm_profissional",
           ],
           [
             Sequelize.col(
-              "tb_confirmacaoServico.tb_profissional.img_profissional"
+              "tb_confirmacaoServicos.tb_profissional.img_profissional"
             ),
             "img_profissional",
           ],
         ],
         group: [
           "tb_postagemServico.id_postagemServico",
-          "tb_confirmacaoServico.id_confirmacaoServico",
-          "tb_confirmacaoServico.tb_profissional.id_profissional",
+          "tb_confirmacaoServicos.id_confirmacaoServico",
+          "tb_confirmacaoServicos.tb_profissional.id_profissional",
         ], //
       });
- 
+
       return services;
     } catch (err) {
       console.error(`Erro de listagem: ${err}`);
@@ -825,13 +840,13 @@ module.exports = {
     try {
       const { id_cliente } = req.params;
       const services = await ModelPostagemServico.findAll({
-        where: { id_cliente: id_cliente,
-            id_postagemServico: {
-              [Op.notIn]: Sequelize.literal(
-                "(SELECT id_postagemServico FROM tb_confirmacaoServico)"
-              ),
-            },
-
+        where: {
+          id_cliente: id_cliente,
+          id_postagemServico: {
+            [Op.notIn]: Sequelize.literal(
+              "(SELECT id_postagemServico FROM tb_confirmacaoServico)"
+            ),
+          },
         },
         raw: true,
       });
@@ -847,6 +862,7 @@ module.exports = {
       const services = await ModelPostagemServico.findAll({
         where: { id_cliente: id_cliente },
         raw: true,
+        
         include: [
           {
             model: ModelConfirmacaoServico,
@@ -871,15 +887,23 @@ module.exports = {
               },
             ],
           },
+          {
+            model: ModelCategoria,
+            required: true,
+            attributes: []
+          }
         ],
         attributes: [
           [Sequelize.col("ds_servico"), "ds_servico"],
+          [Sequelize.col("tb_categorium.ds_categoria"), "categoria"],
           [
-            Sequelize.col("tb_confirmacaoServico.dt_inicioServico"),
+            Sequelize.col("tb_confirmacaoServicos.dt_inicioServico"),
             "dt_inicioServico",
           ],
           [
-            Sequelize.col("tb_confirmacaoServico.tb_terminoServico.dt_terminoServico"),
+            Sequelize.col(
+              "tb_confirmacaoServicos.tb_terminoServico.dt_terminoServico"
+            ),
             "dt_terminoServico",
           ],
 
@@ -889,7 +913,7 @@ module.exports = {
               Sequelize.fn(
                 "AVG",
                 Sequelize.col(
-                  "tb_confirmacaoServico.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
+                  "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.nmr_avaliacao"
                 )
               ),
               0
@@ -898,27 +922,27 @@ module.exports = {
           ],
           [
             Sequelize.col(
-              "tb_confirmacaoServico.tb_profissional.id_profissional"
+              "tb_confirmacaoServicos.tb_profissional.id_profissional"
             ),
             "id_profissional",
           ],
           [
             Sequelize.col(
-              "tb_confirmacaoServico.tb_profissional.nm_profissional"
+              "tb_confirmacaoServicos.tb_profissional.nm_profissional"
             ),
             "nm_profissional",
           ],
           [
             Sequelize.col(
-              "tb_confirmacaoServico.tb_profissional.img_profissional"
+              "tb_confirmacaoServicos.tb_profissional.img_profissional"
             ),
             "img_profissional",
           ],
         ],
         group: [
           "tb_postagemServico.id_postagemServico",
-          "tb_confirmacaoServico.id_confirmacaoServico",
-          "tb_confirmacaoServico.tb_profissional.id_profissional",
+          "tb_confirmacaoServicos.id_confirmacaoServico",
+          "tb_confirmacaoServicos.tb_profissional.id_profissional",
         ], //
       });
 
@@ -946,10 +970,9 @@ module.exports = {
           where: {
             id_cliente: id_cliente,
           },
-          attributes: []
-        }
-      ]
-      
+          attributes: [],
+        },
+      ],
     });
   },
   apagarServicePend: async (req, res) => {
@@ -988,21 +1011,20 @@ module.exports = {
     });
   },
 
-  createTermino: async(req, res) => {
-    const {id_confirmacaoServico, dt_terminoServico} = req.params
+  createTermino: async (req, res) => {
+    const { id_confirmacaoServico, dt_terminoServico } = req.params;
     return await ModelTerminoServico.create({
-      id_confirmacaoServico:id_confirmacaoServico,
-      dt_terminoServico: dt_terminoServico
-    })
+      id_confirmacaoServico: id_confirmacaoServico,
+      dt_terminoServico: dt_terminoServico,
+    });
   },
 
-  createAvaliacao: async(req, res) => {
-const {  id_terminoservico, nmr_avaliacao, ds_comentario } = req.params
-return await ModelAvaliacao.create({
-  id_terminoservico: id_terminoservico,
-  nmr_avaliacao:nmr_avaliacao,
-  ds_comentario:ds_comentario
-})
-  }
+  createAvaliacao: async (req, res) => {
+    const { id_terminoservico, nmr_avaliacao, ds_comentario } = req.params;
+    return await ModelAvaliacao.create({
+      id_terminoservico: id_terminoservico,
+      nmr_avaliacao: nmr_avaliacao,
+      ds_comentario: ds_comentario,
+    });
+  },
 };
-
