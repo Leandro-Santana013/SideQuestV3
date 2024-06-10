@@ -14,30 +14,30 @@ SwiperCore.use([Navigation]);
 
 const allSlidesData = [
   [
-    { id: 1, text: "Texto do slide 1", image: img1 },
-    { id: 1, text: "Texto do slide 1", image: img1 },
-    { id: 1, text: "Texto do slide 1", image: img1 },
+    { id: 1, text: "Instalação de Lâmpadas", image: img1 },
+    { id: 1, text: "Troca de Tomadas", image: img1 },
+    { id: 1, text: "Reparo de Fiação Elétrica", image: img1 },
   ],
   [
-    { id: 1, text: "Texto do slide 1", image: img1 },
-    { id: 2, text: "Texto do slide 2", image: img2 },
+    { id: 1, text: "Pintar Parede do Quarto", image: img1 },
+    { id: 2, text: "Pintar Parede da Sala", image: img2 },
   ],
   [
-    { id: 1, text: "Texto do slide 1", image: img1 },
-    { id: 2, text: "Texto do slide 2", image: img2 },
-    { id: 3, text: "Texto do slide 2", image: img2 },
+    { id: 1, text: "Conserto de Encanamento", image: img1 },
+    { id: 2, text: "Desentupimento de Canos", image: img2 },
+    { id: 3, text: "Conserto de Vazamento", image: img2 },
   ],
   [
-    { id: 1, text: "Texto do slide 1", image: img1 },
-    { id: 2, text: "Texto do slide 2", image: img2 },
-    { id: 3, text: "Texto do slide 2", image: img2 },
-    { id: 4, text: "Texto do slide 2", image: img2 },
+    { id: 1, text: "Instalação de Prateleiras", image: img1 },
+    { id: 2, text: "Montagem de Móveis", image: img2 },
+    { id: 3, text: "Reparação Janelas de Madeira", image: img2 },
+    { id: 4, text: "Reparação do Deck", image: img2 },
   ],
   [
-    { id: 1, text: "Texto do slide 1", image: img1 },
-    { id: 2, text: "Texto do slide 2", image: img2 },
-    { id: 3, text: "Texto do slide 2", image: img2 },
-    { id: 4, text: "Texto do slide 2", image: img2 },
+    { id: 1, text: "Desentupimento de Calhas", image: img1 },
+    { id: 2, text: "Substituição de Fechaduras", image: img2 },
+    { id: 3, text: "Reforma de banheiro", image: img2 },
+    { id: 4, text: "Corte de grama", image: img2 },
   ],
   [
     { id: 1, text: "Texto do slide 1", image: img1 },

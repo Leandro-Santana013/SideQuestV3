@@ -1,4 +1,5 @@
 *.txt
+
 # Ignore tudo dentro do diretório node_modules/
 node_modules/*
 
