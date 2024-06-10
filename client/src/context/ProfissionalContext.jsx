@@ -202,6 +202,8 @@ export const ProfessionalContextProvider = ({ children }) => {
   /********************/
 
   const [cepError, setCepError] = useState(false);
+  const [conclusionCadError, setConclusionCadError] = useState(false)
+
   const concluirCad = useCallback(
     async (e) => {
       if (pro && pro.id_profissional)
@@ -212,7 +214,8 @@ export const ProfessionalContextProvider = ({ children }) => {
         infoConfirm
       );
       if (response.error) {
-        setConclusioncadError(response.error);
+        setConclusionCadError(response.error);
+        setModal(response.formstatus)
       } else {
         console.log(response.user);
         setModal(modal + 1);
@@ -308,6 +311,7 @@ export const ProfessionalContextProvider = ({ children }) => {
         loginLoading,
         Dadosiniciais,
         setDadosIniciais,
+        conclusionCadError,
         logoutPro,
         changedProData,
         setChangedProData,

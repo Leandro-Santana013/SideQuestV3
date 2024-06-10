@@ -369,7 +369,9 @@ exports.postarServicoLoc = async (req, res) => {
 
     const datanow = new Date();
 
-    if (!servico.titulo && !servico.dsServico && !servico.categoria) {
+    console.log(servico)
+
+    if (!servico.titulo || !servico.dsServico || !servico.categoria) {
       return res
         .status(400)
         .json({ error: "Insira as informações corretamente", formstatus: 1 });
@@ -562,6 +564,8 @@ exports.concluirCad = async (req, res) => {
     ) {
       age--;
     }
+
+    if(age < 18) return res.status(400).json({error: 'Idade inválida, você precisar ter 18 anos ou mais.', formstatus: 1})
 
     const userReset = await controller_User.updateInfoCliente({
       params: {

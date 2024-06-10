@@ -97,10 +97,7 @@ export const Infoinc = () => {
                   <option value="F">Feminino</option>
                 </select>
               </div>
-              <div className="bottom-card-conclua-registro">
-                <p onClick={() => setModalConcluaRegistro(0)}>
-                  Deixar para depois
-                </p>
+              <div className="bottom-card-conclua-registro" style={{justifyContent: 'center'}}>
                 <button onClick={() => setModalConcluaRegistro(1)}>
                   Próximo
                 </button>

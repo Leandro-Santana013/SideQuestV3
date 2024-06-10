@@ -428,6 +428,8 @@ exports.concluirCad = async (req, res) => {
       age--;
     }
 
+    if(age < 18) return res.status(400).json({error: 'Idade inválida, você precisar ter 18 anos ou mais.', formstatus: 1})
+
     const updatedPro = await controller_Pro.updatePro({
       params: {
         id_profissional: id_profissional,

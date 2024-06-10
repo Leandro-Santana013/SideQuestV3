@@ -189,6 +189,7 @@ export const UserContextProvider = ({ children }) => {
       const response = await postRequest("/user/concluirCad", infoConfirm);
       if (response.error) {
         setConclusioncadError(response.error);
+        setModal(response.formstatus)
       } else {
         setModal(modal + 1);
         localStorage.setItem("User", JSON.stringify(response.user.clienteuser));

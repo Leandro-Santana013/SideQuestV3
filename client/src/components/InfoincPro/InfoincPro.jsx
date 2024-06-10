@@ -16,6 +16,7 @@ export const InfoincPro = () => {
     cepError,
     categorias,
     setCategorias,
+    conclusionCadError
   } = useContext(ProfessionalContext);
 
   const [telefone, setTelefone] = useState("");
@@ -56,12 +57,8 @@ export const InfoincPro = () => {
 
   const setModalConcluaRegistro = (param) => {
     if (param === 1) {
-      if (telefone.length < 11) { // Verifica se o telefone tem 11 dígitos
-        alert("Por favor, preencha o telefone corretamente.");
-        return;
-      }
       setModal(modal + 1);
-    } else if (param === 2) {
+    } if (param === 2) {
       setModal(modal - 1);
     } else if (param === 0) {
       setModal(0);
@@ -137,6 +134,7 @@ export const InfoincPro = () => {
                   Finalize o seu cadastro para uma melhor experiência em nossa
                   plataforma
                 </p>
+                {conclusionCadError && <p style={{color: 'red'}}>{conclusionCadError}</p>}
               </div>
               <div className="inputs-card-conclua-registro">
                 <p>Telefone ou celular</p>
@@ -160,10 +158,7 @@ export const InfoincPro = () => {
                   <option value="F">Feminino</option>
                 </select>
               </div>
-              <div className="bottom-card-conclua-registro">
-                <p onClick={() => setModalConcluaRegistro(0)}>
-                  Deixar para depois
-                </p>
+              <div className="bottom-card-conclua-registro" style={{justifyContent: 'center'}}>
                 <button onClick={() => setModalConcluaRegistro(1)}>
                   Próximo
                 </button>
@@ -179,6 +174,7 @@ export const InfoincPro = () => {
                   Insira o seu endereço (você poderá adicionar outros
                   posteriormente).
                 </p>
+                {conclusionCadError && <p style={{color: 'red'}}>{conclusionCadError}</p>}
               </div>
               <div className="inputs-card-conclua-registro">
                 <div className="grid-2x2-card-conclua-registro">
@@ -230,6 +226,7 @@ export const InfoincPro = () => {
                 <div className="top-card-conclua-registro">
                   <h1>Conclua o seu registro</h1>
                   <p>Escolha as categorias de serviço em que você trabalha</p>
+                  {conclusionCadError && <p style={{color: 'red'}}>{conclusionCadError}</p>}
                 </div>
                 {categorias.length > 0 ? (
                   <>
