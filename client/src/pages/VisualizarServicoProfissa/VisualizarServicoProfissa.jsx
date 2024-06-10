@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./VisualizarServicoProfissa.css";
 import { SidebarProfissional, Header } from "../../components/index";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ChatContext } from "../../context/ChatContext";
 import { ProfessionalContext } from "../../context/ProfissionalContext";
 import iconePerfil from "../../assets/icone-perfil.png";
@@ -17,14 +17,16 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { Navigation } from "swiper/modules";
 import { MdOutlineLocationOn } from "react-icons/md";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
+
 SwiperCore.use([Navigation]);
 const VisualizarServicoProfissa = () => {
     const { id } = useParams();
-    const { pro } = useContext(ProfessionalContext);
+    const { pro, setnum, setServicosEnd } = useContext(ProfessionalContext);
     const { createChat } = useContext(ChatContext);
     const [servico, setServico] = useState(null);
     const [imagesServico, setImagesServico] = useState([]);
-
+    const [modal, setModal] = useState(false)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -46,7 +48,8 @@ const VisualizarServicoProfissa = () => {
 
     const handleClickaceitar = async (id) => {
         if (pro && pro.id_profissional && servico) {
-            await postRequest(`/professional/servico/aceitar`, { id_profissional: id, id_servico: servico.id_postagemServico });
+             await postRequest(`/professional/servico/aceitar`, { id_profissional: id, id_servico: servico.id_postagemServico });
+            setModal(true)
         }
     };
 
@@ -87,6 +90,28 @@ const VisualizarServicoProfissa = () => {
             <SidebarProfissional />
             <div className="content-midia">
                 <div className="main-content">
+                {modal && (
+                      <>
+                        <div className="fade">
+                          <div className={`modal-postar-sucess`}>
+                            <h3>Serviço aceito</h3>
+                            <RiVerifiedBadgeFill/>
+                            <p></p>
+                            <Link to={"/homeProfissionais"}>
+                              <button
+                                className="close-modal-postar"
+                                onClick={async() => {                         
+                                 await setModal(false); // Adicione esta linha para fechar o modal ao clicar em "Fechar"
+                                 window.location.reload()
+                                }}
+                              >
+                                Fechar
+                              </button>
+                            </Link>
+                          </div>
+                        </div>
+                      </>
+                    )}
                     <div className="card-visualizar">
                         {servico && (
                             <>

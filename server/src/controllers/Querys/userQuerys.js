@@ -815,7 +815,7 @@ module.exports = {
           "tb_confirmacaoServico.tb_profissional.id_profissional",
         ], //
       });
-
+ 
       return services;
     } catch (err) {
       console.error(`Erro de listagem: ${err}`);
@@ -825,19 +825,15 @@ module.exports = {
     try {
       const { id_cliente } = req.params;
       const services = await ModelPostagemServico.findAll({
-        where: { id_cliente: id_cliente },
-        raw: true,
-        include: [
-          {
-            model: ModelConfirmacaoServico,
-            required: false,
-            where: {
-              id_confirmacaoServico: {
-                [Op.is]: null, // Utilize null diretamente sem Op.is
-              },
+        where: { id_cliente: id_cliente,
+            id_postagemServico: {
+              [Op.notIn]: Sequelize.literal(
+                "(SELECT id_postagemServico FROM tb_confirmacaoServico)"
+              ),
             },
-          },
-        ],
+
+        },
+        raw: true,
       });
       console.log("servicos pendentes", services);
       return services;

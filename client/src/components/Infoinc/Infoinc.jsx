@@ -169,7 +169,7 @@ export const Infoinc = () => {
                 <p
                   style={{ color: "gray", textAlign: "center" }}
                 >
-                  Obrigado por fornecer mais informações sobre você. Esta atitude ajuda muito a nossa comunidade.
+                  O seu cadatro está completo.
                 </p>
                 <button
                   style={{

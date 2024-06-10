@@ -327,6 +327,8 @@ export const ProfessionalContextProvider = ({ children }) => {
         imagemSelecionada,
         ServicosEnd,
         num,
+        setnum,
+        setServicosEnd,
         setImagemSelecionada,
         profissional,
         imagens,

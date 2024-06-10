@@ -513,7 +513,8 @@ const formattedDate = getFormattedDate();
 const servicoaceito = await controller_Pro.insertconfirmarServico({
   params: { id_profissional: id_profissional, id_postagemServico:id_servico, dt_inicioServico: formattedDate},
 });
-res.status(200).json(servicoaceito  )
+
+res.status(200).json(servicoaceito)
 }
 
 exports.perfilpro = async (req, res) => {

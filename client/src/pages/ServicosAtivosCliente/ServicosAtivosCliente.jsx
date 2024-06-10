@@ -1,57 +1,119 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./servicosAtivosCliente.css";
 import { SidebarCliente, Header } from "../../components";
+import ImgPerfil from "../../assets/icone-perfil.png";
 import sucessoIcon from "../../assets/sucesso1.png";
 import iconeperfil from "../../assets/icone-perfil.png";
 import alertaIcon from "../../assets/alerta.png";
 import { UserContext } from "../../context/UserContext";
+import StarRating from '../../components/StarRating/StarRating'; 
 
 const ServicosAtivosCliente = () => {
   const { ServiceEnd } = useContext(UserContext);
-  console.log(ServiceEnd, "bbbb");
+  const [servico, setServicos] = useState(ServiceEnd);
+  const [modal, setModal] = useState(false);
+  const [selectedService, setSelectedService] = useState(null); // Estado para armazenar o serviço selecionado
+  const [rating, setRating] = useState(0); // Estado para armazenar a avaliação
+
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.slice(0, maxLength) + '...' + ' Ver mais';
+    }
+    return text;
+  };
+
+  useEffect(() => {
+    if (Array.isArray(ServiceEnd)) {
+      const unzipData = async () => {
+        const unzippedData = await Promise.all(
+          ServiceEnd.map(async (item) => {
+            if (item.img_servico) {
+              try {
+                const imgServicoObj = JSON.parse(item.img_servico);
+                if (imgServicoObj.content) {
+                  const zip = new JSZip();
+                  const arrayBuffer = base64js.toByteArray(imgServicoObj.content).buffer;
+                  const unzipped = await zip.loadAsync(arrayBuffer);
+                  const files = {};
+                  for (let filename in unzipped.files) {
+                    const fileData = await unzipped.files[filename].async("base64");
+                    files[filename] = `data:image/png;base64,${fileData}`;  // Assumindo que a imagem é png
+                  }
+                  return { ...item, img_servico: files[Object.keys(files)[0]] }; // Pega a primeira imagem descompactada
+                } else {
+                  console.error("content property not found in img_servico");
+                  return item;
+                }
+              } catch (error) {
+                console.error("Error parsing or unzipping img_servico:", error);
+                return item;
+              }
+            }
+            return item;
+          })
+        );
+        setServicos(unzippedData);
+      };
+
+      unzipData();
+    }
+  }, [ServiceEnd]);
+
+  const handleRatingSubmit = (rating) => {
+    setRating(rating);
+  };
+
+  const handleSubmit = () => {
+    // Função para enviar a avaliação para o backend
+   console.log(rating)
+  };
+
   return (
     <>
       <Header />
       <SidebarCliente />
       <div className="content-midia">
-        <div className="sessao-cards">
-          <h1>Serviços Ativos</h1>
-          {ServiceEnd?.length > 0 ? (
-            ServiceEnd.map((serv) => (
-              <div className="card-servicoProfissa">
-                <div className="icon-sucesso">
-                  <img src={sucessoIcon} alt="icone de sucesso" />
-                </div>
-                <div className="desc-servico-usuario">
-                  <h2>{serv.ds_titulo}</h2>
-                  <p>{serv.ds_servico}
-                    <strong>Ver mais detalhes</strong>
-                  </p>
-                  <div className="info-usuario">
-                    <p>Início: 02/10/2023 Fim: 27/10/2023</p>
-                    <div className="avaliacao">
-                      <img src={iconeperfil} alt="icone perfil" id="perfil" />
-                      <p>João Silva</p>
-                      <i className="fa-regular fa-star"></i>
-                      <p>4.9</p>
-                    </div>
-                  </div>
-                  <div className="chat-cancelar">
-                  {serv.set_finalizar &&  <button id="finalizar">Finalizar</button>}
-                    <button id="chat">Chat</button>
-                    <button id="cancelar">Cancelar</button>
-                  </div>
-                </div>
-                <div className="btn-distancia">
-                  <button>R$450</button>
+        <div className="main-content">
+          <h1>Serviços ativos</h1>
+          <div className="cards-servicos">
+            {modal && (
+              <div className="fade">
+                <div className="modal-postar-sucess">
+                  <h3>Deixe sua avaliação</h3>
+                  <StarRating onRatingSubmit={handleRatingSubmit} />
+                  <input placeholder="Deixe seu comentário" />
+                  <button onClick={handleSubmit}>Enviar</button>
                 </div>
               </div>
-            ))
-          ) : (
-            <>
+            )}
+            {ServiceEnd?.length > 0 ? (
+              ServiceEnd.map((servico) => (
+                <div className="card-servico-profissional" key={servico.id_postagemServico}>
+                  <div className="card-servico-profissional-header">
+                    {servico.img_servico ? <img src={servico.img_servico} alt="Imagem do serviço" /> : ''}
+                  </div>
+                  <div className="card-servico-profissional-body">
+                    <h2>{servico.ds_titulo}</h2>
+                    <p>
+                      {truncateText(servico.ds_servico, 66)}
+                    </p>
+                  </div>
+                  <div className="card-servico-profissional-footer">
+                    {servico.set_finalizar && (
+                      <button id="finalizar" onClick={() => {
+                        setSelectedService(servico);
+                        setModal(true);
+                      }}>
+                        Finalizar
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))
+            ) : (
               <p>Nenhum serviço encontrado.</p>
-            </>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </>

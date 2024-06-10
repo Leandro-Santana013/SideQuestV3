@@ -57,7 +57,6 @@ const ServicosPendentesCliente = () => {
   };
 
   const servicos = Array.isArray(servico) ? servico : [];
-  console.log(servicos, "servicos");
 
   return (
     <>
@@ -70,6 +69,7 @@ const ServicosPendentesCliente = () => {
         <div className="main-content">
       
       <div className="cards-servicos">
+        <h1>Serviços pendentes</h1>
         {servicos.length > 0 ? (
           servicos.map((servico) => (
             <div className="card-servico-profissional" key={servico.id_postagemServico}>
