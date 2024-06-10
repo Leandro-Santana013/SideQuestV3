@@ -23,5 +23,5 @@ router.post('/servicePend', userControllers.ServicePend)
 router.post('/serviceHistorico', userControllers.Servicehistory)
 router.post('/resetPass', userControllers.resetPass)
 router.delete('/deleteAllintances/:id_cliente', userControllers.delete)
-router.post('/terminarServico', userControllers.delete)
+router.post('/terminarServico', userControllers.concluirServico)
 module.exports = router; 

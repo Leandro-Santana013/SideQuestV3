@@ -9,7 +9,7 @@ import { UserContext } from "../../context/UserContext";
 import StarRating from '../../components/StarRating/StarRating'; 
 
 const ServicosAtivosCliente = () => {
-  const { ServiceEnd } = useContext(UserContext);
+  const { ServiceEnd,  setAvaliacao, avaliar } = useContext(UserContext);
   const [servico, setServicos] = useState(ServiceEnd);
   const [modal, setModal] = useState(false);
   const [selectedService, setSelectedService] = useState(null); // Estado para armazenar o serviço selecionado
@@ -59,14 +59,29 @@ const ServicosAtivosCliente = () => {
     }
   }, [ServiceEnd]);
 
+
   const handleRatingSubmit = (rating) => {
-    setRating(rating);
+    setAvaliacao((prevAvaliacao) => ({
+      ...prevAvaliacao,
+      nmr_avaliacao: rating,
+    }));
+  };
+  useEffect(()=> {
+    setAvaliacao((prevAvaliacao) => ({
+      ...prevAvaliacao,
+      id_confirmacaoServico: selectedService?.id_confirmacaoServico,
+    }));
+  }, [selectedService])
+
+  const handleFieldChange = (field, event) => {
+    const value = event.target.value;
+    setAvaliacao((prevAvaliacao) => ({
+      ...prevAvaliacao,
+      [field]: value
+    }));
   };
 
-  const handleSubmit = () => {
-    // Função para enviar a avaliação para o backend
-   console.log(rating)
-  };
+
 
   return (
     <>
@@ -81,8 +96,11 @@ const ServicosAtivosCliente = () => {
                 <div className="modal-postar-sucess">
                   <h3>Deixe sua avaliação</h3>
                   <StarRating onRatingSubmit={handleRatingSubmit} />
-                  <input placeholder="Deixe seu comentário" />
-                  <button onClick={handleSubmit}>Enviar</button>
+                  <input placeholder="Deixe seu comentário" 
+                  onChange={(event) =>
+                    handleFieldChange("ds_comentario", event)
+                  }/>
+                  <button onClick={()=>{avaliar()}}>Enviar</button>
                 </div>
               </div>
             )}
@@ -102,7 +120,7 @@ const ServicosAtivosCliente = () => {
                     {servico.set_finalizar && (
                       <button id="finalizar" onClick={() => {
                         setSelectedService(servico);
-                        setModal(true);
+                        setModal(true)
                       }}>
                         Finalizar
                       </button>

@@ -997,11 +997,12 @@ module.exports = {
   },
 
   createAvaliacao: async(req, res) => {
-const { id_confirmacaoServico, nmr_avaliacao, ds_comentario } = req.params
+const {  id_terminoservico, nmr_avaliacao, ds_comentario } = req.params
 return await ModelAvaliacao.create({
-  id_confirmacaoServico:id_confirmacaoServico,
+  id_terminoservico: id_terminoservico,
   nmr_avaliacao:nmr_avaliacao,
   ds_comentario:ds_comentario
 })
   }
 };
+

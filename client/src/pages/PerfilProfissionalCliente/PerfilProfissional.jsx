@@ -50,6 +50,7 @@ const PerfilProfissionalcli = () => {
         const response = await getRequest(`/user/perfil/profissionais/${id}`);
         setProfissional(response.pro);
         setimagens(response.images);
+        console.log(response.comentario)
         if(response.comentarios[0].avaliacao_id !== null){
         setComentarios(response.comentarios);
         }

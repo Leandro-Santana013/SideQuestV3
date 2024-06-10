@@ -98,6 +98,9 @@ export const Infoinc = () => {
                 </select>
               </div>
               <div className="bottom-card-conclua-registro" style={{justifyContent: 'center'}}>
+              <p onClick={() => setModalConcluaRegistro(0)}>
+                  Deixar para depois
+                </p>
                 <button onClick={() => setModalConcluaRegistro(1)}>
                   Próximo
                 </button>

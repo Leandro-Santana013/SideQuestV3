@@ -811,8 +811,10 @@ exports.delete = async (req, res) => {
   });
 return res.status(200).json()
 }
+}
 exports.concluirServico = async (req, res) => {
-  const {id_confirmacaoServico, nmr_avaliacao, ds_servico} = req.body
+  const {id_confirmacaoServico, nmr_avaliacao, ds_comentario} = req.body
+  console.log(id_confirmacaoServico, nmr_avaliacao, ds_comentario, "pppppp")
   const getFormattedDate = () => {
     const date = new Date();
     const day = String(date.getDate()).padStart(2, '0');
@@ -826,16 +828,18 @@ exports.concluirServico = async (req, res) => {
   const inserindtermino = await controller_User.createTermino({
     params: {id_confirmacaoServico: id_confirmacaoServico, dt_terminoServico:formattedDate }
   })
-
+  const idTerminoServico = inserindtermino.dataValues.id_terminoServico;
+  console.log(idTerminoServico)
+  if(nmr_avaliacao, ds_comentario){
   const insertavaliacao = await controller_User.createAvaliacao({
     params:{
-      id_confirmacaoServico: id_confirmacaoServico,
+      id_terminoservico: idTerminoServico,
       nmr_avaliacao:nmr_avaliacao,
-      ds_servico:ds_servico
+      ds_comentario:ds_comentario
     }
   })
 }
+  return res.status(200).json()
+}
 
-return res.status(200).json()
-  
-};
+

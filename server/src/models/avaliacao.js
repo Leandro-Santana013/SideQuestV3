@@ -9,7 +9,7 @@ const ModelAvaliacao = connectionDataBase.define('tb_avaliacao', {
         autoIncrement: true,
         allowNull: false
       },
-      id_terminoServico: {
+      id_terminoservico: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         references: {
