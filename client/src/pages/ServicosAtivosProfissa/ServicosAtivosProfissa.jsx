@@ -10,10 +10,13 @@ import "./servicosAtivosProfissa.css";
 import sucessoIcon from "../../assets/sucesso1.png";
 import iconeperfil from "../../assets/icone-perfil.png";
 import alertaIcon from "../../assets/alerta.png";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 
 function ServicosAtivos() {
   const { pro, ServicosEnd, submitforCLient } = useContext(ProfessionalContext);
   const [servico, setServicos] = useState(ServicosEnd);
+  const [modal, setModal] = useState(false);
+
     const truncateText = (text, maxLength) => {
     if (text.length > maxLength) {
       return text.slice(0, maxLength) + '...' + ' Ver mais';
@@ -67,6 +70,18 @@ function ServicosAtivos() {
         <div className="main-content">
         <h1>Serviços ativos</h1>
       <div className="cards-servicos">
+      {modal && (
+              <div className="fade">
+                <div className="modal-avaliar">
+                  <h3>Serviço Finalizado</h3>
+                <RiVerifiedBadgeFill className="confirm-icon"/>
+                  <p>O cliente confirmará finalização e poderá te avaliar.</p>
+                  <button className="submit-button-avaliar" onClick={() => {
+                    setModal(false)
+                  }}>Fechar</button>
+                </div>
+              </div>
+            )}
         {ServicosEnd?.length > 0 ? (
           ServicosEnd.map((servico) => (
             <div className="card-servico-profissional" key={servico.id_postagemServico}>           
@@ -77,11 +92,10 @@ function ServicosAtivos() {
                   <h2>{servico.ds_titulo}</h2>
                   <p>
                     {truncateText(servico.ds_servico, 66)}
-                  </p>
-                 
+                  </p>              
                 </div>
                 <div className="card-servico-profissional-footer">
-                {servico.set_finalizar ? (<><label id="finalizar">aguardando</label></>) :<button id="finalizar" onClick={async() => {
+                {servico.set_finalizar ? (<><label id="finalizar" className="submit-button-card">aguardando</label></>) :<button id="finalizar" className='submit-button-card' onClick={() => {
                   submitforCLient(servico.id_confirmacaoServico);
                   setModal(true)
                 }}>Finalizar</button>}

@@ -67,9 +67,9 @@ const ServicosPendentesCliente = () => {
 
       <div className="content-midia">
         <div className="main-content">
-      
-      <div className="cards-servicos">
         <h1>Serviços pendentes</h1>
+      <div className="cards-servicos">
+
         {servicos.length > 0 ? (
           servicos.map((servico) => (
             <div className="card-servico-profissional" key={servico.id_postagemServico}>
@@ -83,8 +83,6 @@ const ServicosPendentesCliente = () => {
                     {truncateText(servico.ds_servico, 66)}
                   </p>
                   <div className="user-info">
-                    <img src={servico["tb_cliente.img_cliente"] ? servico["tb_cliente.img_cliente"] : ImgPerfil} alt="Avatar do Usuário" className="avatar" />
-                    <span>{servico["tb_cliente.nm_cliente"]}</span>
                     <p>{servico.diferencaTempo}</p>
                   </div>
                 </div>

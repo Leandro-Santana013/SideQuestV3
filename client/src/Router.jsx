@@ -28,7 +28,7 @@ import PerfilProfissionalcli from "./pages/PerfilProfissionalCliente/PerfilProfi
 import PerfilProfissional from "./pages/PerfilProfissional/PerfilPro";
 import PrivateServices from "./pages/servicosPrivados/servicoPrivado"
 import { Chats } from "./pages/Chats/Chats";
-
+import VizualizarServicoAtivoCliente from "./pages/VizualizarServicoAtivoCliente/VizualizarServicoAtivoCliente";
 const Router = () => {
   const { user } = useContext(UserContext);
   const { pro } = useContext(ProfessionalContext);
@@ -51,6 +51,9 @@ const Router = () => {
           <Route exact path="/pagamentosCliente" element={<PagamentosCliente />} />
           <Route exact path="/servicosPendentesCliente" element={<ServicosPendentesCliente />} />
           <Route exact path="/config" element={user ? <Config /> : <Navigate to="/login" />} />
+          <Route exact path="/config" element={user ? <Config /> : <Navigate to="/login" />} />
+          <Route exact path="/vizualizarServicoAtivoCliente" element={user ? <VizualizarServicoAtivoCliente /> : <Navigate to="/login" />} />
+
 
           {/* rotas profissional */}
           <Route exact path="/ConfigProfissa" element={pro ? <ConfigProfissa /> : <Navigate to="/loginProfissional" />} />

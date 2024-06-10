@@ -2,18 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import "./servicosAtivosCliente.css";
 import { SidebarCliente, Header } from "../../components";
 import ImgPerfil from "../../assets/icone-perfil.png";
-import sucessoIcon from "../../assets/sucesso1.png";
-import iconeperfil from "../../assets/icone-perfil.png";
-import alertaIcon from "../../assets/alerta.png";
 import { UserContext } from "../../context/UserContext";
-import StarRating from '../../components/StarRating/StarRating'; 
+import StarRating from "../../components/StarRating/StarRating"; // Import the StarRating component
+import { Link } from "react-router-dom";
 
 const ServicosAtivosCliente = () => {
   const { ServiceEnd,  setAvaliacao, avaliar } = useContext(UserContext);
   const [servico, setServicos] = useState(ServiceEnd);
-  const [modal, setModal] = useState(false);
-  const [selectedService, setSelectedService] = useState(null); // Estado para armazenar o serviço selecionado
-  const [rating, setRating] = useState(0); // Estado para armazenar a avaliação
+  const [modal, setModal] = useState(false)
+
+const [selectedService, setSelectedService] = useState(null);
+  const [rating, setRating] = useState(0);
 
   const truncateText = (text, maxLength) => {
     if (text.length > maxLength) {
@@ -21,6 +20,7 @@ const ServicosAtivosCliente = () => {
     }
     return text;
   };
+
 
   useEffect(() => {
     if (Array.isArray(ServiceEnd)) {
@@ -93,8 +93,10 @@ const ServicosAtivosCliente = () => {
           <div className="cards-servicos">
             {modal && (
               <div className="fade">
-                <div className="modal-postar-sucess">
-                  <h3>Deixe sua avaliação</h3>
+                <div className="modal-avaliar">
+                  <button className="close-modal-avaliar" onClick={() => setModal(false)}>X</button>
+                  <h3>Serviço Finalizado</h3>
+                  <p>Não se esqueça de avaliar o profissional!</p>
                   <StarRating onRatingSubmit={handleRatingSubmit} />
                   <input placeholder="Deixe seu comentário" 
                   onChange={(event) =>
@@ -112,9 +114,7 @@ const ServicosAtivosCliente = () => {
                   </div>
                   <div className="card-servico-profissional-body">
                     <h2>{servico.ds_titulo}</h2>
-                    <p>
-                      {truncateText(servico.ds_servico, 66)}
-                    </p>
+                    <p>{truncateText(servico.ds_servico, 66)}</p>
                   </div>
                   <div className="card-servico-profissional-footer">
                     {servico.set_finalizar && (
@@ -126,7 +126,7 @@ const ServicosAtivosCliente = () => {
                       </button>
                     )}
                   </div>
-                </div>
+                </div>  
               ))
             ) : (
               <p>Nenhum serviço encontrado.</p>

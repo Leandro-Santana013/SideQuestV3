@@ -1,0 +1,12 @@
+span {
+    cursor: pointer;
+    color: #e4e5e9;
+    font-size: 2rem;
+    transition: color 200ms;
+  }
+  
+  span:hover,
+  span:hover ~ span {
+    color: #ffc107;
+  }
+  

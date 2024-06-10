@@ -79,3 +79,96 @@ h2 {
     cursor: pointer;
     color: var(--azul);
 }
+
+
+.modal-avaliar {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 33vw;
+    text-align: center;
+    position: relative;
+  }
+  
+  .modal-avaliar h3 {
+    color: var(--verde);
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .modal-avaliar p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .comentario-textarea {
+    width: 27vw;
+    height: 8vw;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+    font: arial;
+  }
+  
+  .close-modal-avaliar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    color: white;
+    background-color: var(--verde);
+    cursor: pointer;
+  }
+
+  .submit-button-avaliar {
+    border-radius: 4px;
+    background: #3CBC8C;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.5s;
+  }
+  
+  .submit-button-avaliar:hover {
+    background-color: var(--azul);
+  }
+
+  .card-servico-ativo-profissional-footer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .submit-button-card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background: #3CBC8C;
+    color: white;
+    width: 100px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.5s;
+  }
+
+  .confirm-icon {
+    width: 7vw;
+    height: 7vw;
+    color: var(--verde);
+  }

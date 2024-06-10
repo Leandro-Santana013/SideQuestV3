@@ -838,6 +838,7 @@ exports.concluirServico = async (req, res) => {
       ds_comentario:ds_comentario
     }
   })
+  return res.status(200).json()
 }
   return res.status(200).json()
 }

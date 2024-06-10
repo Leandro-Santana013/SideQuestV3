@@ -180,3 +180,9 @@ align-items: flex-end;
 font-size: 1.5rem;
 }
 
+
+.confirm-icon {
+    width: 7vw;
+    height: 7vw;
+    color: var(--verde);
+  }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './starRating.css'
 const StarRating = ({ onRatingSubmit }) => {
   const [rating, setRating] = useState(0);
 
@@ -20,7 +20,7 @@ const StarRating = ({ onRatingSubmit }) => {
               value={ratingValue}
               onClick={() => handleRating(ratingValue)}
               style={{ display: 'none' }}
-            />
+            />  
             <span
               style={{
                 cursor: 'pointer',
