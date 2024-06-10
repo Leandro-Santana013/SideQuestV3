@@ -1,12 +1,12 @@
-span {
+.starRating span {
     cursor: pointer;
     color: #e4e5e9;
     font-size: 2rem;
     transition: color 200ms;
   }
   
-  span:hover,
-  span:hover ~ span {
+  .starRating span:hover,
+  .starRatingspan:hover ~ .starRating span {
     color: #ffc107;
   }
   

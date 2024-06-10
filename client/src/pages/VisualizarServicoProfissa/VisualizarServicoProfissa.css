@@ -1,25 +1,51 @@
-.card-visualizar {
-    width: 60vw;
-    box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.48);
-    border-radius: 15px;
-    margin-top: 5vw;
+.service-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: transparent;
+    padding: 20px;
 }
 
-.card-visualizar .card-header-servico {
+.service-header {
+    position: relative; /* Adicione essa linha para usar posição absoluta para os ícones */
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 25px;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 35px;
 }
 
-.card-visualizar .card-header-servico .action-buttons-header-servico{
+.service-info {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.service-info h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.service-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 18px;
+}
+
+.location-icon {
+    display: inline-block;
+    font-size: 25px;
+    vertical-align: middle;
+}
+
+.actions-buttons-service{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.card-visualizar .card-header-servico button {
+.action-button-service {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,68 +59,96 @@
     cursor: pointer;
 }
 
-.card-visualizar .card-main-servico {
+.favorite-icon {
+    cursor: pointer;
+    right: 20px;
+    top: 7px;
+    position: absolute;
+}
+
+.favorite-icon .icone-favoritado {
+    color: var(--verde);
+    font-size: 30px;
+}
+
+.favorite-icon .icone-favoritar {
+    color: #666;
+    font-size: 30px;
+}
+
+.service-section {
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    flex-grow: 1; 
+}
+
+.row-section {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
-    padding: 25px;
+    gap: 30px;
 }
 
-.card-main-servico .descricao {
-width: 30vw;
-}
-
-.card-main-servico .descricao h3 {
-    font-size: 18px;
-    text-align: justify;
-}
-
-.card-main-servico .perfil-avaliacao{
+.section-header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.3em;
+}
+
+.section-content {
+    padding: 10px 0;
+}
+
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: #e0e7ff;
+    color: #333;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 5px;
+}
+
+.gallery-section{
+    display: flex;
+    align-items: center;
     flex-direction: column;
-    align-items: center;
+    width: 35vw;
+    height: 16vw;
+    overflow-y: auto;
 }
 
-.card-main-servico .avaliacao-icon-nome {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-main-servico .avaliacao-icon-nome .nome-avaliacao{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-main-servico .avaliacao-icon-nome .nome-avaliacao .avaliacao {
+.gallery-section .section-header{
     display: flex;
     gap: 3px;
-    align-items: center;
-
 }
 
-.avaliacao-icon-nome img {
-    width: 80px;
-    height: 80px;
-    margin-right: 8px;
-}
 
-.images-servico {
+.gallery {
     display: flex;
-    width: 30vw;
+    flex-wrap: wrap;
     gap: 10px;
-    overflow-x: auto;
-}
-
-.images-servico .imagem-servico{
-    width: 10vw;
-    height: 10vw;
-}
-
-.card-main-servico .distancia{
-    display: flex;
-    align-items: center;
     justify-content: center;
-}
+    width: 35vw ;
+  }
+  
+  .imagem-servico{
+    width: 10vw;
+ 
+    height: 10vw;
+    border-radius: 4px;
+    object-fit: cover;
+  }

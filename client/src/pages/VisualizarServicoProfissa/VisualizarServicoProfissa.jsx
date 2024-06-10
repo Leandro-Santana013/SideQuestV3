@@ -48,7 +48,7 @@ const VisualizarServicoProfissa = () => {
 
     const handleClickaceitar = async (id) => {
         if (pro && pro.id_profissional && servico) {
-             await postRequest(`/professional/servico/aceitar`, { id_profissional: id, id_servico: servico.id_postagemServico });
+            await postRequest(`/professional/servico/aceitar`, { id_profissional: id, id_servico: servico.id_postagemServico });
             setModal(true)
         }
     };
@@ -90,93 +90,92 @@ const VisualizarServicoProfissa = () => {
             <SidebarProfissional />
             <div className="content-midia">
                 <div className="main-content">
-                {modal && (
-                      <>
-                        <div className="fade">
-                          <div className={`modal-postar-sucess`}>
-                            <h3>Serviço aceito</h3>
-                            <RiVerifiedBadgeFill/>
-                            <p></p>
-                            <Link to={"/homeProfissionais"}>
-                              <button
-                                className="close-modal-postar"
-                                onClick={async() => {                         
-                                 await setModal(false); // Adicione esta linha para fechar o modal ao clicar em "Fechar"
-                                 window.location.reload()
-                                }}
-                              >
-                                Fechar
-                              </button>
-                            </Link>
-                          </div>
-                        </div>
-                      </>
+                    {modal && (
+                        <>
+                            <div className="fade">
+                                <div className={`modal-postar-sucess`}>
+                                    <h3>Serviço aceito</h3>
+                                    <RiVerifiedBadgeFill style={{width: '10vw', height: '10vw', color: '#3CBC8C'}}/>
+                                    <p></p>
+                                    <Link to={"/homeProfissionais"}>
+                                        <button
+                                            className="close-modal-postar"
+                                            onClick={async () => {
+                                                await setModal(false); // Adicione esta linha para fechar o modal ao clicar em "Fechar"
+                                                window.location.reload()
+                                            }}
+                                        >
+                                            Fechar
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </>
                     )}
-                    <div className="card-visualizar">
-                        {servico && (
-                            <>
-                                <div className="card-header-servico">
-                                    <div className="titulo-servico">
-                                        <h2>{servico.ds_titulo}</h2>
-                                        <h3>Pintura</h3>
-                                    </div>
-                                    <div className="action-buttons-header-servico">
-                                        <button onClick={() => handleClickaceitar(pro.id_profissional)}>Aceitar</button>
-                                        <button onClick={() => handleClick(servico.id_cliente)}>Chat</button>
+                    {servico && (
+                    <div className="service-container">
+                        <div className="service-header">
+                            <div className="service-info" style={{display: 'flex', flexDirection: 'column'}}>
+                                <h1>
+                                    {servico.ds_titulo}{" "}
+                                </h1>
+                                <p style={{display: 'flex'}}>
+                                    <strong><p style={{fontWeight: '600'}}>{servico.nm_cliente}</p></strong>
+                                    <i className="location-icon" style={{display: 'flex', alignItems: 'center',}}>
+                                        <MdOutlineLocationOn />
+                                        <p style={{display: 'flex', alignItems: 'center'}}>4km</p>
+                                    </i>
+                                </p>
+                            </div>
+                            <div className="actions-buttons-service">
+                                <button className="action-button-service" onClick={() => handleClickaceitar(pro.id_profissional)}>Aceitar</button>
+                                <button className="action-button-service" onClick={() => handleClick(servico.id_cliente)}>Chat</button>
+                            </div>
+                        </div>
+                        <div className="row-section">
+                            <div className="service-section info-section">
+                                <div className="section-header">
+                                    <h2>Descrição do serviço</h2>
+                                </div>
+                                <div className="section-content">
+
+                                    <p>{servico.ds_servico}</p>
+                                </div>
+                            </div>
+                            <div className="service-section areas-section">
+                                <div className="section-header">
+                                    <h2>Categoria</h2>
+                                </div>
+                                <div className="section-content tags">
+                                    <p className="tag">{servico.ds_categoria}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row-section">
+                            <div className="service-section  gallery-section">
+                                <div className="section-header">
+                                    <h2>Imagens do serviço</h2>
+                                    <p>({imagesServico?.length})</p>
+                                </div>
+                                <div className="section-content">
+                                    <div className="gallery">
+                                        {imagesServico.length > 0 ? (              
+                                                imagesServico.map((image, index) => (
+                                                        <img src={image} alt={`Imagem do serviço ${index + 1}`} className="imagem-servico" />
+                                                ))
+                                        ) : (
+                                            <p>Nenhuma imagem anexada ao serviço</p>
+                                        )}
                                     </div>
                                 </div>
-                                <hr />
-                                <div className="card-main-servico">
-                                    <div className="proposta-servico">
-                                        <div className="perfil-avaliacao">
-                                            <div className="avaliacao-icon-nome">
-                                                <img src={servico['tb_cliente.img_cliente'] ? servico.img_cliente : iconePerfil} alt="icon-perfil" />
-                                                <div className="nome-avaliacao">
-                                <p>{servico['tb_cliente.nm_cliente']}</p>
-                                                    <div className="avaliacao">
-                                                        <p>4.9</p>
-                                                        <span className="feedback-score">
-                                                            <RiStarFill />
-                                                            <RiStarFill />
-                                                            <RiStarFill />
-                                                            <RiStarFill />
-                                                            <RiStarFill />
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="distancia">
-                                                <MdOutlineLocationOn/>
-                                                <p>4km</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="desc-servico">
-                                        <div className="descricao">
-                                            <h3>Descrição</h3>
-                                            <p>{servico.ds_servico}</p>
-                                        </div>
-                                        <h3>Imagens anexadas a postagem</h3>
-                                        <div className="images-servico">
-                                            {imagesServico.length > 0 ? (
-                                                <Swiper spaceBetween={10} slidesPerView={3}>
-                                                    {imagesServico.map((image, index) => (
-                                                        <SwiperSlide key={index}>
-                                                            <img src={image} alt={`Imagem do serviço ${index + 1}`} className="imagem-servico" />
-                                                        </SwiperSlide>
-                                                    ))}
-                                                </Swiper>
-                                            ) : (
-                                                <p>Nenhuma imagem anexada ao serviço</p>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            </>
-                        )}
+                            </div>
+                        </div>
                     </div>
+                    )}
                 </div>
+                
             </div>
+                                    
         </>
     );
 };
