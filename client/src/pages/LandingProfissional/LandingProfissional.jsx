@@ -1,3 +1,4 @@
+
 import "./landingProfissional.css";
 import React from "react";
 import { useState } from "react";
@@ -87,14 +88,6 @@ const LandingProfissional = () => {
                             <p className="pe">Converse livremente com seus clientes</p>
                         </div>
                         <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p>Acesso à nossa rede de clientes</p>
-                        </div>
-                        <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p>Converse livremente com seus clientes</p>
-                        </div>
-                        <div className="beneficios-plano">
                             <img src={verificado} alt="verificado" />
                             <p className="pe">1 categoria para serviços</p>
                         </div>
@@ -121,14 +114,6 @@ const LandingProfissional = () => {
                             <p className="pe">Converse livremente com seus clientes</p>
                         </div>
                         <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p>Acesso à nossa rede de clientes</p>
-                        </div>
-                        <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p>Converse livremente com seus clientes</p>
-                        </div>
-                        <div className="beneficios-plano">
                             <img src={verificado} alt="verificado" />
                             <p className="pe">4 categorias para serviços</p>
                         </div>
@@ -153,14 +138,6 @@ const LandingProfissional = () => {
                         <div className="beneficios-plano">
                         <img src={verificado} alt="verificado" />
                             <p className="pe">Converse livremente com seus clientes</p>
-                        </div>
-                        <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p>Acesso à nossa rede de clientes</p>
-                        </div>
-                        <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p>Converse livremente com seus clientes</p>
                         </div>
                         <div className="beneficios-plano">
                             <img src={verificado} alt="verificado" />
