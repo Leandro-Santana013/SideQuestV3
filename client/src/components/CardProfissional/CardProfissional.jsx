@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { RiFilter2Fill, RiStarFill } from "react-icons/ri";
 import { getRequest } from "../../utils/services";
 
+
 export const CardProfissional = () => {
   const [dadosIniciais, setDadosIniciais] = useState([]);
   const [filtrados, setFiltrado] = useState(null);
@@ -157,7 +158,7 @@ export const CardProfissional = () => {
     <section className="area-servicos">
       <div className="input-filtros">
         <TextInputBusca
-          placeholder={"Encontre profissionais"}
+          placeholder={"Encontre os melhores profissionais"}
           value={busca}
           onChange={(value) => setBusca(value)}
         />

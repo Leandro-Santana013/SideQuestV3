@@ -57,7 +57,7 @@ const HomeProfissionais = () => {
                                 </div>
                             </div>
                         </div>
-                        <h1 className="encontre-prof-p-seu-problema">Encontre os melhores profissionais para o seu problema</h1>
+                        <h1 className="encontre-prof-p-seu-problema">Encontre os melhores serviços para você!</h1>
                         <section className="area-servicos">
                             <CardServico />
                         </section>

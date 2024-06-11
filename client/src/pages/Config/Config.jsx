@@ -12,6 +12,7 @@ import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 
 import imgPerfil from "../../assets/icone-perfil.png";
+import { IoIosWarning } from "react-icons/io";
 
 const Config = () => {
   const avatarUrl = useRef(imgPerfil);
@@ -416,10 +417,10 @@ const Config = () => {
                               handleFieldChange("password", event);
                             }}
                           />
-                          <div style={{height: '15px'}}>
-                            {passErrorCompare && <p style={{color: 'red', fontWeight: 'normal', margin: '0', padding: '0'}}>Senha Incorreta</p>}
+                          <div style={{ height: '15px' }}>
+                            {passErrorCompare && <p style={{ color: 'red', fontWeight: 'normal', margin: '0', padding: '0' }}>Senha Incorreta</p>}
                           </div>
-                          
+
                           <div className="enviar-cancelar-alt-senha">
                             <button className="btn-enviar-senha"
                               onClick={() => {
@@ -454,20 +455,22 @@ const Config = () => {
                             handleFieldChange("password", event);
                           }}
                         />
-                        <button
+                        <button className="btn-salvar-nova-senha"
                           onClick={() => {
                             comparePassword(true);
                           }}
                         >
                           Salvar nova Senha
                         </button>
-                        {levelSecPass && !alterpass ? (
-                          <p>{levelSecPass}</p>
-                        ) : (
-                          <>
-                            <p>{alterpass}</p>
-                          </>
-                        )}
+                        <div style={{ height: '20px' }}>
+                          {levelSecPass && !alterpass ? (
+                            <p style={{ margin: '0', fontWeight: 'normal', color: 'red' }}>{levelSecPass}</p>
+                          ) : (
+                            <>
+                              <p>{alterpass}</p>
+                            </>
+                          )}
+                        </div>
                       </>
                     )}
                   </>
@@ -479,15 +482,26 @@ const Config = () => {
                   <button id="excluir" onClick={() => {
                     setCerteza(true)
                   }}>Excluir</button>
-                  {certeza && <><h2>todos os seus Dados serão excluidos
-                    e nunca mais poderam ser acessados, {num > 0 ? `você possui ${num} serviços ativos` : ""}
-                    tem certeza?
-                    <button onClick={async () => { await deleteuser(); logoutUser() }}>confirmar</button> <button onClick={() => { setCerteza(null) }}>cancelar</button></h2></>}
                 </div>
               </div>
             </div>
           </div>
         </div>
+        {certeza && (
+          <div className="content-modal-confirmar-excluir-conta">
+            <div className="modal-confirmar-excluir-conta">
+              <IoIosWarning />
+              <h2>todos os seus Dados serão excluidos
+                e nunca mais poderam ser acessados, {num > 0 ? `você possui ${num} serviços ativos` : ""}
+                tem certeza que deseja deletar sua conta?
+              </h2>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button className="btn-sim" onClick={async () => { await deleteuser(); logoutUser() }}>confirmar</button>
+                <button className="btn-nao" onClick={() => { setCerteza(null) }}>cancelar</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       {showModal && (
         <div className="centralizador-modal-salvar-alteracoes">
@@ -503,10 +517,15 @@ const Config = () => {
               >
                 Cancelar
               </button>
+
             </div>
+
           </div>
+
         </div>
       )}
+
+
     </>
   );
 };

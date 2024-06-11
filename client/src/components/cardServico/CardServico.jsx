@@ -63,12 +63,12 @@ export const CardServico = () => {
 
   return (
     <>
-      <div className="input-filtros">
-        <TextInputBusca placeholder={"Encontre profissionais"} />
-        <div className="filtros">
+      <div className="input-filtros" style={{justifyContent: 'center'}}>
+        <TextInputBusca placeholder={"Pesquisar por serviços"} />
+        {/* <div className="filtros">
           <p>Filtros</p>
           <RiFilter2Fill className="iconFilter" />
-        </div>
+        </div> */}
       </div>
       <div className="cards-container">
 

@@ -50,12 +50,14 @@ export const ChatBox = () => {
       <div className="chat-header">
         <div className="chat-header-img-name">
           <img className="img-profissional" src={pro ? infoChat.img_cliente ? infoChat.img_cliente : imgPerfil : null || user ? infoChat.img_profissional ? infoChat.img_profissional : imgPerfil : null} />
-
-          <h3>{user ? infoChat.nm_profissional : infoChat.nm_cliente}</h3>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
+            <h3 style={{margin: '0'}}>{user ? infoChat.nm_profissional : infoChat.nm_cliente}</h3>
+            {isOnlineUser || isOnlinePro &&
+              <div className="user-online">online</div>
+            }
+          </div>
         </div>
-        {isOnlineUser || isOnlinePro &&
-          <div className="user-online">online</div>
-        }
+
       </div>
       <div className="chat-main" ref={chatMainRef}>
         {messages &&
