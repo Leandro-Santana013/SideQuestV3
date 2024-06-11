@@ -127,6 +127,11 @@ color: #fff;
     padding: 10px 0;
 }
 
+.areas-section {
+    width: 9vw;
+    height: 10vw;
+    overflow-y: auto;
+}
 
 .tags {
     display: flex;

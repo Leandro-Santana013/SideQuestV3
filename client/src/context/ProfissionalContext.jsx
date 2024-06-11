@@ -137,7 +137,7 @@ export const ProfessionalContextProvider = ({ children }) => {
           setServicosHistory(historico)
           setnum(responseNum)
           setServicosEnd(ServiceEnd.user);
-          console.log(ServiceEnd.user, "apapapappapap")
+          console.log(responseprivate.user, "apapapappapap")
           setProfissional(perfilpro.pro);
           setimagens(perfilpro.images);
           setComentarios(perfilpro.comentarios);

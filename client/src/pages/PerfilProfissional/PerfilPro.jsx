@@ -15,7 +15,7 @@
     RiAttachment2,
   } from "react-icons/ri";
   import iconeperfil from "../../assets/icone-perfil.png";
-
+  import { FaPlus } from "react-icons/fa";
   import { ChatContext } from "../../context/ChatContext";
   import {
     postRequest,
@@ -27,8 +27,10 @@
   import { MdOutlineLocationOn } from "react-icons/md";
   import { RiStarFill } from "react-icons/ri";
 
+  
   const PerfilProfissional = () => {
     const { createChat } = useContext(ChatContext);
+    const [modal, setModal] = useState(false)
     const {
       profissional,
       imagens,
@@ -38,6 +40,9 @@
       imagemSelecionada,
       setImagemSelecionada,
     } = useContext(ProfessionalContext);
+    useEffect(()=> {
+      console.log(comentario, "apapo")
+    }, [comentario])
 
     const handleFileChange = (event) => {
       const file = event.target.files[0];
@@ -66,7 +71,42 @@
         <section className="content-midia">
           <div className="main-content">
             {profissional && (
-              <div className="profile-container">
+              <>
+             
+              <div className="profile-container" >
+              {modal &&(
+                <div className="fade">
+                <div className="modal" style={{width: '30vw', height: '25vw', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginBottom: '10px'}}>  {imagemSelecionada && (             
+                    <div>
+                      <h2>Imagem Selecionada:</h2>
+                      <img
+                        src={imagemSelecionada}
+                        alt="Imagem Selecionada"
+                        style={{width: '20vw', height: '15vw'}}
+                      />
+                      <div style={{display: 'flex', gap: '1vw'}}>
+                      <button
+                        onClick={() => {
+                          saveimg();
+                          setModal(false)
+                        }}
+                        className="submit-button-card"
+                      >
+                        salvar
+                      </button>
+                      <button
+                        onClick={() => {
+                          setImagemSelecionada(null);
+                          setModal(false)
+                        }}
+                        style={{padding: '10px', border: ' 1px solid red', color: 'red', backgroundColor: 'white', cursor: 'pointer'}}
+                      >
+                        cancelar
+                      </button>
+                    </div>
+                    </div>  
+                )}</div></div>
+            )}
                 <div className="profile-header">
                   <img
                     src={
@@ -121,7 +161,7 @@
                   </div>
                 </div>
                 <div className="row-section">
-                  <div className="profile-section  gallery-section">
+                  <div className="profile-section  gallery-section gallery-section-pro" style={{position: 'relative'}}>
                     <div className="section-header">
                       <h2>Galeria de trabalhos </h2>
                       <p>({imagens?.length})</p>
@@ -130,40 +170,14 @@
                       <input
                         type="file"
                         id="anexo"
-                        className="anexo"
+                        className="anexo" 
                         accept="image/*"
                         onChange={handleFileChange}
                       />
-                      <label htmlFor="anexo" className="anexoLabel">
-                        Anexo
-                        <RiAttachment2 className="iconAnexo" />
+                      <label htmlFor="anexo" className="photoLabelas" style={{position: 'absolute', right: '15px', bottom: '15px'}} onClick={() => setModal(true)}>
+                        <FaPlus  className="iconPhoto" />
                       </label>
                       <div className="gallery">
-                        {imagemSelecionada && (
-                          <>
-                            <div>
-                              <h2>Imagem Selecionada:</h2>
-                              <img
-                                src={imagemSelecionada}
-                                alt="Imagem Selecionada"
-                              />
-                              <button
-                                onClick={() => {
-                                  saveimg();
-                                }}
-                              >
-                                salvar
-                              </button>
-                              <button
-                                onClick={() => {
-                                  setImagemSelecionada(null);
-                                }}
-                              >
-                                cancelar
-                              </button>
-                            </div>
-                          </>
-                        )}
                         {imagens?.length > 0 ? (
                           imagens.map((profile, index) => (
                             <img
@@ -180,122 +194,48 @@
                     </div>
                   </div>
                   <div class="profile-section feedback-section">
-                    <div class="section-header">
-                      <h2>Avaliações</h2>
-                      <p>4.5/5 (396 opniões)</p>
-                    </div>
-                    <div class="section-content">
-                      <div class="feedback-list">
-                        <div class="feedback-box">
-                          <div className="feedback-author">
-                            <img
-                              src={
-                                profissional && profissional.img_profissional
-                                  ? profissional.img_profissional
-                                  : iconeperfil
-                              }
-                              alt="Foto de perfil do autor do comentário"
-                              className="feedback-profile-picture"
-                            />
-                            <div className="feedback-name-score">
-                              <p class="author-name">Joao manuel</p>
-                              <span className="feedback-score">
-                                <RiStarFill />
-                                <RiStarFill />
-                                <RiStarFill />
-                                <RiStarFill />
-                                <RiStarFill />
-                              </span>
-                            </div>
-                          </div>
-                          <p class="feedback-text">
-                            Excelente serviço e muito profissional!
-                          </p>
-                        </div>
-                        <div class="feedback-box">
-                          <div className="feedback-author">
-                            <img
-                              src={
-                                profissional && profissional.img_profissional
-                                  ? profissional.img_profissional
-                                  : iconeperfil
-                              }
-                              alt="Foto de perfil do autor do comentário"
-                              className="feedback-profile-picture"
-                            />
-                            <div className="feedback-name-score">
-                              <p class="author-name">Joao manuel</p>
-                              <span className="feedback-score">
-                                <RiStarFill />
-                                <RiStarFill />
-                                <RiStarFill />
-                                <RiStarFill />
-                                <RiStarFill />
-                              </span>
-                            </div>
-                          </div>
-                          <p class="feedback-text">
-                            Excelente serviço e muito profissional!
-                          </p>
-                        </div>
-                        <div class="feedback-box">
-                          <div className="feedback-author">
-                            <img
-                              src={
-                                profissional && profissional.img_profissional
-                                  ? profissional.img_profissional
-                                  : iconeperfil
-                              }
-                              alt="Foto de perfil do autor do comentário"
-                              className="feedback-profile-picture"
-                            />
-                            <div className="feedback-name-score">
-                              <p class="author-name">Joao manuel</p>
-                              <span className="feedback-score">
-                                <RiStarFill />
-                                <RiStarFill />
-                                <RiStarFill />
-                                <RiStarFill />
-                                <RiStarFill />
-                              </span>
-                            </div>
-                          </div>
-                          <p class="feedback-text">
-                            Excelente serviço e muito profissional!
-                          </p>
+                  <div class="section-header">
+                    <h2>Avaliações</h2>
+                    <p>{Number(profissional.media_avaliacoes).toFixed(1)}/5 ({comentario?.length} avaliações)</p>
+                  </div>
+                  <div class="section-content">
+                    <div class="feedback-list">
+                    {comentario? comentario.map((comentario, index) =>(
+                    <div class="feedback-box" key={comentario.avaliacao_id}>
+                      <div className="feedback-author">
+                        <img
+                          src={
+                            comentario.cliente_imagem
+                              ? comentario.cliente_imagem
+                              : iconeperfil
+                          }
+                          alt="Foto de perfil do autor do comentário"
+                          className="feedback-profile-picture"
+                        />
+                        <div className="feedback-name-score">
+                          <p class="author-name">{comentario.cliente_nome}</p>
+                          <span className="feedback-score">
+                          {[...Array(5)].map((_, index) => (
+                  <RiStarFill
+                    key={index}
+                    className={`ri-star-s-fill ${index < comentario.avaliacao_numero
+                      ? "ava" : ""}`}
+                  ></RiStarFill>
+                ))}
+                          </span>
                         </div>
                       </div>
-                      <div class="feedback-box">
-                        <div className="feedback-author">
-                          <img
-                            src={
-                              profissional && profissional.img_profissional
-                                ? profissional.img_profissional
-                                : iconeperfil
-                            }
-                            alt="Foto de perfil do autor do comentário"
-                            className="feedback-profile-picture"
-                          />
-                          <div className="feedback-name-score">
-                            <p class="author-name">Joao manuel</p>
-                            <span className="feedback-score">
-                              <RiStarFill />
-                              <RiStarFill />
-                              <RiStarFill />
-                              <RiStarFill />
-                              <RiStarFill />
-                            </span>
-                          </div>
-                        </div>
-                        <p class="feedback-text">
-                          Excelente serviço e muito profissional!
-                        </p>
-                      </div>
+                      <p class="feedback-text">
+                       {comentario.avaliacao_comentario}
+                      </p>
                     </div>
+                    )) : (<p>O profissional ainda não recebeu nenhuma avaliação</p>)}
                   </div>
                 </div>
               </div>
-            )}
+                </div>
+              </div>
+            </>)}
           </div>
         </section>
       </>

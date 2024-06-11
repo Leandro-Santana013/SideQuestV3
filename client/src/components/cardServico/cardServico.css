@@ -60,11 +60,14 @@
 .card-servico-profissional-body h2 {
     font-size: 18px;
     margin: 0 0 10px;
+    word-wrap: break-word;
 }
 
 .card-servico-profissional-body p {
     font-size: 14px;
     color: #555;
+    word-wrap: break-word;
+
 }
 
 

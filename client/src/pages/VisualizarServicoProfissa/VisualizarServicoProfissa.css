@@ -11,24 +11,28 @@
     align-items: center;
     justify-content: space-between;
     background-color: #fff;
+    height: 7vw;  
     padding-bottom: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 35px;
 }
 
-.service-info {
+.info-section-service {
+    width: 20vw;
     flex-grow: 1;
     margin-left: 20px;
+    margin-left: 0;
 }
 
-.service-info h1 {
+.info-section-service h1 {
     margin: 0;
     font-size: 30px;
 }
 
-.service-info p {
+.info-section-service p {
     margin: 5px 0;
+    word-wrap: break-word;
     color: #666;
     font-size: 18px;
 }
@@ -114,9 +118,10 @@
 }
 
 
-.tags {
+.tags-service {
     display: flex;
     flex-wrap: wrap;
+    width: 7vw;
 }
 
 .tag {
@@ -145,7 +150,7 @@
 .gallery {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 30px;
     justify-content: center;
     width: 35vw ;
   }

@@ -554,11 +554,13 @@ module.exports = {
       group: ["tb_profissionalProfileImgs.id_profileImg"],
     });
   },
+    
 
   queryPart3: async (req, res) => {
     const { id_profissional } = req.params;
     return ModelProfissional.findAll({
       where: { id_profissional: id_profissional },
+      raw: true,
       include: [
         {
           model: ModelConfirmacaoServico,
@@ -571,53 +573,33 @@ module.exports = {
                 {
                   model: ModelAvaliacao,
                   attributes: [],
-                  include: [
-                    {
-                      model: ModelTerminoServico,
-                      attributes: [],
-                      include: [
-                        {
-                          model: ModelConfirmacaoServico,
-                          attributes: [],
-                          include: [
-                            {
-                              model: ModelPostagemServico,
-                              attributes: [],
-                              include: [
-                                {
-                                  model: ModelCliente,
-                                  attributes: [],
-                                },
-                              ],
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ],
                 },
               ],
             },
+            {
+              model: ModelPostagemServico,
+              attributes: [],
+              include: [
+                {
+                  model: ModelCliente,
+                  attributes: []
+                }
+              ]
+            }
           ],
         },
       ],
       attributes: [
         // Adicionando atributos do cliente
-        [
-          Sequelize.col(
-            "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.id_cliente"
-          ),
-          "cliente_id",
-        ],
-        [
-          Sequelize.col(
-            "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.nm_cliente"
-          ),
+
+        [Sequelize.col(
+          "tb_confirmacaoServicos.tb_postagemServico.tb_cliente.nm_cliente"
+        ),
           "cliente_nome",
         ],
         [
           Sequelize.col(
-            "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.img_cliente"
+            "tb_confirmacaoServicos.tb_postagemServico.tb_cliente.img_cliente"
           ),
           "cliente_imagem",
         ],
@@ -642,12 +624,12 @@ module.exports = {
         ],
       ],
       group: [
-        "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.tb_terminoServico.tb_confirmacaoServico.tb_postagemServico.tb_cliente.id_cliente",
         "tb_confirmacaoServicos.tb_terminoServico.tb_avaliacao.id_avaliacao",
+        "tb_confirmacaoServicos->tb_postagemServico->tb_cliente.id_cliente"
+
       ], // agrupando pelo id do cliente
     });
   },
-
   buscarfav: async (req, res) => {
     const { id_cliente, id_profissional, param } = req.params;
 
@@ -862,7 +844,7 @@ module.exports = {
       const services = await ModelPostagemServico.findAll({
         where: { id_cliente: id_cliente },
         raw: true,
-        
+
         include: [
           {
             model: ModelConfirmacaoServico,

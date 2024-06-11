@@ -116,10 +116,10 @@ const VisualizarServicoProfissa = () => {
                     <div className="service-container">
                         <div className="service-header">
                             <div className="service-info" style={{display: 'flex', flexDirection: 'column'}}>
-                                <h1>
+                                <h1 style={{margin: 0}}>
                                     {servico.ds_titulo}{" "}
                                 </h1>
-                                <p style={{display: 'flex'}}>
+                                <p style={{display: 'flex', alignItems: 'center', margin: 0}}>
                                     <strong><p style={{fontWeight: '600'}}>{servico.nm_cliente}</p></strong>
                                     <i className="location-icon" style={{display: 'flex', alignItems: 'center',}}>
                                         <MdOutlineLocationOn />
@@ -133,7 +133,7 @@ const VisualizarServicoProfissa = () => {
                             </div>
                         </div>
                         <div className="row-section">
-                            <div className="service-section info-section">
+                            <div className="service-section info-section-service">
                                 <div className="section-header">
                                     <h2>Descrição do serviço</h2>
                                 </div>
@@ -146,7 +146,7 @@ const VisualizarServicoProfissa = () => {
                                 <div className="section-header">
                                     <h2>Categoria</h2>
                                 </div>
-                                <div className="section-content tags">
+                                <div className="section-content tags-service">
                                     <p className="tag">{servico.ds_categoria}</p>
                                 </div>
                             </div>

@@ -111,7 +111,12 @@ const PostarServico = () => {
       }
     }
   };
+  useEffect(()=>{
+console.log(exceededLimit)
+  }, [exceededLimit])
 
+
+  
   const openModal = (index) => {
     setCurrentImageIndex(index);
     setModalOpen(true);
@@ -178,7 +183,7 @@ const PostarServico = () => {
                   : "message-error-postar-end"
               }
             >
-              {messageErrorPostar}
+             <p style={{color: 'red'}}>{messageErrorPostar ? messageErrorPostar : "Limite maximo de imagens atingindo"}</p>
             </div>
           )}
           <form

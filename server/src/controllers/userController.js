@@ -369,13 +369,13 @@ exports.postarServicoLoc = async (req, res) => {
 
     const datanow = new Date();
 
-    console.log(servico)
-
     if (!servico.titulo || !servico.dsServico || !servico.categoria) {
       return res
         .status(400)
         .json({ error: "Insira as informações corretamente", formstatus: 1 });
     }
+console.log(servico.titulo.length)
+    if(servico.titulo.length > 50) return res.status(400).json({ error: "titulo muito longo", formstatus: 1 });
 
     const categoriaInstance = await controller_User.selectCategoriaescolhida({
       params: { ds_categoria: servico.categoria },

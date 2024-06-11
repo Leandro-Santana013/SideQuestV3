@@ -8,6 +8,12 @@ import {
 import { ProfessionalContext } from "../../context/ProfissionalContext";
 import "./servicosAtivosProfissa.css";
 import sucessoIcon from "../../assets/sucesso1.png";
+import {
+  postRequest,
+  favRequest,
+  putRequest,
+  getRequest,
+} from "../../utils/services";
 import iconeperfil from "../../assets/icone-perfil.png";
 import alertaIcon from "../../assets/alerta.png";
 import { RiVerifiedBadgeFill } from "react-icons/ri";

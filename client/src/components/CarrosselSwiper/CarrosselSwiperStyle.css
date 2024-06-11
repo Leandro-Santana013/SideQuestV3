@@ -119,8 +119,9 @@
 }
 
 .swiper-wrapper {
+  background-color:  #f4f4f4;
   height: 20% !important;
-  background-color: #eeeeee;
+
   padding: 10px;
   border-radius: 10px;
 }

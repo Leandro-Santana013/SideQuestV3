@@ -50,7 +50,7 @@ const PerfilProfissionalcli = () => {
         const response = await getRequest(`/user/perfil/profissionais/${id}`);
         setProfissional(response.pro);
         setimagens(response.images);
-        console.log(response.comentario)
+        console.log(response.comentario, "aaa")
         if(response.comentarios[0].avaliacao_id !== null){
         setComentarios(response.comentarios);
         }
@@ -126,7 +126,7 @@ const PerfilProfissionalcli = () => {
                   className="profile-picture"
                 />
                 <div className="profile-info">
-                  <h1>
+                  <h1 style={{display: 'flex', alignItems: 'center'}}>
                     {profissional.nm_profissional}{" "}
                     <span
                       className={

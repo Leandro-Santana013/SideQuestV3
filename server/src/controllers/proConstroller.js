@@ -538,7 +538,7 @@ exports.perfilpro = async (req, res) => {
       params: { id_profissional: id_profissional },
     });
 
-    const comentarios = pt3[0];
+    const comentarios = pt3;
     
 
     res.status(200).json({ pro, images, comentarios });

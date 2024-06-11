@@ -98,11 +98,19 @@ const [selectedService, setSelectedService] = useState(null);
                   <h3>Serviço Finalizado</h3>
                   <p>Não se esqueça de avaliar o profissional!</p>
                   <StarRating onRatingSubmit={handleRatingSubmit} />
-                  <input placeholder="Deixe seu comentário" 
+                  <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                  <textarea placeholder="Deixe seu comentário" 
                   onChange={(event) =>
                     handleFieldChange("ds_comentario", event)
-                  }/>
-                  <button onClick={()=>{avaliar()}}>Enviar</button>
+                  }
+                  className="comentario-textarea"
+                  />
+                  <button onClick={async()=>{
+                 await avaliar()
+                 setModal(false); 
+                    window.location.reload()
+                  }} className="submit-button-avaliar">Enviar</button>
+                  </div>
                 </div>
               </div>
             )}
@@ -118,7 +126,7 @@ const [selectedService, setSelectedService] = useState(null);
                   </div>
                   <div className="card-servico-profissional-footer">
                     {servico.set_finalizar && (
-                      <button id="finalizar" onClick={() => {
+                      <button id="finalizar" className='submit-button-card' onClick={() => {
                         setSelectedService(servico);
                         setModal(true)
                       }}>

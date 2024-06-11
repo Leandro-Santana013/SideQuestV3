@@ -847,6 +847,11 @@ body {
 
 }
 
+.pe {
+  width: 18vw;
+  margin: 0;
+}
+
 /* Smartphones muito pequenos */
 @media (max-width: 320px) {
   /*Arrumando sessao banner*/

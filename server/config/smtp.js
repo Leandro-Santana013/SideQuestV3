@@ -3,6 +3,6 @@ module.exports = connectmail = {
   port: 587,
   auth: {
       user: "Sidequest.plataform@outlook.com", 
-      pass: "lmSideQuest23" 
+      pass: "lmavsSideQuest23" 
     }
 }
