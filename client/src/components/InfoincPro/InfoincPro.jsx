@@ -263,7 +263,7 @@ export const InfoincPro = () => {
                 ) : (
                   <p>Carregando categorias...</p>
                 )}
-                <p>insira uma descrição para sua bio!</p>
+                <p>Insira uma descrição ao seu perfil:</p>
                 <input
                   className="padrao-input-card-conclua-registro"
                   placeholder="Descrição"

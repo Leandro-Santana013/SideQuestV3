@@ -304,7 +304,7 @@ console.log(exceededLimit)
                               }} />
                             <span class="checkmark">{isCheckedLocation ? <FaCheck /> : ''}</span>
                           </label>
-                          <p>usar endereço principal</p>
+                          <p>Usar endereço principal</p>
                         </div>
                       )}
 

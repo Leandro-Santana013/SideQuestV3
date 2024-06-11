@@ -13,13 +13,11 @@ export const Footer = () => {
             <h4>Termos</h4>
             <p>Termos de uso</p>
             <p>Política de privacidade</p>
-            <p>Lorem ipsum dot</p>
           </div>
           <div className="sobre">
             <h4>Sobre</h4>
             <p>Sobre nós</p>
             <p>Time SideQuest</p>
-          <p>Lorem ipsum dot</p>
         </div>
       </div>
       <div className="inferior-footer">

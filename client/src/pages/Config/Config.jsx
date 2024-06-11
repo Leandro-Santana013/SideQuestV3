@@ -152,7 +152,7 @@ const Config = () => {
           <>
             {parabens && (
               <>
-                <h1>Salva direito animal</h1>
+                <h1>Digite seu CEP corretamente!</h1>
               </>
             )}
           </>
@@ -202,7 +202,7 @@ const Config = () => {
 
                     {user && user.nmr_telefoneCliente && (
                       <>
-                        <p>número</p>
+                        <p>Número</p>
                         {modalEditar ? (
                           <input
                             type="text"
@@ -388,7 +388,7 @@ const Config = () => {
                   ) :
                     (<div>
                       <p>Nenhuma localização vinculada</p>
-                      <button >insira localização principal</button>
+                      <button >Insira localização principal</button>
                     </div>
                     )}
                 </div>
@@ -409,7 +409,7 @@ const Config = () => {
                     {!passSucess ? (
                       <>
                         <div className="alt-senha">
-                          <p>digite sua senha atual</p>
+                          <p>Digite sua senha atual:</p>
                           <input
                             type="password"
                             id="senha-alterar"
@@ -427,7 +427,7 @@ const Config = () => {
                                 comparePassword();
                               }}
                             >
-                              enviar
+                              Enviar
                             </button>
 
                             <button className="btn-cancelar-senha"
@@ -439,7 +439,7 @@ const Config = () => {
                                 setAlterPass(null);
                               }}
                             >
-                              {alterpass ? "fechar" : "cancelar"}
+                              {alterpass ? "fechar" : "Cancelar"}
                             </button>
 
                           </div>
@@ -447,7 +447,7 @@ const Config = () => {
                       </>
                     ) : (
                       <>
-                        <h2>digite sua nova senha</h2>
+                        <h2>Digite sua nova senha:</h2>
                         <input
                           type="password"
                           id="senha-alterar"
@@ -460,7 +460,7 @@ const Config = () => {
                             comparePassword(true);
                           }}
                         >
-                          Salvar nova Senha
+                          Salvar Nova Senha
                         </button>
                         <div style={{ height: '20px' }}>
                           {levelSecPass && !alterpass ? (
@@ -491,13 +491,13 @@ const Config = () => {
           <div className="content-modal-confirmar-excluir-conta">
             <div className="modal-confirmar-excluir-conta">
               <IoIosWarning />
-              <h2>todos os seus Dados serão excluidos
+              <h2>Todos os seus dados serão excluidos
                 e nunca mais poderam ser acessados, {num > 0 ? `você possui ${num} serviços ativos` : ""}
                 tem certeza que deseja deletar sua conta?
               </h2>
               <div style={{ display: 'flex', gap: '10px' }}>
-                <button className="btn-sim" onClick={async () => { await deleteuser(); logoutUser() }}>confirmar</button>
-                <button className="btn-nao" onClick={() => { setCerteza(null) }}>cancelar</button>
+                <button className="btn-sim" onClick={async () => { await deleteuser(); logoutUser() }}>Confirmar</button>
+                <button className="btn-nao" onClick={() => { setCerteza(null) }}>Cancelar</button>
               </div>
             </div>
           </div>
