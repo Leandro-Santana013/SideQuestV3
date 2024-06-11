@@ -12,7 +12,6 @@ export const SidebarCliente = () => {
     { id: 2, name: "chats", href: "chats" }, ,
     { id: 3, name: "favoritos", href: "favoritosCliente" },
     { id: 4, name: "histórico", href: "historicoCliente" },
-    { id: 5, name: "pagamentos", href: "pagamentosCliente" },
   ];
 
   useEffect(() => {
@@ -87,8 +86,6 @@ const getIcon = (page) => {
       return "fa-regular fa-star";
     case "historicoCliente":
       return "fa-solid fa-clock-rotate-left";
-    case "pagamentosCliente":
-      return "fa-solid fa-hand-holding-dollar";
     case "config":
       return "fa-solid fa-gear";
     default:

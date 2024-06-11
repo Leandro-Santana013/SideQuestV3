@@ -33,11 +33,9 @@ export const MenuBottomProfissional = () => {
     const pages = [
         { id: 1, name: "home", href: "homeProfissionais" },
         { id: 2, name: "chats", href: "chats" },
-        { id: 3, name: "dashboard", href: "dashboard" },
-        { id: 4, name: "perfil", href: "perfilProfissional" },
-        { id: 5, name: "pagamentos", href: "pagamentosProfissional" },
-        { id: 6, name: "propostas", href: "propostasProfissional" },
-        { id: 7, name: "Configurações", href: "ConfigProfissa" }
+        { id: 3, name: "perfil", href: "perfilProfissional" },
+        { id: 4, name: "propostas", href: "propostasProfissional" },
+        { id: 5, name: "Configurações", href: "ConfigProfissa" }
     ];
 
     useEffect(() => {
@@ -79,14 +77,10 @@ const getIcon = (page) => {
             return "fa-solid fa-house";
         case "chats":
             return "fa-regular fa-comments";
-        case "dashboard":
-            return "fa-sharp fa-solid fa-chart-line";
         case 'perfilProfissional':
             return 'fa-solid fa-user-tie';
         case "favoritosProfissional":
             return "fa-regular fa-star";
-        case "pagamentosProfissional":
-            return "fa-solid fa-coins";
         case "propostasProfissional":
             return "fa-solid fa-handshake";
         case "ConfigProfissa":

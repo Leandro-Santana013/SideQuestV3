@@ -35,8 +35,7 @@ export const MenuBottomCliente = () => {
         { id: 2, name: "Chats", href: "chats" },
         { id: 3, name: "Favoritos", href: "favoritosCliente" },
         { id: 4, name: "Histórico", href: "historicoCliente" },
-        { id: 5, name: "Pagamentos", href: "pagamentosCliente" },
-        { id: 6, name: "Configurações", href: "config" }
+        { id: 5, name: "Configurações", href: "config" }
     ];
 
     useEffect(() => {
@@ -82,8 +81,6 @@ const getIcon = (page) => {
             return "fa-regular fa-star";
         case "historicoCliente":
             return "fa-solid fa-clock-rotate-left";
-        case "pagamentosCliente":
-            return "fa-solid fa-hand-holding-dollar";
         case "config":
             return "fa-solid fa-gear";
         default:

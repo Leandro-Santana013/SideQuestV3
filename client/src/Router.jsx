@@ -11,7 +11,6 @@ import ValidaEmail from "./pages/ValidaEmail/validaEmail";
 import ValidaEmailProfissional from "./pages/validaEmailProfissional/validaEmailProfissional";
 import HomeCliente from "./pages/HomeCliente/HomeCliente";
 import PostarServico from "./pages/PostarServico/PostarServico";
-import PagamentosCliente from "./pages/PagamentosCliente/PagamentosCliente";
 import Favoritos from "./pages/Favoritos/Favoritos";
 import Historico from "./pages/Historico/Historico";
 import HomeProfissionais from "./pages/HomeProfissional/HomeProfissional";
@@ -48,7 +47,6 @@ const Router = () => {
           <Route exact path="/homeCliente/postarSevico" element={<PostarServico />} />
           <Route exact path="/favoritosCliente" element={<Favoritos />} />
           <Route exact path="/historicoCliente" element={<Historico />} />
-          <Route exact path="/pagamentosCliente" element={<PagamentosCliente />} />
           <Route exact path="/servicosPendentesCliente" element={<ServicosPendentesCliente />} />
           <Route exact path="/config" element={user ? <Config /> : <Navigate to="/login" />} />
           <Route exact path="/config" element={user ? <Config /> : <Navigate to="/login" />} />

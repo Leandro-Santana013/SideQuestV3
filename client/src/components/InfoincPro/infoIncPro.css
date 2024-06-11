@@ -106,7 +106,7 @@
     }
 
     .data {
-        width: 6vw;
+        width: auto;
         height: 2vw;
         border: none;
         background-color: #eee;
@@ -155,7 +155,7 @@
 
 .selected-categories {
     display: flex;
-    width: 15vw;
+    width: auto;
     flex-direction: column;
     height: 85px;
     overflow: hidden;
@@ -178,6 +178,17 @@
         font-size: 30px;
         color: red;
     }
+}
+
+
+.padrao-input-card-conclua-registro {
+    width: 10vw;
+    height: 2vw;
+    padding: 3px;
+    border-radius: 5px;
+    border: none;
+    background-color: #eee;
+    outline: none;
 }
 
 /* Responsividade */
@@ -244,7 +255,7 @@
         font-size: 2.3vw;
     }
 
-    .top-card-conclua-registro span{
+    .top-card-conclua-registro span {
         font-size: 2.3vw;
         margin: 1vw;
     }
@@ -320,7 +331,7 @@
         font-size: 2.7vw;
     }
 
-    .top-card-conclua-registro span{
+    .top-card-conclua-registro span {
         font-size: 2.7vw;
         margin: 2vw;
     }
@@ -392,7 +403,8 @@
     .top-card-conclua-registro p {
         font-size: 3vw;
     }
-    .top-card-conclua-registro span{
+
+    .top-card-conclua-registro span {
         font-size: 3vw;
         margin: 2vw;
     }
@@ -477,7 +489,7 @@
         font-size: 3.3vw;
     }
 
-    .top-card-conclua-registro span{
+    .top-card-conclua-registro span {
         font-size: 3.3vw;
         margin: 2vw;
     }
