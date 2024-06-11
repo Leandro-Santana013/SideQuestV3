@@ -8,6 +8,7 @@ const path = require('path');
 const filePath = path.join(__dirname, 'estados-cidades.json');
 const flagFilePath = path.join(__dirname, 'script-rodado.txt');
 
+
 // Conexão com o banco de dados
 const connectionDataBase = new Sequelize(
     name,

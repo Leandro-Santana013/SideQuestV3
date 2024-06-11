@@ -782,19 +782,19 @@ exports.delete = async (req, res) => {
 
 
  
-    if(serviceend.length > 0){
+    if(serviceend?.length > 0){
       console.log(serviceend, "aaaaaaaaaaaaaaaaaa")
        await controller_User.apagarService({
       params: { id_cliente: id_cliente },
     });
   }
-  if(ServicePend.length > 0){
+  if(ServicePend?.length > 0){
     await controller_User.apagarServicePend({
       params: { id_cliente: id_cliente },
     });
    
   } 
-  if(favoritos.length > 0){
+  if(favoritos?.length > 0){
    console.log(favoritos)
      await controller_User.apagarfavoritoscliente({
     params:{ id_cliente: id_cliente}

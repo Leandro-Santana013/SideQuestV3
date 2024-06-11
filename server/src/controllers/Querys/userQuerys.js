@@ -962,17 +962,6 @@ module.exports = {
     await ModelPostagemServico.destroy({
       where: { id_cliente: id_cliente },
       raw: true,
-      include: [
-        {
-          model: ModelConfirmacaoServico,
-          required: false,
-          where: {
-            id_confirmacaoServico: {
-              [Op.is]: null, // Utilize null diretamente sem Op.is
-            },
-          },
-        },
-      ],
     });
   },
   apagarLocalcli: async (req, res) => {

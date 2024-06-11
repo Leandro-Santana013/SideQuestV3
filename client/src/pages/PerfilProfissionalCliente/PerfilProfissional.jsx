@@ -183,6 +183,7 @@ const PerfilProfissionalcli = () => {
                     </p>
                     <p>{profissional.ds_biografia}</p>
                   </div>
+                  <p>numero de serviços terminados: <label>{profissional.num_servicos_terminados}</label></p> 
                 </div>
                 <div className="profile-section areas-section">
                   <div className="section-header">
