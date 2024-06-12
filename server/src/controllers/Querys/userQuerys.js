@@ -34,6 +34,7 @@ module.exports = {
       attributes: ["cd_emailCliente", "cd_senhaCliente"],
       where: {
         cd_emailCliente: cd_emailCliente,
+        acount_exclude: null
       },
     });
   },
@@ -57,6 +58,7 @@ module.exports = {
       cd_senhaCliente: cd_senhaCliente,
     });
   },
+  
 
   findtokenCliente: async (req, res) => {
     try {
@@ -935,51 +937,10 @@ module.exports = {
   },
   apagarInfocliente: async (req, res) => {
     const { id_cliente } = req.params;
-    return ModelCliente.destroy({
-      where: {
-        id_cliente: id_cliente,
-      },
-      raw: true,
-    });
-  },
-
-  apagarService: async (req, res) => {
-    const { id_cliente } = req.params;
-    await ModelConfirmacaoServico.destroy({
-      include: [
-        {
-          model: ModelPostagemServico,
-          where: {
-            id_cliente: id_cliente,
-          },
-          attributes: [],
-        },
-      ],
-    });
-  },
-  apagarServicePend: async (req, res) => {
-    const { id_cliente } = req.params;
-    await ModelPostagemServico.destroy({
-      where: { id_cliente: id_cliente },
-      raw: true,
-    });
-  },
-  apagarLocalcli: async (req, res) => {
-    const { id_cliente } = req.params;
-    await ModelEndereco.destroy({
-      where: {
-        id_cliente: id_cliente,
-      },
-    });
-  },
-
-  apagarfavoritoscliente: async (req, res) => {
-    const { id_cliente } = req.params;
-    await ClienteProfissionalFavorito.destroy({
-      where: {
-        id_cliente: id_cliente,
-      },
-    });
+    return ModelCliente.update(
+      { acount_exclude: true },
+      { where: { id_cliente: id_cliente } } 
+    );
   },
 
   createTermino: async (req, res) => {

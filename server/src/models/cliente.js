@@ -47,11 +47,15 @@ const ModelCliente = connectionDataBase.define('tb_cliente', {
         type: DataTypes.STRING(255),
         allowNull: true
     },
+    
 
     img_cliente: {
         type: DataTypes.TEXT('long'),
         allowNull: true
-    }
+    },
+    acount_exclude: {
+        type: DataTypes.BOOLEAN
+    },
 },
     _padraoTableDBExistence('tb_cliente')
 )
