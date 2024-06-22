@@ -492,7 +492,7 @@ const Config = () => {
             <div className="modal-confirmar-excluir-conta">
               <IoIosWarning />
               <h2>Todos os seus dados serão excluidos
-                e nunca mais poderam ser acessados, {num > 0 ? `você possui ${num} serviços ativos` : ""}
+                e nunca mais poderão ser acessados, {num > 0 ? `você possui ${num} serviços ativos` : ""}
                 tem certeza que deseja deletar sua conta?
               </h2>
               <div style={{ display: 'flex', gap: '10px' }}>
