@@ -396,9 +396,7 @@ console.log(servico.titulo.length)
           ds_titulo: servico.titulo,
           img_servico: servico.imagens,
           tm_postagem: datanow,
-          pr_escolhido: servico.id_profissional
-            ? servico.id_profissional
-            : null,
+          pr_escolhido: servico.id_profissional ? servico.id_profissional : null,
         },
       });
     } catch (error) {
@@ -450,41 +448,92 @@ exports.updateInfoUser = async (req, res) => {
     nm_logradouro,
     nmr_casa,
     complemento,
+    adressset
   } = req.body;
+
+  console.log(req.body)
   try {
-    // Converter base64 para Blob
-    const clientinfo = await controller_User.selectInfocliente({
-      params: { id_cliente: id_cliente },
-    });
-
-    const localizacaoinfo = await controller_User.selectLocalcli({
-      params: { id_cliente: clientinfo.id_cliente, end_principal: true },
-    });
-
-    let partes, estado, cidade, cdCidade, cdCidadeestate;
+    
+    let partes, estado, cidade, cdCidade;
 
     if (uf_localidade) {
       partes = uf_localidade.split(" - ");
       estado = partes[0];
       cidade = partes[1];
 
-      cdCidade = await controller_User.selectCidadeAdress({
+     cdCidade = await controller_User.selectCidadeAdress({
         params: { nm_cidade: cidade, sg_estado: estado },
-      });
-    } 
+    });
+    
+    }
+    const clienteinfo = await controller_User.selectInfocliente({
+      params: { id_cliente: id_cliente },
+    });
+
+
+    const localizacaoinfo = await controller_User.selectLocalcli({
+      params: { id_cliente: clienteinfo.id_cliente, end_principal: true },
+    });
+
+    
+
+    
     
 
     const clientinfoupdated = await controller_User.updateInfoCli({
       params: {
         id_cliente: id_cliente,
-        nm_cliente: name ? name : clientinfo.nm_cliente,
-        cd_emailCliente: email ? email : clientinfo.cd_emailCliente,
-        img_cliente: foto ? foto : clientinfo.img_cliente,
-        nmr_telefoneCliente: numero ? numero : clientinfo.nmr_telefoneCliente,
+        nm_cliente: name ? name : clienteinfo.nm_cliente,
+        cd_emailCliente: email ? email : clienteinfo.cd_emailCliente,
+        img_cliente: foto ? foto : clienteinfo.img_cliente,
+        nmr_telefoneCliente: numero ? numero : clienteinfo.nmr_telefoneCliente,
       },
     });
+    let clienteuser = await controller_User.selectInfocliente({
+      params: { id_cliente: id_cliente },
+    });
+console.log(adressset)
+    if(adressset){
+      if (!cd_cep && !uf_localidade && !nm_logradouro && !nm_bairro && !nmr_casa) {
+        return res
+          .status(400)
+          .json({ error: "Insira as informações corretamente"});
+      }
+      const enderecoInstance = await controller_User.createadresscli({
+        params: {
+          id_cliente: id_cliente,
+          id_cidade: cdCidade?.id_cidade,
+          nm_logradouro: nm_logradouro,
+          cd_cep: cd_cep,
+          nm_bairro: nm_bairro,
+          nmr_casa:  nmr_casa,
+          end_principal: true,
+          txt_complemento: complemento,
+        },
+      });
+  
+    
+      const localizacaoprincipal = await controller_User.selectLocalcli({
+        params: { id_cliente: id_cliente, end_principal: true },
+      });
+
+      if (localizacaoprincipal) {
+        const cdCidadeestate = await controller_User.selectCidadeAdress({
+          params: { id_cidade: localizacaoprincipal.id_cidade },
+        });
+        localizacaoprincipal.uf_localidade = `${cdCidadeestate.sg_estado} - ${cdCidadeestate.nm_cidade}`;
+      }
+     return res.status(200).json({ clienteuser, localizacaoprincipal });
+    }
  
-if(cd_cep || nm_bairro || nm_logradouro || nmr_casa || complemento){
+if(cd_cep || nm_bairro || nm_logradouro || nmr_casa || complemento && !adressset){
+  console.log(cdCidade ? cdCidade.id_cidade : localizacaoinfo.id_cidade ? localizacaoinfo.id_cidade : null,
+    cd_cep ? cd_cep : localizacaoinfo.cd_cep ? localizacaoinfo.cd_cep : null,
+    nm_bairro ? nm_bairro : localizacaoinfo.nm_bairro ? localizacaoinfo.nm_bairro : null,
+    nm_logradouro ? nm_logradouro : localizacaoinfo.nm_logradouro ? localizacaoinfo.nm_logradouro : null,
+    nmr_casa ? nmr_casa : localizacaoinfo.nmr_casa ? localizacaoinfo.nmr_casa : null,
+    complemento ? complemento : localizacaoinfo.txt_complemento ? localizacaoinfo.txt_complemento : null
+  )
     const updateAdressCli = await controller_User.updateAdressCli({
       params: {
         id_cliente: id_cliente,
@@ -498,9 +547,7 @@ if(cd_cep || nm_bairro || nm_logradouro || nmr_casa || complemento){
     });
   }
 
-    const clienteuser = await controller_User.selectInfocliente({
-      params: { id_cliente: id_cliente },
-    });
+   
 
     const localizacaoprincipal = await controller_User.selectLocalcli({
       params: { id_cliente: clienteuser.id_cliente, end_principal: true },

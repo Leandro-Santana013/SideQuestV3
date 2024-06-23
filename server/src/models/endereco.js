@@ -42,7 +42,7 @@ const ModelEndereco = connectionDataBase.define('tb_endereco', {
 
     nmr_casa:{
         type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
+        allowNull: true,
     },
     txt_complemento:{
         type: DataTypes.STRING(100),

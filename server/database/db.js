@@ -100,6 +100,7 @@ const infoProfissional = [
     [20, 'Especializada em limpeza de estofados, ofereço serviços de higienização e revitalização de móveis.', 'Certificado em Limpeza de Estofados pela Associação de Limpeza Profissional.', 'Utilizo técnicas e produtos específicos para garantir a remoção de manchas e odores indesejados.', 'Curso de Higienização de Estofados, Treinamento em Remoção de Manchas e Odores.']
 ]; 
 
+
 const clientes = [
     ['Ana Costa', '12345678901', 'F', 35, '111111111', 'ana.costa@exemplo.com', 'senha123', 'Rt5YnHjK2p'],
     ['Pedro Fernandes', '98765432109', 'M', 28, '222222222', 'pedro.fernandes@exemplo.com', 'senha456', 'Lm9Zx8Cv3b'],

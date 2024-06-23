@@ -1,5 +1,4 @@
-import { useContext, useEffect, useRef, useState, useCallback } from "react";
-
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   Header,
   SidebarCliente,
@@ -44,18 +43,27 @@ const Config = () => {
     deleteuser,
   } = useContext(UserContext);
 
-
-
   const handleCepChange = async (e) => {
     const cep = e.target.value;
-    const cepToFetch = cep; // Armazena o valor atual do CEP em uma variável local
-    if (cep.length === 8) await fetchData(cepToFetch, true); // Chama a função de busca de dados do CEP com o valor atual
+    if (cep.length === 8) {
+      await fetchData(cep, true);
+    }
   };
 
-  let valuecep = false;
   useEffect(() => {
-    valuecep = cepConfig;
-  }, [cepConfig]);
+    
+    if (mudandoloc) {
+      setChangedUserData((prevData) => ({
+        ...prevData,
+        cd_cep: mudandoloc?.cep,
+        uf_localidade: mudandoloc?.uf_localidade,
+        nm_bairro: mudandoloc?.bairro,
+        nm_logradouro: mudandoloc?.logradouro,
+        nmr_casa: mudandoloc?.nmr_casa,
+        complemento: mudandoloc?.complemento,
+      }));
+    }
+  }, [cepConfig, mudandoloc]);
 
   const updateUserData = async (newData) => {
     const changes = {};
@@ -64,8 +72,8 @@ const Config = () => {
     if (newData.email !== user.email) changes.email = newData.email;
     if (newData.numero !== user.numero) changes.numero = newData.numero;
     if (newData.foto !== imgPerfil && newData.foto !== user.foto) changes.foto = newData.foto;
-    if (newData.cd_cep !== locationuser?.cd_cep && newData.cep !== null) changes.cd_cep = newData.cd_cep;
-    if (newData.uf_localidade !== locationuser?.uf_localidade) changes.uf_localidade = newData.uf_localidade;
+    if (newData.cd_cep !== locationuser?.cd_cep && newData.cd_cep !== null) changes.cd_cep = newData.cd_cep;
+    if (newData.uf_localidade !== locationuser?.uf_localidade ) changes.uf_localidade = newData.uf_localidade;
     if (newData.nm_bairro !== locationuser?.nm_bairro) changes.nm_bairro = newData.nm_bairro;
     if (newData.nm_logradouro !== locationuser?.nm_logradouro) changes.nm_logradouro = newData.nm_logradouro;
     if (newData.nmr_casa !== locationuser?.nmr_casa) changes.nmr_casa = newData.nmr_casa;
@@ -74,11 +82,8 @@ const Config = () => {
     setChangedUserData(changes);
     if (Object.keys(changes).length > 0) {
       if (changes.cd_cep) {
-        console.log(changes.cd_cep, changes.cd_cep.length);
         if (changes.cd_cep.length === 8) {
-          console.log(valuecep);
-          if (!valuecep) {
-            console.log(user);
+          if (!cepConfig) {
             setShowModal(true);
           }
         }
@@ -90,9 +95,13 @@ const Config = () => {
     }
     setChangedUserData(changes);
   };
+  useEffect(()=>{
+console.log(changedUserData)
+  }, [changedUserData])
+
 
   const updatefoto = (ImgSrc) => {
-    avatarUrl.current.src = ImgSrc; // Atualizando a imagem de perfil
+    avatarUrl.current.src = ImgSrc;
     updateUserData({ ...changedUserData, foto: ImgSrc });
   };
 
@@ -120,15 +129,13 @@ const Config = () => {
     setCepConfig(false);
     setparabens(false);
     setmudandoloc(null);
+    setloc(null)
   };
+
   const [parabens, setparabens] = useState(null);
-  useEffect(() => {
-    console.log(cepConfig, "estado do cep");
-  }, [cepConfig]);
-  /***************************************************/
 
   const [modalEditar, setModalEditar] = useState(false);
-  const [certeza, setCerteza] = useState(null)
+  const [certeza, setCerteza] = useState(null);
 
   const handleSave = () => {
     if (cepConfig) {
@@ -136,11 +143,15 @@ const Config = () => {
       return;
     }
     functionUpdateInfoUser();
-    setModalEditar(false); // Define o estado modalEditar de volta para false
+    setModalEditar(false);
   };
 
   const [modal, setmodal] = useState(null);
-  /***************************************************/
+  const [loc, setloc] = useState(null);
+  const setlock = () => {
+    setloc(true);
+ 
+  };
 
   return (
     <>
@@ -244,7 +255,7 @@ const Config = () => {
               <div className="edit-info-endereco-principal">
                 <div className="leftPostar leftPostar-de-config">
                   <h2>Endereço Principal</h2>
-                  {locationuser ? (
+                  {locationuser || loc ? (
                     <>
                       <div className="cep-estado">
                         <div>
@@ -259,7 +270,7 @@ const Config = () => {
                                   ? changedUserData.cd_cep
                                   : locationuser?.cd_cep) || null
                               }
-                              size={{
+                              size={{ 
                                 border: cepConfig
                                   ? "2px solid red"
                                   : "2px solid #eee",
@@ -267,12 +278,10 @@ const Config = () => {
                               onChange={async (event) => {
                                 const newCep = event.target.value;
 
-                                // Remove temporariamente a função handleCepChange para depuração
                                 handleFieldChange("cd_cep", {
                                   target: { value: newCep },
                                 });
 
-                                // Adicione novamente a função handleCepChange para testes
                                 try {
                                   await handleCepChange(event);
                                 } catch (error) {
@@ -308,7 +317,7 @@ const Config = () => {
                             className="componente-content-input-config-bairro"
                             type="text"
                             name="bairro"
-                            autocomplete="off"
+                            autoComplete="address-level3"
                             placeholder={""}
                             value={
                               (changedUserData?.nm_bairro !== undefined
@@ -329,7 +338,7 @@ const Config = () => {
                               className="componente-content-input-config-rua"
                               type="text"
                               name="nmRua"
-                              autocomplete="off"
+                              autoComplete="address-level2"
                               placeholder={"nm_logradouro"}
                               value={
                                 (changedUserData?.nm_logradouro !== undefined
@@ -353,7 +362,7 @@ const Config = () => {
                             className="componente-content-input-config-residencia"
                             type="number"
                             name="nmrResidencia"
-                            autocomplete="off"
+                            autoComplete="address-line1"
                             placeholder={""}
                             value={
                               (changedUserData?.nmr_casa !== undefined
@@ -371,7 +380,7 @@ const Config = () => {
                             className="componente-content-input-config-complemento"
                             type="text"
                             name="complemento"
-                            autocomplete="off"
+                            autoComplete="address-line"
                             value={
                               (changedUserData?.complemento !== undefined
                                 ? changedUserData.complemento
@@ -388,7 +397,7 @@ const Config = () => {
                   ) :
                     (<div>
                       <p>Nenhuma localização vinculada</p>
-                      <button >Insira localização principal</button>
+                      <button onClick={setlock}>Insira localização principal</button>
                     </div>
                     )}
                 </div>
@@ -517,21 +526,12 @@ const Config = () => {
               >
                 Cancelar
               </button>
-
             </div>
-
           </div>
-
         </div>
       )}
-
-
     </>
   );
 };
 
 export default Config;
-
-{
-  /* <Link className="btn-logout" to="/Login" onClick={() => logoutUser()}>LOGOUT</Link> */
-}

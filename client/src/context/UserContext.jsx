@@ -478,6 +478,7 @@ export const UserContextProvider = ({ children }) => {
   }, [user]);
 
   const functionUpdateInfoUser = useCallback(async () => {
+    if (!locationuser) changedUserData.adressset = true 
     const response = await postRequest("/user/updateInfoUser", changedUserData);
     setUser(response.user.clienteuser);
     localStorage.setItem("User",JSON.stringify(response.user.clienteuser));
