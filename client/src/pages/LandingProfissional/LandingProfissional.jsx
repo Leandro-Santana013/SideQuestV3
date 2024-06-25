@@ -71,86 +71,82 @@ const LandingProfissional = () => {
                 <h2>Planos de pagamento</h2>
                 <div className="cards-planos">
                     <div className="card-plano">
-                        <h3>Plano Grátis</h3>
+                        <h3>Plano Gratuito</h3>
                         <p>Feito para você usar os benefícios básicos da plataforma.</p>
                         <hr />
                         <p id="preco">R$0<span>/Mês</span></p>
                         <button>Crie sua conta grátis</button>
                         <hr id="gray-hr" />
-                        <div style={{display: 'flex', gap: '1vw', flexDirection: 'column'}}>
-                        <div className="beneficios-plano">
-                        
-                        <img src={verificado} alt="verificado" />
-                            <p className="pe">Acesso à nossa rede de clientes</p>
-                        </div>
-                        <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p className="pe">Converse livremente com seus clientes</p>
-                        </div>
-                        <div className="beneficios-plano">
-                            <img src={verificado} alt="verificado" />
-                            <p className="pe">1 categoria para serviços</p>
-                        </div>
-                        <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p className="pe">2 serviços por semana</p>
-                        </div>
+                        <div style={{ display: 'flex', gap: '1vw', flexDirection: 'column' }}>
+                            <div className="beneficios-plano">
+
+                                <img src={verificado} alt="verificado" />
+                                <p className="pe">Acesso à nossa rede de clientes</p>
+                            </div>
+                            <div className="beneficios-plano">
+                                <img src={verificado} alt="verificado" />
+                                <p className="pe">1 categoria para serviços</p>
+                            </div>
+                            <div className="beneficios-plano">
+                                <img src={verificado} alt="verificado" />
+                                <p className="pe">2 serviços por semana</p>
+                            </div>
                         </div>
                     </div>
                     <div className="card-plano">
-                        <h3>Plano Simples</h3>
-                        <p>Feito para você que quer ter mais benefícios que os usuários comuns.</p>
+                        <h3>Plano Mensal</h3>
+                        <p>Feito para você que quer ter mais benefícios que os usuários de contas gratuitas.</p>
                         <hr />
                         <p id="preco">R$109<span>/Mês</span></p>
-                        <button>Teste grátis</button>
+                        <button>Assinar</button>
                         <hr id="gray-hr" />
-                        <div style={{display: 'flex', gap: '1vw', flexDirection: 'column'}}>
-                        <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p className="pe">Acesso à nossa rede de clientes</p>
-                        </div>
-                        <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p className="pe">Converse livremente com seus clientes</p>
-                        </div>
-                        <div className="beneficios-plano">
-                            <img src={verificado} alt="verificado" />
-                            <p className="pe">4 categorias para serviços</p>
-                        </div>
-                        <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p className="pe">Serviços ilimitados por semana</p>
-                        </div>
+                        <div style={{ display: 'flex', gap: '1vw', flexDirection: 'column' }}>
+                            <div className="beneficios-plano">
+                                <img src={verificado} alt="verificado" />
+                                <p className="pe">Acesso à nossa rede de clientes</p>
+                            </div>
+                            <div className="beneficios-plano">
+                                <img src={verificado} alt="verificado" />
+                                <p className="pe">Converse livremente com seus clientes</p>
+                            </div>
+                            <div className="beneficios-plano">
+                                <img src={verificado} alt="verificado" />
+                                <p className="pe">4 categorias para serviços</p>
+                            </div>
+                            <div className="beneficios-plano">
+                                <img src={verificado} alt="verificado" />
+                                <p className="pe">Serviços ilimitados</p>
+                            </div>
                         </div>
                     </div>
                     <div className="card-plano">
-                        <h3>Plano Irmãos a Obra</h3>
+                        <h3>Plano Anual</h3>
                         <p>Feito para você que quer ter todos os benefícios da plataforma.</p>
                         <hr />
                         <p id="preco">R$1200<span>/Ano</span></p>
-                        <button>Melhor escolha</button>
+                        <button>Assinar</button>
                         <hr id="gray-hr" />
-                        <div style={{display: 'flex', gap: '1vw', flexDirection: 'column'}}>
-                        <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p className="pe">Acesso à nossa rede de clientes</p>
-                        </div>
-                        <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p className="pe">Converse livremente com seus clientes</p>
-                        </div>
-                        <div className="beneficios-plano">
-                            <img src={verificado} alt="verificado" />
-                            <p className="pe">10 categorias para serviços</p>
-                        </div>
-                        <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p className="pe">Serviços ilimitados por semana</p>
-                        </div>
-                        <div className="beneficios-plano">
-                        <img src={verificado} alt="verificado" />
-                            <p className="pe">Mais visibilidade na plataforma</p>
-                        </div>
+                        <div style={{ display: 'flex', gap: '1vw', flexDirection: 'column' }}>
+                            <div className="beneficios-plano">
+                                <img src={verificado} alt="verificado" />
+                                <p className="pe">Acesso à nossa rede de clientes</p>
+                            </div>
+                            <div className="beneficios-plano">
+                                <img src={verificado} alt="verificado" />
+                                <p className="pe">Converse livremente com seus clientes</p>
+                            </div>
+                            <div className="beneficios-plano">
+                                <img src={verificado} alt="verificado" />
+                                <p className="pe">10 categorias para serviços</p>
+                            </div>
+                            <div className="beneficios-plano">
+                                <img src={verificado} alt="verificado" />
+                                <p className="pe">Serviços ilimitados por semana</p>
+                            </div>
+                            <div className="beneficios-plano">
+                                <img src={verificado} alt="verificado" />
+                                <p className="pe">Mais visibilidade na plataforma</p>
+                            </div>
                         </div>
                     </div>
                 </div>
