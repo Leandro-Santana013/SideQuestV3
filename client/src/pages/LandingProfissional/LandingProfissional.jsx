@@ -141,7 +141,7 @@ const LandingProfissional = () => {
                             </div>
                             <div className="beneficios-plano">
                                 <img src={verificado} alt="verificado" />
-                                <p className="pe">Serviços ilimitados por semana</p>
+                                <p className="pe">Serviços ilimitados</p>
                             </div>
                             <div className="beneficios-plano">
                                 <img src={verificado} alt="verificado" />
