@@ -86,10 +86,10 @@ module.exports = {
   },
 
   updateSenha: async (req, res) => {
-    const { id_cliente, cd_senhaCliente } = req.params;
+    const { cd_emailCliente, cd_senhaCliente } = req.params;
     return ModelCliente.update(
       { cd_senhaCliente: cd_senhaCliente },
-      { where: { id_cliente: id_cliente } }
+      { where: { cd_emailCliente: cd_emailCliente } }
     );
   },
 
@@ -957,6 +957,16 @@ module.exports = {
       id_terminoservico: id_terminoservico,
       nmr_avaliacao: nmr_avaliacao,
       ds_comentario: ds_comentario,
+    });
+  },
+  requireidCliente: async (req, res) => {
+    const { cd_emailCliente } = req.params;
+    return ModelCliente.findAll({
+      attributes: ["id_cliente"],
+      where: {
+        cd_emailCliente: cd_emailCliente,
+        acount_exclude: null
+      },
     });
   },
 };

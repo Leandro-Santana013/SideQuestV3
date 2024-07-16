@@ -10,8 +10,10 @@ import axios from "axios";
 import { file } from "jszip";
 import { Infoinc } from "../components/Infoinc/Infoinc";
 import JSZip from "jszip";
+import { Navigate } from "react-router-dom";
 export const UserContext = createContext();
 export const UserContextProvider = ({ children }) => {
+
   //objeto de usuario
   const [user, setUser] = useState({});
   const [locationuser, setlocationuser] = useState(null);
@@ -528,11 +530,32 @@ export const UserContextProvider = ({ children }) => {
        setpassErrorCompare(false)
     }
   }, [pass, user]);
+  
   const [avaliacao,  setAvaliacao] = useState({})
   const avaliar = useCallback(async (e) =>{
     console.log(avaliacao)
     const response = await postRequest("/user/terminarServico", avaliacao);
    }, [avaliacao])
+   const [typemodal, setTypemodal] = useState(1)
+   const [objectPass, setObjectPass] = useState(null)
+   const [errorpass, seterrorpass] =useState(null)
+   const [errorpassMessage, seterrorpassMessage] =useState(null)
+   const calbackpassword = useCallback(async (e) =>{
+    e.preventDefault()
+    console.log(objectPass)
+    const response = await postRequest("/user/reqpassword", objectPass);
+  
+    if (response.error){ 
+      seterrorpass(true)
+      seterrorpassMessage(response.error)
+    }
+    else{
+      seterrorpass(null)
+      setTypemodal(typemodal + 1)
+      errorpassMessage(null)
+    }
+    objectPass.tokenpass ? objectPass.tokenpass = null : ""
+   }, [objectPass])
   
     return (
       <UserContext.Provider
@@ -602,7 +625,15 @@ export const UserContextProvider = ({ children }) => {
           deleteuser,
           num,
           avaliar,
-          setAvaliacao
+          setAvaliacao,
+          calbackpassword,
+          setObjectPass,
+          typemodal,
+          setTypemodal,
+          errorpass,
+          errorpassMessage,
+          seterrorpass,
+          seterrorpassMessage
         }}
       >
         {children}

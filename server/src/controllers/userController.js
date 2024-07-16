@@ -8,6 +8,9 @@ const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const { response } = require("../../config/express");
 const Buffer = require("buffer").Buffer;
+const shortid = require('shortid'); // Biblioteca para gerar códigos curtos aleatórios
+const moment = require('moment');
+const { password } = require("../../config/connectInfo");
 
 let globalemail;
 let globaltoken;
@@ -27,24 +30,24 @@ function isValidCPF(cpf) {
   cpf = cpf.replace(/[^\d]+/g, '');
 
   if (cpf.length !== 11 ||
-      cpf === "00000000000" ||
-      cpf === "11111111111" ||
-      cpf === "22222222222" ||
-      cpf === "33333333333" ||
-      cpf === "44444444444" ||
-      cpf === "55555555555" ||
-      cpf === "66666666666" ||
-      cpf === "77777777777" ||
-      cpf === "88888888888" ||
-      cpf === "99999999999") {
+    cpf === "00000000000" ||
+    cpf === "11111111111" ||
+    cpf === "22222222222" ||
+    cpf === "33333333333" ||
+    cpf === "44444444444" ||
+    cpf === "55555555555" ||
+    cpf === "66666666666" ||
+    cpf === "77777777777" ||
+    cpf === "88888888888" ||
+    cpf === "99999999999") {
     return false;
   }
 
   let sum = 0;
   let remainder;
-  
+
   for (let i = 1; i <= 9; i++) {
-    sum += parseInt(cpf.substring(i-1, i)) * (11 - i);
+    sum += parseInt(cpf.substring(i - 1, i)) * (11 - i);
   }
 
   remainder = (sum * 10) % 11;
@@ -60,7 +63,7 @@ function isValidCPF(cpf) {
   sum = 0;
 
   for (let i = 1; i <= 10; i++) {
-    sum += parseInt(cpf.substring(i-1, i)) * (12 - i);
+    sum += parseInt(cpf.substring(i - 1, i)) * (12 - i);
   }
 
   remainder = (sum * 10) % 11;
@@ -81,7 +84,6 @@ exports.register = async (req, res) => {
     const { name, email, cpf, senha, senhaConfirm } = req.body;
     console.log(name, email, cpf, senha, senhaConfirm);
     if (!name || !email || !cpf || !senha || !senhaConfirm) {
-      console.log("a");
       return res.status(400).json({ error: "Preencha todos os campos" });
     }
     if (!isValidCPF(cpf)) {
@@ -107,7 +109,6 @@ exports.register = async (req, res) => {
       return res.status(400).json({ error: "As senhas estão incorretas" });
     }
     if (!validator.isStrongPassword(senha && senhaConfirm)) {
-      console.log("c");
       return res
         .status(400)
         .json({ error: "As senhas näo são seguras o suficentes" });
@@ -118,7 +119,6 @@ exports.register = async (req, res) => {
     });
 
     if (cpfResults.length > 0) {
-      console.log("d");
       return res
         .status(400)
         .json({ error: "Alguns dos dados já estão sendo utilizado" });
@@ -373,8 +373,8 @@ exports.postarServicoLoc = async (req, res) => {
         .status(400)
         .json({ error: "Insira as informações corretamente", formstatus: 1 });
     }
-console.log(servico.titulo.length)
-    if(servico.titulo.length > 50) return res.status(400).json({ error: "titulo muito longo", formstatus: 1 });
+    console.log(servico.titulo.length)
+    if (servico.titulo.length > 50) return res.status(400).json({ error: "titulo muito longo", formstatus: 1 });
 
     const categoriaInstance = await controller_User.selectCategoriaescolhida({
       params: { ds_categoria: servico.categoria },
@@ -453,7 +453,7 @@ exports.updateInfoUser = async (req, res) => {
 
   console.log(req.body)
   try {
-    
+
     let partes, estado, cidade, cdCidade;
 
     if (uf_localidade) {
@@ -461,10 +461,10 @@ exports.updateInfoUser = async (req, res) => {
       estado = partes[0];
       cidade = partes[1];
 
-     cdCidade = await controller_User.selectCidadeAdress({
+      cdCidade = await controller_User.selectCidadeAdress({
         params: { nm_cidade: cidade, sg_estado: estado },
-    });
-    
+      });
+
     }
     const clienteinfo = await controller_User.selectInfocliente({
       params: { id_cliente: id_cliente },
@@ -475,10 +475,10 @@ exports.updateInfoUser = async (req, res) => {
       params: { id_cliente: clienteinfo.id_cliente, end_principal: true },
     });
 
-    
 
-    
-    
+
+
+
 
     const clientinfoupdated = await controller_User.updateInfoCli({
       params: {
@@ -492,12 +492,12 @@ exports.updateInfoUser = async (req, res) => {
     let clienteuser = await controller_User.selectInfocliente({
       params: { id_cliente: id_cliente },
     });
-console.log(adressset)
-    if(adressset){
+    console.log(adressset)
+    if (adressset) {
       if (!cd_cep && !uf_localidade && !nm_logradouro && !nm_bairro && !nmr_casa) {
         return res
           .status(400)
-          .json({ error: "Insira as informações corretamente"});
+          .json({ error: "Insira as informações corretamente" });
       }
       const enderecoInstance = await controller_User.createadresscli({
         params: {
@@ -506,13 +506,13 @@ console.log(adressset)
           nm_logradouro: nm_logradouro,
           cd_cep: cd_cep,
           nm_bairro: nm_bairro,
-          nmr_casa:  nmr_casa,
+          nmr_casa: nmr_casa,
           end_principal: true,
           txt_complemento: complemento,
         },
       });
-  
-    
+
+
       const localizacaoprincipal = await controller_User.selectLocalcli({
         params: { id_cliente: id_cliente, end_principal: true },
       });
@@ -523,31 +523,31 @@ console.log(adressset)
         });
         localizacaoprincipal.uf_localidade = `${cdCidadeestate.sg_estado} - ${cdCidadeestate.nm_cidade}`;
       }
-     return res.status(200).json({ clienteuser, localizacaoprincipal });
+      return res.status(200).json({ clienteuser, localizacaoprincipal });
     }
- 
-if(cd_cep || nm_bairro || nm_logradouro || nmr_casa || complemento && !adressset){
-  console.log(cdCidade ? cdCidade.id_cidade : localizacaoinfo.id_cidade ? localizacaoinfo.id_cidade : null,
-    cd_cep ? cd_cep : localizacaoinfo.cd_cep ? localizacaoinfo.cd_cep : null,
-    nm_bairro ? nm_bairro : localizacaoinfo.nm_bairro ? localizacaoinfo.nm_bairro : null,
-    nm_logradouro ? nm_logradouro : localizacaoinfo.nm_logradouro ? localizacaoinfo.nm_logradouro : null,
-    nmr_casa ? nmr_casa : localizacaoinfo.nmr_casa ? localizacaoinfo.nmr_casa : null,
-    complemento ? complemento : localizacaoinfo.txt_complemento ? localizacaoinfo.txt_complemento : null
-  )
-    const updateAdressCli = await controller_User.updateAdressCli({
-      params: {
-        id_cliente: id_cliente,
-        id_cidade: cdCidade ? cdCidade.id_cidade : localizacaoinfo.id_cidade ? localizacaoinfo.id_cidade : null,
-        cd_cep: cd_cep ? cd_cep : localizacaoinfo.cd_cep ? localizacaoinfo.cd_cep : null,
-        nm_bairro: nm_bairro ? nm_bairro : localizacaoinfo.nm_bairro ? localizacaoinfo.nm_bairro : null,
-        nm_logradouro: nm_logradouro ? nm_logradouro : localizacaoinfo.nm_logradouro ? localizacaoinfo.nm_logradouro : null,
-        nmr_casa: nmr_casa ? nmr_casa : localizacaoinfo.nmr_casa ? localizacaoinfo.nmr_casa : null,
-        txt_complemento: complemento ? complemento : localizacaoinfo.txt_complemento ? localizacaoinfo.txt_complemento : null
-      },
-    });
-  }
 
-   
+    if (cd_cep || nm_bairro || nm_logradouro || nmr_casa || complemento && !adressset) {
+      console.log(cdCidade ? cdCidade.id_cidade : localizacaoinfo.id_cidade ? localizacaoinfo.id_cidade : null,
+        cd_cep ? cd_cep : localizacaoinfo.cd_cep ? localizacaoinfo.cd_cep : null,
+        nm_bairro ? nm_bairro : localizacaoinfo.nm_bairro ? localizacaoinfo.nm_bairro : null,
+        nm_logradouro ? nm_logradouro : localizacaoinfo.nm_logradouro ? localizacaoinfo.nm_logradouro : null,
+        nmr_casa ? nmr_casa : localizacaoinfo.nmr_casa ? localizacaoinfo.nmr_casa : null,
+        complemento ? complemento : localizacaoinfo.txt_complemento ? localizacaoinfo.txt_complemento : null
+      )
+      const updateAdressCli = await controller_User.updateAdressCli({
+        params: {
+          id_cliente: id_cliente,
+          id_cidade: cdCidade ? cdCidade.id_cidade : localizacaoinfo.id_cidade ? localizacaoinfo.id_cidade : null,
+          cd_cep: cd_cep ? cd_cep : localizacaoinfo.cd_cep ? localizacaoinfo.cd_cep : null,
+          nm_bairro: nm_bairro ? nm_bairro : localizacaoinfo.nm_bairro ? localizacaoinfo.nm_bairro : null,
+          nm_logradouro: nm_logradouro ? nm_logradouro : localizacaoinfo.nm_logradouro ? localizacaoinfo.nm_logradouro : null,
+          nmr_casa: nmr_casa ? nmr_casa : localizacaoinfo.nmr_casa ? localizacaoinfo.nmr_casa : null,
+          txt_complemento: complemento ? complemento : localizacaoinfo.txt_complemento ? localizacaoinfo.txt_complemento : null
+        },
+      });
+    }
+
+
 
     const localizacaoprincipal = await controller_User.selectLocalcli({
       params: { id_cliente: clienteuser.id_cliente, end_principal: true },
@@ -611,7 +611,7 @@ exports.concluirCad = async (req, res) => {
       age--;
     }
 
-    if(age < 18) return res.status(400).json({error: 'Idade inválida, você precisar ter 18 anos ou mais.', formstatus: 1})
+    if (age < 18) return res.status(400).json({ error: 'Idade inválida, você precisar ter 18 anos ou mais.', formstatus: 1 })
 
     const userReset = await controller_User.updateInfoCliente({
       params: {
@@ -810,20 +810,20 @@ exports.delete = async (req, res) => {
   const id_cliente = Number(req.params.id_cliente);
 
   const clienteuser = await controller_User.selectInfocliente({
-    params: { id_cliente: id_cliente},
+    params: { id_cliente: id_cliente },
   });
 
-  if(clienteuser){ 
+  if (clienteuser) {
     console.log("a1", clienteuser)
     await controller_User.apagarInfocliente({
-    params: { id_cliente: id_cliente},
-  });
-return res.status(200).json()
-}
+      params: { id_cliente: id_cliente },
+    });
+    return res.status(200).json()
+  }
 }
 exports.concluirServico = async (req, res) => {
-  const {id_confirmacaoServico, nmr_avaliacao, ds_comentario} = req.body
-  console.log(id_confirmacaoServico, nmr_avaliacao, ds_comentario, "pppppp")
+  const { id_confirmacaoServico, nmr_avaliacao, ds_comentario } = req.body
+  console.log(id_confirmacaoServico, nmr_avaliacao, ds_comentario)
   const getFormattedDate = () => {
     const date = new Date();
     const day = String(date.getDate()).padStart(2, '0');
@@ -831,25 +831,153 @@ exports.concluirServico = async (req, res) => {
     const year = date.getFullYear();
     return `${year}-${month}-${day}`;
   };
-  
+
   const formattedDate = getFormattedDate();
 
   const inserindtermino = await controller_User.createTermino({
-    params: {id_confirmacaoServico: id_confirmacaoServico, dt_terminoServico:formattedDate }
+    params: { id_confirmacaoServico: id_confirmacaoServico, dt_terminoServico: formattedDate }
   })
   const idTerminoServico = inserindtermino.dataValues.id_terminoServico;
   console.log(idTerminoServico)
-  if(nmr_avaliacao, ds_comentario){
-  const insertavaliacao = await controller_User.createAvaliacao({
-    params:{
-      id_terminoservico: idTerminoServico,
-      nmr_avaliacao:nmr_avaliacao,
-      ds_comentario:ds_comentario
+  if (nmr_avaliacao, ds_comentario) {
+    const insertavaliacao = await controller_User.createAvaliacao({
+      params: {
+        id_terminoservico: idTerminoServico,
+        nmr_avaliacao: nmr_avaliacao,
+        ds_comentario: ds_comentario
+      }
+    })
+    return res.status(200).json()
+  }
+  return res.status(200).json()
+}
+
+
+const CODE_EXPIRATION_MINUTES = 15;
+
+class CodeManager {
+  constructor() {
+    this.codesStore = {};
+  }
+
+  generateShortCode(email) {
+    const shortCode = shortid.generate().substring(0, 6); // Gerar código curto de 6 caracteres
+    const createdAt = moment(); // Timestamp atual
+    const expiration = moment(createdAt).add(CODE_EXPIRATION_MINUTES, 'minutes'); // Expira em 15 minutos
+
+    // Armazenar o código gerado na estrutura temporária
+    this.codesStore[shortCode] = {
+      email: email,
+      createdAt: createdAt,
+      expiration: expiration
+    };
+
+    return shortCode; // Retornar apenas o código curto para ser usado no e-mail
+  }
+
+  verifyShortCode(codeTyped) {
+    const now = moment();
+
+    for (const code in this.codesStore) {
+      const { email, expiration } = this.codesStore[code];
+
+      if (code === codeTyped && now.isBefore(expiration)) {
+        return { valid: true, email: email, message: 'Código válido.' };
+      }
     }
-  })
-  return res.status(200).json()
-}
-  return res.status(200).json()
+
+    return { valid: false, message: 'Código inválido ou expirado.' };
+  }
+
+  removeShortCode(codeToRemove) {
+    if (this.codesStore[codeToRemove]) {
+      delete this.codesStore[codeToRemove];
+    }
+  }
 }
 
+const codeManager = new CodeManager(); // inicialização com valor padrão
 
+exports.recoveryPassword = async (req, res) => {
+  const { email, tokenpass, newpassword, newpasswordconfirm } = req.body;
+  console.log(req.body)
+  try {
+    if (email && !newpassword && !tokenpass) {
+      const emailResults = await controller_User.findEmailCliente({ params: { cd_emailCliente: email } });
+      if (emailResults.length > 0) {
+        const shortCode = codeManager.generateShortCode(email);
+        console.log(shortCode)
+        const htmlContent = `
+          <!DOCTYPE html>
+          <html lang="pt-br">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Confirme seu E-mail</title>
+          </head>
+          <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; text-align: center;">
+            <h1 style="font-size: 40px; color: #3cbc8c;">Confirme seu E-mail</h1>
+            <p style="font-size: 20px;">Use o código abaixo para confirmar seu e-mail:</p>
+            <p style="font-size: 24px; color: #3cbc8c;">${shortCode}</p>
+          </body>
+          </html>
+        `;
+
+        const transporter = nodemailer.createTransport(smtpconfig);
+        await transporter.sendMail({
+          html: htmlContent,
+          subject: "Confirme seu email na SideQuest",
+          from: "SideQuest <Sidequest.plataform@outlook.com>",
+          to: email,
+        });
+
+        return res.status(200).json({ message: "E-mail de confirmação enviado com sucesso." });
+      } else {
+        return res.status(400).json({ error: "E-mail incorreto ou inexistente." });
+      }
+    }
+
+
+    if (tokenpass) {
+      console.log(tokenpass)
+
+      const codeVerification = codeManager.verifyShortCode(tokenpass);
+
+      console.log(codeVerification)
+      if (codeVerification.valid) {
+        return res.status(200).json({ message: "E-mail de confirmado com sucesso." });
+      } else {
+        return res.status(400).json({ error: codeVerification.message });
+      }
+    }
+
+
+    if (newpassword && newpassword !== newpasswordconfirm) {
+      return res.status(400).json({ error: "As senhas não coincidem." });
+    }
+
+    if (newpassword) {
+      if (!validator.isStrongPassword(newpassword)) {
+        return res
+          .status(400)
+          .json({ error: "As senhas näo são seguras o suficentes" });
+      }
+      let hash = await bcrypt.hash(newpassword, 8);
+      const user = await controller_User.updateSenha({
+        params: {
+          cd_emailCliente: email,
+          cd_senhaCliente: hash,
+        },
+      });
+
+      codeManager.removeShortCode(tokenpass)
+      return res.status(200).json({ message: "Processo de recuperação de senha concluído com sucesso." });
+
+    }
+    return res.status(400).json({ error: "Requisição inválida." });
+
+  } catch (err) {
+    console.error(`Erro ao processar recuperação de senha: ${err}`);
+    return res.status(500).json({ error: "Erro interno ao processar recuperação de senha." });
+  }
+};

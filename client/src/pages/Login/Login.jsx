@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./login.css";
 import Cookies from "js-cookie";
 import { useIsSignUpActive } from "../../components/HeaderLanding/singUpState";
@@ -122,6 +123,7 @@ export const Login = () => {
                   updateCadastro({ ...formDataCadastro, senha: e.target.value });
                 }}
               />
+              
               {showPasswordStrength && (
                 <div className="modal-password" >
               <PasswordStrength password={password} />
@@ -171,6 +173,9 @@ export const Login = () => {
                   updateLogininfo({ ...loginInfo, senha: e.target.value });
                 }}
               />
+                 <Link to={"/recoverypassword"}>
+                Esqueceu a sua senha?
+                </Link>
               <button type="submit">Entrar</button>
             </form>
           </div>

@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { ChatContext, ChatContextProvider } from "./context/ChatContext";
 import { UserContextProvider, UserContext } from "./context/UserContext";
 import { ProfessionalContext, ProfessionalContextProvider } from "./context/ProfissionalContext";
-import { useNavigate } from "react-router-dom";
 import Landing from "./pages/Landing/landing";
 import { Login } from "./pages/Login/Login";
 import LoginProfissional from "./pages/LoginProfissional/LoginPro";
@@ -28,6 +27,7 @@ import PerfilProfissional from "./pages/PerfilProfissional/PerfilPro";
 import PrivateServices from "./pages/servicosPrivados/servicoPrivado"
 import { Chats } from "./pages/Chats/Chats";
 import VizualizarServicoAtivoCliente from "./pages/VizualizarServicoAtivoCliente/VizualizarServicoAtivoCliente";
+import RecoveryPass from "./pages/password/PasswordRec" 
 const Router = () => {
   const { user } = useContext(UserContext);
   const { pro } = useContext(ProfessionalContext);
@@ -39,6 +39,7 @@ const Router = () => {
           {/* rotas públicas */}
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/landingProfissional" element={<LandingProfissional />} />
+          <Route exact path="/recoverypassword" element={<RecoveryPass/>} />
 
           {/* rotas cliente */}
           <Route exact path="/login" element={user ? <Navigate to="/homeCliente" /> : <Login />} />
@@ -68,6 +69,7 @@ const Router = () => {
           <Route exact path="/propostasProfissional" element={<PrivateServices />} />
           {/* rotas cliente / profissional */}
           <Route exact path="/chats" element={user || pro ? <Chats /> : <Navigate to="/login" />} />
+          
 
         </Routes>
       </ChatContextProvider>
