@@ -1,0 +1,265 @@
+.dash-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: transparent;
+    padding: 20px;
+}
+
+.dash-header {
+    position: relative; /* Adicione essa linha para usar posição absoluta para os ícones */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+.dash-card {
+    width: 330px;
+    height: 150px;
+    border-radius: 10px;
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dash-card .background-icon {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    opacity: 0.2;
+    font-size: 100px;
+}
+
+.card-dash-1 {
+    background: linear-gradient(135deg, #8E70EE, #4C7ECF);
+}
+
+.card-dash-2 {
+    background: linear-gradient(135deg, #FF6F61, #e778d9);
+}
+
+.card-dash-3 {
+    background: linear-gradient(135deg,  #D65DB1 ,#987bc5);
+}
+
+.dash-card img {
+    transform: scaleX(-1);
+    width: 150px;
+    height: 150px;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.value {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.subtext {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+
+.dash-info h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.dash-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 18px;
+}
+
+.location-icon {
+    display: inline-block;
+    font-size: 30px;
+    vertical-align: middle;
+}
+
+.actions-buttons-dash{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.action-button-dash {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--verde);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 120px;
+    height: 30px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.favorite-icon {
+    cursor: pointer;
+    right: 20px;
+    top: 7px;
+    position: absolute;
+}
+
+.favorite-icon .icone-favoritado {
+    color: var(--verde);
+    font-size: 30px;
+}
+
+.favorite-icon .icone-favoritar {
+    color: #666;
+    font-size: 30px;
+}
+
+.dash-section {
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    flex-grow: 1; 
+}
+
+.row-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.3em;
+}
+
+.section-content {
+    padding: 10px 0;
+}
+
+.areas-section {
+    width: 9vw;
+    height: 10vw;
+    overflow-y: auto;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: #e0e7ff;
+    color: #333;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 5px;
+}
+
+.gallery-section{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 35vw;
+    height: 25vw;
+    overflow-y: auto;
+}
+
+.gallery-section .section-header{
+    display: flex;
+    gap: 3px;
+}
+
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .images {
+    width: 100%;
+    max-width: calc(33.333% - 20px); 
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
+.feedback-section {
+    height: 25vw;
+    overflow-y: auto;
+}
+
+.feedback-list {
+    display: flex;
+    flex-direction: column;
+    max-height: 100%; /* Ajusta para altura máxima baseada no conteúdo */
+    overflow-y: auto; /* Adiciona barra de rolagem vertical quando necessário */
+}
+
+.feedback-box {
+    display: flex;
+    flex-direction: column;
+    background-color: #cdcdcd47;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-author {
+    display: flex;
+    align-items: center;
+}
+
+.author-name {
+    font-size: 14px;
+    margin: 0;
+}
+
+.feedback-text {
+    color: #666;
+    font-size: 15px;
+    word-break: break-word;
+}
+
+.feedback-name-score {
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback-dash-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.feedback-score {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+

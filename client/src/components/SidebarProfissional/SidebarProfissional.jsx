@@ -11,7 +11,8 @@ export const SidebarProfissional = () => {
     { id: 1, name: "home", href: "homeProfissionais" },
     { id: 2, name: "chats", href: "chats" },
     { id: 3, name: "perfil", href: "perfilProfissional" },
-    { id: 4, name: "propostas", href: "propostasProfissional" }
+    { id: 4, name: "propostas", href: "propostasProfissional" },
+    { id: 5, name: "dashboard", href: "dashboard" },
   ];
 
 
@@ -94,7 +95,9 @@ const getIcon = (page) => {
       return 'fa-solid fa-user-tie';
     case "propostasProfissional":
       return "fa-solid fa-handshake";
-    case "config":
+    case "dashboard":
+      return "fa-solid fa-gear";
+      case "config":
       return "fa-solid fa-gear";
     default:
       return "";

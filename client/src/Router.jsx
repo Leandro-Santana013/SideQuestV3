@@ -28,6 +28,7 @@ import PrivateServices from "./pages/servicosPrivados/servicoPrivado"
 import { Chats } from "./pages/Chats/Chats";
 import VizualizarServicoAtivoCliente from "./pages/VizualizarServicoAtivoCliente/VizualizarServicoAtivoCliente";
 import RecoveryPass from "./pages/password/PasswordRec" 
+import Dashboard from "./pages/Dashboard/Dashboard";
 const Router = () => {
   const { user } = useContext(UserContext);
   const { pro } = useContext(ProfessionalContext);
@@ -67,6 +68,7 @@ const Router = () => {
           <Route exact path="/ServicosAtivosCliente" element={<ServicosAtivosCliente />} />
           <Route exact path="/homeCliente/perfilProfissional/:id" element={<PerfilProfissionalcli />} />
           <Route exact path="/propostasProfissional" element={<PrivateServices />} />
+          <Route exact path="/dashboard" element={<Dashboard/>} />
           {/* rotas cliente / profissional */}
           <Route exact path="/chats" element={user || pro ? <Chats /> : <Navigate to="/login" />} />
           
