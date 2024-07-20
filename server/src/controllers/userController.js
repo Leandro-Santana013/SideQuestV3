@@ -981,3 +981,14 @@ exports.recoveryPassword = async (req, res) => {
     return res.status(500).json({ error: "Erro interno ao processar recuperação de senha." });
   }
 };
+
+exports.counter = async (req, res) => {
+  const { id_profissional } = req.params;
+
+  // Chamada para obter o valor atual de 'views'}
+  const datanow = new Date();
+  let n = await controller_User.recnum({ params: { id_profissional: id_profissional, ds_date: datanow } });
+  console.log(n, "aaaaaaaaaaa")
+  return res.status(200).json();
+}
+

@@ -47,14 +47,17 @@ const PerfilProfissionalcli = () => {
     const fetchData = async () => {
       try {
         // Fazendo a solicitação para buscar informações do profissional com base no ID
+
         const response = await getRequest(`/user/perfil/profissionais/${id}`);
         setProfissional(response.pro);
         setimagens(response.images);
         console.log(response.comentario, "aaa")
-        if(response.comentarios[0].avaliacao_id !== null){
-        setComentarios(response.comentarios);
+        if (response.comentarios[0].avaliacao_id !== null) {
+          setComentarios(response.comentarios);
         }
         if (user && user.id_cliente) {
+          const response = await postRequest(`/user/perfil/profissionais/counter/${id}`);
+        
           const fav = await favRequest(`/user/profissional/favoritado`, {
             id_cliente: user.id_cliente,
             id_profissional: Number(id),
@@ -126,7 +129,7 @@ const PerfilProfissionalcli = () => {
                   className="profile-picture"
                 />
                 <div className="profile-info">
-                  <h1 style={{display: 'flex', alignItems: 'center'}}>
+                  <h1 style={{ display: 'flex', alignItems: 'center' }}>
                     {profissional.nm_profissional}{" "}
                     <span
                       className={
@@ -140,10 +143,10 @@ const PerfilProfissionalcli = () => {
                       }
                     >
                       {onlineUsers?.some(
-                          (user) =>
-                            user?.userID == profissional.id_profissional &&
-                            user.type == "pro"
-                        ) ? 'online' : ''}
+                        (user) =>
+                          user?.userID == profissional.id_profissional &&
+                          user.type == "pro"
+                      ) ? 'online' : ''}
                     </span>
                   </h1>
                   {profissional.sg_estado && profissional.nm_cidade && (
@@ -183,7 +186,7 @@ const PerfilProfissionalcli = () => {
                     </p>
                     <p>{profissional.ds_biografia}</p>
                   </div>
-                  <p>numero de serviços terminados: <label>{profissional.num_servicos_terminados}</label></p> 
+                  <p>numero de serviços terminados: <label>{profissional.num_servicos_terminados}</label></p>
                 </div>
                 <div className="profile-section areas-section">
                   <div className="section-header">
@@ -234,40 +237,40 @@ const PerfilProfissionalcli = () => {
                   </div>
                   <div class="section-content">
                     <div class="feedback-list">
-                    {comentarios? comentarios.map((comentario, index) =>(
-                    <div class="feedback-box" key={comentario.avaliacao_id}>
-                      <div className="feedback-author">
-                        <img
-                          src={
-                            comentario.cliente_imagem
-                              ? comentario.cliente_imagem
-                              : iconeperfil
-                          }
-                          alt="Foto de perfil do autor do comentário"
-                          className="feedback-profile-picture"
-                        />
-                        <div className="feedback-name-score">
-                          <p class="author-name">{comentario.cliente_nome}</p>
-                          <span className="feedback-score">
-                          {[...Array(5)].map((_, index) => (
-                  <RiStarFill
-                    key={index}
-                    className={`ri-star-s-fill ${index < comentario.avaliacao_numero
-                      ? "ava" : ""}`}
-                  ></RiStarFill>
-                ))}
-                          </span>
+                      {comentarios ? comentarios.map((comentario, index) => (
+                        <div class="feedback-box" key={comentario.avaliacao_id}>
+                          <div className="feedback-author">
+                            <img
+                              src={
+                                comentario.cliente_imagem
+                                  ? comentario.cliente_imagem
+                                  : iconeperfil
+                              }
+                              alt="Foto de perfil do autor do comentário"
+                              className="feedback-profile-picture"
+                            />
+                            <div className="feedback-name-score">
+                              <p class="author-name">{comentario.cliente_nome}</p>
+                              <span className="feedback-score">
+                                {[...Array(5)].map((_, index) => (
+                                  <RiStarFill
+                                    key={index}
+                                    className={`ri-star-s-fill ${index < comentario.avaliacao_numero
+                                      ? "ava" : ""}`}
+                                  ></RiStarFill>
+                                ))}
+                              </span>
+                            </div>
+                          </div>
+                          <p class="feedback-text">
+                            {comentario.avaliacao_comentario}
+                          </p>
                         </div>
-                      </div>
-                      <p class="feedback-text">
-                       {comentario.avaliacao_comentario}
-                      </p>
+                      )) : (<p>O profissional ainda não recebeu nenhuma avaliação</p>)}
                     </div>
-                    )) : (<p>O profissional ainda não recebeu nenhuma avaliação</p>)}
                   </div>
                 </div>
               </div>
-            </div>
             </div>
           )}
         </div>

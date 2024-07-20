@@ -15,6 +15,7 @@ const {
   ModelProfissionalProfileImg,
   ClienteProfissionalFavorito,
   ModelEnderecoProfissional,
+  ModelDataView
 } = require("../../models/index");
 const { Service, Servicehistory } = require("../userController");
 
@@ -959,14 +960,47 @@ module.exports = {
       ds_comentario: ds_comentario,
     });
   },
-  requireidCliente: async (req, res) => {
-    const { cd_emailCliente } = req.params;
-    return ModelCliente.findAll({
-      attributes: ["id_cliente"],
-      where: {
-        cd_emailCliente: cd_emailCliente,
-        acount_exclude: null
+  
+counterselec: async (req, res) => {
+  const { id_profissional } = req.params;
+  return ModelProfissional.findOne({
+    where: {
+      id_profissional:id_profissional
+    },
+    attributes: [
+      [Sequelize.col("tb_infoProfissional.views"), "views"],
+    ],
+    include: [
+      {
+        model: ModelInfoProfissional,
+        attributes: [],
       },
-    });
-  },
-};
+    ]
+  });
+},
+recnum: async (req, res) => {
+  const { id_profissional, ds_date } = req.params;
+  const infoProfissional = await ModelDataView.create({
+    id_profissional: id_profissional,
+    ds_date: ds_date
+  });
+  console.log(infoProfissional)
+  let newViews;
+  if (infoProfissional && infoProfissional.views !== null && infoProfissional.views !== undefined) {
+    newViews = infoProfissional.views + 1;
+  } else {
+    newViews = 1; 
+  }
+  console.log(newViews)
+   const [numRowsUpdated, updatedInfoProfissional] = await ModelInfoProfissional.update(
+    { views: newViews },
+    {
+      where: { id_profissional: id_profissional },
+      returning: true,
+      plain: true
+    }
+  );
+  return { numRowsUpdated, updatedInfoProfissional };
+}
+
+  }

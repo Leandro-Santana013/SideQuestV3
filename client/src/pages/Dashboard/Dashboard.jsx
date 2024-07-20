@@ -29,6 +29,8 @@ import { UserContext } from "../../context/UserContext";
 import './dashboard.css'
 import LupaIcon from '../../assets/lupa.png'
 import avaliarIcon from '../../assets/revisao-do-cliente.png'
+import RevenueChart from "../../components/RevenueChart/RevenueChart";
+import PropostasChart from "../../components/PropostasChart/PropostasChart";
 const Dashboard = () => {
   const { createChat } = useContext(ChatContext);
   const [modal, setModal] = useState(false)
@@ -140,44 +142,22 @@ const Dashboard = () => {
               <div className="row-section">
                 <div className="dash-section  gallery-section gallery-section-pro" style={{position: 'relative'}}>
                   <div className="section-header">
-            
+            <RevenueChart/>
             </div>
                   <div className="section-content">
                   </div>
                 </div>
-                <div class="dash-section feedback-section">
+                <div class="dash-section"  style={{color: 'tr'}}>
                 <div class="section-header">
-                
                 </div>
-                <div class="section-content">
-                    <h3>Ultimos serviços</h3>
-                <div className="lista-historico">
-              { ServicosHistory.length > 0 ? (
-                ServicosHistory.map((historico, index) => (
-                    <div className="card-historico" key={index}>
-                      <div className="coluna">
-                        <div className="info-prof">
-                          <p className="desc-tipo-servico">
-                            {historico.ds_servico}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="coluna">
-                        <p>{historico.dt_terminoServico}</p>
-                      </div>
-                      <div className="coluna">
-                        <p className="categoria">{historico.categoria}</p>
-                      </div>
-                    </div>
-                  ))
-              ) : (<p className="mensagem-vazia">Nenhum historico encontrado.</p>)}
-            </div>
-                    </div>
+                <PropostasChart/>
             </div>
               </div>
             </div>
           </>)}
+
         </div>
+      
       </section>
     </>
   );

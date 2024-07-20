@@ -12,7 +12,7 @@ const { ClienteProfissionalFavorito } = require('./fav')
 const { ModelProfissionalProfileImg } = require('./profissionalProfileImg')
 const {ModelProfissionalCategoria} = require("./profissionalCategoria")
 const {ModelEnderecoProfissional} = require("./enderecoProfissional")
-
+const {ModelDataView} = require("./dataView")
 //um cliente tem muitas postagens e uma postagem tem um cliente
 ModelCliente.hasMany(ModelPostagemServico, { foreignKey: 'id_cliente' });
 ModelPostagemServico.belongsTo(ModelCliente, { foreignKey: 'id_cliente' });
@@ -76,6 +76,8 @@ ModelTerminoServico.belongsTo(ModelConfirmacaoServico, { foreignKey: 'id_confirm
 ModelTerminoServico.hasOne(ModelAvaliacao, {foreignKey: 'id_terminoServico'})
 ModelAvaliacao.belongsTo(ModelTerminoServico, {foreignKey: 'id_terminoServico'})
 
+ModelDataView.hasMany(ModelDataView, {foreignKey: 'id_profissional'})
+ModelDataView.belongsTo(ModelProfissional, {foreignKey: 'id_profissional'})
 
 module.exports = {
    ModelCliente,
@@ -91,5 +93,6 @@ module.exports = {
     ClienteProfissionalFavorito,
     ModelProfissionalProfileImg,
     ModelEnderecoProfissional,
-    ModelProfissionalCategoria
+    ModelProfissionalCategoria,
+    ModelDataView
 };
