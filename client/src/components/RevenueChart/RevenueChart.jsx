@@ -121,12 +121,18 @@ const RevenueChart = () => {
     }
   ];
 
+  const handleViewTypeChange = (event) => {
+    setViewType(event.target.value);
+  };
+
   return (
     <div className="chart-container">
       <div className="button-group">
-        <button onClick={() => setViewType('monthly')}>Mensal</button>
-        <button onClick={() => setViewType('weekly')}>Semanal</button>
-        <button onClick={() => setViewType('yearly')}>Anual</button>
+        <select value={viewType} onChange={handleViewTypeChange}>
+          <option value="weekly">Semana</option>
+          <option value="monthly">Mensal</option>
+          <option value="yearly">Anual</option>
+        </select>
       </div>
       <Chart options={options} series={series} type="area" height={430} width={750} />
     </div>
