@@ -11,10 +11,11 @@ const {
   ModelProfissionalProfileImg,
   ModelTerminoServico,
   ModelAvaliacao,
+  ModelDataView
 } = require("../../models/index");
 const { Model, Op, Sequelize } = require("sequelize");
 const { raw } = require("mysql2");
-const { setarImg } = require("../proConstroller");
+
 
 module.exports = {
   bindCookieBypkProfissonal: async (req, res) => {
@@ -616,4 +617,41 @@ module.exports = {
       console.log(erro);
     }
   },
+
+
+    viewsdashboard: async (req, res) => {
+      const { id_profissional } = req.params;
+  
+      
+      const now = new Date();
+      const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+      const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+  
+      try {
+    
+          const countThisMonth = await ModelDataView.count({
+              where: {
+                  id_profissional: id_profissional,
+                  ds_data: {
+                      [Op.between]: [startOfMonth, endOfMonth]
+                  }
+              }
+          });
+
+          const totalCount = await ModelDataView.count({
+              where: {
+                  id_profissional: id_profissional
+              }
+          });
+  console.log(totalCount, countThisMonth)
+        return {totalCount, countThisMonth};
+      } catch (error) {
+          console.error('Erro ao contar as entradas:', error);
+          res.status(500).send('Erro ao contar as entradas');
+      }
+  }
+    
+
 };
+
+  

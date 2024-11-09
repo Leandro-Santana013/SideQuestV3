@@ -19,6 +19,7 @@ router.post('/serviceEnd', proControllers.service)
 router.get('/nservice/:id_profissional', proControllers.numService)
 router.get('/history/:id_profissional', proControllers.history)
 router.post('/setconcluir', proControllers.servicebool)
+router.get('/dashboard/:id_profissional', proControllers.dashboard)
 
 
 module.exports = router; 

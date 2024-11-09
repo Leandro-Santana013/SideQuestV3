@@ -110,6 +110,7 @@ export const ProfessionalContextProvider = ({ children }) => {
   const [Dadosprivate, setDadosprivate] = useState([]);
   const [ServicosEnd, setServicosEnd] = useState([]);
   const [ServicosHistory, setServicosHistory] = useState([]);
+  const [dashbord, setDashbord] = useState([]);
   const [num, setnum] = useState([])
   useEffect(() => {
     const fetchDataFromBackend = async () => {
@@ -128,12 +129,16 @@ export const ProfessionalContextProvider = ({ children }) => {
           const historico = await getRequest(
             `/professional/history/${pro?.id_profissional}`
           );
-          
+          const dashbord = await getRequest(
+            `/professional/dashboard/${pro?.id_profissional}`
+          );
+          console.log(dashbord)
           const ServiceEnd = await postRequest("/professional/serviceEnd", {
             id_profissional: pro?.id_profissional,
           });
           const responseNum = await getRequest(`/professional/nservice/${pro?.id_profissional}`);
 
+          setDashbord(dashbord)
           setServicosHistory(historico)
           setnum(responseNum)
           setServicosEnd(ServiceEnd.user);

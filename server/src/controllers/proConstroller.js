@@ -611,3 +611,16 @@ exports.servicebool = async(req, res) => {
 
   res.status(200).json(n)
 }
+
+exports.dashboard = async(req, res) => {
+  const id_profissional = Number(req.params.id_profissional);
+  const nview = await controller_Pro.viewsdashboard({
+    params: { id_profissional: id_profissional }
+  });
+console.log(nview, "aaaaaaaa")
+  const n = await controller_Pro.Service({
+    params: { id_profissional: id_profissional },
+  });
+
+  res.status(200).json(n)
+}

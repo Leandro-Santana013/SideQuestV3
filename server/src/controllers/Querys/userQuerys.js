@@ -978,29 +978,12 @@ counterselec: async (req, res) => {
     ]
   });
 },
-recnum: async (req, res) => {
-  const { id_profissional, ds_date } = req.params;
-  const infoProfissional = await ModelDataView.create({
-    id_profissional: id_profissional,
-    ds_date: ds_date
-  });
-  console.log(infoProfissional)
-  let newViews;
-  if (infoProfissional && infoProfissional.views !== null && infoProfissional.views !== undefined) {
-    newViews = infoProfissional.views + 1;
-  } else {
-    newViews = 1; 
-  }
-  console.log(newViews)
-   const [numRowsUpdated, updatedInfoProfissional] = await ModelInfoProfissional.update(
-    { views: newViews },
-    {
-      where: { id_profissional: id_profissional },
-      returning: true,
-      plain: true
-    }
-  );
-  return { numRowsUpdated, updatedInfoProfissional };
-}
 
-  }
+recnum: async (req, res) => {
+  const { id_profissional, ds_data } = req.params;
+return await ModelDataView.create({
+    id_profissional: id_profissional,
+    ds_data: ds_data
+  });
+}
+}
