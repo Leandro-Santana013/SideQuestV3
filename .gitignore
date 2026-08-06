@@ -1,24 +1,40 @@
-*.txt
+# Dependencies
+node_modules/
+*/node_modules/
 
-# Ignore tudo dentro do diretório node_modules/
-node_modules/*
+# Production Build
+dist/
+build/
+*.local
 
-
+# Environment Variables & Secrets
+.env
+.env.*
+!.env.example
+server/.env
+server/.env.*
+!server/.env.example
 
 # Logs
-logs    
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# Environment variables
-.env
-.env.sample
+# Database & Runtime flags
+*.sqlite
+server/database/script-rodado.txt
 
-# IDE - VSCode
+# Editor / IDE
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

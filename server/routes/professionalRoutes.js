@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const proControllers = require('../src/controllers/proConstroller')
+const proControllers = require('../src/controllers/proController')
 
 router.post('/registerPro', proControllers.registerPro)
 router.post('/loginPro', proControllers.loginPro)
